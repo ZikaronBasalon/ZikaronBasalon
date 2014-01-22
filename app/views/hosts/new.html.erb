@@ -1,0 +1,76 @@
+<% title "New Host" %>
+
+<%= form_for @host, html: {class: "form-horizontal"} do |f| %>
+
+  <div class="control-group">
+     <%= f.label :f_name, "First Name", class: "control-label" %>
+    <div class="controls">
+      <%= f.text_field :f_name %>
+    </div>
+  </div>
+
+   <div class="control-group">
+     <%= f.label :l_name, "Last Name", class: "control-label" %>
+    <div class="controls">
+      <%= f.text_field :l_name %>
+    </div>
+  </div>
+  
+   <div class="control-group">
+     <%= f.label :email, "Email", class: "control-label" %>
+    <div class="controls">
+      <%= f.text_field :email %>
+    </div>
+  </div>
+
+   <div class="control-group">
+     <%= f.label :phone, "Phone Number", class: "control-label" %>
+    <div class="controls">
+      <%= f.text_field :phone %>
+    </div>
+  </div>
+
+  <div class="control-group">
+     <%= f.label :address, "Address", class: "control-label" %>
+    <div class="controls">
+      <%= f.text_field :address %>
+    </div>
+  </div>
+
+   <div class="control-group">
+     <%= f.label :city_name, "City", class: "control-label" %>
+    <div class="controls">
+       <%= f.text_field :city_name, data: {autocomplete_source: City.order(:name).map(&:name)} %>
+    </div>
+  </div>
+
+  
+  <div class="control-group">
+    <div class="controls">
+      <label class="checkbox">
+        <%= f.check_box :strangers %> Strangers allowed
+      </label>
+    </div>
+  </div>
+
+  <div class="control-group">
+     <%= f.label :max_guests, "Maximum amount of people", class: "control-label" %>
+    <div class="controls">
+      <%= f.number_field :max_guests %>
+    </div>
+  </div>
+
+  <div class="control-group">
+     <%= f.label :survivor_needed, "Survivor needed", class: "control-label" %>
+    <div class="controls">
+      <%= f.text_field :survivor_needed %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="controls">
+      <%= f.submit %>
+    </div>
+  </div>
+<% end %>
+

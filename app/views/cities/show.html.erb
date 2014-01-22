@@ -1,0 +1,26 @@
+<% title "City" %>
+
+<%= simple_form_for @guest, html: {id: "guest_form"} do |f| %>
+   	<%= f.input :name %>
+    <%= f.input :email %>
+    <%= f.input :phone %>
+    <%= f.input :num_of_friends %>
+<% end %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @city.name %>
+</p>
+<ul>
+	<% @city.hosts.each do |host| %>
+		<li>
+			<p>Name: <%= host.name %></p>
+			<p>Address: <%= host.address %></p>
+			<p>Email: <%= host.email %></p>
+			<button class="btn btn-primary request_invite" data-id= <%= host.id %>>Request invite</button>
+		</li>
+	<% end %>
+</ul>
+<p>
+  <%= link_to "View All", cities_path %>
+</p>

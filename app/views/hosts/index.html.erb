@@ -1,0 +1,51 @@
+<% title "Hosts" %>
+
+<%= search_form_for @search, url: search_hosts_path, html: {class: "form-inline", method: :post} do |f| %>
+    
+    <%= f.label :survivor_needed_eq, "Survivor needed" %>
+    <%= f.select :survivor_needed_eq, options_for_select(Host::SURVIVOR_OPTIONS), class: "input-small" %>
+  
+    <%= f.label :city_region_name_eq, "Region" %>
+    <%= f.select :city_region_name_eq, options_for_select(Region.all.map(&:name)), class: "input-small" %>
+    
+    <%= f.label :city_name_eq, "City" %>
+    <%= f.select :city_name_eq, options_for_select(City.all.map(&:name)), class: "input-small" %>
+
+    <%= f.label :strangers_eq, "Strangers allowed" %>
+    <%= f.check_box :strangers_eq, class: "input-small" %>
+
+    <%= f.submit "Search", class: "btn" %>
+<% end %>
+
+<table id="hosts" class="table">
+  <tr>
+    <th><%= sort_link @search, :f_name, "First Name" %></th>
+    <th><%= sort_link @search, :l_name, "Last Name" %></th>
+    <th><%= sort_link @search, :email, "Email" %></th>
+    <th>Phone Number</th>
+    <th>Address</th>
+    <th><%= sort_link @search, :region_name, "Region" %></th>
+    <th><%= sort_link @search, :city_name, "City" %></th>
+    <th><%= sort_link @search, :max_guests, "Max Guests" %></th>
+    <th>Needs Survivor</th>
+    <th>Strangers allowed</th>
+    <th>Status</th>
+    <th><%= sort_link @search, :created_at, "Max Guests" %></th>
+  </tr>
+  <% @hosts.each do |host| %>
+    <tr>
+      <td><%= host.f_name %></td>
+      <td><%= host.l_name %></td>
+      <td><%= host.email %></td>
+      <td><%= host.phone %></td>
+      <td><%= host.address %></td>
+      <td><%= host.region_name %></td>
+      <td><%= host.city_name %></td>
+      <td><%= host.max_guests %></td>
+      <td><%= host.survivor_needed %></td>
+      <td><%= host.strangers %></td>
+      <td><%= host.status %></td>
+      <td><%= host.created_at %></td>
+    </tr>
+  <% end %>
+</table>

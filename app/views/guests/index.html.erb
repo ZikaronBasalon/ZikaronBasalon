@@ -1,0 +1,15 @@
+<% title "Guests" %>
+
+<table>
+  <tr>
+    <th>Email</th>
+    <th>Phone</th>
+  </tr>
+  <% for guest in @guests %>
+    <tr>
+      <td><%= guest.email %></td>
+      <td><%= guest.phone %></td>
+    </tr>
+  <% end %>
+</table>
+

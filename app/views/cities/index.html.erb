@@ -1,0 +1,16 @@
+<% title "Cities" %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Region</th>
+  </tr>
+  <% for city in @cities %>
+    <tr>
+      <td><%= city.name %></td>
+      <td><%= city.region_id %></td>
+      <td><%= link_to "Show", city %></td>
+    </tr>
+  <% end %>
+</table>
+
