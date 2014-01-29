@@ -1,2 +1,6 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+ <h1>Search for a Salon:</h1>
+
+ <form action="/pages/search" class="form-search">
+	<%= text_field_tag :q, nil, data: {autocomplete_source: (City.all + Region.all).map(&:name).sort }, class: "search-query"  %>
+	<button type="submit" class="btn">Search</button>
+</form>

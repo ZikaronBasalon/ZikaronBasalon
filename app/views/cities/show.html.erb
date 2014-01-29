@@ -14,7 +14,7 @@
 <ul>
 	<% @city.hosts.each do |host| %>
 		<li>
-			<p>Name: <%= host.name %></p>
+			<p>Name: <%= host.f_name %></p>
 			<p>Address: <%= host.address %></p>
 			<p>Email: <%= host.email %></p>
 			<button class="btn btn-primary request_invite" data-id= <%= host.id %>>Request invite</button>

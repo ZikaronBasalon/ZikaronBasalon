@@ -1,6 +1,7 @@
 class Host < ActiveRecord::Base
   attr_accessible :f_name, :l_name, :email, :phone, :address, :city_id, :max_guests,
    :survivor_needed, :free_text, :city_name, :status, :strangers
+   
   belongs_to :city
 
   SURVIVOR_OPTIONS = ["Need","Don't Need","Recieved"]

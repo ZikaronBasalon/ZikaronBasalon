@@ -1,51 +1,52 @@
-<% title "Hosts" %>
-
-<%= search_form_for @search, url: search_hosts_path, html: {class: "form-inline", method: :post} do |f| %>
-    
-    <%= f.label :survivor_needed_eq, "Survivor needed" %>
-    <%= f.select :survivor_needed_eq, options_for_select(Host::SURVIVOR_OPTIONS), class: "input-small" %>
+<form class="form-inline">
+    <%= label_tag :survivor_needed, "Survivor needed" %>
+    <%= select_tag :survivor_needed, options_for_select(Host::SURVIVOR_OPTIONS), class: "input-small", include_blank: true %>
   
-    <%= f.label :city_region_name_eq, "Region" %>
-    <%= f.select :city_region_name_eq, options_for_select(Region.all.map(&:name)), class: "input-small" %>
+    <%= label_tag :region_name, "Region" %>
+    <%= select_tag :region_name, options_for_select(Region.all.map(&:name)), class: "input-small", include_blank: true %>
     
-    <%= f.label :city_name_eq, "City" %>
-    <%= f.select :city_name_eq, options_for_select(City.all.map(&:name)), class: "input-small" %>
+    <%= label_tag :city_name, "City" %>
+    <%= select_tag :city_name, options_for_select(City.all.map(&:name)), class: "input-small", include_blank: true %>
 
-    <%= f.label :strangers_eq, "Strangers allowed" %>
-    <%= f.check_box :strangers_eq, class: "input-small" %>
+    <%= label_tag :strangers, "Strangers allowed" %>
+    <%= check_box_tag :strangers, class: "input-small" %>
+</form>
 
-    <%= f.submit "Search", class: "btn" %>
-<% end %>
-
-<table id="hosts" class="table">
-  <tr>
-    <th><%= sort_link @search, :f_name, "First Name" %></th>
-    <th><%= sort_link @search, :l_name, "Last Name" %></th>
-    <th><%= sort_link @search, :email, "Email" %></th>
-    <th>Phone Number</th>
-    <th>Address</th>
-    <th><%= sort_link @search, :region_name, "Region" %></th>
-    <th><%= sort_link @search, :city_name, "City" %></th>
-    <th><%= sort_link @search, :max_guests, "Max Guests" %></th>
-    <th>Needs Survivor</th>
-    <th>Strangers allowed</th>
-    <th>Status</th>
-    <th><%= sort_link @search, :created_at, "Max Guests" %></th>
-  </tr>
-  <% @hosts.each do |host| %>
+<div id="hosts">
+  <table class="table">
     <tr>
-      <td><%= host.f_name %></td>
-      <td><%= host.l_name %></td>
-      <td><%= host.email %></td>
-      <td><%= host.phone %></td>
-      <td><%= host.address %></td>
-      <td><%= host.region_name %></td>
-      <td><%= host.city_name %></td>
-      <td><%= host.max_guests %></td>
-      <td><%= host.survivor_needed %></td>
-      <td><%= host.strangers %></td>
-      <td><%= host.status %></td>
-      <td><%= host.created_at %></td>
+      <th>Edit</th>
+      <th class="sort" data-sort="f_name">First Name</th>
+      <th class="sort" data-sort="l_name">Last Name</th>
+      <th class="sort" data-sort="email"> Email</th>
+      <th>Phone Number</th>
+      <th>Address</th>
+      <th class="sort" data-sort="region_name">Region</th>
+      <th class="sort" data-sort="city_name">City</th>
+      <th class="sort" data-sort="max_guests">Max Guests</th>
+      <th class="sort" data-sort="survivor_needed">Needs Survivor</th>
+      <th class="sort" data-sort="strangers">Strangers allowed</th>
+      <th>Status</th>
+      <th class="sort" data-sort="created_at">Created at</th>
     </tr>
-  <% end %>
-</table>
+    <tbody class="list">
+    <% @hosts.each do |host| %>
+      <tr>
+          <td ><%= link_to 'Edit', edit_host_path(host)%></td>
+          <td class="f_name"><%= host.f_name %></td>
+          <td class="l_name"><%= host.l_name %></td>
+          <td class="email"><%= host.email %></td>
+          <td class="phone"><%= host.phone %></td>
+          <td class="address"><%= host.address %></td>
+          <td class="region_name"><%= host.region_name %></td>
+          <td class="city_name"><%= host.city_name %></td>
+          <td class="max_guests"><%= host.max_guests %></td>
+          <td class="survivor_needed"><%= host.survivor_needed %></td>
+          <td class="strangers"><%= host.strangers %></td>
+          <td class="status"><%= host.status %></td>
+          <td class="created_at"><%= host.created_at.to_date %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

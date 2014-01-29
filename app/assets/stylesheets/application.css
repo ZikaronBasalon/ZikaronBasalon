@@ -10,16 +10,45 @@
  *
  *= require_self
  *= require_tree .
+ *= require reset
+ *= require jquery.ui.all
  */
 
- nav {
- 	background-color: gray;
- }
+ 
+body {
+	background-color: #454595 !important;
+}
+
+nav {
+	background-color: gray;
+}
 
 .hidden {
 	display: none;
 }
 
+
 #container{
-	margin: 30px;
+	
+}
+
+* {
+	margin: 0;
+}
+html, body {
+	height: 100%;
+}
+
+#container {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin-right: 30px;
+	margin-left: 30px;
+	margin-bottom:-30px; /* the bottom margin is the negative value of the footer's height */
+	background-color: white;
+}
+footer, .push {
+	height: 30px; /* '.push' must be the same height as 'footer' */
+	background-color: gray;
 }

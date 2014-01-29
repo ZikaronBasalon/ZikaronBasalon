@@ -3,7 +3,7 @@
   <head>
     <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
     <%= stylesheet_link_tag "application" %>
-    <%= javascript_include_tag :application, controller_name %>
+    <%= javascript_include_tag "application", "#{controller_name}.#{action_name}" if ZikaronBasalon::Application.assets.find_asset("#{controller.controller_name}.#{action_name}.js") %>
     <%= csrf_meta_tag %>
     <%= yield(:head) %>
   </head>
@@ -16,5 +16,8 @@
       <%= content_tag :h1, yield(:title) if show_title? %>
       <%= yield %>
     </div>
+    <footer class="push">
+      AAAAAAAAAAAAAAAAAAAAAAA
+    </footer>
   </body>
 </html>

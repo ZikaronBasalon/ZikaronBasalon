@@ -1,9 +1,6 @@
 class HostsController < ApplicationController
   def index
-    @search = Host.search(params[:q])
-    @hosts = @search.result
-    @search.build_condition if @search.conditions.empty?
-    @search.build_sort if @search.sorts.empty?
+    @hosts = Host.all
   end
 
   def new
@@ -19,9 +16,14 @@ class HostsController < ApplicationController
     end
   end
 
-  def search
-    index
-    render :index
+  def edit
+    @host = Host.find(params[:id])
+  end
+
+  def update
+    @host = Host.find(params[:id])
+    @host.update_attributes(params[:host])
+    redirect_to action: 'index'
   end
 
   def success

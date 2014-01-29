@@ -5,9 +5,6 @@ ZikaronBasalon::Application.routes.draw do
   resources :guests
 
   resources :hosts do
-    collection do
-      match 'search' => 'hosts#search', via: [:get, :post], as: :search
-    end
     member do
       get :send_request
       get :success
@@ -19,6 +16,7 @@ ZikaronBasalon::Application.routes.draw do
   resources :cities
 
   get "pages/home"
+  get "pages/search"
 
 
 

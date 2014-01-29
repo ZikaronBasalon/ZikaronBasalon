@@ -1,0 +1,25 @@
+<% title "Edit #{@host.f_name} #{@host.l_name}" %>
+
+<%= form_for @host, html: {class: "form-horizontal"} do |f| %>
+
+  <div class="control-group">
+     <%= f.label :survivor_needed, "Survivor Status", class: "control-label" %>
+    <div class="controls">
+      <%= f.select :survivor_needed, options_for_select(Host::SURVIVOR_OPTIONS) %>
+    </div>
+  </div>
+
+  <div class="control-group">
+     <%= f.label :status, "Status", class: "control-label" %>
+    <div class="controls">
+      <%= f.text_area :status %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="controls">
+      <%= f.submit %>
+    </div>
+  </div>
+<% end %>
+
