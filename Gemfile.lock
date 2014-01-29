@@ -73,8 +73,7 @@ GEM
       metaclass (~> 0.0.1)
     multi_json (1.8.4)
     nifty-generators (0.4.6)
-    polyamorous (0.6.4)
-      activerecord (>= 3.0)
+    pg (0.12.2)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -99,10 +98,6 @@ GEM
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
     rake (10.1.1)
-    ransack (1.1.0)
-      actionpack (>= 3.0)
-      activerecord (>= 3.0)
-      polyamorous (~> 0.6.0)
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.5)
@@ -151,8 +146,8 @@ DEPENDENCIES
   less-rails
   mocha
   nifty-generators
+  pg (= 0.12.2)
   rails (= 3.2.14)
-  ransack
   sass-rails (~> 3.2.3)
   simple_form
   sqlite3
