@@ -5,10 +5,9 @@ gem 'rails', '3.2.14'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+
 gem 'simple_form'
 gem 'will_paginate'
-gem 'ransack'
 
 
 
@@ -18,6 +17,7 @@ gem 'ransack'
 group :development do
 	gem 'debugger'
 	gem "nifty-generators"
+  gem 'sqlite3'
 end
 
 group :assets do
@@ -38,6 +38,7 @@ gem 'haml'
 
 group :production do
 	gem 'therubyracer'
+  gem 'pg', '0.12.2'
 end
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
