@@ -50,7 +50,19 @@ ZikaronBasalon::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
+   # Don't care if the mailer can't send
+  config.action_mailer.raise_delivery_errors = false
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: "asciicasts.com",
+    authentication: "plain",
+    enable_starttls_auto: true,
+    user_name: "uriklar",
+    password: "bBznot11?"
+  }
   # Enable threaded mode
   # config.threadsafe!
 
