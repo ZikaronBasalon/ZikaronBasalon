@@ -16,12 +16,9 @@
 
  
 body {
-	background-color: #454595 !important;
+	background-color: white !important;
 }
 
-nav {
-	background-color: gray;
-}
 
 .hidden {
 	display: none;
@@ -46,7 +43,8 @@ html, body {
 	margin-right: 30px;
 	margin-left: 30px;
 	margin-bottom:-30px; /* the bottom margin is the negative value of the footer's height */
-	background-color: white;
+	background-color: #FAFAF5;
+	padding: 30px;
 }
 footer, .push {
 	height: 30px; /* '.push' must be the same height as 'footer' */

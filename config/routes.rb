@@ -1,5 +1,5 @@
 ZikaronBasalon::Application.routes.draw do
-  match "hosts/send_request", :to => 'hosts#send_request'
+  match "hosts/:id/send_request", :to => 'hosts#send_request'
 
 
   resources :guests

@@ -1,3 +1,9 @@
-<nav>
-	<%= image_tag "logo.png" %>
-</nav>
+<div class="navbar">
+	<div class="navbar-inner">
+		<%= link_to image_tag("logo.png"), root_path, class: "brand"  %>
+		<ul class="nav">
+			<li><%= link_to "Admin", hosts_path %></li>
+			<li><%= link_to "Host Signup", new_host_path %></li>
+		</ul>
+	</div>
+</div>

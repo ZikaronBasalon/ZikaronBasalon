@@ -1,12 +1,3 @@
-<% title "City" %>
-
-<%= simple_form_for @guest, html: {id: "guest_form"} do |f| %>
-   	<%= f.input :name %>
-    <%= f.input :email %>
-    <%= f.input :phone %>
-    <%= f.input :num_of_friends %>
-<% end %>
-
 <p>
   <strong>Name:</strong>
   <%= @city.name %>
@@ -17,10 +8,34 @@
 			<p>Name: <%= host.f_name %></p>
 			<p>Address: <%= host.address %></p>
 			<p>Email: <%= host.email %></p>
-			<button class="btn btn-primary request_invite" data-id= <%= host.id %>>Request invite</button>
+			<% if (!session[:invites_sent] || !session[:invites_sent].include?(host.id.to_s)) %>
+				<a href="#guestModal" class="btn btn-primary request_invite" data-id= <%= host.id %> data-toggle="modal">Request invite</a>
+			<% else %>
+				<a disabled="true" class="btn">Invite Sent</a>
+			<% end %>
 		</li>
 	<% end %>
 </ul>
 <p>
   <%= link_to "View All", cities_path %>
 </p>
+
+
+  <div id="guestModal" class="modal hide fade">
+	  <div class="modal-header">
+	  	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	  	<h3>Enter your details</h3>
+	  </div>
+	  <div class="modal-body">
+	  <%= simple_form_for @guest, url: send_request_host_path do |f| %>
+	   	<%= f.input :name %>
+	    <%= f.input :email %>
+	    <%= f.input :phone %>
+	    <%= f.input :num_of_friends %>
+	    <%= f.input :host_id, as: :hidden %>
+	  </div>
+	  <div class="modal-footer">
+	  	<%= f.submit "Send", class: "btn btn-primary" %>
+	  </div>
+	  <% end %>
+  </div>

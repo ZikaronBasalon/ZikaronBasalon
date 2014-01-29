@@ -1,4 +1,6 @@
 class HostsController < ApplicationController
+  before_filter :basic_auth, only: [:index]
+
   def index
     @hosts = Host.all
   end
@@ -32,10 +34,17 @@ class HostsController < ApplicationController
   def send_request
     @guest = Guest.find_or_create_by_email(params[:guest])
     session[:guest_id] = @guest.id
-    @host = Host.find(params[:id])
+
+    session[:invites_sent] ||= Array.new
+    session[:invites_sent].push(params[:guest][:host_id])
+
+    @host = Host.find(params[:guest][:host_id])
     RequestMailer.send_request(@host,@guest).deliver
-    respond_to do |format|
-        format.js 
-      end
+  end
+
+  def basic_auth
+    authenticate_or_request_with_http_basic do |username,password|
+      username == "zikaron" && password == "1234.com"
+    end
   end
 end

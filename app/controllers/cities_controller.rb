@@ -5,7 +5,6 @@ class CitiesController < ApplicationController
 
   def show
     @city = City.find(params[:id])
-
     @guest = session[:guest_id] ? Guest.find(session[:guest_id]) : Guest.new
   end
 end

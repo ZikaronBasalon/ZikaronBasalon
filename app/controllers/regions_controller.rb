@@ -5,6 +5,7 @@ class RegionsController < ApplicationController
 
   def show
     @region = Region.find(params[:id])
+    @guest = session[:guest_id] ? Guest.find(session[:guest_id]) : Guest.new
   end
 
   def new
