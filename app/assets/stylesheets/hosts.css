@@ -26,3 +26,11 @@ ul.ui-autocomplete {
   color: blue;
   cursor: pointer;
 }
+
+#export_to_excel {
+  width: 60px;
+  height: 60px;
+  float: right;
+  vertical-align: top;
+  cursor: pointer;
+}

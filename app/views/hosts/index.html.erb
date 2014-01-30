@@ -1,3 +1,4 @@
+<%= image_tag "excel.png", id: "export_to_excel" %>
 <form class="form-inline">
     <%= label_tag :survivor_needed, "Survivor needed" %>
     <%= select_tag :survivor_needed, options_for_select(Host::SURVIVOR_OPTIONS), class: "input-small", include_blank: true %>
@@ -13,7 +14,7 @@
 </form>
 
 <div id="hosts">
-  <table class="table">
+  <table class="table" id="hosts_table">
     <tr>
       <th>Edit</th>
       <th class="sort" data-sort="f_name">First Name</th>
