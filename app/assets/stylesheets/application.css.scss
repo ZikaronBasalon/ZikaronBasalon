@@ -1,0 +1,101 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ *= require reset
+ *= require jquery.ui.all
+ */
+
+@import url(http://fonts.googleapis.com/css?family=Alef);
+
+html,body {
+	height: 100%;
+}
+body {
+	direction: rtl;
+	font-family: 'Alef', sans-serif;
+}
+
+#header {
+	height: 77px;
+	background-color: #fff;
+	padding-right: 40px;
+	border-bottom: 2px solid #cecbcb;
+	box-sizing: border-box;
+
+	#logo {
+		display: inline-block;
+		height: 77px;
+	}
+
+	.header_links {
+		display: inline-block;
+		margin-right: 28px;
+		vertical-align: top;
+		margin-top: 34px;
+		.header_link {
+			font-size: 18px;
+			color: #898989;
+			display: inline-block;
+			margin-left: 38px;
+		}
+	}
+
+	#staff {
+		float: left;
+		width: 116px;
+		background-color: #5e5e5e;
+		font-size: 20px;
+		color: #ededed;
+		height: 100%;
+		line-height: 77px;
+		text-align: center;
+	}
+}
+
+#container {
+	width: 1200px;
+	background-color: #eaeaea;
+	margin-left: auto;
+	margin-right: auto;
+	height: 100%;
+}
+
+.container_inner {
+	margin-right: 135px;
+	padding-top: 53px;
+}
+
+#host_list {
+	.title {
+		color: #3b3b3b;
+		font-size: 20px;
+		font-weight: bold;
+		border-bottom: 3px solid #f5dd23;
+		width: 441px;
+		line-height: 26px;
+	}
+	.explenation {
+		width: 522px;
+		color: #4d4d4d;
+		font-size: 16px;
+		line-height: 24px;
+	}
+
+	#city_select {
+		margin-top: 18px;
+	}
+}
+
+.hidden {
+	display: none;
+}
+

@@ -18,6 +18,10 @@ class HostsController < ApplicationController
     end
   end
 
+  def show
+
+  end
+
   def edit
     @host = Host.find(params[:id])
   end
@@ -26,6 +30,13 @@ class HostsController < ApplicationController
     @host = Host.find(params[:id])
     @host.update_attributes(params[:host])
     redirect_to action: 'index'
+  end
+
+  def search
+    #searchable = Region.find_by_name(params[:q])
+    #searchable ||= City.find_by_name(params[:q])
+    city = City.find(params[:id])
+    @hosts = city.hosts
   end
 
   def success

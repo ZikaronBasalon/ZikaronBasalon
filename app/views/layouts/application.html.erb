@@ -10,14 +10,7 @@
   <body>
     <%= render "layouts/header" %>
     <div id="container">
-      <% flash.each do |name, msg| %>
-        <%= content_tag :div, msg, :id => "flash_#{name}" %>
-      <% end %>
-      <%= content_tag :h1, yield(:title) if show_title? %>
       <%= yield %>
     </div>
-    <footer class="push">
-      AAAAAAAAAAAAAAAA AAAAAAA
-    </footer>
   </body>
 </html>

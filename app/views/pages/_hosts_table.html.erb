@@ -1,0 +1,18 @@
+<table>
+	<thead>
+		<th>Host</th>
+		<th>Address</th>
+		<th>City</th>
+	</thead>
+
+	<tbody>
+		<% @hosts.each do |host| %>
+			<tr>
+				<td><%= host.f_name %></td>
+				<td><%= host.address %></td>
+				<td><%= host.city_name %></td>
+				<td></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

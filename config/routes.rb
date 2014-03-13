@@ -16,7 +16,7 @@ ZikaronBasalon::Application.routes.draw do
   resources :cities
 
   get "pages/home"
-  get "pages/search"
+  get "hosts/search"
 
 
 

@@ -1,6 +1,16 @@
- <h1>Search for a Salon:</h1>
+<div class="container_inner" id="host_list">
+	 <div class="title">List of Hosts Zikaron Basalon 2014</div>
+	 <br>
+	 <div class="explenation">
+	 		Here will be an explenation text saying bla bla bla and bla bla bla and what you should do in zikaron basalon and some more text and some more.
+	 </div>
 
- <form action="/pages/search" class="form-search">
-	<%= text_field_tag :q, nil, data: {autocomplete_source: (City.all + Region.all).map(&:name).sort }, class: "search-query"  %>
-	<button type="submit" class="btn">Search</button>
-</form>
+	 <%= select_tag :city_select, options_from_collection_for_select(City.all, :id, :name), include_blank: true %>
+	<div class="hosts_table">
+		<%= render 'hosts_table' %>
+	</div>
+</div>
+
+
+
+

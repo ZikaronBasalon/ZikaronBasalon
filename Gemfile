@@ -8,6 +8,7 @@ gem 'rails', '3.2.14'
 
 gem 'simple_form'
 gem 'will_paginate'
+gem 'compass-rails'
 
 
 
