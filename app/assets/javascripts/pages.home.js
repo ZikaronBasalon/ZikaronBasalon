@@ -1,7 +1,4 @@
 $(function(){
-	// $("#q").autocomplete({
-	// 	source: $('#q').data('autocomplete-source')
-	// });
 	$('#city_select').change(function(event) {
 		id = $(this).val();
 		$.ajax({
@@ -11,5 +8,15 @@ $(function(){
 				alert('Error!');
 			}
 		});
+	});
+
+	$('.send').click(function(event) {
+		$('#register').removeClass('hidden');
+		$('#mask').removeClass('hidden');
+	});
+
+	$('.x').click(function(event) {
+		$('#register').addClass('hidden');
+		$('#mask').addClass('hidden');
 	});
 });

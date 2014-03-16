@@ -1,22 +1,20 @@
 ZikaronBasalon::Application.routes.draw do
-  match "hosts/:id/send_request", :to => 'hosts#send_request'
-
+  match "hosts/send_request", :to => 'hosts#send_request'
+  match "hosts/search", :to => 'hosts#search'
 
   resources :guests
 
   resources :hosts do
     member do
-      get :send_request
       get :success
     end
   end
 
   resources :regions
-
   resources :cities
 
   get "pages/home"
-  get "hosts/search"
+  #get "hosts/search"
 
 
 

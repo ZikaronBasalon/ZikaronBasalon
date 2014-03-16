@@ -1,3 +1,5 @@
+<div id="mask" class="hidden"></div>
+
 <div class="container_inner" id="host_list">
 	 <div class="title">List of Hosts Zikaron Basalon 2014</div>
 	 <br>
@@ -6,10 +8,18 @@
 	 </div>
 
 	 <%= select_tag :city_select, options_from_collection_for_select(City.all, :id, :name), include_blank: true %>
-	<div class="hosts_table">
-		<%= render 'hosts_table' %>
+
+	<div id="hosts_table">
+		<%= render 'hosts/hosts_table' %>
+	</div>
+
+	<div id="register" class="hidden">
+		<%= render 'guests/register' %>
 	</div>
 </div>
+
+
+
 
 
 
