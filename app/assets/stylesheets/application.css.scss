@@ -167,6 +167,33 @@ table.hosts_table {
 	}
 }
 
+.request_btn {
+	width: 170px;
+	height: 39px;
+	border-radius: 2px; // border radius
+	background-clip: padding-box; // prevents bg color from leaking outside the border
+	box-shadow : 0 1px 3px rgba(0,0,0,.2); // drop shadow
+	color: #595959;
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 39px;
+	text-align: center;
+
+	&.send {
+		background-color: #f5dd23; // layer fill content + color overlay
+		&:hover{
+			cursor: pointer;
+			background-color: #feec67;
+		}
+	}
+
+	&.sent {
+		background-color: #c9c9c9; // layer fill content + color overlay
+	}
+
+
+}
+
 #register {
 	width: 455px;
 	height: 395px;
@@ -247,3 +274,46 @@ table.hosts_table {
 	right: 0;
 }
 
+#success {
+	text-align: center;
+	padding-top: 105px;
+	.request_sent {
+		color: #4d4d4d;
+		font-size: 30px;
+		line-height: 40px;
+	}
+
+	.text {
+		color: #4d4d4d;
+		font-size: 16px;
+		line-height: 24px;
+	}
+
+	#links {
+		margin-top: 90px;
+
+		.link {
+			display: inline-block;
+			margin-left: 20px;
+			width: 265px;
+			height: 62px;
+			border-radius: 2px; // border radius
+			background-clip: padding-box; // prevents bg color from leaking outside the border
+			box-shadow : 0 1px 3px rgba(0,0,0,.2); // drop shadow
+
+			line-height: 62px;
+			text-align: center;
+			background-color: #f7b519; // layer fill content + color overlay
+			&:hover{
+				cursor: pointer;
+				background-color: #feec67;
+			}
+			a {
+				color: #fff;
+				font-size: 20px;
+				font-weight: bold;
+				text-decoration: none;
+			}
+		}
+	}
+}

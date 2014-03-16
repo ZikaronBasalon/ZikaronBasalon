@@ -1,0 +1,18 @@
+<div class="x">X</div>
+<h1>
+	Fill in your details
+</h1>
+<h2>
+	And the host will contanct you in the next few days
+</h2>
+
+<%= simple_form_for @guest, url: hosts_send_request_path do |f| %>
+   	<%= f.input :name, label: false, placeholder: "Name" %>
+    <%= f.input :email, label: false, placeholder: "Emai" %>
+    <%= f.input :phone, label: false, placeholder: "Phone" %>
+    <%= f.input :num_of_friends, label: false, placeholder: "Friends coming with" %>
+    <%= f.input :host_id, as: :hidden %>
+  	<%= f.submit "Send", class: "btn" %>
+<% end %>
+
+

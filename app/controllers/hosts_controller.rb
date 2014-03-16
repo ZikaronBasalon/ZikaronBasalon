@@ -33,8 +33,6 @@ class HostsController < ApplicationController
   end
 
   def search
-    #searchable = Region.find_by_name(params[:q])
-    #searchable ||= City.find_by_name(params[:q])
     city = City.find(params[:id])
     @hosts = city.hosts
   end
@@ -43,14 +41,13 @@ class HostsController < ApplicationController
   end
 
   def send_request
-    @guest = Guest.find_or_create_by_email(params[:guest])
-    session[:guest_id] = @guest.id
-
-    session[:invites_sent] ||= Array.new
-    session[:invites_sent].push(params[:guest][:host_id])
-
-    @host = Host.find(params[:guest][:host_id])
-    RequestMailer.send_request(@host,@guest).deliver
+    if false
+      @guest = Guest.find_or_create_by_email(params[:guest])
+      session[:guest_id] = @guest.id
+      @guest.invites.create(host_id: params[:guest][:host_id] )
+      @host = Host.find(params[:guest][:host_id])
+      RequestMailer.send_request(@host,@guest).deliver
+    end
   end
 
   def basic_auth
