@@ -49,6 +49,13 @@ body {
 			color: #898989;
 			display: inline-block;
 			margin-left: 38px;
+			a {
+				text-decoration: none;
+				color: #898989;
+				&:visited {
+					color: #898989;
+				}
+			}
 		}
 	}
 

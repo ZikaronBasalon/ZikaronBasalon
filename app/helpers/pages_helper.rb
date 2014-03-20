@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module PagesHelper
 	def invite_exists?(id)
 		if !@invites.nil?
