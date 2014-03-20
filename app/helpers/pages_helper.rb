@@ -1,9 +1,17 @@
 module PagesHelper
 	def invite_exists?(id)
-		@invites.include?(id) ? "sent" : "send"
+		if !@invites.nil?
+			@invites.include?(id) ? "sent" : "send"
+		else
+			"send"
+		end
 	end
 
 	def request_btn_text(id)
-		@invites.include?(id) ? "Request Sent" : "Send Request"
+		if !@invites.nil?
+			@invites.include?(id) ? "Request Sent" : "Send Request"
+		else
+			"Send Request"
+		end
 	end
 end

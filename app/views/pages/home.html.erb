@@ -9,9 +9,20 @@
 
 	 <%= select_tag :city_select, options_from_collection_for_select(City.all, :id, :name), include_blank: true %>
 
-	<div id="hosts_table">
-		<%= render 'hosts/hosts_table' %>
+	<div id="main_content">
+		<div id="hosts_table">
+			<%= render 'hosts/hosts_table' %>
+		</div>
+
+		<div id="no_salon">
+			<div class="label">Didn't find a living room?</div>
+			<div class="content">Why don't you and your friends host a zikaron in your salon? We will help you an shit...</div>
+			<%= link_to "Click for details", "http://www.zikaronbasalon.com" %>
+		</div>
 	</div>
+
+
+
 
 	<div id="register" class="hidden">
 		<%= render 'guests/register' %>

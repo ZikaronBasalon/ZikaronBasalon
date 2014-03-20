@@ -17,7 +17,7 @@
 @import url(http://fonts.googleapis.com/css?family=Alef);
 
 html,body {
-	height: 100%;
+	min-height: 100% !important;
 }
 body {
 	direction: rtl;
@@ -79,22 +79,23 @@ body {
 	padding-top: 53px;
 }
 
+.title {
+	color: #3b3b3b;
+	font-size: 20px;
+	font-weight: bold;
+	border-bottom: 3px solid #f5dd23;
+	line-height: 26px;
+	display: inline;
+	margin-bottom: 24px;
+}
+.explenation {
+	width: 522px;
+	color: #4d4d4d;
+	font-size: 16px;
+	line-height: 24px;
+	margin-top: 24px;
+}
 #host_list {
-	.title {
-		color: #3b3b3b;
-		font-size: 20px;
-		font-weight: bold;
-		border-bottom: 3px solid #f5dd23;
-		width: 441px;
-		line-height: 26px;
-	}
-	.explenation {
-		width: 522px;
-		color: #4d4d4d;
-		font-size: 16px;
-		line-height: 24px;
-	}
-
 	#city_select {
 		margin-top: 18px;
 		width: 295px;
@@ -190,8 +191,6 @@ table.hosts_table {
 	&.sent {
 		background-color: #c9c9c9; // layer fill content + color overlay
 	}
-
-
 }
 
 #register {
@@ -314,6 +313,169 @@ table.hosts_table {
 				font-weight: bold;
 				text-decoration: none;
 			}
+		}
+	}
+}
+
+#hosts_table {
+	display: inline-block;
+}
+
+#no_salon {
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 120px;
+	margin-right: 114px;
+	width: 262px;
+	.label {
+		font-size: 27px;
+		color: #616161;
+	}
+
+	.content {
+		color: #616161;
+	}
+
+	a {
+		line-height: 40px;
+		color: #616161;
+	}
+}
+
+.form_header {
+	line-height: 60px;
+	font-size: 20px;
+	font-weight: bold;
+	color: #4d4d4d;
+}
+
+form {
+	.control-group {
+		label {
+			width: 170px;
+			text-align: left;
+			font-size: 18px;
+			color: #616161;
+			display: inline-block;
+		}
+	}
+	.controls {
+		display: inline;
+		input,select {
+			margin-right: 20px;
+			margin-bottom: 20px;
+			width: 264px;
+			height: 37px;
+			border: 1px solid #d7d7d7; // stroke
+			border-radius: 2px; // border radius
+			background-color: #fff; // layer fill content + color overlay
+			padding-right: 12px;
+			color: #616161;
+			font-size: 18px;
+			font-family: 'Alef', sans-serif;
+			box-sizing: border-box;
+		}
+		textarea {
+			margin-right: 195px;
+			padding-right: 12px;
+			color: #616161;
+			font-size: 18px;
+			font-family: 'Alef', sans-serif;
+			box-sizing: border-box;
+			padding-top: 15px;
+			width: 358px;
+			height: 193px;
+		}
+
+		.host_submit {
+			margin-right: 195px;
+			width: 162px;
+			height: 46px;
+			margin-top: 15px;
+			border-radius: 2px; // border radius
+			background-clip: padding-box; // prevents bg color from leaking outside the border
+			background-color: #f5dd23; // layer fill content + color overlay
+			box-shadow : 0 1px 3px rgba(0,0,0,.2); // drop shadow
+			color: #595959;
+			font-size: 18px;
+			font-weight: bold;
+			line-height: 39px;
+			text-align: center;
+
+			&:hover{
+				cursor: pointer;
+				background-color: #feec67;
+			}
+		}
+	}
+}
+
+.box {
+	padding-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 60px;
+	margin-bottom: 80px;
+	width: 777px;
+	background-color: #fff;
+	border: 1px solid #d8d8d8;
+	color: #4d4d4d;
+	h1 {
+		font-size: 30px;
+		font-weight: bold;
+	}
+
+	h2 {
+		font-size: 24px;
+		font-weight: bold;
+		line-height: 33px;
+	}
+
+	.text {
+		font-size: 15px;
+		line-height: 19px;
+	}
+
+	.square {
+		width: 318px;
+		display: inline-block;
+		vertical-align: top;
+		margin-top: 40px;
+		img {
+			margin-bottom: 20px;
+		}
+	}
+
+	.v_line {
+		display: inline-block;
+		margin-top: 75px;
+		width: 1px;
+		background-color: #969696;
+		height: 197px;
+		margin-left: 15px;
+		margin-right: 15px;
+	}
+
+	.btn {
+		width: 162px;
+		height: 46px;
+		margin-top: 15px;
+		border-radius: 2px; // border radius
+		background-clip: padding-box; // prevents bg color from leaking outside the border
+		background-color: #f5dd23; // layer fill content + color overlay
+		box-shadow : 0 1px 3px rgba(0,0,0,.2); // drop shadow
+		color: #595959;
+		font-size: 18px;
+		font-weight: bold;
+		line-height: 39px;
+		text-align: center;
+		margin-left: auto;
+		margin-right: auto;
+		margin-bottom: 30px;
+		text-decoration: none;
+		&:hover{
+			cursor: pointer;
+			background-color: #feec67;
 		}
 	}
 }
