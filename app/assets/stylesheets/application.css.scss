@@ -78,8 +78,15 @@ body {
 	width: 100%;
 	background-color: #424242;
 	line-height: 60px;
+	color: #a9a9a9;
+	font-size: 16px;
 	img {
 		vertical-align: middle;
+		width: 20px;
+		height: 20px;
+	}
+	a{
+		text-decoration: none;
 	}
 }
 
