@@ -71,6 +71,24 @@ body {
 	}
 }
 
+#footer {
+	position: absolute;
+	bottom: 0;
+	height: 60px;
+	width: 100%;
+	background-color: #424242;
+	line-height: 60px;
+	img {
+		vertical-align: middle;
+	}
+}
+
+.footer_wrapper {
+	margin: auto;
+	text-align: center;
+	line-height: 60px;
+}
+
 #container {
 	width: 1200px;
 	background-color: #eaeaea;
@@ -79,6 +97,7 @@ body {
 	height: 100%;
 	position: relative;
 	font-family: 'Alef', sans-serif;
+	padding-bottom: 60px;
 }
 
 .container_inner {
