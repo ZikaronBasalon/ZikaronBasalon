@@ -41,13 +41,11 @@ class HostsController < ApplicationController
   end
 
   def send_request
-    if false
-      @guest = Guest.find_or_create_by_email(params[:guest])
-      session[:guest_id] = @guest.id
-      @guest.invites.create(host_id: params[:guest][:host_id] )
-      @host = Host.find(params[:guest][:host_id])
-      RequestMailer.send_request(@host,@guest).deliver
-    end
+    @guest = Guest.find_or_create_by_email(params[:guest])
+    session[:guest_id] = @guest.id
+    @guest.invites.create(host_id: params[:guest][:host_id] )
+    @host = Host.find(params[:guest][:host_id])
+    RequestMailer.send_request(@host,@guest).deliver
   end
 
   def basic_auth
