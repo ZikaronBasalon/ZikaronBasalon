@@ -14,18 +14,21 @@
  *= require jquery.ui.all
  */
 
-@import url(http://fonts.googleapis.com/css?family=Alef);
+@import url(http://fonts.googleapis.com/css?family=Alef:400,700);
 
 html,body {
 	min-height: 100% !important;
+	font-family: 'Alef', sans-serif;
 }
 body {
 	direction: rtl;
 	font-family: 'Alef', sans-serif;
+	background-color: #eaeaea;
 }
 
 #header {
-	width: 1200px;
+	font-family: 'Alef', sans-serif;
+	min-width: 1200px;
 	height: 77px;
 	margin-left: auto;
 	margin-right: auto;
@@ -103,7 +106,7 @@ body {
 }
 
 #container {
-	width: 1200px;
+	min-width: 1200px;
 	background-color: #eaeaea;
 	margin-left: auto;
 	margin-right: auto;
