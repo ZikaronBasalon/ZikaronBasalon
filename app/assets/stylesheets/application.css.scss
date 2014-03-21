@@ -316,6 +316,7 @@ table.hosts_table {
 #success {
 	text-align: center;
 	padding-top: 105px;
+	padding-bottom: 105px;
 	.request_sent {
 		color: #4d4d4d;
 		font-size: 30px;
@@ -352,6 +353,9 @@ table.hosts_table {
 				font-size: 20px;
 				font-weight: bold;
 				text-decoration: none;
+			}
+			img {
+				margin-left: 10px;
 			}
 		}
 	}
