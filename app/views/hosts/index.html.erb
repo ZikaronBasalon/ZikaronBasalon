@@ -1,53 +1,59 @@
-<%= image_tag "excel.png", id: "export_to_excel" %>
-<form class="form-inline">
-    <%= label_tag :survivor_needed, "Survivor needed" %>
-    <%= select_tag :survivor_needed, options_for_select(Host::SURVIVOR_OPTIONS), class: "input-small", include_blank: true %>
-  
-    <%= label_tag :region_name, "Region" %>
-    <%= select_tag :region_name, options_for_select(Region.all.map(&:name)), class: "input-small", include_blank: true %>
-    
-    <%= label_tag :city_name, "City" %>
-    <%= select_tag :city_name, options_for_select(City.all.map(&:name)), class: "input-small", include_blank: true %>
+<div id="staff_container">
+  <form class="form-inline">
+    <div class="filter_by">Filter by:</div>
+    <%= select_tag :city_name, options_for_select(City.all.map(&:name)), prompt: "City" %>
 
-    <%= label_tag :strangers, "Strangers allowed" %>
-    <%= check_box_tag :strangers, class: "input-small" %>
-</form>
+    <%= select_tag :survivor_needed, options_for_select(["זקוק","לא זקוק","Sent"]), prompt: "בחר/י"%>
 
-<div id="hosts">
-  <table class="table" id="hosts_table">
-    <tr>
-      <th>Edit</th>
-      <th class="sort" data-sort="f_name">First Name</th>
-      <th class="sort" data-sort="l_name">Last Name</th>
-      <th class="sort" data-sort="email"> Email</th>
-      <th>Phone Number</th>
-      <th>Address</th>
-      <th class="sort" data-sort="region_name">Region</th>
-      <th class="sort" data-sort="city_name">City</th>
-      <th class="sort" data-sort="max_guests">Max Guests</th>
-      <th class="sort" data-sort="survivor_needed">Needs Survivor</th>
-      <th class="sort" data-sort="strangers">Strangers allowed</th>
-      <th>Status</th>
-      <th class="sort" data-sort="created_at">Created at</th>
-    </tr>
-    <tbody class="list">
-    <% @hosts.each do |host| %>
-      <tr>
-          <td ><%= link_to 'Edit', edit_host_path(host)%></td>
-          <td class="f_name"><%= host.f_name %></td>
-          <td class="l_name"><%= host.l_name %></td>
-          <td class="email"><%= host.email %></td>
-          <td class="phone"><%= host.phone %></td>
-          <td class="address"><%= host.address %></td>
-          <td class="region_name"><%= host.region_name %></td>
-          <td class="city_name"><%= host.city_name %></td>
-          <td class="max_guests"><%= host.max_guests %></td>
-          <td class="survivor_needed"><%= host.survivor_needed %></td>
-          <td class="strangers"><%= host.strangers %></td>
-          <td class="status"><%= host.status %></td>
-          <td class="created_at"><%= host.created_at.to_date %></td>
-        </tr>
-    <% end %>
-    </tbody>
-  </table>
+    <%= select_tag :strangers, options_for_select([['מוכן', true], ['לא מוכן', false]]), prompt: "בחר/י" %>
+
+    <%= image_tag "excel.png", id: "export_to_excel" %>
+  </form>
+
+  <div id="hosts">
+    <table id="staff_table">
+      <thead>
+        <tr>
+        <th>&nbsp;</th>
+        <th class="sort" data-sort="f_name">
+          First Name
+            <div class="header_line"></div>
+        </th>
+        <th class="sort" data-sort="l_name">
+          Last Name
+          <div class="header_line"></div>
+        </th>
+        <th>Address<div class="header_line"></div></th>
+        <th class="sort" data-sort="strangers">Strangers allowed<div class="header_line"></div></th>
+        <th class="sort" data-sort="city_name">City<div class="header_line"></div></th>
+        <th>Phone Number<div class="header_line"></th>
+        <th class="sort" data-sort="email"> Email<div class="header_line"></div></th>
+        <th class="sort" data-sort="survivor_needed">Needs Survivor<div class="header_line"></div></th>
+        <th>Status<div class="header_line"></div></th>
+      </tr>
+      </thead>
+      <tbody class="list">
+      <% @hosts.each do |host| %>
+        <tr>
+            <td >
+              <%= link_to edit_host_path(host) do %>
+              <div class="circle">
+                <%= inline_svg "edit.svg" %>
+              </div>
+              <% end %>
+            </td>
+            <td class="f_name"><%= host.f_name %></td>
+            <td class="l_name"><%= host.l_name %></td>
+            <td class="address"><%= host.address %></td>
+            <td class="strangers <%= strangers_class(host.strangers) %>"><%= inline_svg(get_guests_svg(host.strangers)) %><%= host.strangers %></td>
+            <td class="city_name"><%= host.city_name %></td>
+            <td class="phone"><%= host.phone %></td>
+            <td class="email"><%= host.email %></td>
+            <td class="survivor_needed"><%= host.survivor_needed %></td>
+            <td class="status"><%= host.staatus %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -23,8 +23,8 @@ ZikaronBasalon::Application.configure do
     domain: "asciicasts.com",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: "uriklar",
-    password: "bBznot11?"
+    user_name: "zikaronbasalon",
+    password: "yomhashoa"
   }
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log

@@ -87,6 +87,12 @@ body {
 	}
 	a{
 		text-decoration: none;
+		color: #a9a9a9;
+		&:visited {olor: #a9a9a9;}
+	}
+	.part {
+		display: inline;
+		margin-left: 15px;
 	}
 }
 
@@ -511,5 +517,93 @@ form {
 			cursor: pointer;
 			background-color: #feec67;
 		}
+	}
+}
+
+#staff_container{
+	padding-top: 47px;
+	font-size: 16px;
+	color: #616161;
+	margin-right: 40px;
+	margin-left: 40px;
+	font-family: 'Alef', sans-serif;
+	.filter_by {
+		display: inline;
+	}
+	#export_to_excel {
+		float: left;
+		cursor: pointer;
+	}
+	select {
+		margin-right: 20px;
+		width: 168px;
+		height: 37px;
+		border: 1px solid #d7d7d7; // stroke
+		border-radius: 0.5px; // border radius
+		background-color: #fff; // layer fill content + color overlay
+		font-size: 16px;
+		color: #616161;
+		font-family: 'Alef', sans-serif;
+	}
+	table#staff_table {
+		width: 100%;
+		margin-top: 53px;
+		th {
+			//padding-left: 20px;
+			font-size: 18px;
+			font-weight: bold;
+			color: #252525;
+			&.sort {
+				cursor: pointer;
+				//color: blue;
+				//text-decoration: none;
+			}
+
+			.header_line {
+				margin-top: 15px;
+				height: 3px;
+				background-color: #d9d9d9;
+			}
+		}
+		tbody {
+			tr {
+				border-bottom: 1px solid #c6c6c6;
+				line-height: 67px;
+			}
+			td {
+				padding-right: 5px;
+				padding-left: 5px;
+				box-sizing: border-box;
+			}
+		}
+	}
+	.strangers {
+		font-size: 0px;
+		&.allowed {
+			svg{ path{ fill: #f7b519}}
+		}
+		&.not_allowed {
+			svg{ path{ fill: #bcbcbc}}
+		}
+	}
+}
+
+.circle {
+	width: 32px;
+	height: 32px;
+	background-color: #a3a3a3;
+	border-radius: 16px;
+	color: white;
+	//font-size: 18px;
+	display: inline-block;
+	//line-height: 24px;
+	cursor: pointer;
+	position: relative;
+	vertical-align: middle;
+	svg {
+		position: absolute;
+		top: 8px;
+		right: 6px;
+		path { fill: white;}
 	}
 }

@@ -1,24 +1,23 @@
-<% title "Edit #{@host.f_name} #{@host.l_name}" %>
+<% title "#{@host.f_name} #{@host.l_name}" %>
 
 <%= form_for @host, html: {class: "form-horizontal"} do |f| %>
 
   <div class="control-group">
-     <%= f.label :survivor_needed, "Survivor Status", class: "control-label" %>
+     <%= f.label :survivor_needed, "זקוק לעזרה במציאת איש עדות?", class: "control-label" %>
     <div class="controls">
-      <%= f.select :survivor_needed, options_for_select(Host::SURVIVOR_OPTIONS) %>
+      <%= f.select :survivor_needed,options_for_select(["זקוק","לא זקוק","Sent"]), prompt: "בחר/י" %>
     </div>
   </div>
 
   <div class="control-group">
-     <%= f.label :status, "Status", class: "control-label" %>
-    <div class="controls">
-      <%= f.text_area :status %>
-    </div>
+      <div class="controls">
+        <%= f.text_area :status %>
+      </div>
   </div>
 
   <div class="control-group">
     <div class="controls">
-      <%= f.submit %>
+      <%= f.submit "שלח/י", class: "host_submit" %>
     </div>
   </div>
 <% end %>

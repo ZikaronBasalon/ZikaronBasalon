@@ -4,5 +4,7 @@
 		<div class="header_link"><%= link_to "רוצה לארח", new_host_path %></div>
 		<div class="header_link"><%= link_to "רוצה להתארח", root_path %></div>
 	</div>
-	<div id="staff">צוות</div>
+	<%= link_to hosts_path do %>
+		<div id="staff">צוות</div>
+	<% end %>
 </div>

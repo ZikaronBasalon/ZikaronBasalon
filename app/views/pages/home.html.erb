@@ -7,7 +7,7 @@
 	 		פה יבוא טקסט שמסביר מה לעשות בלה בלה בלה "זיכרון בסלון" משהו על שואה ועל היטלר שהיה בחור קצת שונה מהמקובל, אך לא פחות משמעותי מסטאלין
 	 </div>
 
-	 <%= select_tag :city_select, options_from_collection_for_select(City.all, :id, :name), include_blank: true, prompt: "חפש עיר" %>
+	 <%= select_tag :city_select, options_from_collection_for_select(City.all, :id, :name), prompt: "חפש עיר" %>
 
 	<div id="main_content">
 		<div id="hosts_table">
@@ -17,7 +17,7 @@
 		<div id="no_salon">
 			<div class="label">לא מצאתם סלון מארח?</div>
 			<div class="content">למה שלא תארגנו ערב לכם ולחבריכם? צוות זיכרון בסלון יסייע לכם בארגון הערב ובבניתת תוכנו.</div>
-			<%= link_to "לחצו כאן לפרטים", "http://www.zikaronbasalon.com" %>
+			<%= link_to "לחצו כאן לפרטים", new_host_path %>
 		</div>
 	</div>
 
