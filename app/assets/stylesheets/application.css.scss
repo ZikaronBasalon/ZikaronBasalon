@@ -299,6 +299,11 @@ table.hosts_table {
 			cursor: pointer;
 			background-color: #feec67;
 		}
+		a{
+			text-decoration: none;
+			color: #595959;
+			&:visited {color: #595959;}
+		}
 	}
 
 	.x {
