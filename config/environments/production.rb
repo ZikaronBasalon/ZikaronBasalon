@@ -63,6 +63,7 @@ ZikaronBasalon::Application.configure do
     user_name: "zikaronbasalon",
     password: "yomhashoa"
   }
+
   # Enable threaded mode
   # config.threadsafe!
 

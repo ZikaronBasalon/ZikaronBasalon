@@ -1,5 +1,5 @@
 class RequestMailer < ActionMailer::Base
-  default from: "uriklar@gmail.com"
+  default from: "zikaronbasalon@gmail.com"
 
   def send_request(host,guest)
   	@guest = guest

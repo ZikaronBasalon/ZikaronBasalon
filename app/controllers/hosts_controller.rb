@@ -12,7 +12,12 @@ class HostsController < ApplicationController
   def create
     @host = Host.new(params[:host])
     if @host.save
+      manager_email = @host.try(:city).manager_email
+      if manager_email
+        HostMailer.manager_notification(manager_email,@host).deliver
+      end
       redirect_to success_host_path(@host), :notice => "Successfully created host."
+
     else
       render :action => 'new'
     end

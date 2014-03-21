@@ -26,6 +26,7 @@ ZikaronBasalon::Application.configure do
     user_name: "zikaronbasalon",
     password: "yomhashoa"
   }
+
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
