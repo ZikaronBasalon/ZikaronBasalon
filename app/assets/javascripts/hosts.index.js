@@ -54,8 +54,8 @@ function is_in_filter_conditions (item,filters) {
       return false;
   }
 
-  if(filters.city_name){
-    if(values.city_name != filters.city_name)
+  if(filters.strangers){
+    if(values.strangers.indexOf(filters.strangers) == -1 )
       return false;
   }
 
