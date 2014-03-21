@@ -4,10 +4,10 @@
 	 <div class="title">רשימת מארחים זיכרון בסלון 2014</div>
 	 <br>
 	 <div class="explenation">
-	 		Here will be an explenation text saying bla bla bla and bla bla bla and what you should do in zikaron basalon and some more text and some more.
+	 		פה יבוא טקסט שמסביר מה לעשות בלה בלה בלה "זיכרון בסלון" משהו על שואה ועל היטלר שהיה בחור קצת שונה מהמקובל, אך לא פחות משמעותי מסטאלין
 	 </div>
 
-	 <%= select_tag :city_select, options_from_collection_for_select(City.all, :id, :name), include_blank: true %>
+	 <%= select_tag :city_select, options_from_collection_for_select(City.all, :id, :name), include_blank: true, prompt: "חפש עיר" %>
 
 	<div id="main_content">
 		<div id="hosts_table">
@@ -15,9 +15,9 @@
 		</div>
 
 		<div id="no_salon">
-			<div class="label">Didn't find a living room?</div>
-			<div class="content">Why don't you and your friends host a zikaron in your salon? We will help you an shit...</div>
-			<%= link_to "Click for details", "http://www.zikaronbasalon.com" %>
+			<div class="label">לא מצאתם סלון מארח?</div>
+			<div class="content">למה שלא תארגנו ערב לכם ולחבריכם? צוות זיכרון בסלון יסייע לכם בארגון הערב ובבניתת תוכנו.</div>
+			<%= link_to "לחצו כאן לפרטים", "http://www.zikaronbasalon.com" %>
 		</div>
 	</div>
 

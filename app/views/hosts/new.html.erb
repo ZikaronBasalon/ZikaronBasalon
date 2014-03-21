@@ -1,25 +1,25 @@
 <% title "New Host" %>
 
 <div class="container_inner">
-  <div class="title">Want Host?</div>
+  <div class="title">רוצה לארח</div>
   <br>
   <div class="explenation">
-    Here will be an explenation text saying bla bla bla and bla bla bla and what you should do in zikaron basalon and some more text and some more.
+    פה יבוא טקסט שמסביר מה לעשות בלה בלה בלה "זיכרון בסלון" מאפשר לציין את משהו שאני לא רוה אירועי הזיכרון בדרך שונה מעט מהמקובל, אך לא פחות משמעותית ומכבדת. בסלון הבית, בין חברים, מתכנסים ובלה בלה בלה איש עדות 2014.
   </div>
 
-  <div class="form_header">What to host? Fill in your details:</div>
+  <div class="form_header">הרשמו בתור מארחים לזיכרון בסלון וקבלו את כל הפרטים:</div>
 
   <%= form_for @host, html: {class: "form-horizontal"} do |f| %>
 
     <div class="control-group">
-      <%= f.label :f_name, "First Name", class: "control-label" %>
+      <%= f.label :f_name, "שם פרטי", class: "control-label" %>
       <div class="controls">
         <%= f.text_field :f_name %>
       </div>
     </div>
 
     <div class="control-group">
-      <%= f.label :l_name, "Last Name", class: "control-label" %>
+      <%= f.label :l_name, "שם משפחה", class: "control-label" %>
       <div class="controls">
         <%= f.text_field :l_name %>
       </div>
@@ -33,49 +33,49 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :phone, "Phone", class: "control-label" %>
+      <%= f.label :phone, "טלפון", class: "control-label" %>
       <div class="controls">
         <%= f.text_field :phone %>
       </div>
     </div>
 
     <div class="control-group">
-      <%= f.label :address, "Address", class: "control-label" %>
+      <%= f.label :address, "כתובת הסלון", class: "control-label" %>
       <div class="controls">
         <%= f.text_field :address %>
       </div>
     </div>
 
     <div class="control-group">
-      <%= f.label :city_name, "City", class: "control-label" %>
+      <%= f.label :city_name, "עיר", class: "control-label" %>
       <div class="controls">
         <%= f.text_field :city_name, data: {autocomplete_source: City.order(:name).map(&:name)} %>
       </div>
     </div>
 
     <div class="control-group">
-     <%= f.label :survivor_needed, "Survivor needed", class: "control-label" %>
+     <%= f.label :survivor_needed, "זקוק לעזרה במציאת איש עדות?", class: "control-label" %>
     <div class="controls">
-      <%= f.select :survivor_needed,options_for_select(["Need","Don't Need"]), prompt: "Select" %>
+      <%= f.select :survivor_needed,options_for_select(["זקוק","לא זקוק"]), prompt: "בחר/י" %>
     </div>
   </div>
 
    <div class="control-group">
-     <%= f.label :strangers, "Strangers alowed", class: "control-label" %>
+     <%= f.label :strangers, "מוכן לארח זרים", class: "control-label" %>
     <div class="controls">
-      <%= f.select :strangers,[['Allowed', true], ['Not Allowed', false]], prompt: "Select" %>
+      <%= f.select :strangers,[['מוכן', true], ['לא מוכן', false]], prompt: "בחר/י" %>
     </div>
   </div>
 
   <div class="control-group">
       <div class="controls">
-        <%= f.text_area :free_text, placeholder: "anything else we need to know?" %>
+        <%= f.text_area :free_text, placeholder: "עוד משהו שאנחנו צריכים לדעת?" %>
       </div>
   </div>
 
   <div class="control-group">
     <div class="controls">
-      <%= f.submit "Submit", class: "host_submit" %>
+      <%= f.submit "שלח/י", class: "host_submit" %>
     </div>
   </div>
 
