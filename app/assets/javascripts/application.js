@@ -15,3 +15,11 @@
 //= require jquery.ui.autocomplete
 // require twitter/bootstrap
 // require_tree .
+
+$(function() {
+	$("form").on("keypress", function (e) {
+	    if (e.keyCode == 13) {
+	        return false;
+	    }
+	});
+})
