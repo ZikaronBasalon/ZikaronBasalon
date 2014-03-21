@@ -34,7 +34,7 @@ class HostsController < ApplicationController
 
   def search
     city = City.find(params[:id])
-    @hosts = city.hosts
+    @hosts = city.get_hosts
   end
 
   def success

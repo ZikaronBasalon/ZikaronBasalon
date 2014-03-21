@@ -3,4 +3,8 @@ class City < ActiveRecord::Base
 
   belongs_to :region
   has_many :hosts
+
+  def get_hosts
+  	hosts.where("strangers = ?",true)
+  end
 end
