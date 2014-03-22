@@ -2,22 +2,71 @@
 
 <%= form_for @host, html: {class: "form-horizontal"} do |f| %>
 
-  <div class="control-group">
+   <div class="control-group">
+      <%= f.label :f_name, "שם פרטי", class: "control-label" %>
+      <div class="controls">
+        <%= f.text_field :f_name %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :l_name, "שם משפחה", class: "control-label" %>
+      <div class="controls">
+        <%= f.text_field :l_name %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :email, "Email", class: "control-label" %>
+      <div class="controls">
+        <%= f.text_field :email %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :phone, "טלפון", class: "control-label" %>
+      <div class="controls">
+        <%= f.text_field :phone %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :address, "כתובת הסלון", class: "control-label" %>
+      <div class="controls">
+        <%= f.text_field :address %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :city_name, "עיר", class: "control-label" %>
+      <div class="controls">
+        <%= f.text_field :city_name, data: {autocomplete_source: City.order(:name).map(&:name)} %>
+      </div>
+    </div>
+
+    <div class="control-group">
      <%= f.label :survivor_needed, "זקוק לעזרה במציאת איש עדות?", class: "control-label" %>
     <div class="controls">
-      <%= f.select :survivor_needed,options_for_select(["זקוק","לא זקוק","Sent"]), prompt: "בחר/י" %>
+      <%= f.select :survivor_needed,options_for_select(["זקוק","לא זקוק","נשלח"]), prompt: "בחר/י" %>
+    </div>
+  </div>
+
+   <div class="control-group">
+     <%= f.label :strangers, "מוכן לארח זרים", class: "control-label" %>
+    <div class="controls">
+      <%= f.select :strangers,[['מוכן', true], ['לא מוכן', false]], prompt: "בחר/י" %>
     </div>
   </div>
 
   <div class="control-group">
       <div class="controls">
-        <%= f.text_area :status %>
+        <%= f.text_area :free_text, placeholder: "עוד משהו שאנחנו צריכים לדעת?" %>
       </div>
   </div>
 
   <div class="control-group">
     <div class="controls">
-      <%= f.submit "שלח/י", class: "host_submit" %>
+      <%= f.submit "עדכן/י", class: "host_submit" %>
     </div>
   </div>
 <% end %>

@@ -3,7 +3,7 @@
     <div class="filter_by">Filter by:</div>
     <%= select_tag :city_name, options_for_select(City.all.map(&:name)), prompt: "City" %>
 
-    <%= select_tag :survivor_needed, options_for_select(["זקוק","לא זקוק","Sent"]), prompt: "בחר/י"%>
+    <%= select_tag :survivor_needed, options_for_select(["זקוק","לא זקוק","נשלח"]), prompt: "בחר/י"%>
 
     <%= select_tag :strangers, options_for_select([['מוכן', true], ['לא מוכן', false]]), prompt: "בחר/י" %>
 
@@ -16,20 +16,20 @@
         <tr>
         <th>&nbsp;</th>
         <th class="sort" data-sort="f_name">
-          First Name
+          שם
             <div class="header_line"></div>
         </th>
         <th class="sort" data-sort="l_name">
-          Last Name
+          משפחה
           <div class="header_line"></div>
         </th>
-        <th>Address<div class="header_line"></div></th>
-        <th class="sort" data-sort="strangers">Strangers allowed<div class="header_line"></div></th>
-        <th class="sort" data-sort="city_name">City<div class="header_line"></div></th>
-        <th>Phone Number<div class="header_line"></th>
+        <th>כתובת<div class="header_line"></div></th>
+        <th class="sort" data-sort="strangers">זרים<div class="header_line"></div></th>
+        <th class="sort" data-sort="city_name">עיר<div class="header_line"></div></th>
+        <th>טלפון<div class="header_line"></th>
         <th class="sort" data-sort="email"> Email<div class="header_line"></div></th>
-        <th class="sort" data-sort="survivor_needed">Needs Survivor<div class="header_line"></div></th>
-        <th>Status<div class="header_line"></div></th>
+        <th class="sort" data-sort="survivor_needed">איש עדות<div class="header_line"></div></th>
+        <th>מידע נוסף<div class="header_line"></div></th>
       </tr>
       </thead>
       <tbody class="list">
@@ -50,7 +50,7 @@
             <td class="phone"><%= host.phone %></td>
             <td class="email"><%= host.email %></td>
             <td class="survivor_needed"><%= host.survivor_needed %></td>
-            <td class="status"><%= host.status %></td>
+            <td class="status"><%= host.free_text %></td>
           </tr>
       <% end %>
       </tbody>
