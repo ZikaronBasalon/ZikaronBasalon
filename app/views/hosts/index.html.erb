@@ -1,7 +1,7 @@
 <div id="staff_container">
   <form class="form-inline">
     <div class="filter_by">Filter by:</div>
-    <%= select_tag :city_name, options_for_select(City.all.map(&:name)), prompt: "City" %>
+    <%= select_tag :city_name, options_for_select(City.all.map(&:name)), prompt: "עיר" %>
 
     <%= select_tag :survivor_needed, options_for_select(["זקוק","לא זקוק","נשלח"]), prompt: "בחר/י"%>
 
