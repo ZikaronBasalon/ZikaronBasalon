@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class HostMailer < ActionMailer::Base
   default from: "zikaronbasalon@gmail.com"
 
