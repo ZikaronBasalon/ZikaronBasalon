@@ -1,8 +1,10 @@
+# encoding: UTF-8
 class RequestMailer < ActionMailer::Base
   default from: "zikaronbasalon@gmail.com"
 
   def send_request(host,guest)
   	@guest = guest
-  	mail :to => host.email, :subject => "Zikaron Basalon request"
+  	@host = host
+  	mail :to => host.email, :subject => "התקבלה בקשה להתארח בסלון שלך"
   end
 end

@@ -16,6 +16,9 @@ class HostsController < ApplicationController
       if manager_email
         HostMailer.manager_notification(manager_email,@host).deliver
       end
+      if @host.email 
+         HostMailer.new_host(@host).deliver
+      end
       redirect_to success_host_path(@host), :notice => "Successfully created host."
 
     else
