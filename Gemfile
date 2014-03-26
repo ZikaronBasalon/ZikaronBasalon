@@ -38,7 +38,7 @@ gem 'jquery-ui-rails'
 gem 'haml'
 
 group :production do
-	gem 'therubyracer'
+ gem 'therubyracer'
   gem 'pg', '0.12.2'
   gem 'rails_12factor'
 end
