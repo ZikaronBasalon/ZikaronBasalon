@@ -2,7 +2,7 @@
 <%= @guest.email %> wants to do zikaron in your salon.
 שלום <%=  @host.f_name %>.
 
-<%=  @guest.name %>. ו <% if @guest.num_of_friends  &&   @guest.num_of_friends.to_i > 0 %> ו <%= @guest.num_of_friends %> אורחים נוספים מעוניינים <% else %> מעוניין  <% end %> להתארח בערב זיכרון בסלון אצלך בבית.
+<%=  @guest.name %> <% if @guest.num_of_friends  &&   @guest.num_of_friends.to_i > 0 %> ו <%= @guest.num_of_friends %> אורחים נוספים מעוניינים <% else %> מעוניין  <% end %> להתארח בערב זיכרון בסלון אצלך בבית.
 פרטי יצירת קשר:
 טלפון <%= @guest.phone %>
 מייל <%= @guest.email %>
