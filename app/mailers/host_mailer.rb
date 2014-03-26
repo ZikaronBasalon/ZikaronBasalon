@@ -3,6 +3,6 @@ class HostMailer < ActionMailer::Base
 
   def manager_notification(manager_email,host)
   	@host = host
-  	mail :to => manager_email, :subject => "New Host in your city"
+  	mail :to => manager_email, :subject => "מארח חדש בעירך"
   end
 end
