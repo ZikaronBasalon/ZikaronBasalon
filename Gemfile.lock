@@ -80,6 +80,7 @@ GEM
     mocha (1.0.0)
       metaclass (~> 0.0.1)
     multi_json (1.8.4)
+    newrelic_rpm (3.7.3.204)
     nifty-generators (0.4.6)
     pg (0.12.2)
     pg (0.12.2-x86-mingw32)
@@ -162,6 +163,7 @@ DEPENDENCIES
   jquery-ui-rails
   less-rails
   mocha
+  newrelic_rpm
   nifty-generators
   pg (= 0.12.2)
   rails (= 3.2.14)
