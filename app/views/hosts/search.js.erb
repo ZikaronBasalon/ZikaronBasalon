@@ -1,1 +1,8 @@
 $('#hosts_table').html("<%= j render(:partial => 'hosts_table') %>");
+
+	$('.send').click(function(event) {
+		$('#guest_host_id').val($(this).data('id'));
+		$('#register').removeClass('hidden');
+		$('#register').center();
+		$('#mask').removeClass('hidden');
+	});

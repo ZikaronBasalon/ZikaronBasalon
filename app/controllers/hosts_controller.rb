@@ -16,7 +16,7 @@ class HostsController < ApplicationController
       if manager_email
         HostMailer.manager_notification(manager_email,@host).deliver
       end
-      if @host.email 
+      if @host.email
          HostMailer.new_host(@host).deliver
       end
       redirect_to success_host_path(@host), :notice => "Successfully created host."
@@ -50,6 +50,7 @@ class HostsController < ApplicationController
 
   def send_request
     @guest = Guest.find_or_create_by_email(params[:guest])
+    @guest.update_attributes(params[:guest])
     session[:guest_id] = @guest.id
     @guest.invites.create(host_id: params[:guest][:host_id] )
     @host = Host.find(params[:guest][:host_id])

@@ -13,6 +13,7 @@ $(function(){
 	$('.send').click(function(event) {
 		$('#guest_host_id').val($(this).data('id'));
 		$('#register').removeClass('hidden');
+		$('#register').center();
 		$('#mask').removeClass('hidden');
 	});
 
