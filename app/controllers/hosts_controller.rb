@@ -43,6 +43,8 @@ class HostsController < ApplicationController
   def search
     city = City.find(params[:id])
     @hosts = city.get_hosts
+    @guest = session[:guest_id] ? Guest.find(session[:guest_id]) : Guest.new
+    @invites = @guest.invites.map(&:host_id)
   end
 
   def success
