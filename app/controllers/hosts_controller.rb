@@ -1,5 +1,5 @@
 class HostsController < ApplicationController
-  before_filter :basic_auth, only: [:index]
+  before_filter :basic_auth, only: [:index,:edit]
 
   def index
     @hosts = Host.all
