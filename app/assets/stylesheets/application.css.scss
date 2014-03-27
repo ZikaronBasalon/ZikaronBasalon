@@ -415,6 +415,9 @@ form {
 			color: #616161;
 			display: inline-block;
 		}
+		&.inline {
+			display: inline-block;
+		}
 	}
 	.controls {
 		display: inline;
@@ -463,6 +466,11 @@ form {
 				cursor: pointer;
 				background-color: #feec67;
 			}
+		}
+
+		.host_delete {
+			margin-right: 30px;
+			font-size: 18px;
 		}
 	}
 }

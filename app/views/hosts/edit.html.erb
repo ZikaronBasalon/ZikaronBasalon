@@ -1,7 +1,7 @@
 <% title "#{@host.f_name} #{@host.l_name}" %>
 
 <%= form_for @host, html: {class: "form-horizontal"} do |f| %>
-
+  <% if session[:auth] == "extended"  %>
    <div class="control-group">
       <%= f.label :f_name, "שם פרטי", class: "control-label" %>
       <div class="controls">
@@ -43,6 +43,7 @@
         <%= f.text_field :city_name, data: {autocomplete_source: City.order(:name).map(&:name)} %>
       </div>
     </div>
+  <% end %>
 
     <div class="control-group">
      <%= f.label :survivor_needed, "זקוק לעזרה במציאת איש עדות?", class: "control-label" %>
@@ -64,10 +65,20 @@
       </div>
   </div>
 
-  <div class="control-group">
+  <div class="control-group inline">
     <div class="controls">
       <%= f.submit "עדכן/י", class: "host_submit" %>
     </div>
   </div>
+
+  <% if session[:auth] == "extended" %>
+    <div class="control-group inline">
+      <div class="controls">
+       <%= link_to 'Delete', host_path(@host),
+                      method: :delete, data: { confirm: 'Are you sure?' }, class: "host_delete" %>
+      </div>
+    </div>
+  <% end %>
+
 <% end %>
 

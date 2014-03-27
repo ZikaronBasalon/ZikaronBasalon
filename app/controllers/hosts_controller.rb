@@ -27,7 +27,12 @@ class HostsController < ApplicationController
   end
 
   def show
+  end
 
+  def destroy
+    @host = Host.find(params[:id])
+    @host.destroy
+    redirect_to hosts_path
   end
 
   def edit
@@ -61,7 +66,14 @@ class HostsController < ApplicationController
 
   def basic_auth
     authenticate_or_request_with_http_basic do |username,password|
-      username == "zikaron" && password == "1234.com"
+      if username == "zikaron" && password == "1234.com"
+        session[:auth] = "basic"
+        return true
+      elsif username == "zbadmin" && password == "bbznot"
+        session[:auth] = "extended"
+        return true
+      end
+      return false
     end
   end
 end
