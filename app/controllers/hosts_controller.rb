@@ -14,10 +14,10 @@ class HostsController < ApplicationController
     if @host.save
       manager_email = @host.try(:city).manager_email
       if manager_email
-        HostMailer.manager_notification(manager_email,@host).deliver
+        HostMailer.manager_notification(manager_email,@host.id).deliver
       end
       if @host.email
-         HostMailer.new_host(@host).deliver
+         HostMailer.new_host(@host.id).deliver
       end
       redirect_to success_host_path(@host), :notice => "Successfully created host."
 
@@ -61,7 +61,7 @@ class HostsController < ApplicationController
     session[:guest_id] = @guest.id
     @guest.invites.create(host_id: params[:guest][:host_id] )
     @host = Host.find(params[:guest][:host_id])
-    RequestMailer.send_request(@host,@guest).deliver
+    RequestMailer.send_request(@host.id,@guest.id).deliver
   end
 
   def basic_auth

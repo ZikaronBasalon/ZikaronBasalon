@@ -10,7 +10,8 @@ gem 'simple_form'
 gem 'will_paginate'
 gem 'compass-rails'
 gem 'newrelic_rpm'
-
+gem 'sidekiq'
+gem 'sidekiq_mailer'
 
 
 
