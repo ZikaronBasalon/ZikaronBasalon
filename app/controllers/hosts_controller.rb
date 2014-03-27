@@ -12,7 +12,7 @@ class HostsController < ApplicationController
   def create
     @host = Host.new(params[:host])
     if @host.save
-      manager_email = @host.try(:city).manager_emailP
+      manager_email = @host.try(:city).manager_email
       if manager_email
         HostMailer.manager_notification(manager_email,@host.id).deliver
       end
