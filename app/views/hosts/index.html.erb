@@ -1,11 +1,11 @@
 <div id="staff_container">
   <form class="form-inline">
-    <div class="filter_by">Filter by:</div>
+    <div class="filter_by">סנן/י לפי</div>
     <%= select_tag :city_name, options_for_select(City.all.map(&:name)), prompt: "עיר" %>
 
-    <%= select_tag :survivor_needed, options_for_select(["זקוק","לא זקוק","נשלח"]), prompt: "בחר/י"%>
+    <%= select_tag :survivor_needed, options_for_select(["זקוק","לא זקוק","נשלח"]), prompt: "איש עדות"%>
 
-    <%= select_tag :strangers, options_for_select([['מוכן', true], ['לא מוכן', false]]), prompt: "בחר/י" %>
+    <%= select_tag :strangers, options_for_select([['מוכן', true], ['לא מוכן', false]]), prompt: "מוכן/ה לארח" %>
 
     <%= image_tag "excel.png", id: "export_to_excel" %>
   </form>
