@@ -9,9 +9,7 @@
     <tr>
       <td><%= city.name %></td>
       <td><%= city.manager_email %></td>
-      <td><%= link_to "Show", city %></td>
-      <td><%= link_to 'Delete', city_path(city),
-                        method: :delete, data: { confirm: 'אתה בטוח?' } %></td>
+      <td><%= button_to 'Delete', city, method: :delete, data: { confirm: 'אתה בטוח?' } %></td>
     </tr>
   <% end %>
 </table>
