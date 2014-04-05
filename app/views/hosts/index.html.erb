@@ -51,7 +51,7 @@
             <td class="survivor_needed"><%= host.survivor_needed %></td>
             <td class="status"><%= host.survivor_details %></td>
             <td class="contact"><%= host.contact %></td>
-            <td class="status"><%= host.free_text %></td>
+            <td class="status"><%= truncate(host.free_text, length: 40) %></td>
             <td >
               <%= link_to edit_host_path(host) do %>
               <div class="circle">
