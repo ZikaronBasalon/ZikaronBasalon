@@ -3,13 +3,15 @@
 <table>
   <tr>
     <th>Name</th>
-    <th>Region</th>
+    <th>Manager</th>
   </tr>
   <% for city in @cities %>
     <tr>
       <td><%= city.name %></td>
-      <td><%= city.region_id %></td>
+      <td><%= city.manager_email %></td>
       <td><%= link_to "Show", city %></td>
+      <td><%= link_to 'Delete', host_path(@host),
+                        method: :delete, data: { confirm: 'אתה בטוח?' } %></td>
     </tr>
   <% end %>
 </table>
