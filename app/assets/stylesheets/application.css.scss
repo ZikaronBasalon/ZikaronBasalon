@@ -577,7 +577,7 @@ form {
 		float: left;
 		cursor: pointer;
 	}
-	select {
+	select,input {
 		margin-right: 20px;
 		width: 168px;
 		height: 37px;
@@ -588,12 +588,13 @@ form {
 		color: #616161;
 		font-family: 'Alef', sans-serif;
 	}
+
 	table#staff_table {
 		width: 100%;
 		margin-top: 53px;
 		th {
 			//padding-left: 20px;
-			font-size: 18px;
+			font-size: 16px;
 			font-weight: bold;
 			color: #252525;
 			&.sort {
@@ -651,4 +652,8 @@ form {
 		right: 6px;
 		path { fill: white;}
 	}
+}
+
+#edit_host_container {
+	margin-top: 50px;
 }

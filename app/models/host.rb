@@ -1,10 +1,12 @@
 class Host < ActiveRecord::Base
   attr_accessible :f_name, :l_name, :email, :phone, :address, :city_id, :max_guests,
-   :survivor_needed, :free_text, :city_name, :status, :strangers, :contact
+   :survivor_needed, :free_text, :city_name, :status, :strangers, :contact,
+   :survivor_details
 
   belongs_to :city
 
-  SURVIVOR_OPTIONS = ["Need","Don't Need","Recieved"]
+  validates_presence_of :city
+
 
   def city_name
   	city.try(:name)
