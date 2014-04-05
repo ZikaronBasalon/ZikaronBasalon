@@ -4,13 +4,13 @@
     <div class="filter_by">סנן/י לפי</div>
     <%= select_tag :city_name, options_for_select(City.all.map(&:name)), prompt: "עיר" %>
 
-    <%= select_tag :survivor_needed, options_for_select(["זקוק","לא זקוק","נשלח"]), prompt: "איש עדות"%>
+    <%= select_tag :survivor_needed, options_for_select(["צריך","לא צריך","נשלח"]), prompt: "איש עדות"%>
 
     <%= select_tag :strangers, options_for_select([['מוכן', true], ['לא מוכן', false]]), prompt: "מוכן/ה לארח" %>
 
 
     <%= image_tag "excel.png", id: "export_to_excel" %>
-    <%= text_field_tag :search,nil, class: "search", placeholder: "Search by f name" %>
+    <%= text_field_tag :search,nil, class: "search", placeholder: "חיפוש חופשי" %>
   </form>
 
     <table id="staff_table">
@@ -32,7 +32,7 @@
         <th class="sort" data-sort="email"> Email<div class="header_line"></div></th>
         <th class="sort" data-sort="survivor_needed">איש עדות<div class="header_line"></div></th>
         <th>איש קשר<div class="header_line"></div></th>
-        <th>Survivor details<div class="header_line"></div></th>
+        <th>פרטי איש עדות<div class="header_line"></div></th>
         <th>מידע נוסף<div class="header_line"></div></th>
         <th>&nbsp;</th>
       </tr>
