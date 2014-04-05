@@ -10,7 +10,7 @@
       <td><%= city.name %></td>
       <td><%= city.manager_email %></td>
       <td><%= link_to "Show", city %></td>
-      <td><%= link_to 'Delete', host_path(@host),
+      <td><%= link_to 'Delete', city_path(city),
                         method: :delete, data: { confirm: 'אתה בטוח?' } %></td>
     </tr>
   <% end %>
