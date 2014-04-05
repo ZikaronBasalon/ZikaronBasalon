@@ -92,8 +92,7 @@
     <% if session[:auth] == "extended" %>
       <div class="control-group inline">
         <div class="controls">
-         <%= link_to 'מחק', host_path(@host),
-                        method: :delete, data: { confirm: 'אתה בטוח?' }, class: "host_delete" %>
+         <%= link_to 'מחק', host_path(@host),method: :delete, data: { confirm: 'אתה בטוח?' }, class: "host_delete" %>
         </div>
       </div>
     <% end %>
