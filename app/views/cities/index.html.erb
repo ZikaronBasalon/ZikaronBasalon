@@ -9,7 +9,16 @@
     <tr>
       <td><%= city.name %></td>
       <td><%= city.manager_email %></td>
-      <td><%= button_to 'Delete', city, method: :delete, data: { confirm: 'אתה בטוח?' } %></td>
+      <td >
+        <%= link_to edit_city_path(city) do %>
+        <div class="circle">
+          <%= inline_svg "edit.svg" %>
+        </div>
+        <% end %>
+      </td>
+       <% if session[:auth] == "extended"  %>
+        <td><%= button_to 'Delete', city, method: :delete, data: { confirm: 'אתה בטוח?' } %></td>
+      <% end %>
     </tr>
   <% end %>
 </table>

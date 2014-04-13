@@ -1,0 +1,27 @@
+<% title "#{@city.name}" %>
+
+
+<div id="edit_host_container">
+  <%= form_for @city, html: {class: "form-horizontal"} do |f| %>
+     <div class="control-group">
+        <%= f.label :name, "שם", class: "control-label" %>
+        <div class="controls">
+          <%= f.text_field :name %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= f.label :manager_email, "Manager Email", class: "control-label" %>
+        <div class="controls">
+          <%= f.text_field :manager_email %>
+        </div>
+      </div>
+
+    <div class="control-group inline">
+      <div class="controls">
+        <%= f.submit "עדכן/י", class: "host_submit" %>
+      </div>
+    </div>
+
+  <% end %>
+</div>
