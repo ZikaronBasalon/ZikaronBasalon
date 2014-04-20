@@ -7,6 +7,7 @@
     <%= javascript_include_tag "application", "#{controller_name}.#{action_name}" if ZikaronBasalon::Application.assets.find_asset("#{controller.controller_name}.#{action_name}.js") %>
     <%= csrf_meta_tag %>
     <%= yield(:head) %>
+    <meta property="og:image" content="https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-ash3/t1.0-9/580533_132370990278067_1549760967_n.png">
   </head>
   <body>
     <%= render "layouts/header" %>
