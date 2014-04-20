@@ -7,7 +7,9 @@
     <%= javascript_include_tag "application", "#{controller_name}.#{action_name}" if ZikaronBasalon::Application.assets.find_asset("#{controller.controller_name}.#{action_name}.js") %>
     <%= csrf_meta_tag %>
     <%= yield(:head) %>
-    <meta property="og:image" content="https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-ash3/t1.0-9/580533_132370990278067_1549760967_n.png">
+    <meta property="og:image" content="https://www.dropbox.com/s/qrnglv3ilj8z7b2/Share%20thumbnail.jpg">
+    <meta property="og:url" content="http://zikaronbasalon.herokuapp.com">
+    <meta property="og:description" content="בין הקדושה של הטקסים הממלכתיים וההדחקה המוחלטת, זיכרון בסלון מציע דרך אחת נוספת ﻿ זיכרון בסלון נולד מתוך ההבנה שהזיקה שלנו, הדור השלישי, ליום הזיכרון לשואה ולגבורה - הולכת ונחלשת. הפרויקט נועד לייצר דרך נוספת לציין את היום הזה, אשר תאפשר חיבור שונ">
   </head>
   <body>
     <%= render "layouts/header" %>
