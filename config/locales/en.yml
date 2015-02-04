@@ -3,3 +3,10 @@
 
 en:
   hello: "Hello world"
+  views:
+    pagination:
+      first: "ראשון"
+      last: "אחרון"
+      previous: "לפני"
+      next: "אחרי"
+      truncate: "..."

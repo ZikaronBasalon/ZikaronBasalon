@@ -10,7 +10,7 @@ gem 'simple_form'
 gem 'will_paginate'
 gem 'compass-rails'
 gem 'newrelic_rpm'
-
+gem 'kaminari'
 
 
 
@@ -18,7 +18,7 @@ gem 'newrelic_rpm'
 # in production environments by default.
 
 group :development do
-	gem 'debugger'
+	# gem 'debugger'
 	gem "nifty-generators"
   gem 'sqlite3'
 end
