@@ -10,8 +10,12 @@ gem 'simple_form'
 gem 'will_paginate'
 gem 'compass-rails'
 gem 'newrelic_rpm'
+<<<<<<< HEAD
 gem 'sidekiq'
 gem 'sidekiq_mailer'
+=======
+gem 'kaminari'
+>>>>>>> pagination
 
 
 
@@ -19,7 +23,7 @@ gem 'sidekiq_mailer'
 # in production environments by default.
 
 group :development do
-	gem 'debugger'
+	# gem 'debugger'
 	gem "nifty-generators"
   gem 'sqlite3'
 end

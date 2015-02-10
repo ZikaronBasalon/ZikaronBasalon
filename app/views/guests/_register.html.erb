@@ -6,7 +6,13 @@
 	המארח/ת יצרו איתך קשר בימים הקרובים
 </h2>
 
+
 <%= simple_form_for @guest, url: hosts_send_request_path do |f| %>
+		<% if @guest.errors.any? %>
+			<div class="error">
+				Please fill in all fields
+			</div>
+		<% end %>
    	<%= f.input :name, label: false, placeholder: "שם" %>
     <%= f.input :email, label: false, placeholder: "Emai" %>
     <%= f.input :phone, label: false, placeholder: "טלפון" %>

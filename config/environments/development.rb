@@ -24,7 +24,7 @@ ZikaronBasalon::Application.configure do
     authentication: "plain",
     enable_starttls_auto: true,
     user_name: "zikaronbasalon",
-    password: "yomhashoa"
+    password: "shoa2014"
   }
 
   # Print deprecation notices to the Rails logger

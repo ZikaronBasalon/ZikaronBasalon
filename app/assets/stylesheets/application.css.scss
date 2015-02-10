@@ -450,6 +450,11 @@ form {
 			height: 193px;
 		}
 
+		#host_survivor_details {
+			height: 100px;
+			margin-bottom: 20px;
+		}
+
 		.host_submit {
 			margin-right: 195px;
 			width: 162px;
@@ -577,7 +582,7 @@ form {
 		float: left;
 		cursor: pointer;
 	}
-	select {
+	select,input {
 		margin-right: 20px;
 		width: 168px;
 		height: 37px;
@@ -588,12 +593,13 @@ form {
 		color: #616161;
 		font-family: 'Alef', sans-serif;
 	}
+
 	table#staff_table {
 		width: 100%;
 		margin-top: 53px;
 		th {
 			//padding-left: 20px;
-			font-size: 18px;
+			font-size: 16px;
 			font-weight: bold;
 			color: #252525;
 			&.sort {
@@ -609,12 +615,14 @@ form {
 			}
 		}
 		tbody {
+			font-size: 14px;
 			tr {
 				border-bottom: 1px solid #c6c6c6;
 				height: 67px;
 				line-height: 20px;
 			}
 			td {
+				padding-top: 20px;
 				padding-right: 5px;
 				padding-left: 5px;
 				box-sizing: border-box;
@@ -650,4 +658,8 @@ form {
 		right: 6px;
 		path { fill: white;}
 	}
+}
+
+#edit_host_container {
+	margin-top: 50px;
 }

@@ -3,13 +3,22 @@
 <table>
   <tr>
     <th>Name</th>
-    <th>Region</th>
+    <th>Manager</th>
   </tr>
   <% for city in @cities %>
     <tr>
       <td><%= city.name %></td>
-      <td><%= city.region_id %></td>
-      <td><%= link_to "Show", city %></td>
+      <td><%= city.manager_email %></td>
+      <td >
+        <%= link_to edit_city_path(city) do %>
+        <div class="circle">
+          <%= inline_svg "edit.svg" %>
+        </div>
+        <% end %>
+      </td>
+       <% if session[:auth] == "extended"  %>
+        <td><%= button_to 'Delete', city, method: :delete, data: { confirm: 'אתה בטוח?' } %></td>
+      <% end %>
     </tr>
   <% end %>
 </table>

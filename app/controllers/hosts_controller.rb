@@ -2,7 +2,7 @@ class HostsController < ApplicationController
   before_filter :basic_auth, only: [:index,:edit]
 
   def index
-    @hosts = Host.all
+    @hosts = Host.all.sort_by {|x| x.city || City.first}
   end
 
   def new

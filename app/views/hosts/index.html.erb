@@ -1,19 +1,22 @@
 <div id="staff_container">
+  <div id="hosts">
   <form class="form-inline">
     <div class="filter_by">סנן/י לפי</div>
     <%= select_tag :city_name, options_for_select(City.all.map(&:name)), prompt: "עיר" %>
 
-    <%= select_tag :survivor_needed, options_for_select(["זקוק","לא זקוק","נשלח"]), prompt: "איש עדות"%>
+    <%= select_tag :survivor_needed, options_for_select(["צריך","לא צריך","נשלח"]), prompt: "איש עדות"%>
 
     <%= select_tag :strangers, options_for_select([['מוכן', true], ['לא מוכן', false]]), prompt: "מוכן/ה לארח" %>
 
+
     <%= image_tag "excel.png", id: "export_to_excel" %>
+    <%= text_field_tag :search,nil, class: "search", placeholder: "חיפוש חופשי" %>
   </form>
 
-  <div id="hosts">
     <table id="staff_table">
       <thead>
         <tr>
+        <th></th>
         <th class="sort" data-sort="strangers">זרים<div class="header_line"></div></th>
         <th class="sort" data-sort="f_name">
           שם
@@ -28,13 +31,16 @@
         <th>טלפון<div class="header_line"></th>
         <th class="sort" data-sort="email"> Email<div class="header_line"></div></th>
         <th class="sort" data-sort="survivor_needed">איש עדות<div class="header_line"></div></th>
+        <th>פרטי איש עדות<div class="header_line"></div></th>
+        <th>איש קשר<div class="header_line"></div></th>
         <th>מידע נוסף<div class="header_line"></div></th>
         <th>&nbsp;</th>
       </tr>
       </thead>
       <tbody class="list">
-      <% @hosts.each do |host| %>
+      <% @hosts.each_with_index do |host,i| %>
         <tr>
+            <td><%= i+1 %></td>
             <td class="strangers <%= strangers_class(host.strangers) %>"><%= inline_svg(get_guests_svg(host.strangers)) %><%= host.strangers %></td>
             <td class="f_name"><%= host.f_name %></td>
             <td class="l_name"><%= host.l_name %></td>
@@ -43,6 +49,8 @@
             <td class="phone"><%= host.phone %></td>
             <td class="email"><%= host.email %></td>
             <td class="survivor_needed"><%= host.survivor_needed %></td>
+            <td class="status"><%= host.survivor_details %></td>
+            <td class="contact"><%= host.contact %></td>
             <td class="status"><%= host.free_text %></td>
             <td >
               <%= link_to edit_host_path(host) do %>

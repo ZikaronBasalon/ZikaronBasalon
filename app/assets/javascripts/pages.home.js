@@ -21,4 +21,8 @@ $(function(){
 		$('#register').addClass('hidden');
 		$('#mask').addClass('hidden');
 	});
+    var pages = document.getElementsByClassName("reversed")[0];
+    var i = pages.childNodes.length;
+    while (i--)
+        pages.appendChild(pages.childNodes[i]);
 });

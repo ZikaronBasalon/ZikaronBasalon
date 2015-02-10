@@ -3,6 +3,7 @@ ZikaronBasalon::Application.routes.draw do
   match "hosts/search", :to => 'hosts#search'
 
   resources :guests
+  resources :cities
 
   resources :hosts do
     member do
@@ -11,7 +12,6 @@ ZikaronBasalon::Application.routes.draw do
   end
 
   resources :regions
-  resources :cities
 
   get "pages/home"
   #get "hosts/search"

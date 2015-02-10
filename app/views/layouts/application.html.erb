@@ -7,6 +7,9 @@
     <%= javascript_include_tag "application", "#{controller_name}.#{action_name}" if ZikaronBasalon::Application.assets.find_asset("#{controller.controller_name}.#{action_name}.js") %>
     <%= csrf_meta_tag %>
     <%= yield(:head) %>
+    <meta property="og:image" content="http://static.wixstatic.com/media/21e365_91defaf889494d6ea5cad65059ba650c.jpg">
+    <meta property="og:url" content="http://zikaronbasalon.herokuapp.com">
+    <meta property="og:description" content="בין הקדושה של הטקסים הממלכתיים וההדחקה המוחלטת, זיכרון בסלון מציע דרך אחת נוספת ﻿ זיכרון בסלון נולד מתוך ההבנה שהזיקה שלנו, הדור השלישי, ליום הזיכרון לשואה ולגבורה - הולכת ונחלשת. הפרויקט נועד לייצר דרך נוספת לציין את היום הזה, אשר תאפשר חיבור שונ">
   </head>
   <body>
     <%= render "layouts/header" %>
@@ -17,8 +20,10 @@
         <div class="footer_wrapper">
           <div class="part"> צרו קשר: zikaronbasalon@gmail.com </div>
          <div class="part"><%= link_to "זיכרון בסלון בפייסבוק", "https://www.facebook.com/ZikronBaSalon" %></div>
+         <% if false %>
          <div class="part"> פותח ע"י אורי קלר
         <%= link_to image_tag("linkdin.jpg"), "http://www.linkedin.com/in/uriklar", target: "_blank" %></div>
+        <% end %>
         </div>
       </div>
   </body>
