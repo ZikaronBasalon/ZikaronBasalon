@@ -51,12 +51,9 @@
       </div>
     </div>
 
-    <div class="control-group">
-      <%= f.label :city_name, "עיר", class: "control-label" %>
-      <div class="controls">
-        <%= f.text_field :city_name, data: {autocomplete_source: City.order(:name).map(&:name)} %>
-      </div>
-    </div>
+    <%= f.hidden_field :city_name %>
+    <%= f.hidden_field :lat %>
+    <%= f.hidden_field :lng %>
 
     <div class="control-group">
      <%= f.label :survivor_needed, "זקוק לעזרה במציאת איש עדות?", class: "control-label" %>
