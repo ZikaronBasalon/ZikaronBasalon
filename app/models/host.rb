@@ -1,7 +1,7 @@
 class Host < ActiveRecord::Base
   attr_accessible :f_name, :l_name, :email, :phone, :address, :city_id, :max_guests,
    :survivor_needed, :free_text, :city_name, :status, :strangers, :contact,
-   :survivor_details
+   :survivor_details, :lat, :lng
 
   belongs_to :city
 

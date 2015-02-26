@@ -2,11 +2,13 @@
 
 <table>
   <tr>
+    <th>Name</th>
     <th>Email</th>
     <th>Phone</th>
   </tr>
   <% for guest in @guests %>
     <tr>
+      <td><%= guest.name %></td>
       <td><%= guest.email %></td>
       <td><%= guest.phone %></td>
     </tr>
