@@ -15,7 +15,27 @@
 
 	<div id="main_content">
 		<div id="hosts_table">
-			<%= render 'hosts/hosts_table' %>
+			<table class="hosts_table">
+				<thead>
+					<th class="right">
+						מארח
+						<div class="line"></div>
+					</th>
+					<th>
+						כתובת
+						<div class="line"></div>
+					</th>
+					<th >
+						עיר
+						<div class="line"></div>
+					</th>
+					<th></th>
+				</thead>
+				<tbody id="hosts">
+					<%= render 'hosts/hosts' %>
+				</tbody>
+			</table>
+			<%= paginate @hosts %>
 		</div>
 
 		<div id="no_salon">

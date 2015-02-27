@@ -1,8 +1,4 @@
 $(function(){
-	// $("#host_city_name").autocomplete({
-	// 	source: $('#host_city_name').data('autocomplete-source')
-	// });
-
 	autocomplete = new google.maps.places.Autocomplete($("#host_address")[0], { types: ['geocode'] });
 
 	// bind autocomplete object to 'place_changed' event (user selects place from dropdown)

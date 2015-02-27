@@ -191,8 +191,10 @@ table.hosts_table {
 		font-size: 18px;
 		tr {
 			height: 100px;
-			line-height: 100px;
 			border-bottom: 1px solid #c6c6c6;
+			td {
+				vertical-align: middle;
+			}
 		}
 	}
 }
@@ -479,6 +481,13 @@ form {
 		.host_delete {
 			margin-right: 30px;
 			font-size: 18px;
+		}
+	}
+
+	.field_with_errors {
+		display: inline;
+		input, select {
+			border: 1px solid red;
 		}
 	}
 }
