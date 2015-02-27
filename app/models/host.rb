@@ -5,6 +5,15 @@ class Host < ActiveRecord::Base
 
   belongs_to :city
 
+  validates_presence_of :f_name, :email, :phone, :strangers
+  validate :valid_address
+
+  def valid_address
+    if lat.nil? || lng.nil?
+      errors.add(:address, "invalid")
+    end
+  end
+
 
   def city_name
   	city.try(:name)

@@ -15,19 +15,6 @@
 		<th></th>
 	</thead>
 	<tbody>
-		<% @hosts.each do |host| %>
-			<tr>
-				<td><%= host.f_name %></td>
-				<td><%= host.address %></td>
-				<td><%= host.city_name %></td>
-				<td>
-
-					<div class="request_btn <%= invite_exists?(host.id) %>" data-id="<%= host.id %>">
-						<%= request_btn_text(host.id) %>
-					</div>
-				</td>
-			</tr>
-		<% end %>
+		
 	</tbody>
 </table>
-<%= paginate @hosts %>

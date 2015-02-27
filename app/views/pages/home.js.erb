@@ -1,0 +1,6 @@
+$('#hosts').append('<%= j render(:partial => "hosts/hosts") %>');
+<% unless @hosts.last_page? %>
+$('.pagination').replaceWith('<%= j paginate(@hosts) %>');
+<% else %>
+$('.pagination').remove();
+<% end %>

@@ -7,21 +7,18 @@ gem 'rails', '3.2.14'
 
 
 gem 'simple_form'
-gem 'will_paginate'
 gem 'compass-rails'
 gem 'newrelic_rpm'
 gem 'kaminari'
 gem 'sidekiq'
 gem 'figaro'
-
+gem 'pry-debugger'
 
 
 # Gems used only for assets and not required
 # in production environments by default.
 
 group :development do
-	# gem 'debugger'
-	gem "nifty-generators"
   gem 'sqlite3'
 end
 
