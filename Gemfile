@@ -12,13 +12,14 @@ gem 'newrelic_rpm'
 gem 'kaminari'
 gem 'sidekiq'
 gem 'figaro'
-gem 'pry-debugger'
+
 
 
 # Gems used only for assets and not required
 # in production environments by default.
 
 group :development do
+  gem 'pry-debugger'
   gem 'sqlite3'
 end
 
