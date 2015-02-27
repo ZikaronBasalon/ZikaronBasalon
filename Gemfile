@@ -11,6 +11,8 @@ gem 'will_paginate'
 gem 'compass-rails'
 gem 'newrelic_rpm'
 gem 'kaminari'
+gem 'sidekiq'
+gem 'figaro'
 
 
 
