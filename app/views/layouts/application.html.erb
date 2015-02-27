@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for?(:title) ? yield(:title) : "זיכרון בסלון 2014" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "זיכרון בסלון 2015" %></title>
     <%= favicon_link_tag %>
     <%= stylesheet_link_tag "application" %>
     <%= javascript_include_tag "application", "#{controller_name}.#{action_name}" if ZikaronBasalon::Application.assets.find_asset("#{controller.controller_name}.#{action_name}.js") %>
