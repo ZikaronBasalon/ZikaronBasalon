@@ -75,7 +75,7 @@ class HostsController < ApplicationController
         session[:auth] = "extended"
         return true
       end
-      return false
+      request_http_basic_authentication
     end
   end
 end
