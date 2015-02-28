@@ -11,8 +11,16 @@ $(function(){
 	});
 
 	$('#host_strangers').change(function(event) {
+		var $max_guests = $('#host_max_guests');
 		if ($(this).val() == "true"){
 			alert("סימון אפשרות זו אומר ששמך הפרטי וכתובתך יופיעו בעמוד חיפוש המארחים באתר.");
+			$max_guests.parents('.control-group').show();
+			if($max_guests.val() == 0) {
+				$max_guests.val("");
+			}
+		} else {
+			$max_guests.parents('.control-group').hide();
+			$max_guests.val(0);
 		}
 	});
 
