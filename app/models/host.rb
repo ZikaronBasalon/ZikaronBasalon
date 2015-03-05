@@ -5,7 +5,7 @@ class Host < ActiveRecord::Base
 
   belongs_to :city
 
-  validates_presence_of :f_name, :email, :phone, :strangers
+  validates_presence_of :f_name, :email, :phone
   validate :valid_address
 
   def valid_address
