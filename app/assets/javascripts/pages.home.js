@@ -1,11 +1,12 @@
-$(function(){
+$(function() {
 	// Change city
 	$('#city_select').change(function(event) {
 		id = $(this).val();
 		$.ajax({
 			url: '/pages/home.js',
 			data: { city_id: id },
-			error: function() {
+			error: function(e) {
+				console.log(e.message);
 				alert('Error!');
 			}
 		});
@@ -25,18 +26,27 @@ $(function(){
 		$('#mask').addClass('hidden');
 	});
 
-	// Reverse the pagination (hebrew)
-  // var pages = document.getElementsByClassName("reversed")[0];
-  // var i = pages.childNodes.length;
-  // while (i--)
-  //     pages.appendChild(pages.childNodes[i]);
+	registerEndlessScroll();
+});
 
-  // Endelss scrolling
-  $(window).scroll(function(){
+// Reverse the pagination (hebrew)
+// var pages = document.getElementsByClassName("reversed")[0];
+// var i = pages.childNodes.length;
+// while (i--)
+//     pages.appendChild(pages.childNodes[i]);
+
+// Endelss scrolling
+function registerEndlessScroll() {
+	console.log("registered");
+	$(window).scroll(function(){
   	url = $('.pagination a[rel="next"]').attr('href');
   	if(url && $(window).scrollTop() > $(document).height() - $(window).height() - 50) {
-       $('.pagination').text('טוען מארחים נוספים...')
+      console.log("getting pafination");
+      $('.pagination').text('טוען מארחים נוספים...')
       $.getScript(url);
   	}
-  })
-});
+  });
+} 	
+
+
+

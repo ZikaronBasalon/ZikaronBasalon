@@ -1,10 +1,15 @@
 <% if @is_city %>
 	$('#hosts').html('');
 <% end %>
-
-$('#hosts').append('<%= j render(:partial => "hosts/hosts") %>');
+	$('#hosts').append('<%= j render(:partial => "hosts/hosts") %>');
 <% unless @hosts.last_page? %>
-$('.pagination').replaceWith('<%= j paginate(@hosts) %>');
+	$pagination = $('.pagination');
+	if($pagination.length > 0) {
+		$('.pagination').replaceWith('<%= j paginate(@hosts) %>');	
+	} else {
+		$('#hosts_table').append('<%= j paginate(@hosts) %>');
+	}
 <% else %>
-$('.pagination').remove();
+	$('.pagination').remove();
 <% end %>
+registerEndlessScroll();
