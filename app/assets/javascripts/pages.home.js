@@ -3,8 +3,8 @@ $(function(){
 	$('#city_select').change(function(event) {
 		id = $(this).val();
 		$.ajax({
-			url: '/hosts/search',
-			data: { id: id },
+			url: '/pages/home.js',
+			data: { city_id: id },
 			error: function() {
 				alert('Error!');
 			}
