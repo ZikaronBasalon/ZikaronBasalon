@@ -41,7 +41,7 @@ module ZikaronBasalon
 
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
-
+    
     config.action_mailer.default_url_options = { host: 'zikaronbasalon.herokuapp.com' }
 
     # Use SQL instead of Active Record's schema dumper when creating the database.

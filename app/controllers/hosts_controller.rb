@@ -61,9 +61,10 @@ class HostsController < ApplicationController
     @guest = Guest.find_or_create_by_email(params[:guest])
     @guest.update_attributes(params[:guest])
     session[:guest_id] = @guest.id
-    @guest.invites.create(host_id: params[:guest][:host_id] )
+    @invite = @guest.invites.create(host_id: params[:guest][:host_id] )
     @host = Host.find(params[:guest][:host_id])
-    RequestMailer.send_request(@host.id,@guest.id).deliver
+    RequestMailer.delay.send_request(@host.id,@guest.id, @invite.id)
+    RequestMailer.delay.send_request(@host.id,@guest.id)
   end
 
   def basic_auth

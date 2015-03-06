@@ -1,9 +1,12 @@
 ZikaronBasalon::Application.routes.draw do
+  get "invites/update"
+
   match "hosts/send_request", :to => 'hosts#send_request'
   match "hosts/search", :to => 'hosts#search'
 
   resources :guests
   resources :cities
+  resources :invites
 
   resources :hosts do
     member do
