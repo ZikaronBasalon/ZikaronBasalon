@@ -12,21 +12,8 @@ $(function() {
 		});
 	});
 
-	// Open send reuqest popup
-	$('.send').click(function(event) {
-		$('#guest_host_id').val($(this).data('id'));
-		$('#register').removeClass('hidden');
-		$('#register').center();
-		$('#mask').removeClass('hidden');
-	});
-
-	// Close send request popup
-	$('.x').click(function(event) {
-		$('#register').addClass('hidden');
-		$('#mask').addClass('hidden');
-	});
-
 	registerEndlessScroll();
+	registerRequestPopup();
 });
 
 // Reverse the pagination (hebrew)
@@ -47,6 +34,22 @@ function registerEndlessScroll() {
   	}
   });
 } 	
+
+function registerRequestPopup() {
+	// Open send reuqest popup
+	$('.send').click(function(event) {
+		$('#guest_host_id').val($(this).data('id'));
+		$('#register').removeClass('hidden');
+		$('#register').center();
+		$('#mask').removeClass('hidden');
+	});
+
+	// Close send request popup
+	$('.x').click(function(event) {
+		$('#register').addClass('hidden');
+		$('#mask').addClass('hidden');
+	});
+}
 
 
 
