@@ -12,6 +12,7 @@ gem 'newrelic_rpm'
 gem 'kaminari'
 gem 'sidekiq'
 gem 'figaro'
+gem 'sendgrid-ruby'
 
 
 
