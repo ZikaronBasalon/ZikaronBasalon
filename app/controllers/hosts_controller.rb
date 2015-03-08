@@ -19,7 +19,7 @@ class HostsController < ApplicationController
         HostMailer.delay.manager_notification(manager_email,@host.id)
       end
       if @host.email
-         HostMailer.delay.new_host(@host.id)
+        HostMailer.delay.new_host(@host.id)
       end
       redirect_to success_host_path(@host), :notice => "Successfully created host."
 
@@ -64,7 +64,7 @@ class HostsController < ApplicationController
     @invite = @guest.invites.create(host_id: params[:guest][:host_id] )
     @host = Host.find(params[:guest][:host_id])
     RequestMailer.delay.send_request(@host.id,@guest.id, @invite.id)
-    RequestMailer.delay.send_request(@host.id,@guest.id)
+    RequestMailer.delay.request_was_sent(@host.id,@guest.id)
   end
 
   def basic_auth
