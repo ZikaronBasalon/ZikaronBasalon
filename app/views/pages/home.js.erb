@@ -1,4 +1,4 @@
-<% if @is_city %>
+<% if @is_city && @hosts.first_page? %>
 	$('#hosts').html('');
 <% end %>
 	$('#hosts').append('<%= j render(:partial => "hosts/hosts") %>');
