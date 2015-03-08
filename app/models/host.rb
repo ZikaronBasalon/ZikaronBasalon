@@ -14,6 +14,10 @@ class Host < ActiveRecord::Base
     end
   end
 
+  def full_name
+    f_name + " " + l_name
+  end
+
 
   def city_name
   	city.try(:name)

@@ -24,11 +24,9 @@ $(function() {
 
 // Endelss scrolling
 function registerEndlessScroll() {
-	console.log("registered");
 	$(window).scroll(function(){
   	url = $('.pagination a[rel="next"]').attr('href');
   	if(url && $(window).scrollTop() > $(document).height() - $(window).height() - 50) {
-      console.log("getting pafination");
       $('.pagination').text('טוען מארחים נוספים...')
       $.getScript(url);
   	}

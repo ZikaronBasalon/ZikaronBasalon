@@ -1,0 +1,18 @@
+<p><%=  @guest.name %> 
+	<% if @guest.num_of_friends  && @guest.num_of_friends.to_i > 0 %> 
+		ו <%= @guest.num_of_friends %> אורחים נוספים מעוניינים 
+	<% else %>	
+	 	מעוניין  
+	<% end %> 
+	להתארח בערב זיכרון בסלון אצלך בבית.
+</p>
+
+<p>
+לאישור, אנא לחץ <%= link_to "כאן", invite_url(@invite) %> ופרטי הקשר שלך ישלחו אליו.
+</p>
+
+<p>
+	תודה!
+	<br>
+	צוות "זיכרון בסלון"
+</p>
