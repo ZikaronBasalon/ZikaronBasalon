@@ -51,6 +51,7 @@ ZikaronBasalon::Application.configure do
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
    # Don't care if the mailer can't send
+   config.action_mailer.default_url_options = { host: 'zikaronbasalon.herokuapp.com' }
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.delivery_method = :smtp
