@@ -2,7 +2,7 @@
   <div id="hosts">
   <form class="form-inline">
     <div class="filter_by">סנן/י לפי</div>
-    <%= select_tag :city_name, options_for_select(City.all.map(&:name)), prompt: "עיר" %>
+    <%= select_tag :city_name, options_for_select(City.order(:name).all.map(&:name)), prompt: "עיר" %>
 
     <%= select_tag :survivor_needed, options_for_select(["צריך","לא צריך","נשלח"]), prompt: "איש עדות"%>
 
