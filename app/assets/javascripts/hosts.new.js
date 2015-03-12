@@ -26,11 +26,15 @@ $(function(){
 	});
 
 	function getAddress() {
-		result = autocomplete.getPlace();
-		if(result.geometry && result.geometry.location) {
-			handleSuccessfullGeocoding(result);
-		} else {
-			handleUnsuccessfullGeocoding();
+		try {
+			result = autocomplete.getPlace();
+			if(result.geometry && result.geometry.location) {
+				handleSuccessfullGeocoding(result);
+			} else {
+				handleUnsuccessfullGeocoding();
+			}
+		} catch(e) {
+			handleSeriouslyUnsuccesfullGeocoding();
 		}
 	}
 
@@ -72,9 +76,15 @@ $(function(){
 			}
 			// Geocoding failed. Update with current map center
 			else {
-				console.log("Geocoding failed");
+				handleSeriouslyUnsuccesfullGeocoding();
 			}
 		});
+	}
+
+	function handleSeriouslyUnsuccesfullGeocoding() {
+		$('#host_city_name').val("לא ידוע");
+		$('#host_lat').val(0);
+		$('#host_lng').val(0);	
 	}
 });
 
