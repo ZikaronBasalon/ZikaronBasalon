@@ -7,8 +7,10 @@ $(function(){
 
 	$('#host_address').focusout(function(event) {
 		setTimeout(function(){
-			getAddress();
-		},500);
+			if(!$('#host_lat').val()) {
+				getAddress();
+			}
+		},1000);
 	});
 
 	$('#host_strangers').change(function(event) {
@@ -53,6 +55,7 @@ $(function(){
 				}
 			}
 		}
+		console.log(locality);
 		return locality;
 	}
 
