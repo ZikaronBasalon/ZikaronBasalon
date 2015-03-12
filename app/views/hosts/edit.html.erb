@@ -46,6 +46,8 @@
           <%= f.text_field :city_name, data: {autocomplete_source: City.order(:name).map(&:name)} %>
         </div>
       </div>
+      <%= f.hidden_field :lat %>
+    <%= f.hidden_field :lng %>
 
     <div class="control-group">
         <%= f.label :contact, "איש קשר", class: "control-label" %>
