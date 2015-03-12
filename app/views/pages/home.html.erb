@@ -11,7 +11,7 @@
 נא חיזרו להתעדכן לגביי סלונים חדשים שהצטרפו אלינו.
 תודה רבה וברוכים הבאים.	 </div>
 
-	 <%= select_tag :city_select, options_from_collection_for_select(City.all, :id, :name), prompt: "חפש עיר" %>
+	 <%= select_tag :city_select, options_from_collection_for_select(City.order(:name).all, :id, :name), prompt: "חפש עיר" %>
 
 	<div id="main_content">
 		<div id="hosts_table">
