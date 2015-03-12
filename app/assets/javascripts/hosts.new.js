@@ -30,7 +30,7 @@ $(function(){
 	function getAddress() {
 		try {
 			result = autocomplete.getPlace();
-			if(result.geometry && result.geometry.location) {
+			if(result && result.geometry && result.geometry.location) {
 				handleSuccessfullGeocoding(result);
 			} else {
 				handleUnsuccessfullGeocoding();
@@ -60,7 +60,7 @@ $(function(){
 	}
 
 	function handleSuccessfullGeocoding(result) {
-		$('#host_address').val(result.formatted_address);
+		//$('#host_address').val(result.formatted_address);
 		var locality = getLocalityComponent(result);
 		$('#host_city_name').val(locality);
 		$('#host_lat').val(result.geometry.location.lat());
@@ -75,6 +75,7 @@ $(function(){
 		geocoder.geocode({address: query_text},function (results,status) {
 			// Geocoding was successfull
 			if(status == google.maps.GeocoderStatus.OK) {
+				$('#host_address').val(results[0].formatted_address);
 				handleSuccessfullGeocoding(results[0]);
 			}
 			// Geocoding failed. Update with current map center
