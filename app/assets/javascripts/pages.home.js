@@ -4,7 +4,7 @@ $(function() {
 		id = $(this).val();
 		$.ajax({
 			url: '/pages/home.js',
-			data: { city_id: id },
+			data: { city_id: id, locale: $('body').attr('class') },
 			error: function(e) {
 				console.log(e.message);
 				alert('Error!');
