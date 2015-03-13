@@ -1,14 +1,14 @@
 <div id="success">
 	<div class="request_sent">
 		<%= image_tag "checkmark.png" %>
-		בקשתך נשלחה!
+		<%= t '.request_sent' %>
 	</div>
 	<div class="text">
-		המארח/ת יצרו איתך קשר בימים הקרובים
+		<%= t '.subtitle' %>
 	</div>
 
 	<div id="links">
-		<div class="link"><%= link_to "לעמוד הפייסבוק שלנו", "https://www.facebook.com/ZikronBaSalon" %></div>
-		<div class="link"><%= image_tag "website.png" %><%= link_to "לאתר זיכרון בסלון", "http://www.zikaronbasalon.com" %></div>
+		<div class="link"><%= link_to t('.link1'), "https://www.facebook.com/ZikronBaSalon" %></div>
+		<div class="link"><%= image_tag "website.png" %><%= link_to t('.link2'), "http://www.zikaronbasalon.com" %></div>
 	</div>
 </div>

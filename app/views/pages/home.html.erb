@@ -1,23 +1,23 @@
 <div id="mask" class="hidden"></div>
 
 <div class="container_inner" id="host_list">
-	 <div class="title">רשימת מארחים זיכרון בסלון 2015</div>
+	 <div class="title"><%= t '.title' %></div>
 	 <br>
 	 <div class="explenation">
 	 	<p>
-	 		שלום! אנחנו שמחים שבחרת להתארח בערב "זיכרון בסלון". תוכלו לחפש סלון פתוח לאירוח בסביבת מגוריכם ברשימות המופיעות בהמשך. 
+	 		<%= t '.explenation1' %>
 	 	</p>
 	 	<br>			
 	 	<p>
-	 		אם לא מצאתם סלון להתארח בו, אתם יכולים <%= link_to "לארח ערב זיכרון בסלון בעצמכם", new_host_path %>. זה פשוט וקל, וצוות זיכרון בסלון יעזור לכם בכל השלבים ליצירת ערב משמעותי.
+	 		 <%= t '.explenation21' %><%= link_to t('.explenation_link'), new_host_path %>. <%= t '.explenation22' %>
 	 	</p>
 	 	<br>
 	 	<p>
-	 		אם לא מצאתם סלון להתארח בו- נסו שוב מחר, הרשימה מתעדכנת מדי יום. ערב יום השואה חל השנה ב-15.4.2015.	 
+	 		<%= t '.explenation3' %>	 
 		</p>
 </div>
 
-	 <%= select_tag :city_select, options_from_collection_for_select(City.order(:name).all, :id, :name), prompt: "חפש עיר" %>
+	 <%= select_tag :city_select, options_from_collection_for_select(City.order(:name).all, :id, :name), prompt: t('.select_city') %>
 
 	<div id="main_content">
 		<div id="hosts_table">
@@ -45,9 +45,9 @@
 		</div>
 
 		<div id="no_salon">
-			<div class="label">לא מצאתם סלון מארח?</div>
-			<div class="content">למה שלא תארגנו ערב לכם ולחבריכם? צוות זיכרון בסלון יסייע לכם בארגון הערב ובבניית תוכנו.</div>
-			<%= link_to "לחצו כאן לפרטים", new_host_path %>
+			<div class="label"><%= t '.no_salon1' %></div>
+			<div class="content"><%= t '.no_salon2' %></div>
+			<%= link_to t('.no_salon_link'), new_host_path %>
 		</div>
 	</div>
 

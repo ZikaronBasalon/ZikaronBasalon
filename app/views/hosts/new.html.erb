@@ -1,52 +1,53 @@
 <% title "New Host" %>
 
 <div class="container_inner">
-  <div class="title">רוצה לארח</div>
+  <div class="title">
+    <%= t '.title' %>
+  </div>
   <br>
 <div class="explenation">
-<p>
-אנחנו שמחים שבחרת לארח ערב "זיכרון בסלון".
-ערב מוצלח מחייב תכנון מוקדם ואנחנו כאן כדי לסייע.
-כל שאלה לגבי הזמנת אורחים, הערכות לוגיסטית, תכני הערב ועוד, תקבל מענה עם השלמת ההרשמה.
-תודה רבה וברוכים הבאים.
-</p>
+  <p>
+    <%= t '.explenation' %>
+  </p>
 </div>
 
-  <div class="form_header">הרשמו בתור מארחים לזיכרון בסלון וקבלו את כל הפרטים:</div>
-  <noscript><p>מתנצלים, אבל בכדי שההרשמה תעבוד עליך להתמש בדפדפן אשר מאפשר הרצת ג'אווהסקריפט. תודה</p></noscript>
+  <div class="form_header">
+    <%= t '.title2' %>
+  </div>
+  <noscript><p><%= t '.no_script' %></p></noscript>
 
   <%= form_for @host, html: {class: "form-horizontal"} do |f| %>
 
     <div class="control-group">
-      <%= f.label :f_name, "שם פרטי", class: "control-label" %>
+      <%= f.label :f_name, t('.f_name'), class: "control-label" %>
       <div class="controls">
         <%= f.text_field :f_name %>
       </div>
     </div>
 
     <div class="control-group">
-      <%= f.label :l_name, "שם משפחה", class: "control-label" %>
+      <%= f.label :l_name, t('.l_name'), class: "control-label" %>
       <div class="controls">
         <%= f.text_field :l_name %>
       </div>
     </div>
 
     <div class="control-group">
-      <%= f.label :email, "Email", class: "control-label" %>
+      <%= f.label :email, t('.email'), class: "control-label" %>
       <div class="controls">
         <%= f.text_field :email %>
       </div>
     </div>
 
     <div class="control-group">
-      <%= f.label :phone, "טלפון", class: "control-label" %>
+      <%= f.label :phone, t('.phone'), class: "control-label" %>
       <div class="controls">
         <%= f.text_field :phone %>
       </div>
     </div>
 
     <div class="control-group">
-      <%= f.label :address, "רחוב", class: "control-label" %>
+      <%= f.label :address, t('.address'), class: "control-label" %>
       <div class="controls">
         <%= f.text_field :address %>
       </div>
@@ -57,21 +58,21 @@
     <%= f.hidden_field :lng %>
 
     <div class="control-group">
-     <%= f.label :survivor_needed, "זקוק לעזרה במציאת איש עדות?", class: "control-label" %>
+     <%= f.label :survivor_needed, t('.survivor_needed'), class: "control-label" %>
       <div class="controls">
-        <%= f.select :survivor_needed,options_for_select(["צריך","לא צריך"]), prompt: "בחר/י" %>
+        <%= f.select :survivor_needed,options_for_select([t('.need'),"צריך"],[t('.dont_need'),"לא צריך"]), prompt: t('.choose') %>
       </div>
     </div>
 
    <div class="control-group">
-     <%= f.label :strangers, "מוכן לארח זרים", class: "control-label" %>
+     <%= f.label :strangers, t('.strangers'), class: "control-label" %>
     <div class="controls">
-      <%= f.select :strangers,[['מוכן', true], ['לא מוכן', false]], prompt: "בחר/י" %>
+      <%= f.select :strangers,[[t('.willing'), true], [t('.not_willing'), false]], prompt: t('.choose') %>
     </div>
   </div>
 
   <div class="control-group">
-     <%= f.label :max_guests, "מס' אורחים מקסימאלי", class: "control-label" %>
+     <%= f.label :max_guests, t('.max_guests'), class: "control-label" %>
     <div class="controls">
       <%= f.number_field :max_guests %>
     </div>
@@ -79,13 +80,13 @@
 
   <div class="control-group">
       <div class="controls">
-        <%= f.text_area :free_text, placeholder: "עוד משהו שאנחנו צריכים לדעת?" %>
+        <%= f.text_area :free_text, placeholder: t('.free_text') %>
       </div>
   </div>
 
   <div class="control-group">
     <div class="controls">
-      <%= f.submit "שלח/י", class: "host_submit" %>
+      <%= f.submit t('.submit'), class: "host_submit" %>
     </div>
   </div>
 

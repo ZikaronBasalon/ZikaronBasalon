@@ -1,12 +1,80 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
-  hello: "Hello world"
+  shared:
+    send_request: "Send request"
+    request_sent: "Request sent"
   views:
     pagination:
-      first: "ראשון"
-      last: "אחרון"
-      previous: "לפני"
-      next: "אחרי"
+      first: "First"
+      last: "Last"
+      previous: "Previous"
+      next: "Next"
       truncate: "..."
+  layouts:
+    application:
+      contact_us: "Contact us"
+      facebook: "Zikaron Basalon facebook"
+    header:
+      want_to_host: "I want to host"
+      want_to_guest: "I want to be a guest"
+      staff: "Staff"
+  pages:
+    home:
+      title: "2015 Zikaron Basalon list of hosts"
+      explenation1: "Hello! We're happy you chose to take part of Zikaron Basalon. Here you can look for a living room open for guests near you."
+      explenation21: "If you didn't find a place to host you, you can always "
+      explenation22: "It's really simple, and our staff will help you with all the steps for creating a meaningfull night."
+      explenation3: "Or you can always return tommorow. The list updates daily. Holocaust Remembrance Day will be on the 15.4.2015 this year."
+      explenation_link: "host one yourselves."
+      select_city: "Select city"
+      no_salon1: "Couldn't find a place?"
+      no_salon2: "Why don't you host one yourself for you and your friends? Out staff will help you with planning the evening and it's content."
+      no_salon_link: "Click here to sign up"
+
+  guests:
+    register:
+      title1: "Fill in your details"
+      title2: "You'll recieve a notification when the host approves your request"
+      name: "Name"
+      email: "Email"
+      phone: "Phone number"
+      num_of_friends: "Number of +1s"
+      submit: "Send"
+
+  hosts:
+    new:
+      title: "I want to host"
+      explenation: "We're happy you chose to host a Zikaron Basalon. A succesfull evening requires planning and we're here to assist. At the end of the registration you will recive answer to any questions regarding planning the evening, inviting guests, and the evening's content. Many thanks, and welcome."
+      title2: "Register as a host of Zikaron Basalon and recieve all the details:"
+      no_script: "Sorry, your browser isn't javascript enabled. Please use a javascript enabled browser to succefully register."
+      f_name: "First name"
+      l_name: "Last name"
+      email: "Email"
+      phone: "Phone number"
+      address: "Address"
+      survivor_needed: "Need assistance finding a witness for testimonial?"
+      strangers: "Willing to host strangers"
+      max_guests: "Maximum number of guests"
+      free_text: "Anything else we need to know?"
+      need: "Need"
+      dont_need: "Don't need"
+      choose: "Choose"
+      willing: "Willing"
+      not_willing: "Not willing"
+      submit: "Submit"
+    success:
+      title: 'Thank you for taking part of Zikaron Basalon!'
+      facebook_link: "Hosts Facebook group"
+      box_exp1: "This is the group of all Zikaron Basalon hosts. This is the place to consult with us or other hosts and to share interesting ideas."
+      facebook: "Join our Facebook hosts group"
+      box_title1: "So what now?"
+      exp1: "We're here to help you and will be happy to answer any question."
+      exp2: "In the coming days we are preparing for thousands of hosts from all around Israel and the world that chose to participate in Zikaron Basalon"
+      exp3: "We will be in touch in the following weeks and provide all neccsary information to make the Holocaust Remembrance Day a special day for you and your guests."
+      exp4: 'In the meantime your welcome to join out Facebook group for hosts.'
+      exp5: "Thank you for taking part of this project. Together we'll make the Holocaust Remembrance Day meaningfull, relevant and accessible."
+      exp6: 'The Zikaron Basalon team'
+    send_request:
+      request_sent: "You request has been submitted!"
+      subtitle: "You'll recieve a confirmation message in the following days"
+      link1: "Our Facebook page"
+      link2: "The Zikaron Basalon website"

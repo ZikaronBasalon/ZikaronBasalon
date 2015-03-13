@@ -10,9 +10,9 @@ module PagesHelper
 
 	def request_btn_text(id)
 		if !@invites.nil?
-			@invites.include?(id) ? "בקשתך נשלחה" : "שלח בקשה"
+			@invites.include?(id) ? t('shared.request_sent') : t('shared.send_request')
 		else
-			"שלח בקשה"
+			t('shared.send_request')
 		end
 	end
 
