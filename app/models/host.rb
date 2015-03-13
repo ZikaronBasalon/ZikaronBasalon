@@ -8,6 +8,8 @@ class Host < ActiveRecord::Base
   validates_presence_of :f_name, :email, :phone
   validate :valid_address
 
+  before_save :default_max_guests
+
   def valid_address
     if lat.nil? || lng.nil?
       errors.add(:address, "invalid")
@@ -29,6 +31,14 @@ class Host < ActiveRecord::Base
 
   def region_name
   	city.try(:region).try(:name)
+  end
+
+  private
+
+  def default_max_guests
+    if self.max_guests.nil?
+      self.max_guests = 9999
+    end
   end
 
 end
