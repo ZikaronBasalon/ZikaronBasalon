@@ -22,19 +22,15 @@
     <meta property="og:url" content="http://zikaronbasalon.herokuapp.com">
     <meta property="og:description" content="בין הקדושה של הטקסים הממלכתיים וההדחקה המוחלטת, זיכרון בסלון מציע דרך אחת נוספת ﻿ זיכרון בסלון נולד מתוך ההבנה שהזיקה שלנו, הדור השלישי, ליום הזיכרון לשואה ולגבורה - הולכת ונחלשת. הפרויקט נועד לייצר דרך נוספת לציין את היום הזה, אשר תאפשר חיבור שונ">
   </head>
-  <body>
+  <body class="<%= I18n.locale %>">
     <%= render "layouts/header" %>
     <div id="container">
       <%= yield %>
     </div>
     <div id="footer">
         <div class="footer_wrapper">
-          <div class="part"> צרו קשר: zikaronbasalon@gmail.com </div>
-         <div class="part"><%= link_to "זיכרון בסלון בפייסבוק", "https://www.facebook.com/ZikronBaSalon" %></div>
-         <% if false %>
-         <div class="part"> פותח ע"י אורי קלר
-        <%= link_to image_tag("linkdin.jpg"), "http://www.linkedin.com/in/uriklar", target: "_blank" %></div>
-        <% end %>
+          <div class="part"> <%= t '.contact_us' %>: zikaronbasalon@gmail.com </div>
+         <div class="part"><%= link_to t('.facebook'), "https://www.facebook.com/ZikronBaSalon" %></div>
         </div>
       </div>
   </body>
