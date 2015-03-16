@@ -60,7 +60,7 @@
     <div class="control-group">
      <%= f.label :survivor_needed, t('.survivor_needed'), class: "control-label" %>
       <div class="controls">
-        <%= f.select :survivor_needed,options_for_select([t('.need'),"צריך"],[t('.dont_need'),"לא צריך"]), prompt: t('.choose') %>
+        <%= f.select :survivor_needed,options_for_select([t('.need'),t('.dont_need')]), prompt: t('.choose') %>
       </div>
     </div>
 
