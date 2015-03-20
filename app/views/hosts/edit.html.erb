@@ -57,7 +57,7 @@
     </div>
 
 
-      <div class="control-group">
+    <div class="control-group">
        <%= f.label :survivor_needed, "זקוק לעזרה במציאת איש עדות?", class: "control-label" %>
       <div class="controls">
         <%= f.select :survivor_needed,options_for_select(["צריך","לא צריך","נשלח"],@host.survivor_needed), prompt: "בחר/י" %>
@@ -75,6 +75,13 @@
        <%= f.label :strangers, "מוכן לארח זרים", class: "control-label" %>
       <div class="controls">
         <%= f.select :strangers,[['מוכן', true], ['לא מוכן', false]], prompt: "בחר/י" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+       <%= f.label :max_guests, t('.max_guests'), class: "control-label" %>
+      <div class="controls">
+        <%= f.number_field :max_guests %>
       </div>
     </div>
 

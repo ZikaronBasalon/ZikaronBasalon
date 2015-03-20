@@ -33,6 +33,7 @@
         <th class="sort" data-sort="survivor_needed">איש עדות<div class="header_line"></div></th>
         <th>פרטי איש עדות<div class="header_line"></div></th>
         <th>איש קשר<div class="header_line"></div></th>
+        <th>מקומות פנויים<div class="header_line"></div></th>
         <th>מידע נוסף<div class="header_line"></div></th>
         <th>&nbsp;</th>
       </tr>
@@ -51,6 +52,7 @@
             <td class="survivor_needed"><%= host.survivor_needed %></td>
             <td class="status"><%= host.survivor_details %></td>
             <td class="contact"><%= host.contact %></td>
+            <td class="status"><%= host.max_guests %></td>
             <td class="status"><%= host.free_text %></td>
             <td >
               <%= link_to edit_host_path(host) do %>
