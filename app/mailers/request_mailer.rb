@@ -1,5 +1,8 @@
 # encoding: UTF-8
 class RequestMailer < ActionMailer::Base
+  include Sidekiq::Worker
+  include Roadie::Rails::Automatic
+  layout 'mailer_default'
   default from: "zikaronbasalon@gmail.com"
 
   def send_request(host_id,guest_id,invite_id)

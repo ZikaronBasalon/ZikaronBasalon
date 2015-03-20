@@ -1,6 +1,8 @@
 # encoding: UTF-8
 class HostMailer < ActionMailer::Base
 	include Sidekiq::Worker
+  include Roadie::Rails::Automatic
+  layout 'mailer_default'
   default from: "zikaronbasalon@gmail.com"
 
   def manager_notification(manager_email,host_id)

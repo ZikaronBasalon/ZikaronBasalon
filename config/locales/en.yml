@@ -67,12 +67,7 @@ en:
       box_exp1: "This is the group of all Zikaron Basalon hosts. This is the place to consult with us or other hosts and to share interesting ideas."
       facebook: "Join our Facebook hosts group"
       box_title1: "So what now?"
-      exp1: "We're here to help you and will be happy to answer any question."
-      exp2: "In the coming days we are preparing for thousands of hosts from all around Israel and the world that chose to participate in Zikaron Basalon"
-      exp3: "We will be in touch in the following weeks and provide all neccsary information to make the Holocaust Remembrance Day a special day for you and your guests."
-      exp4: 'In the meantime your welcome to join out Facebook group for hosts.'
-      exp5: "Thank you for taking part of this project. Together we'll make the Holocaust Remembrance Day meaningfull, relevant and accessible."
-      exp6: 'The Zikaron Basalon team'
+      exp1: "In the following minutes you will recieve an email to the address you provided with all the detail you need to host a Zikaron Basalon evening. Didn't recieve an email? Please contact us at zikaronbasalon@gmail.com."
     send_request:
       request_sent: "You request has been submitted!"
       subtitle: "You'll recieve a confirmation message in the following days"

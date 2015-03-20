@@ -13,6 +13,8 @@ gem 'kaminari'
 gem 'sidekiq'
 gem 'figaro'
 gem 'sendgrid-ruby'
+gem 'roadie'
+gem 'roadie-rails'
 
 
 

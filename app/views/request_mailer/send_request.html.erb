@@ -8,8 +8,14 @@
 </p>
 
 <p>
-לאישור, אנא לחץ <%= link_to "כאן", invite_url(@invite) %> ופרטי הקשר שלך ישלחו אליו.
+ברגע שתאשר את הבקשה פרטי הקשר שלך ישלחו אליו 
 </p>
+
+<%= link_to invite_url(@invite, locale: :he) do %>
+	<div class="btn">
+		מאשר את הבקשה
+	</div>
+<% end %>
 
 <p>
 	תודה!
