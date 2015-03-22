@@ -16,4 +16,8 @@ class ApplicationController < ActionController::Base
 	def default_url_options(options = {})
 	  {locale: I18n.locale}
 	end
+
+	def mailer_default_url_options
+    ActionMailer::Base.default_url_options[:locale] = :he
+  end
 end

@@ -18,6 +18,8 @@ class Host < ActiveRecord::Base
 
   def full_name
     f_name + " " + l_name
+  rescue
+    f_name
   end
 
 
