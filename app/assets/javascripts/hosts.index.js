@@ -3,7 +3,8 @@ var hostList;
 $(function(){
   var options = {
     valueNames: [ 'f_name', 'l_name', 'email','phone','address','region_name',
-                  'city_name', 'max_guests','survivor_needed','strangers','status']
+                  'city_name', 'max_guests','survivor_needed','strangers','status'],
+    page: 5000
   };
 
   hostList = new List('hosts', options);
