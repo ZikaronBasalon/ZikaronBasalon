@@ -68,6 +68,9 @@ en:
       facebook: "Join our Facebook hosts group"
       box_title1: "So what now?"
       exp1: "In the following minutes you will recieve an email to the address you provided with all the detail you need to host a Zikaron Basalon evening. Didn't recieve an email? Please contact us at zikaronbasalon@gmail.com."
+      download_title: "Download the full Memories@Home host kit"
+      download_text: "In the kit you'll a lot of helpfull material to help you host a succesfull evening (available only in Hebrew at the moment)"
+      download_kit: "Download kit"
     send_request:
       request_sent: "You request has been submitted!"
       subtitle: "You'll recieve a confirmation message in the following days"

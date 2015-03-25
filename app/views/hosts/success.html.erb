@@ -8,14 +8,13 @@
 
 	<div class="box">
 		<h1><%= t '.box_title1' %></h1>
-<!-- 		<div class="square">
-			<%#= image_tag "download.png" %>
-			<h2>הורידו את הערכה השלמה למארח זיכרון בסלון</h2>
-			<div class="text">בערכה תמצאו: מערך עם הצעות לתוכן הדיון, תעודת הוקרה לאיש/אשת העדות, תמונה ל-event בפייסבוקת שילוט לבנין בערב עצמו ועוד...</div>
-
+		<div class="square">
+			<%= image_tag "download.png" %>
+			<h2><%= t '.download_title' %></h2>
+			<div class="text"><%= t '.download_text' %></div>
 		</div>
 
-		<div class="v_line"></div> -->
+		<div class="v_line"></div>
 
 		<div class="square">
 			<%= image_tag "host_group.png" %>
@@ -26,10 +25,10 @@
 		</div>
 
 		<div class="buttons">
-			<!-- <div class="button_container">
-				<div class="btn"><%#= link_to "להורדת הערכה", "/zikaron_basalon_kit.zip" %></div>
+			<div class="button_container">
+				<div class="btn"><%= link_to(t('.download_kit'), "/zikaron_basalon_kit.zip") %></div>
 			</div>
-			<div class="devider"></div> -->
+			<div class="devider"></div>
 			<div class="button_container">
 				<div class="btn"><%= link_to t('.facebook_link'), "https://www.facebook.com/groups/zikron/" %></div>
 			</div>
