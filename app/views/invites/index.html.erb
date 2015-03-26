@@ -1,0 +1,20 @@
+<% title "Invites" %>
+
+<table id="staff_table">
+  <tr>
+    <th>עיר</th>
+    <th>אורח</th>
+    <th>מייל אורח</th>
+    <th>מארח</th>
+    <th>מייל מארח</th>
+  </tr>
+  <% for invite in @invites %>
+    <tr>
+      <td><%= invite.host.city_name %></td>
+      <td><%= invite.guest.name %></td>
+      <td><%= invite.guest.email %></td>
+      <td><%= invite.host.full_name %></td>
+      <td><%= invite.host.email %></td>
+    </tr>
+  <% end %>
+</table>

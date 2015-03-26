@@ -606,7 +606,18 @@ body.he {
 			font-family: 'Alef', sans-serif;
 		}
 
-		table#staff_table {
+		.strangers {
+			font-size: 0px;
+			&.allowed {
+				svg{ path{ fill: #f7b519}}
+			}
+			&.not_allowed {
+				svg{ path{ fill: #bcbcbc}}
+			}
+		}
+	}
+
+	table#staff_table {
 			width: 100%;
 			margin-top: 53px;
 			th {
@@ -641,16 +652,6 @@ body.he {
 				}
 			}
 		}
-		.strangers {
-			font-size: 0px;
-			&.allowed {
-				svg{ path{ fill: #f7b519}}
-			}
-			&.not_allowed {
-				svg{ path{ fill: #bcbcbc}}
-			}
-		}
-	}
 
 	.circle {
 		width: 32px;
