@@ -11,12 +11,12 @@
   </tr>
   <% for invite in @invites %>
     <tr>
-      <td><%= invite.host.city_name %></td>
-      <td><%= invite.guest.name %></td>
-      <td><%= invite.guest.email %></td>
-      <td><%= invite.host.full_name %></td>
-      <td><%= invite.host.email %></td>
-      <td><%= invite.confirmed ? "מאושר" : "ממתין לאישור" %></td>
+      <td><%= invite.host.try(:city_name) %></td>
+      <td><%= invite.guest.try(:name) %></td>
+      <td><%= invite.guest.try(:email) %></td>
+      <td><%= invite.host.try(:full_name) %></td>
+      <td><%= invite.host.try(:email) %></td>
+      <td><%= invite.try(:confirmed) ? "מאושר" : "ממתין לאישור" %></td>
     </tr>
   <% end %>
 </table>
