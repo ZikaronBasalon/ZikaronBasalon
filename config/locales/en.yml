@@ -12,15 +12,15 @@ en:
   layouts:
     application:
       contact_us: "Contact us"
-      facebook: "Zikaron Basalon facebook"
+      facebook: "Memories@Home facebook"
     header:
       want_to_host: "I want to host"
       want_to_guest: "I want to be a guest"
       staff: "Staff"
   pages:
     home:
-      title: "2015 Zikaron Basalon list of hosts"
-      explenation1: "Hello! We're happy you chose to take part of Zikaron Basalon. Here you can look for a living room open for guests near you."
+      title: "2015 Memories@Home list of hosts"
+      explenation1: "Hello! We're happy you chose to take part of Memories@Home. Here you can look for a living room open for guests near you."
       explenation21: "If you didn't find a place to host you, you can always "
       explenation22: "It's really simple, and our staff will help you with all the steps for creating a meaningfull night."
       explenation3: "Or you can always return tommorow. The list updates daily. Holocaust Remembrance Day will be on the 15.4.2015 this year."
@@ -43,8 +43,8 @@ en:
   hosts:
     new:
       title: "I want to host"
-      explenation: "We're happy you chose to host a Zikaron Basalon. A succesfull evening requires planning and we're here to assist. At the end of the registration you will recive answer to any questions regarding planning the evening, inviting guests, and the evening's content. Many thanks, and welcome."
-      title2: "Register as a host of Zikaron Basalon and recieve all the details:"
+      explenation: "We're happy you chose to host a Memories@Home. A succesfull evening requires planning and we're here to assist. At the end of the registration you will recive answer to any questions regarding planning the evening, inviting guests, and the evening's content. Many thanks, and welcome."
+      title2: "Register as a host of Memories@Home and recieve all the details:"
       no_script: "Sorry, your browser isn't javascript enabled. Please use a javascript enabled browser to succefully register."
       f_name: "First name"
       l_name: "Last name"
@@ -62,12 +62,12 @@ en:
       not_willing: "Not willing"
       submit: "Submit"
     success:
-      title: 'Thank you for taking part of Zikaron Basalon!'
+      title: 'Thank you for taking part of Memories@Home!'
       facebook_link: "Hosts Facebook group"
-      box_exp1: "This is the group of all Zikaron Basalon hosts. This is the place to consult with us or other hosts and to share interesting ideas."
+      box_exp1: "This is the group of all Memories@Home hosts. This is the place to consult with us or other hosts and to share interesting ideas."
       facebook: "Join our Facebook hosts group"
       box_title1: "So what now?"
-      exp1: "In the following minutes you will recieve an email to the address you provided with all the detail you need to host a Zikaron Basalon evening. Didn't recieve an email? Please contact us at zikaronbasalon@gmail.com."
+      exp1: "In the following minutes you will recieve an email to the address you provided with all the detail you need to host a Memories@Home evening. Didn't recieve an email? Please contact us at zikaronbasalon@gmail.com."
       download_title: "Download the full Memories@Home host kit"
       download_text: "In the kit you'll a lot of helpfull material to help you host a succesfull evening (available only in Hebrew at the moment)"
       download_kit: "Download kit"
@@ -75,4 +75,4 @@ en:
       request_sent: "You request has been submitted!"
       subtitle: "You'll recieve a confirmation message in the following days"
       link1: "Our Facebook page"
-      link2: "The Zikaron Basalon website"
+      link2: "The Memories@Home website"

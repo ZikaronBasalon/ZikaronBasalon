@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for?(:title) ? yield(:title) : "זיכרון בסלון 2015" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "זכרון בסלון 2015" %></title>
     <%= favicon_link_tag %>
     <%= stylesheet_link_tag "application" %>
     <script>
@@ -20,7 +20,7 @@
     <%= yield(:head) %>
     <meta property="og:image" content="http://static.wixstatic.com/media/21e365_91defaf889494d6ea5cad65059ba650c.jpg">
     <meta property="og:url" content="http://zikaronbasalon.herokuapp.com">
-    <meta property="og:description" content="בין הקדושה של הטקסים הממלכתיים וההדחקה המוחלטת, זיכרון בסלון מציע דרך אחת נוספת ﻿ זיכרון בסלון נולד מתוך ההבנה שהזיקה שלנו, הדור השלישי, ליום הזיכרון לשואה ולגבורה - הולכת ונחלשת. הפרויקט נועד לייצר דרך נוספת לציין את היום הזה, אשר תאפשר חיבור שונ">
+    <meta property="og:description" content="בין הקדושה של הטקסים הממלכתיים וההדחקה המוחלטת, זכרון בסלון מציע דרך אחת נוספת ﻿ זכרון בסלון נולד מתוך ההבנה שהזיקה שלנו, הדור השלישי, ליום הזכרון לשואה ולגבורה - הולכת ונחלשת. הפרויקט נועד לייצר דרך נוספת לציין את היום הזה, אשר תאפשר חיבור שונ">
   </head>
   <body class="<%= I18n.locale %>">
     <%= render "layouts/header" %>
