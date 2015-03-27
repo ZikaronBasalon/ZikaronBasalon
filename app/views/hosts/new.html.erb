@@ -74,7 +74,7 @@
   <div class="control-group">
      <%= f.label :max_guests, t('.max_guests'), class: "control-label" %>
     <div class="controls">
-      <%= f.number_field :max_guests %>
+      <%= f.number_field :max_guests, min: 0 %>
     </div>
   </div>
 
