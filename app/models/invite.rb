@@ -18,4 +18,14 @@ class Invite < ActiveRecord::Base
     end
     host.save
   end
+
+  def display_status
+    if self.confirmed.nil?
+      "נדחה"
+    elsif self.confirmed
+      "אושר"
+    else 
+      "ממתין לאישור"
+    end
+  end
 end

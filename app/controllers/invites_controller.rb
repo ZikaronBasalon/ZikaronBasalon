@@ -1,4 +1,5 @@
 class InvitesController < ApplicationController
+
 	before_filter :basic_auth, only: [:index]
   def show
   	@invite = Invite.find(params[:id])
@@ -13,7 +14,7 @@ class InvitesController < ApplicationController
   end
 
   def index
-  	@invites = Invite.where(confirmed: nil).order(:created_at).all
+  	@invites = Invite.order(:confirmed).all
   end
 
   def basic_auth

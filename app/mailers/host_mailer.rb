@@ -14,4 +14,9 @@ class HostMailer < ActionMailer::Base
   	@host = Host.find(host_id)
   	mail :to => @host.email, :subject => "ברכות על הצטרפותך!"
   end
+
+  def host_kit(host_id)
+    @host = Host.find(host_id)
+    mail :to => @host.email, :subject => "זכרון בסלון, ערכה למארח"
+  end
 end
