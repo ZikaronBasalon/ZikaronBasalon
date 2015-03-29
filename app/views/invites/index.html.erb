@@ -7,7 +7,6 @@
     <th>מייל אורח</th>
     <th>מארח</th>
     <th>מייל מארח</th>
-    <th>סטטוס</th>
   </tr>
   <% for invite in @invites %>
     <tr>
@@ -15,8 +14,7 @@
       <td><%= invite.guest.try(:name) %></td>
       <td><%= invite.guest.try(:email) %></td>
       <td><%= invite.host.try(:full_name) %></td>
-      <td><%= invite.host.try(:email) %></td>
-      <td><%= invite.try(:confirmed) ? "מאושר" : "ממתין לאישור" %></td>
+      <td><%= invite.host.try(:email) %></td></td>
     </tr>
   <% end %>
 </table>

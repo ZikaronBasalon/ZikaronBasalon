@@ -5,7 +5,11 @@ ZikaronBasalon::Application.routes.draw do
 
     resources :guests
     resources :cities
-    resources :invites
+    resources :invites do
+      member do
+        get :reject
+      end
+    end
 
     resources :hosts do
       member do

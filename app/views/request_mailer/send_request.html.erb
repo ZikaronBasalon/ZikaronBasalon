@@ -17,6 +17,12 @@
 	</div>
 <% end %>
 
+<%= link_to reject_invite_url(id: @invite.id, :locale => :he) do %>
+	<div class="btn reject">
+		נגמר לי המקום
+	</div>
+<% end %>
+
 <p>
 	במידה ותצטרך, תוכל לפנות ישירות אל <%=  @guest.name %>  במייל <%=  @guest.email %> 
 </p>

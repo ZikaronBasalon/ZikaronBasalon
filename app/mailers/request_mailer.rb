@@ -23,4 +23,10 @@ class RequestMailer < ActionMailer::Base
   	@host = Host.find(host_id)
   	mail :to => @guest.email, :subject => "בקשתך אושרה"
   end
+
+  def request_was_rejected(host_id,guest_id)
+    @guest = Guest.find(guest_id)
+    @host = Host.find(host_id)
+    mail :to => @guest.email, :subject => "בקשתך נדחתה"
+  end
 end

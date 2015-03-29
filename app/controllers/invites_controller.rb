@@ -6,8 +6,14 @@ class InvitesController < ApplicationController
   	RequestMailer.delay.request_was_confirmed(@invite.host.id,@invite.guest.id)
   end
 
+  def reject
+  	@invite = Invite.find(params[:id])
+  	@invite.update_attributes(confirmed: nil)
+  	RequestMailer.delay.request_was_rejected(@invite.host.id,@invite.guest.id)
+  end
+
   def index
-  	@invites = Invite.order(:created_at).all
+  	@invites = Invite.where(confirmed: nil).order(:created_at).all
   end
 
   def basic_auth
