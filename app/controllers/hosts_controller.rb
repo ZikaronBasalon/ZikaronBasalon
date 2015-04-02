@@ -14,10 +14,8 @@ class HostsController < ApplicationController
     city = City.find_or_create_by_name(params[:host][:city_name])
     @host.city = city
     if @host.save
-      manager_email = @host.try(:city).try(:manager_email)
-      if manager_email
-        HostMailer.delay.manager_notification(manager_email,@host.id)
-      end
+      manager_email = @host.try(:city).try(:manager_email) || "nissimmi@gmail.com"
+      HostMailer.delay.manager_notification(manager_email,@host.id)
       if @host.email
         HostMailer.delay.new_host(@host.id)
       end
