@@ -12,6 +12,10 @@ class HostMailer < ActionMailer::Base
 
   def new_host(host_id)
   	@host = Host.find(host_id)
+    attachments['חומרים_מעוררי_מחשבה.pdf'] = File.read("#{Rails.root}/public/kit/thought_provoking_material.pdf")
+    attachments['ערכה_למארח.pdf'] = File.read("#{Rails.root}/public/kit/host_kit.pdf")
+    attachments['שלט_לאירוע.pdf'] = File.read("#{Rails.root}/public/kit/event_sign.pdf")
+    attachments['תעודת_הוקרה_לאיש_עדות.pdf'] = File.read("#{Rails.root}/public/kit/certificate.pdf")
   	mail :to => @host.email, :subject => "ברכות על הצטרפותך!"
   end
 

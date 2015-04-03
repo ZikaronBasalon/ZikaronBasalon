@@ -11,7 +11,13 @@
 		<div class="square">
 			<%= image_tag "download.png" %>
 			<h2><%= t '.download_title' %></h2>
-			<div class="text"><%= t '.download_text' %></div>
+			<div class="text">
+				<%= t '.download_text' %>
+				<%= link_to(t('.download_text1'),"http://zikaronbasalon.herokuapp.com/kit/host_kit.pdf") %>,
+				<%= link_to(t('.download_text2'),"http://zikaronbasalon.herokuapp.com/kit/thought_provoking_material.pdf") %>,
+				<%= link_to(t('.download_text3'),"http://zikaronbasalon.herokuapp.com/kit/event_sign.pdf") %>,
+				<%= link_to(t('.download_text4'),"http://zikaronbasalon.herokuapp.com/kit/certificate.pdf") %>
+			</div>
 		</div>
 
 		<div class="v_line"></div>
