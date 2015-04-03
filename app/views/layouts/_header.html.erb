@@ -5,8 +5,19 @@
 		<div class="header_link"><%= link_to t('.want_to_guest'), root_path %></div>
 	</div>
 	<%= link_to hosts_path do %>
-		<div id="staff"><%= t '.staff' %></div>
+		<div class="header_box" id="staff"><%= t '.staff' %></div>
 	<% end %>
+
+	<% if signed_in? %>
+		<%= link_to host_path(current_user) do %>
+			<div class="header_box" id="host_dashboard"><%= t '.host_dashboard' %></div>
+		<% end %>
+	<% else %>
+		<%= link_to signin_path do %>
+			<div class="header_box" id="host_dashboard"><%= t '.host_dashboard' %></div>
+		<% end %>
+	<% end %>
+	
 	<div class="header_links locale_links">
 		<%= link_to_unless_current "עברית", locale: "he" %>
     <%= link_to_unless_current "English", locale: "en" %>

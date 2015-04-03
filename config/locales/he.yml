@@ -17,6 +17,7 @@ he:
       want_to_host: "רוצה לארח"
       want_to_guest: "רוצה להתארח"
       staff: "צוות"
+      host_dashboard: "אזור מארחים"
   pages:
     home:
       title: "רשימת מארחים זכרון בסלון 2015"
@@ -39,6 +40,10 @@ he:
       phone: "טלפון"
       num_of_friends: "מס' אורחים שבאים איתי"
       submit: "שלח"
+
+  sessions:
+    new:
+      title: "הזן פרטים לכניסה לאזורך האישי"
 
   hosts:
     new:

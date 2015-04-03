@@ -35,6 +35,10 @@ class Host < ActiveRecord::Base
   	city.try(:region).try(:name)
   end
 
+  def authenticate(s_phone)
+    phone == s_phone
+  end
+
   private
 
   def default_max_guests

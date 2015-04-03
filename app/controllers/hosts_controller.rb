@@ -1,5 +1,6 @@
 class HostsController < ApplicationController
   before_filter :basic_auth, only: [:index,:edit]
+  before_filter :signed_in_user, only: [:show]
 
   def index
     @hosts = Host.all.sort_by {|x| x.city || City.first}
@@ -27,6 +28,10 @@ class HostsController < ApplicationController
   end
 
   def show
+    @host = Host.find(params[:id])
+    @confirmed_invites = Invite.where(host_id: @host.id, confirmed: true)
+    @pending_invites = Invite.where(host_id: @host.id, confirmed: false)
+    @rejected_invites = Invite.where(host_id: @host.id).where("confirmed IS NULL")
   end
 
   def destroy
@@ -66,6 +71,9 @@ class HostsController < ApplicationController
   end
 
   def basic_auth
+    # if current_user && current_user.id == params[:id].to_i
+    #   return true
+    # end
     authenticate_or_request_with_http_basic do |username,password|
       if username == "zikaron" && password == "1234.com"
         session[:auth] = "basic"

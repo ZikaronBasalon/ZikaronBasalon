@@ -5,6 +5,8 @@ ZikaronBasalon::Application.routes.draw do
 
     resources :guests
     resources :cities
+    resources :sessions, only: [:new,:create]
+    match 'sessions/signin',  :to => 'sessions#new', as: :signin
     resources :invites do
       member do
         get :reject

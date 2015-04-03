@@ -1,0 +1,81 @@
+<div class="container_inner host_show">
+	<div class="title">
+    שלום <%= @host.f_name %>
+  </div>
+  <div class="content">
+    <p>
+      מספר מקומות פנויים: <%= @host.max_guests %>
+      <br>
+      בימים הקרובים תתווסף אפשרות לערוך את פרטיך. תודה, צוות זכרון בסלון.
+    </p>  
+
+    <div class="subtitle">בקשות שאושרו</div>
+    <table class="gridtable">
+      <thead>
+        <tr>
+          <th>שם</th>
+          <th>מייל</th>
+          <th>טלפון</th>
+          <th>אורחים נוספים</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @confirmed_invites.each do |ci| %>
+          <tr>
+            <td><%= ci.guest.try(:name)%></td>
+            <td><%= ci.guest.try(:email)%>/td>
+            <td><%= ci.guest.try(:phone)%></td>
+            <td><%= ci.guest.try(:num_of_friends)%></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div class="subtitle">בקשות שממתינות לאישור</div>
+    <table class="gridtable">
+      <thead>
+        <tr>
+          <th>שם</th>
+          <th>מייל</th>
+          <th>טלפון</th>
+          <th>אורחים נוספים</th>
+          <th>אשר</th>
+          <th>דחה</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @pending_invites.each do |ci| %>
+          <tr>
+            <td><%= ci.guest.try(:name)%></td>
+            <td><%= ci.guest.try(:email)%></td>
+            <td><%= ci.guest.try(:phone)%></td>
+            <td><%= ci.guest.try(:num_of_friends) %></td>
+            <td><%= link_to "אשר בקשה", ci %></td>
+            <td><%= link_to "דחה בקשה", reject_invite_path(ci) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div class="subtitle">בקשות שנדחו</div>
+    <table class="gridtable">
+      <thead>
+        <tr>
+          <th>שם</th>
+          <th>מייל</th>
+          <th>טלפון</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @rejected_invites.each do |ci| %>
+          <tr>
+            <td><%= ci.guest.try(:name)%></td>
+            <td><%= ci.guest.try(:email)%></td>
+            <td><%= ci.guest.try(:phone)%></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+</div>

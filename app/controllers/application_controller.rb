@@ -1,6 +1,13 @@
 class ApplicationController < ActionController::Base
+	include SessionsHelper
   protect_from_forgery
   before_filter :set_locale
+
+  def signed_in_user
+   unless signed_in?
+    redirect_to signin_path
+   end
+  end
 
 	private
 
