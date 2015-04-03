@@ -23,7 +23,7 @@
         <% @confirmed_invites.each do |ci| %>
           <tr>
             <td><%= ci.guest.try(:name)%></td>
-            <td><%= ci.guest.try(:email)%>/td>
+            <td><%= ci.guest.try(:email)%></td>
             <td><%= ci.guest.try(:phone)%></td>
             <td><%= ci.guest.try(:num_of_friends)%></td>
           </tr>
