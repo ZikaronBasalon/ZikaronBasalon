@@ -11,12 +11,14 @@
 
     <%= image_tag "excel.png", id: "export_to_excel" %>
     <%= text_field_tag :search,nil, class: "search", placeholder: "חיפוש חופשי" %>
+
+    <span>סה"כ מארחים רשומים: <%= @hosts.count %></span>
   </form>
 
     <table id="staff_table">
       <thead>
         <tr>
-        <th></th>
+        <th>ID</th>
         <th class="sort" data-sort="strangers">זרים<div class="header_line"></div></th>
         <th class="sort" data-sort="f_name">
           שם
@@ -39,9 +41,9 @@
       </tr>
       </thead>
       <tbody class="list">
-      <% @hosts.each_with_index do |host,i| %>
+      <% @hosts.each do |host| %>
         <tr>
-            <td><%= i+1 %></td>
+            <td><%= host.id %></td>
             <td class="strangers <%= strangers_class(host.strangers) %>"><%= inline_svg(get_guests_svg(host.strangers)) %><%= host.strangers %></td>
             <td class="f_name"><%= host.f_name %></td>
             <td class="l_name"><%= host.l_name %></td>
