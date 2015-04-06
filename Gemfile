@@ -15,6 +15,7 @@ gem 'figaro'
 gem 'sendgrid-ruby'
 gem 'roadie'
 gem 'roadie-rails'
+gem 'party_foul'
 
 
 
