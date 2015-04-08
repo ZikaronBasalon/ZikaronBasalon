@@ -36,7 +36,7 @@ class Host < ActiveRecord::Base
   end
 
   def authenticate(s_phone)
-    phone == s_phone
+    phone.tr("-","") == s_phone.tr("-","")
   end
 
   private

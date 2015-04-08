@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
 	
 	def create
 		Rails.logger.info "I'm here: #{params}"
-		host = Host.find_by_email(params[:session][:email])
+		host = Host.find(:first, :conditions => ["lower(email) = ?", params[:session][:email].downcase])
 		if host && host.authenticate(params[:session][:phone])
 			sign_in host
 			redirect_to host
