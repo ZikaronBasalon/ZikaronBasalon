@@ -1,7 +1,7 @@
 class Host < ActiveRecord::Base
   attr_accessible :f_name, :l_name, :email, :phone, :address, :city_id, :max_guests,
    :survivor_needed, :free_text, :city_name, :status, :strangers, :contact,
-   :survivor_details, :lat, :lng
+   :survivor_details, :lat, :lng, :date
 
   belongs_to :city
 
@@ -20,6 +20,10 @@ class Host < ActiveRecord::Base
     f_name + " " + l_name
   rescue
     f_name
+  end
+
+  def date 
+    read_attribute(:date) || Date.parse("15-4-2015")
   end
 
 

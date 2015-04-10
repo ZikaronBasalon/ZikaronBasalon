@@ -79,6 +79,13 @@
   </div>
 
   <div class="control-group">
+    <%= f.label :date, t('.date'), class: "control-label" %>
+      <div class="controls">
+        <%= f.text_field :date, placeholder: t('.date') %>
+      </div>
+  </div>
+
+  <div class="control-group">
       <div class="controls">
         <%= f.text_area :free_text, placeholder: t('.free_text') %>
       </div>

@@ -60,6 +60,7 @@ en:
       choose: "Choose"
       willing: "Willing"
       not_willing: "Not willing"
+      date: "Event date"
       submit: "Submit"
     success:
       title: 'Thank you for taking part of Memories@Home!'

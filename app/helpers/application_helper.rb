@@ -19,4 +19,8 @@ module ApplicationHelper
   		"not_allowed"
   	end
   end
+
+  def date_format(date)
+    date.strftime("%d-%m-%Y")
+  end
 end

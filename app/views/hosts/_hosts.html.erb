@@ -3,6 +3,7 @@
 		<td><%= host.f_name %></td>
 		<td><%= host.address %></td>
 		<td><%= host.city_name %></td>
+		<td><%= date_format(host.date) %></td>
 		<td>
 
 			<div class="request_btn <%= invite_exists?(host.id) %>" data-id="<%= host.id %>">

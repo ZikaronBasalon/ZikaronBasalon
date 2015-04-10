@@ -27,6 +27,11 @@ $(function(){
 		}
 	});
 
+	$('#host_date').datepicker({
+		minDate: new Date(),
+		dateFormat: 'dd-mm-yy'
+	});
+
 	function getAddress() {
 		try {
 			result = autocomplete.getPlace();

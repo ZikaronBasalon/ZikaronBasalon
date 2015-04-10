@@ -65,6 +65,7 @@ he:
       choose: "בחר/י"
       willing: "מוכן"
       not_willing: "לא מוכן"
+      date: "תאריך הערב"
       submit: "שלח/י"
     success:
       title: 'תודה שבחרת לקחת חלק בזכרון בסלון!'
