@@ -15,7 +15,7 @@ class RequestMailer < ActionMailer::Base
   def request_was_sent(host_id,guest_id)
   	@guest = Guest.find(guest_id)
   	@host = Host.find(host_id)
-  	mail :to => @guest.email, :subject => "בקשתך נשלחה בצלחה"
+  	mail :to => @guest.email, :subject => "בקשתך נשלחה בהצלחה"
   end
 
   def request_was_confirmed(host_id,guest_id)
