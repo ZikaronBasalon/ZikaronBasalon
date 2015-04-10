@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(:version => 20150410082927) do
     t.text     "survivor_details"
     t.float    "lat"
     t.float    "lng"
-    t.date     "date"
+    t.datetime "date"
   end
 
   create_table "invites", :force => true do |t|
