@@ -24,7 +24,7 @@ h2 {
 	font-size: 22px;
 }
 
-p {
+p, li {
 	color: #010101;
 	/*font-family: "Alef";*/
 	font-weight: 400;
@@ -87,4 +87,8 @@ a {
 
 .mail-and-website table {
 	height: 50%;
+}
+
+li {
+	margin-bottom: 10px;
 }
