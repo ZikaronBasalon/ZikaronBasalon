@@ -9,7 +9,16 @@
   <p>
     <%= t '.explenation' %>
   </p>
+
+  <br>
+  <p>
+    <b>
+    בשל הסמיכות ליום השואה אין ביכולתנו לאתר עבורכם איש עדות. אתם מוזמנים להשתמש בקטעי ארכיון, סרטים ועדויות בשידור חי שלינקים אליהם יישלחו אליכם כמה שעות לאחר ההרשמה.
+    </b>
+  </p>
 </div>
+
+
 
   <div class="form_header">
     <%= t '.title2' %>
@@ -57,12 +66,13 @@
     <%= f.hidden_field :lat %>
     <%= f.hidden_field :lng %>
 
-    <div class="control-group">
-     <%= f.label :survivor_needed, t('.survivor_needed'), class: "control-label" %>
+
+    <!-- <div class="control-group">
+     <%#= f.label :survivor_needed, t('.survivor_needed'), class: "control-label" %>
       <div class="controls">
-        <%= f.select :survivor_needed,options_for_select([t('.need'),t('.dont_need')]), prompt: t('.choose') %>
+        <%#= f.select :survivor_needed,options_for_select([t('.need'),t('.dont_need')]), prompt: t('.choose') %>
       </div>
-    </div>
+    </div> -->
 
    <div class="control-group">
      <%= f.label :strangers, t('.strangers'), class: "control-label" %>
