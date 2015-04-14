@@ -3,7 +3,7 @@ class HostsController < ApplicationController
   before_filter :signed_in_user, only: [:show]
 
   def index
-    @hosts = Host.all.sort_by {|x| x.city || City.first}
+    @hosts = Host.order('created_at DESC').all
   end
 
   def new
