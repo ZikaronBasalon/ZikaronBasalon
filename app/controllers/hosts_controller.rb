@@ -18,7 +18,8 @@ class HostsController < ApplicationController
       manager_email = @host.try(:city).try(:manager_email) || "nissimmi@gmail.com"
       HostMailer.delay.manager_notification(manager_email,@host.id)
       if @host.email
-        HostMailer.delay.new_host(@host.id)
+        #HostMailer.delay.new_host(@host.id)
+        HostMailer.delay.day_before(@host.id)
       end
       redirect_to success_host_path(@host), :notice => "Successfully created host."
 
