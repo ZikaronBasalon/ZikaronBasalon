@@ -38,6 +38,6 @@ class HostMailer < ActionMailer::Base
   end
 
   def mazal_tov_shani
-    mail :to => "brusishani@gmail.com" :subject => "נזכור, לא נסלח ונאחל לשני עד 120"
+    mail :to => "brusishani@gmail.com" , :subject => "נזכור, לא נסלח ונאחל לשני עד 120"
   end
 end
