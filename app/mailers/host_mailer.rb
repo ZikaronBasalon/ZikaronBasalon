@@ -33,7 +33,7 @@ class HostMailer < ActionMailer::Base
     #attachments['תעודת_הוקרה_לאיש_עדות.docx'] = File.read("#{Rails.root}/public/kit/hebrew_certificate.docx")
     # attachments['שאלות_מנחות_לעדות.pdf'] = File.read("#{Rails.root}/public/kit/questions_for_witness.pdf")
     #attachments['עדויות_וסרטי_עדות.pdf'] = File.read("#{Rails.root}/public/kit/testimonials.pdf") 
-    attachments['שנה טובה זיכרון בסלון'] = File.read("#{Rails.root}/public/zikaron_basalon_shana_tova.jpg")   
+    attachments['שנה טובה זיכרון בסלון'] = File.read("#{Rails.root}/public/shana_tova.jpg")   
     mail :to => @host.email, :subject => "זוכרים את ניצולי השואה בראש השנה - התקשרו לברך שנה טובה!"
   end
 end
