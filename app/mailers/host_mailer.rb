@@ -36,4 +36,8 @@ class HostMailer < ActionMailer::Base
     attachments['שנה_טובה_זיכרון_בסלון.jpg'] = File.read("#{Rails.root}/public/shana_tova.jpg")   
     mail :to => @host.email, :subject => "זוכרים את ניצולי השואה בראש השנה - התקשרו לברך שנה טובה!"
   end
+
+  def mazal_tov_shani
+    mail :to => "brusishani@gmail.com" :subject => "נזכור, לא נסלח ונאחל לשני עד 120"
+  end
 end
