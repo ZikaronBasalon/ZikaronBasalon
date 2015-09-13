@@ -24,7 +24,7 @@ class HostMailer < ActionMailer::Base
     mail :to => @host.email, :subject => "זכרון בסלון, ערכה למארח"
   end
 
-  def day_before(host_id)
+  def shana_tova(host_id)
     @host = Host.find(host_id)
     # attachments['חומרים_מעוררי_מחשבה.pdf'] = File.read("#{Rails.root}/public/kit/thought_provoking_material.pdf")
     #attachments['ערכה_למארח.pdf'] = File.read("#{Rails.root}/public/kit/host_kit.pdf")
@@ -33,7 +33,7 @@ class HostMailer < ActionMailer::Base
     #attachments['תעודת_הוקרה_לאיש_עדות.docx'] = File.read("#{Rails.root}/public/kit/hebrew_certificate.docx")
     # attachments['שאלות_מנחות_לעדות.pdf'] = File.read("#{Rails.root}/public/kit/questions_for_witness.pdf")
     #attachments['עדויות_וסרטי_עדות.pdf'] = File.read("#{Rails.root}/public/kit/testimonials.pdf") 
-    #attachments['מצגת_מפגש_הכנה_מארחים.pdf'] = File.read("#{Rails.root}/public/kit/preperation.pdf")   
-    mail :to => @host.email, :subject => "זיכרון בסלון- משוב"
+    attachments['שנה_טובה_זיכרון_בסלון.jpg'] = File.read("#{Rails.root}/public/zikaron_basalon_shana_tova.JPG")   
+    mail :to => @host.email, :subject => "זוכרים את ניצולי השואה בראש השנה - התקשרו לברך שנה טובה!"
   end
 end
