@@ -3,7 +3,7 @@ class HostMailer < ActionMailer::Base
 	include Sidekiq::Worker
   include Roadie::Rails::Automatic
   layout 'mailer_default'
-  default from: "zikaronbasalon@gmail.com"
+  default from: "\"זיכרון בסלון\" <zikaronbasalon@gmail.com>"
 
   def manager_notification(manager_email,host_id)
   	@host = Host.find(host_id)
