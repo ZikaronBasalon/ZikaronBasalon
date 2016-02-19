@@ -1,0 +1,35 @@
+#host-edit-form {
+	label {
+		color: #a3a3a3;
+	}
+
+	.radio {
+		label {
+			color: initial;
+		}
+	}
+
+	input,select,textarea {
+		max-width: 230px;
+	}
+
+	button {
+		width: 170px;
+	}
+
+	.form-horizontal {
+		.control-label {
+			text-align: right;
+			color: initial;
+		}
+	}
+}
+
+#host-index {
+	tbody {
+		tr:hover {
+			background-color: white;
+			cursor: pointer;
+		}
+	}
+}

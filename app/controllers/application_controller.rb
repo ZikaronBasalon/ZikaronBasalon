@@ -3,10 +3,15 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :set_locale
 
-  def signed_in_user
-   unless signed_in?
-    redirect_to signin_path
-   end
+  # Checks if user has access to view page
+  def correct_meta
+  	unless current_user.meta_id === params[:id].to_i || current_user.admin?
+			redirect_to root_path
+  	end
+  end
+
+  def is_admin
+  	redirect_to root_path unless current_user.admin?
   end
 
 	private
@@ -26,5 +31,10 @@ class ApplicationController < ActionController::Base
 
 	def mailer_default_url_options
     ActionMailer::Base.default_url_options[:locale] = :he
+  end
+
+  # Overwriting the sign_out redirect path method
+  def after_sign_out_path_for(resource_or_scope)
+    root_path
   end
 end

@@ -1,9 +1,10 @@
 class HostsController < ApplicationController
-  before_filter :basic_auth, only: [:index,:edit]
   before_filter :signed_in_user, only: [:show]
+  before_filter :correct_meta, only: [:edit]
+  respond_to :html, :json
 
   def index
-    @hosts = Host.order('created_at DESC').all
+    @hosts = Host.includes(:user).order('created_at DESC').all
   end
 
   def new
@@ -48,7 +49,7 @@ class HostsController < ApplicationController
   def update
     @host = Host.find(params[:id])
     @host.update_attributes(params[:host])
-    redirect_to action: 'index'
+    respond_with(@host)
   end
 
   def search
@@ -69,21 +70,5 @@ class HostsController < ApplicationController
     @host = Host.find(params[:guest][:host_id])
     RequestMailer.delay.send_request(@host.id,@guest.id, @invite.id)
     RequestMailer.delay.request_was_sent(@host.id,@guest.id)
-  end
-
-  def basic_auth
-    # if current_user && current_user.id == params[:id].to_i
-    #   return true
-    # end
-    authenticate_or_request_with_http_basic do |username,password|
-      if username == "zikaron" && password == "1234.com"
-        session[:auth] = "basic"
-        return true
-      elsif username == "zbadmin" && password == "bbznot"
-        session[:auth] = "extended"
-        return true
-      end
-      request_http_basic_authentication
-    end
   end
 end

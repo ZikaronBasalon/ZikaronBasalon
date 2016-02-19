@@ -1,3 +1,37 @@
+<div class="col-xs-12" id="host-index" ng-controller="HostIndexController"
+     ng-init="init('<%= @hosts.to_json(:include => :user) %>')">
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>שם</th>
+        <th>מייל</th>
+        <th>טלפון</th>
+        <th>כתובת</th>
+        <th>נרשם בתאריך</th>
+        <th>צריך איש עדות</th>
+        <th>צוות איש עדות</th>
+        <th>ערב פתוח</th>
+      </tr> 
+    </thead>
+    <tbody>
+      <tr ng-repeat="host in hosts" ng-click="editHost(host)">
+        <td>{{ host.user.full_name }}</td>
+        <td>{{ host.user.email }}</td>
+        <td>{{ host.phone }}</td>
+        <td>{{ host.address }}</td>
+        <td>{{ formatDate(host.created_at) }}</td>
+        <td>{{ formatBool(host.survivor_needed) }}</td>
+        <td>{{  }}</td>
+        <td>{{ formatBool(host.strangers) }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+
+<% if false %>
 <div id="staff_container">
   <div id="hosts">
   <form class="form-inline">
@@ -73,3 +107,5 @@
     </table>
   </div>
 </div>
+
+<% end %>

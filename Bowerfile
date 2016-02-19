@@ -1,0 +1,3 @@
+asset 'angular'
+asset 'bootstrap-rtl' 
+asset 'angular-bootstrap'

@@ -1,117 +1,187 @@
-<% title "#{@host.f_name} #{@host.l_name}" %>
+<div class="col-xs-12" id="host-edit-form" ng-controller="HostEditController"
+     ng-init="init('<%= @host.to_json %>')">
 
+  <h2>פרטים נוספים</h2>
+  <p>כדי שנוכל לעזור לך בארגון הערב אנחנו צריכים עוד קצת פרטים</p>
 
-<div id="edit_host_container">
-  <%= form_for @host, html: {class: "form-horizontal"} do |f| %>
-    <% if session[:auth] == "extended"  %>
-     <div class="control-group">
-        <%= f.label :f_name, "שם פרטי", class: "control-label" %>
-        <div class="controls">
-          <%= f.text_field :f_name %>
-        </div>
-      </div>
+  <form name="stepOne" ng-show="'stepOne' === steps[stepIndex]" >
 
-      <div class="control-group">
-        <%= f.label :l_name, "שם משפחה", class: "control-label" %>
-        <div class="controls">
-          <%= f.text_field :l_name %>
-        </div>
-      </div>
-
-      <div class="control-group">
-        <%= f.label :email, "Email", class: "control-label" %>
-        <div class="controls">
-          <%= f.text_field :email %>
-        </div>
-      </div>
-
-      <div class="control-group">
-        <%= f.label :phone, "טלפון", class: "control-label" %>
-        <div class="controls">
-          <%= f.text_field :phone %>
-        </div>
-      </div>
-
-      <div class="control-group">
-        <%= f.label :address, "כתובת הסלון", class: "control-label" %>
-        <div class="controls">
-          <%= f.text_field :address %>
-        </div>
-      </div>
-
-    <% end %>
-      <div class="control-group">
-        <%= f.label :city_name, "עיר", class: "control-label" %>
-        <div class="controls">
-          <%= f.text_field :city_name, data: {autocomplete_source: City.order(:name).map(&:name)} %>
-        </div>
-      </div>
-      <%= f.hidden_field :lat %>
-    <%= f.hidden_field :lng %>
-
-    <div class="control-group">
-        <%= f.label :contact, "איש קשר", class: "control-label" %>
-        <div class="controls">
-          <%= f.text_field :contact %>
-        </div>
+    <div class="form-group">
+      <label for="phone">טלפון</label>
+      <input type="text" class="form-control"
+             id="phone"
+             ng-model="host.phone"
+             required>
     </div>
 
-
-    <div class="control-group">
-       <%= f.label :survivor_needed, "זקוק לעזרה במציאת איש עדות?", class: "control-label" %>
-      <div class="controls">
-        <%= f.select :survivor_needed,options_for_select(["צריך","לא צריך","נשלח"],@host.survivor_needed), prompt: "בחר/י" %>
+    <div class="form-group">
+      <label>האם אירחת בעבר ערב זכרון בסלון</label>
+      <div class="radio">
+        <label>
+          <input type="radio"
+                 name="hostedBefore"
+                 id="hostedBeforeFalse"
+                 ng-value="false"
+                 ng-model="host.hosted_before"
+                 checked>
+          פעם ראשונה שאני מארח זיכרון בסלון
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio"
+                 name="hostedBefore"
+                 id="hostedBeforeTrue"
+                 ng-value="true"
+                 ng-model="host.hosted_before">
+          אירחתי בעבר ערב זכרון בסלון
+        </label>
       </div>
     </div>
 
-    <div class="control-group">
-        <div class="controls">
-          <%= f.text_area :survivor_details, placeholder: "פרטי איש העדות" %>
+    <div class="form-group">
+      <label>האם אתה מייצג ארגון?</label>
+      <div class="radio">
+        <label>
+          <input type="radio"
+                 name="organization"
+                 id="organizationFalse"
+                 ng-value="false"
+                 ng-model="organization"
+                 ng-change='orgChanged(organization)'
+                 checked>
+          לא
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio"
+                 name="organization"
+                 id="organizationTrue"
+                 ng-value="true"
+                 ng-model="organization"
+                 ng-change='orgChanged(organization)'>
+          כן, אני מייצג/ת ארגון
+        </label>
+      </div>
+    </div>
+
+    <div ng-if="organization">
+      <div class="form-group">
+        <label for="orgName">שם הארגון</label>
+        <input type="text" class="form-control"
+               id="orgName"
+               ng-model="host.org_name">
+      </div>
+
+      <div class="form-group">
+        <label for="orgRole">תפקיד בארגון</label>
+        <input type="text" class="form-control"
+               id="orgRole"
+               ng-model="host.org_role">
+      </div>
+    </div>
+
+    <button ng-click="submitStepOne()" class="btn btn-warning">המשך</button>
+  </form>
+
+  <form name="stepTwo" ng-show="'stepTwo' === steps[stepIndex]" >
+    <div class="form-group">
+      <label for="address">כתובת</label>
+      <input type="text" class="form-control"
+             id="address"
+             ng-model="host.address"
+             required>
+
+      <input type="hidden" ng-model="host.lat" />
+      <input type="hidden" ng-model="host.lng" />
+      <input type="hidden" ng-model="host.city_name" />
+    </div>
+
+    <label>נגישות</label>
+    <p>חשוב לנו לדעת...</p>
+
+    <div class="form-horizontal">
+      <div class="form-group">
+        <label for="floor" class="col-xs-1 control-label">קומה</label>
+        <div class="col-xs-11">
+          <input type="number" class="form-control" id="floor" ng-model="host.floor">
         </div>
-    </div>
-
-
-     <div class="control-group">
-       <%= f.label :strangers, "מוכן לארח זרים", class: "control-label" %>
-      <div class="controls">
-        <%= f.select :strangers,[['מוכן', true], ['לא מוכן', false]], prompt: "בחר/י" %>
       </div>
-    </div>
 
-    <div class="control-group">
-       <%= f.label :max_guests, "מקומות פנויים", class: "control-label" %>
-      <div class="controls">
-        <%= f.number_field :max_guests %>
-      </div>
-    </div>
-
-    <div class="control-group">
-       <%= f.label :date, "תאריך הערב", class: "control-label" %>
-      <div class="controls">
-        <%= f.text_field :date %>
-      </div>
-    </div>
-
-
-    <div class="control-group">
-        <div class="controls">
-          <%= f.text_area :free_text, placeholder: "עוד משהו שאנחנו צריכים לדעת?" %>
-        </div>
-    </div>
-
-    <div class="control-group inline">
-      <div class="controls">
-        <%= f.submit "עדכן/י", class: "host_submit" %>
-      </div>
-    </div>
-
-    <% if session[:auth] == "extended" %>
-      <div class="control-group inline">
-        <div class="controls">
-         <%= link_to 'מחק', host_path(@host),method: :delete, data: { confirm: 'אתה בטוח?' }, class: "host_delete" %>
+      <div class="form-group ">
+        <label for="elevator" class="col-xs-1 control-label">מעלית</label>
+        <div class="col-xs-11">
+          <select class="form-control" id="elevator" 
+                  ng-model="host.elevator"
+                  ng-options="o.v as o.n for o in [{ n: 'יש', v: true }, { n: 'אין', v: false }]">
+          </select>
         </div>
       </div>
-    <% end %>
+    </div>
 
-  <% end %>
+    <div class="form-group">
+      <label>מה התאריך שבו מתוכנן הערב שלך?</label>
+      <p>אנחנו ממליצים לערוך ערב זיכרון בסלון בתאריך בלה בלה בלה...</p>
+
+      <input type="text" class="form-control" uib-datepicker-popup="{{dateFormat}}" ng-model="host.event_date"  is-open="eventDate.isOpen" ng-click="openDatepicker()" />
+    </div>  
+
+    <button class="btn btn-info" ng-click="back()">חזרה</button>
+    <button class="btn btn-warning" ng-click="submitStepTwo()">המשך</button>
+  </form>
+
+  <form name="stepThree" ng-show="'stepThree' === steps[stepIndex]" >
+    <div class="form-group">
+      <label for="event_language">השפה בה יתנהל הערב</label>
+      <div>
+        <select class="form-control" id="event_language" ng-model="host.event_language">
+          <option value="hebrew">עברית</option>
+          <option value="english">English</option>
+          <option value="arabic">العربية</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>האם אתה צריך עזרה במציאת איש עדות?</label>
+      <p>אנשי העדות הם בלה בלה בלה...</p>
+
+      <div>
+        <select class="form-control" id="survivor_needed" 
+                ng-model="host.survivor_needed"
+                 ng-options="o.v as o.n for o in [{ n: 'צריך', v: true }, { n: 'לא צריך', v: false }]">
+        </select>
+      </div>
+    </div>  
+
+    <div class="form-group">
+      <label>האם אתה מתכנן ערב פתוח או פרטי?</label>
+      <p>אל דאגהת תמיד אפשר לשנות...</p>
+
+      <div>
+        <select class="form-control" id="strangers" 
+                ng-model="host.strangers"
+                ng-options="o.v as o.n for o in [{ n: 'פתוח', v: true }, { n: 'פרטי', v: false }]">
+        </select>
+      </div>
+    </div>  
+
+    <div class="form-group" ng-show="host.strangers">
+      <label for="max_guests" class="control-label">מס מקומות מקסימאלי</label>
+      <input type="number" class="form-control" id="max_guests" ng-model="host.max_guests">
+    </div>
+
+    <div class="form-group">
+      <label for="free_text" class="control-label">עוד משהו שאנחנו צריכים לדעת?</label>
+      <textarea class="form-control" id="free_text" ng-model="host.free_text"></textarea>
+    </div>
+
+
+
+
+
+    <button class="btn btn-info" ng-click="back()">חזרה</button>
+    <button class="btn btn-warning"  ng-click="submitStepThree()">סיים</button>
+  </form>
 </div>

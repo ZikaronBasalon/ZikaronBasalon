@@ -18,6 +18,9 @@ he:
       want_to_guest: "רוצה להתארח"
       staff: "צוות"
       host_dashboard: "אזור מארחים"
+      signin: "התחבר"
+      signout: "התנתק"
+      signup: "הרשמה"
   pages:
     home:
       title: "רשימת מארחים זכרון בסלון 2015"
