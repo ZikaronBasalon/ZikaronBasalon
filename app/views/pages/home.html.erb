@@ -7,16 +7,17 @@
 	 	<p>
 	 		<%= t '.explenation1' %>
 	 	</p>
-	 	<br>			
+<!-- 	 	<br>			
 	 	<p>
-	 		 <%= t '.explenation21' %><%= link_to t('.explenation_link'), new_host_path %>. <%= t '.explenation22' %>
+	 		 <%#= t '.explenation21' %><%#= link_to t('.explenation_link'), new_host_path %>. <%#= t '.explenation22' %>
 	 	</p>
 	 	<br>
 	 	<p>
-	 		<%= t '.explenation3' %>	 
-		</p>
+ 		<%#= t '.explenation3' %>	 
+		</p> -->
 </div>
 
+<% if false %>
 	 <%= select_tag :city_select, options_from_collection_for_select(City.order(:name).all, :id, :name), prompt: t('.select_city') %>
 
 	<div id="main_content">
@@ -47,13 +48,8 @@
 			</table>
 			<%= paginate @hosts %>
 		</div>
-
-		<div id="no_salon">
-			<div class="label"><%= t '.no_salon1' %></div>
-			<div class="content"><%= t '.no_salon2' %></div>
-			<%= link_to t('.no_salon_link'), new_host_path %>
-		</div>
 	</div>
+<% end %>
 
 
 

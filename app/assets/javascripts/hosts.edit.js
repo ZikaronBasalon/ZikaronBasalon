@@ -74,7 +74,7 @@ app.controller('HostEditController', ['$scope','$http', function($scope, $http) 
 					free_text: $scope.host.free_text
 				}
 	  	}).then(function success(response) {
-	  		alert('finished!');
+	  		window.location = '/hosts/success';
 	  	})
   	}
   }

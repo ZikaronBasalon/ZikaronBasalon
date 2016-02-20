@@ -47,6 +47,7 @@ footer {
 }
 
 #main-container {
+	width: 100%;
 	@include flexbox((flex-grow: 2));
 }
 
