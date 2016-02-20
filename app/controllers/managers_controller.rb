@@ -6,7 +6,7 @@ class ManagersController < ApplicationController
   respond_to :html, :json
 
   def index
-    @managers = Manager.includes(:cities, :user).all
+    @managers = Manager.includes(:cities, :user).all 
     respond_with(@managers)
   end
 
@@ -43,5 +43,14 @@ class ManagersController < ApplicationController
   private
     def set_manager
       @manager = Manager.find(params[:id])
+    end
+
+    def correct_manager
+      meta = current_user.meta
+      id = params[:id].to_i
+
+      return if current_user.admin?
+      
+      redirect_to root_path if (meta.is_a?(Manager) && meta.id != id) || !meta.is_a?(Manager)
     end
 end

@@ -1,5 +1,5 @@
 <div class="col-xs-12" ng-controller="ManagerShowController"
-     ng-init="init(<%= @manager.hosts.to_json(:include => :user) %>)">
+     ng-init="init(<%= @manager.hosts.to_json(:include => [:user, :witness]) %>,<%= @manager.witnesses.to_json(:include => :city) %>)">
 
    <form class="form-inline" ng-submit="createManager()">
     <div class="form-group">
@@ -42,10 +42,57 @@
         <td>{{ host.address }}</td>
         <td>{{ formatDate(host.created_at) }}</td>
         <td>{{ formatBool(host.survivor_needed) }}</td>
-        <td>{{  }}</td>
+        <td>
+        <span ng-if="host.witness">
+            {{ host.witness.full_name }}
+          </span>
+
+          <a ng-if="!host.witness" ng-click="openWitnessPopup($event, host)">
+            צוות איש עדות
+          </a>
+        </td>
         <td>{{ formatBool(host.strangers) }}</td>
       </tr>
     </tbody>
   </table>
-
 </div>
+
+
+<script type="text/ng-template" id="witness-popup.html">
+  <div class="modal-header">
+    <h3 class="modal-title">בחר איש עדות</h3>
+  </div>
+  <div class="modal-body">
+      <table class="table host-table">
+        <thead>
+          <tr>
+            <th>שם</th>
+            <th>עיר</th>
+            <th>שפה</th>
+            <th>יכול מדרגות</th>
+            <th>צריך סמינר</th>
+            <th>אוכלוסיה מיוחדת</th>
+
+          </tr> 
+        </thead>
+        <tbody>
+          <tr ng-repeat="witness in witnesses" ng-click="selectWitness(witness)">
+            <td>{{ witness.full_name }}</td>
+            <td>{{ witness.city.name }}</td>
+            <td>{{ witness.language }}</td>
+            <td>{{ formatBool(witness.stairs) }}</td>
+            <td>{{ formatBool(witness.seminar_required) }}</td>
+            <td>{{ formatBool(witness.special_population) }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>
+        צוות את: {{ selected.witness.full_name }}
+      </p>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-primary" type="button" ng-click="ok()">אישור</button>
+      <button class="btn btn-warning" type="button" ng-click="cancel()">ביטול</button>
+  </div>
+</script>

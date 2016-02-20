@@ -71,4 +71,15 @@ class HostsController < ApplicationController
     RequestMailer.delay.send_request(@host.id,@guest.id, @invite.id)
     RequestMailer.delay.request_was_sent(@host.id,@guest.id)
   end
+
+  # Checks if user has access to view page
+  def correct_host
+    meta = current_user.meta
+    id = params[:id].to_i
+
+    return if current_user.admin?
+    
+    redirect_to root_path if meta.is_a?(Host) && meta.id != id 
+    redirect_to root_path if meta.is_a?(Manager) && !meta.hosts.pluck(:id).include?(id)
+  end
 end

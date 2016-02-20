@@ -3,26 +3,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :set_locale
 
-  # Checks if user has access to view page
-  def correct_host
-    meta = current_user.meta
-    id = params[:id].to_i
-
-    return if current_user.admin?
-    
-    redirect_to root_path if meta.is_a?(Host) && meta.id != id 
-    redirect_to root_path if meta.is_a?(Manager) && !meta.hosts.pluck(:id).include?(id)
-  end
-
-  def correct_manager
-    meta = current_user.meta
-    id = params[:id].to_i
-
-    return if current_user.admin?
-    
-    redirect_to root_path if (meta.is_a?(Manager) && meta.id != id) || !meta.is_a?(Manager)
-  end
-
   def is_admin
   	redirect_to root_path unless current_user.admin?
   end

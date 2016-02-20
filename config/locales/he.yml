@@ -21,6 +21,9 @@ he:
       signin: "התחבר"
       signout: "התנתק"
       signup: "הרשמה"
+      profile: "פרופיל אישי"
+      home: "זיכרון בסלון"
+      managers: "מובילי קהילות"
   pages:
     home:
       title: "רשימת מארחים זכרון בסלון 2015"

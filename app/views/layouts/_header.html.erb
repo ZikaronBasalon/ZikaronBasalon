@@ -1,33 +1,80 @@
-<div id="header">
-	<div id="logo"><%= link_to image_tag("logo.png"),"http://www.zikaronbasalon.com" %></div>
-	<div class="header_links">
-		<div class="header_link"><%= link_to t('.want_to_host'), signup_path(type: 'host') %></div>
-		<div class="header_link"><%= link_to t('.want_to_guest'), root_path %></div>
+<% if false %>
+	<div id="header">
+		<div id="logo"><%= link_to image_tag("logo.png"),"http://www.zikaronbasalon.com" %></div>
+		<div class="header_links">
+			<div class="header_link"><%= link_to t('.want_to_host'), signup_path(type: 'host') %></div>
+			<div class="header_link"><%= link_to t('.want_to_guest'), root_path %></div>
 
-		<!-- Signin/out links -->
+			<!-- Signin/out links -->
+			<% if user_signed_in? %>
+				<div class="header_link"><%= link_to t('.signout'), destroy_user_session_path, method: :delete %></div>
+			<% else %>
+					<div class="header_link"><%= link_to t('.signin'), user_session_path %></div>
+			<% end %>
+		</div>
+
+		<%= link_to hosts_path do %>
+			<div class="header_box" id="staff"><%= t '.staff' %></div>
+		<% end %>
+
 		<% if user_signed_in? %>
-			<div class="header_link"><%= link_to t('.signout'), destroy_user_session_path, method: :delete %></div>
+			<%= link_to host_path(current_user) do %>
+				<div class="header_box" id="host_dashboard"><%= t '.host_dashboard' %></div>
+			<% end %>
 		<% else %>
-				<div class="header_link"><%= link_to t('.signin'), user_session_path %></div>
+			<%= link_to signin_path do %>
+				<div class="header_box" id="host_dashboard"><%= t '.host_dashboard' %></div>
+			<% end %>
 		<% end %>
+		
+		<div class="header_links locale_links">
+			<%= link_to_unless_current "עברית", locale: "he" %>
+	    <%= link_to_unless_current "English", locale: "en" %>
+		</div>
 	</div>
+<% end %>
 
-	<%= link_to hosts_path do %>
-		<div class="header_box" id="staff"><%= t '.staff' %></div>
-	<% end %>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" 
+      				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" a
+      				ria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to t('.home'), root_path, class: "navbar-brand" %>
+    </div>
 
-	<% if user_signed_in? %>
-		<%= link_to host_path(current_user) do %>
-			<div class="header_box" id="host_dashboard"><%= t '.host_dashboard' %></div>
-		<% end %>
-	<% else %>
-		<%= link_to signin_path do %>
-			<div class="header_box" id="host_dashboard"><%= t '.host_dashboard' %></div>
-		<% end %>
-	<% end %>
-	
-	<div class="header_links locale_links">
-		<%= link_to_unless_current "עברית", locale: "he" %>
-    <%= link_to_unless_current "English", locale: "en" %>
-	</div>
-</div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+      	<% if user_signed_in? %>
+      	 	<!-- Signed in user -->
+      	 	<% if current_user.meta %>
+        		<li><%= link_to t('.profile'), polymorphic_path(current_user.meta) %></li>
+      		<% end %>
+
+        	<% if current_user.admin? %>
+	        	<li><%= link_to t('.managers'), managers_path %></li>
+	        <% end %>
+        <% else %>
+						<li><%= link_to t('.want_to_host'), signup_path(type: 'host') %></li>
+						<li><%= link_to t('.want_to_guest'), root_path %></li>
+				<% end %>
+      </ul>
+
+
+      <ul class="nav navbar-nav navbar-left">
+      	<% if user_signed_in? %>
+					<li><%= link_to t('.signout'), destroy_user_session_path, method: :delete %></li>
+				<% else %>
+						<li><%= link_to t('.signin'), user_session_path %></li>
+				<% end %>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

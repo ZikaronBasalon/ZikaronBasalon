@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160219113234) do
+ActiveRecord::Schema.define(:version => 20160220102301) do
 
   create_table "cities", :force => true do |t|
     t.string   "name"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(:version => 20160219113234) do
     t.string   "event_language"
     t.boolean  "contacted",                       :default => false
     t.string   "phone"
+    t.integer  "witness_id"
   end
 
   create_table "invites", :force => true do |t|
@@ -108,5 +109,23 @@ ActiveRecord::Schema.define(:version => 20160219113234) do
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["meta_id", "meta_type"], :name => "index_users_on_meta_id_and_meta_type"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "witnesses", :force => true do |t|
+    t.string   "full_name"
+    t.string   "address"
+    t.integer  "city_id"
+    t.string   "witness_type"
+    t.string   "language"
+    t.string   "email"
+    t.string   "phone"
+    t.boolean  "stairs"
+    t.text     "special_needs"
+    t.boolean  "seminar_required"
+    t.boolean  "concept"
+    t.text     "free_text"
+    t.boolean  "special_population"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
 
 end

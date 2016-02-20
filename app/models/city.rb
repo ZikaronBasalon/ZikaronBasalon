@@ -5,4 +5,5 @@ class City < ActiveRecord::Base
   has_many :community_leaderships
   has_many :managers, :through => :community_leaderships
   has_many :hosts
+  has_many :witnesses
 end

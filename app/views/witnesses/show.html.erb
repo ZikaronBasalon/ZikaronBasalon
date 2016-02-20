@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Index:</b>
+  <%= @witness.index %>
+</p>
+
+<p>
+  <b>New:</b>
+  <%= @witness.new %>
+</p>
+
+<p>
+  <b>Edit:</b>
+  <%= @witness.edit %>
+</p>
+
+<p>
+  <b>Create:</b>
+  <%= @witness.create %>
+</p>
+
+<p>
+  <b>Update:</b>
+  <%= @witness.update %>
+</p>
+
+
+<%= link_to 'Edit', edit_witness_path(@witness) %> |
+<%= link_to 'Back', witnesses_path %>
