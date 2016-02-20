@@ -18,6 +18,7 @@ gem 'roadie-rails'
 gem 'party_foul'
 gem 'devise', '3.5.6'
 gem 'sass-rails',   '~> 3.2.3'
+gem 'coffee-rails'
 
 
 
