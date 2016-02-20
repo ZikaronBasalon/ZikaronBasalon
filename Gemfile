@@ -18,9 +18,6 @@ gem 'roadie-rails'
 gem 'party_foul'
 gem 'devise', '3.5.6'
 gem 'sass-rails',   '~> 3.2.3'
-gem 'coffee-rails'
-
-
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -33,6 +30,7 @@ group :development do
 end
 
 group :assets do
+	gem 'coffee-rails'
   gem 'uglifier', '>= 1.0.3'
 end
 
