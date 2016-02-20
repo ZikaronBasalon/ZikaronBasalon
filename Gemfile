@@ -28,6 +28,7 @@ group :development do
   gem 'byebug'
   gem 'sqlite3'
   gem 'test-unit'
+  gem 'seed_dump'
 end
 
 group :assets do

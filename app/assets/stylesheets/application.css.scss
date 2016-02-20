@@ -30,6 +30,15 @@ input {
 	}
 }
 
+.host-table {
+	tbody {
+		tr:hover {
+			background-color: white;
+			cursor: pointer;
+		}
+	}
+}
+
 
 body.he {
 	//direction: rtl;

@@ -14,6 +14,12 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   def create_meta
+    manager = Manager.find_by_temp_email(self.email)
+    if manager
+      manager.user = self
+      manager.save
+      return
+    end
   	if self.type == 'host'
       host = Host.new
       host.user = self

@@ -1,5 +1,51 @@
-<p id="notice"><%= notice %></p>
+<div class="col-xs-12" ng-controller="ManagerShowController"
+     ng-init="init(<%= @manager.hosts.to_json(:include => :user) %>)">
 
+   <form class="form-inline" ng-submit="createManager()">
+    <div class="form-group">
+      <input type="text" class="form-control" ng-model="search.query" placeholder="חיפוש חופשי" />
+    </div>
 
-<%= link_to 'Edit', edit_manager_path(@manager) %> |
-<%= link_to 'Back', managers_path %>
+    <div class="form-group">
+      <select class="form-control" ng-model="search.survivor_needed"
+              ng-options="o.v as o.n for o in [{ n: 'צריך', v: true }, { n: 'לא צריך', v: false }]">
+        <option value="">צריך/לא צריך איש עדות</option>
+      </select>
+    </div> 
+
+    <div class="form-group">
+      <select class="form-control" ng-model="search.strangers"
+              ng-options="o.v as o.n for o in [{ n: 'פתוח', v: true }, { n: 'פרטי', v: false }]">
+        <option value="">ערב פתוח/פרטי</option>
+      </select>
+    </div>  
+  </form>
+
+  <table class="table host-table">
+    <thead>
+      <tr>
+        <th>שם</th>
+        <th>מייל</th>
+        <th>טלפון</th>
+        <th>כתובת</th>
+        <th>נרשם בתאריך</th>
+        <th>צריך איש עדות</th>
+        <th>צוות איש עדות</th>
+        <th>ערב פתוח</th>
+      </tr> 
+    </thead>
+    <tbody>
+      <tr ng-repeat="host in filterHosts(hosts)" ng-click="editHost(host)">
+        <td>{{ host.user.full_name }}</td>
+        <td>{{ host.user.email }}</td>
+        <td>{{ host.phone }}</td>
+        <td>{{ host.address }}</td>
+        <td>{{ formatDate(host.created_at) }}</td>
+        <td>{{ formatBool(host.survivor_needed) }}</td>
+        <td>{{  }}</td>
+        <td>{{ formatBool(host.strangers) }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

@@ -4,4 +4,5 @@ class City < ActiveRecord::Base
   belongs_to :region
   has_many :community_leaderships
   has_many :managers, :through => :community_leaderships
+  has_many :hosts
 end

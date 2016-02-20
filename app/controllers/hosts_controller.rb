@@ -1,6 +1,6 @@
 class HostsController < ApplicationController
   before_filter :signed_in_user, only: [:show]
-  before_filter :correct_meta, only: [:edit]
+  before_filter :correct_host, only: [:edit]
   respond_to :html, :json
 
   def index

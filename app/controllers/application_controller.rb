@@ -4,10 +4,23 @@ class ApplicationController < ActionController::Base
   before_filter :set_locale
 
   # Checks if user has access to view page
-  def correct_meta
-  	unless current_user.meta_id === params[:id].to_i || current_user.admin?
-			redirect_to root_path
-  	end
+  def correct_host
+    meta = current_user.meta
+    id = params[:id].to_i
+
+    return if current_user.admin?
+    
+    redirect_to root_path if meta.is_a?(Host) && meta.id != id 
+    redirect_to root_path if meta.is_a?(Manager) && !meta.hosts.pluck(:id).include?(id)
+  end
+
+  def correct_manager
+    meta = current_user.meta
+    id = params[:id].to_i
+
+    return if current_user.admin?
+    
+    redirect_to root_path if (meta.is_a?(Manager) && meta.id != id) || !meta.is_a?(Manager)
   end
 
   def is_admin

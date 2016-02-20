@@ -1,6 +1,7 @@
 class ManagersController < ApplicationController
   before_filter :set_manager, only: [:show, :edit, :update, :destroy]
-  before_filter :is_admin
+  before_filter :is_admin, only: [:index]
+  before_filter :correct_manager, only: [:show]
 
   respond_to :html, :json
 
