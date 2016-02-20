@@ -1,5 +1,6 @@
 class ChangeSurvivorNeededToBoolean < ActiveRecord::Migration
   def up
+  	remove_column :hosts, :survivor_needed
     add_column :hosts, :survivor_needed, :boolean
   end
 
