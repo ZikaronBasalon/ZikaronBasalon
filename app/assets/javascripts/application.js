@@ -14,10 +14,10 @@
 //= require jquery_ujs
 // require jquery.ui.autocomplete
 // require jquery.ui.datepicker
-//= require angular/angular
+// require angular/angular
 // require_tree .
-//= require angular-bootstrap/ui-bootstrap.min.js
-//= require angular-bootstrap/ui-bootstrap-tpls.min.js
+// require angular-bootstrap/ui-bootstrap.min.js
+// require angular-bootstrap/ui-bootstrap-tpls.min.js
 //= require module
 
 $(function() {
