@@ -4,8 +4,7 @@ app.directive('compareTo', function () {
     scope: {
       otherModelValue: '=compareTo'
     },
-    link: (scope, element, attributes, ngModel) => {
-      console.log(scope.otherModelValue);
+    link: function(scope, element, attributes, ngModel) {
       ngModel.$validators.compareTo = function(modelValue) {
         return modelValue == scope.otherModelValue;
       };
