@@ -16,12 +16,15 @@
  */
 
 @import url(http://fonts.googleapis.com/css?family=Alef:400,700);
+@import "compass/css3/flexbox";
 
 
 html,body {
 	height: 100%;
 	//min-height: 100% !important;
 	font-family: 'Alef', sans-serif;
+	@include display-flex;
+  @include flex-direction(column);
 }
 
 input {
@@ -37,6 +40,14 @@ input {
 			cursor: pointer;
 		}
 	}
+}
+
+footer {
+	@include display-flex;
+}
+
+#main-container {
+	@include flexbox((flex-grow: 2));
 }
 
 

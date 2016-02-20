@@ -52,35 +52,37 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', function
   $scope.filterHosts = function(hosts) {
     return _.filter(hosts, function(host) {
 
-      if(activeFilter($scope.search.survivor_needed)) {
-        return $scope.search.survivor_needed === host.survivor_needed;
+      if(activeFilter($scope.search.survivor_needed) &&
+         $scope.search.survivor_needed !== host.survivor_needed) {
+        return false;
       }
 
-      if(activeFilter($scope.search.strangers)) {
-        return $scope.search.strangers === host.strangers;
+      if(activeFilter($scope.search.has_survivor)) {
+        if($scope.search.has_survivor && !host.witness.id) {
+          return false;
+        }
+
+        if(!$scope.search.has_survivor && host.witness.id) {
+          return false;
+        }
       }
 
-      if (!$scope.search.query) { return true }
-
-
-      
-      if (_.includes(host.user.email, $scope.search.query)) {
-        return true;
+      if(activeFilter($scope.search.strangers) &&
+         $scope.search.strangers !== host.strangers ) {
+        return false;
       }
 
-      if (_.includes(host.user.full_name, $scope.search.query)) {
-        return true;
+      if ($scope.search.query) { 
+        if (!_.includes(host.user.email, $scope.search.query) &&
+            !_.includes(host.user.full_name, $scope.search.query) &&
+            !_.includes(host.address, $scope.search.query) &&
+            !_.includes(host.phone, $scope.search.query)
+        ) {
+          return false;
+        }
       }
 
-      if (_.includes(host.address, $scope.search.query)) {
-        return true;
-      }
-
-      if (_.includes(host.phone, $scope.search.query)) {
-        return true;
-      }
-
-      return false;
+      return true;
     });
   }
 

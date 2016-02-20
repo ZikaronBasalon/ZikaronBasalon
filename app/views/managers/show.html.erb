@@ -14,6 +14,13 @@
     </div> 
 
     <div class="form-group">
+      <select class="form-control" ng-model="search.has_survivor"
+              ng-options="o.v as o.n for o in [{ n: 'צוות', v: true }, { n: 'לא צוות', v: false }]">
+        <option value="">צוות/לא צוות איש עדות</option>
+      </select>
+    </div>  
+
+    <div class="form-group">
       <select class="form-control" ng-model="search.strangers"
               ng-options="o.v as o.n for o in [{ n: 'פתוח', v: true }, { n: 'פרטי', v: false }]">
         <option value="">ערב פתוח/פרטי</option>
