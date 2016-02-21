@@ -15,12 +15,4 @@ module PagesHelper
 			t('shared.send_request')
 		end
 	end
-
-	def host_conditions_hash
-		h = { }
-		h[:strangers] = true
-		h[:city_id] = params[:city_id] if !params[:city_id].blank?
-    h[:max_guests] = 1..9999
-    h
-	end
 end

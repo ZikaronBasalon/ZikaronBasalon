@@ -1,9 +1,13 @@
 app.controller('HomePageController', ['$scope','$http', function($scope, $http) {
   $scope.hosts = [];
   $scope.search = {};
+  $scope.currentPage = 1;
 
-  $scope.init = function(hosts) {
+  $scope.init = function(hosts, cities, totalPages, page) {
     $scope.hosts = hosts;
+    $scope.cities = cities;
+    $scope.totalPages = totalPages;
+    $scope.currentPage = page;
   }
 
   $scope.formatBool = function(value) {
@@ -19,6 +23,37 @@ app.controller('HomePageController', ['$scope','$http', function($scope, $http) 
     return day + '.' + month + '.' + year;
   }
 
+  $scope.filter = function() {
+    $scope.getHosts();
+  }
+
+  $scope.paginate = function(n) {
+    $scope.currentPage = n;
+    $scope.getHosts(n);
+  }
+
+  $scope.getHosts = function(page) {
+    $http.get('/pages/home.json', {
+      params: {
+        page: page,
+        city_id: $scope.search.city_id
+      }
+    }).then(function(response) {
+      $scope.cities = response.data.cities;
+      $scope.hosts = response.data.hosts;
+      $scope.totalPages = response.data.total_pages;
+      $scope.currentPage = parseInt(response.data.page);
+    });
+  }
+
+  $scope.range = function(min, max, step) {
+    step = step || 1;
+    var input = [];
+    for (var i = min; i <= max; i += step) {
+        input.push(i);
+    }
+    return input;
+  };
 }]);
 
 
