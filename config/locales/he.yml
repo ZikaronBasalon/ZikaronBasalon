@@ -7,7 +7,7 @@ he:
       first: "ראשון"
       last: "אחרון"
       previous: "קודם"
-      next: "הבר"
+      next: "הבא"
       truncate: "..."
   layouts:
     application:

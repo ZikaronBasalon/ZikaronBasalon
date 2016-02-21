@@ -19,8 +19,7 @@ module PagesHelper
 	def host_conditions_hash
 		h = { }
 		h[:strangers] = true
-		@is_city = !params[:city_id].blank?
-		h[:city_id] = params[:city_id] if @is_city
+		h[:city_id] = params[:city_id] if !params[:city_id].blank?
     h[:max_guests] = 1..9999
     h
 	end

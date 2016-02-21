@@ -3,8 +3,6 @@
   <head>
     <title><%= content_for?(:title) ? yield(:title) : "זכרון בסלון 2015" %></title>
     <%= favicon_link_tag %>
-    <%= stylesheet_link_tag "application" %>
-    <%= stylesheet_link_tag params[:controller] %>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -31,6 +29,8 @@
     <script src="https://cdn.jsdelivr.net/lodash/4.5.0/lodash.min.js"></script>
     <!-- Load Bootstrap RTL theme from RawGit -->
     <link rel="stylesheet" href="//cdn.rawgit.com/morteza/bootstrap-rtl/v3.3.4/dist/css/bootstrap-rtl.min.css">
+    <%= stylesheet_link_tag "application" %>
+    <%= stylesheet_link_tag params[:controller] %>
 
     <%= csrf_meta_tag %>
     <%= yield(:head) %>

@@ -10,6 +10,8 @@ app.controller('HostEditController', ['$scope','$http', function($scope, $http) 
 		isOpen: false,
 	}
 
+	$scope.otherLanguageVisible = false;
+
 	$scope.openDatepicker = function() {
 		$scope.eventDate.isOpen = true;
 	}
@@ -30,13 +32,19 @@ app.controller('HostEditController', ['$scope','$http', function($scope, $http) 
     }
   }
 
+  $scope.languageChanged = function() {
+  	if($scope.host.event_language === "other") {
+  		$scope.otherLanguageVisible = true;
+  		$scope.host.event_language = null;
+  	}
+  }
+
   $scope.submitStepOne = function() {
   	if ($scope.stepOne.$valid) {
   		$http.put('/hosts/' + $scope.host.id + '.json', {
 	  		host: {
 					hosted_before: $scope.host.hosted_before,
 					org_name: $scope.host.org_name,
-					org_role: $scope.host.org_role,
 					phone: $scope.host.phone
 				}
 	  	}).then(function success(response) {
@@ -55,7 +63,8 @@ app.controller('HostEditController', ['$scope','$http', function($scope, $http) 
 					city_name: $scope.host.city_name,
 					floor: $scope.host.floor,
 					elevator: $scope.host.elevator,
-					event_date: $scope.host.event_date
+					event_date: $scope.host.event_date,
+					event_time: $scope.host.event_time
 				}
 	  	}).then(function success(response) {
 	  		$scope.stepIndex += 1; 

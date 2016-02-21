@@ -56,7 +56,6 @@ ActiveRecord::Schema.define(:version => 20160220102301) do
     t.boolean  "hosted_before",                   :default => false
     t.date     "event_date"
     t.string   "event_time"
-    t.integer  "floor"
     t.boolean  "elevator"
     t.string   "org_name"
     t.string   "org_role"
@@ -64,6 +63,7 @@ ActiveRecord::Schema.define(:version => 20160220102301) do
     t.boolean  "contacted",                       :default => false
     t.string   "phone"
     t.integer  "witness_id"
+    t.string   "floor"
   end
 
   create_table "invites", :force => true do |t|

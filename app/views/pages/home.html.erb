@@ -1,20 +1,52 @@
-<div id="mask" class="hidden"></div>
+<div class="col-xs-12" ng-controller="HomePageController"
+     ng-init="init(<%= @hosts.to_json(:include => [:user, :city]) %>)">
 
-<div class="container_inner" id="host_list">
-	 <div class="title"><%= t '.title' %></div>
-	 <br>
-	 <div class="explenation">
-	 	<p>
-	 		<%= t '.explenation1' %>
-	 	</p>
-<!-- 	 	<br>			
-	 	<p>
-	 		 <%#= t '.explenation21' %><%#= link_to t('.explenation_link'), new_host_path %>. <%#= t '.explenation22' %>
-	 	</p>
-	 	<br>
-	 	<p>
- 		<%#= t '.explenation3' %>	 
-		</p> -->
+  <form class="form-inline" ng-submit="createManager()">
+    <div class="form-group">
+      <input type="text" class="form-control" ng-model="search.query" placeholder="חיפוש חופשי" />
+    </div>
+
+    <div class="form-group">
+      <select class="form-control" ng-model="search.survivor_needed"
+              ng-options="o.v as o.n for o in [{ n: 'צריך', v: true }, { n: 'לא צריך', v: false }]">
+        <option value="">צריך/לא צריך איש עדות</option>
+      </select>
+    </div> 
+
+    <div class="form-group">
+      <select class="form-control" ng-model="search.has_survivor"
+              ng-options="o.v as o.n for o in [{ n: 'צוות', v: true }, { n: 'לא צוות', v: false }]">
+        <option value="">צוות/לא צוות איש עדות</option>
+      </select>
+    </div>  
+
+    <div class="form-group">
+      <select class="form-control" ng-model="search.strangers"
+              ng-options="o.v as o.n for o in [{ n: 'פתוח', v: true }, { n: 'פרטי', v: false }]">
+        <option value="">ערב פתוח/פרטי</option>
+      </select>
+    </div>  
+  </form>
+
+  <table class="table host-table">
+    <thead>
+      <tr>
+        <th>שם</th>
+        <th>כתובת</th>
+        <th>תאריך</th>
+        <th>שפה</th>
+      </tr> 
+    </thead>
+    <tbody>
+      <tr ng-repeat="host in hosts">
+        <td>{{ host.user.full_name }}</td>
+        <td>{{ host.address }}</td>
+        <td>{{ formatDate(host.event_date) }}</td>
+        <td>{{ host.language }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <%= paginate @hosts %>
 </div>
 
 <% if false %>
@@ -49,15 +81,16 @@
 			<%= paginate @hosts %>
 		</div>
 	</div>
-<% end %>
-
-
 
 
 	<div id="register" class="hidden">
 		<%= render 'guests/register' %>
 	</div>
-</div>
+
+<% end %>
+
+
+
 
 
 

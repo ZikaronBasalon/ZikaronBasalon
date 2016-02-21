@@ -1,57 +1,64 @@
-<form ng-controller="UserSignupController" action="users" method="post" >
-  <p ng-if="error">מצטערים, משהו השתבש. בבקשה תנסו שוב</p>
-  <div class="form-group">
-    <label for="fullName">שם מלא</label>
-    <input type="text" class="form-control"
-           id="fullName" placeholder="הכנס שם"
-           ng-model="form.fullName"
-           name="user[full_name]"
-           required>
+<div id="signup-container">
+  <div class="text-center title-container">
+    <div class="title">הרשמה למארח זיכרון בסלון</div>
+    <div>לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן קוואזי במר מודוף. אודיפו בלאסטיק מונופץ קליר, בנפת נפקט למסון בלרק - וענוף לפרומי בלוף קינץ תתיח לרעח</div>
   </div>
 
-  <div class="form-group">
-    <label for="fullName">כתובת מייל</label>
-    <input type="email" class="form-control"
-           id="email" placeholder="מייל"
-           ng-model="form.email"
-           name="user[email]"
-           required>
-  </div>
+  <form ng-controller="UserSignupController" action="users" method="post" >
+    <p ng-if="error">מצטערים, משהו השתבש. בבקשה תנסו שוב</p>
+    <div class="form-group">
+      <label for="fullName">שם מלא</label>
+      <input type="text" class="form-control"
+             id="fullName" placeholder="הכנס שם"
+             ng-model="form.fullName"
+             name="user[full_name]"
+             required>
+    </div>
 
-  <div class="form-group" ng-class="">
-    <label for="emailConfirmation">אימות מייל</label>
-    <input type="email" class="form-control"
-           id="emailConfirmation" placeholder="מייל"
-           ng-model="form.emailConfirmation"
-           required
-           compare-to="form.email">
-  </div>
+    <div class="form-group">
+      <label for="fullName">כתובת מייל</label>
+      <input type="email" class="form-control"
+             id="email" placeholder="מייל"
+             ng-model="form.email"
+             name="user[email]"
+             required>
+    </div>
 
-  <div class="form-group">
-    <label for="password">סיסמא</label>
-    <input type="password" class="form-control"
-           id="password" placeholder="סיסמא"
-           ng-model="form.password"
-           name="user[password]"
-           required>
-  </div>
+    <!-- <div class="form-group" ng-class="">
+      <label for="emailConfirmation">אימות מייל</label>
+      <input type="email" class="form-control"
+             id="emailConfirmation" placeholder="מייל"
+             ng-model="form.emailConfirmation"
+             required
+             compare-to="form.email">
+    </div> -->
 
-  <div class="form-group">
-    <label for="passwordConfirmation">אימות סיסמא</label>
-    <input type="password" class="form-control"
-           id="passwordConfirmation" placeholder="סיסמא"
-           ng-model="form.passwordConfirmation"
-           name="user[password_confirmation]"
-           required
-           compare-to="form.password">
-  </div>
+    <div class="form-group">
+      <label for="password">סיסמא</label>
+      <input type="password" class="form-control"
+             id="password" placeholder="סיסמא"
+             ng-model="form.password"
+             name="user[password]"
+             required>
+    </div>
 
-  <input type="hidden" name="user[type]" value="<%= @type %>">
+    <div class="form-group">
+      <label for="passwordConfirmation">אימות סיסמא</label>
+      <input type="password" class="form-control"
+             id="passwordConfirmation" placeholder="סיסמא"
+             ng-model="form.passwordConfirmation"
+             name="user[password_confirmation]"
+             required
+             compare-to="form.password">
+    </div>
 
-  <input type="submit" value="המשך">
+    <input type="hidden" name="user[type]" value="<%= @type %>">
 
-  <p>
-    <span>נרשמת כבר?</span>
-    <a href="#">התחבר למערכת</a>
-  </p>
-</form>
+    <input type="submit" value="המשך">
+
+    <p>
+      <span>נרשמת כבר?</span>
+      <a href="#">התחבר למערכת</a>
+    </p>
+  </form>
+</div>

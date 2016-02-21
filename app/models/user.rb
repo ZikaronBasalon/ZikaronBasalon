@@ -9,7 +9,8 @@ class User < ActiveRecord::Base
   belongs_to :meta, polymorphic: true
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :full_name, :type
+  attr_accessible :email, :password, :password_confirmation, :remember_me,
+                  :full_name, :type, :phone
   attr_accessor :type
   # attr_accessible :title, :body
 

@@ -33,6 +33,21 @@ input {
 	}
 }
 
+.help-block {
+	color: #585858;
+}
+
+.btn-info {
+	background: white;
+	border-color: #eb9316;
+	color: #eb9316;
+	&:hover {
+		background: #eaeaea;
+		border-color: #eb9316;
+		color: #eb9316;
+	}
+}
+
 .host-table {
 	tbody {
 		tr:hover {
@@ -49,6 +64,16 @@ footer {
 #main-container {
 	width: 100%;
 	@include flexbox((flex-grow: 2));
+}
+
+#signup-container {
+	width: 40%;
+	margin: auto;
+	.title-container {
+		p {
+			width: 300px;
+		}
+	}
 }
 
 
@@ -171,7 +196,7 @@ body.he {
 		font-weight: bold;
 		border-bottom: 3px solid #f5dd23;
 		line-height: 26px;
-		display: inline;
+		display: inline-block;
 		margin-bottom: 24px;
 	}
 	.explenation {
