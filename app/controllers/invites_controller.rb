@@ -7,6 +7,9 @@ class InvitesController < ApplicationController
   	RequestMailer.delay.request_was_confirmed(@invite.host.id,@invite.guest.id)
   end
 
+  def create
+  end
+
   def reject
   	@invite = Invite.find(params[:id])
   	@invite.update_attributes(confirmed: nil)

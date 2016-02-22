@@ -46,6 +46,10 @@ app.controller('HomePageController', ['$scope','$http', function($scope, $http) 
     });
   }
 
+  $scope.requestInvite = function(host) {
+    
+  }
+
   $scope.range = function(min, max, step) {
     step = step || 1;
     var input = [];

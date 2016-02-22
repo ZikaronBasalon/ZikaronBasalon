@@ -25,6 +25,7 @@
         <th>כתובת</th>
         <th>תאריך</th>
         <th>שפה</th>
+        <th></th>
       </tr> 
     </thead>
     <tbody>
@@ -34,6 +35,12 @@
         <td>{{ host.address }}</td>
         <td>{{ formatDate(host.event_date) }}</td>
         <td>{{ host.language }}</td>
+        <td>
+          <button class="btn btn-warning"
+                  ng-click="requestInvite(host)">
+            שלח/י בשקה
+          </button>
+      </td>
       </tr>
     </tbody>
   </table>
