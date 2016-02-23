@@ -93,7 +93,8 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', function
 
 
 
-app.controller('WitnessModalController', function ($scope, $uibModalInstance, witnesses) {
+app.controller('WitnessModalController', ['$scope', '$uibModalInstance', 'witnesses',
+  function ($scope, $uibModalInstance, witnesses) {
 
   $scope.witnesses = witnesses;
   $scope.selected = {
@@ -115,4 +116,4 @@ app.controller('WitnessModalController', function ($scope, $uibModalInstance, wi
   $scope.cancel = function () {
     $uibModalInstance.dismiss('cancel');
   };
-});
+}]);
