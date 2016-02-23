@@ -14,7 +14,6 @@ ZikaronBasalon::Application.routes.draw do
     resources :users, only: [:new]
     resources :managers
     resources :witnesses
-    match 'sessions/signin',  :to => 'sessions#new', as: :signin
     match 'signup', :to => 'users#new', as: :signup
     match 'hosts/success', :to => 'hosts#success', as: :host_success
     resources :invites do
