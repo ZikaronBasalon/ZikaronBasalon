@@ -1,10 +1,8 @@
+@import "compass/css3/flexbox";
+
 #host-edit-form {
 	padding-bottom: 20px;
 	
-	label {
-		color: #a3a3a3;
-	}
-
 	.radio {
 		label {
 			color: initial;
@@ -13,6 +11,10 @@
 
 	input,select,textarea {
 		max-width: 230px;
+
+		&.error {
+			border-color: red;
+		}
 	}
 
 	button {
@@ -24,6 +26,28 @@
 			text-align: right;
 			color: initial;
 		}
+	}
+}
+
+.host-signup-finished {
+	margin-top: 30px;
+	img {
+		margin-bottom: 20px;
+	}
+
+	p {
+		font-size: 20px;
+		margin-bottom: 30px;
+	}
+
+	.buttons-container {
+		@include flexbox((
+	    display: flex,
+	    flex-direction: row,
+	    justify-content: space-around
+	  ));
+	  padding-left: 80px;
+	  padding-right: 80px;
 	}
 }
 

@@ -33,6 +33,10 @@ input {
 	}
 }
 
+label {
+	color: #a3a3a3;
+}
+
 .help-block {
 	color: #585858;
 }
@@ -67,12 +71,10 @@ footer {
 }
 
 #signup-container {
-	width: 40%;
+	width: 30%;
 	margin: auto;
 	.title-container {
-		p {
-			width: 300px;
-		}
+		margin-bottom: 20px;
 	}
 }
 

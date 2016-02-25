@@ -1,7 +1,7 @@
 <div id="signup-container">
   <div class="text-center title-container">
-    <div class="title">הרשמה למארח זיכרון בסלון</div>
-    <div>לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן קוואזי במר מודוף. אודיפו בלאסטיק מונופץ קליר, בנפת נפקט למסון בלרק - וענוף לפרומי בלוף קינץ תתיח לרעח</div>
+    <div class="title"><%= t '.title' %></div>
+    <div class="text-justify"><%= t '.description' %></div>
   </div>
   <form ng-controller="UserSignupController" 
         action="users" method="post"
@@ -9,45 +9,45 @@
         name="signupForm" >
     <p ng-if="error">מצטערים, משהו השתבש. בבקשה תנסו שוב</p>
     <div class="form-group">
-      <label for="fullName">שם מלא</label>
+      <label for="fullName"><%= t '.labels.full_name' %></label>
       <input type="text" class="form-control"
-             id="fullName" placeholder="הכנס שם"
+             id="fullName" placeholder="<%= t '.placeholders.full_name' %>"
              ng-model="form.fullName"
              name="user[full_name]"
              required>
     </div>
 
     <div class="form-group">
-      <label for="fullName">כתובת מייל</label>
+      <label for="fullName"><%= t '.labels.email' %></label>
       <input type="email" class="form-control"
-             id="email" placeholder="מייל"
+             id="email" placeholder="<%= t '.placeholders.email' %>"
              ng-model="form.email"
              name="user[email]"
              required>
     </div>
 
     <div class="form-group" ng-class="">
-      <label for="emailConfirmation">אימות מייל</label>
+      <label for="emailConfirmation"><%= t '.labels.email_confirmation' %></label>
       <input type="email" class="form-control"
-             id="emailConfirmation" placeholder="מייל"
+             id="emailConfirmation" placeholder="<%= t '.placeholders.email_confirmation' %>"
              ng-model="form.emailConfirmation"
              required
              compare-to="form.email">
     </div>
 
     <div class="form-group">
-      <label for="password">סיסמא</label>
+      <label for="password"><%= t '.labels.password' %></label>
       <input type="password" class="form-control"
-             id="password" placeholder="סיסמא"
+             id="password" placeholder="<%= t '.placeholders.password' %>"
              ng-model="form.password"
              name="user[password]"
              required>
     </div>
 
     <div class="form-group">
-      <label for="passwordConfirmation">אימות סיסמא</label>
+      <label for="passwordConfirmation"><%= t '.labels.password_confirmation' %></label>
       <input type="password" class="form-control"
-             id="passwordConfirmation" placeholder="סיסמא"
+             id="passwordConfirmation" placeholder="<%= t '.placeholders.password_confirmation' %>"
              ng-model="form.passwordConfirmation"
              name="user[password_confirmation]"
              required
@@ -56,11 +56,11 @@
 
     <input type="hidden" name="user[type]" value="<%= @type %>">
 
-    <input type="submit" class="btn btn-warning form-control" value="המשך">
+    <input type="submit" class="btn btn-warning form-control" value="<%= t 'shared.continue' %>">
 
     <p>
-      <span>נרשמת כבר?</span>
-      <a href="/users/sign_in">התחבר למערכת</a>
+      <span><%= t '.already_a_member' %></span>
+      <a href="/users/sign_in"><%= t '.sign_in_to_system' %></a>
     </p>
   </form>
 </div>

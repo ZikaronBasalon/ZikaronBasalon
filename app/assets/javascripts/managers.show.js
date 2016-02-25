@@ -2,9 +2,16 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', function
   $scope.hosts = [];
   $scope.search = {};
 
-  $scope.init = function(hosts, witnesses) {
-    $scope.hosts = hosts;
+  $scope.init = function(hosts, witnesses, cities) {
+    $scope.hosts = _.map(hosts, function(host) {
+      host.has_survivor = !!host.witness;
+      return host;
+    });
     $scope.witnesses = witnesses;
+    $scope.cities = _.map(
+      _.uniqBy($scope.hosts, function(host) { return host.city.name }),
+      function(host) { return host.city }
+    );
   }
 
   $scope.formatBool = function(value) {
@@ -53,22 +60,22 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', function
     return _.filter(hosts, function(host) {
 
       if(activeFilter($scope.search.survivor_needed) &&
-         $scope.search.survivor_needed !== host.survivor_needed) {
+          $scope.search.survivor_needed !== host.survivor_needed) {
         return false;
       }
 
-      if(activeFilter($scope.search.has_survivor)) {
-        if($scope.search.has_survivor && !host.witness.id) {
-          return false;
-        }
-
-        if(!$scope.search.has_survivor && host.witness.id) {
-          return false;
-        }
+      if(activeFilter($scope.search.has_survivor) &&
+          $scope.search.has_survivor !== host.has_survivor) {
+        return false;
       }
 
       if(activeFilter($scope.search.strangers) &&
-         $scope.search.strangers !== host.strangers ) {
+          $scope.search.strangers !== host.strangers) {
+        return false;
+      }
+
+      if(activeFilter($scope.search.city_id) &&
+         $scope.search.city_id !== host.city.id) {
         return false;
       }
 
@@ -86,9 +93,14 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', function
     });
   }
 
+  $scope.isAccesible = function(host) {
+    return host.floor === 0 || host.elevator;
+  }
+
   function activeFilter(filter) {
     return !_.isUndefined(filter) && !_.isNull(filter);
   }
+
 }]);
 
 

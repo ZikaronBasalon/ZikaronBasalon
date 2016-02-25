@@ -1,9 +1,11 @@
-app.controller('HostEditController', ['$scope','$http', function($scope, $http) {
+//= require directives/datePicker
+app.controller('HostEditController', ['$scope','$http','$uibModal', function($scope, $http, $uibModal) {
 	$scope.host = {
 		hosted_before: false
 	};
 
 	$scope.steps = ['stepOne', 'stepTwo', 'stepThree'];
+	$scope.submitted = [false, false, false];
 	$scope.stepIndex = 0;
 	$scope.dateFormat = 'dd-MMMM-yyyy';
 	$scope.eventDate = {
@@ -20,7 +22,7 @@ app.controller('HostEditController', ['$scope','$http', function($scope, $http) 
 	google.maps.event.addListener($scope.autocomplete, 'place_changed', getAddress);
 
 	$scope.init = function(host) {
-		$scope.host = JSON.parse(host);
+		$scope.host = host;
 		$scope.organization = !!$scope.host.org_name;
 		$scope.host.event_date = new Date($scope.host.event_date);
 
@@ -40,6 +42,7 @@ app.controller('HostEditController', ['$scope','$http', function($scope, $http) 
   }
 
   $scope.submitStepOne = function() {
+  	$scope.submitted[0] = true;
   	if ($scope.stepOne.$valid) {
   		$http.put('/hosts/' + $scope.host.id + '.json', {
 	  		host: {
@@ -54,6 +57,7 @@ app.controller('HostEditController', ['$scope','$http', function($scope, $http) 
   }
 
   $scope.submitStepTwo = function() {
+  	$scope.submitted[1] = true;
   	if ($scope.stepTwo.$valid) {
   		$http.put('/hosts/' + $scope.host.id + '.json', {
 	  		host: {
@@ -73,6 +77,7 @@ app.controller('HostEditController', ['$scope','$http', function($scope, $http) 
   }
 
   $scope.submitStepThree = function() {
+  	$scope.submitted[2] = true;
   	if ($scope.stepThree.$valid) {
   		$http.put('/hosts/' + $scope.host.id + '.json', {
 	  		host: {
@@ -83,7 +88,11 @@ app.controller('HostEditController', ['$scope','$http', function($scope, $http) 
 					free_text: $scope.host.free_text
 				}
 	  	}).then(function success(response) {
-	  		window.location = '/hosts/success';
+	  		var modalInstance = $uibModal.open({
+		      templateUrl: 'host-signup-finished.html',
+		      controller: 'HostSignupFinishedModal',
+		      backdrop: false
+		    });
 	  	})
   	}
   }
@@ -98,17 +107,24 @@ app.controller('HostEditController', ['$scope','$http', function($scope, $http) 
   function getAddress() {
   	try {
 			$scope.result = $scope.autocomplete.getPlace();
-			if($scope.result && $scope.result.geometry && $scope.result.geometry.location) {
+			$scope.stepTwo.address.$setValidity('route', true);
+			if($scope.result && 
+				 $scope.result.geometry && 
+				 $scope.result.geometry.location) {
 				handleSuccessfullGeocoding($scope.result);
+				if(!getAddressComponent($scope.result, "route").length) {
+					$scope.stepTwo.address.$setValidity('route', false);
+				}
 			} else {
 				handleUnsuccessfullGeocoding();
 			}
 		} catch(e) {
 			handleSeriouslyUnsuccesfullGeocoding();
 		}
+		$scope.$apply();
   }
 
-	function getLocalityComponent(result){
+	function getAddressComponent(result, component){
 	 // Function recieves a google PlacesResult and an array of address components
 	 //   and returns the content of that address component
 		locality = [];
@@ -116,8 +132,8 @@ app.controller('HostEditController', ['$scope','$http', function($scope, $http) 
 		for(var i in address_components){
 			type = address_components[i].types;
 			for(var j in type){
-				index = $.inArray(type[j],["locality"]);
-				if(type[j] == "locality") {
+				index = $.inArray(type[j],[component]);
+				if(type[j] == component) {
 					locality = address_components[i].long_name;
 				}
 			}
@@ -126,7 +142,7 @@ app.controller('HostEditController', ['$scope','$http', function($scope, $http) 
 	}
 
 	function handleSuccessfullGeocoding(result) {
-		var locality = getLocalityComponent(result);
+		var locality = getAddressComponent(result, "locality");
 		$scope.host.address = result.formatted_address;
 		$scope.host.city_name = locality;
 		$scope.host.lat = result.geometry.location.lat();
@@ -157,4 +173,19 @@ app.controller('HostEditController', ['$scope','$http', function($scope, $http) 
 		$scope.host.lng = 0;
 	}
 
+}]);
+
+
+
+app.controller('HostSignupFinishedModal', ['$scope', '$uibModalInstance',
+  function ($scope, $uibModalInstance, witnesses) {
+
+
+  $scope.ok = function () {
+
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
 }]);
