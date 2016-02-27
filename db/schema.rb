@@ -42,28 +42,28 @@ ActiveRecord::Schema.define(:version => 20160220102301) do
     t.integer  "city_id"
     t.integer  "max_guests"
     t.text     "free_text"
-    t.datetime "created_at",                                         :null => false
-    t.datetime "updated_at",                                         :null => false
-    t.boolean  "strangers",                       :default => true
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.boolean  "strangers",        :default => true
     t.text     "status"
-    t.boolean  "survivor_needed",  :limit => 255
     t.string   "contact"
     t.text     "survivor_details"
     t.float    "lat"
     t.float    "lng"
     t.datetime "date"
-    t.boolean  "evening_public",                  :default => true
-    t.boolean  "hosted_before",                   :default => false
+    t.boolean  "evening_public",   :default => true
+    t.boolean  "hosted_before",    :default => false
     t.date     "event_date"
     t.string   "event_time"
+    t.integer  "floor"
     t.boolean  "elevator"
     t.string   "org_name"
     t.string   "org_role"
     t.string   "event_language"
-    t.boolean  "contacted",                       :default => false
+    t.boolean  "contacted",        :default => false
     t.string   "phone"
+    t.boolean  "survivor_needed"
     t.integer  "witness_id"
-    t.string   "floor"
   end
 
   create_table "invites", :force => true do |t|

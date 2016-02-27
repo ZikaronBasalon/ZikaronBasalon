@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   after_create :create_meta
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable
+         :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :meta, polymorphic: true
 

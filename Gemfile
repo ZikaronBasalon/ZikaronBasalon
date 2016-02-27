@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.14'
+gem 'pg'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -23,7 +24,6 @@ gem 'devise', '3.5.6'
 
 group :development do
   gem 'byebug'
-  gem 'sqlite3'
   gem 'test-unit'
   gem 'seed_dump'
 end
@@ -42,7 +42,6 @@ gem 'bower-rails'
 gem 'therubyracer'
 
 group :production do
-  gem 'pg', '0.12.2'
   gem "rails_12factor"
   gem "rails_stdout_logging"
   gem "rails_serve_static_assets"
