@@ -178,14 +178,19 @@ app.controller('HostEditController', ['$scope','$http','$uibModal', function($sc
 
 
 app.controller('HostSignupFinishedModal', ['$scope', '$uibModalInstance',
-  function ($scope, $uibModalInstance, witnesses) {
+  function ($scope, $uibModalInstance) {
 
 
-  $scope.ok = function () {
+  $scope.fbShare = function () {
+  	FB.ui({
+		  method: 'share',
+		  href: 'http://www.zikaronbasalon.com/'
+		}, function(response){
 
+		});
   };
 
-  $scope.cancel = function () {
-    $uibModalInstance.dismiss('cancel');
+  $scope.buildEvening = function () {
+   window.location = 'http://www.zikaronbasalon.com/';
   };
 }]);

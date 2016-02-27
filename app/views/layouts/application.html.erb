@@ -11,8 +11,8 @@
 
       ga('create', 'UA-49428934-2', 'zikaronbasalon.herokuapp.com');
       ga('send', 'pageview');
-
     </script>
+
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
@@ -42,6 +42,25 @@
     <meta property="og:description" content="בין הקדושה של הטקסים הממלכתיים וההדחקה המוחלטת, זכרון בסלון מציע דרך אחת נוספת ﻿ זכרון בסלון נולד מתוך ההבנה שהזיקה שלנו, הדור השלישי, ליום הזכרון לשואה ולגבורה - הולכת ונחלשת. הפרויקט נועד לייצר דרך נוספת לציין את היום הזה, אשר תאפשר חיבור שונ">
   </head>
   <body class="<%= I18n.locale %>">
+    
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '192610131086928',
+          xfbml      : true,
+          version    : 'v2.5'
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
+
     <%= render "layouts/header" %>
     <div id="main-container" class="container-fluid">
       <%= yield %>

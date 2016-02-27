@@ -52,6 +52,27 @@ label {
 	}
 }
 
+.zb-btn {
+	width: 176px;
+	height: 43px;
+	border-radius: 5px;
+	font-size: 18px;
+
+	&.btn-blue {
+		background-color: #428bca;
+		border: solid 1px #357ebd;
+		color: #ffffff;
+	}
+
+	&.btn-white {
+		background-color: #ffffff;
+		border: solid 2px #4a90e2;
+		color: #428bca;
+	}	
+
+}
+
+
 .host-table {
 	tbody {
 		tr:hover {

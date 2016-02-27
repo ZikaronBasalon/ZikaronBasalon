@@ -74,12 +74,13 @@ class HostsController < ApplicationController
 
   # Checks if user has access to view page
   def correct_host
-    meta = current_user.meta
+    meta = current_user.try(:meta)
     id = params[:id].to_i
 
-    return if current_user.admin?
+    return if current_user && current_user.admin?
+
     
-    redirect_to root_path if meta.is_a?(Host) && meta.id != id 
+    redirect_to root_path if meta.nil? || (meta.is_a?(Host) && meta.id != id)
     redirect_to root_path if meta.is_a?(Manager) && !meta.hosts.pluck(:id).include?(id)
   end
 end
