@@ -98,10 +98,13 @@
     </div>
 
 
-    <div class="form-group">
+    <div class="form-group"
+         ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.floor.$invalid]">
       <label for="floor"><%= t '.floor' %></label>
         <select class="form-control" id="floor" 
                 ng-model="host.floor"
+                name="floor"
+                required
                 ng-options="o.v as o.n for o in [
                   { n: '<%= t '.ground_floor' %>', v: 0 }, { n: '1', v: 1 },
                   { n: '2', v: 2 }, { n: '3', v: 3 },
@@ -113,10 +116,13 @@
         </select>
     </div>
 
-    <div class="form-group ">
+    <div class="form-group"
+         ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.elevator.$invalid]">
       <label for="elevator"><%= t '.elevator' %></label>
         <select class="form-control" id="elevator" 
                 ng-model="host.elevator"
+                name="elevator"
+                required
                 ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.yes' %>', v: true }, { n: '<%= t 'shared.no' %>', v: false }]">
           <option ng-show="!host.elevator" value=""><%= t 'shared.select' %></option>
         </select>
@@ -142,10 +148,13 @@
   </form>
 
   <form name="stepThree" ng-show="'stepThree' === steps[stepIndex]" >
-    <div class="form-group">
+    <div class="form-group"
+         ng-class="{true: 'has-error'}[submitted[stepIndex] && stepThree.event_language.$invalid]">
       <label for="event_language"><%= t '.event_language' %></label>
       <div ng-show="!otherLanguageVisible">
         <select class="form-control" id="event_language" 
+                name="event_language"
+                required
                 ng-model="host.event_language" ng-change="languageChanged()">
           <option ng-show="!host.language" value=""><%= t 'shared.select' %></option>
           <option value="hebrew">עברית</option>
@@ -161,25 +170,31 @@
              ng-show="otherLanguageVisible" />
     </div>
 
-    <div class="form-group">
+    <div class="form-group"
+         ng-class="{true: 'has-error'}[submitted[stepIndex] && stepThree.survivor_needed.$invalid]">
       <label><%= t '.survivor_needed' %></label>
       <p class="help-block"><%= t '.survivor_needed_help_block' %></p>
 
       <div>
         <select class="form-control" id="survivor_needed" 
                 ng-model="host.survivor_needed"
-                 ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.yes' %>', v: true }, { n: '<%= t 'shared.no' %>', v: false }]">
+                name="survivor_needed"
+                required
+                ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.yes' %>', v: true }, { n: '<%= t 'shared.no' %>', v: false }]">
          <option ng-show="!host.survivor_needed" value=""><%= t 'shared.select' %></option>
         </select>
       </div>
     </div>  
 
-    <div class="form-group">
+    <div class="form-group"
+         ng-class="{true: 'has-error'}[submitted[stepIndex] && stepThree.strangers.$invalid]">
       <label><%= t '.strangers' %></label>
       <p class="help-block"><%= t '.strangers_help_block' %></p>
 
       <div>
         <select class="form-control" id="strangers" 
+                name="strangers"
+                required
                 ng-model="host.strangers"
                 ng-options="o.v as o.n for o in [{ n: '<%= t '.strangers_yes' %>', v: true }, { n: '<%= t '.strangers_no' %>', v: false }]">
           <option ng-show="!host.strangers" value=""><%= t 'shared.select' %></option>
@@ -187,20 +202,19 @@
       </div>
     </div>  
 
-    <div class="form-group" ng-show="host.strangers">
+    <div class="form-group" ng-if="host.strangers"
+         ng-class="{true: 'has-error'}[submitted[stepIndex] && stepThree.max_guests.$invalid]">
       <label for="max_guests" ><%= t '.max_guests' %></label>
       <p class="help-block"><%= t '.max_guests_help_block' %></p>
-      <input type="number" class="form-control" id="max_guests" ng-model="host.max_guests">
+      <input type="number" class="form-control" 
+             required name="max_guests"
+             id="max_guests" ng-model="host.max_guests">
     </div>
 
     <div class="form-group">
       <label for="free_text"><%= t '.free_text' %></label>
       <textarea id="free_text" class="form-control" ng-model="host.free_text"></textarea>
     </div>
-
-
-
-
 
     <button class="btn btn-info" ng-click="back()"><%= t 'shared.back' %></button>
     <button class="btn btn-warning"  ng-click="submitStepThree()"><%= t '.finish' %></button>
