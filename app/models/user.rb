@@ -12,7 +12,18 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me,
                   :full_name, :type, :phone
   attr_accessor :type
-  # attr_accessible :title, :body
+  
+  def first_name
+    if full_name
+      return full_name.split(' ')[0]
+    end
+  end
+
+  def last_name
+    if full_name
+      return full_name.split(' ')[1]
+    end
+  end
 
   def create_meta
     manager = Manager.find_by_temp_email(self.email)
@@ -25,6 +36,7 @@ class User < ActiveRecord::Base
       host = Host.new
       host.user = self
       host.save
+      ZbMailer.registration(self.id)
     end
   end
 end
