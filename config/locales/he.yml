@@ -27,6 +27,14 @@ he:
       already_a_member: "נרשמת כבר?"
       sign_in_to_system: "התחבר למערכת"
 
+  devise:
+    sessions:
+      new:
+        title: "התחברות לזכרון בסלון"
+        labels:
+          email: "כתובת דואר אלקטרוני"
+          password: "סיסמא"
+
 
   shared:
     'yes': "כן"
