@@ -3,17 +3,20 @@
     <div class="title"><%= t '.title' %></div>
     <div class="text-justify"><%= t '.description' %></div>
   </div>
-  <form ng-controller="UserSignupController" 
+
+  <form ng-controller="UserSignupController"
+        ng-init="init('<%= @type %>')" 
         action="users" method="post"
-        ng-submit="validate($event)"
+        ng-submit="submit($event)"
         name="signupForm" >
-    <p ng-if="error">מצטערים, משהו השתבש. בבקשה תנסו שוב</p>
+    <ul class="errors">
+      <li ng-repeat="error in errors">{{ error }}</li>
+    </ul>
     <div class="form-group">
       <label for="fullName"><%= t '.labels.full_name' %></label>
       <input type="text" class="form-control"
              id="fullName" placeholder="<%= t '.placeholders.full_name' %>"
              ng-model="form.fullName"
-             name="user[full_name]"
              required>
     </div>
 
@@ -22,7 +25,6 @@
       <input type="email" class="form-control"
              id="email" placeholder="<%= t '.placeholders.email' %>"
              ng-model="form.email"
-             name="user[email]"
              required>
     </div>
 
@@ -40,7 +42,6 @@
       <input type="password" class="form-control"
              id="password" placeholder="<%= t '.placeholders.password' %>"
              ng-model="form.password"
-             name="user[password]"
              required>
     </div>
 
@@ -49,12 +50,9 @@
       <input type="password" class="form-control"
              id="passwordConfirmation" placeholder="<%= t '.placeholders.password_confirmation' %>"
              ng-model="form.passwordConfirmation"
-             name="user[password_confirmation]"
              required
              compare-to="form.password">
     </div>
-
-    <input type="hidden" name="user[type]" value="<%= @type %>">
 
     <input type="submit" class="btn btn-warning form-control" value="<%= t 'shared.continue' %>">
 

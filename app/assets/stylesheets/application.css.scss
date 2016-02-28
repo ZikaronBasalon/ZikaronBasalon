@@ -33,6 +33,15 @@ input {
 	}
 }
 
+ul {
+	list-style: none;
+	padding: 0;
+
+	&.errors {
+		color: red;
+	}
+}
+
 label {
 	color: #a3a3a3;
 }

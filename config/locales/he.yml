@@ -1,4 +1,12 @@
 he:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken: "כתובת הדואר האלקטרוני שהזנת תפוסה"
+
   users:
     new:
       title: "הרשמת ערב של זיכרון בסלון"

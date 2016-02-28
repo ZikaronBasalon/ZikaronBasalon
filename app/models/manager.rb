@@ -4,8 +4,9 @@ class Manager < ActiveRecord::Base
   has_many :hosts, :through => :cities
   has_many :witnesses, :through => :cities
   has_one :user, as: :meta, dependent: :destroy
+  accepts_nested_attributes_for :user
 
- 	attr_accessible :temp_email
+ 	attr_accessible :temp_email, :user_attributes
  	attr_accessor :city_name
 
  	 validates_uniqueness_of :temp_email
