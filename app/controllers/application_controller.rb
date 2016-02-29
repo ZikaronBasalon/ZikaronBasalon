@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
 	include SessionsHelper
   protect_from_forgery
   before_filter :set_locale
+  respond_to :json, :html
 
   def is_admin
   	redirect_to root_path unless current_user.admin?

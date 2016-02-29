@@ -1,9 +1,12 @@
-<div id="signup-container">
+<div id="signup-container" ng-controller="UserSigninController">
   <div class="text-center title-container">
     <div class="title"><%= t '.title' %></div>
   </div>
 
-  <form action="sign_in" method="post">	
+  <form ng-submit="submit($event)" name="signinForm">
+  	<p class="has-error" ng-show="error">
+  		<%= t '.signin_error' %>
+  	</p>	
     <div class="form-group">
       <label for="fullName"><%= t '.labels.email' %></label>
       <input type="email" class="form-control"

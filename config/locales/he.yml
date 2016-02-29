@@ -34,6 +34,7 @@ he:
         labels:
           email: "כתובת דואר אלקטרוני"
           password: "סיסמא"
+        signin_error: "כתובת דואר אלקטרוני או סיסמא לא נכונים"
 
 
   shared:
