@@ -1,6 +1,11 @@
+//= require lib/utils
+
 app.controller('ManagerShowController', ['$scope','$uibModal', '$http', function($scope, $uibModal, $http) {
   $scope.hosts = [];
   $scope.search = {};
+  $scope.formatBool = formatBool;
+  $scope.formatDate = formatDate;
+  $scope.formatDateTime = formatDateTime;
 
   $scope.init = function(hosts, witnesses, cities) {
     $scope.hosts = _.map(hosts, function(host) {
@@ -12,19 +17,6 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', function
       _.uniqBy($scope.hosts, function(host) { return host.city.name }),
       function(host) { return host.city }
     );
-  }
-
-  $scope.formatBool = function(value) {
-    return value ? 'כן' : 'לא';
-  }
-
-  $scope.formatDate = function(date) {
-    var date = new Date(date);
-    var day = date.getDate();
-    var month= date.getMonth() + 1;
-    var year = date.getFullYear();
-
-    return day + '.' + month + '.' + year;
   }
 
   $scope.editHost = function(host) {

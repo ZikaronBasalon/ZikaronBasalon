@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160220102301) do
+ActiveRecord::Schema.define(:version => 20160301130327) do
 
   create_table "cities", :force => true do |t|
     t.string   "name"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20160220102301) do
     t.string   "phone"
     t.boolean  "survivor_needed"
     t.integer  "witness_id"
+    t.text     "public_text"
   end
 
   create_table "invites", :force => true do |t|

@@ -41,12 +41,12 @@
   <table class="table host-table">
     <thead>
       <tr>
-        <th>נרשם בתאריך</th>
         <th>שם</th>
+        <th>זמן הרשמה</th>
         <th>עיר</th>
-        <th>רחוב</th>
-        <th>תאריך הערב</th>
-        <th>נגישות</th>
+        <th>תאריך האירוע</th>
+        <th>סלון ראשון</th>
+        <th>סטטוס יצירת קשר</th>
         <th>צריך איש עדות</th>
         <th>צוות איש עדות</th>
         <th>ערב פתוח</th>
@@ -54,12 +54,12 @@
     </thead>
     <tbody>
       <tr ng-repeat="host in filterHosts(hosts)" ng-click="editHost(host)">
-        <td>{{ formatDate(host.created_at) }}</td>
         <td>{{ host.user.full_name }}</td>
+        <td>{{ formatDateTime(host.created_at) }}</td>
         <td>{{ host.city.name }}</td>
-        <td>{{ host.address }}</td>
         <td>{{ formatDate(host.event_date) }}</td>
-        <td>{{ formatBool(isAccesible(host))}}</td>
+        <td>{{ formatBool(!host.hosted_before) }}</td>
+        <td>???</td>
         <td>{{ formatBool(host.survivor_needed) }}</td>
         <td>
         <span ng-if="host.witness">

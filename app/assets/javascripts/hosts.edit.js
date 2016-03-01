@@ -25,6 +25,7 @@ app.controller('HostEditController', ['$scope','$http','$uibModal', function($sc
 		$scope.host = host;
 		$scope.organization = !!$scope.host.org_name;
 		$scope.host.event_date = new Date($scope.host.event_date);
+		$scope.host.event_time = $scope.host.event_time ? new Date($scope.host.event_time): null;
 
 	}
 
@@ -85,6 +86,7 @@ app.controller('HostEditController', ['$scope','$http','$uibModal', function($sc
 					survivor_needed: $scope.host.survivor_needed,
 					strangers: $scope.host.strangers,
 					max_guests: $scope.host.max_guests,
+					public_text: $scope.host.public_text,
 					free_text: $scope.host.free_text
 				}
 	  	}).then(function success(response) {
@@ -108,13 +110,12 @@ app.controller('HostEditController', ['$scope','$http','$uibModal', function($sc
   	try {
 			$scope.result = $scope.autocomplete.getPlace();
 			$scope.stepTwo.address.$setValidity('route', true);
+			$scope.stepTwo.address.$setValidity('street_number', true);
 			if($scope.result && 
 				 $scope.result.geometry && 
 				 $scope.result.geometry.location) {
 				handleSuccessfullGeocoding($scope.result);
-				if(!getAddressComponent($scope.result, "route").length) {
-					$scope.stepTwo.address.$setValidity('route', false);
-				}
+				validateAddress();
 			} else {
 				handleUnsuccessfullGeocoding();
 			}
@@ -171,6 +172,16 @@ app.controller('HostEditController', ['$scope','$http','$uibModal', function($sc
 		$scope.host.city_name = 'לא ידוע';
 		$scope.host.lat = 0;
 		$scope.host.lng = 0;
+	}
+
+	function validateAddress() {
+		if(!getAddressComponent($scope.result, "route").length) {
+			$scope.stepTwo.address.$setValidity('route', false);
+		}
+
+		if(!getAddressComponent($scope.result, "street_number").length) {
+			$scope.stepTwo.address.$setValidity('street_number', false);
+		}
 	}
 
 }]);

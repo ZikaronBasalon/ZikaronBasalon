@@ -2,13 +2,14 @@ class RegistrationsController < Devise::RegistrationsController
 	respond_to :html, :json
 
 	def create
-    type = user_attributes[:type]
-    if type === 'host'
-      @resource = Host.new({ user_attributes: user_attributes })
-    else
-      @resource = Manager.find_by_temp_email(user_attributes[:email])
-      if @resource
-        resource.user_attributes = user_attributes
+    @resource = Manager.find_by_temp_email(user_attributes[:email])
+
+    if @resource 
+      @resource.user_attributes = user_attributes
+    else 
+      type = user_attributes[:type]
+      if type === 'host'
+        @resource = Host.new({ user_attributes: user_attributes })
       end
     end
 

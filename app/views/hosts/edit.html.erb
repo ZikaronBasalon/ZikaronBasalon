@@ -82,7 +82,8 @@
   </form>
 
   <form name="stepTwo" ng-show="'stepTwo' === steps[stepIndex]" >
-    <div class="form-group" ng-class="{true: 'has-error'}[(submitted[stepIndex] && stepTwo.address.$invalid) || stepTwo.address.$error.route]">
+    <div class="form-group" 
+         ng-class="{true: 'has-error'}[(submitted[stepIndex] && stepTwo.address.$invalid) || stepTwo.address.$error.route || stepTwo.address.$error.street_number]">
       <label for="address"><%= t '.address' %></label>
       <input type="text" class="form-control"
              name="address"
@@ -91,6 +92,7 @@
              ng-model="host.address"
              required>
       <p class="help-block" ng-show="stepTwo.address.$error.route"><%= t '.address_route_error' %></p>
+      <p class="help-block" ng-show="stepTwo.address.$error.street_number"><%= t '.address_street_number_error' %></p>
 
       <input type="hidden" ng-model="host.lat" />
       <input type="hidden" ng-model="host.lng" />
@@ -139,8 +141,7 @@
 
     <div class="form-group">
       <label><%= t '.event_time' %></label>
-      <!-- <p class="help-block">><%#= t '.event_time_help_block' %></p> -->
-      <input type="text" ng-model="host.event_time" class="form-control" />
+      <input type="time" ng-model="host.event_time" class="form-control" name="event_time"/>
     </div>  
 
     <button class="btn btn-info" ng-click="back()"><%= t 'shared.back' %></button>
@@ -161,6 +162,7 @@
           <option value="english">English</option>
           <option value="arabic">العربية</option>
           <option value="french">Français</option>
+          <option value="russian">русский</option>
           <option value="other"><%= t 'shared.other' %></option>
         </select>
       </div>
@@ -200,6 +202,13 @@
           <option ng-show="!host.strangers" value=""><%= t 'shared.select' %></option>
         </select>
       </div>
+    </div>
+
+    <div class="form-group" ng-if="host.strangers">
+      <label for="public_text" ><%= t '.public_text' %></label>
+      <input type="text" class="form-control" 
+             name="public_text"
+             id="public_text" ng-model="host.public_text">
     </div>  
 
     <div class="form-group" ng-if="host.strangers"
