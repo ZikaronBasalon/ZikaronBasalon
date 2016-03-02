@@ -50,6 +50,8 @@
 }
 
 #host-show {
+	padding-bottom: 20px;
+	
 	.panel-heading, .panel-body {
 		@include flexbox((
 	    display: flex,
@@ -66,6 +68,25 @@
 		font-size: 18px;
 		color: #4a4a4a;
 		font-weight: 300;
+	}
+
+	.field-group {
+		@include flexbox((
+	    display: flex,
+	    flex-basis: 0,
+	    flex-grow: 1,
+	    flex-direction: column,
+	    align-self: flex-start
+	  ));
+
+	  .radio {
+	  	display: inline-block;
+	  	margin: 0px 5px;
+	  }
+	}
+
+	.alert {
+		margin-top: 10px;	
 	}
 }
 

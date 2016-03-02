@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160301130327) do
+ActiveRecord::Schema.define(:version => 20160302173736) do
 
   create_table "cities", :force => true do |t|
     t.string   "name"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(:version => 20160301130327) do
     t.boolean  "survivor_needed"
     t.integer  "witness_id"
     t.text     "public_text"
+    t.string   "concept"
   end
 
   create_table "invites", :force => true do |t|
@@ -125,8 +126,12 @@ ActiveRecord::Schema.define(:version => 20160301130327) do
     t.boolean  "concept"
     t.text     "free_text"
     t.boolean  "special_population"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+    t.boolean  "contacted",             :default => false
+    t.boolean  "contacted_by_host",     :default => false
+    t.boolean  "available_for_teaming", :default => true
+    t.integer  "host_id"
   end
 
 end

@@ -1,6 +1,5 @@
 class HostsController < ApplicationController
-  #before_filter :signed_in_user, only: [:show]
-  before_filter :correct_host, only: [:edit]
+  before_filter :correct_host, only: [:edit, :show]
   respond_to :html, :json
 
   def index
@@ -11,29 +10,8 @@ class HostsController < ApplicationController
     @host = Host.new
   end
 
-  # def create
-  #   @host = Host.new(params[:host])
-  #   city = City.find_or_create_by_name(params[:host][:city_name])
-  #   @host.city = city
-  #   if @host.save
-  #     manager_email = @host.try(:city).try(:manager_email) || "nissimmi@gmail.com"
-  #     HostMailer.delay.manager_notification(manager_email,@host.id)
-  #     if @host.email
-  #       #HostMailer.delay.new_host(@host.id)
-  #       HostMailer.delay.day_before(@host.id)
-  #     end
-  #     redirect_to success_host_path(@host), :notice => "Successfully created host."
-
-  #   else
-  #     render :action => 'new'
-  #   end
-  # end
-
   def show
     @host = Host.find(params[:id])
-    @confirmed_invites = Invite.where(host_id: @host.id, confirmed: true)
-    @pending_invites = Invite.where(host_id: @host.id, confirmed: false)
-    @rejected_invites = Invite.where(host_id: @host.id).where("confirmed IS NULL")
   end
 
   def destroy

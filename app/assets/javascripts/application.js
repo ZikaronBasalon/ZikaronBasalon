@@ -20,6 +20,7 @@
 // require angular-bootstrap/ui-bootstrap-tpls.min.js
 //= require module
 
+
 $(function() {
 	$("form").on("keypress", function (e) {
 	    if (e.keyCode == 13) {

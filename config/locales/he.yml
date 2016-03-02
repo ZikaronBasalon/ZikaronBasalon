@@ -50,6 +50,12 @@ he:
     other: "אחר"
     send_request: "שלח בקשה"
     request_sent: "בקשתך נשלחה"
+    save: "שמירה"
+    return: "חזור"
+    concept:
+      religious_and_secular: "חרדים וחילונים"
+      vetrans: "וטרנים"
+      eastern: "בשיח המזרחי"
   views:
     pagination:
       first: "ראשון"
@@ -130,6 +136,7 @@ he:
       title: "פרופיל מארח"
       personal_details: "פרטים אישיים"
       evening_details: "פרטים על הערב"
+      manager_actions: "פעולות מוביל קהילה"
       labels:
         registration_time: "זמן הרשמה"
         name: "שם"
@@ -145,5 +152,12 @@ he:
         public_text: "הערות למתארחים"
         free_text: "הערות לצוות"
         edit: "עריכה"
+        contacted: "נוצר קשר ראשוני"
+        survivor_needed: "צריך עד"
+        has_survivor: "צוות עד"
+        survivor_contacted: "מארח אישר הגעת עד"
+        concept: "קונספט"
+      host_updated: "פרטי המארח עודכנו בהצלחה"
+
 
 
