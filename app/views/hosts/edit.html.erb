@@ -26,7 +26,7 @@
                  ng-value="false"
                  ng-model="host.hosted_before"
                  checked>
-          <%= t 'shared.no' %>
+          <%= t '.hosted_before_no' %>
         </label>
       </div>
       <div class="radio">
@@ -36,7 +36,7 @@
                  id="hostedBeforeTrue"
                  ng-value="true"
                  ng-model="host.hosted_before">
-          <%= t 'shared.yes' %>
+          <%= t 'hosted_before_yes' %>
         </label>
       </div>
     </div>
@@ -78,7 +78,7 @@
       </div>
     </div>
 
-    <button ng-click="submitStepOne()" class="btn btn-warning"><%= t 'shared.continue' %></button>
+    <button ng-click="submitStepOne()" class="btn btn-warning"><%= t 'shared.next' %></button>
   </form>
 
   <form name="stepTwo" ng-show="'stepTwo' === steps[stepIndex]" >
@@ -141,11 +141,13 @@
 
     <div class="form-group">
       <label><%= t '.event_time' %></label>
+      <p class="help-block"><%= t '.event_time_help_block' %></p>
+
       <input type="time" ng-model="host.event_time" class="form-control" name="event_time"/>
     </div>  
 
     <button class="btn btn-info" ng-click="back()"><%= t 'shared.back' %></button>
-    <button class="btn btn-warning" ng-click="submitStepTwo()"><%= t 'shared.continue' %></button>
+    <button class="btn btn-warning" ng-click="submitStepTwo()"><%= t 'shared.next' %></button>
   </form>
 
   <form name="stepThree" ng-show="'stepThree' === steps[stepIndex]" >
@@ -235,8 +237,8 @@
       <img src="/assets/couch.png" />
       <p><%= t '.thanks_for_joining' %></p>
       <div class="buttons-container">
-        <button class="zb-btn btn-blue" ng-click="fbShare()">שתף</button>
-        <button class="zb-btn btn-white" ng-click="buildEvening()">בניית ערב</button>
+        <button class="zb-btn btn-blue" ng-click="fbShare()"><%= t '.facebook_share' %></button>
+        <button class="zb-btn btn-white" ng-click="buildEvening()"><%= t '.build_evening' %></button>
       </div>
   </div>
 </script>

@@ -49,3 +49,23 @@
 	}
 }
 
+#host-show {
+	.panel-heading, .panel-body {
+		@include flexbox((
+	    display: flex,
+	    justify-content: space-between,
+	    align-items: center
+	  ));
+	}
+
+	.info-title {
+  	font-size: 28px;
+  }
+
+	.info-label {
+		font-size: 18px;
+		color: #4a4a4a;
+		font-weight: 300;
+	}
+}
+
