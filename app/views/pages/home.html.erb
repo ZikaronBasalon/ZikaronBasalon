@@ -1,95 +1,69 @@
-<div class="col-xs-12" ng-controller="HomePageController"
-     ng-init="init(<%= @hosts.to_json(:include => [:user, :city]) %>,
-              <%= @cities.to_json %>, <%= @total_pages %>,
-              <%= @page %>)">
 
-  <form class="form-inline" ng-submit="createManager()">
-    <div class="form-group">
-      <input type="text" class="form-control" ng-model="search.query" placeholder="חיפוש חופשי" />
-    </div>
-
-    <div class="form-group">
-      <select class="form-control" ng-model="search.city_id"
-              ng-options="o.id as o.name for o in cities"
-              ng-change="filter()">
-        <option value="">יישוב</option>
-      </select>
-    </div> 
-  </form>
-
-  <table class="table host-table">
-    <thead>
-      <tr>
-        <th>שם</th>
-        <th>יישוב</th>
-        <th>כתובת</th>
-        <th>תאריך</th>
-        <th>שפה</th>
-        <th></th>
-      </tr> 
-    </thead>
-    <tbody>
-      <tr ng-repeat="host in hosts">
-        <td>{{ host.user.full_name }}</td>
-        <td>{{ host.city.name }}</td>
-        <td>{{ host.address }}</td>
-        <td>{{ formatDate(host.event_date) }}</td>
-        <td>{{ host.language }}</td>
-        <td>
-          <button class="btn btn-warning"
-                  ng-click="requestInvite(host)">
-            שלח/י בשקה
-          </button>
-      </td>
-      </tr>
-    </tbody>
-  </table>
-  
-  <ul class="pagination reversed">
-    <li ng-repeat="n in range(1,totalPages + 1)"
-        ng-class="{ 'active': n === currentPage }">
-      <a ng-click="paginate(n)">{{ n }}</a>
-    </li>
-  </ul>
+<div class="col-xs-12">
+  <div class="title">ברוגים הבאים לזיכרון בסלון</div>
+  <p>
+    בנתיים אנחנו פתוחים רק להרשמת מארחים. תחזרו בקרוב לעדכונים!
+  </p>
 </div>
 
+
 <% if false %>
-	 <%= select_tag :city_select, options_from_collection_for_select(City.order(:name).all, :id, :name), prompt: t('.select_city') %>
 
-	<div id="main_content">
-		<div id="hosts_table">
-			<table class="hosts_table">
-				<thead>
-					<th class="right">
-						מארח
-						<div class="line"></div>
-					</th>
-					<th>
-						כתובת
-						<div class="line"></div>
-					</th>
-					<th >
-						עיר
-						<div class="line"></div>
-					</th>
-					<th >
-						תאריך הערב
-						<div class="line"></div>
-					</th>
-					<th></th>
-				</thead>
-				<tbody id="hosts">
-					<%= render 'hosts/hosts' %>
-				</tbody>
-			</table>
-			<%= paginate @hosts %>
-		</div>
-	</div>
+  <div class="col-xs-12" ng-controller="HomePageController"
+       ng-init="init(<%= @hosts.to_json(:include => [:user, :city]) %>,
+                <%= @cities.to_json %>, <%= @total_pages %>,
+                <%= @page %>)">
 
+    <form class="form-inline">
+      <div class="form-group">
+        <input type="text" class="form-control" ng-model="search.query" placeholder="חיפוש חופשי" />
+      </div>
 
-	<div id="register" class="hidden">
-		<%= render 'guests/register' %>
-	</div>
+      <div class="form-group">
+        <select class="form-control" ng-model="search.city_id"
+                ng-options="o.id as o.name for o in cities"
+                ng-change="filter()">
+          <option value="">יישוב</option>
+        </select>
+      </div> 
+    </form>
+
+    <table class="table host-table">
+      <thead>
+        <tr>
+          <th>שם</th>
+          <th>יישוב</th>
+          <th>כתובת</th>
+          <th>תאריך</th>
+          <th>שפה</th>
+          <th></th>
+        </tr> 
+      </thead>
+      <tbody>
+        <tr ng-repeat="host in hosts">
+          <td>{{ host.user.full_name }}</td>
+          <td>{{ host.city.name }}</td>
+          <td>{{ host.address }}</td>
+          <td>{{ formatDate(host.event_date) }}</td>
+          <td>{{ host.language }}</td>
+          <td>
+            <button class="btn btn-warning"
+                    ng-click="requestInvite(host)">
+              שלח/י בשקה
+            </button>
+        </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <ul class="pagination reversed">
+      <li ng-repeat="n in range(1,totalPages + 1)"
+          ng-class="{ 'active': n === currentPage }">
+        <a ng-click="paginate(n)">{{ n }}</a>
+      </li>
+    </ul>
+
+  </div>
 
 <% end %>
 

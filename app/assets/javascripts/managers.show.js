@@ -20,7 +20,7 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', function
   }
 
   $scope.editHost = function(host) {
-    window.open('/hosts/' + host.id + '/edit', '_blank');
+    window.open('/hosts/' + host.id, '_blank');
   }
 
   $scope.openWitnessPopup = function($event, host) {
