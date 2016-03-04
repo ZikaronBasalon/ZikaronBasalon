@@ -1,56 +1,42 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" 
-      				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" a
-      				ria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <%= link_to t('.home'), root_path, class: "navbar-brand" %>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-      	
-        <!-- Signed in user -->
-        <% if user_signed_in? %>
-          <!-- User profile -->
-      	 	<% if current_user.meta %>
-        		<li><%= link_to t('.profile'), polymorphic_path(current_user.meta) %></li>
-      		<% end %>
-          <!-- Admin -->
-        	<% if current_user.admin? %>
-	        	<li><%= link_to t('.managers'), managers_path %></li>
-	        <% end %>
-        
-        <!-- Not signed in user -->
-        <% else %>
-						<li><%= link_to t('.want_to_host'), signup_path(type: 'host') %></li>
-				<% end %>
-
-      </ul>
+<header>
+	<div class="right-side">
+		<!-- Home link -->
+		<%= link_to t('.home'), root_path, class: "home" %>
 
 
-      <ul class="nav navbar-nav navbar-left">
-      	<% if user_signed_in? %>
-					<li class="button-link">
-						<%= link_to destroy_user_session_path, method: :delete  do %>
-							<button class="btn btn-warning"><%= t('.signout') %></button>
-						<% end %>
-					</li>
-				<% else %>
-					<li class="button-link">
-						<%= link_to user_session_path do %>
-							<button class="btn btn-warning"><%= t('.signin') %></button>
-						<% end %>
-					</li>
-				<% end %>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+
+		<!-- Signed in user -->
+		<% if user_signed_in? %>
+			<!-- User profile -->
+			<%= link_to(t('.profile'), polymorphic_path(current_user.meta), class: 'header-link') if current_user.meta %>
+
+			<!-- Admin -->
+			<%= link_to(t('.managers'), managers_path, class: 'header-link') if current_user.admin? %>
+		<!-- Non signed in user -->
+		<% else %>
+			<%= link_to signup_path(type: 'host') do %>
+				<div class="header-btn white"><%= t('.want_to_host') %></div>
+			<% end %>
+
+			<%= link_to root_path do %>
+				<div class="header-btn orange"><%= t('.want_to_guest') %></div>
+			<% end %>
+		<% end %>
+		<!-- End Non signed in user -->
+	</div>
+
+	<div class="left-side">
+		<div class="header-brand">זיכרון בסלון</div>
+		<div class="language-btn small-header-btn">En</div>
+		<div class="facebook-btn small-header-btn">f</div>
+		
+		<!-- Signin/Signout -->
+		<% if user_signed_in? %>
+			<%= link_to t('.signout'), destroy_user_session_path, method: :delete, class: 'header-link' %>
+		<% else %>
+			<%= link_to t('.signup_staff'), signup_path, class: 'header-link' %>
+			<%= link_to t('.signin'), user_session_path, class: 'header-link' %>
+		<% end %>
+	</div>
+	
+</header>

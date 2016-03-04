@@ -1,3 +1,4 @@
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -91,11 +92,20 @@ label {
 }
 
 .navbar.navbar-default {
-	background: #222222;
+	background: #fff;
 
-	a {
-		color: #fff !important;
+	.navbar-brand {
+		color: #000000;
 	}
+
+	li>a {
+		color: #000000;
+	}
+	
+
+	// a {
+	// 	color: #fff !important;
+	// }
 
 	li.button-link {
 		a {
@@ -106,10 +116,114 @@ label {
 			padding: 4px 12px;
 		}
 	}
+
+	li.header-btn {
+		padding: 5px 29px;
+		font-size: 18px;
+		
+		&.white {
+			border: solid 1px #000000;
+			
+			color: #000000;
+		}
+
+		&.orange {
+			background-color: #f5a623;
+			color: #fff;
+		}
+	}
 }
 
 footer {
 	@include display-flex;
+}
+
+header {
+	color: #000000;
+	height: 52px;
+	font-size: 18px;
+	background-color: #fff;
+	padding-left: 29px;
+	padding-right: 29px;
+
+	@include flexbox((
+		display: flex,
+		align-items: center,
+		justify-content: space-between
+	));
+
+	a {
+		color: #000000 !important;
+		&:hover {
+			text-decoration: none;
+		}
+	}
+
+	.right-side, .left-side {
+		@include flexbox((
+			display: flex,
+			align-items: center
+		));
+	}
+
+	.home {
+		font-size: 19px;
+	}
+
+	.header-btn {
+		width: 129px;
+		height: 33px;
+		margin-right: 19px;
+		@include flexbox((
+			display: flex,
+			justify-content: center,
+			align-items: center
+		));
+
+		&.white {
+			border: solid 1px #000000;
+		}
+
+		&.orange {
+			background-color: #f5a623;
+			border: solid 1px #f5a623;
+			color: #fff;
+		}
+	}
+
+	.header-brand {
+		font-size: 24px;
+	}
+
+	.small-header-btn {
+		width: 33px;
+		height: 32px;
+		margin-right: 8px;
+		font-size: 17.5px;
+		@include flexbox((
+			display: flex,
+			align-items: center,
+			justify-content: center
+		));
+		cursor: pointer;
+	}
+
+	.language-btn {
+		background-color: #f5a623; 
+		color: #ffffff;
+	}
+
+	.facebook-btn {
+		background-color: #000000;
+		color: #fff;
+	}
+
+	.header-link {
+		font-size: 16px;
+		margin-right: 8px;
+	}
+
+
 }
 
 #main-container {

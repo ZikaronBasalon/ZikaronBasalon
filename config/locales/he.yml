@@ -100,12 +100,13 @@ he:
       want_to_guest: "רוצה להתארח"
       staff: "צוות"
       host_dashboard: "אזור מארחים"
-      signin: "התחבר"
-      signout: "התנתק"
+      signin: "התחבר/י"
+      signout: "התנתק/י"
       signup: "הרשמה"
       profile: "פרופיל אישי"
       home: "דף הבית"
-      managers: "מובילי קהילות"
+      managers: "ניהול מובילי קהילות"
+      signup_staff: "הרשמת צוות"
   pages:
     home:
       title: "רשימת מארחים זכרון בסלון 2015"
