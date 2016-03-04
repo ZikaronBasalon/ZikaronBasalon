@@ -22,8 +22,8 @@ class ManagersController < ApplicationController
   def edit
   end
 
+  # Creates a temp Manager and assigns him with a City
   def create
-    #@manager = Manager.new(params[:manager])
     @manager = Manager.find_or_create_by_temp_email(params[:manager][:temp_email])
     city = City.find_or_create_by_name(params[:manager][:city_name])
     CommunityLeadership.find_or_create_by_manager_id_and_city_id(manager_id: @manager.id, city_id: city.id)

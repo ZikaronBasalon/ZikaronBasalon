@@ -83,6 +83,11 @@ class WitnessesController < ApplicationController
     end
   end
 
+  # GET /witnesses/1/assign
+  def assign
+    @witness = Witness.find(params[:id])
+  end
+
   def is_authorized
     unless (current_user && current_user.meta.is_a?(Manager)) || 
            (current_user && current_user.admin?)
