@@ -169,18 +169,42 @@
       <table class="table witness-table">
         <thead>
           <tr>
-            <th><%= t 'shared.name' %></th>
-            <th><%= t 'shared.city' %></th>
-            <th><%= t 'shared.type' %></th>
-            <th><%= t 'shared.date' %></th>
-            <th><%= t 'shared.walk_up_stairs' %></th>
-            <th><%= t 'shared.seminar_required' %></th>
-            <th><%= t 'shared.concept_label' %></th>
-            <th><%= t 'shared.special_population' %></th>
+            <th ng-click="setSortProp('full_name')">
+              <%= t 'shared.name' %>
+              <span class="caret" ng-if="sortProp === 'full_name'"></span>
+            </th>
+            <th ng-click="setSortProp('city.name')">
+              <%= t 'shared.city' %>
+              <span class="caret" ng-if="sortProp === 'city.name'"></span>
+            </th>
+            <th ng-click="setSortProp('witness_type')">
+              <%= t 'shared.type' %>
+              <span class="caret" ng-if="sortProp === 'witness_type'"></span>
+            </th>
+            <th ng-click="setSortProp('')">
+              <%= t 'shared.date' %>
+              <span class="caret" ng-if="sortProp === ''"></span>
+            </th>
+            <th ng-click="setSortProp('stairs')">
+              <%= t 'shared.walk_up_stairs' %>
+              <span class="caret" ng-if="sortProp === 'stairs'"></span>
+            </th>
+            <th ng-click="setSortProp('seminar_required')">
+              <%= t 'shared.seminar_required' %>
+              <span class="caret" ng-if="sortProp === 'seminar_required'"></span>
+            </th>
+            <th ng-click="setSortProp('concept')">
+              <%= t 'shared.concept_label' %>
+              <span class="caret" ng-if="sortProp === 'concept'"></span>
+            </th>
+            <th ng-click="setSortProp('special_population')">
+              <%= t 'shared.special_population' %>
+              <span class="caret" ng-if="sortProp === 'special_population'"></span>
+            </th>
           </tr> 
         </thead>
         <tbody>
-          <tr ng-repeat="witness in filterWitnesses(witnesses)"
+          <tr ng-repeat="witness in sort(filterWitnesses(witnesses))"
               ng-click="editWitness(witness)">
             <td>{{ witness.full_name }}</td>
             <td>{{ witness.city.name }}</td>
