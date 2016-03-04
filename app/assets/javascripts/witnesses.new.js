@@ -1,5 +1,6 @@
 app.controller('WitnessNewController', ['$scope','$http', function($scope, $http) {
 	$scope.witness = {};
+	$scope.otherLanguageVisible = false;
 
 	$scope.typeOptions = [
 		{ n: 'ניצול', v: 'survivor' }, 
@@ -19,6 +20,13 @@ app.controller('WitnessNewController', ['$scope','$http', function($scope, $http
 			window.location = '/witnesses';
 		});
 	}
+
+	$scope.languageChanged = function() {
+  	if($scope.witness.language === "other") {
+  		$scope.otherLanguageVisible = true;
+  		$scope.witness.language = null;
+  	}
+  }
 
   function getAddress() {
 		result = $scope.autocomplete.getPlace();

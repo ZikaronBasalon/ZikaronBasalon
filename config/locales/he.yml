@@ -52,10 +52,38 @@ he:
     request_sent: "בקשתך נשלחה"
     save: "שמירה"
     return: "חזור"
+    submit: "שלח"
     concept:
       religious_and_secular: "חרדים וחילונים"
       vetrans: "וטרנים"
       eastern: "בשיח המזרחי"
+    filter_by: "סנן לפי"
+    city: "עיר"
+    survivor_needed: "צריך איש עדות"
+    type: "סוג"
+    walk_up_stairs: "עליה במדרגות"
+    can: "יכול"
+    cant: "לא יכול"
+    seminar_required: "ערב הכנה"
+    search: "חיפוש"
+    name: "שם"
+    date: "תאריך"
+    special_population: "אוכלוסיות מיוחדות"
+    concept_label: "קונספט"
+    interested: "מעוניין"
+    not_interested: "לא מעוניין"
+    registration_time: "זמן הרשמה"
+    evening_date: "תאריך האירוע"
+    hosted_before: "סלון ראשון"
+    host_contacted: "סטטוס יצירת קשר"
+    has_survivor: "צוות איש עדות"
+    strangers_allowed: "סלון פתוח"
+    needs: "צריך"
+    doesnt_need: "לא צריך"
+    teamed: "צוות"
+    not_teamed: "לא צוות"
+
+
   views:
     pagination:
       first: "ראשון"
@@ -76,7 +104,7 @@ he:
       signout: "התנתק"
       signup: "הרשמה"
       profile: "פרופיל אישי"
-      home: "זיכרון בסלון"
+      home: "דף הבית"
       managers: "מובילי קהילות"
   pages:
     home:
@@ -159,5 +187,24 @@ he:
         concept: "קונספט"
       host_updated: "פרטי המארח עודכנו בהצלחה"
 
+  managers:
+    show:
+      hosts_view: "מארחים"
+      witnesses_view: "אנשי עדות"
+      add_witness: "הוסף איש עדות"
+
+  witnesses:
+    types:
+      survivor: "ניצול"
+      academia: "אקדמיה"
+      second_generation: "דור שני"
+      therapist: "מטפל"
+    new:
+      title: "הוסף איש עדות"
+      walk_up_stairs: "יכול לעלות מדרגות"
+      special_needs: "צרכי נגישות מיוחדים"
+      seminar_required: "צריך סמינר"
+      free_text: "עוד משהו שאנחנו צריכים לדעת"
+      special_population: "אוכלוסיה מיוחדת"
 
 

@@ -16,26 +16,39 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-      	<% if user_signed_in? %>
-      	 	<!-- Signed in user -->
+      	
+        <!-- Signed in user -->
+        <% if user_signed_in? %>
+          <!-- User profile -->
       	 	<% if current_user.meta %>
         		<li><%= link_to t('.profile'), polymorphic_path(current_user.meta) %></li>
       		<% end %>
-
+          <!-- Admin -->
         	<% if current_user.admin? %>
 	        	<li><%= link_to t('.managers'), managers_path %></li>
 	        <% end %>
+        
+        <!-- Not signed in user -->
         <% else %>
 						<li><%= link_to t('.want_to_host'), signup_path(type: 'host') %></li>
 				<% end %>
+
       </ul>
 
 
       <ul class="nav navbar-nav navbar-left">
       	<% if user_signed_in? %>
-					<li><%= link_to t('.signout'), destroy_user_session_path, method: :delete %></li>
+					<li class="button-link">
+						<%= link_to destroy_user_session_path, method: :delete  do %>
+							<button class="btn btn-warning"><%= t('.signout') %></button>
+						<% end %>
+					</li>
 				<% else %>
-						<li><%= link_to t('.signin'), user_session_path %></li>
+					<li class="button-link">
+						<%= link_to user_session_path do %>
+							<button class="btn btn-warning"><%= t('.signin') %></button>
+						<% end %>
+					</li>
 				<% end %>
       </ul>
     </div><!-- /.navbar-collapse -->

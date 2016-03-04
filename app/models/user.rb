@@ -22,4 +22,12 @@ class User < ActiveRecord::Base
       return full_name.split(' ')[1]
     end
   end
+
+  def manager?
+    self.meta && self.meta.is_a?(Manager)
+  end
+
+  def host?
+    self.meta && self.meta.is_a?(Host)
+  end
 end

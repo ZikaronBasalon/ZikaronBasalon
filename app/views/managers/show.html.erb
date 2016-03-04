@@ -1,79 +1,176 @@
 <div class="col-xs-12" ng-controller="ManagerShowController"
-     ng-init="init(<%= @manager.hosts.to_json(:include => [:user, :witness, :city]) %>,<%= @manager.witnesses.to_json(:include => :city) %>)">
+     ng-init="init(<%= @manager.hosts.to_json(:include => [:user, :witness, :city]) %>,
+                   <%= @manager.witnesses.to_json(:include => :city) %>)">
 
-   <form class="form-inline" ng-submit="createManager()">
-    <span>סנן לפי:</span>
-
-    <div class="form-group">
-      <select class="form-control" ng-model="search.city_id"
-              ng-options="o.id as o.name for o in cities">
-        <option value="">עיר</option>
-      </select>
-    </div> 
-
-    <div class="form-group">
-      <select class="form-control" ng-model="search.survivor_needed"
-              ng-options="o.v as o.n for o in [{ n: 'צריך', v: true }, { n: 'לא צריך', v: false }]">
-        <option value="">צריך איש עדות</option>
-      </select>
-    </div> 
-
-    <div class="form-group">
-      <select class="form-control" ng-model="search.has_survivor"
-              ng-options="o.v as o.n for o in [{ n: 'צוות', v: true }, { n: 'לא צוות', v: false }]">
-        <option value="">צוות איש עדות</option>
-      </select>
-    </div>  
-
-    <div class="form-group">
-      <select class="form-control" ng-model="search.strangers"
-              ng-options="o.v as o.n for o in [{ n: 'פתוח', v: true }, { n: 'פרטי', v: false }]">
-        <option value="">ערב פתוח/פרטי</option>
-      </select>
-    </div>  
-
-    <div class="form-group pull-left">
-      <input type="text" class="form-control" ng-model="search.query" placeholder="חיפוש חופשי" />
+  <!-- View toggle buttons -->
+  <div class="text-center margin-bottom-20">
+    <div class="view-toggle">
+      <div ng-class="{ 'selected': activeView === 'hosts' }"
+           ng-click="onViewToggle('hosts')"><%= t '.hosts_view' %></div>
+      <div ng-class="{ 'selected': activeView === 'witnesses' }"
+           ng-click="onViewToggle('witnesses')"><%= t '.witnesses_view' %></div>
     </div>
+  </div>
+  
+  <!-- Host view -->
+  <div class="row" ng-if="activeView === 'hosts'">
+    <div class="col-xs-12">
+      <!-- Host filters -->
+      <form class="form-inline">
+        <span><%= t 'shared.filter_by' %></span>
 
-  </form>
+        <div class="form-group">
+          <select class="form-control" ng-model="search.host.city_id"
+                  ng-options="o.id as o.name for o in cities">
+            <option value=""><%= t 'shared.city' %></option>
+          </select>
+        </div> 
 
-  <table class="table host-table">
-    <thead>
-      <tr>
-        <th>שם</th>
-        <th>זמן הרשמה</th>
-        <th>עיר</th>
-        <th>תאריך האירוע</th>
-        <th>סלון ראשון</th>
-        <th>סטטוס יצירת קשר</th>
-        <th>צריך איש עדות</th>
-        <th>צוות איש עדות</th>
-        <th>ערב פתוח</th>
-      </tr> 
-    </thead>
-    <tbody>
-      <tr ng-repeat="host in filterHosts(hosts)" ng-click="editHost(host)">
-        <td>{{ host.user.full_name }}</td>
-        <td>{{ formatDateTime(host.created_at) }}</td>
-        <td>{{ host.city.name }}</td>
-        <td>{{ formatDate(host.event_date) }}</td>
-        <td>{{ formatBool(!host.hosted_before) }}</td>
-        <td>???</td>
-        <td>{{ formatBool(host.survivor_needed) }}</td>
-        <td>
-        <span ng-if="host.witness">
-            {{ host.witness.full_name }}
-          </span>
+        <div class="form-group">
+          <select class="form-control" ng-model="search.host.survivor_needed"
+                  ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.needs' %>', v: true }, { n: '<%= t 'shared.doesnt_need' %>', v: false }]">
+            <option value=""><%= t 'shared.survivor_needed' %></option>
+          </select>
+        </div> 
 
-          <a ng-if="!host.witness" ng-click="openWitnessPopup($event, host)">
-            צוות איש עדות
-          </a>
-        </td>
-        <td>{{ formatBool(host.strangers) }}</td>
-      </tr>
-    </tbody>
-  </table>
+        <div class="form-group">
+          <select class="form-control" ng-model="search.host.has_survivor"
+                  ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.teamed' %>', v: true }, { n: '<%= t 'shared.not_teamed' %>', v: false }]">
+            <option value=""><%= t 'shared.has_survivor' %></option>
+          </select>
+        </div>  
+
+        <div class="form-group">
+          <select class="form-control" ng-model="search.host.contacted"
+                  ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.yes' %>', v: true }, { n: '<%= t 'shared.no' %>', v: false }]">
+            <option value=""><%= t 'shared.host_contacted' %></option>
+          </select>
+        </div>  
+
+        <div class="form-group pull-left">
+          <input type="text" class="form-control" ng-model="search.host.query" placeholder="חיפוש חופשי" />
+        </div>
+      </form>
+
+      <!-- Host table -->
+      <table class="table host-table">
+        <thead>
+          <tr>
+            <th><%= t 'shared.name' %></th>
+            <th><%= t 'shared.registration_time' %></th>
+            <th><%= t 'shared.city' %></th>
+            <th><%= t 'shared.evening_date' %></th>
+            <th><%= t 'shared.hosted_before' %></th>
+            <th><%= t 'shared.host_contacted' %></th>
+            <th><%= t 'shared.survivor_needed' %></th>
+            <th><%= t 'shared.has_survivor' %></th>
+            <th><%= t 'shared.strangers_allowed' %></th>
+          </tr> 
+        </thead>
+        <tbody>
+          <tr ng-repeat="host in filterHosts(hosts)" ng-click="editHost(host)">
+            <td>{{ host.user.full_name }}</td>
+            <td>{{ formatDateTime(host.created_at) }}</td>
+            <td>{{ host.city.name }}</td>
+            <td>{{ formatDate(host.event_date) }}</td>
+            <td>{{ formatBool(!host.hosted_before) }}</td>
+            <td>{{ formatBool(host.contacted) }}</td>
+            <td>{{ formatBool(host.survivor_needed) }}</td>
+            <td>{{ formatBool(host.has_survivor) }}</td>
+            <td>{{ formatBool(host.strangers) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div> 
+  <!-- End of host view -->
+
+
+  <!-- Witness view -->
+  <div class="row" ng-if="activeView === 'witnesses'">
+    <div class="col-xs-12">
+      <div class="pull-left">
+        <%= link_to new_witness_path do %>
+          <span class="glyphicon glyphicon-plus"></span>
+          <span><%= t '.add_witness' %></span>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <!-- Witness filters -->
+      <form class="form-inline">
+        <span><%= t 'shared.filter_by' %>:</span>
+
+        <div class="form-group">
+          <select class="form-control" ng-model="search.witness.witness_type"
+                  ng-options="o.v as o.n for o in witnessTypes">
+            <option value=""><%= t 'shared.type' %></option>
+          </select>
+        </div> 
+
+        <div class="form-group">
+          <select class="form-control" ng-model="search.witness.stairs"
+                  ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.can' %>', v: true }, { n: '<%= t 'shared.cant' %>', v: false }]">
+            <option value=""><%= t 'shared.walk_up_stairs' %></option>
+          </select>
+        </div> 
+
+        <div class="form-group">
+          <select class="form-control" ng-model="search.witness.seminar_required"
+                  ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.interested' %>', v: true }, { n: '<%= t 'shared.not_interested' %>', v: false }]">
+            <option value=""><%= t 'shared.seminar_required' %></option>
+          </select>
+        </div>  
+
+        <div class="form-group">
+          <select class="form-control" ng-model="search.witness.concept"
+                  ng-options="o.v as o.n for o in [
+                    { n: '<%= t 'shared.concept.religious_and_secular' %>', v: 'religious_and_secular' },
+                    { n: '<%= t 'shared.concept.vetrans' %>', v: 'vetrans' },
+                    { n: '<%= t 'shared.concept.eastern' %>', v: 'eastern' }
+                  ]">
+            <option value=""><%= t 'shared.concept_label' %></option>
+          </select>
+        </div>  
+
+        <div class="form-group pull-left">
+          <input type="text" class="form-control" ng-model="search.witness.query"
+                 placeholder="<%= t 'shared.search' %>" />
+        </div>
+      </form>
+
+      <!-- Host table -->
+      <table class="table witnesses-table">
+        <thead>
+          <tr>
+            <th><%= t 'shared.name' %></th>
+            <th><%= t 'shared.city' %></th>
+            <th><%= t 'shared.type' %></th>
+            <th><%= t 'shared.date' %></th>
+            <th><%= t 'shared.walk_up_stairs' %></th>
+            <th><%= t 'shared.seminar_required' %></th>
+            <th><%= t 'shared.concept_label' %></th>
+            <th><%= t 'shared.special_population' %></th>
+          </tr> 
+        </thead>
+        <tbody>
+          <tr ng-repeat="witness in filterWitnesses(witnesses)">
+            <td>{{ witness.full_name }}</td>
+            <td>{{ witness.city_name }}</td>
+            <td>{{ witness.witness_type }}</td>
+            <td>{{  }}</td>
+            <td>{{ formatBool(witness.stairs) }}</td>
+            <td>{{ formatBool(witness.seminar_required) }}</td>
+            <td>{{ witness.concept }}</td>
+            <td>{{ formatBool(witness.special_population) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div> 
+  <!-- End of host view -->
+
+
 </div>
 
 

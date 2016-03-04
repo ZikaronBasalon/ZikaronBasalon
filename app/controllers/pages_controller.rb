@@ -1,7 +1,6 @@
 class PagesController < ApplicationController
   include PagesHelper
   def home
-  	Rails.logger.info params
   	@page = params[:page] || 1
   	@hosts = Host.page(@page).per(2).where(host_conditions_hash)
   	@total_pages = @hosts.total_pages
