@@ -13,6 +13,8 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
   $scope.formatDateTime = formatDateTime;
   $scope.witnessTypes = witnessTypes;
 
+  $scope.sortProp = 'created_at';
+
   $scope.init = function(hosts, witnesses, cities) {
     $scope.hosts = _.map(hosts, function(host) {
       host.has_survivor = !!host.witness;
@@ -33,31 +35,6 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
 
   $scope.editWitness = function(witness) {
     window.open('/witnesses/' + witness.id, '_blank');
-  }
-
-  $scope.openWitnessPopup = function($event, host) {
-    $scope.selectedHost = host;
-
-    var modalInstance = $uibModal.open({
-      templateUrl: 'witness-popup.html',
-      controller: 'WitnessModalController',
-      resolve: {
-        witnesses: function () {
-          return $scope.witnesses;
-        }
-      }
-    });
-
-    modalInstance.result.then(function (selectedWitness) {
-      $http.put('/hosts/' + $scope.selectedHost.id + '.json', {
-        host: {
-          witness_id: selectedWitness.id
-        }
-      }).then(function() {
-        location.reload();
-      })
-    });
-    $event.stopPropagation();
   }
 
   $scope.filterHosts = function(hosts) {
@@ -97,6 +74,10 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
     });
   }
 
+  $scope.sort = function(arr) {
+    return _.sortBy(arr, $scope.sortProp);
+  }
+
   $scope.filterWitnesses = function(witnesses) {
     return witnesses;
   }
@@ -109,36 +90,11 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
     $scope.activeView = view;
   }
 
+  $scope.setSortProp = function(prop) {
+    $scope.sortProp = prop;
+  }
+
   function activeFilter(filter) {
     return !_.isUndefined(filter) && !_.isNull(filter);
   }
-
-
-}]);
-
-
-
-app.controller('WitnessModalController', ['$scope', '$uibModalInstance', 'witnesses',
-  function ($scope, $uibModalInstance, witnesses) {
-
-  $scope.witnesses = witnesses;
-  $scope.selected = {
-    witness: {}
-  };
-
-  $scope.formatBool = function(value) {
-    return value ? 'כן' : 'לא';
-  };
-
-  $scope.selectWitness = function(witness) {
-    $scope.selected.witness = witness;
-  }
-
-  $scope.ok = function () {
-    $uibModalInstance.close($scope.selected.witness);
-  };
-
-  $scope.cancel = function () {
-    $uibModalInstance.dismiss('cancel');
-  };
 }]);

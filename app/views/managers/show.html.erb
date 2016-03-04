@@ -56,19 +56,46 @@
       <table class="table host-table">
         <thead>
           <tr>
-            <th><%= t 'shared.name' %></th>
-            <th><%= t 'shared.registration_time' %></th>
-            <th><%= t 'shared.city' %></th>
-            <th><%= t 'shared.evening_date' %></th>
-            <th><%= t 'shared.hosted_before' %></th>
-            <th><%= t 'shared.host_contacted' %></th>
-            <th><%= t 'shared.survivor_needed' %></th>
-            <th><%= t 'shared.has_survivor' %></th>
-            <th><%= t 'shared.strangers_allowed' %></th>
+            <th ng-click="setSortProp('user.full_name')">
+              <%= t 'shared.name' %>
+              <span class="caret" ng-if="sortProp === 'user.full_name'"></span>
+            </th>
+            <th ng-click="setSortProp('created_at')">
+              <%= t 'shared.registration_time' %>
+              <span class="caret" ng-if="sortProp === 'created_at'"></span>
+            </th>
+            <th ng-click="setSortProp('city.name')">
+              <%= t 'shared.city' %>
+              <span class="caret" ng-if="sortProp === 'city.name'"></span>
+            </th>
+            <th ng-click="setSortProp('event_date')">
+              <%= t 'shared.evening_date' %>
+              <span class="caret" ng-if="sortProp === 'event_date'"></span>
+            </th>
+            <th ng-click="setSortProp('hosted_before')">
+              <%= t 'shared.hosted_before' %>
+              <span class="caret" ng-if="sortProp === 'hosted_before'"></span>
+            </th>
+            <th ng-click="setSortProp('host_contacted')">
+              <%= t 'shared.host_contacted' %>
+              <span class="caret" ng-if="sortProp === 'host_contacted'"></span>
+            </th>
+            <th ng-click="setSortProp('survivor_needed')">
+              <%= t 'shared.survivor_needed' %>
+              <span class="caret" ng-if="sortProp === 'survivor_needed'"></span>
+            </th>
+            <th ng-click="setSortProp('has_survivor')">
+              <%= t 'shared.has_survivor' %>
+              <span class="caret" ng-if="sortProp === 'has_survivor'"></span>
+            </th>
+            <th ng-click="setSortProp('strangers')">
+              <%= t 'shared.strangers_allowed' %>
+              <span class="caret" ng-if="sortProp === 'strangers'"></span>
+            </th>
           </tr> 
         </thead>
         <tbody>
-          <tr ng-repeat="host in filterHosts(hosts)" ng-click="editHost(host)">
+          <tr ng-repeat="host in sort(filterHosts(hosts))" ng-click="editHost(host)">
             <td>{{ host.user.full_name }}</td>
             <td>{{ formatDateTime(host.created_at) }}</td>
             <td>{{ host.city.name }}</td>
@@ -173,43 +200,3 @@
 
 
 </div>
-
-
-<script type="text/ng-template" id="witness-popup.html">
-  <div class="modal-header">
-    <h3 class="modal-title">בחר איש עדות</h3>
-  </div>
-  <div class="modal-body">
-      <table class="table host-table">
-        <thead>
-          <tr>
-            <th>שם</th>
-            <th>עיר</th>
-            <th>שפה</th>
-            <th>יכול מדרגות</th>
-            <th>צריך סמינר</th>
-            <th>אוכלוסיה מיוחדת</th>
-
-          </tr> 
-        </thead>
-        <tbody>
-          <tr ng-repeat="witness in witnesses" ng-click="selectWitness(witness)">
-            <td>{{ witness.full_name }}</td>
-            <td>{{ witness.city.name }}</td>
-            <td>{{ witness.language }}</td>
-            <td>{{ formatBool(witness.stairs) }}</td>
-            <td>{{ formatBool(witness.seminar_required) }}</td>
-            <td>{{ formatBool(witness.special_population) }}</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <p>
-        צוות את: {{ selected.witness.full_name }}
-      </p>
-  </div>
-  <div class="modal-footer">
-      <button class="btn btn-primary" type="button" ng-click="ok()">אישור</button>
-      <button class="btn btn-warning" type="button" ng-click="cancel()">ביטול</button>
-  </div>
-</script>
