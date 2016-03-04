@@ -1,6 +1,5 @@
 <div class="col-xs-12" ng-controller="ManagerShowController"
-     ng-init="init(<%= @manager.hosts.to_json(:include => [:user, :witness, :city]) %>,
-                   <%= @manager.witnesses.to_json(:include => :city) %>)">
+     ng-init="init(<%= @manager.hosts.to_json(:include => [:user, :witness, :city]) %>, <%= @manager.witnesses.to_json(:include => :city) %>)">
 
   <!-- View toggle buttons -->
   <div class="text-center margin-bottom-20">

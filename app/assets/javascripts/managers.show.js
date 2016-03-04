@@ -79,7 +79,39 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
   }
 
   $scope.filterWitnesses = function(witnesses) {
-    return witnesses;
+    return _.filter(witnesses, function(witness) {
+
+      if(activeFilter($scope.search.witness.witness_type) &&
+          $scope.search.witness.witness_type !== witness.witness_type) {
+        return false;
+      }
+
+      if(activeFilter($scope.search.witness.stairs) &&
+          $scope.search.witness.stairs !== witness.stairs) {
+        return false;
+      }
+
+      if(activeFilter($scope.search.witness.seminar_required) &&
+          $scope.search.witness.seminar_required !== witness.seminar_required) {
+        return false;
+      }
+
+      if(activeFilter($scope.search.witness.concept) &&
+         $scope.search.witness.concept !== witness.concept) {
+        return false;
+      }
+
+      if ($scope.search.witness.query) { 
+        if (!_.includes(witness.full_name, $scope.search.witness.query) &&
+            !_.includes(witness.witness_type, $scope.search.witness.query) &&
+            !_.includes(witness.concept, $scope.search.witness.query)
+        ) {
+          return false;
+        }
+      }
+
+      return true;
+    });
   }
 
   $scope.isAccesible = function(host) {
