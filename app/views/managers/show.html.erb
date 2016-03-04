@@ -140,7 +140,7 @@
       </form>
 
       <!-- Host table -->
-      <table class="table witnesses-table">
+      <table class="table witness-table">
         <thead>
           <tr>
             <th><%= t 'shared.name' %></th>
@@ -154,9 +154,10 @@
           </tr> 
         </thead>
         <tbody>
-          <tr ng-repeat="witness in filterWitnesses(witnesses)">
+          <tr ng-repeat="witness in filterWitnesses(witnesses)"
+              ng-click="editWitness(witness)">
             <td>{{ witness.full_name }}</td>
-            <td>{{ witness.city_name }}</td>
+            <td>{{ witness.city.name }}</td>
             <td>{{ witness.witness_type }}</td>
             <td>{{  }}</td>
             <td>{{ formatBool(witness.stairs) }}</td>

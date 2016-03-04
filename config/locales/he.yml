@@ -206,5 +206,38 @@ he:
       seminar_required: "צריך סמינר"
       free_text: "עוד משהו שאנחנו צריכים לדעת"
       special_population: "אוכלוסיה מיוחדת"
+    show:
+      title: "פרופיל איש עדות"
+
+  profile:
+    labels:
+      registration_time: "זמן הרשמה"
+      name: "שם"
+      phone: "טלפון"
+      email: "מייל"
+      address: "כתובת"
+      date_and_time: "תאריך ושעה משוערת"
+      organization: "שייך לארגון"
+      langauge: "שפה"
+      accesability: "נגישות הסלון"
+      salon_type: "סוג סלון"
+      open_places: "מקומות פנויים"
+      public_text: "הערות למתארחים"
+      free_text: "הערות לצוות"
+      edit: "עריכה"
+      contacted: "נוצר קשר ראשוני"
+      survivor_needed: "צריך עד"
+      has_survivor: "צוות עד"
+      survivor_contacted: "מארח אישר הגעת עד"
+      concept: "קונספט"
+      host: "מארח"
+      seminar_required: "מעוניין בערב הכנה"
+      special_population: "מוכנות לאוכ' מיוחדות"
+    personal_details: "פרטים אישיים"
+    evening_details: "פרטים על הערב"
+    manager_actions: "פעולות מוביל קהילה"
+    assign_host: "צוות למארח"
+    updated: "הפרטים עודכנו בהצלחה"
+
 
 

@@ -1,30 +1,178 @@
-<p id="notice"><%= notice %></p>
+<div id="witness-show" class="row profile" ng-controller="WitnessShowController"
+      ng-init="init(<%= @witness.to_json(:include => [:city, :host]) %>)">
 
-<p>
-  <b>Index:</b>
-  <%= @witness.index %>
-</p>
+  <div class="col-xs-12">
+    <h1><%= t '.title' %></h1>
+  </div>
+  
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+         <div class="info-title"><%= t 'profile.personal_details' %></div>
+         <div>
+          <a href="/witnesses/{{ witness.id }}/edit">
+            <%= t 'profile.labels.edit' %>
+          </a>
+         </div>
+      </div>
+      <div class="panel-body">
+        
+        <div class="field-group">
+          <div class="info-label"><%= t 'profile.labels.name' %></div>
+          <div>{{ witness.full_name }}</div>
+        </div>
 
-<p>
-  <b>New:</b>
-  <%= @witness.new %>
-</p>
+        <div class="field-group">
+          <div class="info-label"><%= t 'profile.labels.phone' %></div>
+          <div>{{ witness.phone }}</div>
+        </div>
 
-<p>
-  <b>Edit:</b>
-  <%= @witness.edit %>
-</p>
+        <div class="field-group">
+          <div class="info-label"><%= t 'profile.labels.email' %></div>
+          <div>{{ witness.email }}</div>
+        </div>
 
-<p>
-  <b>Create:</b>
-  <%= @witness.create %>
-</p>
+        <div class="field-group">
+          <div class="info-label"><%= t 'profile.labels.address' %></div>
+          <div>{{ witness.address }}</div>
+        </div>
+      </div>
 
-<p>
-  <b>Update:</b>
-  <%= @witness.update %>
-</p>
+      <div class="panel-body">
+        
+      </div>
+    </div>
+  </div>
 
+  <% if current_user.meta.is_a?(Manager) || current_user.admin? %>
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="info-title">
+            <%= t 'hosts.show.manager_actions' %>
+          </div>
+        </div>
+        <div class="panel-body">
 
-<%= link_to 'Edit', edit_witness_path(@witness) %> |
-<%= link_to 'Back', witnesses_path %>
+          <!-- Host -->
+          <div class="field-group">
+            <div class="info-label"><%= t 'profile.labels.host' %></div>
+            <div ng-if="witness.host">
+
+            </div>
+
+            <div ng-if="!witness.host">
+              <a href="/witnesses/assign"><%= t 'profile.assign_host' %></a>
+            </div>
+          </div>  
+          
+          <!-- Seminar -->
+          <div class="field-group">
+            <div class="info-label"><%= t 'profile.labels.seminar_required' %></div>
+            <div>
+              <div class="radio">
+                <label>
+                  <input type="radio"
+                         name="seminar_required"
+                         id="seminarRequiredFalse"
+                         ng-value="false"
+                         ng-model="witness.seminar_required">
+                  <b><%= t 'shared.no' %></b>
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio"
+                         name="seminar_required"
+                         id="seminarRequiredTrue"
+                         ng-value="true"
+                         ng-model="witness.seminar_required">
+                  <b><%= t 'shared.yes' %></b>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Special Population -->
+          <div class="field-group">
+            <div class="info-label">
+              <%= t 'profile.labels.special_population' %>
+            </div>
+            <div>
+              <div class="radio">
+                <label>
+                  <input type="radio"
+                         name="special_population"
+                         id="specialPopulationFalse"
+                         ng-value="false"
+                         ng-model="witness.special_population">
+                  <b><%= t 'shared.no' %></b>
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio"
+                         name="special_population"
+                         id="specialPopulationTrue"
+                         ng-value="true"
+                         ng-model="witness.special_population">
+                  <b><%= t 'shared.yes' %></b>
+                </label>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Concept -->
+          <div class="field-group">
+            <div class="info-label"><%= t 'profile.labels.concept' %></div>
+            <div>
+              <select class="form-control"
+                      ng-model="witness.concept"
+                      ng-options="o.v as o.n for o in [
+                        { n: '<%= t 'shared.concept.religious_and_secular' %>', v: 'religious_and_secular' },
+                        { n: '<%= t 'shared.concept.vetrans' %>', v: 'vetrans' },
+                        { n: '<%= t 'shared.concept.eastern' %>', v: 'eastern' }
+                      ]">
+              <option ng-show="!witness.concept" value=""><%= t 'shared.select' %></option>
+            </select>
+            </div>
+          </div>
+
+          <!-- Type -->
+           <div class="form-group ">
+              <label for="witness_type" >
+                <%= t 'shared.type' %>
+              </label>
+              <select class="form-control" id="witness_type" 
+                      ng-model="witness.witness_type"
+                      ng-options="o.v as o.n for o in witnessTypes">
+                <option ng-show="!witness.concept" value=""><%= t 'shared.select' %></option>
+              </select>
+            </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12">
+      <button class="btn btn-warning"  
+                ng-click="save()">
+        <%= t 'shared.save' %>
+      </button>
+      <button class="btn btn-info" 
+              ng-click="back()">
+        <%= t 'shared.return' %>
+      </button>
+    </div>
+
+    <div class="col-xs-12" ng-if="success">
+      <div class="alert alert-success" role="alert">
+        <%= t 'profile.updated' %>
+      </div>
+    </div>
+  <% end %>
+  
+
+  
+  
+</div>

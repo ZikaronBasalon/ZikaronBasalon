@@ -31,6 +31,10 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
     window.open('/hosts/' + host.id, '_blank');
   }
 
+  $scope.editWitness = function(witness) {
+    window.open('/witnesses/' + witness.id, '_blank');
+  }
+
   $scope.openWitnessPopup = function($event, host) {
     $scope.selectedHost = host;
 
