@@ -1,4 +1,6 @@
 //= require directives/datePicker
+//= require directives/isPhone
+
 app.controller('HostEditController', ['$scope','$http','$uibModal', function($scope, $http, $uibModal) {
 	$scope.host = {
 		hosted_before: false
