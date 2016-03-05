@@ -21,11 +21,14 @@
 
 
 html,body {
-	height: 100%;
-	//min-height: 100% !important;
 	font-family: 'Alef', sans-serif;
-	@include display-flex;
-  @include flex-direction(column);
+  @include flexbox((
+  	display: flex,
+  	flex-direction: column,
+  	flex-grow: 1
+	));
+
+	min-height: 100%;
 }
 
 input {
@@ -229,6 +232,8 @@ header {
 #main-container {
 	width: 100%;
 	@include flexbox((flex-grow: 2));
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
 
 #signup-container {
@@ -271,7 +276,6 @@ header {
 }
 
 .profile {
-	padding-bottom: 20px;
 	
 	.panel-heading, .panel-body {
 		@include flexbox((
