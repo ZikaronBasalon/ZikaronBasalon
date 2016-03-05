@@ -45,4 +45,10 @@
 	    justify-content: space-around
 	  ));
 	}
+
+	.close {
+		position: absolute;
+		top: 20px;
+		left: 20px;
+	}
 }

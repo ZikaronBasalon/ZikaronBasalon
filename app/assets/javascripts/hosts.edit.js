@@ -191,6 +191,9 @@ app.controller('HostEditController', ['$scope','$http','$uibModal', function($sc
 app.controller('HostSignupFinishedModal', ['$scope', '$uibModalInstance',
   function ($scope, $uibModalInstance) {
 
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
 
   $scope.fbShare = function () {
   	FB.ui({
