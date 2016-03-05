@@ -1,4 +1,6 @@
 //= require directives/compareTo
+//= require directives/hasSpace
+
 app.controller('UserSignupController', ['$scope', '$http', function($scope, $http) {
 	$scope.form = {};
 	$scope.error = null;
