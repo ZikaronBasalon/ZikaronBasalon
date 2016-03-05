@@ -15,7 +15,6 @@ class RegistrationsController < Devise::RegistrationsController
 
     if @resource.save
       sign_up("user", @resource.user)
-      ZbMailer.registration(@resource.user.id)
       render json: { success: true, redirect_url: after_sign_up_path_for(@resource) }
     else
       render json: { success: false, errors: @resource.errors }

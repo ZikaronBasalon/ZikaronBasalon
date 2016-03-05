@@ -27,27 +27,13 @@ class HostsController < ApplicationController
   def update
     @host = Host.find(params[:id])
     @host.update_attributes(params[:host])
+
+    if params[:finalStep] && !@host.received_registration_mail
+      ZbMailer.registration(@host.user.id)
+      @host.update_attributes(received_registration_mail: true)
+    end
+
     respond_with(@host)
-  end
-
-  def search
-    #city = City.find(params[:id])
-    @hosts = Host.page(params[:page]).per(10).where("strangers = ?",true)#city.get_hosts
-    @guest = session[:guest_id] ? Guest.find(session[:guest_id]) : Guest.new
-    @invites = @guest.invites.map(&:host_id)
-  end
-
-  def success
-  end
-
-  def send_request
-    @guest = Guest.find_or_create_by_email(params[:guest])
-    @guest.update_attributes(params[:guest])
-    session[:guest_id] = @guest.id
-    @invite = @guest.invites.create(host_id: params[:guest][:host_id] )
-    @host = Host.find(params[:guest][:host_id])
-    RequestMailer.delay.send_request(@host.id,@guest.id, @invite.id)
-    RequestMailer.delay.request_was_sent(@host.id,@guest.id)
   end
 
   # Checks if user has access to view page

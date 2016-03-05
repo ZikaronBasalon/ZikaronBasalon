@@ -90,7 +90,8 @@ app.controller('HostEditController', ['$scope','$http','$uibModal', function($sc
 					max_guests: $scope.host.max_guests,
 					public_text: $scope.host.public_text,
 					free_text: $scope.host.free_text
-				}
+				},
+				finalStep: true
 	  	}).then(function success(response) {
 	  		var modalInstance = $uibModal.open({
 		      templateUrl: 'host-signup-finished.html',
