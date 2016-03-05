@@ -1,235 +1,251 @@
-<div class="col-xs-6" id="host-edit-form" ng-controller="HostEditController"
+<div class="col-xs-12" id="host-edit-form" ng-controller="HostEditController"
      ng-init="init(<%= @host.to_json %>)">
-
-  <h2><%= t '.title' %></h2>
-  <p><%= t '.subtitle' %></p>
-
-  <form name="stepOne" ng-show="'stepOne' === steps[stepIndex]" >
-
-    <div class="form-group">
-      <label for="phone"><%= t '.phone' %></label>
-      <input type="text" class="form-control"
-             name="phone"
-             ng-class="{true: 'error'}[submitted[stepIndex] && stepOne.phone.$invalid]"
-             id="phone"
-             ng-model="host.phone"
-             required>
-    </div>
-
-    <div class="form-group">
-      <label><%= t '.hosted_before' %></label>
-      <div class="radio">
-        <label>
-          <input type="radio"
-                 name="hostedBefore"
-                 id="hostedBeforeFalse"
-                 ng-value="false"
-                 ng-model="host.hosted_before"
-                 checked>
-          <%= t '.hosted_before_no' %>
-        </label>
-      </div>
-      <div class="radio">
-        <label>
-          <input type="radio"
-                 name="hostedBefore"
-                 id="hostedBeforeTrue"
-                 ng-value="true"
-                 ng-model="host.hosted_before">
-          <%= t '.hosted_before_yes' %>
-        </label>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="text-center">
+        <img ng-src="/assets/progress_bar_{{ stepIndex + 1 }}.png">
       </div>
     </div>
+  </div>
+  
 
-    <div class="form-group">
-      <label><%= t '.organization' %></label>
-      <p class="help-block"><%= t '.org_help_block' %></p>
-      <div class="radio">
-        <label>
-          <input type="radio"
-                 name="organization"
-                 id="organizationFalse"
-                 ng-value="false"
-                 ng-model="organization"
-                 ng-change='orgChanged(organization)'
-                 checked>
-          <%= t 'shared.no' %>
-        </label>
-      </div>
-      <div class="radio">
-        <label>
-          <input type="radio"
-                 name="organization"
-                 id="organizationTrue"
-                 ng-value="true"
-                 ng-model="organization"
-                 ng-change='orgChanged(organization)'>
-          <%= t 'shared.yes' %>
-        </label>
-      </div>
+  <div class="row">
+    <div class="col-xs-6">
+      <h2><%= t '.title' %></h2>
+      <p><%= t '.subtitle' %></p>
+      <!-- Step one -->
+      <form name="stepOne" ng-show="'stepOne' === steps[stepIndex]" >
+
+        <div class="form-group">
+          <label for="phone"><%= t '.phone' %></label>
+          <input type="text" class="form-control"
+                 name="phone"
+                 ng-class="{true: 'error'}[submitted[stepIndex] && stepOne.phone.$invalid]"
+                 id="phone"
+                 ng-model="host.phone"
+                 required>
+        </div>
+
+        <div class="form-group">
+          <label><%= t '.hosted_before' %></label>
+          <div class="radio">
+            <label>
+              <input type="radio"
+                     name="hostedBefore"
+                     id="hostedBeforeFalse"
+                     ng-value="false"
+                     ng-model="host.hosted_before"
+                     checked>
+              <%= t '.hosted_before_no' %>
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio"
+                     name="hostedBefore"
+                     id="hostedBeforeTrue"
+                     ng-value="true"
+                     ng-model="host.hosted_before">
+              <%= t '.hosted_before_yes' %>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label><%= t '.organization' %></label>
+          <p class="help-block"><%= t '.org_help_block' %></p>
+          <div class="radio">
+            <label>
+              <input type="radio"
+                     name="organization"
+                     id="organizationFalse"
+                     ng-value="false"
+                     ng-model="organization"
+                     ng-change='orgChanged(organization)'
+                     checked>
+              <%= t 'shared.no' %>
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio"
+                     name="organization"
+                     id="organizationTrue"
+                     ng-value="true"
+                     ng-model="organization"
+                     ng-change='orgChanged(organization)'>
+              <%= t 'shared.yes' %>
+            </label>
+          </div>
+        </div>
+
+        <div ng-if="organization">
+          <div class="form-group">
+            <label for="orgName"><%= t '.org_name' %></label>
+            <input type="text" class="form-control"
+                   id="orgName"
+                   ng-model="host.org_name">
+          </div>
+        </div>
+
+        <button ng-click="submitStepOne()" class="btn btn-warning"><%= t 'shared.next' %></button>
+      </form>
+
+      <!-- Step two -->
+      <form name="stepTwo" ng-show="'stepTwo' === steps[stepIndex]" >
+        <div class="form-group" 
+             ng-class="{true: 'has-error'}[(submitted[stepIndex] && stepTwo.address.$invalid) || stepTwo.address.$error.route || stepTwo.address.$error.street_number]">
+          <label for="address"><%= t '.address' %></label>
+          <input type="text" class="form-control"
+                 name="address"
+                 id="address"
+                 placeholder="מצדה 6, באר שבע, ישראל"
+                 ng-model="host.address"
+                 required>
+          <p class="help-block" ng-show="stepTwo.address.$error.route"><%= t '.address_route_error' %></p>
+          <p class="help-block" ng-show="stepTwo.address.$error.street_number"><%= t '.address_street_number_error' %></p>
+
+          <input type="hidden" ng-model="host.lat" />
+          <input type="hidden" ng-model="host.lng" />
+          <input type="hidden" ng-model="host.city_name" />
+        </div>
+
+
+        <div class="form-group"
+             ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.floor.$invalid]">
+          <label for="floor"><%= t '.floor' %></label>
+            <select class="form-control" id="floor" 
+                    ng-model="host.floor"
+                    name="floor"
+                    required
+                    ng-options="o.v as o.n for o in [
+                      { n: '<%= t '.ground_floor' %>', v: 0 }, { n: '1', v: 1 },
+                      { n: '2', v: 2 }, { n: '3', v: 3 },
+                      { n: '4', v: 4 }, { n: '5', v: 5 },
+                      { n: '6', v: 6 }, { n: '7', v: 7 },
+                      { n: '8', v: 8 }, { n: '9+', v: 9 }
+                    ]">
+              <option ng-show="!host.floor" value=""><%= t 'shared.select' %></option>
+            </select>
+        </div>
+
+        <div class="form-group"
+             ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.elevator.$invalid]">
+          <label for="elevator"><%= t '.elevator' %></label>
+            <select class="form-control" id="elevator" 
+                    ng-model="host.elevator"
+                    name="elevator"
+                    required
+                    ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.yes' %>', v: true }, { n: '<%= t 'shared.no' %>', v: false }]">
+              <option ng-show="!host.elevator" value=""><%= t 'shared.select' %></option>
+            </select>
+        </div>
+
+
+        <div class="form-group">
+          <label><%= t '.event_date' %></label>
+          <p class="help-block"><%= t '.event_date_help_block' %></p>
+
+          <input type="date" class="form-control"  
+                 ng-model="host.event_date" datepicker />
+        </div>
+
+        <div class="form-group">
+          <label><%= t '.event_time' %></label>
+          <p class="help-block"><%= t '.event_time_help_block' %></p>
+
+          <input type="time" ng-model="host.event_time" class="form-control" name="event_time"/>
+        </div>  
+
+        <button class="btn btn-info" ng-click="back()"><%= t 'shared.back' %></button>
+        <button class="btn btn-warning" ng-click="submitStepTwo()"><%= t 'shared.next' %></button>
+      </form>
+
+      <!-- Step three -->
+      <form name="stepThree" ng-show="'stepThree' === steps[stepIndex]" >
+        <div class="form-group"
+             ng-class="{true: 'has-error'}[submitted[stepIndex] && stepThree.event_language.$invalid]">
+          <label for="event_language"><%= t '.event_language' %></label>
+          <div ng-show="!otherLanguageVisible">
+            <select class="form-control" id="event_language" 
+                    name="event_language"
+                    required
+                    ng-model="host.event_language" ng-change="languageChanged()">
+              <option ng-show="!host.language" value=""><%= t 'shared.select' %></option>
+              <option value="hebrew">עברית</option>
+              <option value="english">English</option>
+              <option value="arabic">العربية</option>
+              <option value="french">Français</option>
+              <option value="russian">русский</option>
+              <option value="other"><%= t 'shared.other' %></option>
+            </select>
+          </div>
+
+          <input type="text" class="form-control" 
+                 ng-model="host.event_language"
+                 ng-show="otherLanguageVisible" />
+        </div>
+
+        <div class="form-group"
+             ng-class="{true: 'has-error'}[submitted[stepIndex] && stepThree.survivor_needed.$invalid]">
+          <label><%= t '.survivor_needed' %></label>
+          <p class="help-block"><%= t '.survivor_needed_help_block' %></p>
+
+          <div>
+            <select class="form-control" id="survivor_needed" 
+                    ng-model="host.survivor_needed"
+                    name="survivor_needed"
+                    required
+                    ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.yes' %>', v: true }, { n: '<%= t 'shared.no' %>', v: false }]">
+             <option ng-show="!host.survivor_needed" value=""><%= t 'shared.select' %></option>
+            </select>
+          </div>
+        </div>  
+
+        <div class="form-group"
+             ng-class="{true: 'has-error'}[submitted[stepIndex] && stepThree.strangers.$invalid]">
+          <label><%= t '.strangers' %></label>
+          <p class="help-block"><%= t '.strangers_help_block' %></p>
+
+          <div>
+            <select class="form-control" id="strangers" 
+                    name="strangers"
+                    required
+                    ng-model="host.strangers"
+                    ng-options="o.v as o.n for o in [{ n: '<%= t '.strangers_yes' %>', v: true }, { n: '<%= t '.strangers_no' %>', v: false }]">
+              <option ng-show="!host.strangers" value=""><%= t 'shared.select' %></option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" ng-if="host.strangers">
+          <label for="public_text" ><%= t '.public_text' %></label>
+          <input type="text" class="form-control" 
+                 name="public_text"
+                 id="public_text" ng-model="host.public_text">
+        </div>  
+
+        <div class="form-group" ng-if="host.strangers"
+             ng-class="{true: 'has-error'}[submitted[stepIndex] && stepThree.max_guests.$invalid]">
+          <label for="max_guests" ><%= t '.max_guests' %></label>
+          <p class="help-block"><%= t '.max_guests_help_block' %></p>
+          <input type="number" class="form-control" 
+                 required name="max_guests"
+                 id="max_guests" ng-model="host.max_guests">
+        </div>
+
+        <div class="form-group">
+          <label for="free_text"><%= t '.free_text' %></label>
+          <textarea id="free_text" class="form-control" ng-model="host.free_text"></textarea>
+        </div>
+
+        <button class="btn btn-info" ng-click="back()"><%= t 'shared.back' %></button>
+        <button class="btn btn-warning"  ng-click="submitStepThree()"><%= t '.finish' %></button>
+      </form>
     </div>
+  </div>
 
-    <div ng-if="organization">
-      <div class="form-group">
-        <label for="orgName"><%= t '.org_name' %></label>
-        <input type="text" class="form-control"
-               id="orgName"
-               ng-model="host.org_name">
-      </div>
-    </div>
-
-    <button ng-click="submitStepOne()" class="btn btn-warning"><%= t 'shared.next' %></button>
-  </form>
-
-  <form name="stepTwo" ng-show="'stepTwo' === steps[stepIndex]" >
-    <div class="form-group" 
-         ng-class="{true: 'has-error'}[(submitted[stepIndex] && stepTwo.address.$invalid) || stepTwo.address.$error.route || stepTwo.address.$error.street_number]">
-      <label for="address"><%= t '.address' %></label>
-      <input type="text" class="form-control"
-             name="address"
-             id="address"
-             placeholder="מצדה 6, באר שבע, ישראל"
-             ng-model="host.address"
-             required>
-      <p class="help-block" ng-show="stepTwo.address.$error.route"><%= t '.address_route_error' %></p>
-      <p class="help-block" ng-show="stepTwo.address.$error.street_number"><%= t '.address_street_number_error' %></p>
-
-      <input type="hidden" ng-model="host.lat" />
-      <input type="hidden" ng-model="host.lng" />
-      <input type="hidden" ng-model="host.city_name" />
-    </div>
-
-
-    <div class="form-group"
-         ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.floor.$invalid]">
-      <label for="floor"><%= t '.floor' %></label>
-        <select class="form-control" id="floor" 
-                ng-model="host.floor"
-                name="floor"
-                required
-                ng-options="o.v as o.n for o in [
-                  { n: '<%= t '.ground_floor' %>', v: 0 }, { n: '1', v: 1 },
-                  { n: '2', v: 2 }, { n: '3', v: 3 },
-                  { n: '4', v: 4 }, { n: '5', v: 5 },
-                  { n: '6', v: 6 }, { n: '7', v: 7 },
-                  { n: '8', v: 8 }, { n: '9+', v: 9 }
-                ]">
-          <option ng-show="!host.floor" value=""><%= t 'shared.select' %></option>
-        </select>
-    </div>
-
-    <div class="form-group"
-         ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.elevator.$invalid]">
-      <label for="elevator"><%= t '.elevator' %></label>
-        <select class="form-control" id="elevator" 
-                ng-model="host.elevator"
-                name="elevator"
-                required
-                ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.yes' %>', v: true }, { n: '<%= t 'shared.no' %>', v: false }]">
-          <option ng-show="!host.elevator" value=""><%= t 'shared.select' %></option>
-        </select>
-    </div>
-
-
-    <div class="form-group">
-      <label><%= t '.event_date' %></label>
-      <p class="help-block"><%= t '.event_date_help_block' %></p>
-
-      <input type="date" class="form-control"  
-             ng-model="host.event_date" datepicker />
-    </div>
-
-    <div class="form-group">
-      <label><%= t '.event_time' %></label>
-      <p class="help-block"><%= t '.event_time_help_block' %></p>
-
-      <input type="time" ng-model="host.event_time" class="form-control" name="event_time"/>
-    </div>  
-
-    <button class="btn btn-info" ng-click="back()"><%= t 'shared.back' %></button>
-    <button class="btn btn-warning" ng-click="submitStepTwo()"><%= t 'shared.next' %></button>
-  </form>
-
-  <form name="stepThree" ng-show="'stepThree' === steps[stepIndex]" >
-    <div class="form-group"
-         ng-class="{true: 'has-error'}[submitted[stepIndex] && stepThree.event_language.$invalid]">
-      <label for="event_language"><%= t '.event_language' %></label>
-      <div ng-show="!otherLanguageVisible">
-        <select class="form-control" id="event_language" 
-                name="event_language"
-                required
-                ng-model="host.event_language" ng-change="languageChanged()">
-          <option ng-show="!host.language" value=""><%= t 'shared.select' %></option>
-          <option value="hebrew">עברית</option>
-          <option value="english">English</option>
-          <option value="arabic">العربية</option>
-          <option value="french">Français</option>
-          <option value="russian">русский</option>
-          <option value="other"><%= t 'shared.other' %></option>
-        </select>
-      </div>
-
-      <input type="text" class="form-control" 
-             ng-model="host.event_language"
-             ng-show="otherLanguageVisible" />
-    </div>
-
-    <div class="form-group"
-         ng-class="{true: 'has-error'}[submitted[stepIndex] && stepThree.survivor_needed.$invalid]">
-      <label><%= t '.survivor_needed' %></label>
-      <p class="help-block"><%= t '.survivor_needed_help_block' %></p>
-
-      <div>
-        <select class="form-control" id="survivor_needed" 
-                ng-model="host.survivor_needed"
-                name="survivor_needed"
-                required
-                ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.yes' %>', v: true }, { n: '<%= t 'shared.no' %>', v: false }]">
-         <option ng-show="!host.survivor_needed" value=""><%= t 'shared.select' %></option>
-        </select>
-      </div>
-    </div>  
-
-    <div class="form-group"
-         ng-class="{true: 'has-error'}[submitted[stepIndex] && stepThree.strangers.$invalid]">
-      <label><%= t '.strangers' %></label>
-      <p class="help-block"><%= t '.strangers_help_block' %></p>
-
-      <div>
-        <select class="form-control" id="strangers" 
-                name="strangers"
-                required
-                ng-model="host.strangers"
-                ng-options="o.v as o.n for o in [{ n: '<%= t '.strangers_yes' %>', v: true }, { n: '<%= t '.strangers_no' %>', v: false }]">
-          <option ng-show="!host.strangers" value=""><%= t 'shared.select' %></option>
-        </select>
-      </div>
-    </div>
-
-    <div class="form-group" ng-if="host.strangers">
-      <label for="public_text" ><%= t '.public_text' %></label>
-      <input type="text" class="form-control" 
-             name="public_text"
-             id="public_text" ng-model="host.public_text">
-    </div>  
-
-    <div class="form-group" ng-if="host.strangers"
-         ng-class="{true: 'has-error'}[submitted[stepIndex] && stepThree.max_guests.$invalid]">
-      <label for="max_guests" ><%= t '.max_guests' %></label>
-      <p class="help-block"><%= t '.max_guests_help_block' %></p>
-      <input type="number" class="form-control" 
-             required name="max_guests"
-             id="max_guests" ng-model="host.max_guests">
-    </div>
-
-    <div class="form-group">
-      <label for="free_text"><%= t '.free_text' %></label>
-      <textarea id="free_text" class="form-control" ng-model="host.free_text"></textarea>
-    </div>
-
-    <button class="btn btn-info" ng-click="back()"><%= t 'shared.back' %></button>
-    <button class="btn btn-warning"  ng-click="submitStepThree()"><%= t '.finish' %></button>
-  </form>
+  
 </div>
 
 <script type="text/ng-template" id="host-signup-finished.html">
