@@ -1,5 +1,5 @@
 class ManagersController < ApplicationController
-  before_filter :set_manager, only: [:show, :edit, :update, :destroy]
+  before_filter :set_manager, only: [:show, :edit, :update, :destroy, :remove_city]
   before_filter :is_admin, only: [:index]
   before_filter :correct_manager, only: [:show]
 
@@ -38,6 +38,12 @@ class ManagersController < ApplicationController
   def destroy
     @manager.destroy
     respond_with(@manager)
+  end
+
+  def remove_city
+    @city = City.find(params[:city_id])
+    CommunityLeadership.find_by_manager_id_and_city_id(@manager.id, @city.id).destroy
+    render :json => @manager.to_json( :include => [:cities, :user] )
   end
 
   private

@@ -1,83 +1,182 @@
-en:
+he:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken: "כתובת הדואר האלקטרוני שהזנת תפוסה"
+
+  users:
+    new:
+      title: "הרשמת למארח/ת זיכרון בסלון"
+      description: "אנחנו שמחים שבחרת לארח ערב של זיכרון בסלון! בשלב זה, ניצור פרופיל אישי שילווה אותך עד ערב יום הזיכרון לשואה ולגבורה. אנחנו כאן כדי לעזור ולהכווין"
+      labels:
+        full_name: "שם מלא"
+        email: "כתובת מייל"
+        email_confirmation: "אימות כתובת מייל"
+        password: "סיסמא"
+        password_confirmation: "אימות סיסמא"
+      placeholders:
+        full_name: "הכנס שם"
+        email: "הכנס כתובת מייל"
+        email_confirmation: "הכנס אימות כתובת מייל"
+        password: "הכנס סיסמא"
+        password_confirmation: "הכנס אימות סיסמא"
+      submit: "המשך"
+      already_a_member: "נרשמת כבר?"
+      sign_in_to_system: "התחבר למערכת"
+
+  devise:
+    sessions:
+      new:
+        title: "התחברות לזכרון בסלון"
+        labels:
+          email: "כתובת מייל"
+          password: "סיסמא"
+        placeholders:
+          email: "הכנס כתובת מייל"
+          password: "הכנס סיסמא"
+        signin_error: "כתובת מייל או סיסמא לא נכונים"
+
+
   shared:
-    send_request: "Send request"
-    request_sent: "Request sent"
+    'yes': "כן"
+    'no': "לא"
+    continue: "המשך"
+    next: "הבא"
+    back: "הקודם"
+    select: "בחר/י"
+    other: "אחר"
+    send_request: "שלח בקשה"
+    request_sent: "בקשתך נשלחה"
+    save: "שמירה"
+    return: "חזור"
+    submit: "שלח"
+    concept:
+      religious_and_secular: "חרדים וחילונים"
+      vetrans: "וטרנים"
+      eastern: "בשיח המזרחי"
+    filter_by: "סנן לפי"
+    city: "עיר"
+    survivor_needed: "צריך איש עדות"
+    type: "סוג"
+    walk_up_stairs: "עליה במדרגות"
+    can: "יכול"
+    cant: "לא יכול"
+    seminar_required: "ערב הכנה"
+    search: "חיפוש"
+    name: "שם"
+    date: "תאריך"
+    special_population: "אוכלוסיות מיוחדות"
+    concept_label: "קונספט"
+    interested: "מעוניין"
+    not_interested: "לא מעוניין"
+    registration_time: "זמן הרשמה"
+    evening_date: "תאריך האירוע"
+    hosted_before: "סלון ראשון"
+    host_contacted: "סטטוס יצירת קשר"
+    has_survivor: "צוות איש עדות"
+    strangers_allowed: "סלון פתוח"
+    needs: "צריך"
+    doesnt_need: "לא צריך"
+    teamed: "צוות"
+    not_teamed: "לא צוות"
+
+
   views:
     pagination:
-      first: "First"
-      last: "Last"
-      previous: "Previous"
-      next: "Next"
+      first: "ראשון"
+      last: "אחרון"
+      previous: "קודם"
+      next: "הבא"
       truncate: "..."
   layouts:
     application:
-      contact_us: "Contact us"
-      facebook: "Memories@Home facebook"
+      contact_us: "צרו קשר"
+      facebook: "זכרון בסלון בפייסבוק"
     header:
-      want_to_host: "I want to host"
-      want_to_guest: "I want to be a guest"
-      staff: "Staff"
+      want_to_host: "רוצה לארח"
+      want_to_guest: "רוצה להתארח"
+      staff: "צוות"
+      host_dashboard: "אזור מארחים"
+      signin: "התחבר/י"
+      signout: "התנתק/י"
+      signup: "הרשמה"
+      profile: "פרופיל"
+      home: "דף הבית"
+      managers: "ניהול מובילי קהילות"
+      signup_staff: "הרשמת צוות"
   pages:
     home:
-      title: "2015 Memories@Home list of hosts"
-      explenation1: "Hello! We're happy you chose to take part of Memories@Home. Here you can look for a living room open for guests near you."
-      explenation21: "If you didn't find a place to host you, you can always "
-      explenation22: "It's really simple, and our staff will help you with all the steps for creating a meaningfull night."
-      explenation3: "Or you can always return tommorow. The list updates daily. Holocaust Remembrance Day will be on the 15.4.2015 this year."
-      explenation_link: "host one yourselves."
-      select_city: "Select city"
-      no_salon1: "Couldn't find a place?"
-      no_salon2: "Why don't you host one yourself for you and your friends? Out staff will help you with planning the evening and it's content."
-      no_salon_link: "Click here to sign up"
+      title: "רשימת מארחים זכרון בסלון 2016"
+      explenation1: 'שלום רב! רשימת המארחים תעלה בקרוב...'
 
-  guests:
-    register:
-      title1: "Fill in your details"
-      title2: "You'll recieve a notification when the host approves your request"
-      name: "Name"
-      email: "Email"
-      phone: "Phone number"
-      num_of_friends: "Number of +1s"
-      submit: "Send"
+  sessions:
+    new:
+      title: "הזן פרטים לכניסה לאזורך האישי"
 
   hosts:
-    new:
-      title: "I want to host"
-      explenation: "We're happy you chose to host a Memories@Home. A succesfull evening requires planning and we're here to assist. At the end of the registration you will recive answer to any questions regarding planning the evening, inviting guests, and the evening's content. Many thanks, and welcome."
-      title2: "Register as a host of Memories@Home and recieve all the details:"
-      no_script: "Sorry, your browser isn't javascript enabled. Please use a javascript enabled browser to succefully register."
-      f_name: "First name"
-      l_name: "Last name"
-      email: "Email"
-      phone: "Phone number"
-      address: "Address"
-      survivor_needed: "Need assistance finding a witness for testimonial?"
-      strangers: "Willing to host strangers"
-      max_guests: "Maximum number of guests"
-      free_text: "Anything else we need to know?"
-      need: "Need"
-      dont_need: "Don't need"
-      choose: "Choose"
-      willing: "Willing"
-      not_willing: "Not willing"
-      date: "Event date"
-      submit: "Submit"
-    success:
-      title: 'Thank you for taking part of Memories@Home!'
-      facebook_link: "Hosts Facebook group"
-      box_exp1: "This is the group of all Memories@Home hosts. This is the place to consult with us or other hosts and to share interesting ideas."
-      facebook: "Join our Facebook hosts group"
-      box_title1: "So what now?"
-      exp1: "In the following minutes you will recieve an email to the address you provided with all the detail you need to host a Memories@Home evening. Didn't recieve an email? Please contact us at zikaronbasalon@gmail.com."
-      download_title: "Download the full Memories@Home host kit"
-      download_text: "Click to download (Hebrew only): "
-      download_text1: "Host kit with discussion suggestions"
-      download_text2: "thought provoking material"
-      download_text3: "sign for the event"
-      download_text4: "certificate for survivor"
-      download_kit: "Download kit"
-    send_request:
-      request_sent: "You request has been submitted!"
-      subtitle: "You'll recieve a confirmation message in the following days"
-      link1: "Our Facebook page"
-      link2: "The Memories@Home website"
+    edit:
+      title: "כמה פרטים עליך"
+      subtitle: "כדי שנוכל לעזור לך לתכנן ערב מוצלח"
+      phone: "טלפון"
+      hosted_before: "האם אירחת בעבר ערב של זיכרון בסלון"
+      hosted_before_yes: "אירחתי בעבר"
+      hosted_before_no: "פעם ראשונה"
+      organization: "האם את/ה מייצג/ת ארגון?"
+      org_help_block: "*חשוב לשים לב כי יש לרשום כל סלון בנפרד"
+      org_name: "שם הארגון"
+      address: "כתובת"
+      address_route_error: "כתובת חייבת לכלול רחוב"
+      address_street_number_error: "כתובת חייבת לכלול מספר בית"
+      floor: "קומה"
+      elevator: "מעלית"
+      ground_floor: "קומת קרקע"
+      event_date: "תאריך הערב"
+      event_date_help_block: "אנו מציעים לקיים את האירוע בערב יום הזיכרון לשואה ולגבורה, איך ניתן לקיים אירועי זיכרון בסלון גם בזמנים אחרים. אל תדאג/י, תמיד תוכל/י לשנות את הפרטים בפרופיל האישי שלך."
+      event_date_placeholder: "בחר/י תאריך"
+      event_time: "שעה משוערת"
+      event_time_help_block: "לא חייבים להכניס שעה, אבל זה יעזור לאורחים והעדים שרוצים להתכונן מראש ולדעת להגיע אליכם"
+      event_language: "השפה בה יתנהל הערב"
+      survivor_needed: "האם את/ה צריכ/ה עזרה במציאות איש/אשת עדות?"
+      survivor_needed_help_block: "לצערנו, אין ביכולתנו להבטיח הגעה של איש עדות ואנו מעודדים לחפש עדות באופן עצמאי. תוכל/י למצוא באתר שלנו גם עדויות מצולמות וכתובות."
+      strangers: "האם את/ה מתכננ/ת סלון פתוח או סגור?"
+      strangers_help_block: "בבחירת סלון פתוח, תוכל/י לקבל בקשות מאורחים דרך האתר. אל דאגה, תמיד אפשר לשנות."
+      strangers_yes: "סלון פתוח"
+      strangers_no: "אירוע פרטי"
+      max_guests: "כמה אורחים תוכל/י לארח בסלון?"
+      max_guests_help_block: "הכוונה היא לאורחים שיגיעו דרך האתר שלנו - את חברייך תוכל להזמין עצמאית בסיום ההרשמה."
+      public_text: "יש משהו שתרצה לשתף עם אורחיך?"
+      free_text: "עוד משהו שאנחנו צריכים לדעת?"
+      finish: "סיום הרשמה"
+      thanks_for_joining: "שמחים שהצטרפת לאלפי מארחי זיכרון בסלון ברחבי הארץ והעולם"
+      facebook_share: "שיתוף בפייסבוק"
+      build_evening: "בניית הערב שלך"
+    show:
+      title: "פרופיל מארח"
+      personal_details: "פרטים אישיים"
+      evening_details: "פרטים על הערב"
+      labels:
+        registration_time: "זמן הרשמה"
+        name: "שם"
+        phone: "טלפון"
+        email: "מייל"
+        address: "כתובת"
+        date_and_time: "תאריך ושעה משוערת"
+        organization: "שייך לארגון"
+        langauge: "שפה"
+        accesability: "נגישות הסלון"
+        salon_type: "סוג סלון"
+        open_places: "מקומות פנויים"
+        public_text: "הערות למתארחים"
+
+  witnesses:
+    types:
+      survivor: "ניצול"
+      academia: "אקדמיה"
+      second_generation: "דור שני"
+      therapist: "מטפל"
+
+
+

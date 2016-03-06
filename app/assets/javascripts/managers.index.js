@@ -15,7 +15,6 @@ app.controller('ManagerIndexController', ['$scope','$http', function($scope, $ht
   		}
   	}).then(function(response) {
   		var manager = response.data;
-  		console.log(manager);
   		var i = _.findIndex($scope.managers, { temp_email: manager.temp_email });
   		if (i > -1) {
   			$scope.managers[i] = manager;
@@ -34,6 +33,18 @@ app.controller('ManagerIndexController', ['$scope','$http', function($scope, $ht
   $scope.placeChanged = function() {
   	$scope.city = getPlaceLocality($scope.autocomplete.getPlace());
     $scope.$apply();
+  }
+
+  $scope.removeCity = function(manager, city) {
+    $http.post('/managers/' + manager.id + '/remove_city', {
+      city_id: city.id
+    }).then(function(response) {
+      var manager = response.data;
+      var i = _.findIndex($scope.managers, { temp_email: manager.temp_email });
+      if (i > -1) {
+        $scope.managers[i] = manager;
+      }
+    });
   }
 
   function getPlaceLocality(place) {

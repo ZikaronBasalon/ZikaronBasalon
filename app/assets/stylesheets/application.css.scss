@@ -315,6 +315,38 @@ header {
 	}
 }
 
+.tag {
+	@include flexbox((
+  	display: flex,
+  	justify-content: center,
+  	align-items: center
+	));
+
+	padding-left: 3px;
+	padding-right: 3px;
+	display: inline-block;
+	border: 1px solid gray;
+	position: relative;
+
+	.glyphicon {
+		cursor: pointer;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 body.he {
 	//direction: rtl;

@@ -26,7 +26,10 @@
         <td>{{ manager.user ? manager.user.full_name : 'לא רשום' }}</td>
         <td>{{ manager.user ? manager.user.email : manager.temp_email }}</td>
         <td>
-          <span ng-repeat="city in manager.cities">{{city.name}} |</span>
+          <span ng-repeat="city in manager.cities" class="tag">
+            {{city.name}}
+            <span class="glyphicon glyphicon-remove" ng-click="removeCity(manager, city)"></span>
+          </span>
 
         </td>
       </tr>
