@@ -37,7 +37,7 @@ class ManagersController < ApplicationController
 
   def destroy
     @manager.destroy
-    respond_with(@manager)
+    render :json => @manager.to_json
   end
 
   def remove_city

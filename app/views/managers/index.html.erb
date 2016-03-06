@@ -19,6 +19,7 @@
         <th>שם</th>
         <th>מייל</th>
         <th>ערים</th>
+        <th>פעולות</th>
       </tr> 
     </thead>
     <tbody>
@@ -30,7 +31,9 @@
             {{city.name}}
             <span class="glyphicon glyphicon-remove" ng-click="removeCity(manager, city)"></span>
           </span>
-
+        </td>
+        <td>
+          <button type="button" class="btn btn-danger" ng-click="deleteManager(manager)">מחק מארח</button>
         </td>
       </tr>
     </tbody>

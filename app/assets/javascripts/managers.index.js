@@ -47,6 +47,18 @@ app.controller('ManagerIndexController', ['$scope','$http', function($scope, $ht
     });
   }
 
+  $scope.deleteManager = function(manager) {
+    var dialog = confirm("בטוח בטוח??");
+    if (dialog == true) {
+        $http.delete('managers/' + manager.id)
+        .then(function(response) {
+          $scope.managers = _.filter($scope.managers, function(manager) { 
+            return manager.id !== response.data.id 
+          });
+        });
+    }
+  }
+
   function getPlaceLocality(place) {
   	return _.filter(place.address_components, function(component) { 
   		return _.includes(component.types, 'locality');
