@@ -1,17 +1,16 @@
 class PagesController < ApplicationController
   include PagesHelper
   def home
-  	@page = params[:page] || 1
-  	@hosts = Host.page(@page).per(2).where(host_conditions_hash)
-  	@total_pages = @hosts.total_pages
+  	@hosts = Host.page(params[:page] || 1).per(2).where(host_conditions_hash)
+  	@total_items = @hosts.total_count
   	@cities = City.all
 
   	respond_to do |format|
 		  format.json { render json: { 
 			  	hosts: @hosts, 
 			  	cities: @cities, 
-			  	total_pages: @total_pages,
-			  	page: @page
+			  	total_items: @hosts.total_count,
+			  	page: params[:page] || 1
 			  } 
 		  }
 		  format.html

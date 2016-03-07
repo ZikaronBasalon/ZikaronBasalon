@@ -1,7 +1,13 @@
 <div id="signup-container">
+
   <div class="text-center title-container">
-    <div class="title"><%= t '.title' %></div>
-    <div class="text-justify"><%= t '.description' %></div>
+    <% if params[:type] === 'host' %>
+      <div class="title"><%= t '.title' %></div>
+      <div class="text-justify"><%= t '.description' %></div>
+    <% else %>
+      <div class="title">הרשמת מוביל/ת קהילה זיכרון בסלון</div>
+      <div class="text-justify">נא להרשם עם כתובת המייל אליה קיבלת את ההודעה על היותך מוביל קהילה.</div>
+    <% end %>
   </div>
 
   <form ng-controller="UserSignupController"
