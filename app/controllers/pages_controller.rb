@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   include PagesHelper
   def home
-  	@hosts = Host.page(params[:page] || 1).per(2).where(host_conditions_hash)
+  	@hosts = Host.page(params[:page] || 1).per(10).where(host_conditions_hash)
   	@total_items = @hosts.total_count
   	@cities = City.all
 

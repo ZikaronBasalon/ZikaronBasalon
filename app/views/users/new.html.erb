@@ -2,11 +2,11 @@
 
   <div class="text-center title-container">
     <% if params[:type] === 'host' %>
-      <div class="title"><%= t '.title' %></div>
-      <div class="text-justify"><%= t '.description' %></div>
+      <h2><%= t '.title' %></h2>
+      <div class="description"><%= t '.description' %></div>
     <% else %>
-      <div class="title">הרשמת מוביל/ת קהילה זיכרון בסלון</div>
-      <div class="text-justify">נא להרשם עם כתובת המייל אליה קיבלת את ההודעה על היותך מוביל קהילה.</div>
+      <h2>הרשמת מוביל/ת קהילה זיכרון בסלון</h2>
+      <div class="description">נא להרשם עם כתובת המייל אליה קיבלת את ההודעה על היותך מוביל קהילה.</div>
     <% end %>
   </div>
 
