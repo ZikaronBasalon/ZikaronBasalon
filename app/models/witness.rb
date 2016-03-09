@@ -7,6 +7,8 @@ class Witness < ActiveRecord::Base
   belongs_to :city
   belongs_to :host
 
+  default_scope { includes(:city) }
+
   def city_name
   	city.try(:name)
   end

@@ -1,5 +1,6 @@
 //= require lib/utils
 //= require config/constants
+//= require directives/managerLink
 
 app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$location', function($scope, $uibModal, $http, $location) {
   $scope.hosts = [];
@@ -124,6 +125,12 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
 
   $scope.setSortProp = function(prop) {
     $scope.sortProp = prop;
+  }
+
+  $scope.getManager = function(obj) {
+    return obj.city && obj.city.managers
+      ? obj.city.managers[0]
+      : {};
   }
 
   function activeFilter(filter) {
