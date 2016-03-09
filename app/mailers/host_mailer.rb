@@ -1,5 +1,5 @@
 # encoding: UTF-8
-class HostMailer < ActionMailer::Base
+class HostMailer < BaseMailer
 	include Sidekiq::Worker
   include Roadie::Rails::Automatic
   layout 'mailer_default'
