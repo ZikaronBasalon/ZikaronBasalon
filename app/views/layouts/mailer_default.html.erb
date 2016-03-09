@@ -1,34 +1,93 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<%= stylesheet_link_tag "mailer_default" %>
-		<meta charset="utf-8">
-	</head>
-	<body>
-		<div id="content">
-			<h1>זכרון בסלון</h1>
-			<%= yield %>
-		</div>
-		<div class="footer">
-			<table>
-				<tr>
-					<td class="facebook">
-						זכרון בסלון בפייסבוק
-					</td>
-					<td class="mail-and-website">
-						<table>
-							<tr>
-								<td>zikaronbasalon@gmail.com</td>
-							</tr>
-							<tr>
-								<td>
-									www.zikaronbasalon.com
-								</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-			</table>
-		</div>
-	</body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<%= stylesheet_link_tag "mailer_default" %>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width"/>
+</head>
+<body>
+	<table class="body">
+		<tr>
+			<td class="center" align="center" valign="top">
+        <center>
+
+          <table class="row header">
+            <tr>
+              <td class="center" align="center">
+                <center>
+
+                  <table class="container">
+                    <tr>
+                      <td class="wrapper last">
+
+                        <table class="twelve columns">
+                          <tr>
+                            <td class="six sub-columns">
+                              <%= image_tag "logo.png" %>
+                            </td>
+                            <td class="six sub-columns last" style="text-align:left; vertical-align:middle;">
+                              <span class="template-label">BASIC</span>
+                            </td>
+                            <td class="expander"></td>
+                          </tr>
+                        </table>
+
+                      </td>
+                    </tr>
+                  </table>
+                </center>
+              </td>
+            </tr>
+          </table>
+
+          <table class="container">
+            <tr>
+              <td>
+
+                <table class="row">
+                  <tr>
+                    <td class="wrapper last">
+
+                      <table class="twelve columns">
+                        <tr>
+                          <td>
+                            <%= yield %>
+                          </td>
+                          <td class="expander"></td>
+                        </tr>
+                      </table>
+
+                    </td>
+                  </tr>
+                </table>
+
+                <table class="row">
+                  <tr>
+                    <td class="wrapper last">
+
+                      <table class="twelve columns">
+                        <tr>
+                          <td align="center">
+                            <center>
+                              <p style="text-align:center;"><a href="#">Terms</a> | <a href="#">Privacy</a> | <a href="#">Unsubscribe</a></p>
+                            </center>
+                          </td>
+                          <td class="expander"></td>
+                        </tr>
+                      </table>
+
+                    </td>
+                  </tr>
+                </table>
+
+              <!-- container end below -->
+              </td>
+            </tr>
+          </table>
+
+        </center>
+			</td>
+		</tr>
+	</table>
+</body>
 </html>
