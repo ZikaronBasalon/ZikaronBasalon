@@ -7,7 +7,7 @@ class HostsController < ApplicationController
   end
 
   def new
-    @host = Host.new
+    redirect_to signup_path(type: 'host')
   end
 
   def show
