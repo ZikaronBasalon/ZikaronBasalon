@@ -1,5 +1,12 @@
 <div class="col-xs-12" id="manager-index" ng-controller="ManagerIndexController"
-     ng-init="init(<%= @managers.to_json(:include => [:cities, :user]) %>)">
+     ng-init="init(<%= @managers.to_json(:include => [:cities, :user]) %>, <%= @cities_without_manager.to_json %>)">
+
+  <div class="margin-bottom-20">
+    <span>ערים בלי מוביל:</span>
+    <span ng-repeat="city in citiesWithoutManager" class="tag">
+      {{city.name}}
+    </span>
+  </div>
 
   <form class="form-inline" ng-submit="createManager()">
     <div class="form-group">

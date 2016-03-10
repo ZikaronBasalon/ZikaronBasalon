@@ -2,8 +2,9 @@ app.controller('ManagerIndexController', ['$scope','$http', function($scope, $ht
   $scope.managers = [];
   $scope.city;
 
-  $scope.init = function(managers) {
+  $scope.init = function(managers, citiesWithoutManager) {
     $scope.managers = managers;
+    $scope.citiesWithoutManager = citiesWithoutManager;
     $scope.initCityInput();
   }
 
