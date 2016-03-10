@@ -30,9 +30,13 @@ function formatBool(value) {
 	return value ? 'כן' : 'לא';
 }
 
+function formatElevatorBool(value) {
+  return value ? 'יש מעלית' : 'אין מעלית'
+}
+
 
 function getAccesability(host) {
-  return "קומה " + host.floor + "," + formatBool(host.elevator);
+  return "קומה " + host.floor + ", " + formatElevatorBool(host.elevator);
 }
 
 function formatStrangers(strangers) {
