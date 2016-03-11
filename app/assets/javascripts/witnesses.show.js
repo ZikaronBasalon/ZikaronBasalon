@@ -1,5 +1,7 @@
 //= require lib/utils
 //= require config/constants
+//= require directives/commentForm
+//= require directives/commentList
 
 app.controller('WitnessShowController', ['$scope', '$http', function($scope, $http) {
 	$scope.formatDateTime = formatDateTime;
@@ -12,6 +14,7 @@ app.controller('WitnessShowController', ['$scope', '$http', function($scope, $ht
 
 	$scope.init = function(witness) {
 		$scope.witness = witness;
+		$scope.comments = witness.comments;
 	}
 
 	$scope.back = function() {
@@ -32,4 +35,7 @@ app.controller('WitnessShowController', ['$scope', '$http', function($scope, $ht
   	})
 	}
 
+	$scope.commentCallback = function(response) {
+		$scope.comments.push(response.data);
+	}
 }]);
