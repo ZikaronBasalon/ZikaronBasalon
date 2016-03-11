@@ -1,4 +1,8 @@
 ZikaronBasalon::Application.routes.draw do
+  get "comments/index"
+
+  get "comments/new"
+
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/  do
     devise_for :users, controllers: { registrations: "registrations" }
     resources :managers do
@@ -10,9 +14,14 @@ ZikaronBasalon::Application.routes.draw do
     resources :users, only: [:new]
     resources :witnesses do
       get :assign, on: :member
+      resources :comments
     end
+    
     match 'signup', :to => 'users#new', as: :signup
-    resources :hosts 
+    
+    resources :hosts do
+      resources :comments
+    end
 
     get "pages/home"
     root :to => 'pages#home'

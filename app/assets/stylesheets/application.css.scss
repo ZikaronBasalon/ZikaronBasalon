@@ -435,7 +435,7 @@ body.he {
 		a{
 			text-decoration: none;
 			color: #a9a9a9;
-			&:visited {olor: #a9a9a9;}
+			&:visited {color: #a9a9a9;}
 		}
 		.part {
 			display: inline;
@@ -449,6 +449,40 @@ body.he {
 		line-height: 60px;
 	}
 
+.comment-list {
+	p {
+	    margin: 0 0 1em;
+	}
+
+	.comment {
+	    overflow: hidden;
+	    padding: 0 0 1em;
+	    border-bottom: 1px solid #ddd;
+	    margin: 0 0 1em;
+	    *zoom: 1;
+	}
+	.comment-body {
+	    overflow: hidden;
+	}
+
+	.comment .text {
+	    padding: 10px;
+	    border: 1px solid #e5e5e5;
+	    border-radius: 5px;
+	    background: #fff;
+	}
+
+	.comment .text p:last-child {
+	    margin: 0;
+	}
+
+	.comment .attribution {
+	    height: 10px;
+	    padding: 10px;
+	    font-size: 14px;
+	    color: #666;
+	}
+}
 
 	// .title {
 	// 	color: #3b3b3b;

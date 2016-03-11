@@ -6,6 +6,7 @@ class Witness < ActiveRecord::Base
 
   belongs_to :city
   belongs_to :host
+  has_many :comments, as: :commentable
 
   default_scope { includes(:city) }
 
