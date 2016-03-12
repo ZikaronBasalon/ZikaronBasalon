@@ -179,11 +179,11 @@ app.controller('HostEditController', ['$scope','$http','$uibModal', function($sc
 
 	function validateAddress() {
 		if(!getAddressComponent($scope.result, "route").length) {
-			$scope.stepTwo.address.$setValidity('route', false);
+			//$scope.stepTwo.address.$setValidity('route', false);
 		}
 
 		if(!getAddressComponent($scope.result, "street_number").length) {
-			$scope.stepTwo.address.$setValidity('street_number', false);
+			//$scope.stepTwo.address.$setValidity('street_number', false);
 		}
 	}
 
