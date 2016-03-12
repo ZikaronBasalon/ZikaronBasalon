@@ -1,62 +1,87 @@
+<div class="col-xs-12 home-page">
+  <div class="row">
+    <div class="col-xs-12 text-center">
+      <h3><%= t '.title' %></h3>
+      <p class="subtitle"><%= simple_format(t '.subtitle') %></p>
+    </div>
 
-<div class="col-xs-12">
-  <h3 class="text-center">ברוכים הבאים לזיכרון בסלון</h3>
-  <p>
-    בנתיים אנחנו פתוחים רק להרשמת מארחים. תחזרו בקרוב לעדכונים!
-  </p>
-</div>
-
-<div class="col-xs-12" ng-controller="HomePageController"
+    <div class="col-xs-12" ng-controller="HomePageController"
      ng-init="init(<%= @hosts.to_json(:include => [:user, :city]) %>,
                    <%= @cities.to_json %>, <%= @total_items %>)">
 
-  <form class="form-inline">
-    <div class="form-group">
-      <input type="text" class="form-control" ng-model="search.query" placeholder="חיפוש חופשי" />
+      <!-- Filters -->
+      <form class="form-inline margin-bottom-20">
+        <span class="margin-left-10"><%= t 'shared.filter_by' %>:</span>
+
+        <div class="form-group">
+          <select class="form-control city-select" ng-model="search.city_id"
+                  ng-options="o.id as o.name for o in cities"
+                  ng-change="filter()">
+            <option value=""><%= t 'shared.city' %></option>
+          </select>
+        </div> 
+
+        <div class="form-group">
+          <select class="form-control" ng-model="search.city_id"
+                  ng-options="o.id as o.name for o in cities"
+                  ng-change="filter()">
+            <option value=""><%= t 'shared.language' %></option>
+            <option value="hebrew">עברית</option>
+            <option value="english">English</option>
+            <option value="arabic">العربية</option>
+            <option value="french">Français</option>
+            <option value="russian">русский</option>
+            <option value="other"><%= t 'shared.other' %></option>
+          </select>
+        </div> 
+
+        <div class="form-group pull-left">
+          <input type="text" class="form-control" ng-model="search.query" placeholder="חיפוש חופשי" />
+        </div>
+      </form>
+
+      <div class="salon-count">
+        <span class="count">{{ totalItems }}</span>
+        <span><%= t '.zb_salons' %></span>
+      </div>
+
+      <table class="table host-table">
+        <thead>
+          <tr>
+            <th>שם</th>
+            <th>יישוב</th>
+            <th>כתובת</th>
+            <th>תאריך</th>
+            <th>שפה</th>
+            <th></th>
+          </tr> 
+        </thead>
+        <tbody>
+          <tr ng-repeat="host in hosts">
+            <td>{{ host.user.full_name }}</td>
+            <td>{{ host.city.name }}</td>
+            <td>{{ host.address }}</td>
+            <td>{{ formatDate(host.event_date) }}</td>
+            <td>{{ host.language }}</td>
+            <td>
+              <button class="btn btn-warning"
+                      ng-click="requestInvite(host)">
+                שלח/י בשקה
+              </button>
+          </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <uib-pagination total-items="totalItems" 
+                      ng-model="currentPage" 
+                      ng-change="pageChanged()">
+      </uib-pagination>
     </div>
-
-    <div class="form-group">
-      <select class="form-control" ng-model="search.city_id"
-              ng-options="o.id as o.name for o in cities"
-              ng-change="filter()">
-        <option value="">יישוב</option>
-      </select>
-    </div> 
-  </form>
-
-  <table class="table host-table">
-    <thead>
-      <tr>
-        <th>שם</th>
-        <th>יישוב</th>
-        <th>כתובת</th>
-        <th>תאריך</th>
-        <th>שפה</th>
-        <th></th>
-      </tr> 
-    </thead>
-    <tbody>
-      <tr ng-repeat="host in hosts">
-        <td>{{ host.user.full_name }}</td>
-        <td>{{ host.city.name }}</td>
-        <td>{{ host.address }}</td>
-        <td>{{ formatDate(host.event_date) }}</td>
-        <td>{{ host.language }}</td>
-        <td>
-          <button class="btn btn-warning"
-                  ng-click="requestInvite(host)">
-            שלח/י בשקה
-          </button>
-      </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <uib-pagination total-items="totalItems" 
-                  ng-model="currentPage" 
-                  ng-change="pageChanged()">
-  </uib-pagination>
+  </div>
 </div>
+
+
 
 
 
