@@ -7,7 +7,7 @@ class HostsController < ApplicationController
   end
 
   def new
-    @host = Host.new
+    redirect_to signup_path(type: 'host')
   end
 
   def show
@@ -29,7 +29,7 @@ class HostsController < ApplicationController
     @host.update_attributes(params[:host])
 
     if params[:finalStep] && !@host.received_registration_mail
-      ZbMailer.registration(@host.user.id)
+      HostMailer.new_host(@host.user.id).deliver
       @host.update_attributes(received_registration_mail: true)
     end
 

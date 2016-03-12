@@ -11,6 +11,14 @@ class Manager < ActiveRecord::Base
 
  	 validates_uniqueness_of :temp_email
 
+   def get_hosts
+     user.admin? ? Host.all : hosts
+   end
+
+   def get_witnesses
+     user.admin? ? Witness.all : witnesses
+   end
+
   def city_name=(name)
   	city = City.find_or_create_by_name(name) if name.present?
   	self.cities.push(city)

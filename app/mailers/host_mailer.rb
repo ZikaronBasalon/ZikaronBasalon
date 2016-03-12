@@ -1,5 +1,5 @@
 # encoding: UTF-8
-class HostMailer < ActionMailer::Base
+class HostMailer < BaseMailer
 	include Sidekiq::Worker
   include Roadie::Rails::Automatic
   layout 'mailer_default'
@@ -10,13 +10,9 @@ class HostMailer < ActionMailer::Base
   	mail :to => manager_email, :subject => "מארח חדש בעירך"
   end
 
-  def new_host(host_id)
-  	@host = Host.find(host_id)
-    attachments['חומרים_מעוררי_מחשבה.pdf'] = File.read("#{Rails.root}/public/kit/thought_provoking_material.pdf")
-    attachments['ערכה_למארח.pdf'] = File.read("#{Rails.root}/public/kit/host_kit.pdf")
-    attachments['שלט_לאירוע.pdf'] = File.read("#{Rails.root}/public/kit/event_sign.pdf")
-    attachments['תעודת_הוקרה_לאיש_עדות.pdf'] = File.read("#{Rails.root}/public/kit/certificate.pdf")
-  	mail :to => @host.email, :subject => "ברכות על הצטרפותך!"
+  def new_host(user_id)
+  	@user = User.find(user_id)
+  	mail :to => @user.email, :subject => t('host_mailer.new_host.subject')
   end
 
   def host_kit(host_id)

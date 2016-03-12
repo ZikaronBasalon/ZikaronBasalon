@@ -5,7 +5,20 @@
       <p class="subtitle"><%= simple_format(t '.subtitle') %></p>
     </div>
 
+<<<<<<< HEAD
     <div class="col-xs-12" ng-controller="HomePageController"
+=======
+<div class="col-xs-12 text-center">
+  <h3>ברוכים הבאים לזיכרון בסלון</h3>
+  <p>
+    בנתיים אנחנו פתוחים רק להרשמת מארחים. תחזרו בקרוב לעדכונים!
+  </p>
+</div>
+
+
+<% if false %>
+<div class="col-xs-12" ng-controller="HomePageController"
+>>>>>>> master
      ng-init="init(<%= @hosts.to_json(:include => [:user, :city]) %>,
                    <%= @cities.to_json %>, <%= @total_items %>)">
 
@@ -80,6 +93,7 @@
     </div>
   </div>
 </div>
+<% end %>
 
 
 

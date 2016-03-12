@@ -46,6 +46,8 @@ module ZikaronBasalon
     config.active_support.escape_html_entities_in_json = true
     
     config.action_mailer.default_url_options = { host: 'zikaronbasalon.herokuapp.com' }
+    config.action_mailer.perform_deliveries = true
+    config.action_mailer.raise_delivery_errors = true
 
     # Use SQL instead of Active Record's schema dumper when creating the database.
     # This is necessary if your schema can't be completely dumped by the schema dumper,

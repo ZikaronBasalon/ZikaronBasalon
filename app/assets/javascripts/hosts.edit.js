@@ -208,6 +208,6 @@ app.controller('HostSignupFinishedModal', ['$scope', '$uibModalInstance',
   };
 
   $scope.buildEvening = function () {
-   window.location = 'http://www.zikaronbasalon.com/';
+   window.location = 'http://www.zikaronbasalon.com/#!eveningsetup/c1hap';
   };
 }]);

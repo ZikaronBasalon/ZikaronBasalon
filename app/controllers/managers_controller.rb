@@ -7,6 +7,7 @@ class ManagersController < ApplicationController
 
   def index
     @managers = Manager.includes(:cities, :user).all 
+    @cities_without_manager = City.without_managers
     respond_with(@managers)
   end
 
@@ -24,7 +25,11 @@ class ManagersController < ApplicationController
 
   # Creates a temp Manager and assigns him with a City
   def create
-    @manager = Manager.find_or_create_by_temp_email(params[:manager][:temp_email])
+    @manager = Manager.find_or_initialize_by_temp_email(params[:manager][:temp_email])
+    if @manager.new_record?
+      @manager.save!
+      ManagerMailer.new_manager(@manager.temp_email).deliver
+    end
     city = City.find_or_create_by_name(params[:manager][:city_name])
     CommunityLeadership.find_or_create_by_manager_id_and_city_id(manager_id: @manager.id, city_id: city.id)
     render :json => @manager.to_json( :include => [:cities, :user] )

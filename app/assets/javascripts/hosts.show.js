@@ -1,4 +1,6 @@
 //= require lib/utils
+//= require directives/commentForm
+//= require directives/commentList
 
 app.controller('HostShowController', ['$scope', '$http', function($scope, $http) {
 	$scope.formatDateTime = formatDateTime;
@@ -10,6 +12,7 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 
 	$scope.init = function(host) {
 		$scope.host = host;
+		$scope.comments = host.comments;
 	}
 
 	$scope.back = function() {
@@ -28,4 +31,7 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
   	})
 	}
 
+	$scope.commentCallback = function(response) {
+		$scope.comments.push(response.data);
+	}
 }]);

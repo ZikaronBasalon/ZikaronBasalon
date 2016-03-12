@@ -1,5 +1,5 @@
 <div class="col-xs-12" ng-controller="ManagerShowController"
-     ng-init="init(<%= @manager.hosts.to_json(:include => [:user, :witness, :city]) %>, <%= @manager.witnesses.to_json(:include => :city) %>)">
+     ng-init="init(<%= @manager.get_hosts.to_json(:include => [:user, :witness, city: { :include => :managers }]) %>, <%= @manager.get_witnesses.to_json(:include => { city: { :include => :managers } }) %>)">
 
   <!-- View toggle buttons -->
   <div class="text-center margin-bottom-20">
@@ -91,6 +91,9 @@
               <%= t 'shared.strangers_allowed' %>
               <span class="caret" ng-if="sortProp === 'strangers'"></span>
             </th>
+            <% if current_user.admin? %>
+              <th><%= t 'shared.manager' %></th>
+            <% end %>
           </tr> 
         </thead>
         <tbody>
@@ -104,6 +107,11 @@
             <td>{{ formatBool(host.survivor_needed) }}</td>
             <td>{{ formatBool(host.has_survivor) }}</td>
             <td>{{ formatBool(host.strangers) }}</td>
+            <% if current_user.admin? %>
+              <td>
+                <div manager-link obj="host"></div>
+              </td>
+            <% end %>
           </tr>
         </tbody>
       </table>
@@ -201,6 +209,9 @@
               <%= t 'shared.special_population' %>
               <span class="caret" ng-if="sortProp === 'special_population'"></span>
             </th>
+            <% if current_user.admin? %>
+              <th><% t 'shared.manager' %></th>
+            <% end %>
           </tr> 
         </thead>
         <tbody>
@@ -214,6 +225,11 @@
             <td>{{ formatBool(witness.seminar_required) }}</td>
             <td>{{ witness.concept }}</td>
             <td>{{ formatBool(witness.special_population) }}</td>
+            <% if current_user.admin? %>
+              <td>
+                <div manager-link obj="witness"></div>
+              </td>
+            <% end %>
           </tr>
         </tbody>
       </table>

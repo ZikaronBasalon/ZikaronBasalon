@@ -1,5 +1,6 @@
 //= require lib/utils
 //= require config/constants
+//= require directives/managerLink
 
 app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$location', function($scope, $uibModal, $http, $location) {
   $scope.hosts = [];
@@ -24,8 +25,8 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
     $scope.witnesses = witnesses;
     
     $scope.cities = _.map(
-      _.uniqBy($scope.hosts, function(host) { return host.city.name }),
-      function(host) { return host.city }
+      _.uniqBy($scope.hosts, function(host) { if(host.city) return host.city.name }),
+      function(host) { if(host.city) { return host.city } }
     );
   }
 
@@ -55,8 +56,8 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
         return false;
       }
 
-      if(activeFilter($scope.search.host.city_id) &&
-         $scope.search.host.city_id !== host.city.id) {
+      if(activeFilter($scope.search.host.city_id) && 
+        (!host.city || $scope.search.host.city_id !== host.city.id)) {
         return false;
       }
 
@@ -124,6 +125,12 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
 
   $scope.setSortProp = function(prop) {
     $scope.sortProp = prop;
+  }
+
+  $scope.getManager = function(obj) {
+    return obj.city && obj.city.managers
+      ? obj.city.managers[0]
+      : {};
   }
 
   function activeFilter(filter) {

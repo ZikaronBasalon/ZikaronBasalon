@@ -13,7 +13,6 @@ gem 'newrelic_rpm'
 gem 'kaminari'
 gem 'sidekiq'
 gem 'figaro'
-gem 'sendgrid-ruby'
 gem 'roadie'
 gem 'roadie-rails'
 gem 'party_foul'
@@ -26,6 +25,7 @@ group :development do
   gem 'byebug'
   gem 'test-unit'
   gem 'seed_dump'
+  gem 'letter_opener'
 end
 
 group :assets do
