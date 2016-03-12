@@ -1,0 +1,22 @@
+<div class="col-xs-12 request-invite">
+	<span class="glyphicon glyphicon-remove" ng-click="close()"></span>
+	<div ng-if="<%= current_user.nil? %>" class="register">
+		<div ng-show="view === 'register'">
+			<%= render "guests/register" %>
+		</div>
+
+		<div ng-show="view === 'login'">
+			<%= render "guests/login" %>
+		</div>
+	</div>
+
+	<div ng-if="!<%= current_user.nil? %> && view !=='success'">
+		<%= render "guests/request" %>
+	</div>
+
+	<div ng-if="view ==='success'">
+		<%= render "guests/request_successful" %>
+	</div>
+
+
+</div>

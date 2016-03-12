@@ -1,4 +1,8 @@
+//= require request-invite
+
 .home-page {
+	font-size: 16px;
+
   .form-inline {
     select, input {
       width: 164px;
@@ -7,5 +11,16 @@
     .city-select {
       margin-left: 33px;
     }
+  }
+
+  .salon-count {
+  	span {
+  		font-size: 16px;
+  	}
+
+  	.count {
+  		font-weight: 700;
+			font-size: 24px;
+  	}
   }
 }

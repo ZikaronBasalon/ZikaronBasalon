@@ -5,21 +5,8 @@
       <p class="subtitle"><%= simple_format(t '.subtitle') %></p>
     </div>
 
-<<<<<<< HEAD
     <div class="col-xs-12" ng-controller="HomePageController"
-=======
-<div class="col-xs-12 text-center">
-  <h3>ברוכים הבאים לזיכרון בסלון</h3>
-  <p>
-    בנתיים אנחנו פתוחים רק להרשמת מארחים. תחזרו בקרוב לעדכונים!
-  </p>
-</div>
-
-
-<% if false %>
-<div class="col-xs-12" ng-controller="HomePageController"
->>>>>>> master
-     ng-init="init(<%= @hosts.to_json(:include => [:user, :city]) %>,
+          ng-init="init(<%= @hosts.to_json(:include => [:user, :city]) %>,
                    <%= @cities.to_json %>, <%= @total_items %>)">
 
       <!-- Filters -->
@@ -61,11 +48,13 @@
       <table class="table host-table">
         <thead>
           <tr>
-            <th>שם</th>
-            <th>יישוב</th>
-            <th>כתובת</th>
-            <th>תאריך</th>
-            <th>שפה</th>
+            <th><%= t 'shared.name' %></th>
+            <th><%= t 'shared.city' %></th>
+            <th><%= t 'shared.street' %></th>
+            <th><%= t 'shared.date' %></th>
+            <th><%= t 'shared.language' %></th>
+            <th><%= t 'shared.available_spaces' %></th>
+            <th><%= t 'shared.free_text' %></th>
             <th></th>
           </tr> 
         </thead>
@@ -73,28 +62,42 @@
           <tr ng-repeat="host in hosts">
             <td>{{ host.user.full_name }}</td>
             <td>{{ host.city.name }}</td>
-            <td>{{ host.address }}</td>
+            <td>{{ formatAddress(host.address) }}</td>
             <td>{{ formatDate(host.event_date) }}</td>
             <td>{{ host.language }}</td>
+            <td>???</td>
+            <td>{{ host.public_text }}</td>
             <td>
-              <button class="btn btn-warning"
+              <button class="btn-request"
                       ng-click="requestInvite(host)">
-                שלח/י בשקה
+                <%= t 'shared.send_request' %>
               </button>
           </td>
           </tr>
         </tbody>
       </table>
 
-      <uib-pagination total-items="totalItems" 
-                      ng-model="currentPage" 
-                      ng-change="pageChanged()">
-      </uib-pagination>
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <uib-pagination total-items="totalItems" 
+                          ng-model="currentPage" 
+                          ng-change="pageChanged()"
+                          class="pagination-sm" 
+                          previous-text="&lsaquo;" 
+                          next-text="&rsaquo;" 
+                          first-text="&laquo;" 
+                          last-text="&raquo;">
+          </uib-pagination>
+        </div>
+      </div>
+    
     </div>
   </div>
 </div>
-<% end %>
 
+<script type="text/ng-template" id="request-invite.html">
+  <%= render 'guests/request_invite_modal' %>
+</script>
 
 
 
