@@ -2,16 +2,27 @@
 //= require guests.login
 //= require lib/utils
 
-app.controller('RequestInviteController', ['$scope', '$http', '$uibModalInstance', 'host', 
-	function($scope, $http, $uibModalInstance, host) {
-	$scope.view = 'success';
+app.controller('RequestInviteController', ['$scope', '$http', '$uibModalInstance', 'host', 'currentUser',
+	function($scope, $http, $uibModalInstance, host, currentUser) {
+	$scope.view = 'register';
 	$scope.host = host;
+	$scope.currentUser = currentUser;
 	$scope.plusOnes = "0";
 
 	$scope.formatFirstName = formatFirstName;
 	$scope.getAccesability = getAccesability;
 	$scope.formatDate = formatDate;
 	$scope.formatLanguage = formatLanguage;
+
+	if (!$scope.currentUser)  {
+		$scope.view = 'register';
+	} else {
+		if ($scope.currentUser.meta.invites && $scope.currentUser.meta.invites.length > 0) {
+			$scope.view = 'error';
+		} else {
+			$scope.view = 'request';
+		}
+	}
 
 	$scope.toggleView = function(view) {
 		$scope.view = view;
@@ -44,4 +55,8 @@ app.controller('RequestInviteController', ['$scope', '$http', '$uibModalInstance
 
 		});
   };
+
+  $scope.toProfile = function () {
+  	window.location = '/guests/' + $scope.currentUser.meta.id;
+  }
 }]);

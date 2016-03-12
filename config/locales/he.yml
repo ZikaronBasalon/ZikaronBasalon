@@ -91,6 +91,8 @@ he:
     accessibility: "נגישות"
     estimated_time: "שעה משוערת"
     sending_request: "שליחת בקשה"
+    to_my_profile: "לפרופיל שלי"
+    back_to_website: "בחזרה לאתר"
 
 
   views:
@@ -258,6 +260,9 @@ he:
       subtitle: "שמחים שהצטרפת לחצי מיליון אנשים אשר בוחרים לציין את ערב יום הזיכרון לשואה בדרך שונה, אינטימית ומשמעותית"
       facebook_share: "שיתוף בפייסבוק"
       back_to_website: "בחזרה לאתר"
+    request_error: 
+      title: "יוסטון, יש לנו בעיה"
+      subtitle: "נראה שכבר הגשת בקשה אחת. על מנת להגיש בקשה חדשה, יש לבטל את הנוכחית בפרופיל שלך"
   host_mailer:
     new_host:
       subject: "ברוכים הבאים לקהילת זיכרון בסלון!"

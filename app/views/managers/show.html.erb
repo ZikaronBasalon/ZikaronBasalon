@@ -1,7 +1,7 @@
 <div class="col-xs-12" ng-controller="ManagerShowController"
      ng-init="init(<%= @manager.get_hosts.to_json(:include => [:user, :witness, city: { :include => :managers }]) %>, <%= @manager.get_witnesses.to_json(:include => { city: { :include => :managers } }) %>)">
 
-  <!-- View toggle buttons -->
+<!-- View toggle buttons -->
   <div class="text-center margin-bottom-20">
     <div class="view-toggle">
       <div ng-class="{ 'selected': activeView === 'hosts' }"

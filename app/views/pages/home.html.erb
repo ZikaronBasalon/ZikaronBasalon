@@ -7,7 +7,8 @@
 
     <div class="col-xs-12" ng-controller="HomePageController"
           ng-init="init(<%= @hosts.to_json(:include => [:user, :city]) %>,
-                   <%= @cities.to_json %>, <%= @total_items %>)">
+                   <%= @cities.to_json %>, <%= @total_items %>,
+                   <%= current_user.to_json(:include => { meta: { :include => :invites } }) %>)">
 
       <!-- Filters -->
       <form class="form-inline margin-bottom-20">

@@ -10,10 +10,12 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
   $scope.formatDate = formatDate;
   $scope.formatAddress = formatAddress;
 
-  $scope.init = function(hosts, cities, totalItems) {
+  $scope.init = function(hosts, cities, totalItems, currentUser) {
     $scope.hosts = hosts;
     $scope.cities = cities;
     $scope.totalItems = totalItems;
+    $scope.currentUser = currentUser;
+    console.log(currentUser);
 
     var hostId = getUrlParameter('invite', window.location);
     if(hostId) {
@@ -52,6 +54,9 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
       resolve: {
         host: function () {
           return host;
+        },
+        currentUser: function () {
+          return $scope.currentUser;
         }
       }
     });
