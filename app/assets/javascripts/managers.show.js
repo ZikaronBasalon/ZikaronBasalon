@@ -79,7 +79,7 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
   }
     
   $scope.sort = function(arr) {
-    return _.sortBy(arr, $scope.sortProp);
+    return _.sortBy(arr, $scope.sortProp).reverse();
   }
 
   $scope.isAccesible = function(host) {

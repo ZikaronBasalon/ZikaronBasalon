@@ -13,17 +13,17 @@ class Manager < ActiveRecord::Base
 
    def get_hosts(page, filter)
     if user.admin?
-      Host.includes(:city).page(page).per(10).where(filter)
+      Host.includes(:city).page(page).per(20).where(filter).order("created_at desc")
     else 
-      Host.includes(:city).page(page).per(10).where(:city_id => cities.pluck(:id)).where(filter)
+      Host.includes(:city).page(page).per(20).where(:city_id => cities.pluck(:id)).where(filter).order("created_at desc")
     end
    end
 
    def get_witnesses(page, filter)
     if user.admin?
-      Witness.page(page).per(10).where(filter)
+      Witness.page(page).per(20).where(filter).order("created_at desc")
     else 
-      Witness.page(page).per(10).where(:city_id => cities.pluck(:id)).where(filter)
+      Witness.page(page).per(20).where(:city_id => cities.pluck(:id)).where(filter).order("created_at desc")
     end
    end
 
