@@ -83,6 +83,7 @@ he:
     teamed: "צוות"
     not_teamed: "לא צוות"
     manager: "מוביל"
+    id: "ID"
 
 
   views:
