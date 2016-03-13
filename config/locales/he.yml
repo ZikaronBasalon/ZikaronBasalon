@@ -38,6 +38,13 @@ he:
           email: "הכנס כתובת מייל"
           password: "הכנס סיסמא"
         signin_error: "כתובת מייל או סיסמא לא נכונים"
+    passwords:
+      edit:
+        title: "שכחתי סיסמא"
+        reset_password_error: "משהו השתבש. נסה/י שנית"
+      new:
+        title: "שכחתי סיסמא"
+        password_email_sent: "ברגעים אלו נשלח אליך מייל עם הוראות לאיפוס הסיסמא"
 
 
   shared:
@@ -84,6 +91,8 @@ he:
     not_teamed: "לא צוות"
     manager: "מוביל"
     id: "ID"
+    reset_password: "אפס/י סיסמא"
+    forgot_password: "שכחתי סיסמא"
 
 
   views:

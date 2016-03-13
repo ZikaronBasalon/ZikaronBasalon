@@ -1,8 +1,4 @@
 ZikaronBasalon::Application.routes.draw do
-  get "comments/index"
-
-  get "comments/new"
-
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/  do
     devise_for :users, controllers: { registrations: "registrations" }
     resources :managers do

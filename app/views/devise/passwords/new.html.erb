@@ -1,0 +1,24 @@
+<div id="signup-container" ng-controller="ForgotPasswordController">
+  <div class="text-center title-container">
+    <div class="title"><%= t '.title' %></div>
+  </div>
+
+  <div class="alert alert-success" role="alert" ng-if="success">
+    <%= t '.password_email_sent' %>
+  </div>
+
+  <form ng-submit="submit($event)" name="passwordForm">
+    <p class="has-error" ng-show="error">
+      <%= t 'devise.passwords.edit.reset_password_error' %>
+    </p>  
+    <div class="form-group">
+      <label for="email"><%= t 'users.new.labels.email' %></label>
+      <input type="email" class="form-control"
+             id="email" placeholder="<%= t 'users.new.placeholders.email' %>"
+             ng-model="form.email"
+             required>
+    </div>
+    
+    <input type="submit" class="btn btn-warning form-control" value="<%= t 'shared.reset_password' %>">
+  </form>
+</div>
