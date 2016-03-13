@@ -12,7 +12,9 @@ class ManagersController < ApplicationController
   end
 
   def show
-    respond_with(@manager)
+    @hosts = @manager.get_hosts
+    @witnesses = @manager.get_witnesses
+    respond_with(@hosts, @witnesses)
   end
 
   def new

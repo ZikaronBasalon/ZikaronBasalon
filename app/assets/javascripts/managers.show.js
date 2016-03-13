@@ -39,40 +39,44 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
   }
 
   $scope.filterHosts = function(hosts) {
-    return _.filter(hosts, function(host) {
+    var hostFilter = {
+      survivor_needed: 
+    }
 
-      if(activeFilter($scope.search.host.survivor_needed) &&
-          $scope.search.host.survivor_needed !== host.survivor_needed) {
-        return false;
-      }
+    // return _.filter(hosts, function(host) {
 
-      if(activeFilter($scope.search.host.has_survivor) &&
-          $scope.search.host.has_survivor !== host.has_survivor) {
-        return false;
-      }
+    //   if(activeFilter($scope.search.host.survivor_needed) &&
+    //       $scope.search.host.survivor_needed !== host.survivor_needed) {
+    //     return false;
+    //   }
 
-      if(activeFilter($scope.search.host.contacted) &&
-          $scope.search.host.contacted !== host.contacted) {
-        return false;
-      }
+    //   if(activeFilter($scope.search.host.has_survivor) &&
+    //       $scope.search.host.has_survivor !== host.has_survivor) {
+    //     return false;
+    //   }
 
-      if(activeFilter($scope.search.host.city_id) && 
-        (!host.city || $scope.search.host.city_id !== host.city.id)) {
-        return false;
-      }
+    //   if(activeFilter($scope.search.host.contacted) &&
+    //       $scope.search.host.contacted !== host.contacted) {
+    //     return false;
+    //   }
 
-      if ($scope.search.host.query) { 
-        if (!_.includes(host.user.email, $scope.search.host.query) &&
-            !_.includes(host.user.full_name, $scope.search.host.query) &&
-            !_.includes(host.address, $scope.search.host.query) &&
-            !_.includes(host.phone, $scope.search.host.query)
-        ) {
-          return false;
-        }
-      }
+    //   if(activeFilter($scope.search.host.city_id) && 
+    //     (!host.city || $scope.search.host.city_id !== host.city.id)) {
+    //     return false;
+    //   }
 
-      return true;
-    });
+    //   if ($scope.search.host.query) { 
+    //     if (!_.includes(host.user.email, $scope.search.host.query) &&
+    //         !_.includes(host.user.full_name, $scope.search.host.query) &&
+    //         !_.includes(host.address, $scope.search.host.query) &&
+    //         !_.includes(host.phone, $scope.search.host.query)
+    //     ) {
+    //       return false;
+    //     }
+    //   }
+
+    //   return true;
+    // });
   }
 
   $scope.sort = function(arr) {
