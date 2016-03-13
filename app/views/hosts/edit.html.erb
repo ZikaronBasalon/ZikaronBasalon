@@ -95,23 +95,25 @@
       <!-- Step two -->
       <form name="stepTwo" ng-show="'stepTwo' === steps[stepIndex]" novalidate>
         <div class="form-group" 
-             ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.address.$invalid]">
-          <label for="address"><%= t '.address' %></label>
-          <input type="text" class="form-control"
-                 name="address"
-                 id="address"
-                 ng-model="host.address"
-                 required>
-        </div>
-
-        <div class="form-group" 
              ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.city.$invalid]">
           <label for="city"><%= t '.city' %></label>
           <input type="text" class="form-control"
                  name="city"
                  id="city"
                  ng-model="host.city_name"
+                 placeholder="<%= t '.city_placeholder' %>"
                  ng-blur="onCityNameBlur()"
+                 required>
+        </div>
+
+        <div class="form-group" 
+             ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.address.$invalid]">
+          <label for="address"><%= t '.address' %></label>
+          <input type="text" class="form-control"
+                 name="address"
+                 placeholder="<%= t '.address_placeholder' %>"
+                 id="address"
+                 ng-model="host.address"
                  required>
         </div>
 
