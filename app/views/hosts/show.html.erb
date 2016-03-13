@@ -1,5 +1,5 @@
 <div id="host-show" class="row profile" ng-controller="HostShowController"
-      ng-init="init(<%= @host.to_json(:include => [:user, :witness, comments: { :include => :user }]) %>)">
+      ng-init="init(<%= @host.to_json(:include => [:user, :witness, :city, comments: { :include => :user }]) %>)">
 
   <div class="col-xs-12">
     <h1><%= t '.title' %></h1>
@@ -35,7 +35,7 @@
 
           <div class="field-group">
             <div class="info-label"><%= t '.labels.address' %></div>
-            <div>{{ host.address }}</div>
+            <div>{{ host.address }} {{ host.city.name }}</div>
           </div>
         </div>
       </div>

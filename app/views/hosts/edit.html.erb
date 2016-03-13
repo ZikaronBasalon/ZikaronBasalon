@@ -1,5 +1,5 @@
 <div class="col-xs-12" id="host-edit-form" ng-controller="HostEditController"
-     ng-init="init(<%= @host.to_json %>)">
+     ng-init="init(<%= @host.to_json(:include => :city) %>)">
   <div class="row">
     <div class="col-xs-12">
       <div class="text-center">
@@ -14,7 +14,7 @@
       <h2><%= t '.title' %></h2>
       <p><%= t '.subtitle' %></p>
       <!-- Step one -->
-      <form name="stepOne" ng-show="'stepOne' === steps[stepIndex]" >
+      <form name="stepOne" ng-show="'stepOne' === steps[stepIndex]" novalidate>
 
         <div class="form-group">
           <label for="phone"><%= t '.phone' %></label>
@@ -93,24 +93,28 @@
       </form>
 
       <!-- Step two -->
-      <form name="stepTwo" ng-show="'stepTwo' === steps[stepIndex]" >
+      <form name="stepTwo" ng-show="'stepTwo' === steps[stepIndex]" novalidate>
         <div class="form-group" 
-             ng-class="{true: 'has-error'}[(submitted[stepIndex] && stepTwo.address.$invalid) || stepTwo.address.$error.fromList]">
+             ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.address.$invalid]">
           <label for="address"><%= t '.address' %></label>
           <input type="text" class="form-control"
                  name="address"
                  id="address"
-                 placeholder="מצדה 6, באר שבע, ישראל"
+                 placeholder="מצדה 6, קומה 2, דירה 4"
                  ng-model="host.address"
-                 ng-blur="addressFocusLost($event)"
                  required>
-          <p class="help-block" ng-show="stepTwo.address.$error.route"><%= t '.address_route_error' %></p>
-          <p class="help-block" ng-show="stepTwo.address.$error.street_number"><%= t '.address_street_number_error' %></p>
-          <p class="help-block" ng-show="stepTwo.address.$error.fromList"><%= t '.address_from_list_error' %></p>
+        </div>
 
-          <input type="hidden" ng-model="host.lat" />
-          <input type="hidden" ng-model="host.lng" />
-          <input type="hidden" ng-model="host.city_name" />
+        <div class="form-group" 
+             ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.city.$invalid]">
+          <label for="city"><%= t '.city' %></label>
+          <input type="text" class="form-control"
+                 name="city"
+                 id="city"
+                 placeholder="כפר סבא, ישראל"
+                 ng-model="host.city_name"
+                 ng-blur="onCityNameBlur()"
+                 required>
         </div>
 
 
@@ -165,7 +169,7 @@
       </form>
 
       <!-- Step three -->
-      <form name="stepThree" ng-show="'stepThree' === steps[stepIndex]" >
+      <form name="stepThree" ng-show="'stepThree' === steps[stepIndex]" novalidate>
         <div class="form-group"
              ng-class="{true: 'has-error'}[submitted[stepIndex] && stepThree.event_language.$invalid]">
           <label for="event_language"><%= t '.event_language' %></label>

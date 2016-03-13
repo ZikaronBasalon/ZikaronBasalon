@@ -1,8 +1,8 @@
 //= require directives/datePicker
 //= require directives/isPhone
 
-app.controller('HostEditController', ['$scope','$http','$uibModal',
-function($scope, $http, $uibModal) {
+app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout', 
+	function($scope, $http, $uibModal, $timeout) {
 	$scope.host = {
 		hosted_before: false
 	};
@@ -21,7 +21,7 @@ function($scope, $http, $uibModal) {
 		$scope.eventDate.isOpen = true;
 	}
 
-	$scope.autocomplete = new google.maps.places.Autocomplete($("#address")[0], { types: ['geocode'] });
+	$scope.autocomplete = new google.maps.places.Autocomplete($("#city")[0], { types: ['(cities)'] });
 	google.maps.event.addListener($scope.autocomplete, 'place_changed', getAddress);
 
 	$scope.init = function(host) {
@@ -29,7 +29,11 @@ function($scope, $http, $uibModal) {
 		$scope.organization = !!$scope.host.org_name;
 		$scope.host.event_date = new Date($scope.host.event_date);
 		$scope.host.event_time = $scope.host.event_time ? new Date($scope.host.event_time): null;
-		$scope.isAddressFromList = false;
+		if($scope.host.city) {
+			$scope.host.city_name = $scope.host.city.name;
+		}
+
+		$scope.cityFromList = false;
 	}
 
 	$scope.orgChanged = function(value) {
@@ -45,10 +49,14 @@ function($scope, $http, $uibModal) {
   	}
   }
 
-  $scope.addressFocusLost = function($event) {
-		if(!$scope.isAddressFromList) {
-			$scope.stepTwo.address.$setValidity('fromList', false);
-		}
+  $scope.onCityNameBlur = function() {
+  	$timeout(function() {
+  		if(!$scope.cityFromList) {
+  			$scope.host.city_name = null;
+  		}
+  		$scope.cityFromList = false;
+			$scope.$apply();
+  	}, 1000);
   }
 
   $scope.submitStepOne = function() {
@@ -72,8 +80,6 @@ function($scope, $http, $uibModal) {
   		$http.put('/hosts/' + $scope.host.id + '.json', {
 	  		host: {
 					address: $scope.host.address,
-					lat: $scope.host.lat,
-					lng: $scope.host.lng,
 					city_name: $scope.host.city_name,
 					floor: $scope.host.floor,
 					elevator: $scope.host.elevator,
@@ -117,23 +123,10 @@ function($scope, $http, $uibModal) {
 
 
   function getAddress() {
-  	try {
-			$scope.result = $scope.autocomplete.getPlace();
-			$scope.isAddressFromList = true;
-			$scope.stepTwo.address.$setValidity('fromList', true);
-			//$scope.stepTwo.address.$setValidity('route', true);
-			//$scope.stepTwo.address.$setValidity('street_number', true);
-			if($scope.result && 
-				 $scope.result.geometry && 
-				 $scope.result.geometry.location) {
-				handleSuccessfullGeocoding($scope.result);
-				$scope.isAddressFromList = false;
-				//validateAddress();
-			} else {
-				handleUnsuccessfullGeocoding();
-			}
-		} catch(e) {
-			handleSeriouslyUnsuccesfullGeocoding();
+		$scope.result = $scope.autocomplete.getPlace();
+		$scope.cityFromList = true;
+		if($scope.result) {
+			$scope.host.city_name = getAddressComponent($scope.result, "locality");
 		}
 		$scope.$apply();
   }
@@ -154,50 +147,7 @@ function($scope, $http, $uibModal) {
 		}
 		return locality;
 	}
-
-	function handleSuccessfullGeocoding(result) {
-		var locality = getAddressComponent(result, "locality");
-		$scope.host.address = result.formatted_address;
-		$scope.host.city_name = locality;
-		$scope.host.lat = result.geometry.location.lat();
-		$scope.host.lng = result.geometry.location.lng();	
-	}
-
-
-	function handleUnsuccessfullGeocoding() {
-		var query_text = $scope.host.address;
-		var geocoder = new google.maps.Geocoder();
-
-		geocoder.geocode({address: query_text},function (results,status) {
-			// Geocoding was successfull
-			if(status == google.maps.GeocoderStatus.OK) {
-				handleSuccessfullGeocoding(results[0]);
-			}
-			// Geocoding failed. Update with current map center
-			else {
-				handleSeriouslyUnsuccesfullGeocoding();
-			}
-		});
-	}
-
-	function handleSeriouslyUnsuccesfullGeocoding() {
-		$scope.host.city_name = 'לא ידוע';
-		$scope.host.lat = 0;
-		$scope.host.lng = 0;
-	}
-
-	function validateAddress() {
-		if(!getAddressComponent($scope.result, "route").length) {
-			//$scope.stepTwo.address.$setValidity('route', false);
-		}
-
-		if(!getAddressComponent($scope.result, "street_number").length) {
-			//$scope.stepTwo.address.$setValidity('street_number', false);
-		}
-	}
-
 }]);
-
 
 
 app.controller('HostSignupFinishedModal', ['$scope', '$uibModalInstance',
