@@ -1,5 +1,5 @@
 class ManagersController < ApplicationController
-  before_filter :set_manager, only: [:show, :edit, :update, :destroy, :remove_city]
+  before_filter :set_manager, only: [:show, :edit, :update, :destroy, :remove_city, :filter_hosts]
   before_filter :is_admin, only: [:index]
   before_filter :correct_manager, only: [:show]
 
@@ -12,7 +12,22 @@ class ManagersController < ApplicationController
   end
 
   def show
-    respond_with(@manager)
+    @page = params[:page] || 1
+    @hosts = @manager.get_hosts(@page, host_filter)
+    @cities = City.all.map{ |c| { id: c.id, name: c.name }}
+    @witnesses = @manager.get_witnesses(@page, witness_filter)
+    @total_hosts = @hosts.total_count
+    @total_witnesses = @witnesses.total_count
+    respond_to do |format|
+      format.html
+      format.json { render :json => {
+        hosts:  @hosts.to_json(:include => [:user, :witness, city: { :include => :managers }]),
+        witnesses: @witnesses.to_json(:include => { city: { :include => :managers } }),
+        total_hosts: @total_hosts,
+        total_witnesses: @total_witnesses,
+        page: @page
+      }}
+    end
   end
 
   def new
@@ -63,5 +78,13 @@ class ManagersController < ApplicationController
       return if current_user.admin?
       
       redirect_to root_path if (meta.is_a?(Manager) && meta.id != id) || !meta.is_a?(Manager)
+    end
+
+    def host_filter
+      params[:filter].try(:[], :host)
+    end
+
+    def witness_filter
+      params[:filter].try(:[], :witness)
     end
 end

@@ -11,12 +11,20 @@ class Manager < ActiveRecord::Base
 
  	 validates_uniqueness_of :temp_email
 
-   def get_hosts
-     user.admin? ? Host.all : hosts
+   def get_hosts(page, filter)
+    if user.admin?
+      Host.includes(:city).page(page).per(10).where(filter)
+    else 
+      Host.includes(:city).page(page).per(10).where(:city_id => cities.pluck(:id)).where(filter)
+    end
    end
 
-   def get_witnesses
-     user.admin? ? Witness.all : witnesses
+   def get_witnesses(page, filter)
+    if user.admin?
+      Witness.page(page).per(10).where(filter)
+    else 
+      Witness.page(page).per(10).where(:city_id => cities.pluck(:id)).where(filter)
+    end
    end
 
   def city_name=(name)
