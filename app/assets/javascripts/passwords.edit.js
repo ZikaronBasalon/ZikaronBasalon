@@ -15,9 +15,7 @@ app.controller('UpdatePasswordController', ['$scope', '$http', function($scope, 
 					reset_password_token: $scope.token
 				}
 			}).then(function(response) {
-				if(response.status === 201) {
-					window.location = '/';
-				}
+				window.location = '/';
 			}).catch(function(response) {
 				if(response.status > 400) {
 					$scope.error = true;
