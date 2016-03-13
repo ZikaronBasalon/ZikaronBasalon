@@ -13,21 +13,28 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
   $scope.formatDate = formatDate;
   $scope.formatDateTime = formatDateTime;
   $scope.witnessTypes = witnessTypes;
+  $scope.pagination = {
+    currentPage: 1
+  }
 
   $scope.sortProp = 'created_at';
 
-  $scope.init = function(hosts, witnesses, cities) {
+  $scope.init = function(currentUser, hosts, witnesses, cities, totalHosts, totalWitnesses, currentPage) {
+    $scope.currentUser = currentUser;
     $scope.hosts = _.map(hosts, function(host) {
       host.has_survivor = !!host.witness;
       return host;
     });
 
     $scope.witnesses = witnesses;
-    
-    $scope.cities = _.map(
-      _.uniqBy($scope.hosts, function(host) { if(host.city) return host.city.name }),
-      function(host) { if(host.city) { return host.city } }
-    );
+    $scope.cities = cities;
+    $scope.totalHosts = totalHosts;
+    $scope.totalWitnesses = totalWitnesses;
+    $scope.$watch("search", function(newVal, oldVal) {
+      if(newVal != oldVal) {
+        filter(1);
+      }
+    }, true);
   }
 
   $scope.editHost = function(host) {
@@ -38,10 +45,39 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
     window.open('/witnesses/' + witness.id, '_blank');
   }
 
-  $scope.filterHosts = function(hosts) {
-    var hostFilter = {
-      survivor_needed: 
-    }
+  $scope.pageChanged = function() {
+    filter($scope.pagination.currentPage);
+  }
+
+  function filter(page) {
+    var params = {
+      filter: {
+        host: getFilterKeys($scope.search.host),
+        witness: getFilterKeys($scope.search.witness)
+      },
+      page: page
+    };
+
+    $http.get('/managers/' + $scope.currentUser.meta.id + '.json' + '?' + $.param(params))
+    .then(function(response) {
+      $scope.hosts = JSON.parse(response.data.hosts);
+      $scope.witnesses = JSON.parse(response.data.witnesses);
+      $scope.pagination.currentPage = response.data.page;
+      $scope.totalHosts = response.data.total_hosts;
+      $scope.totalWitnesses = response.data.total_witnesses;
+    });
+  }
+
+  function getFilterKeys(filterObj) {
+    var filtered = {};
+    _.mapKeys(filterObj, function(value, key) {
+      if(value && value !== "") {
+        filtered[key] = value;
+      }
+    });
+    return filtered;
+  }
+    
 
     // return _.filter(hosts, function(host) {
 
@@ -77,7 +113,6 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
 
     //   return true;
     // });
-  }
 
   $scope.sort = function(arr) {
     return _.sortBy(arr, $scope.sortProp);
