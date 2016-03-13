@@ -1,0 +1,105 @@
+@import "compass/css3/flexbox";
+
+.request-invite {
+	background-color: #ffffff;
+	position: relative;
+	width: 605px;
+	padding: 20px 80px;
+
+	.register {
+		form {
+			label {
+				color: #999999;
+				font-weight: 700;
+			}
+		}
+	}
+
+	.subtitle {
+		color: #9b9b9b;
+	}
+
+	.glyphicon-remove {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		color: #d8d8d8;
+		font-size: 20px;
+		cursor: pointer;
+	}
+
+	.salon-info {
+		border-radius: 2px;
+		background-color: #f5f5f5;
+		box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.19);
+		padding: 10px 20px;
+
+		.salon-title {
+			font-size: 20px;
+			font-weight: 700;
+		}
+
+		.info-group {
+			font-size: 14px;
+			color: #000000;
+			text-align: right;
+			display: table-row;
+
+			.label, .value {
+				display: table-cell;
+				text-align: right;
+			}
+
+			.label {
+				color: #000000;
+				font-weight: 300;
+			}
+
+			.value {
+				font-weight: 600;
+			}
+		}
+	}
+
+	.plus-one-select {
+		width: 164px;
+		border-radius: 3px;
+		background-color: #ffffff;
+		border: solid 1px #cccccc;
+	}
+
+	.request-container {
+		@include flexbox((
+	  	display: flex,
+	  	flex-direction: row,
+	  	flex-grow: 1
+		));
+
+		.request-info {
+			@include flexbox((
+		  	display: flex,
+		  	flex-direction: column,
+		  	flex-grow: 1,
+		  	justify-content: space-between
+			));
+		}
+	}
+
+	.request-successful {
+		.subtitle {
+			font-size: 16px;
+			color: #000000;
+		}
+
+		.buttons-container {
+			@include flexbox((
+		    display: flex,
+		    flex-direction: row,
+		    justify-content: space-around
+		  ));
+		}
+
+		
+	}
+
+}

@@ -7,7 +7,11 @@ class RegistrationsController < Devise::RegistrationsController
     if @resource 
       @resource.user_attributes = user_attributes
     else 
-      @resource = Host.new({ user_attributes: user_attributes })
+      if user_attributes[:type] == 'guest'
+         @resource = Guest.new({ user_attributes: user_attributes })
+      else
+         @resource = Host.new({ user_attributes: user_attributes })
+      end
     end
 
     if @resource.save

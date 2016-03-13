@@ -42,3 +42,39 @@ function getAccesability(host) {
 function formatStrangers(strangers) {
   return strangers ? 'סלון פתוח' : 'סלון סגור';
 }
+
+function formatAddress(address) {
+  return address.split(',')[0];
+}
+
+function formatFirstName(host) {
+  return host.user 
+    ? host.user.full_name.split(' ')[0]
+    : ''
+}
+
+function getUrlParameter(name, url) {
+  if (!url) url = location.href;
+  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regexS = "[\\?&]"+name+"=([^&#]*)";
+  var regex = new RegExp( regexS );
+  var results = regex.exec( url );
+  return results == null ? null : results[1];
+}
+
+function formatLanguage(language) {
+  switch(language) {
+    case 'hebrew':
+      return 'עברית';
+    case 'english':
+      return 'English'
+    case 'arabic':
+      return 'العربية';
+    case 'french':
+      return 'Français';
+    case 'russian':
+      return 'русский'
+    default:
+        return language;
+  }
+}

@@ -1,8 +1,7 @@
 class Guest < ActiveRecord::Base
-  attr_accessible :email, :phone,:name,:num_of_friends, :host_id
-  attr_accessor :host_id
-
-  validates_presence_of :email,:phone,:name
-
+	attr_accessible :user_attributes
+	
+  has_one :user, as: :meta, dependent: :destroy
+  accepts_nested_attributes_for :user
   has_many :invites
 end

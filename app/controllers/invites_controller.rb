@@ -1,35 +1,15 @@
 class InvitesController < ApplicationController
-
-	before_filter :basic_auth, only: [:index]
-  def show
-  	@invite = Invite.find(params[:id])
-  	@invite.update_attributes(confirmed: true)
-  	RequestMailer.delay.request_was_confirmed(@invite.host.id,@invite.guest.id)
-  end
-
   def create
-  end
+    @invite = Invite.new({
+      guest_id: current_user.meta.id, 
+      host_id: params[:invite][:host_id], 
+      plus_ones: params[:invite][:plus_ones].to_i
+    })
 
-  def reject
-  	@invite = Invite.find(params[:id])
-  	@invite.update_attributes(confirmed: nil)
-  	RequestMailer.delay.request_was_rejected(@invite.host.id,@invite.guest.id)
-  end
-
-  def index
-  	@invites = Invite.order(:confirmed).all
-  end
-
-  def basic_auth
-    authenticate_or_request_with_http_basic do |username,password|
-      if username == "zikaron" && password == "1234.com"
-        session[:auth] = "basic"
-        return true
-      elsif username == "zbadmin" && password == "bbznot"
-        session[:auth] = "extended"
-        return true
-      end
-      request_http_basic_authentication
+    if @invite.save
+      render :json => { error: false }
+    else
+      render :json => { error: true }
     end
   end
 end

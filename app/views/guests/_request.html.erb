@@ -1,0 +1,61 @@
+<div class="text-center">
+  <h3><%= t '.title' %></h3>
+  <p class="subtitle"><%= t '.subtitle' %></p>
+
+  <div class="margin-top-20 col-xs-12">
+  	<div class="row request-container">
+  		<div class="col-xs-6 salon-info">
+  			<div class="salon-title"><%= t '.salon_of' %> {{ formatFirstName(host) }}</div>
+  			
+  			<div class="info-group">
+  				<span class="label"><%= t 'shared.location' %>:</span>
+  				<span class="value">{{ host.address }}</span>
+  			</div>
+
+  			<div class="info-group">
+  				<span class="label"><%= t 'shared.language' %>:</span>
+  				<span class="value">{{ formatLanguage(host.event_language) }}</span>
+  			</div>
+
+  			<div class="info-group">
+  				<span class="label"><%= t 'shared.accessibility' %>:</span>
+  				<span class="value">{{ getAccesability(host) }}</span>
+  			</div>
+
+  			<div class="info-group">
+  				<span class="label"><%= t 'shared.date' %>:</span>
+  				<span class="value">{{ formatDate(host.event_date) }}</span>
+  			</div>
+
+  			<div class="info-group">
+  				<span class="label"><%= t 'shared.estimated_time' %>:</span>
+  				<span class="value">{{ host.event_time }}</span>
+  			</div>
+
+  			<div class="info-group">
+  				<span class="label"><%= t 'shared.available_spaces' %>:</span>
+  				<span class="value">???</span>
+  			</div>
+
+  			<div class="info-group">
+  				<span class="label"><%= t 'shared.free_text' %>:</span>
+  				<span class="value">{{ host.public_text }}</span>
+  			</div>
+
+  		</div>
+  		<div class="col-xs-6 align-right request-info">
+  			<div>
+  				<div class="subtitle"><%= t '.num_of_guests' %>:</div>
+	  			<select ng-model="plusOnes" class="margin-top-20 plus-one-select">
+	  				<option value="0">0</option>
+	          <option value="1">1</option>
+	          <option value="2">2</option>
+	  			</select>
+  			</div>
+  			
+
+  			<button class="btn-orange" ng-click="sendRequest()"><%= t 'shared.sending_request' %></button>
+  		</div>
+  	</div>	
+  </div>
+</div>
