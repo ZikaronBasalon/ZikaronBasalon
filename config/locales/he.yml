@@ -93,6 +93,9 @@ he:
     id: "ID"
     reset_password: "אפס/י סיסמא"
     forgot_password: "שכחתי סיסמא"
+    address: "כתובת"
+    free_text: "הערות"
+    assign: "צוות"
 
 
   views:

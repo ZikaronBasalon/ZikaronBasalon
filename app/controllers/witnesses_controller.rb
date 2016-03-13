@@ -86,6 +86,18 @@ class WitnessesController < ApplicationController
   # GET /witnesses/1/assign
   def assign
     @witness = Witness.find(params[:id])
+    @city_id = params[:city_id] || @witness.city.id
+    @hosts = Host.where(city_id: @city_id, survivor_needed: true).where("witness_id IS ?", nil)
+    @cities = City.all.map{ |c| { id: c.id, name: c.name }}
+
+    respond_to do |format|
+      format.html
+      format.json {
+        render :json => {
+          hosts: @hosts.to_json(:include => [:user, :city])
+        }
+      }
+    end
   end
 
   def is_authorized
