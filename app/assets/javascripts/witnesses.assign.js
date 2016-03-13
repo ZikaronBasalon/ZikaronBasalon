@@ -1,5 +1,6 @@
 //= require lib/utils
-app.controller('WitnessAssignController', ['$scope', '$http', function($scope, $http) {
+app.controller('WitnessAssignController', ['$scope', '$http', '$uibModal',  
+  function($scope, $http, $uibModal) {
 	$scope.formatBool = formatBool;
 	$scope.filter = {};
 
@@ -26,4 +27,36 @@ app.controller('WitnessAssignController', ['$scope', '$http', function($scope, $
   		});
   	}
   }
+
+$scope.assignHost = function(host) {
+  $scope.getAccesability = getAccesability;
+  $scope.formatDate = formatDate; 
+  $scope.formatLanguage = formatLanguage;
+  $scope.formatStairs = formatStairs;
+
+  var modalInstance = $uibModal.open({
+    templateUrl: 'assign-modal.html',
+    controller: 'WitnessAssignModalController',
+    resolve: {
+      host: function () {
+        return host;
+      },
+      witness: function () {
+        return $scope.witness;
+      }
+    }
+  });
+}
+}]);
+
+app.controller('WitnessAssignModalController', ['$scope', '$http','$uibModalInstance', 'host', 'witness', 
+ function($scope, $http, $uibModalInstance, host, witness) {
+  
+  $scope.host = host;
+  $scope.witness = witness;
+
+  $scope.close = function () {
+    $uibModalInstance.dismiss('close');
+  };
+
 }]);

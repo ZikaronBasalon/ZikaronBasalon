@@ -1,0 +1,83 @@
+<div class="col-xs-12 request-invite">
+	<span class="glyphicon glyphicon-remove" ng-click="close()"></span>
+	
+	<div class="text-center">
+		<h3><%= t '.title' %></h3>
+		<p><%= t '.subtitle' %></p>
+
+		<div class="col-xs-12">
+	  	<div class="row request-container">
+	  		<div class="col-xs-6">
+	  			<h5>פרטי המארח</h5>
+
+	  			<div class="salon-info">
+	  				<div class="info-group">
+		  				<span class="label"><%= t 'shared.name' %>:</span>
+		  				<span class="value">{{ host.user.full_name }}</span>
+		  			</div>
+
+		  			<div class="info-group">
+		  				<span class="label"><%= t 'shared.address' %>:</span>
+		  				<span class="value">{{ host.city.name }} {{ host.addresss }}</span>
+		  			</div>
+
+		  			<div class="info-group">
+		  				<span class="label"><%= t 'shared.accessibility' %>:</span>
+		  				<span class="value">{{ getAccesability(host) }}</span>
+		  			</div>
+
+		  			<div class="info-group">
+		  				<span class="label"><%= t 'shared.date' %>:</span>
+		  				<span class="value">{{ formatDate(host.event_date) }}</span>
+		  			</div>
+
+		  			<div class="info-group">
+		  				<span class="label"><%= t 'shared.estimated_time' %>:</span>
+		  				<span class="value">{{ host.event_time }}</span>
+		  			</div>
+
+		  			<div class="info-group">
+		  				<span class="label"><%= t 'shared.language' %>:</span>
+		  				<span class="value">{{ formatLanguage(host.language) }}</span>
+		  			</div>
+
+		  			<div class="info-group">
+		  				<span class="label"><%= t 'shared.free_text' %>:</span>
+		  				<span class="value">{{ host.free_text }}</span>
+		  			</div>
+	  			</div>
+	  		</div>
+
+	  		<div class="col-xs-6">
+	  			<h5>פרטי איש העדות</h5>
+	  			<div class="salon-info">
+	  				<div class="info-group">
+		  				<span class="label"><%= t 'shared.name' %>:</span>
+		  				<span class="value">{{ witness.full_name }}</span>
+		  			</div>
+
+		  			<div class="info-group">
+		  				<span class="label"><%= t 'shared.address' %>:</span>
+		  				<span class="value">{{ witness.address }}</span>
+		  			</div>
+
+		  			<div class="info-group">
+		  				<span class="label"><%= t 'shared.accessibility' %>:</span>
+		  				<span class="value">{{ formatStairs(witness.stairs) }}</span>
+		  			</div>
+
+		  			<div class="info-group">
+		  				<span class="label"><%= t 'shared.language' %>:</span>
+		  				<span class="value">{{ formatLanguage(witness.language) }}</span>
+		  			</div>
+
+		  			<div class="info-group">
+		  				<span class="label"><%= t 'shared.free_text' %>:</span>
+		  				<span class="value">{{ witness.free_text }}</span>
+		  			</div>
+	  			</div>
+	  		</div>
+	  	</div>	
+	  </div>
+	</div>
+</div>

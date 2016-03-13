@@ -91,14 +91,12 @@ he:
     not_teamed: "לא צוות"
     language: "שפה"
     manager: "מוביל"
-<<<<<<< HEAD
     id: "ID"
     reset_password: "אפס/י סיסמא"
     forgot_password: "שכחתי סיסמא"
     address: "כתובת"
     free_text: "הערות"
     assign: "צוות"
-=======
     street: "רחוב"
     available_spaces: "מקומות פנויים"
     free_text: "הערות"
@@ -108,7 +106,6 @@ he:
     sending_request: "שליחת בקשה"
     to_my_profile: "לפרופיל שלי"
     back_to_website: "בחזרה לאתר"
->>>>>>> guest
 
 
   views:
@@ -233,6 +230,9 @@ he:
       special_population: "אוכלוסיה מיוחדת"
     show:
       title: "פרופיל איש עדות"
+    assign_modal:
+      title: "ציוות מארח ואיש עדות"
+      subtitle: "כאן תוכלו לוודא כי מדובר בציוות מוצלח. לאחר האישור יש ליצור קשר עם המארח ולידע אותו על המשך התהליך"
 
   profile:
     labels:

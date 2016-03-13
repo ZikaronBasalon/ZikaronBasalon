@@ -31,7 +31,11 @@ function formatBool(value) {
 }
 
 function formatElevatorBool(value) {
-  return value ? 'יש מעלית' : 'אין מעלית'
+  return value ? 'יש מעלית' : 'אין מעלית';
+}
+
+function formatStairs(value) {
+  return value ? 'יכול לעלות מדרגות' : 'לא יכול לעלות מדרגות';
 }
 
 
