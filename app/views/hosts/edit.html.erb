@@ -95,16 +95,18 @@
       <!-- Step two -->
       <form name="stepTwo" ng-show="'stepTwo' === steps[stepIndex]" >
         <div class="form-group" 
-             ng-class="{true: 'has-error'}[(submitted[stepIndex] && stepTwo.address.$invalid) || stepTwo.address.$error.route || stepTwo.address.$error.street_number]">
+             ng-class="{true: 'has-error'}[(submitted[stepIndex] && stepTwo.address.$invalid) || stepTwo.address.$error.fromList]">
           <label for="address"><%= t '.address' %></label>
           <input type="text" class="form-control"
                  name="address"
                  id="address"
                  placeholder="מצדה 6, באר שבע, ישראל"
                  ng-model="host.address"
+                 ng-blur="addressFocusLost($event)"
                  required>
           <p class="help-block" ng-show="stepTwo.address.$error.route"><%= t '.address_route_error' %></p>
           <p class="help-block" ng-show="stepTwo.address.$error.street_number"><%= t '.address_street_number_error' %></p>
+          <p class="help-block" ng-show="stepTwo.address.$error.fromList"><%= t '.address_from_list_error' %></p>
 
           <input type="hidden" ng-model="host.lat" />
           <input type="hidden" ng-model="host.lng" />

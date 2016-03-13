@@ -1,7 +1,8 @@
 //= require directives/datePicker
 //= require directives/isPhone
 
-app.controller('HostEditController', ['$scope','$http','$uibModal', function($scope, $http, $uibModal) {
+app.controller('HostEditController', ['$scope','$http','$uibModal',
+function($scope, $http, $uibModal) {
 	$scope.host = {
 		hosted_before: false
 	};
@@ -28,7 +29,7 @@ app.controller('HostEditController', ['$scope','$http','$uibModal', function($sc
 		$scope.organization = !!$scope.host.org_name;
 		$scope.host.event_date = new Date($scope.host.event_date);
 		$scope.host.event_time = $scope.host.event_time ? new Date($scope.host.event_time): null;
-
+		$scope.isAddressFromList = false;
 	}
 
 	$scope.orgChanged = function(value) {
@@ -42,6 +43,12 @@ app.controller('HostEditController', ['$scope','$http','$uibModal', function($sc
   		$scope.otherLanguageVisible = true;
   		$scope.host.event_language = null;
   	}
+  }
+
+  $scope.addressFocusLost = function($event) {
+		if(!$scope.isAddressFromList) {
+			$scope.stepTwo.address.$setValidity('fromList', false);
+		}
   }
 
   $scope.submitStepOne = function() {
@@ -112,13 +119,16 @@ app.controller('HostEditController', ['$scope','$http','$uibModal', function($sc
   function getAddress() {
   	try {
 			$scope.result = $scope.autocomplete.getPlace();
-			$scope.stepTwo.address.$setValidity('route', true);
-			$scope.stepTwo.address.$setValidity('street_number', true);
+			$scope.isAddressFromList = true;
+			$scope.stepTwo.address.$setValidity('fromList', true);
+			//$scope.stepTwo.address.$setValidity('route', true);
+			//$scope.stepTwo.address.$setValidity('street_number', true);
 			if($scope.result && 
 				 $scope.result.geometry && 
 				 $scope.result.geometry.location) {
 				handleSuccessfullGeocoding($scope.result);
-				validateAddress();
+				$scope.isAddressFromList = false;
+				//validateAddress();
 			} else {
 				handleUnsuccessfullGeocoding();
 			}
@@ -161,7 +171,6 @@ app.controller('HostEditController', ['$scope','$http','$uibModal', function($sc
 		geocoder.geocode({address: query_text},function (results,status) {
 			// Geocoding was successfull
 			if(status == google.maps.GeocoderStatus.OK) {
-				$scope.host.address = results[0].formatted_address;
 				handleSuccessfullGeocoding(results[0]);
 			}
 			// Geocoding failed. Update with current map center

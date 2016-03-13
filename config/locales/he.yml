@@ -139,6 +139,7 @@ he:
       address: "כתובת"
       address_route_error: "כתובת חייבת לכלול רחוב"
       address_street_number_error: "כתובת חייבת לכלול מספר בית"
+      address_from_list_error: "נא לבחור כתובת מהרשימה"
       floor: "קומה"
       elevator: "מעלית"
       ground_floor: "קומת קרקע"
