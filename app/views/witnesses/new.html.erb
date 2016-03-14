@@ -2,7 +2,7 @@
 	
 	<h1><%= t '.title' %></h1>
 
-  <form>
+  <form name="form" ng-class="{true: 'error'}[submitted]" novalidate>
     <div class="form-group">
       <label for="full_name"><%= t 'users.new.labels.full_name' %></label>
       <input type="text" class="form-control"
@@ -12,13 +12,19 @@
     </div>
 
     <div class="form-group">
-      <label for="address"><%= t 'hosts.edit.address' %></label>
+      <label for="city_name">עיר/יישוב</label>
+      <input type="text" class="form-control"
+             id="city_name"
+             ng-model="witness.city_name"
+             required>
+    </div>
+
+    <div class="form-group">
+      <label for="address">כתובת</label>
       <input type="text" class="form-control"
              id="address"
              ng-model="witness.address"
              required>
-
-      <input type="hidden" ng-model="witness.city_name" />
     </div>
 
     <div class="form-group ">
@@ -29,6 +35,25 @@
               ng-model="witness.witness_type"
               ng-options="o.v as o.n for o in typeOptions">
       </select>
+    </div>
+
+    <div class="form-group ">
+      <label for="contact_name" >
+       שם איש קשר
+      </label>
+      <input type="text" class="form-control"
+             id="contact_name"
+             ng-model="witness.contact_name">
+    </div>
+
+    <div class="form-group ">
+      <label for="contact_phone" >
+       טלפון איש קשר
+      </label>
+      <input type="text" class="form-control"
+             id="contact_phone"
+             is-phone
+             ng-model="witness.contact_phone">
     </div>
 
     <div class="form-group">

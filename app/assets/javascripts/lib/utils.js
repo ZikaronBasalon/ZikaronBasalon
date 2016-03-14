@@ -82,3 +82,16 @@ function formatLanguage(language) {
         return language;
   }
 }
+
+function formatWitnessAvailabilityTime(witness) {
+  if(witness.can_morning && witness.can_afternoon && witness.can_evening) {
+    return 'ללא מגבלה'
+  }
+
+  var str = '';
+  if(witness.can_morning) { str += "בוקר"}
+  if(witness.can_afternoon) { str += ", צהריים"}
+  if(witness.can_afternoon) { str += ", ערב"}
+  return str;
+
+}

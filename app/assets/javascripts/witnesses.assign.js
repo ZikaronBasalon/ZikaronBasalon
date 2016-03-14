@@ -29,10 +29,7 @@ app.controller('WitnessAssignController', ['$scope', '$http', '$uibModal',
   }
 
 $scope.assignHost = function(host) {
-  $scope.getAccesability = getAccesability;
-  $scope.formatDate = formatDate; 
-  $scope.formatLanguage = formatLanguage;
-  $scope.formatStairs = formatStairs;
+
 
   var modalInstance = $uibModal.open({
     templateUrl: 'assign-modal.html',
@@ -54,6 +51,11 @@ app.controller('WitnessAssignModalController', ['$scope', '$http','$uibModalInst
   
   $scope.host = host;
   $scope.witness = witness;
+  $scope.getAccesability = getAccesability;
+  $scope.formatDate = formatDate; 
+  $scope.formatLanguage = formatLanguage;
+  $scope.formatStairs = formatStairs;
+  $scope.formatWitnessAvailabilityTime = formatWitnessAvailabilityTime;
 
   $scope.close = function () {
     $uibModalInstance.dismiss('close');

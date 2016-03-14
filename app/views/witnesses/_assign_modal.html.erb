@@ -67,6 +67,16 @@
 		  			</div>
 
 		  			<div class="info-group">
+		  				<span class="label">זמין בערב יום השואה:</span>
+		  				<span class="value">{{ formatBool(witness.free_on_day) }}</span>
+		  			</div>
+
+		  			<div class="info-group">
+		  				<span class="label">זמין בשעה:</span>
+		  				<span class="value">{{ formatWitnessAvailabilityTime(witness) }}</span>
+		  			</div>
+
+		  			<div class="info-group">
 		  				<span class="label"><%= t 'shared.language' %>:</span>
 		  				<span class="value">{{ formatLanguage(witness.language) }}</span>
 		  			</div>

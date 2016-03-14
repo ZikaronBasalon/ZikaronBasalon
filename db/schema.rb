@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160314161607) do
+ActiveRecord::Schema.define(:version => 20160314224443) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -162,6 +162,8 @@ ActiveRecord::Schema.define(:version => 20160314161607) do
     t.boolean  "can_afternoon"
     t.boolean  "can_evening"
     t.boolean  "free_on_day"
+    t.string   "contact_name"
+    t.string   "contact_phone"
   end
 
 end

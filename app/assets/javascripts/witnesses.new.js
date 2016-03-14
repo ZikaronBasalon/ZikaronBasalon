@@ -15,17 +15,22 @@ app.controller('WitnessNewController', ['$scope','$http', function($scope, $http
 		{ n: 'דור שני', v: 'second_generation' },
 		{ n: 'מטפל', v: 'therapist' }
 	];
+
+	$scope.submitted = false;
 	
-	$scope.autocomplete = new google.maps.places.Autocomplete($("#address")[0], { types: ['geocode'] });
+	$scope.autocomplete = new google.maps.places.Autocomplete($("#city_name")[0], { types: ['(cities)'] });
 	google.maps.event.addListener($scope.autocomplete, 'place_changed', getAddress);
 
 
 	$scope.submit = function() {
-		$http.post('/witnesses', {
-			witness: $scope.witness
-		}).then(function(response) {
-			window.location = '/witnesses';
-		});
+		$scope.submitted = true;
+		if($scope.form.$valid) {
+			$http.post('/witnesses', {
+				witness: $scope.witness
+			}).then(function(response) {
+				window.location = '/witnesses';
+			});
+		}
 	}
 
 	$scope.languageChanged = function() {
@@ -37,9 +42,8 @@ app.controller('WitnessNewController', ['$scope','$http', function($scope, $http
 
   function getAddress() {
 		result = $scope.autocomplete.getPlace();
-		var locality = getLocalityComponent(result);
-		$scope.witness.address = result.formatted_address;
-		$scope.witness.city_name = locality;
+		$scope.witness.city_name = getLocalityComponent(result);
+		$scope.$apply();
   }
 
 	function getLocalityComponent(result){

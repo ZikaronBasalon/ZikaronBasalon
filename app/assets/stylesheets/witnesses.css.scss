@@ -24,4 +24,10 @@
 			text-align: right;
 		}
 	}
+
+	form.error {
+		.ng-invalid {
+			border-color: red;
+		}
+	}
 }
