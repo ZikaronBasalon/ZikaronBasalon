@@ -1,5 +1,5 @@
 class WitnessesController < ApplicationController
-  before_filter :is_authorized, only: [:index, :new, :create]
+  before_filter :is_authorized, only: [:index]
   # GET /witnesses
   # GET /witnesses.json
 
