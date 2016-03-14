@@ -1,5 +1,12 @@
+//= require directives/isPhone
+
 app.controller('WitnessNewController', ['$scope','$http', function($scope, $http) {
-	$scope.witness = {};
+	$scope.witness = {
+		can_morning: true,
+		can_afternoon: true,
+		can_evening: true,
+		free_on_day: true
+	};
 	$scope.otherLanguageVisible = false;
 
 	$scope.typeOptions = [
