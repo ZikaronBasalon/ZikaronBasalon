@@ -5,7 +5,7 @@ app.directive('isPhone', function () {
       ngModel.$parsers.unshift(function(value) {
         if(value){
           // test and set the validity after update.
-          var valid = !isNaN(value) && value.length >= 10;
+          var valid = !isNaN(value) && value.length >= 9;
           ngModel.$setValidity('isPhone', valid);
         }
 
