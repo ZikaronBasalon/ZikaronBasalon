@@ -1,4 +1,5 @@
 //=require request-invite
+@import "compass/css3/flexbox";
 
 #witness-new-form {
 	label {
@@ -30,4 +31,21 @@
 			border-color: red;
 		}
 	}
+}
+
+.request-invite {
+	width: 605px;
+	padding: 20px;
+}
+
+.salon-info-container {
+	@include flexbox((
+  	display: flex,
+  	flex-direction: column
+	));
+}
+
+.salon-info {
+	flex-grow: 1;
+	padding: 10px;
 }

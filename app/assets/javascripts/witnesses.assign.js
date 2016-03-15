@@ -3,6 +3,7 @@ app.controller('WitnessAssignController', ['$scope', '$http', '$uibModal',
   function($scope, $http, $uibModal) {
 	$scope.formatBool = formatBool;
 	$scope.filter = {};
+  $scope.success = false;
 
   $scope.init = function(witness, hosts, cities, cityId) {
     $scope.witness = witness;
@@ -29,8 +30,6 @@ app.controller('WitnessAssignController', ['$scope', '$http', '$uibModal',
   }
 
 $scope.assignHost = function(host) {
-
-
   var modalInstance = $uibModal.open({
     templateUrl: 'assign-modal.html',
     controller: 'WitnessAssignModalController',
@@ -42,6 +41,10 @@ $scope.assignHost = function(host) {
         return $scope.witness;
       }
     }
+  });
+
+  modalInstance.result.then(function () {
+    $scope.success = true;
   });
 }
 }]);
@@ -60,5 +63,21 @@ app.controller('WitnessAssignModalController', ['$scope', '$http','$uibModalInst
   $scope.close = function () {
     $uibModalInstance.dismiss('close');
   };
+
+  $scope.createAssignment = function() {
+    $scope.error = false;
+    
+    $http.put('/witnesses/' + $scope.witness.id + '.json', {
+      witness: {
+        host_id: $scope.host.id
+      }
+    }).then(function(response) {
+      if(response.data.success) {
+        $uibModalInstance.close();
+      } else {
+        $scope.error = true;
+      }
+    });
+  }
 
 }]);

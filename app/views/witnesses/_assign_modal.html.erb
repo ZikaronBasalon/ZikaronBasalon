@@ -5,9 +5,15 @@
 		<h3><%= t '.title' %></h3>
 		<p><%= t '.subtitle' %></p>
 
+		<div class="col-xs-12" ng-if="error">
+      <div class="alert alert-error" role="alert">
+        ציוות נכשל, אנא נסה שנית או בדוק אם קיים כבר שיבוץ למארח זה
+      </div>
+    </div>
+
 		<div class="col-xs-12">
 	  	<div class="row request-container">
-	  		<div class="col-xs-6">
+	  		<div class="col-xs-6 salon-info-container">
 	  			<h5>פרטי המארח</h5>
 
 	  			<div class="salon-info">
@@ -48,7 +54,7 @@
 	  			</div>
 	  		</div>
 
-	  		<div class="col-xs-6">
+	  		<div class="col-xs-6 salon-info-container">
 	  			<h5>פרטי איש העדות</h5>
 	  			<div class="salon-info">
 	  				<div class="info-group">
@@ -88,6 +94,19 @@
 	  			</div>
 	  		</div>
 	  	</div>	
+	  </div>
+
+	  <div class="col-xs-12">
+	  	<div class="text-center margin-top-10">
+	  		<button class="zb-btn btn-orange" ng-click="createAssignment()">
+	  			יאללה צוות
+	  		</button>
+	  	</div>
+	  	<div class="text-center margin-top-10">
+	  		<button class="zb-btn btn-orange" ng-click="close()">
+	  			התחרטתי
+	  		</button>
+	  	</div>
 	  </div>
 	</div>
 </div>
