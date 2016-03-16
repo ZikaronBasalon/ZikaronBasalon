@@ -17,7 +17,7 @@ class HostsController < ApplicationController
   def destroy
     @host = Host.find(params[:id])
     @host.destroy
-    redirect_to hosts_path
+    render :json => { success: true, host: @host }
   end
 
   def edit

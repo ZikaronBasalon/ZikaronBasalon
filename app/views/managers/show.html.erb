@@ -11,6 +11,12 @@
            ng-click="onViewToggle('witnesses')"><%= t '.witnesses_view' %></div>
     </div>
   </div>
+
+  <div class="col-xs-12" ng-if="success">
+    <div class="alert alert-success" role="alert">
+      נחמק בהצלחה
+    </div>
+  </div>
   
   <!-- Host view -->
   <div class="row" ng-if="activeView === 'hosts'">
@@ -47,9 +53,9 @@
           </select>
         </div>  
 
-        <!-- <div class="form-group pull-left">
-          <input type="text" class="form-control" ng-model="hostQuery" placeholder="חיפוש חופשי" />
-        </div> -->
+        <div class="form-group pull-left">
+          <input type="text" class="form-control" ng-model="search.host.query" placeholder="חיפוש חופשי" />
+        </div>
       </form>
 
       <!-- Host table -->
@@ -98,6 +104,7 @@
             </th>
             <% if current_user.admin? %>
               <th><%= t 'shared.manager' %></th>
+              <th></th>
             <% end %>
           </tr> 
         </thead>
@@ -116,6 +123,9 @@
             <% if current_user.admin? %>
               <td>
                 <div manager-link obj="host"></div>
+              </td>
+              <td>
+                <button ng-click="deleteHost(host);$event.stopPropagation();" class="btn btn-warning">מחק/י</button>
               </td>
             <% end %>
           </tr>
@@ -231,6 +241,7 @@
             </th>
             <% if current_user.admin? %>
               <th><% t 'shared.manager' %></th>
+              <th></th>
             <% end %>
           </tr> 
         </thead>
@@ -249,6 +260,9 @@
             <% if current_user.admin? %>
               <td>
                 <div manager-link obj="witness"></div>
+              </td>
+              <td>
+                <button ng-click="deleteWitness(witness);$event.stopPropagation();" class="btn btn-warning">מחק/י</button>
               </td>
             <% end %>
           </tr>

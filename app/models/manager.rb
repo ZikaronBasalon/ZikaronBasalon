@@ -13,7 +13,8 @@ class Manager < ActiveRecord::Base
 
    def get_hosts(page, filter)
     if user.admin?
-      Host.includes(:city).page(page).per(20).where(filter).order("created_at desc")
+      # .where('users.full_name like ?', '%query%')
+      Host.includes(:city, :user).page(page).per(20).where(filter).order("created_at desc")
     else 
       Host.includes(:city).page(page).per(20).where(:city_id => cities.pluck(:id)).where(filter).order("created_at desc")
     end

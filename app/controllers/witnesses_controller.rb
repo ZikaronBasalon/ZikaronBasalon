@@ -76,11 +76,7 @@ class WitnessesController < ApplicationController
   def destroy
     @witness = Witness.find(params[:id])
     @witness.destroy
-
-    respond_to do |format|
-      format.html { redirect_to witnesses_url }
-      format.json { head :no_content }
-    end
+    render :json => { success: true, witness: @witness }
   end
 
   # GET /witnesses/1/assign

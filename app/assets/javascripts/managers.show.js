@@ -8,6 +8,11 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
     host: {},
     witness: {}
   };
+
+  $scope.query = {
+    host: null
+  };
+
   $scope.activeView = 'hosts';
   $scope.formatBool = formatBool;
   $scope.formatDate = formatDate;
@@ -18,6 +23,8 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
   }
 
   $scope.sortProp = 'created_at';
+
+  $scope.success = false;
 
   $scope.init = function(currentUser, hosts, witnesses, cities, totalHosts, totalWitnesses, currentPage) {
     $scope.currentUser = currentUser;
@@ -98,6 +105,43 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
     return obj.city && obj.city.managers
       ? obj.city.managers[0]
       : {};
+  }
+
+  $scope.deleteHost = function(host) {
+    var res = confirm("בטוח בטוח?");
+    if (res) {
+      $http.delete('/hosts/' + host.id + '.json').then(function(response) {
+        if (response.data.success) {
+          $scope.showSuccessMessage();
+          $scope.success = true;
+          $scope.hosts = _.filter($scope.hosts, function(host) {
+            return host.id !== response.data.host.id;
+          });
+        }
+      })
+    }
+  }
+
+  $scope.deleteWitness = function(witness) {
+    var res = confirm("בטוח בטוח?");
+    if (res) {
+      $http.delete('/witnesses/' + witness.id + '.json').then(function(response) {
+        if (response.data.success) {
+          $scope.showSuccessMessage();
+          $scope.witnesses = _.filter($scope.witnesses, function(witness) {
+            return witness.id !== response.data.witness.id;
+          });
+        }
+      })
+    }
+  }
+
+  $scope.showSuccessMessage = function() {
+    $scope.success = true;
+    setTimeout(function() {
+      $scope.success = false;
+      $scope.$apply();
+    }, 3000);
   }
 
   function activeFilter(filter) {
