@@ -134,6 +134,7 @@
 
       <uib-pagination total-items="totalHosts" 
                       ng-model="pagination.currentPage" 
+                      items-per-page="20"
                       ng-change="pageChanged()"
                       class="pagination-sm" 
                       previous-text="&lsaquo;" 
@@ -271,6 +272,7 @@
 
       <uib-pagination total-items="totalWitnesses" 
                       ng-model="pagination.currentPage" 
+                      items-per-page="20"
                       ng-change="pageChanged()"
                       class="pagination-sm" 
                       previous-text="&lsaquo;" 
