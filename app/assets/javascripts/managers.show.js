@@ -87,7 +87,7 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
   function getFilterKeys(filterObj) {
     var filtered = {};
     _.mapKeys(filterObj, function(value, key) {
-      if(value && value !== "") {
+      if(!_.isNull(value) && value !== "") {
         filtered[key] = value;
       }
     });
