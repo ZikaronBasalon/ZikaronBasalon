@@ -11,8 +11,6 @@ class Host < ActiveRecord::Base
   accepts_nested_attributes_for :user
   has_many :comments, as: :commentable
 
-  default_scope { includes(:user, :city, :witness) }
-
   def event_date 
     read_attribute(:event_date) || Date.parse("4-5-2016")
   end

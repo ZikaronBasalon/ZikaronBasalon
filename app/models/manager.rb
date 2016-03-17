@@ -11,13 +11,13 @@ class Manager < ActiveRecord::Base
 
  	 validates_uniqueness_of :temp_email
 
-   def get_hosts(page, filter)
-    if user.admin?
-      # .where('users.full_name like ?', '%query%')
-      Host.includes(:city, :user).page(page).per(20).where(filter).order("created_at desc")
-    else 
-      Host.includes(:city).page(page).per(20).where(:city_id => cities.pluck(:id)).where(filter).order("created_at desc")
-    end
+   def get_hosts(page, filter, query, sort)
+    sort ||= 'created_at'
+    hosts = Host.includes(:city, :user).order(sort + " desc").where(filter)
+    hosts = hosts.where(:city_id => cities.pluck(:id)) if !user.admin?
+    hosts = hosts.select{ |h| h.user.full_name.include? query } if query.present?
+    hosts = Kaminari.paginate_array(hosts).page(page).per(20)
+    hosts
    end
 
    def get_witnesses(page, filter)
@@ -33,3 +33,4 @@ class Manager < ActiveRecord::Base
   	self.cities.push(city)
   end
 end
+

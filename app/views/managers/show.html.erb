@@ -54,7 +54,7 @@
         </div>  
 
         <div class="form-group pull-left">
-          <input type="text" class="form-control" ng-model="search.host.query" placeholder="חיפוש חופשי" />
+          <input type="text" class="form-control" ng-model="query.host" placeholder="חיפוש חופשי" />
         </div>
       </form>
 
@@ -109,7 +109,7 @@
           </tr> 
         </thead>
         <tbody>
-          <tr ng-repeat="host in sort(hosts)" ng-click="editHost(host)">
+          <tr ng-repeat="host in hosts" ng-click="editHost(host)">
             <td>{{ host.user.id }}</td>
             <td>{{ host.user.full_name }}</td>
             <td>{{ formatDateTime(host.created_at) }}</td>

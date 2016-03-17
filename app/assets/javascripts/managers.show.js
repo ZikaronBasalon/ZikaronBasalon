@@ -37,11 +37,18 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
     $scope.cities = cities;
     $scope.totalHosts = totalHosts;
     $scope.totalWitnesses = totalWitnesses;
+
     $scope.$watch("search", function(newVal, oldVal) {
       if(newVal != oldVal) {
         filter(1);
       }
     }, true);
+
+    $scope.$watch('query', _.throttle(function(oldVal, newVal) {
+      if(newVal != oldVal) {
+        filter(1);
+      }
+    }, 2000), true);
   }
 
   $scope.editHost = function(host) {
@@ -62,7 +69,9 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
         host: getFilterKeys($scope.search.host),
         witness: getFilterKeys($scope.search.witness)
       },
-      page: page
+      page: page,
+      host_query: $scope.query.host,
+      sort: $scope.sortProp
     };
 
     $http.get('/managers/' + $scope.currentUser.meta.id + '.json' + '?' + $.param(params))
@@ -82,11 +91,12 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
         filtered[key] = value;
       }
     });
+    delete filtered.query;
     return filtered;
   }
     
   $scope.sort = function(arr) {
-    return _.sortBy(arr, $scope.sortProp).reverse();
+    //return _.sortBy(arr, $scope.sortProp).reverse();
   }
 
   $scope.isAccesible = function(host) {
@@ -99,6 +109,7 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
 
   $scope.setSortProp = function(prop) {
     $scope.sortProp = prop;
+    filter(1)
   }
 
   $scope.getManager = function(obj) {

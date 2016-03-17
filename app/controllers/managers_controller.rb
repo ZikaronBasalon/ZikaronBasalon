@@ -13,11 +13,17 @@ class ManagersController < ApplicationController
 
   def show
     @page = params[:page] || 1
-    @hosts = @manager.get_hosts(@page, host_filter)
-    @cities = City.all.map{ |c| { id: c.id, name: c.name }}
+
+    @hosts = @manager.get_hosts(@page, host_filter, params[:host_query], params[:sort])
+
+    @cities = City.order('name desc').all.map{ |c| { id: c.id, name: c.name }}
+                  .sort_alphabetical_by{|c| c[:name] }
+
     @witnesses = @manager.get_witnesses(@page, witness_filter)
+
     @total_hosts = @hosts.total_count
     @total_witnesses = @witnesses.total_count
+
     respond_to do |format|
       format.html
       format.json { render :json => {
