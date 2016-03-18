@@ -192,6 +192,7 @@ he:
       personal_details: "פרטים אישיים"
       evening_details: "פרטים על הערב"
       manager_actions: "פעולות מוביל קהילה"
+      witness_details: "פרטי איש העדות"
       labels:
         registration_time: "זמן הרשמה"
         name: "שם"

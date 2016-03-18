@@ -3,7 +3,7 @@ class Host < ActiveRecord::Base
   :city_name, :status, :strangers, :contact, :survivor_details, :lat, :lng, :event_date,
   :event_time, :evening_public, :hosted_before, :floor, :elevator, :org_name, :org_role,
   :event_language, :contacted, :phone, :witness_id, :user_attributes, :public_text, :concept,
-  :received_registration_mail
+  :received_registration_mail, :contacted_witness
 
   belongs_to :city
   has_one :witness

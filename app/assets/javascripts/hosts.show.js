@@ -25,6 +25,7 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
   		host: {
 				concept: $scope.host.concept,
 				contacted: $scope.host.contacted,
+				contacted_witness: $scope.host.contacted_witness
 			}
   	}).then(function success(response) {
   		$scope.success = true; 
