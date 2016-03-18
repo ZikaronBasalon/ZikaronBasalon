@@ -78,7 +78,7 @@ class ManagersController < ApplicationController
       meta = current_user.meta
       id = params[:id].to_i
 
-      return if current_user.admin?
+      return if current_user.admin? || current_user.sub_admin?
       
       redirect_to root_path if (meta.is_a?(Manager) && meta.id != id) || !meta.is_a?(Manager)
     end

@@ -14,7 +14,7 @@ class Manager < ActiveRecord::Base
   def get_hosts(page, filter, query, sort)
    sort ||= 'created_at'
    hosts = Host.includes(:city, :user).order(sort + " desc").where(filter)
-   hosts = hosts.where(:city_id => cities.pluck(:id)) if !user.admin?
+   hosts = hosts.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin?
    hosts = hosts.select{ |h| h.user && h.user.full_name.include?(query) } if query.present?
    hosts = paginate(hosts, page)
    hosts
@@ -23,7 +23,7 @@ class Manager < ActiveRecord::Base
   def get_witnesses(page, filter, query, sort)
    sort ||= 'created_at'
    witnesses = Witness.includes(:city, :host).order(sort + " desc").where(filter)
-   witnesses = witnesses.where(:city_id => cities.pluck(:id)) if !user.admin?
+   witnesses = witnesses.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin?
    witnesses = witnesses.select{ |w| w.full_name.include?(query) } if query.present?
    witnesses = paginate(witnesses, page)
    witnesses

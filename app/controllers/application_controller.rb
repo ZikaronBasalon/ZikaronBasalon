@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   respond_to :json, :html
 
   def is_admin
-  	redirect_to root_path unless current_user.admin?
+  	redirect_to root_path unless current_user.admin? || current_user.sub_admin?
   end
 
 	private
