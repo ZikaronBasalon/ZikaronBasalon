@@ -180,7 +180,7 @@ header {
 	}
 
 	.header-btn {
-		width: 129px;
+		width: 135px;
 		height: 33px;
 		margin-right: 19px;
 		@include flexbox((
@@ -423,17 +423,7 @@ header {
 }
 
 
-
-
-
-
-
-
-
-
-
-body.he {
-	//direction: rtl;
+body {
 	font-family: 'Alef', sans-serif;
 	background-color: #eaeaea;
 
@@ -466,5 +456,4 @@ body.he {
 		text-align: center;
 		line-height: 60px;
 	}
-
 }

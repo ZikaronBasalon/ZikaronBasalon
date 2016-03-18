@@ -27,7 +27,10 @@
 
 	<div class="left-side">
 		<div class="header-brand">זיכרון בסלון</div>
-		<div class="language-btn small-header-btn">En</div>
+		<% locale = next_locale(I18n.locale) %>
+		<%= link_to locale: locale do %>
+			<div class="language-btn small-header-btn"><%= locale.capitalize %></div>
+		<% end %>
 		<%= link_to "https://www.facebook.com/ZikronBaSalon/" do %>
 			<div class="facebook-btn small-header-btn">f</div>
 		<% end %>
