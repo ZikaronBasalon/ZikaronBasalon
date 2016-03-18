@@ -17,6 +17,7 @@ app.controller('WitnessNewController', ['$scope','$http', function($scope, $http
 	];
 
 	$scope.submitted = false;
+	$scope.alerts = [];
 	
 	$scope.autocomplete = new google.maps.places.Autocomplete($("#city_name")[0], { types: ['(cities)'] });
 	google.maps.event.addListener($scope.autocomplete, 'place_changed', getAddress);
@@ -25,10 +26,12 @@ app.controller('WitnessNewController', ['$scope','$http', function($scope, $http
 	$scope.submit = function() {
 		$scope.submitted = true;
 		if($scope.form.$valid) {
-			$http.post('/witnesses', {
+			$http.post('/witnesses.json', {
 				witness: $scope.witness
 			}).then(function(response) {
 				window.location = '/witnesses';
+			}).catch(function(response) {
+				_.each(response.data, addAlert);
 			});
 		}
 	}
@@ -61,6 +64,10 @@ app.controller('WitnessNewController', ['$scope','$http', function($scope, $http
 			}
 		}
 		return locality;
+	}
+
+	function addAlert(alert) {
+		$scope.alerts.push({ type: 'danger', msg: alert[0] });
 	}
 
 }]);

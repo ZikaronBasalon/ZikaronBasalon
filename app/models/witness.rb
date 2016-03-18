@@ -10,7 +10,8 @@ class Witness < ActiveRecord::Base
   belongs_to :host
   has_many :comments, as: :commentable
 
-  validates_uniqueness_of :host_id
+  validates_uniqueness_of :host_id, :allow_nil => true
+  validates_uniqueness_of :phone
 
   default_scope { includes(:city) }
 

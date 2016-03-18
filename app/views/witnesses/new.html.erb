@@ -2,6 +2,8 @@
 	
 	<h1><%= t '.title' %></h1>
 
+  <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</uib-alert>
+
   <form name="form" ng-class="{true: 'error'}[submitted]" novalidate>
     <div class="form-group">
       <label for="full_name"><%= t 'users.new.labels.full_name' %></label>
