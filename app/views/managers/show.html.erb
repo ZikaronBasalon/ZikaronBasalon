@@ -194,10 +194,10 @@
           </select>
         </div>  
 
-        <!-- <div class="form-group pull-left">
-          <input type="text" class="form-control" ng-model="search.witness.query"
-                 placeholder="<%#= t 'shared.search' %>" />
-        </div> -->
+        <div class="form-group pull-left">
+          <input type="text" class="form-control" ng-model="query.witness"
+                 placeholder="<%= t 'shared.search' %>" />
+        </div>
       </form>
 
       <!-- Host table -->
@@ -247,7 +247,7 @@
           </tr> 
         </thead>
         <tbody>
-          <tr ng-repeat="witness in sort(witnesses)"
+          <tr ng-repeat="witness in witnesses"
               ng-click="editWitness(witness)">
             <td>{{ witness.id }}</td>
             <td>{{ witness.full_name }}</td>

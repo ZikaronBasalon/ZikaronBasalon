@@ -71,6 +71,7 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
       },
       page: page,
       host_query: $scope.query.host,
+      witness_query: $scope.query.witness,
       sort: $scope.sortProp
     };
 

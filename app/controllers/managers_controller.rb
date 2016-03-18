@@ -19,7 +19,7 @@ class ManagersController < ApplicationController
     @cities = City.order('name desc').all.map{ |c| { id: c.id, name: c.name }}
                   .sort_alphabetical_by{|c| c[:name] }
 
-    @witnesses = @manager.get_witnesses(@page, witness_filter)
+    @witnesses = @manager.get_witnesses(@page, witness_filter, params[:witness_query], params[:sort])
 
     @total_hosts = @hosts.total_count
     @total_witnesses = @witnesses.total_count
