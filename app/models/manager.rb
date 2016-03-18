@@ -9,25 +9,35 @@ class Manager < ActiveRecord::Base
  	attr_accessible :temp_email, :user_attributes
  	attr_accessor :city_name
 
- 	 validates_uniqueness_of :temp_email
+	validates_uniqueness_of :temp_email
 
-   def get_hosts(page, filter, query, sort)
-    sort ||= 'created_at'
-    hosts = Host.includes(:city, :user).order(sort + " desc").where(filter)
-    hosts = hosts.where(:city_id => cities.pluck(:id)) if !user.admin?
-    hosts = hosts.select{ |h| h.user && h.user.full_name.include?(query) } if query.present?
-    hosts = paginate(hosts, page)
-    hosts
-   end
+  def get_hosts(page, filter, query, sort)
+   sort ||= 'created_at'
+   hosts = Host.includes(:city, :user).order(sort + " desc").where(filter)
+   hosts = hosts.where(:city_id => cities.pluck(:id)) if !user.admin?
+   hosts = hosts.select{ |h| h.user && h.user.full_name.include?(query) } if query.present?
+   hosts = paginate(hosts, page)
+   hosts
+  end
 
-   def get_witnesses(page, filter, query, sort)
-    sort ||= 'created_at'
-    witnesses = Witness.includes(:city, :host).order(sort + " desc").where(filter)
-    witnesses = witnesses.where(:city_id => cities.pluck(:id)) if !user.admin?
-    witnesses = witnesses.select{ |w| w.full_name.include?(query) } if query.present?
-    witnesses = paginate(witnesses, page)
-    witnesses
-   end
+  def get_witnesses(page, filter, query, sort)
+   sort ||= 'created_at'
+   witnesses = Witness.includes(:city, :host).order(sort + " desc").where(filter)
+   witnesses = witnesses.where(:city_id => cities.pluck(:id)) if !user.admin?
+   witnesses = witnesses.select{ |w| w.full_name.include?(query) } if query.present?
+   witnesses = paginate(witnesses, page)
+   witnesses
+  end
+
+  def get_cities
+    if user.admin?
+      @cities = City.order('name desc').all
+    else
+      @cities = City.where(:id => cities.pluck(:id))
+    end
+
+    @cities.map{ |c| { id: c.id, name: c.name }}.sort_alphabetical_by{|c| c[:name] }
+  end
 
   def city_name=(name)
   	city = City.find_or_create_by_name(name) if name.present?
