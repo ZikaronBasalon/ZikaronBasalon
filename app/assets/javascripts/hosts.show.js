@@ -13,6 +13,10 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 	$scope.init = function(host) {
 		$scope.host = host;
 		$scope.comments = host.comments;
+
+		if(host.invites && host.invites.length > 0) {
+			initInvites(host.invites);
+		}
 	}
 
 	$scope.back = function() {
@@ -34,5 +38,22 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 
 	$scope.commentCallback = function(response) {
 		$scope.comments.push(response.data);
+	}
+
+	$scope.updateInvite = function(invite, confirmedStatus) {
+		$http.put('/invites/' + invite.id + '.json', {
+			invite: {
+				confirmed: confirmedStatus
+			}
+  	}).then(function success(response) {
+  		console.log(response.data);
+  		initInvites(response.data);
+  	})
+	}
+
+	function initInvites(invites) {
+		var invites = _.groupBy(invites, 'confirmed');
+		$scope.pendingInvites = invites[false];
+		$scope.confirmedInvites = invites[true];
 	}
 }]);

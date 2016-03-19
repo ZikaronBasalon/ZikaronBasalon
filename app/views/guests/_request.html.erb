@@ -34,7 +34,7 @@
 
   			<div class="info-group">
   				<span class="label"><%= t 'shared.available_spaces' %>:</span>
-  				<span class="value">???</span>
+  				<span class="value">{{ host.available_places }}</span>
   			</div>
 
   			<div class="info-group">
@@ -46,7 +46,7 @@
   		<div class="col-xs-6 align-right request-info">
   			<div>
   				<div class="subtitle"><%= t '.num_of_guests' %>:</div>
-	  			<select ng-model="plusOnes" class="margin-top-20 plus-one-select">
+	  			<select ng-model="invite.plusOnes" class="margin-top-20 plus-one-select">
 	  				<option value="0">0</option>
 	          <option value="1">1</option>
 	          <option value="2">2</option>
@@ -54,7 +54,7 @@
   			</div>
   			
 
-  			<button class="btn-orange" ng-click="sendRequest()"><%= t 'shared.sending_request' %></button>
+  			<button class="zb-btn btn-orange" ng-click="sendRequest()"><%= t 'shared.sending_request' %></button>
   		</div>
   	</div>	
   </div>

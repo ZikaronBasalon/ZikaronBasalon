@@ -213,7 +213,12 @@ he:
         has_survivor: "צוות עד"
         survivor_contacted: "מארח אישר הגעת עד"
         concept: "קונספט"
+        how_many_places: "כמה מקומות?"
       host_updated: "פרטי המארח עודכנו בהצלחה"
+      invites_waiting_approval: "בקשות הממתינות לאישור"
+      invites_approved: "בקשות שאישרתי"
+      confirm_request: "אשר/י בשקה"
+      reject_request: "בטל/י בקשה"
 
   managers:
     show:
