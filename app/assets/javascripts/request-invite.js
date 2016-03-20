@@ -42,6 +42,7 @@ app.controller('RequestInviteController', ['$scope', '$http', '$uibModalInstance
   		}
   	}).then(function(response) {
   		if(response.data.error) {
+  			console.log(response.data);
   		} else {
   			window.history.pushState(null, null, '/');
   			$scope.view = 'success';

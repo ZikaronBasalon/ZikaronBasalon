@@ -7,6 +7,7 @@ class InvitesController < ApplicationController
     })
 
     if @invite.save
+      RequestMailer.pending_invite_received(@invite.id).deliver
       render :json => { error: false }
     else
       render :json => { error: true }
