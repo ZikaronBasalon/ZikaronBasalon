@@ -7,7 +7,9 @@ app.controller('RequestInviteController', ['$scope', '$http', '$uibModalInstance
 	$scope.view = 'register';
 	$scope.host = host;
 	$scope.currentUser = currentUser;
-	$scope.plusOnes = "0";
+	$scope.invite = {
+		plusOnes: "0"
+	};
 
 	$scope.formatFirstName = formatFirstName;
 	$scope.getAccesability = getAccesability;
@@ -36,12 +38,13 @@ app.controller('RequestInviteController', ['$scope', '$http', '$uibModalInstance
   	$http.post('/invites', {
   		invite: {
   			host_id: $scope.host.id,
-  			plus_ones: $scope.plusOnes
+  			plus_ones: $scope.invite.plusOnes
   		}
   	}).then(function(response) {
   		if(response.data.error) {
-
+  			console.log(response.data);
   		} else {
+  			window.history.pushState(null, null, '/');
   			$scope.view = 'success';
   		}
   	});

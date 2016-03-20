@@ -5,11 +5,14 @@ class Host < ActiveRecord::Base
   :event_language, :contacted, :phone, :witness_id, :user_attributes, :public_text, :concept,
   :received_registration_mail, :contacted_witness
 
+  attr_accessor :available_places
+
   belongs_to :city
   has_one :witness
   has_one :user, as: :meta, dependent: :destroy
   accepts_nested_attributes_for :user
   has_many :comments, as: :commentable
+  has_many :invites
 
   def event_date 
     read_attribute(:event_date) || Date.parse("4-5-2016")
@@ -26,6 +29,13 @@ class Host < ActiveRecord::Base
 
   def region_name
   	city.try(:region).try(:name)
+  end
+
+  def available_places
+    invites.reduce(max_guests) {|sum, invite| 
+      return sum - (invite.plus_ones.to_i + 1) if invite.confirmed?
+      sum
+    }
   end
 end
 

@@ -5,11 +5,11 @@ class RequestMailer < ActionMailer::Base
   layout 'mailer_default'
   default from: "zikaronbasalon@gmail.com"
 
-  def send_request(host_id,guest_id,invite_id)
-  	@guest = Guest.find(guest_id)
-  	@host = Host.find(host_id)
+  def pending_invite_received(invite_id)
   	@invite = Invite.find(invite_id)
-  	mail :to => @host.email, :subject => "התקבלה בקשה להתארח בסלון שלך"
+    @host = @invite.host
+    @guest = @invite.guest
+  	mail :to => @host.user.email, :subject => "התקבלה בקשה להתארח בסלון שלך"
   end
 
   def request_was_sent(host_id,guest_id)
