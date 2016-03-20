@@ -116,7 +116,8 @@ en:
       zb_salons: "סלוני זיכרון בסלון"
       temp_title: "Welcome to Zikaron BaSalon!"
       temp_subtitle: "At this moment, you can only register as a host. In the next few weeks we will open the guest registration!"
-
+      already_a_member: "Already have a profile?"
+      sign_in_to_system: " Click here to sign in!"
 
   sessions:
     new:
