@@ -14,22 +14,24 @@ class ManagersController < ApplicationController
   def show
     @page = params[:page] || 1
 
-    @hosts = @manager.get_hosts(@page, host_filter, params[:host_query], params[:sort])
+    @hosts = @manager.get_hosts(@page, host_filter, params[:host_query], params[:host_sort])
     @cities = @manager.get_cities
-    @witnesses = @manager.get_witnesses(@page, witness_filter, params[:witness_query], params[:sort])
+    @witnesses = @manager.get_witnesses(@page, witness_filter, params[:witness_query], params[:witness_sort])
 
     @total_hosts = @hosts.total_count
     @total_witnesses = @witnesses.total_count
 
     respond_to do |format|
       format.html
-      format.json { render :json => {
-        hosts:  @hosts.to_json(:include => [:user, :witness, city: { :include => :managers }]),
-        witnesses: @witnesses.to_json(:include => { city: { :include => :managers } }),
-        total_hosts: @total_hosts,
-        total_witnesses: @total_witnesses,
-        page: @page
-      }}
+      format.json { 
+        render :json => {
+          hosts:  @hosts.to_json(:include => [:user, :witness, { city: { :include => :managers } }]),
+          witnesses: @witnesses.to_json(:include => { city: { :include => :managers } }),
+          total_hosts: @total_hosts,
+          total_witnesses: @total_witnesses,
+          page: @page
+        }
+      }
     end
   end
 

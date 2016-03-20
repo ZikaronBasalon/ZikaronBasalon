@@ -72,7 +72,8 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
       page: page,
       host_query: $scope.query.host,
       witness_query: $scope.query.witness,
-      sort: $scope.sortProp
+      host_sort: $scope.sortProp,
+      witness_sort: $scope.witnessSortProp
     };
 
     $http.get('/managers/' + $scope.currentUser.meta.id + '.json' + '?' + $.param(params))
@@ -110,6 +111,11 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
 
   $scope.setSortProp = function(prop) {
     $scope.sortProp = prop;
+    filter(1)
+  }
+
+  $scope.setSortPropWitness = function(prop) {
+    $scope.witnessSortProp = prop;
     filter(1)
   }
 

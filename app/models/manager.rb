@@ -12,7 +12,7 @@ class Manager < ActiveRecord::Base
 	validates_uniqueness_of :temp_email
 
   def get_hosts(page, filter, query, sort)
-   sort ||= 'created_at'
+   sort = 'created_at' if sort.blank?
    hosts = Host.includes(:city, :user).order(sort + " desc").where(filter)
    hosts = hosts.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin?
    hosts = hosts.select{ |h| h.user && h.user.full_name.include?(query) } if query.present?
@@ -21,7 +21,7 @@ class Manager < ActiveRecord::Base
   end
 
   def get_witnesses(page, filter, query, sort)
-   sort ||= 'created_at'
+   sort = 'created_at' if sort.blank?
    witnesses = Witness.includes(:city, :host).order(sort + " desc").where(filter)
    witnesses = witnesses.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin?
    witnesses = witnesses.select{ |w| w.full_name.include?(query) } if query.present?

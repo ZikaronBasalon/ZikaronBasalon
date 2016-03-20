@@ -213,41 +213,41 @@
       <table class="table witness-table">
         <thead>
           <tr>
-            <th ng-click="setSortProp('id')">
+            <th ng-click="setSortPropWitness('id')">
               <%= t 'shared.id' %>
-              <span class="caret" ng-if="sortProp === 'id'"></span>
+              <span class="caret" ng-if="witnessSortProp === 'id'"></span>
             </th>
-            <th ng-click="setSortProp('full_name')">
+            <th ng-click="setSortPropWitness('full_name')">
               <%= t 'shared.name' %>
-              <span class="caret" ng-if="sortProp === 'full_name'"></span>
+              <span class="caret" ng-if="witnessSortProp === 'full_name'"></span>
             </th>
-            <th ng-click="setSortProp('city.name')">
+            <th ng-click="setSortPropWitness('city.name')">
               <%= t 'shared.city' %>
-              <span class="caret" ng-if="sortProp === 'city.name'"></span>
+              <span class="caret" ng-if="witnessSortProp === 'city.name'"></span>
             </th>
-            <th ng-click="setSortProp('witness_type')">
+            <th ng-click="setSortPropWitness('witness_type')">
               <%= t 'shared.type' %>
-              <span class="caret" ng-if="sortProp === 'witness_type'"></span>
+              <span class="caret" ng-if="witnessSortProp === 'witness_type'"></span>
             </th>
-            <th ng-click="setSortProp('')">
+            <th ng-click="setSortPropWitness('')">
               <%= t 'shared.date' %>
-              <span class="caret" ng-if="sortProp === ''"></span>
+              <span class="caret" ng-if="witnessSortProp === ''"></span>
             </th>
-            <th ng-click="setSortProp('stairs')">
+            <th ng-click="setSortPropWitness('stairs')">
               <%= t 'shared.walk_up_stairs' %>
-              <span class="caret" ng-if="sortProp === 'stairs'"></span>
+              <span class="caret" ng-if="witnessSortProp === 'stairs'"></span>
             </th>
-            <th ng-click="setSortProp('seminar_required')">
+            <th ng-click="setSortPropWitness('seminar_required')">
               <%= t 'shared.seminar_required' %>
-              <span class="caret" ng-if="sortProp === 'seminar_required'"></span>
+              <span class="caret" ng-if="witnessSortProp === 'seminar_required'"></span>
             </th>
-            <th ng-click="setSortProp('concept')">
+            <th ng-click="setSortPropWitness('concept')">
               <%= t 'shared.concept_label' %>
-              <span class="caret" ng-if="sortProp === 'concept'"></span>
+              <span class="caret" ng-if="witnessSortProp === 'concept'"></span>
             </th>
-            <th ng-click="setSortProp('special_population')">
+            <th ng-click="setSortPropWitness('special_population')">
               <%= t 'shared.special_population' %>
-              <span class="caret" ng-if="sortProp === 'special_population'"></span>
+              <span class="caret" ng-if="witnessSortProp === 'special_population'"></span>
             </th>
             <% if current_user.admin? %>
               <th><% t 'shared.manager' %></th>
