@@ -43,7 +43,8 @@ class ManagersController < ApplicationController
 
   # Creates a temp Manager and assigns him with a City
   def create
-    @manager = Manager.find_or_initialize_by_temp_email(params[:manager][:temp_email])
+    @manager = Manager.where('lower(temp_email) = ?', params[:manager][:temp_email].downcase).first 
+    @manager ||= Manager.create(:temp_email => params[:manager][:temp_email])
     if @manager.new_record?
       @manager.save!
       ManagerMailer.new_manager(@manager.temp_email).deliver
