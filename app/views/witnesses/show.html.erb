@@ -1,5 +1,5 @@
 <div id="witness-show" class="row profile" ng-controller="WitnessShowController"
-      ng-init="init(<%= @witness.to_json(:include => [:city, host: { :include => :user }, comments: { :include => :user }]) %>)">
+      ng-init="init(<%= @witness.to_json(:include => [:city, { host: { :include => :user } }, { comments: { :include => :user } }]) %>)">
 
   <div class="col-xs-12">
     <h1><%= t '.title' %></h1>

@@ -82,6 +82,7 @@ en:
     doesnt_need: "לא צריך"
     teamed: "צוות"
     not_teamed: "לא צוות"
+    forgot_password: "Forgot your password?"
 
   views:
     pagination:
@@ -176,6 +177,12 @@ en:
       academia: "אקדמיה"
       second_generation: "דור שני"
       therapist: "מטפל"
+
+  manager_mailer:
+    new_manager:
+      title: "Registration for Zikaron BaSalon's team members"
+      paragraph_1: "Hey, we're so glad you're here! :) Please register with the email address you received the welcome email to, and pick a password."
+      paragraph_2: ""
 
 
 

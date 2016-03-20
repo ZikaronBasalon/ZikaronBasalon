@@ -6,6 +6,6 @@ class ManagerMailer < BaseMailer
   default from: "\"זיכרון בסלון\" <zikaronbasalon@gmail.com>"
 
   def new_manager(manager_email)
-  	mail :to => manager_email, :subject => "התווספת כמוביל קהילה בזיכרון בסלון, עליך ליצור חשבון"
+  	mail :to => manager_email, :subject => t('manager_mailer.new_manager.title')
   end
 end
