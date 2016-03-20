@@ -238,7 +238,8 @@
           <p class="help-block"><%= t '.max_guests_help_block' %></p>
           <input type="number" class="form-control" 
                  required name="max_guests"
-                 id="max_guests" ng-model="host.max_guests">
+                 id="max_guests" ng-model="host.max_guests"
+                 min="0">
         </div>
 
         <div class="form-group">
