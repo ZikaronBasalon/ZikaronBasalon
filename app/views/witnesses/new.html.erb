@@ -29,6 +29,15 @@
              required>
     </div>
 
+    <div class="form-group">
+      <label for="phone"><%= t 'hosts.edit.phone' %></label>
+      <input type="text" class="form-control"
+             id="phone"
+             ng-model="witness.phone"
+             is-phone
+             required>
+    </div>
+
     <div class="form-group ">
       <label for="witness_type" >
         <%= t 'shared.type' %>
@@ -84,15 +93,6 @@
       <input type="text" class="form-control"
              id="email"
              ng-model="witness.email">
-    </div>
-
-    <div class="form-group">
-      <label for="phone"><%= t 'hosts.edit.phone' %></label>
-      <input type="text" class="form-control"
-             id="phone"
-             ng-model="witness.phone"
-             is-phone
-             required>
     </div>
 
     <div class="form-group ">
