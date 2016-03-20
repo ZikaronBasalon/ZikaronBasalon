@@ -1,8 +1,12 @@
 <div class="col-xs-12 home-page">
   <div class="col-xs-12 text-center">
-    <h3>ברוכים הבאים לזיכרון בסלון</h3>
+    <h3><%= t '.temp_title' %></h3>
     <p>
-      בנתיים אנחנו פתוחים רק להרשמת מארחים. תחזרו בקרוב לעדכונים!
+      <%= t '.temp_subtitle' %>
+    </p>
+      <span><%= t 'users.new.already_a_member' %></span>
+      <a href="/users/sign_in"><%= t 'users.new.sign_in_to_system' %></a>
+    <p>
     </p>
   </div>
 <% if false %>

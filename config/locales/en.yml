@@ -11,6 +11,8 @@ en:
     new:
       title: "Register as a host"
       description: "We are glad you chose to host an evening of Zikaron BaSalon! We are here to help and guide you through the process. First, let’s create your personal profile"
+      manager_title: "Registration for Zikaron BaSalon's team members"
+      manager_description: "Hey, we're so glad you're here! :) Please register with the email address you received the welcome email to, and pick a password."
       labels:
         full_name: "Full name"
         email: "Email address"
@@ -109,8 +111,12 @@ en:
       signup_staff: "Team registration"
   pages:
     home:
-      title: "Zikaron BaSalon 2016 Hosts list"
-      explenation1: "Zikaron BaSalons hosts list will be published soon..."
+      title: "חיפוש ערב זיכרון בסלון"
+      subtitle: "כאן תוכל/י לחפש סלון פתוח בסביבת מגוריכם. <br> אם לא מצאת סלון להתארח בו, תמיד תוכל/י לארח בעצמך."
+      zb_salons: "סלוני זיכרון בסלון"
+      temp_title: "Welcome to Zikaron BaSalon!"
+      temp_subtitle: "At this moment, you can only register as a host. In the next few weeks we will open the guest registration!"
+
 
   sessions:
     new:
