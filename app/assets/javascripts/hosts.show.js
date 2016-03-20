@@ -14,11 +14,7 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 		$scope.host = host;
 		$scope.comments = host.comments;
 	}
-
-	$scope.back = function() {
-		window.history.back();
-	}
-
+	
 	$scope.save = function() {
 		$scope.success = false;
 		$http.put('/hosts/' + $scope.host.id + '.json', {

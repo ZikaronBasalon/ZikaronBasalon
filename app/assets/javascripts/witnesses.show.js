@@ -17,10 +17,6 @@ app.controller('WitnessShowController', ['$scope', '$http', function($scope, $ht
 		$scope.comments = witness.comments;
 	}
 
-	$scope.back = function() {
-		window.history.back();
-	}
-
 	$scope.save = function() {
 		$scope.success = false;
 		$http.put('/witnesses/' + $scope.witness.id + '.json', {
