@@ -230,6 +230,8 @@ he:
       invites_approved: "בקשות שאישרתי"
       confirm_request: "אשר/י בקשה"
       reject_request: "בטל/י בקשה"
+      close_evening: "סגור הרשמה"
+      close_evening_help_block: "לאחר לחיצה על סגור הרשמה לא תקבל בקשות אירוח נוספות"
 
   managers:
     show:

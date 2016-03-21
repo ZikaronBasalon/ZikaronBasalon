@@ -55,6 +55,15 @@
       </div>
     </div>
 
+    <div class="col-xs-12">
+      <button type="button" class="btn btn-danger" ng-click="closeEvening()">
+        <%= t '.close_evening' %>
+      </button>
+      <p class="help-block"><%= t '.close_evening_help_block' %></p>
+    </div>
+    
+
+
     <!-- Witness details -->
     <div class="col-xs-12" ng-if="host.witness">
       <div class="panel panel-default">
@@ -149,15 +158,16 @@
            <div class="info-title"><%= t '.evening_details' %></div>
 
            <div>
-            <a ng-click="enableEditing()"><%= t '.labels.edit' %></a>
+             <a href="/hosts/{{ host.id }}/edit"><%= t '.labels.edit' %></a>
            </div>
         </div>
         <div class="panel-body">
           
           <div class="field-group">
             <div class="info-label"><%= t '.labels.date_and_time' %></div>
-            <div ng-show="!editingEnabled">{{ formatDate(host.event_date) }} {{ formatTime(host.event_time) }}</div>
-            <input type="text" ng-model="" ng-show="editingEnabled">
+            <div>
+              {{ formatDate(host.event_date) }} {{ formatTime(host.event_time) }}
+            </div>
           </div>
 
           <div class="field-group">
@@ -180,12 +190,35 @@
           
           <div class="field-group">
             <div class="info-label"><%= t '.labels.salon_type' %></div>
-            <div>{{ formatStrangers(host.strangers) }}</div>
+            <div>
+              <div class="radio">
+                  <label>
+                    <input type="radio"
+                           name="strangers"
+                           id="strangersFalse"
+                           ng-value="false"
+                           ng-model="host.strangers">
+                    <b><%= t 'hosts.edit.strangers_no' %></b>
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio"
+                           name="strangers"
+                           id="strangersTrue"
+                           ng-value="true"
+                           ng-model="host.strangers">
+                    <b><%= t 'hosts.edit.strangers_yes' %></b>
+                  </label>
+                </div>
+            </div>
           </div>
 
           <div class="field-group">
             <div class="info-label"><%= t '.labels.open_places' %></div>
-            <div>{{ host.max_guests }}</div>
+            <div ng-show="host.strangers">
+              <input type="number" ng-model="host.max_guests" min="0" class="form-control" style="width: 80px;">
+            </div>
           </div>
 
           <div class="field-group">

@@ -9,7 +9,6 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 	$scope.getAccesability = getAccesability;
 	$scope.formatStrangers = formatStrangers;
 	$scope.formatBool = formatBool;
-	$scope.editingEnabled = false;
 
 	$scope.init = function(host) {
 		$scope.host = host;
@@ -48,8 +47,9 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
   	})
 	}
 
-	$scope.enableEditing = function() {
-		$scope.editingEnabled = true;
+	$scope.closeEvening = function() {
+		$scope.host.strangers = false;
+		$scope.save();
 	}
 
 	function initInvites(invites) {
