@@ -191,6 +191,18 @@ en:
       paragraph_1: "Hey, we're so glad you're here! :) Please register with the email address you received the welcome email to, and pick a password."
       paragraph_2: ""
 
+  request_mailer:
+    pending_invite_received:
+      paragraph_1: "תודה שבחרת לארח אצלך בבית ערב של זיכרון בסלון בערב יום השואה הקרוב. %{guest_name} רוצה להתארח אצלך בערב של זיכרון בסלון"
+      ok_for_you: "מתאים לך?"
+      approve_request: "לאישור הבקשה"
+      paragraph_2: "יש לך עוד מקומות פנויים בסלון? אפשר תמיד לשנות את מספר המתארחים שיצטרפו לזיכרון בסלון אצלך"
+      your_profile: "בפרופיל האישי."
+      paragraph_3: "הבקשה תתבטל אוטומטית לאחר ארבעה ימים, לכן אנו מציעים לך לאשר אותה במהרה."
+
+    request_approved:
+      title: "Your request to join %{name}'s salon was approved!"
+
 
 
 

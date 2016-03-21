@@ -12,6 +12,13 @@ class RequestMailer < ActionMailer::Base
   	mail :to => @host.user.email, :subject => "התקבלה בקשה להתארח בסלון שלך"
   end
 
+  def request_approved(invite_id)
+    @invite = Invite.find(invite_id)
+    @host = @invite.host
+    @guest = @invite.guest
+    mail :to => @guest.user.email, :subject => t('request')
+  end
+
   def request_was_sent(host_id,guest_id)
   	@guest = Guest.find(guest_id)
   	@host = Host.find(host_id)

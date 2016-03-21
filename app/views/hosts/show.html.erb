@@ -6,7 +6,7 @@
   </div>
   
   <div class="col-xs-8">
-
+    <!-- Invites -->
     <div class="col-xs-12" ng-if="host.invites && host.invites.length > 0">
       <div class="panel panel-default request-panel col-xs-12">
         <div ng-if="pendingInvites.length">
@@ -55,6 +55,7 @@
       </div>
     </div>
 
+    <!-- Witness details -->
     <div class="col-xs-12" ng-if="host.witness">
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -108,18 +109,17 @@
       </div>
     </div>
 
+    <!-- Personal details -->
     <div class="col-xs-12">
       <div class="panel panel-default">
         <div class="panel-heading">
            <div class="info-title"><%= t '.personal_details' %></div>
-
            <div>
             <span class="info-label"><%= t '.labels.registration_time' %>:</span>
             <span><b>{{ formatDateTime(host.created_at) }}</b></span>
            </div>
         </div>
         <div class="panel-body">
-          
           <div class="field-group">
             <div class="info-label"><%= t '.labels.name' %></div>
             <div>{{ host.user.full_name }}</div>
@@ -149,14 +149,15 @@
            <div class="info-title"><%= t '.evening_details' %></div>
 
            <div>
-            <a href="/hosts/{{ host.id }}/edit"><%= t '.labels.edit' %></a>
+            <a ng-click="enableEditing()"><%= t '.labels.edit' %></a>
            </div>
         </div>
         <div class="panel-body">
           
           <div class="field-group">
             <div class="info-label"><%= t '.labels.date_and_time' %></div>
-            <div>{{ formatDate(host.event_date) }} {{ formatTime(host.event_time) }}</div>
+            <div ng-show="!editingEnabled">{{ formatDate(host.event_date) }} {{ formatTime(host.event_time) }}</div>
+            <input type="text" ng-model="" ng-show="editingEnabled">
           </div>
 
           <div class="field-group">
