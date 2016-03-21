@@ -201,7 +201,8 @@ en:
       paragraph_3: "הבקשה תתבטל אוטומטית לאחר ארבעה ימים, לכן אנו מציעים לך לאשר אותה במהרה."
 
     request_approved:
-      title: "Your request to join %{name}'s salon was approved!"
+      title: "Your request has been approved. See you in the Salon!"
+      see_you_in: "See you in the %{name}'s Salon"
 
 
 

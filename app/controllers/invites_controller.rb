@@ -17,6 +17,9 @@ class InvitesController < ApplicationController
   def update
     @invite = Invite.find(params[:id])
     @invite.update_attributes(params[:invite])
+    
+    RequestMailer.request_approved(@invite.id).deliver if @invite.confirmed
+
     render :json => Invite.where(host_id: @invite.host.id)
                           .to_json(:include => { guest: { :include => :user }})
   end
