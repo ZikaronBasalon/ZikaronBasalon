@@ -19,6 +19,7 @@ class InvitesController < ApplicationController
     @invite.update_attributes(params[:invite])
     
     RequestMailer.request_approved(@invite.id).deliver if @invite.confirmed
+    RequestMailer.request_rejected(@invite.id).deliver if @invite.rejected
 
     render :json => Invite.where(host_id: @invite.host.id)
                           .to_json(:include => { guest: { :include => :user }})

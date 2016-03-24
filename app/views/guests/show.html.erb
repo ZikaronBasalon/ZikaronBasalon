@@ -1,0 +1,81 @@
+<div id="guest-show" class="row profile" ng-controller="GuestShowController" ng-init="init(<%= @guest.to_json(:include => :user) %>)">
+
+  <!-- Invites -->
+  <div class="col-xs-12" ng-if="host.invites && host.invites.length > 0">
+    <div class="panel panel-default request-panel col-xs-12">
+      <div ng-if="pendingInvites.length">
+        <h3><%= t '.invites_waiting_approval' %> ({{ pendingInvites.length }})</h3>
+
+        <table class="table">
+          <tr>
+            <th><%= t '.labels.name' %></th>
+            <th><%= t '.labels.phone' %></th>
+            <th><%= t '.labels.email' %></th>
+            <th><%= t '.labels.how_many_places' %></th>
+            <th></th>
+          </tr>
+
+          <tr ng-repeat='invite in pendingInvites'>
+            <td>{{ invite.guest.user.full_name }}</td>
+            <td>{{ invite.guest.phone }} </td>
+            <td>{{ invite.guest.user.email }} </td>
+            <td>{{ invite.plus_ones + 1 }} </td>
+            <td><button class="btn btn-warning" ng-click="updateInvite(invite, true)"><%= t '.confirm_request' %></button></td>
+          </tr>
+        </table>
+      </div>
+
+      <div ng-if="confirmedInvites.length">
+        <h3><%= t '.invites_approved' %> ({{ confirmedInvites.length }})</h3>
+
+        <table class="table">
+          <tr>
+            <th><%= t '.labels.name' %></th>
+            <th><%= t '.labels.phone' %></th>
+            <th><%= t '.labels.email' %></th>
+            <th><%= t '.labels.how_many_places' %></th>
+            <th></th>
+          </tr>
+
+          <tr ng-repeat='invite in confirmedInvites'>
+            <td>{{ invite.guest.user.full_name }}</td>
+            <td>{{ invite.guest.phone }} </td>
+            <td>{{ invite.guest.user.email }} </td>
+            <td>{{ invite.plus_ones + 1 }} </td>
+            <td><button class="btn btn-warning" ng-click="updateInvite(invite, null)"><%= t '.reject_request' %></button></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Personal details -->
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+         <div class="info-title"><%= t '.personal_details' %></div>
+      </div>
+      <div class="panel-body">
+        <div class="field-group">
+          <div class="info-label"><%= t 'shared.name' %></div>
+          <div>{{ guest.user.full_name }}</div>
+        </div>
+
+        <div class="field-group">
+          <div class="info-label"><%= t 'shared.phone' %></div>
+          <div>{{ guest.phone }}</div>
+        </div>
+
+        <div class="field-group">
+          <div class="info-label"><%= t 'shared.email' %></div>
+          <div>{{ guest.user.email }}</div>
+        </div>
+
+        <div class="field-group">
+          <div class="info-label"><%= t 'shared.password' %></div>
+          <div>&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

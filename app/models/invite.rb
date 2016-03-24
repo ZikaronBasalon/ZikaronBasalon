@@ -6,6 +6,10 @@ class Invite < ActiveRecord::Base
 
   validates_uniqueness_of :guest_id
 
+  def rejected
+    confirmed.nil?
+  end
+
   def display_status
     if self.confirmed.nil?
       "נדחה"
