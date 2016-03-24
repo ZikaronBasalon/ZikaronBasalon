@@ -23,12 +23,14 @@ he:
         email_confirmation: "אימות כתובת מייל"
         password: "סיסמא"
         password_confirmation: "אימות סיסמא"
+        phone: "טלפון"
       placeholders:
         full_name: "הכנס שם"
         email: "הכנס כתובת מייל"
         email_confirmation: "הכנס אימות כתובת מייל"
         password: "הכנס סיסמא"
         password_confirmation: "הכנס אימות סיסמא"
+        phone: "טלפון"
       submit: "המשך"
       already_a_member: "נרשמת כבר?"
       sign_in_to_system: "התחבר למערכת"
@@ -310,6 +312,10 @@ he:
       subtitle: "נראה שכבר הגשת בקשה אחת. על מנת להגיש בקשה חדשה, יש לבטל את הנוכחית בפרופיל שלך"
     show:
       personal_details: "הפרטים שלי"
+      salon_details: "פרטי הסלון"
+      host_details: "פרטי המארח"
+      find_new_salon: "חפש סלון חדש"
+      cancel_request: "בטל/י בקשה"
 
   host_mailer:
     new_host:

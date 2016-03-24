@@ -19,7 +19,7 @@ ZikaronBasalon::Application.routes.draw do
       resources :comments
     end
 
-    resources :invites, only: [:create, :update]
+    resources :invites, only: [:create, :update, :destroy]
     
     get "pages/home"
     root :to => 'pages#home'

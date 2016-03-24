@@ -1,53 +1,4 @@
-<div id="guest-show" class="row profile" ng-controller="GuestShowController" ng-init="init(<%= @guest.to_json(:include => :user) %>)">
-
-  <!-- Invites -->
-  <div class="col-xs-12" ng-if="host.invites && host.invites.length > 0">
-    <div class="panel panel-default request-panel col-xs-12">
-      <div ng-if="pendingInvites.length">
-        <h3><%= t '.invites_waiting_approval' %> ({{ pendingInvites.length }})</h3>
-
-        <table class="table">
-          <tr>
-            <th><%= t '.labels.name' %></th>
-            <th><%= t '.labels.phone' %></th>
-            <th><%= t '.labels.email' %></th>
-            <th><%= t '.labels.how_many_places' %></th>
-            <th></th>
-          </tr>
-
-          <tr ng-repeat='invite in pendingInvites'>
-            <td>{{ invite.guest.user.full_name }}</td>
-            <td>{{ invite.guest.phone }} </td>
-            <td>{{ invite.guest.user.email }} </td>
-            <td>{{ invite.plus_ones + 1 }} </td>
-            <td><button class="btn btn-warning" ng-click="updateInvite(invite, true)"><%= t '.confirm_request' %></button></td>
-          </tr>
-        </table>
-      </div>
-
-      <div ng-if="confirmedInvites.length">
-        <h3><%= t '.invites_approved' %> ({{ confirmedInvites.length }})</h3>
-
-        <table class="table">
-          <tr>
-            <th><%= t '.labels.name' %></th>
-            <th><%= t '.labels.phone' %></th>
-            <th><%= t '.labels.email' %></th>
-            <th><%= t '.labels.how_many_places' %></th>
-            <th></th>
-          </tr>
-
-          <tr ng-repeat='invite in confirmedInvites'>
-            <td>{{ invite.guest.user.full_name }}</td>
-            <td>{{ invite.guest.phone }} </td>
-            <td>{{ invite.guest.user.email }} </td>
-            <td>{{ invite.plus_ones + 1 }} </td>
-            <td><button class="btn btn-warning" ng-click="updateInvite(invite, null)"><%= t '.reject_request' %></button></td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </div>
+<div id="guest-show" class="row profile" ng-controller="GuestShowController" ng-init="init(<%= @guest.to_json(:include => [:user, { invites: { :include => { host: { :include => [:user, :city] } } } }]) %>)">
 
   <!-- Personal details -->
   <div class="col-xs-12">
@@ -70,10 +21,90 @@
           <div class="info-label"><%= t 'shared.email' %></div>
           <div>{{ guest.user.email }}</div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Invites -->
+  <div class="col-xs-12" ng-if="invite">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+         <div class="info-title"><%= t '.salon_details' %></div>
+         <div invite-status invite="invite"></div>
+      </div>
+      <div class="panel-body">
+        <div class="field-group">
+          <div class="info-label"><%= t 'shared.date' %></div>
+          <div>{{ formatDate(invite.host.event_date) }}</div>
+        </div>
 
         <div class="field-group">
-          <div class="info-label"><%= t 'shared.password' %></div>
-          <div>&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;</div>
+          <div class="info-label"><%= t 'shared.address' %></div>
+          <div>{{ formatAddress(invite.host.address, invite.host.city.name) }}</div>
+        </div>
+
+        <div class="field-group">
+          <div class="info-label"><%= t 'shared.language' %></div>
+          <div>{{ formatLanguage(invite.host.event_language) }}</div>
+        </div>
+      </div>
+
+      <div class="panel-body">
+        <div class="field-group">
+          <div class="info-label"><%= t 'shared.estimated_time' %></div>
+          <div>{{ formatTime(invite.host.event_time) }}</div>
+        </div>
+
+        <div class="field-group">
+          <div class="info-label"><%= t 'shared.free_text' %></div>
+          <div>{{ invite.host.public_text }}</div>
+        </div>
+
+        <div class="field-group">
+          <div class="info-label"><%= t 'shared.accessibility' %></div>
+          <div>{{ getAccesability(invite.host) }}</div>
+        </div>
+
+        <div class="field-group">
+          <div class="info-label">&nbsp;</div>
+          <div>
+            <%= link_to root_path do %>
+              <button class="btn btn-warning" 
+                      ng-if="invite.confirmed === null">
+                <%= t '.find_new_salon' %>
+              </button>
+            <% end %>
+            <button class="btn btn-warning" 
+                    ng-if"invite.confirmed !== null"
+                    ng-click="deleteInvite(invite)">
+              <%= t '.cancel_request' %>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Host details -->
+  <div class="col-xs-12" ng-if="invite && invite.confirmed">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+         <div class="info-title"><%= t '.host_details' %></div>
+      </div>
+      <div class="panel-body">
+        <div class="field-group">
+          <div class="info-label"><%= t 'shared.name' %></div>
+          <div>{{ invite.host.user.full_name }}</div>
+        </div>
+
+        <div class="field-group">
+          <div class="info-label"><%= t 'shared.phone' %></div>
+          <div>{{ invite.host.phone }}</div>
+        </div>
+
+        <div class="field-group">
+          <div class="info-label"><%= t 'shared.email' %></div>
+          <div>{{ invite.host.user.email }}</div>
         </div>
       </div>
     </div>

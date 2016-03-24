@@ -1,5 +1,5 @@
 class GuestsController < ApplicationController
 	def show
-		@guest = Guest.find(params[:id])
+		@guest = Guest.includes(:invites).find(params[:id])
   end
 end

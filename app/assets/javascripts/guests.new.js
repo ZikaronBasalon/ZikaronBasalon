@@ -1,4 +1,5 @@
 //= require directives/compareTo
+//= require directives/isPhone
 
 app.controller('GuestSignupController', ['$scope', '$http', function($scope, $http) {
 	$scope.form = {};
@@ -14,7 +15,8 @@ app.controller('GuestSignupController', ['$scope', '$http', function($scope, $ht
 					password_confirmation: $scope.form.passwordConfirmation,
 					full_name: $scope.form.fullName,
 					type: 'guest'
-				}
+				},
+				phone: $scope.form.phone
 			}).then(function(response) {
 				if(response.data && response.data.success) {
 					window.location = window.location + '?invite=' + $scope.host.id;

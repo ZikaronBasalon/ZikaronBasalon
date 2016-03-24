@@ -1,4 +1,6 @@
 class InvitesController < ApplicationController
+  respond_to :html, :json
+
   def create
     @invite = Invite.new({
       guest_id: current_user.meta.id, 
@@ -23,5 +25,12 @@ class InvitesController < ApplicationController
 
     render :json => Invite.where(host_id: @invite.host.id)
                           .to_json(:include => { guest: { :include => :user }})
+  end
+
+  def destroy
+    @invite = Invite.find(params[:id])
+    @invite.destroy
+
+    render :json => { success: true }
   end
 end
