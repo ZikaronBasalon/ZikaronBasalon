@@ -26,6 +26,13 @@ class RequestMailer < ActionMailer::Base
     mail :to => @guest.user.email, :subject => t('request_mailer.request_rejected.title')
   end
 
+  def new_guest(invite_id)
+    @invite = Invite.find(invite_id)
+    @host = @invite.host
+    @guest = @invite.guest
+    mail :to => @guest.user.email, :subject => t('request_mailer.new_guest.title')
+  end
+
   # def request_was_sent(host_id,guest_id)
   # 	@guest = Guest.find(guest_id)
   # 	@host = Host.find(host_id)
