@@ -15,7 +15,6 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
     $scope.cities = cities;
     $scope.totalItems = totalItems;
     $scope.currentUser = currentUser;
-    console.log(currentUser);
 
     var hostId = getUrlParameter('invite', window.location);
     if(hostId) {
