@@ -10,7 +10,7 @@
           ng-init="init(
             <%= @hosts.to_json(:include => [:user, :city], :methods => [:available_places]) %>, 
             <%= @cities.to_json %>, <%= @total_items %>,
-            <%= current_user.to_json(:include => { meta: { :include => :invites } }) %>
+            <%= current_user.guest? ? current_user.to_json(:include => { meta: { :include => :invites } }) : current_user.to_json %>
           )">
 
       <!-- Filters -->
@@ -69,7 +69,7 @@
             <td>{{ formatAddress(host.address) }}</td>
             <td>{{ formatDate(host.event_date) }}</td>
             <td>{{ host.language }}</td>
-            <td>???</td>
+            <td>{{ host.available_places }}</td>
             <td>{{ host.public_text }}</td>
             <td>
               <button class="btn-request"

@@ -30,4 +30,8 @@ class User < ActiveRecord::Base
   def host?
     self.meta && self.meta.is_a?(Host)
   end
+
+  def guest?
+    self.meta && self.meta.is_a?(Guest)
+  end
 end
