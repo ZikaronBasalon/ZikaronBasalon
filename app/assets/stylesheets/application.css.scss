@@ -461,4 +461,18 @@ body {
 		text-align: center;
 		line-height: 60px;
 	}
+
+	&.en {
+		header {
+			.header-link {
+				margin-right: initial;
+				margin-left: 8px;
+			}
+
+			.header-btn {
+				margin-right: initial;
+				margin-left: 19px;
+			}
+		}
+	}
 }
