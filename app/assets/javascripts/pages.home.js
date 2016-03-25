@@ -41,7 +41,7 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
       }
     }).then(function(response) {
       $scope.cities = response.data.cities;
-      $scope.hosts = response.data.hosts;
+      $scope.hosts = JSON.parse(response.data.hosts);
       $scope.totalItems = response.data.total_items;
     });
   }

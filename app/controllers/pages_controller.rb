@@ -7,7 +7,10 @@ class PagesController < ApplicationController
 
   	respond_to do |format|
 		  format.json { render json: { 
-			  	hosts: @hosts, 
+			  	hosts: @hosts.to_json(
+			  		:include => [:user, :city], 
+			  		:methods => [:available_places]
+		  		), 
 			  	cities: @cities, 
 			  	total_items: @hosts.total_count,
 			  	page: params[:page] || 1
