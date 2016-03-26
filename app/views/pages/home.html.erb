@@ -26,8 +26,7 @@
         </div> 
 
         <div class="form-group">
-          <select class="form-control" ng-model="search.city_id"
-                  ng-options="o.id as o.name for o in cities"
+          <select class="form-control" ng-model="search.event_language"
                   ng-change="filter()">
             <option value=""><%= t 'shared.language' %></option>
             <option value="hebrew">עברית</option>
@@ -68,7 +67,7 @@
             <td>{{ host.city.name }}</td>
             <td>{{ host.address }}</td>
             <td>{{ formatDate(host.event_date) }}</td>
-            <td>{{ host.language }}</td>
+            <td>{{ formatLanguage(host.event_language) }}</td>
             <td>{{ host.available_places }}</td>
             <td>{{ host.public_text }}</td>
             <td>

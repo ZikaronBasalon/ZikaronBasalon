@@ -9,6 +9,7 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
   $scope.formatBool = formatBool;
   $scope.formatDate = formatDate;
   $scope.formatAddress = formatAddress;
+  $scope.formatLanguage = formatLanguage;
 
   $scope.init = function(hosts, cities, totalItems, currentUser) {
     $scope.hosts = hosts;
@@ -37,7 +38,8 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
     $http.get('/pages/home.json', {
       params: {
         page: page,
-        city_id: $scope.search.city_id
+        city_id: $scope.search.city_id,
+        event_language: $scope.search.event_language
       }
     }).then(function(response) {
       $scope.cities = response.data.cities;

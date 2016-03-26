@@ -25,6 +25,7 @@ private
 		h = { }
 		h[:strangers] = true
 		h[:city_id] = params[:city_id] if !params[:city_id].blank?
+		h[:event_language] = params[:event_language] if !params[:event_language].blank?
     h[:max_guests] = 1..9999
     h
 	end
