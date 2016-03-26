@@ -24,6 +24,12 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
         $scope.requestInvite(host);
       }
     }
+
+    $scope.$watch('search.query', _.throttle(function(oldVal, newVal) {
+      if(newVal != oldVal) {
+        $scope.filter();
+      }
+    }, 2000), true);
   }
 
   $scope.filter = function() {
@@ -39,7 +45,8 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
       params: {
         page: page,
         city_id: $scope.search.city_id,
-        event_language: $scope.search.event_language
+        event_language: $scope.search.event_language,
+        query: $scope.search.query
       }
     }).then(function(response) {
       $scope.cities = response.data.cities;
