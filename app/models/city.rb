@@ -15,7 +15,7 @@ class City < ActiveRecord::Base
   	cities
   end
 
-  def without_anyone
+  def self.without_anyone
     cities = []
     City.all.each do |c|
       cities.push(c) if c.managers.empty? && c.hosts.empty? && c.witnesses.empty?
