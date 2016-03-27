@@ -2,7 +2,7 @@
      ng-init="init(<%= current_user.to_json(:include => :meta) %>, <%= @hosts.to_json(:include => [:user, :witness, city: { :include => :managers }]) %>, <%= @witnesses.to_json(:include => { city: { :include => :managers } }) %>,  <%= @cities.to_json %>,
         <%= @total_hosts.to_json %>, <%= @total_witnesses.to_json %>, <%= @page.to_json %> )">
 
-<!-- View toggle buttons -->
+  <!-- View toggle buttons -->
   <div class="text-center margin-bottom-20">
     <div class="view-toggle">
       <div ng-class="{ 'selected': activeView === 'hosts' }"
@@ -163,9 +163,17 @@
       </div>
     </div>
     <div class="col-xs-12">
+      
       <!-- Witness filters -->
       <form class="form-inline">
         <span><%= t 'shared.filter_by' %>:</span>
+
+        <div class="form-group">
+          <select class="form-control" ng-model="search.witness.city_id"
+                  ng-options="o.id as o.name for o in cities">
+            <option value=""><%= t 'shared.city' %></option>
+          </select>
+        </div> 
 
         <div class="form-group">
           <select class="form-control" ng-model="search.witness.witness_type"
