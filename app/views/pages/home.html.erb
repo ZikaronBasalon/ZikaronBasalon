@@ -5,14 +5,13 @@
       <p class="subtitle"><%= simple_format(t '.subtitle') %></p>
     </div>
 
-    
+  <% if false %>    
     <div class="col-xs-12" ng-controller="HomePageController"
           ng-init="init(
             <%= @hosts.to_json(:include => [:user, :city], :methods => [:available_places]) %>, 
             <%= @cities.to_json %>, <%= @total_items %>,
             <%= current_user && current_user.guest? ? current_user.to_json(:include => { meta: { :include => :invites } }) : current_user.to_json %>
           )">
-
       <!-- Filters -->
       <form class="form-inline margin-bottom-20">
         <span class="margin-left-10"><%= t 'shared.filter_by' %>:</span>
@@ -94,13 +93,17 @@
         </div>
       </div>
     
-    </div>
+    </div> 
+    <!-- End of HomePageController -->
+  <% end %>
   </div>
 </div>
 
+<% if false %>   
 <script type="text/ng-template" id="request-invite.html">
   <%= render 'guests/request_invite_modal' %>
 </script>
+<% end %>
 
 
 
