@@ -7,9 +7,11 @@ class PagesController < ApplicationController
   		(h.city && h.city.name.include?(query)) ||
   		h.address.include?(query)
   	} if query.present?
+
+    @cities = @hosts.map{ |h| h.city }
+
   	@hosts = paginate(@hosts, params[:page] || 1)
   	@total_items = @hosts.total_count
-  	@cities = City.all
 
   	respond_to do |format|
 		  format.json { render json: { 

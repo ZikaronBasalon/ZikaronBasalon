@@ -304,7 +304,7 @@ he:
       num_of_guests: "מספר האורחים שבאים איתי"
     request_successful:
       title: "הבקשה נשלחה"
-      subtitle: "שמחים שהצטרפת לחצי מיליון אנשים אשר בוחרים לציין את ערב יום הזיכרון לשואה בדרך שונה, אינטימית ומשמעותית"
+      subtitle: "אנחנו שמחים שהצטרפת לקהילת זיכרון בסלון ושבחרת לציין את ערב יום הזיכרון לשואה בדרך שונה, אינטימית ומשמעותית."
       facebook_share: "שיתוף בפייסבוק"
       back_to_website: "בחזרה לאתר"
     request_error: 
@@ -354,7 +354,7 @@ he:
       link_text: "בפרופיל האישי שלך"
       paragraph_2_after_link: "בימים הקרובים."
       paragraph_3: "בינתיים, אתה מוזמן לקרוא על ערב של זיכרון בסלון"
-      paragraph_3_link_text: "באתר שלנו"
+      paragraph_3_link_text: "באתר שלנו."
 
   manager_mailer:
     new_manager:

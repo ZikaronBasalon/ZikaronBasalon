@@ -37,13 +37,16 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 	}
 
 	$scope.updateInvite = function(invite, confirmedStatus) {
-		$http.put('/invites/' + invite.id + '.json', {
-			invite: {
-				confirmed: confirmedStatus
-			}
-  	}).then(function success(response) {
-  		initInvites(response.data);
-  	})
+		var res = confirmedStatus ? true : confirm("בטוח בטוח?");
+		if (res) {
+			$http.put('/invites/' + invite.id + '.json', {
+				invite: {
+					confirmed: confirmedStatus
+				}
+	  	}).then(function success(response) {
+	  		initInvites(response.data);
+	  	})
+		}
 	}
 
 	$scope.closeEvening = function() {
