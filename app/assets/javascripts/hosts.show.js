@@ -42,7 +42,6 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 				confirmed: confirmedStatus
 			}
   	}).then(function success(response) {
-  		console.log(response.data);
   		initInvites(response.data);
   	})
 	}

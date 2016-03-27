@@ -47,10 +47,6 @@ function formatStrangers(strangers) {
   return strangers ? 'סלון פתוח' : 'סלון סגור';
 }
 
-function formatAddress(address) {
-  return address.split(',')[0];
-}
-
 function formatFirstName(host) {
   return host.user 
     ? host.user.full_name.split(' ')[0]
@@ -93,5 +89,8 @@ function formatWitnessAvailabilityTime(witness) {
   if(witness.can_afternoon) { str += ", צהריים"}
   if(witness.can_afternoon) { str += ", ערב"}
   return str;
+}
 
+function formatAddress(address, city) {
+  return address + ", " + city;
 }

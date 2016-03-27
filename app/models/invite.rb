@@ -6,6 +6,14 @@ class Invite < ActiveRecord::Base
 
   validates_uniqueness_of :guest_id
 
+  scope :pending, -> { where(confirmed: false) }
+
+  def self.cancel_overdue
+    Invite.pending.each do |i|
+      i.destroy if ((Time.now.utc - Invite.last.created_at.utc) / 1.day).to_i >= 4
+    end
+  end
+
   def rejected
     confirmed.nil?
   end

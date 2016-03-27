@@ -9,13 +9,13 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
   $scope.formatBool = formatBool;
   $scope.formatDate = formatDate;
   $scope.formatAddress = formatAddress;
+  $scope.formatLanguage = formatLanguage;
 
   $scope.init = function(hosts, cities, totalItems, currentUser) {
     $scope.hosts = hosts;
     $scope.cities = cities;
     $scope.totalItems = totalItems;
     $scope.currentUser = currentUser;
-    console.log(currentUser);
 
     var hostId = getUrlParameter('invite', window.location);
     if(hostId) {
@@ -24,6 +24,12 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
         $scope.requestInvite(host);
       }
     }
+
+    $scope.$watch('search.query', _.throttle(function(oldVal, newVal) {
+      if(newVal != oldVal) {
+        $scope.filter();
+      }
+    }, 2000), true);
   }
 
   $scope.filter = function() {
@@ -38,11 +44,13 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
     $http.get('/pages/home.json', {
       params: {
         page: page,
-        city_id: $scope.search.city_id
+        city_id: $scope.search.city_id,
+        event_language: $scope.search.event_language,
+        query: $scope.search.query
       }
     }).then(function(response) {
       $scope.cities = response.data.cities;
-      $scope.hosts = response.data.hosts;
+      $scope.hosts = JSON.parse(response.data.hosts);
       $scope.totalItems = response.data.total_items;
     });
   }
