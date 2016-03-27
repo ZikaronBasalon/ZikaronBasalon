@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
 
 	def set_locale
 	  I18n.locale = params[:locale] if params[:locale].present?
+	  I18n.locale ||= request.headers['locale'] if request.headers['locale'].present?
 	  I18n.locale ||= :he
 	  # current_user.locale
 	  # request.subdomain
