@@ -15,4 +15,12 @@ module PagesHelper
 			t('shared.send_request')
 		end
 	end
+
+	def current_user_json
+		if current_user && current_user.guest?
+			return current_user.to_json(:include => { meta: { :include => :invites } }) 
+		end
+
+		current_user ? current_user.to_json(:include => :meta) : current_user.to_json
+	end
 end

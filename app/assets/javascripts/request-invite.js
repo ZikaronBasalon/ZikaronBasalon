@@ -15,11 +15,13 @@ app.controller('RequestInviteController', ['$scope', '$http', '$uibModalInstance
 	$scope.getAccesability = getAccesability;
 	$scope.formatDate = formatDate;
 	$scope.formatLanguage = formatLanguage;
+	$scope.formatTime = formatTime;
 
 	if (!$scope.currentUser)  {
 		$scope.view = 'register';
 	} else {
-		if ($scope.currentUser.meta.invites && $scope.currentUser.meta.invites.length > 0) {
+		if (($scope.currentUser && $scope.currentUser.meta.invites && $scope.currentUser.meta.invites.length > 0) ||
+				($scope.currentUser && $scope.currentUser.meta_type !== 'Guest')) {
 			$scope.view = 'error';
 		} else {
 			$scope.view = 'request';

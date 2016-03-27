@@ -10,7 +10,7 @@
           ng-init="init(
             <%= @hosts.to_json(:include => [:user, :city], :methods => [:available_places]) %>, 
             <%= @cities.to_json %>, <%= @total_items %>,
-            <%= current_user && current_user.guest? ? current_user.to_json(:include => { meta: { :include => :invites } }) : current_user.to_json %>
+            <%= current_user_json %>
           )">
       <!-- Filters -->
       <form class="form-inline margin-bottom-20">

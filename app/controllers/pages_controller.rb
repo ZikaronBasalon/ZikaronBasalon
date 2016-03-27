@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   	@hosts = Host.includes(:city, :user).where(host_conditions_hash)
   	@hosts = @hosts.select { |h| 
   		h.user.full_name.include?(query) ||
-  		h.city.name.include?(query) ||
+  		(h.city && h.city.name.include?(query)) ||
   		h.address.include?(query)
   	} if query.present?
   	@hosts = paginate(@hosts, params[:page] || 1)
