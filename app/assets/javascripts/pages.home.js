@@ -68,6 +68,14 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
         }
       }
     });
+
+    modalInstance.result.then(function () {
+      window.history.pushState(null, null, '/');
+      location.reload();
+    }, function () {
+      window.history.pushState(null, null, '/');
+      location.reload();
+    });
   }
 }]);
 

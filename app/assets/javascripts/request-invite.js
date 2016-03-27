@@ -34,7 +34,6 @@ app.controller('RequestInviteController', ['$scope', '$http', '$uibModalInstance
 
 	$scope.close = function () {
     $uibModalInstance.dismiss('close');
-    window.history.pushState(null, null, '/');
   };
 
   $scope.sendRequest = function() {
@@ -47,7 +46,6 @@ app.controller('RequestInviteController', ['$scope', '$http', '$uibModalInstance
   		if(response.data.error) {
   			console.log(response.data);
   		} else {
-  			window.history.pushState(null, null, '/');
   			$scope.view = 'success';
   		}
   	});
