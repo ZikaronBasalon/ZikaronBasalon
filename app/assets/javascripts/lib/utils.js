@@ -8,6 +8,9 @@ function formatDate(date) {
 }
 
 function formatTime(date) {
+  if (!date) {
+    return "";
+  }
   var date = new Date(date);
   var hour = date.getHours();
   var minutes = ('0'+ date.getMinutes()).slice(-2)
