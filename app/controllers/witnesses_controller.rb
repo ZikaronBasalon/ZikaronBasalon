@@ -1,5 +1,6 @@
 class WitnessesController < ApplicationController
   before_filter :is_authorized, only: [:index]
+  before_filter :is_admin, only: [:destroy]
   # GET /witnesses
   # GET /witnesses.json
 
@@ -102,5 +103,9 @@ class WitnessesController < ApplicationController
            (current_user && (current_user.admin? || current_user.sub_admin?))
       redirect_to root_path
     end
+  end
+
+  def is_admin
+    redirect_to root_path unless current_user.admin?
   end
 end
