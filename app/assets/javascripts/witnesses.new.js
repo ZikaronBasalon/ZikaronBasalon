@@ -29,7 +29,12 @@ app.controller('WitnessNewController', ['$scope','$http', function($scope, $http
 			$http.post('/witnesses.json', {
 				witness: $scope.witness
 			}).then(function(response) {
-				window.location = '/witnesses';
+				if(response.status === 201) {
+					window.location = '/witnesses/' + response.data.id;
+				} else {
+					_.each(response.data, addAlert);
+				}
+				//window.location = '/witnesses';
 			}).catch(function(response) {
 				_.each(response.data, addAlert);
 			});
