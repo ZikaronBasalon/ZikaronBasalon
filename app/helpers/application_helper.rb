@@ -19,4 +19,16 @@ module ApplicationHelper
   		"not_allowed"
   	end
   end
+
+  def date_format(date)
+    date.strftime("%d-%m-%Y")
+  end
+
+  def profile_label(user)
+    current_user.meta.is_a?(Manager) ? t('.manager_profile') : t('.profile')
+  end
+
+  def next_locale(locale)
+    locale == :he ? 'en' : 'he'
+  end
 end

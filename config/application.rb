@@ -32,6 +32,9 @@ module ZikaronBasalon
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+    config.i18n.default_locale = :he
+    config.i18n.available_locales = [:he, :en]
+    config.i18n.fallbacks = [:he]
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
@@ -41,8 +44,10 @@ module ZikaronBasalon
 
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
-
+    
     config.action_mailer.default_url_options = { host: 'zikaronbasalon.herokuapp.com' }
+    config.action_mailer.perform_deliveries = true
+    config.action_mailer.raise_delivery_errors = true
 
     # Use SQL instead of Active Record's schema dumper when creating the database.
     # This is necessary if your schema can't be completely dumped by the schema dumper,
@@ -79,5 +84,10 @@ module ZikaronBasalon
         false
       end
     }
+
+    config.assets.paths << Rails.root.join("vendor","assets","bower_components")
+    config.assets.paths << Rails.root.join("vendor","assets","bower_components","bootstrap-sass-official","assets","fonts")
+
+    config.assets.precompile << %r(.*.(?:eot|svg|ttf|woff|woff2)$)
   end
 end

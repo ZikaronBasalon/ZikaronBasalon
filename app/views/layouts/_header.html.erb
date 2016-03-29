@@ -1,10 +1,47 @@
-<div id="header">
-	<div id="logo"><%= link_to image_tag("logo.png"),"http://www.zikaronbasalon.com" %></div>
-	<div class="header_links">
-		<div class="header_link"><%= link_to "רוצה לארח", new_host_path %></div>
-		<div class="header_link"><%= link_to "רוצה להתארח", root_path %></div>
+<header>
+	<div class="right-side">
+		<!-- Home link -->
+		<%= link_to t('.home'), "http://www.zikaronbasalon.com/", class: "home" %>
+
+
+
+		<!-- Signed in user -->
+		<% if user_signed_in? %>
+			<!-- User profile -->
+			<%= link_to(profile_label(current_user), polymorphic_path(current_user.meta), class: 'header-link') if current_user.meta %>
+
+			<!-- Admin -->
+			<%= link_to(t('.managers'), managers_path, class: 'header-link') if current_user.admin? %>
+		<!-- Non signed in user -->
+		<% else %>
+			<%= link_to signup_path(type: 'host') do %>
+				<div class="header-btn white"><%= t('.want_to_host') %></div>
+			<% end %>
+
+			<%= link_to root_path do %>
+				<div class="header-btn orange"><%= t('.want_to_guest') %></div>
+			<% end %>
+		<% end %>
+		<!-- End Non signed in user -->
 	</div>
-	<%= link_to hosts_path do %>
-		<div id="staff">צוות</div>
-	<% end %>
-</div>
+
+	<div class="left-side">
+		<div class="header-brand">זיכרון בסלון</div>
+		<% locale = next_locale(I18n.locale) %>
+		<%= link_to locale: locale do %>
+			<div class="language-btn small-header-btn"><%= locale.capitalize %></div>
+		<% end %>
+		<%= link_to "https://www.facebook.com/ZikronBaSalon/" do %>
+			<div class="facebook-btn small-header-btn">f</div>
+		<% end %>
+		
+		<!-- Signin/Signout -->
+		<% if user_signed_in? %>
+			<%= link_to t('.signout'), destroy_user_session_path, method: :delete, class: 'header-link' %>
+		<% else %>
+			<%= link_to t('.signup_staff'), signup_path, class: 'header-link' %>
+			<%= link_to t('.signin'), user_session_path, class: 'header-link' %>
+		<% end %>
+	</div>
+	
+</header>

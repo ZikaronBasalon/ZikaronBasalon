@@ -1,12 +1,210 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken: "The email address you entered is already in use"
+
+  users:
+    new:
+      title: "Register as a host"
+      description: "We are glad you chose to host an evening of Zikaron BaSalon! We are here to help and guide you through the process. First, let’s create your personal profile"
+      manager_title: "Registration for Zikaron BaSalon's team members"
+      manager_description: "Hey, we're so glad you're here! :) Please register with the email address you received the welcome email to, and pick a password."
+      labels:
+        full_name: "Full name"
+        email: "Email address"
+        email_confirmation: "Email address verification"
+        password: "Password"
+        password_confirmation: "Password verification"
+      placeholders:
+        full_name: "Enter full name"
+        email: "Enter email address"
+        email_confirmation: "Enter email address verification"
+        password: "Enter password"
+        password_confirmation: "Enter password verification"
+      submit: "Continue"
+      already_a_member: "Already a member?"
+      sign_in_to_system: "Sign in"
+
+  devise:
+    sessions:
+      new:
+        title: "Log in to Zikaron BaSalon"
+        labels:
+          email: "Email address"
+          password: "Password"
+        placeholders:
+          email: "Enter email address"
+          password: "Enter password"
+        signin_error: "The email address or password you entered is not valid"
+
+
+  shared:
+    'yes': "Yes"
+    'no': "No"
+    continue: "Continue"
+    next: "Next"
+    back: "Back"
+    select: "Select"
+    other: "Other"
+    send_request: "Send a request"
+    request_sent: "Your request has been sent"
+    save: "Save"
+    return: "Back"
+    submit: "Submit"
+    concept:
+      religious_and_secular: "חרדים וחילונים"
+      Veterans: "וטרנים"
+      eastern: "בשיח המזרחי"
+    filter_by: "Sort by"
+    city: "City"
+    survivor_needed: "צריך איש עדות"
+    type: "סוג"
+    walk_up_stairs: "עליה במדרגות"
+    can: "יכול"
+    cant: "לא יכול"
+    seminar_required: "ערב הכנה"
+    search: "חיפוש"
+    name: "שם"
+    date: "תאריך"
+    special_population: "אוכלוסיות מיוחדות"
+    concept_label: "קונספט"
+    interested: "מעוניין"
+    not_interested: "לא מעוניין"
+    registration_time: "Registration time"
+    evening_date: "Salon date"
+    hosted_before: "First Salon"
+    host_contacted: "Host contacted"
+    has_survivor: "צוות איש עדות"
+    strangers_allowed: "Open salon"
+    needs: "צריך"
+    doesnt_need: "לא צריך"
+    teamed: "צוות"
+    not_teamed: "לא צוות"
+    forgot_password: "Forgot your password?"
+
   views:
     pagination:
-      first: "ראשון"
-      last: "אחרון"
-      previous: "לפני"
-      next: "אחרי"
+      first: "First"
+      last: "Last"
+      previous: "Previous"
+      next: "Next"
       truncate: "..."
+  layouts:
+    application:
+      contact_us: "Contact us"
+      facebook: "Our Facebook page"
+    header:
+      want_to_host: "Become a host"
+      want_to_guest: "Become a guest"
+      staff: "Team"
+      host_dashboard: "Host zone"
+      signin: "Sign in"
+      signout: "Sign out"
+      signup: "Sign up"
+      profile: "Profile"
+      home: "Home"
+      managers: "Team zone"
+      signup_staff: "Team registration"
+  pages:
+    home:
+      title: "חיפוש ערב זיכרון בסלון"
+      subtitle: "כאן תוכל/י לחפש סלון פתוח בסביבת מגוריכם. <br> אם לא מצאת סלון להתארח בו, תמיד תוכל/י לארח בעצמך."
+      zb_salons: "סלוני זיכרון בסלון"
+      temp_title: "Welcome to Zikaron BaSalon!"
+      temp_subtitle: "At this moment, you can only register as a host. In the next few weeks we will open the guest registration!"
+      already_a_member: "Already have a profile?"
+      sign_in_to_system: " Click here to sign in!"
+
+  sessions:
+    new:
+      title: "Insert personal information to enter your personal profile zone"
+
+  hosts:
+    edit:
+      title: "We want to get to know you better"
+      subtitle: "So we can help you plan a meaningful evening"
+      phone: "Phone number"
+      hosted_before: "Is this the first time you will host Zikaron BaSalon?"
+      hosted_before_yes: "No"
+      hosted_before_no: "Yes"
+      organization: "Do you represent any organization?"
+      org_help_block: "*If so, please make sure you register each event separately"
+      org_name: "Organization name"
+      address: "Address"
+      address_route_error: "Please make sure to add your house number"
+      address_street_number_error: "The address must include a house number"
+      floor: "Floor"
+      elevator: "Elevator"
+      ground_floor: "Ground floor"
+      event_date: "Date of Zikaron BaSalon"
+      event_date_help_block: "We recommend you to host your Zikaron BaSalon in the evening of Yom HaShoa; however, you can choose to host it anytime you like.  Don’t worry, you can always change the date in your personal profile."
+      event_date_placeholder: "Choose a date"
+      event_time: "Approximate time"
+      event_time_help_block: "You don't have to insert an hour, but this could help your guests"
+      event_language: "Language of event"
+      survivor_needed: "האם את/ה צריכ/ה עזרה במציאות איש/אשת עדות?"
+      survivor_needed_help_block: "לצערנו, אין ביכולתנו להבטיח הגעה של איש עדות ואנו מעודדים לחפש עדות באופן עצמאי. תוכל/י למצוא באתר שלנו גם עדויות מצולמות וכתובות."
+      strangers: "Will your Zikaron BaSalon be open for guests?"
+      strangers_help_block: "If you choose to have an open salon, guests from our site will be able to request to join your evening. You can switch your event to close at any time."
+      strangers_yes: "Open salon"
+      strangers_no: "Private salon"
+      max_guests: "How many guests would you like to host?"
+      max_guests_help_block: "We mean the number of guests that could request to join your Zikaron BaSalon through our site. You can invite your friends personally once the registration process is completed."
+      public_text: "Is there anything your guests should know?"
+      free_text: "Is there anything else we need to know?"
+      finish: "Complete registration" 
+      thanks_for_joining:  “You have joined thousands of Zikaron BaSalon hosts worldwide!"
+      facebook_share: "Share on Facebook"
+      build_evening: "Build your evening"
+    show:
+      title: "Host profile"
+      personal_details: "Your information"
+      evening_details: "Zikaron BaSalon information"
+      labels:
+        registration_time: "Time of registration"
+        name: "Name"
+        phone: "Phone number"
+        email: "Email"
+        address: "Address"
+        date_and_time: "Approximate date and time of event"
+        organization: "Do you represent any organization"
+        langauge: "Langauge"
+        accesability: "Accesability"
+        salon_type: "Open/closed salon"
+        open_places: "How many guests do you want to invite?"
+        public_text: "Is there anything you want your guests to know?"
+
+  witnesses:
+    types:
+      survivor: "ניצול"
+      academia: "אקדמיה"
+      second_generation: "דור שני"
+      therapist: "מטפל"
+
+  manager_mailer:
+    new_manager:
+      title: "Registration for Zikaron BaSalon's team members"
+      paragraph_1: "Hey, we're so glad you're here! :) Please register with the email address you received the welcome email to, and pick a password."
+      paragraph_2: ""
+
+  request_mailer:
+    pending_invite_received:
+      paragraph_1: "תודה שבחרת לארח אצלך בבית ערב של זיכרון בסלון בערב יום השואה הקרוב. %{guest_name} רוצה להתארח אצלך בערב של זיכרון בסלון"
+      ok_for_you: "מתאים לך?"
+      approve_request: "לאישור הבקשה"
+      paragraph_2: "יש לך עוד מקומות פנויים בסלון? אפשר תמיד לשנות את מספר המתארחים שיצטרפו לזיכרון בסלון אצלך"
+      your_profile: "בפרופיל האישי."
+      paragraph_3: "הבקשה תתבטל אוטומטית לאחר ארבעה ימים, לכן אנו מציעים לך לאשר אותה במהרה."
+
+    request_approved:
+      title: "Your request has been approved. See you in the Salon!"
+      see_you_in: "See you in the %{name}'s Salon"
+
+
+
+
+

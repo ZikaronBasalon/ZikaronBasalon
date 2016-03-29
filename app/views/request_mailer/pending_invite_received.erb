@@ -1,0 +1,34 @@
+<h1><%= @host.user.first_name %></h1>
+
+<p>
+	<%= t '.paragraph_1', guest_name: @guest.user.first_name %>
+</p>
+
+
+<table class="table">
+  <tr>
+    <th><%= t 'hosts.show.labels.name' %></th>
+    <th><%= t 'hosts.show.labels.phone' %></th>
+    <th><%= t 'hosts.show.labels.email' %></th>
+    <th><%= t 'hosts.show.labels.how_many_places' %></th>
+  </tr>
+
+  <tr>
+    <td><%= @guest.user.full_name %></td>
+    <td><%= @guest.phone %> </td>
+    <td><%= @guest.user.email %></td>
+    <td><%= @invite.plus_ones + 1 %> </td>
+  </tr>
+</table>
+
+<p>
+	<%= t '.ok_for_you' %> <%= link_to t('.approve_request'), host_url(id:@host.id, locale: :he) %>
+</p>
+
+<p>
+	<%= t '.paragraph_2' %> <%= link_to t('.your_profile'), host_url(id:@host.id, locale: :he) %>
+</p>
+
+<p>
+	<%= t '.paragraph_3' %>
+</p>

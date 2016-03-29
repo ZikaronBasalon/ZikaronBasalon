@@ -1,0 +1,13 @@
+<h1><%= @guest.user.first_name %>,</h1>
+
+<p><%= t('.paragraph_1', name: @host.user.first_name) %></p>
+
+<p>
+	<%= t('.paragraph_2', name: @host.user.first_name) %>  
+	<%= link_to(t('.link_text'), guest_url(id: @guest.id, locale: :he)) %> 
+	<%= t '.paragraph_2_after_link' %>
+</p>
+
+<p>
+	<%= t '.paragraph_3' %>  <%= link_to t('.paragraph_3_link_text'), "http://www.zikaronbasalon.com/#!eveningsetup/c1hap" %>
+</p>

@@ -1,0 +1,56 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" 
+      				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" a
+      				ria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to t('.home'), root_path, class: "navbar-brand" %>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+      	
+        <!-- Signed in user -->
+        <% if user_signed_in? %>
+          <!-- User profile -->
+      	 	<% if current_user.meta %>
+        		<li><%= link_to t('.profile'), polymorphic_path(current_user.meta) %></li>
+      		<% end %>
+          <!-- Admin -->
+        	<% if current_user.admin? %>
+	        	<li><%= link_to t('.managers'), managers_path %></li>
+	        <% end %>
+        
+        <!-- Not signed in user -->
+        <% else %>
+						<li class="header-btn"><%= link_to t('.want_to_host'), signup_path(type: 'host') %></li>
+				<% end %>
+
+      </ul>
+
+
+      <ul class="nav navbar-nav navbar-left">
+      	<% if user_signed_in? %>
+					<li class="button-link">
+						<%= link_to destroy_user_session_path, method: :delete  do %>
+							<button class="btn btn-warning"><%= t('.signout') %></button>
+						<% end %>
+					</li>
+				<% else %>
+					<li class="button-link">
+						<%= link_to user_session_path do %>
+							<button class="btn btn-warning"><%= t('.signin') %></button>
+						<% end %>
+					</li>
+				<% end %>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

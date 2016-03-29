@@ -1,0 +1,33 @@
+<p><%= @guest.user.first_name %>, <%= t('.see_you_in', name: @host.user.first_name) %>!</p>
+
+<p><%= t '.paragraph_1' %></p>
+
+<p>
+	<%= t('.want_to_contact', name: @host.user.first_name) %>
+
+	<div>
+		<%= t 'shared.name' %>:  <%= @host.user.full_name %>
+	</div>
+
+	<div>
+		<%= t 'shared.phone' %>:  <%= @host.phone %>
+	</div>
+
+	<div>
+		<%= t 'shared.email' %>:  <%= @host.user.email %>
+	</div>
+
+	<div>
+		<%= t 'shared.date' %>:  <%= @host.event_date %>
+	</div>
+
+	<div>
+		<%= t 'shared.time' %>:  <%= @host.event_time %>
+	</div>
+
+	<div>
+		<%= t 'shared.address' %>: <%= @host.address %> <%= @host.city.name %>
+	</div>
+</p>
+
+<p><%= t '.paragraph_2' %></p>

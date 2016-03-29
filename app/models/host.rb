@@ -1,17 +1,21 @@
 class Host < ActiveRecord::Base
-  attr_accessible :f_name, :l_name, :email, :phone, :address, :city_id, :max_guests,
-   :survivor_needed, :free_text, :city_name, :status, :strangers, :contact,
-   :survivor_details, :lat, :lng
+  attr_accessible :address, :city_id, :max_guests, :survivor_needed, :free_text, 
+  :city_name, :status, :strangers, :contact, :survivor_details, :lat, :lng, :event_date,
+  :event_time, :evening_public, :hosted_before, :floor, :elevator, :org_name, :org_role,
+  :event_language, :contacted, :phone, :witness_id, :user_attributes, :public_text, :concept,
+  :received_registration_mail, :contacted_witness
+
+  attr_accessor :available_places
 
   belongs_to :city
+  has_one :witness
+  has_one :user, as: :meta, dependent: :destroy
+  accepts_nested_attributes_for :user
+  has_many :comments, as: :commentable
+  has_many :invites
 
-  validates_presence_of :f_name, :email, :phone, :strangers
-  validate :valid_address
-
-  def valid_address
-    if lat.nil? || lng.nil?
-      errors.add(:address, "invalid")
-    end
+  def event_date 
+    read_attribute(:event_date) || Date.parse("4-5-2016")
   end
 
 
@@ -27,5 +31,11 @@ class Host < ActiveRecord::Base
   	city.try(:region).try(:name)
   end
 
+  def available_places
+    invites.reduce(max_guests) {|sum, invite| 
+      return sum - (invite.plus_ones.to_i + 1) if invite.confirmed?
+      sum
+    }
+  end
 end
 

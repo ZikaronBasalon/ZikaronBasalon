@@ -50,21 +50,13 @@ ZikaronBasalon::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
-   # Don't care if the mailer can't send
+  # Don't care if the mailer can't send
+  config.action_mailer.default_url_options = { host: 'zikaronbasalon.herokuapp.com' }
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.delivery_method = :smtp
 
-  ActionMailer::Base.smtp_settings = {
-    :user_name => ENV['SENDGRID_USERNAME'],
-    :password => ENV['SENDGRID_PASSWORD'],
-    :domain => ENV['SENDGRID_DOMAIN'],
-    :address => 'smtp.sendgrid.net',
-    :port => 587,
-    :authentication => :plain,
-    :enable_starttls_auto => true
-  }
-
+  
   # Enable threaded mode
   # config.threadsafe!
 
@@ -74,6 +66,11 @@ ZikaronBasalon::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+  config.middleware.use('PartyFoul::Middleware')
+  config.assets.js_compressor = :uglifier
+
+
 
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)

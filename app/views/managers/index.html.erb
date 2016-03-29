@@ -1,0 +1,49 @@
+<div class="col-xs-12" id="manager-index" ng-controller="ManagerIndexController"
+     ng-init="init(<%= @managers.to_json(:include => [:cities, :user]) %>, <%= @cities_without_manager.to_json %>)">
+
+  <div class="margin-bottom-20">
+    <span>ערים בלי מוביל:</span>
+    <span ng-repeat="city in citiesWithoutManager" class="tag">
+      {{city.name}}
+    </span>
+  </div>
+
+  <form class="form-inline" ng-submit="createManager()">
+    <div class="form-group">
+      <label for="email">מייל</label>
+      <input type="text" class="form-control" id="email" ng-model="email" placeholder="מייל" required />
+    </div>
+    <div class="form-group">
+      <label for="city">עיר</label>
+      <input type="text" class="form-control" id="city" ng-model="city" required>
+    </div>
+    <button type="submit" class="btn btn-default">הוסף מוביל</button>
+  </form>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>שם</th>
+        <th>מייל</th>
+        <th>ערים</th>
+        <th>פעולות</th>
+      </tr> 
+    </thead>
+    <tbody>
+      <tr ng-repeat="manager in managers">
+        <td>{{ manager.user ? manager.user.full_name : 'לא רשום' }}</td>
+        <td>{{ manager.user ? manager.user.email : manager.temp_email }}</td>
+        <td>
+          <span ng-repeat="city in manager.cities" class="tag">
+            {{city.name}}
+            <span class="glyphicon glyphicon-remove" ng-click="removeCity(manager, city)"></span>
+          </span>
+        </td>
+        <td>
+          <button type="button" class="btn btn-danger" ng-click="deleteManager(manager)">מחיקת מוביל</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

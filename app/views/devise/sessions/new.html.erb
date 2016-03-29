@@ -1,0 +1,31 @@
+<div id="signup-container" ng-controller="UserSigninController">
+  <div class="text-center title-container">
+    <div class="title"><%= t '.title' %></div>
+  </div>
+
+  <form ng-submit="submit($event)" name="signinForm">
+  	<p class="has-error" ng-show="error">
+  		<%= t '.signin_error' %>
+  	</p>	
+    <div class="form-group">
+      <label for="fullName"><%= t '.labels.email' %></label>
+      <input type="email" class="form-control"
+             id="email" placeholder="<%= t '.placeholders.email' %>"
+             ng-model="form.email"
+             required>
+    </div>
+
+    <div class="form-group">
+      <label for="password"><%= t '.labels.password' %></label>
+      <input type="password" class="form-control"
+             id="password" placeholder="<%= t '.placeholders.password' %>"
+             ng-model="form.password"
+             required>
+    </div>
+    <input type="submit" class="btn btn-warning form-control" value="<%= t 'shared.continue' %>">
+  </form>
+
+  <div class="margin-top-10">
+    <%= link_to t('shared.forgot_password'), new_user_password_path %>
+  </div>
+</div>

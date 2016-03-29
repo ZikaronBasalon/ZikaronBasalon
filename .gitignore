@@ -17,3 +17,9 @@
 
 # Ignore application configuration
 /config/application.yml
+
+.byebug_history
+
+.byebug_history
+
+latest.dump

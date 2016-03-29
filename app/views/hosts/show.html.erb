@@ -1,0 +1,336 @@
+<div id="host-show" class="row profile" ng-controller="HostShowController"
+      ng-init="init(<%= @host.to_json(:include => [:user, :witness, :city, { invites: { :include => { guest: { :include => :user } } } }, { comments: { :include => :user } }]) %>)">
+
+  <div class="col-xs-12">
+    <h1><%= t '.title' %></h1>
+  </div>
+  
+  <div class="col-xs-8">
+    <!-- Invites -->
+    <div class="col-xs-12" ng-if="host.invites && host.invites.length > 0">
+      <div class="panel panel-default request-panel col-xs-12">
+        <div ng-if="pendingInvites.length">
+          <h3><%= t '.invites_waiting_approval' %> ({{ pendingInvites.length }})</h3>
+
+          <table class="table">
+            <tr>
+              <th><%= t '.labels.name' %></th>
+              <th><%= t '.labels.phone' %></th>
+              <th><%= t '.labels.email' %></th>
+              <th><%= t '.labels.how_many_places' %></th>
+              <th></th>
+            </tr>
+
+            <tr ng-repeat='invite in pendingInvites'>
+              <td>{{ invite.guest.user.full_name }}</td>
+              <td>{{ invite.guest.phone }} </td>
+              <td>{{ invite.guest.user.email }} </td>
+              <td>{{ invite.plus_ones + 1 }} </td>
+              <td><button class="btn btn-warning" ng-click="updateInvite(invite, true)"><%= t '.confirm_request' %></button></td>
+            </tr>
+          </table>
+        </div>
+
+        <div ng-if="confirmedInvites.length">
+          <h3><%= t '.invites_approved' %> ({{ confirmedInvites.length }})</h3>
+
+          <table class="table">
+            <tr>
+              <th><%= t '.labels.name' %></th>
+              <th><%= t '.labels.phone' %></th>
+              <th><%= t '.labels.email' %></th>
+              <th><%= t '.labels.how_many_places' %></th>
+              <th></th>
+            </tr>
+
+            <tr ng-repeat='invite in confirmedInvites'>
+              <td>{{ invite.guest.user.full_name }}</td>
+              <td>{{ invite.guest.phone }} </td>
+              <td>{{ invite.guest.user.email }} </td>
+              <td>{{ invite.plus_ones + 1 }} </td>
+              <td><button class="btn btn-warning" ng-click="updateInvite(invite, null)"><%= t '.reject_request' %></button></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12">
+      <button type="button" class="btn btn-danger" ng-click="closeEvening()">
+        <%= t '.close_evening' %>
+      </button>
+      <p class="help-block"><%= t '.close_evening_help_block' %></p>
+    </div>
+    
+
+
+    <!-- Witness details -->
+    <div class="col-xs-12" ng-if="host.witness">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+           <div class="info-title"><%= t '.witness_details' %></div>
+        </div>
+        <div class="panel-body">
+
+          <div class="field-group">
+            <div>
+              <div class="info-label"><%= t '.labels.name' %></div>
+              <div><b>{{ host.witness.full_name }}</b></div>
+           </div>
+         </div>
+          
+          <div class="field-group">
+            <div class="info-label"><%= t '.labels.phone' %></div>
+            <div>{{ host.witness.phone }}</div>
+          </div>
+
+          <div class="field-group">
+            <div class="info-label"><%= t '.labels.email' %></div>
+            <div>{{ host.witness.email }}</div>
+          </div>
+
+          <div class="field-group">
+              <div class="info-label"><%= t '.labels.contacted' %></div>
+              <div>
+                <div class="radio">
+                  <label>
+                    <input type="radio"
+                           name="contacted_witness"
+                           id="contactedWitnessFalse"
+                           ng-value="false"
+                           ng-model="host.contacted_witness">
+                    <b><%= t 'shared.no' %></b>
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio"
+                           name="contacted_witness"
+                           id="contactedWitnessTrue"
+                           ng-value="true"
+                           ng-model="host.contacted_witness">
+                    <b><%= t 'shared.yes' %></b>
+                  </label>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Personal details -->
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+           <div class="info-title"><%= t '.personal_details' %></div>
+           <div>
+            <span class="info-label"><%= t '.labels.registration_time' %>:</span>
+            <span><b>{{ formatDateTime(host.created_at) }}</b></span>
+           </div>
+        </div>
+        <div class="panel-body">
+          <div class="field-group">
+            <div class="info-label"><%= t '.labels.name' %></div>
+            <div>{{ host.user.full_name }}</div>
+          </div>
+
+          <div class="field-group">
+            <div class="info-label"><%= t '.labels.phone' %></div>
+            <div>{{ host.phone }}</div>
+          </div>
+
+          <div class="field-group">
+            <div class="info-label"><%= t '.labels.email' %></div>
+            <div>{{ host.user.email }}</div>
+          </div>
+
+          <div class="field-group">
+            <div class="info-label"><%= t '.labels.address' %></div>
+            <div>{{ host.address }} {{ host.city.name }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+           <div class="info-title"><%= t '.evening_details' %></div>
+
+           <div>
+             <a href="/hosts/{{ host.id }}/edit"><%= t '.labels.edit' %></a>
+           </div>
+        </div>
+        <div class="panel-body">
+          
+          <div class="field-group">
+            <div class="info-label"><%= t '.labels.date_and_time' %></div>
+            <div>
+              {{ formatDate(host.event_date) }} {{ formatTime(host.event_time) }}
+            </div>
+          </div>
+
+          <div class="field-group">
+            <div class="info-label"><%= t '.labels.organization' %></div>
+            <div>{{ host.org_name }}</div>
+          </div>
+
+          <div class="field-group">
+            <div class="info-label"><%= t '.labels.langauge' %></div>
+            <div>{{ host.event_language }}</div>
+          </div>
+
+          <div class="field-group">
+            <div class="info-label"><%= t '.labels.accesability' %></div>
+            <div>{{ getAccesability(host) }}</div>
+          </div>
+        </div>
+
+        <div class="panel-body">
+          
+          <div class="field-group">
+            <div class="info-label"><%= t '.labels.salon_type' %></div>
+            <div>
+              <div class="radio">
+                  <label>
+                    <input type="radio"
+                           name="strangers"
+                           id="strangersFalse"
+                           ng-value="false"
+                           ng-model="host.strangers">
+                    <b><%= t 'hosts.edit.strangers_no' %></b>
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio"
+                           name="strangers"
+                           id="strangersTrue"
+                           ng-value="true"
+                           ng-model="host.strangers">
+                    <b><%= t 'hosts.edit.strangers_yes' %></b>
+                  </label>
+                </div>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <div class="info-label"><%= t '.labels.open_places' %></div>
+            <div ng-show="host.strangers">
+              <input type="number" ng-model="host.max_guests" min="0" class="form-control" style="width: 80px;">
+            </div>
+          </div>
+
+          <div class="field-group">
+            <div class="info-label"><%= t '.labels.public_text' %></div>
+            <div>{{ host.public_text }}</div>
+          </div>
+
+          <div class="field-group">
+            <div class="info-label"><%= t '.labels.free_text' %></div>
+            <div>{{ host.free_text }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <% if current_user.meta.is_a?(Manager) || current_user.admin? %>
+      <div class="col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+             <div class="info-title"><%= t '.manager_actions' %></div>
+          </div>
+          <div class="panel-body">
+            
+            <div class="field-group">
+              <div class="info-label"><%= t '.labels.contacted' %></div>
+              <div>
+                <div class="radio">
+                  <label>
+                    <input type="radio"
+                           name="contacted"
+                           id="contactedFalse"
+                           ng-value="false"
+                           ng-model="host.contacted">
+                    <b><%= t 'shared.no' %></b>
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio"
+                           name="contacted"
+                           id="contactedTrue"
+                           ng-value="true"
+                           ng-model="host.contacted">
+                    <b><%= t 'shared.yes' %></b>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <div class="info-label"><%= t '.labels.survivor_needed' %></div>
+              <div>{{ formatBool(host.survivor_needed) }}</div>
+            </div>
+
+            <div class="field-group">
+              <div class="info-label"><%= t '.labels.has_survivor' %></div>
+              <div>{{ formatBool(host.witness) }}</div>
+            </div>
+
+            <div class="field-group">
+              <div class="info-label"><%= t '.labels.survivor_contacted' %></div>
+              <div>{{ formatBool(host.witness && host.witness.contacted_by_host) }}</div>
+            </div>
+
+            <div class="field-group">
+              <div class="info-label"><%= t '.labels.concept' %></div>
+              <div>
+                <select class="form-control"
+                        ng-model="host.concept"
+                        ng-options="o.v as o.n for o in [
+                          { n: '<%= t 'shared.concept.religious_and_secular' %>', v: 'religious_and_secular' },
+                          { n: '<%= t 'shared.concept.vetrans' %>', v: 'vetrans' },
+                          { n: '<%= t 'shared.concept.eastern' %>', v: 'eastern' }
+                        ]">
+                <option ng-show="!host.concept" value=""><%= t 'shared.select' %></option>
+              </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-12 panel">
+          <div comment-form obj="host" resource="hosts" 
+               user-id="<%= current_user.id %>"
+               callback="commentCallback"></div>
+        </div>   
+      </div>
+    <% end %>
+
+    <% if current_user.meta.is_a?(Manager) || current_user.admin? || @host.witness %>
+      <div class="col-xs-12">
+        <button class="btn btn-warning"  
+                  ng-click="save()">
+          <%= t 'shared.save' %>
+        </button>
+      </div>
+
+      <div class="col-xs-12" ng-if="success">
+        <div class="alert alert-success" role="alert">
+          <%= t '.host_updated' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  
+  <% if current_user.meta.is_a?(Manager) %>
+    <div class="col-xs-4">
+      <div comment-list comments="host.comments"/></div>
+    </div>
+  <% end %>
+  
+
+  
+  
+</div>

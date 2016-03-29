@@ -1,0 +1,191 @@
+<div class="col-xs-12" id="witness-new-form" ng-controller="WitnessNewController">
+	
+	<h1><%= t '.title' %></h1>
+
+  <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</uib-alert>
+
+  <form name="form" ng-class="{true: 'error'}[submitted]" novalidate>
+    <div class="form-group">
+      <label for="full_name"><%= t 'users.new.labels.full_name' %></label>
+      <input type="text" class="form-control"
+             id="full_name"
+             ng-model="witness.full_name"
+             required>
+    </div>
+
+    <div class="form-group">
+      <label for="city_name">עיר/יישוב</label>
+      <input type="text" class="form-control"
+             id="city_name"
+             ng-model="witness.city_name"
+             required>
+    </div>
+
+    <div class="form-group">
+      <label for="address">כתובת</label>
+      <input type="text" class="form-control"
+             id="address"
+             ng-model="witness.address"
+             required>
+    </div>
+
+    <div class="form-group">
+      <label for="phone"><%= t 'hosts.edit.phone' %></label>
+      <input type="text" class="form-control"
+             id="phone"
+             ng-model="witness.phone"
+             is-phone
+             required>
+    </div>
+
+    <div class="form-group ">
+      <label for="witness_type" >
+        <%= t 'shared.type' %>
+      </label>
+      <select class="form-control" id="witness_type" 
+              ng-model="witness.witness_type"
+              ng-options="o.v as o.n for o in typeOptions">
+      </select>
+    </div>
+
+    <div class="form-group ">
+      <label for="contact_name" >
+       שם איש קשר
+      </label>
+      <input type="text" class="form-control"
+             id="contact_name"
+             ng-model="witness.contact_name">
+    </div>
+
+    <div class="form-group ">
+      <label for="contact_phone" >
+       טלפון איש קשר
+      </label>
+      <input type="text" class="form-control"
+             id="contact_phone"
+             ng-model="witness.contact_phone">
+    </div>
+
+    <div class="form-group">
+      <label for="event_language">השפה בה איש העדות מעביר את העדות</label>
+      <div ng-show="!otherLanguageVisible">
+        <select class="form-control" id="event_language" 
+                name="event_language"
+                required
+                ng-model="witness.language" ng-change="languageChanged()">
+          <option ng-show="!witness.language" value=""><%= t 'shared.select' %></option>
+          <option value="hebrew">עברית</option>
+          <option value="english">English</option>
+          <option value="arabic">العربية</option>
+          <option value="french">Français</option>
+          <option value="russian">русский</option>
+          <option value="other"><%= t 'shared.other' %></option>
+        </select>
+      </div>
+
+      <input type="text" class="form-control" 
+                 ng-model="host.event_language"
+                 ng-show="otherLanguageVisible" />
+    </div>
+
+    <div class="form-group">
+      <label for="email"><%= t 'users.new.labels.email' %></label>
+      <input type="text" class="form-control"
+             id="email"
+             ng-model="witness.email">
+    </div>
+
+    <div class="form-group ">
+	    <label for="stairs"><%= t '.walk_up_stairs' %></label>
+      <select class="form-control" id="stairs" 
+              ng-model="witness.stairs"
+              ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.can' %>', v: true }, { n: '<%= t 'shared.cant' %>', v: false }]">
+      </select>
+	  </div>
+
+	  <div class="form-group">
+      <label for="special_needs" class="control-label"><%= t '.special_needs' %></label>
+      <textarea class="form-control" id="special_needs" 
+      					ng-model="witness.special_needs">
+			</textarea>
+    </div>
+
+    <div class="form-group">
+	    <label for="seminar_required"><%= t '.seminar_required' %></label>
+      <select class="form-control" id="seminar_required" 
+              ng-model="witness.seminar_required"
+              ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.needs' %>', v: true }, { n: '<%= t 'shared.doesnt_need' %>', v: false }]">
+      </select>
+	  </div>
+
+    <div class="form-group">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-model="witness.free_on_day">
+          פנוי לתת עדות בערב יום השואה (4/5/2016)
+        </label>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <label>זמינות (באילו שעות איש העדות פנוי)</label>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-model="witness.can_morning">
+          בוקר
+        </label>
+      </div>
+
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-model="witness.can_afternoon">
+          צהריים
+        </label>
+      </div>
+
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-model="witness.can_evening">
+          ערב
+        </label>
+      </div>
+    
+    </div>
+    
+
+	  <div class="form-group">
+      <label for="free_text" class="control-label"><%= t '.free_text' %></label>
+      <textarea class="form-control" id="free_text" 
+      					ng-model="witness.free_text">
+			</textarea>
+    </div>
+
+    <div class="form-group">
+	    <label for="special_population"><%= t '.special_population' %></label>
+      <select class="form-control" id="special_population" 
+              ng-model="witness.special_population"
+              ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.yes' %>', v: true }, { n: '<%= t 'shared.no' %>', v: false }]">
+      </select>
+	  </div>
+
+    <!-- Concept -->
+    <div class="form-group">
+      <label for="concept"><%= t 'profile.labels.concept' %></label>
+        <select class="form-control"
+                ng-model="witness.concept"
+                id="concept"
+                ng-options="o.v as o.n for o in [
+                  { n: '<%= t 'shared.concept.religious_and_secular' %>', v: 'religious_and_secular' },
+                  { n: '<%= t 'shared.concept.vetrans' %>', v: 'vetrans' },
+                  { n: '<%= t 'shared.concept.eastern' %>', v: 'eastern' }
+                ]">
+        <option ng-show="!witness.concept" value=""><%= t 'shared.select' %></option>
+      </select>
+    </div>
+
+
+    <button ng-click="submit()" class="btn btn-warning"><%= t 'shared.submit' %></button>
+  </form>
+</div>
+

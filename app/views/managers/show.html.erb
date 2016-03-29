@@ -1,0 +1,305 @@
+<div class="col-xs-12" ng-controller="ManagerShowController"
+     ng-init="init(<%= current_user.to_json(:include => :meta) %>, <%= @hosts.to_json(:include => [:user, :witness, city: { :include => :managers }]) %>, <%= @witnesses.to_json(:include => { city: { :include => :managers } }) %>,  <%= @cities.to_json %>,
+        <%= @total_hosts.to_json %>, <%= @total_witnesses.to_json %>, <%= @page.to_json %> )">
+
+  <!-- View toggle buttons -->
+  <div class="text-center margin-bottom-20">
+    <div class="view-toggle">
+      <div ng-class="{ 'selected': activeView === 'hosts' }"
+           ng-click="onViewToggle('hosts')"><%= t '.hosts_view' %></div>
+      <div ng-class="{ 'selected': activeView === 'witnesses' }"
+           ng-click="onViewToggle('witnesses')"><%= t '.witnesses_view' %></div>
+    </div>
+  </div>
+
+  <div class="col-xs-12" ng-if="success">
+    <div class="alert alert-success" role="alert">
+      נחמק בהצלחה
+    </div>
+  </div>
+  
+  <!-- Host view -->
+  <div class="row" ng-if="activeView === 'hosts'">
+    <div class="col-xs-12">
+      <!-- Host filters -->
+      <form class="form-inline" name="hostFilter">
+        <span><%= t 'shared.filter_by' %></span>
+
+        <div class="form-group">
+          <select class="form-control" ng-model="search.host.city_id"
+                  ng-options="o.id as o.name for o in cities">
+            <option value=""><%= t 'shared.city' %></option>
+          </select>
+        </div> 
+
+        <div class="form-group">
+          <select class="form-control" ng-model="search.host.survivor_needed"
+                  ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.needs' %>', v: true }, { n: '<%= t 'shared.doesnt_need' %>', v: false }]">
+            <option value=""><%= t 'shared.survivor_needed' %></option>
+          </select>
+        </div> 
+
+        <div class="form-group">
+          <select class="form-control" ng-model="search.host.has_survivor"
+                  ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.teamed' %>', v: true }, { n: '<%= t 'shared.not_teamed' %>', v: false }]">
+            <option value=""><%= t 'shared.has_survivor' %></option>
+          </select>
+        </div>  
+
+        <div class="form-group">
+          <select class="form-control" ng-model="search.host.contacted"
+                  ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.yes' %>', v: true }, { n: '<%= t 'shared.no' %>', v: false }]">
+            <option value=""><%= t 'shared.host_contacted' %></option>
+          </select>
+        </div>  
+
+        <div class="form-group pull-left">
+          <input type="text" class="form-control" ng-model="query.host" placeholder="חיפוש חופשי" />
+        </div>
+      </form>
+
+
+      <div class="margin-top-10">
+        <span>סה"כ מארחים:</span> <span class="total-summary">{{ totalHosts }}</span>
+      </div>
+
+      <!-- Host table -->
+      <table class="table host-table">
+        <thead>
+          <tr>
+            <th ng-click="setSortProp('user.id')">
+              <%= t 'shared.id' %>
+              <span class="caret" ng-if="sortProp === 'user.id'"></span>
+            </th>
+            <th ng-click="setSortProp('user.full_name')">
+              <%= t 'shared.name' %>
+              <span class="caret" ng-if="sortProp === 'user.full_name'"></span>
+            </th>
+            <th ng-click="setSortProp('created_at')">
+              <%= t 'shared.registration_time' %>
+              <span class="caret" ng-if="sortProp === 'created_at'"></span>
+            </th>
+            <th ng-click="setSortProp('city.name')">
+              <%= t 'shared.city' %>
+              <span class="caret" ng-if="sortProp === 'city.name'"></span>
+            </th>
+            <th ng-click="setSortProp('event_date')">
+              <%= t 'shared.evening_date' %>
+              <span class="caret" ng-if="sortProp === 'event_date'"></span>
+            </th>
+            <th ng-click="setSortProp('hosted_before')">
+              <%= t 'shared.hosted_before' %>
+              <span class="caret" ng-if="sortProp === 'hosted_before'"></span>
+            </th>
+            <th ng-click="setSortProp('host_contacted')">
+              <%= t 'shared.host_contacted' %>
+              <span class="caret" ng-if="sortProp === 'host_contacted'"></span>
+            </th>
+            <th ng-click="setSortProp('survivor_needed')">
+              <%= t 'shared.survivor_needed' %>
+              <span class="caret" ng-if="sortProp === 'survivor_needed'"></span>
+            </th>
+            <th ng-click="setSortProp('has_survivor')">
+              <%= t 'shared.has_survivor' %>
+              <span class="caret" ng-if="sortProp === 'has_survivor'"></span>
+            </th>
+            <th ng-click="setSortProp('strangers')">
+              <%= t 'shared.strangers_allowed' %>
+              <span class="caret" ng-if="sortProp === 'strangers'"></span>
+            </th>
+            <% if current_user.admin? %>
+              <th><%= t 'shared.manager' %></th>
+              <th></th>
+            <% end %>
+          </tr> 
+        </thead>
+        <tbody>
+          <tr ng-repeat="host in hosts" ng-click="editHost(host)">
+            <td>{{ host.user.id }}</td>
+            <td>{{ host.user.full_name }}</td>
+            <td>{{ formatDateTime(host.created_at) }}</td>
+            <td>{{ host.city.name }}</td>
+            <td>{{ formatDate(host.event_date) }}</td>
+            <td>{{ formatBool(!host.hosted_before) }}</td>
+            <td>{{ formatBool(host.contacted) }}</td>
+            <td>{{ formatBool(host.survivor_needed) }}</td>
+            <td>{{ formatBool(host.has_survivor) }}</td>
+            <td>{{ formatBool(host.strangers) }}</td>
+            <% if current_user.admin? %>
+              <td>
+                <div manager-link obj="host"></div>
+              </td>
+              <td>
+                <button ng-click="deleteHost(host);$event.stopPropagation();" class="btn btn-warning">מחק/י</button>
+              </td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+
+      <uib-pagination total-items="totalHosts" 
+                      ng-model="pagination.currentPage" 
+                      items-per-page="20"
+                      ng-change="pageChanged()"
+                      class="pagination-sm" 
+                      previous-text="&lsaquo;" 
+                      next-text="&rsaquo;" 
+                      first-text="&laquo;" 
+                      last-text="&raquo;">
+      </uib-pagination>
+    </div>
+  </div> 
+  <!-- End of host view -->
+
+
+  <!-- Witness view -->
+  <div class="row" ng-if="activeView === 'witnesses'">
+    <div class="col-xs-12">
+      <div class="pull-left">
+        <%= link_to new_witness_path do %>
+          <span class="glyphicon glyphicon-plus"></span>
+          <span><%= t '.add_witness' %></span>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-xs-12">
+      
+      <!-- Witness filters -->
+      <form class="form-inline">
+        <span><%= t 'shared.filter_by' %>:</span>
+
+        <div class="form-group">
+          <select class="form-control" ng-model="search.witness.city_id"
+                  ng-options="o.id as o.name for o in cities">
+            <option value=""><%= t 'shared.city' %></option>
+          </select>
+        </div> 
+
+        <div class="form-group">
+          <select class="form-control" ng-model="search.witness.witness_type"
+                  ng-options="o.v as o.n for o in witnessTypes">
+            <option value=""><%= t 'shared.type' %></option>
+          </select>
+        </div> 
+
+        <div class="form-group">
+          <select class="form-control" ng-model="search.witness.stairs"
+                  ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.can' %>', v: true }, { n: '<%= t 'shared.cant' %>', v: false }]">
+            <option value=""><%= t 'shared.walk_up_stairs' %></option>
+          </select>
+        </div> 
+
+        <div class="form-group">
+          <select class="form-control" ng-model="search.witness.seminar_required"
+                  ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.interested' %>', v: true }, { n: '<%= t 'shared.not_interested' %>', v: false }]">
+            <option value=""><%= t 'shared.seminar_required' %></option>
+          </select>
+        </div>  
+
+        <div class="form-group">
+          <select class="form-control" ng-model="search.witness.concept"
+                  ng-options="o.v as o.n for o in [
+                    { n: '<%= t 'shared.concept.religious_and_secular' %>', v: 'religious_and_secular' },
+                    { n: '<%= t 'shared.concept.vetrans' %>', v: 'vetrans' },
+                    { n: '<%= t 'shared.concept.eastern' %>', v: 'eastern' }
+                  ]">
+            <option value=""><%= t 'shared.concept_label' %></option>
+          </select>
+        </div>  
+
+        <div class="form-group pull-left">
+          <input type="text" class="form-control" ng-model="query.witness"
+                 placeholder="<%= t 'shared.search' %>" />
+        </div>
+      </form>
+
+      <div class="margin-top-10">
+        <span>סה"כ אנשי עדות:</span> <span class="total-summary">{{ totalWitnesses }}</span>
+      </div>
+
+      <!-- Witness table -->
+      <table class="table witness-table">
+        <thead>
+          <tr>
+            <th ng-click="setSortPropWitness('id')">
+              <%= t 'shared.id' %>
+              <span class="caret" ng-if="witnessSortProp === 'id'"></span>
+            </th>
+            <th ng-click="setSortPropWitness('full_name')">
+              <%= t 'shared.name' %>
+              <span class="caret" ng-if="witnessSortProp === 'full_name'"></span>
+            </th>
+            <th ng-click="setSortPropWitness('city.name')">
+              <%= t 'shared.city' %>
+              <span class="caret" ng-if="witnessSortProp === 'city.name'"></span>
+            </th>
+            <th ng-click="setSortPropWitness('witness_type')">
+              <%= t 'shared.type' %>
+              <span class="caret" ng-if="witnessSortProp === 'witness_type'"></span>
+            </th>
+            <th ng-click="setSortPropWitness('')">
+              <%= t 'shared.date' %>
+              <span class="caret" ng-if="witnessSortProp === ''"></span>
+            </th>
+            <th ng-click="setSortPropWitness('stairs')">
+              <%= t 'shared.walk_up_stairs' %>
+              <span class="caret" ng-if="witnessSortProp === 'stairs'"></span>
+            </th>
+            <th ng-click="setSortPropWitness('seminar_required')">
+              <%= t 'shared.seminar_required' %>
+              <span class="caret" ng-if="witnessSortProp === 'seminar_required'"></span>
+            </th>
+            <th ng-click="setSortPropWitness('concept')">
+              <%= t 'shared.concept_label' %>
+              <span class="caret" ng-if="witnessSortProp === 'concept'"></span>
+            </th>
+            <th ng-click="setSortPropWitness('special_population')">
+              <%= t 'shared.special_population' %>
+              <span class="caret" ng-if="witnessSortProp === 'special_population'"></span>
+            </th>
+            <% if current_user.admin? %>
+              <th><% t 'shared.manager' %></th>
+              <th></th>
+            <% end %>
+          </tr> 
+        </thead>
+        <tbody>
+          <tr ng-repeat="witness in witnesses"
+              ng-click="editWitness(witness)">
+            <td>{{ witness.id }}</td>
+            <td>{{ witness.full_name }}</td>
+            <td>{{ witness.city.name }}</td>
+            <td>{{ witness.witness_type }}</td>
+            <td>{{  }}</td>
+            <td>{{ formatBool(witness.stairs) }}</td>
+            <td>{{ formatBool(witness.seminar_required) }}</td>
+            <td>{{ witness.concept }}</td>
+            <td>{{ formatBool(witness.special_population) }}</td>
+            <% if current_user.admin? %>
+              <td>
+                <div manager-link obj="witness"></div>
+              </td>
+              <td>
+                <button ng-click="deleteWitness(witness);$event.stopPropagation();" class="btn btn-warning">מחק/י</button>
+              </td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+
+      <uib-pagination total-items="totalWitnesses" 
+                      ng-model="pagination.currentPage" 
+                      items-per-page="20"
+                      ng-change="pageChanged()"
+                      class="pagination-sm" 
+                      previous-text="&lsaquo;" 
+                      next-text="&rsaquo;" 
+                      first-text="&laquo;" 
+                      last-text="&raquo;">
+      </uib-pagination>
+    </div>
+  </div> 
+  <!-- End of host view -->
+
+
+</div>

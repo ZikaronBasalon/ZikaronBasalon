@@ -1,0 +1,28 @@
+<div class="col-xs-12" id="witness-index" ng-controller="WitnessIndexController"
+     ng-init="init(<%= @witnesses.to_json(:include => :city) %>)">
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>שם</th>
+        <th>עיר</th>
+        <th>שפה</th>
+        <th>יכול מדרגות</th>
+        <th>צריך סמינר</th>
+        <th>אוכלוסיה מיוחדת</th>
+
+      </tr> 
+    </thead>
+    <tbody>
+      <tr ng-repeat="witness in witnesses">
+        <td>{{ witness.full_name }}</td>
+        <td>{{ witness.city.name }}</td>
+        <td>{{ witness.language }}</td>
+        <td>{{ formatBool(witness.stairs) }}</td>
+        <td>{{ formatBool(witness.seminar_required) }}</td>
+        <td>{{ formatBool(witness.special_population) }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

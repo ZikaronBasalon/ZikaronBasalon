@@ -1,41 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html  data-ng-app="zikaronbasalon">
   <head>
-    <title><%= content_for?(:title) ? yield(:title) : "זיכרון בסלון 2015" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "זכרון בסלון 2016" %></title>
     <%= favicon_link_tag %>
-    <%= stylesheet_link_tag "application" %>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-49428934-2', 'zikaronbasalon.herokuapp.com');
+      ga('send', 'pageview');
+    </script>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.2/ui-bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.2/ui-bootstrap-tpls.min.js"></script>
     <%= javascript_include_tag "application", "#{controller_name}.#{action_name}" if ZikaronBasalon::Application.assets.find_asset("#{controller.controller_name}.#{action_name}.js") %>
-    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places&language=iw" %>
+    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places&language=he" %>
+        <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/lodash/4.5.0/lodash.min.js"></script>
+    <!-- Load Bootstrap RTL theme from RawGit -->
+    <% if I18n.locale == :he %>
+      <link rel="stylesheet" href="//cdn.rawgit.com/morteza/bootstrap-rtl/v3.3.4/dist/css/bootstrap-rtl.min.css">
+    <% end %>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-lightness/jquery-ui.css">
+    <%= stylesheet_link_tag "application" %>
+    <%= stylesheet_link_tag params[:controller] if ZikaronBasalon::Application.assets.find_asset("#{params[:controller]}") %>
+
     <%= csrf_meta_tag %>
     <%= yield(:head) %>
     <meta property="og:image" content="http://static.wixstatic.com/media/21e365_91defaf889494d6ea5cad65059ba650c.jpg">
     <meta property="og:url" content="http://zikaronbasalon.herokuapp.com">
-    <meta property="og:description" content="בין הקדושה של הטקסים הממלכתיים וההדחקה המוחלטת, זיכרון בסלון מציע דרך אחת נוספת ﻿ זיכרון בסלון נולד מתוך ההבנה שהזיקה שלנו, הדור השלישי, ליום הזיכרון לשואה ולגבורה - הולכת ונחלשת. הפרויקט נועד לייצר דרך נוספת לציין את היום הזה, אשר תאפשר חיבור שונ">
+    <meta property="og:description" content="בין הקדושה של הטקסים הממלכתיים וההדחקה המוחלטת, זכרון בסלון מציע דרך אחת נוספת ﻿ זכרון בסלון נולד מתוך ההבנה שהזיקה שלנו, הדור השלישי, ליום הזכרון לשואה ולגבורה - הולכת ונחלשת. הפרויקט נועד לייצר דרך נוספת לציין את היום הזה, אשר תאפשר חיבור שונ">
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/56e430a9ab6e87da54747af2/default';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
   </head>
-  <body>
+  <body class="<%= I18n.locale %>">
+    
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '192610131086928',
+          xfbml      : true,
+          version    : 'v2.5'
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
+
     <%= render "layouts/header" %>
-    <div id="container">
+    <div id="main-container" class="container-fluid">
       <%= yield %>
     </div>
     <div id="footer">
-        <div class="footer_wrapper">
-          <div class="part"> צרו קשר: zikaronbasalon@gmail.com </div>
-         <div class="part"><%= link_to "זיכרון בסלון בפייסבוק", "https://www.facebook.com/ZikronBaSalon" %></div>
-         <% if false %>
-         <div class="part"> פותח ע"י אורי קלר
-        <%= link_to image_tag("linkdin.jpg"), "http://www.linkedin.com/in/uriklar", target: "_blank" %></div>
-        <% end %>
-        </div>
+      <div class="footer_wrapper">
+        <div class="part"> <%= t '.contact_us' %>: zikaronbasalon@gmail.com </div>
+       <div class="part"><%= link_to t('.facebook'), "https://www.facebook.com/ZikronBaSalon" %></div>
       </div>
+    </div>
   </body>
 </html>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-49428934-2', 'zikaronbasalon.herokuapp.com');
-  ga('send', 'pageview');
-
-</script>

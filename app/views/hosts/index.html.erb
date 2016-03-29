@@ -1,67 +1,39 @@
-<div id="staff_container">
-  <div id="hosts">
-  <form class="form-inline">
-    <div class="filter_by">סנן/י לפי</div>
-    <%= select_tag :city_name, options_for_select(City.all.map(&:name)), prompt: "עיר" %>
+<div class="col-xs-12" id="host-index" ng-controller="HostIndexController"
+     ng-init="init('<%= @hosts.to_json(:include => [:user, :witness]) %>')">
 
-    <%= select_tag :survivor_needed, options_for_select(["צריך","לא צריך","נשלח"]), prompt: "איש עדות"%>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>שם</th>
+        <th>מייל</th>
+        <th>טלפון</th>
+        <th>כתובת</th>
+        <th>נרשם בתאריך</th>
+        <th>צריך איש עדות</th>
+        <th>צוות איש עדות</th>
+        <th>ערב פתוח</th>
+      </tr> 
+    </thead>
+    <tbody>
+      <tr ng-repeat="host in hosts" ng-click="editHost(host)">
+        <td>{{ host.user.full_name }}</td>
+        <td>{{ host.user.email }}</td>
+        <td>{{ host.phone }}</td>
+        <td>{{ host.address }}</td>
+        <td>{{ formatDate(host.created_at) }}</td>
+        <td>{{ formatBool(host.survivor_needed) }}</td>
+        <td>
+          <span ng-if="host.witness">
+            {{ host.witness.full_name }}
+          </span>
 
-    <%= select_tag :strangers, options_for_select([['מוכן', true], ['לא מוכן', false]]), prompt: "מוכן/ה לארח" %>
-
-
-    <%= image_tag "excel.png", id: "export_to_excel" %>
-    <%= text_field_tag :search,nil, class: "search", placeholder: "חיפוש חופשי" %>
-  </form>
-
-    <table id="staff_table">
-      <thead>
-        <tr>
-        <th></th>
-        <th class="sort" data-sort="strangers">זרים<div class="header_line"></div></th>
-        <th class="sort" data-sort="f_name">
-          שם
-            <div class="header_line"></div>
-        </th>
-        <th class="sort" data-sort="l_name">
-          משפחה
-          <div class="header_line"></div>
-        </th>
-        <th>כתובת<div class="header_line"></div></th>
-        <th class="sort" data-sort="city_name">עיר<div class="header_line"></div></th>
-        <th>טלפון<div class="header_line"></th>
-        <th class="sort" data-sort="email"> Email<div class="header_line"></div></th>
-        <th class="sort" data-sort="survivor_needed">איש עדות<div class="header_line"></div></th>
-        <th>פרטי איש עדות<div class="header_line"></div></th>
-        <th>איש קשר<div class="header_line"></div></th>
-        <th>מידע נוסף<div class="header_line"></div></th>
-        <th>&nbsp;</th>
+          <a ng-if="!host.witness" ng-click="openWitnessPopup()">
+            צוות איש עדות
+          </a>
+        </td>
+        <td>{{ formatBool(host.strangers) }}</td>
       </tr>
-      </thead>
-      <tbody class="list">
-      <% @hosts.each_with_index do |host,i| %>
-        <tr>
-            <td><%= i+1 %></td>
-            <td class="strangers <%= strangers_class(host.strangers) %>"><%= inline_svg(get_guests_svg(host.strangers)) %><%= host.strangers %></td>
-            <td class="f_name"><%= host.f_name %></td>
-            <td class="l_name"><%= host.l_name %></td>
-            <td class="address"><%= host.address %></td>
-            <td class="city_name"><%= host.city_name %></td>
-            <td class="phone"><%= host.phone %></td>
-            <td class="email"><%= host.email %></td>
-            <td class="survivor_needed"><%= host.survivor_needed %></td>
-            <td class="status"><%= host.survivor_details %></td>
-            <td class="contact"><%= host.contact %></td>
-            <td class="status"><%= host.free_text %></td>
-            <td >
-              <%= link_to edit_host_path(host) do %>
-              <div class="circle">
-                <%= inline_svg "edit.svg" %>
-              </div>
-              <% end %>
-            </td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
-  </div>
+    </tbody>
+  </table>
+
 </div>

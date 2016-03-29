@@ -1,42 +1,81 @@
-$(function(){
-	// Change city
-	$('#city_select').change(function(event) {
-		id = $(this).val();
-		$.ajax({
-			url: '/hosts/search',
-			data: { id: id },
-			error: function() {
-				alert('Error!');
-			}
-		});
-	});
+//= require lib/utils
+//= require request-invite
 
-	// Open send reuqest popup
-	$('.send').click(function(event) {
-		$('#guest_host_id').val($(this).data('id'));
-		$('#register').removeClass('hidden');
-		$('#register').center();
-		$('#mask').removeClass('hidden');
-	});
+app.controller('HomePageController', ['$scope','$http', '$uibModal', function($scope, $http, $uibModal) {
+  $scope.hosts = [];
+  $scope.search = {};
+  $scope.currentPage = 1;
 
-	// Close send request popup
-	$('.x').click(function(event) {
-		$('#register').addClass('hidden');
-		$('#mask').addClass('hidden');
-	});
+  $scope.formatBool = formatBool;
+  $scope.formatDate = formatDate;
+  $scope.formatAddress = formatAddress;
+  $scope.formatLanguage = formatLanguage;
 
-	// Reverse the pagination (hebrew)
-  // var pages = document.getElementsByClassName("reversed")[0];
-  // var i = pages.childNodes.length;
-  // while (i--)
-  //     pages.appendChild(pages.childNodes[i]);
+  $scope.init = function(hosts, cities, totalItems, currentUser) {
+    $scope.hosts = hosts;
+    $scope.cities = cities;
+    $scope.totalItems = totalItems;
+    $scope.currentUser = currentUser;
 
-  // Endelss scrolling
-  $(window).scroll(function(){
-  	url = $('.pagination a[rel="next"]').attr('href');
-  	if(url && $(window).scrollTop() > $(document).height() - $(window).height() - 50) {
-       $('.pagination').text('טוען מארחים נוספים...')
-      $.getScript(url);
-  	}
-  })
-});
+    var hostId = getUrlParameter('invite', window.location);
+    if(hostId) {
+      var host = _.find($scope.hosts, { id: parseInt(hostId) });
+      if (host) {
+        $scope.requestInvite(host);
+      }
+    }
+
+    $scope.$watch('search.query', _.throttle(function(oldVal, newVal) {
+      if(newVal != oldVal) {
+        $scope.filter();
+      }
+    }, 2000), true);
+  }
+
+  $scope.filter = function() {
+    $scope.getHosts();
+  }
+
+  $scope.pageChanged = function() {
+    $scope.getHosts($scope.currentPage);
+  }
+
+  $scope.getHosts = function(page) {
+    $http.get('/pages/home.json', {
+      params: {
+        page: page,
+        city_id: $scope.search.city_id,
+        event_language: $scope.search.event_language,
+        query: $scope.search.query
+      }
+    }).then(function(response) {
+      $scope.cities = response.data.cities;
+      $scope.hosts = JSON.parse(response.data.hosts);
+      $scope.totalItems = response.data.total_items;
+    });
+  }
+
+  $scope.requestInvite = function(host) {
+    var modalInstance = $uibModal.open({
+      templateUrl: 'request-invite.html',
+      controller: 'RequestInviteController',
+      resolve: {
+        host: function () {
+          return host;
+        },
+        currentUser: function () {
+          return $scope.currentUser;
+        }
+      }
+    });
+
+    modalInstance.result.then(function () {
+      window.history.pushState(null, null, '/');
+      location.reload();
+    }, function () {
+      window.history.pushState(null, null, '/');
+      location.reload();
+    });
+  }
+}]);
+

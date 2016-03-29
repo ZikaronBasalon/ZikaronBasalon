@@ -1,57 +1,112 @@
-<div id="mask" class="hidden"></div>
+<div class="col-xs-12 home-page">
+  <div class="row">
+    <div class="col-xs-12 text-center">
+      <h3><%= t '.title' %></h3>
+      <p class="subtitle"><%= simple_format(t '.subtitle') %></p>
+    </div>
 
-<div class="container_inner" id="host_list">
-	 <div class="title">רשימת מארחים זיכרון בסלון 2015</div>
-	 <br>
-	 <div class="explenation">
-אנחנו שמחים שבחרת להתארח בערב "זיכרון בסלון".
-תוכלו לחפש סלון פתוח לאירוח בסביבת מגוריכם ברשימות המופיעות בהמשך.
-אם לא מצאתם מקום מתאים להתארח בו, אתם תמיד יכולים לארח בעצמכם.
-צוות "זיכרון בסלון" ישמח לעזור בחיפוש אחר סלון מתאים.
-נא חיזרו להתעדכן לגביי סלונים חדשים שהצטרפו אלינו.
-תודה רבה וברוכים הבאים.	 </div>
+    <% if false %>
+    <div class="col-xs-12" ng-controller="HomePageController"
+          ng-init="init(
+            <%= @hosts.to_json(:include => [:user, :city], :methods => [:available_places]) %>, 
+            <%= @cities.to_json %>, <%= @total_items %>,
+            <%= current_user_json %>
+          )">
+      <!-- Filters -->
+      <form class="form-inline margin-bottom-20">
+        <span class="margin-left-10"><%= t 'shared.filter_by' %>:</span>
 
-	 <%= select_tag :city_select, options_from_collection_for_select(City.all, :id, :name), prompt: "חפש עיר" %>
+        <div class="form-group">
+          <select class="form-control city-select" ng-model="search.city_id"
+                  ng-options="o.id as o.name for o in cities"
+                  ng-change="filter()">
+            <option value=""><%= t 'shared.city' %></option>
+          </select>
+        </div> 
 
-	<div id="main_content">
-		<div id="hosts_table">
-			<table class="hosts_table">
-				<thead>
-					<th class="right">
-						מארח
-						<div class="line"></div>
-					</th>
-					<th>
-						כתובת
-						<div class="line"></div>
-					</th>
-					<th >
-						עיר
-						<div class="line"></div>
-					</th>
-					<th></th>
-				</thead>
-				<tbody id="hosts">
-					<%= render 'hosts/hosts' %>
-				</tbody>
-			</table>
-			<%= paginate @hosts %>
-		</div>
+        <div class="form-group">
+          <select class="form-control" ng-model="search.event_language"
+                  ng-change="filter()">
+            <option value=""><%= t 'shared.language' %></option>
+            <option value="hebrew">עברית</option>
+            <option value="english">English</option>
+            <option value="arabic">العربية</option>
+            <option value="french">Français</option>
+            <option value="russian">русский</option>
+            <option value="other"><%= t 'shared.other' %></option>
+          </select>
+        </div> 
 
-		<div id="no_salon">
-			<div class="label">לא מצאתם סלון מארח?</div>
-			<div class="content">למה שלא תארגנו ערב לכם ולחבריכם? צוות זיכרון בסלון יסייע לכם בארגון הערב ובבניתת תוכנו.</div>
-			<%= link_to "לחצו כאן לפרטים", new_host_path %>
-		</div>
-	</div>
+        <div class="form-group pull-left">
+          <input type="text" class="form-control" ng-model="search.query" placeholder="חיפוש חופשי" />
+        </div>
+      </form>
 
+      <div class="salon-count">
+        <span class="count">{{ totalItems }}</span>
+        <span><%= t '.zb_salons' %></span>
+      </div>
 
+      <table class="table host-table">
+        <thead>
+          <tr>
+            <th><%= t 'shared.name' %></th>
+            <th><%= t 'shared.city' %></th>
+            <th><%= t 'shared.street' %></th>
+            <th><%= t 'shared.date' %></th>
+            <th><%= t 'shared.language' %></th>
+            <th><%= t 'shared.available_spaces' %></th>
+            <th><%= t 'shared.free_text' %></th>
+            <th></th>
+          </tr> 
+        </thead>
+        <tbody>
+          <tr ng-repeat="host in hosts">
+            <td>{{ host.user.full_name }}</td>
+            <td>{{ host.city.name }}</td>
+            <td>{{ host.address }}</td>
+            <td>{{ formatDate(host.event_date) }}</td>
+            <td>{{ formatLanguage(host.event_language) }}</td>
+            <td>{{ host.available_places }}</td>
+            <td>{{ host.public_text }}</td>
+            <td>
+              <button class="btn-request"
+                      ng-click="requestInvite(host)">
+                <%= t 'shared.send_request' %>
+              </button>
+          </td>
+          </tr>
+        </tbody>
+      </table>
 
-
-	<div id="register" class="hidden">
-		<%= render 'guests/register' %>
-	</div>
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <uib-pagination total-items="totalItems" 
+                          ng-model="currentPage" 
+                          ng-change="pageChanged()"
+                          class="pagination-sm" 
+                          previous-text="&lsaquo;" 
+                          next-text="&rsaquo;" 
+                          first-text="&laquo;" 
+                          last-text="&raquo;">
+          </uib-pagination>
+        </div>
+      </div>
+    
+    </div> 
+    <% end %>
+    <!-- End of HomePageController -->
+  </div>
 </div>
+
+<% if false %>
+<script type="text/ng-template" id="request-invite.html">
+  <%= render 'guests/request_invite_modal' %>
+</script>
+<% end %>
+
+
+
 
 
 
