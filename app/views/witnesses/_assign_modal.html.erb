@@ -39,12 +39,12 @@
 
 		  			<div class="info-group">
 		  				<span class="label"><%= t 'shared.estimated_time' %>:</span>
-		  				<span class="value">{{ host.event_time }}</span>
+		  				<span class="value">{{ formatTime(host.event_time) }}</span>
 		  			</div>
 
 		  			<div class="info-group">
 		  				<span class="label"><%= t 'shared.language' %>:</span>
-		  				<span class="value">{{ formatLanguage(host.language) }}</span>
+		  				<span class="value">{{ formatLanguage(host.event_language) }}</span>
 		  			</div>
 
 		  			<div class="info-group">

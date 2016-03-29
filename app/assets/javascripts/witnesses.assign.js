@@ -59,6 +59,8 @@ app.controller('WitnessAssignModalController', ['$scope', '$http','$uibModalInst
   $scope.formatLanguage = formatLanguage;
   $scope.formatStairs = formatStairs;
   $scope.formatWitnessAvailabilityTime = formatWitnessAvailabilityTime;
+  $scope.formatTime = formatTime;
+  $scope.formatBool = formatBool;
 
   $scope.close = function () {
     $uibModalInstance.dismiss('close');
@@ -72,8 +74,8 @@ app.controller('WitnessAssignModalController', ['$scope', '$http','$uibModalInst
         host_id: $scope.host.id
       }
     }).then(function(response) {
-      if(response.data.success) {
-        $uibModalInstance.close();
+      if(response.data.success && response.data.host && response.data.host.id) {
+        window.location = '/hosts/' + response.data.host.id;
       } else {
         $scope.error = true;
       }

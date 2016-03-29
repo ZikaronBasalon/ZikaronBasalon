@@ -65,7 +65,7 @@ class WitnessesController < ApplicationController
       if @witness.update_attributes(params[:witness])
         
         format.html { redirect_to @witness, notice: 'Witness was successfully updated.' }
-        format.json { render json: { success: true } }
+        format.json { render json: { success: true, host: @witness.host } }
       else
         format.html { render action: "edit" }
         format.json { render json: @witness.errors, status: :unprocessable_entity }
@@ -85,8 +85,8 @@ class WitnessesController < ApplicationController
   def assign
     @witness = Witness.find(params[:id])
     @city_id = params[:city_id] || @witness.city.id
-    @hosts = Host.where(city_id: @city_id, survivor_needed: true).where("witness_id IS ?", nil)
-    @cities = City.all.map{ |c| { id: c.id, name: c.name }}
+    @hosts = Host.where(city_id: @city_id, survivor_needed: true).select { |h| h.witness.nil? }
+    @cities = City.all.map{ |c| { id: c.id, name: c.name }}.sort_alphabetical_by{|c| c[:name] }
 
     respond_to do |format|
       format.html
