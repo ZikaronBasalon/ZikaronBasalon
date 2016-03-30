@@ -64,10 +64,10 @@ class WitnessesController < ApplicationController
     respond_to do |format|
       if @witness.update_attributes(params[:witness])
         
-        format.html { redirect_to @witness, notice: 'Witness was successfully updated.' }
+        #format.html { redirect_to @witness, notice: 'Witness was successfully updated.' }
         format.json { render json: { success: true, host: @witness.host } }
       else
-        format.html { render action: "edit" }
+        #format.html { render action: "edit" }
         format.json { render json: @witness.errors, status: :unprocessable_entity }
       end
     end
