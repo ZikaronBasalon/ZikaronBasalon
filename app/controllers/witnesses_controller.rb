@@ -47,10 +47,10 @@ class WitnessesController < ApplicationController
 
     respond_to do |format|
       if @witness.save
-        format.html { redirect_to action: "index" }
+        #format.html { redirect_to action: "index" }
         format.json { render json: @witness, status: :created, location: @witness }
       else
-        format.html { render action: "new" }
+        #format.html { render action: "new" }
         format.json { render json: @witness.errors, status: :unprocessable_entity }
       end
     end

@@ -34,9 +34,9 @@ app.controller('WitnessNewController', ['$scope','$http', function($scope, $http
 				} else {
 					_.each(response.data, addAlert);
 				}
-				//window.location = '/witnesses';
 			}).catch(function(response) {
-				_.each(["משהו השתבש! איש העדות לא נשמר בהצלחה!"], addAlert);
+				console.log(response);
+				_.each(response.data, addAlert);
 			});
 		}
 	}
