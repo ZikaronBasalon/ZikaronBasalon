@@ -120,6 +120,7 @@ he:
     time: "שעה"
     address: "כתובת"
     password: "סיסמא"
+    free_on_date: "פנוי בערב יום השואה"
 
 
   views:

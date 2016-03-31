@@ -238,7 +238,7 @@
               <span class="caret" ng-if="witnessSortProp === 'witness_type'"></span>
             </th>
             <th ng-click="setSortPropWitness('')">
-              <%= t 'shared.date' %>
+              <%= t 'shared.free_on_date' %>
               <span class="caret" ng-if="witnessSortProp === ''"></span>
             </th>
             <th ng-click="setSortPropWitness('stairs')">
@@ -269,11 +269,11 @@
             <td>{{ witness.id }}</td>
             <td>{{ witness.full_name }}</td>
             <td>{{ witness.city.name }}</td>
-            <td>{{ witness.witness_type }}</td>
-            <td>{{  }}</td>
+            <td>{{ formatWitnessType(witness.witness_type) }}</td>
+            <td>{{ formatBool(witness.free_on_day) }}</td>
             <td>{{ formatBool(witness.stairs) }}</td>
             <td>{{ formatBool(witness.seminar_required) }}</td>
-            <td>{{ witness.concept }}</td>
+            <td>{{ formatConcept(witness.concept) }}</td>
             <td>{{ formatBool(witness.special_population) }}</td>
             <% if current_user.admin? %>
               <td>

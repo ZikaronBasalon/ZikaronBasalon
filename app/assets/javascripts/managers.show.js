@@ -17,6 +17,8 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
   $scope.formatBool = formatBool;
   $scope.formatDate = formatDate;
   $scope.formatDateTime = formatDateTime;
+  $scope.formatWitnessType = formatWitnessType;
+  $scope.formatConcept = formatConcept;
   $scope.witnessTypes = witnessTypes;
   $scope.pagination = {
     currentPage: 1
