@@ -15,7 +15,7 @@ class Manager < ActiveRecord::Base
    sort = 'created_at' if sort.blank?
    hosts = Host.includes(:city, :user).order(sort + " desc").where(filter)
    hosts = hosts.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin?
-   hosts = hosts.select{ |h| h.user && h.user.full_name.include?(query) } if query.present?
+   hosts = hosts.select{ |h| host_in_query(h, query) } if query.present?
    hosts = paginate(hosts, page)
    hosts
   end
@@ -51,6 +51,13 @@ class Manager < ActiveRecord::Base
       arr_name = Kaminari.paginate_array(arr_name).page(page).per(20)
     end
     arr_name
+  end
+
+  def host_in_query(h, q)
+    (h.user && (h.user.full_name.include?(q) || h.user.email.include?(q))) ||
+    (h.org_name && h.org_name.include?(q)) ||
+    (h.city && h.city.name.include?(q)) ||
+    (h.city && h.city.managers.count > 0 && h.city.managers.first.temp_email.include?(q))
   end
 end
 
