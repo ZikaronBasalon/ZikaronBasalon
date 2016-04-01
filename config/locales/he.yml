@@ -122,6 +122,9 @@ he:
     password: "סיסמא"
     free_on_date: "פנוי בערב יום השואה"
     org_name: "ארגון"
+    has_manager: "משוייך למוביל"
+    has_manager_true: "משוייך"
+    has_manager_false: "לא משוייך"
 
 
   views:

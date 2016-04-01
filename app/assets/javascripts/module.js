@@ -1,5 +1,6 @@
 var app = angular.module('zikaronbasalon',[
-	'ui.bootstrap'
+	'ui.bootstrap',
+	'angularSpinner'
 ])
 .factory('httpRequestInterceptor', function () {
   return {

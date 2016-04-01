@@ -27,6 +27,7 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
   $scope.sortProp = 'created_at';
 
   $scope.success = false;
+  $scope.loading = false;
 
   $scope.init = function(currentUser, hosts, witnesses, cities, totalHosts, totalWitnesses, currentPage) {
     $scope.currentUser = currentUser;
@@ -75,8 +76,11 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
       host_query: $scope.query.host,
       witness_query: $scope.query.witness,
       host_sort: $scope.sortProp,
-      witness_sort: $scope.witnessSortProp
+      witness_sort: $scope.witnessSortProp,
+      has_manager: $scope.search.has_manager
     };
+
+    $scope.loading = true;
 
     $http.get('/managers/' + $scope.currentUser.meta.id + '.json' + '?' + $.param(params))
     .then(function(response) {
@@ -85,6 +89,7 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
       $scope.pagination.currentPage = response.data.page;
       $scope.totalHosts = response.data.total_hosts;
       $scope.totalWitnesses = response.data.total_witnesses;
+      $scope.loading = false;
     });
   }
 

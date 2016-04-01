@@ -11,20 +11,22 @@ class Manager < ActiveRecord::Base
 
 	validates_uniqueness_of :temp_email
 
-  def get_hosts(page, filter, query, sort)
+  def get_hosts(page, filter, query, sort, has_manager)
    sort = 'created_at' if sort.blank?
    hosts = Host.includes(:city, :user).order(sort + " desc").where(filter)
    hosts = hosts.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin?
    hosts = hosts.select{ |h| host_in_query(h, query) } if query.present?
+   hosts = hosts.select{ |h| obj_has_manager(h, has_manager) } if has_manager.present?
    hosts = paginate(hosts, page)
    hosts
   end
 
-  def get_witnesses(page, filter, query, sort)
+  def get_witnesses(page, filter, query, sort, has_manager)
    sort = 'created_at' if sort.blank?
    witnesses = Witness.includes(:city, :host).order(sort + " desc").where(filter)
    witnesses = witnesses.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin?
    witnesses = witnesses.select{ |w| w.full_name.include?(query) } if query.present?
+   witnesses = witnesses.select{ |w| obj_has_manager(w, has_manager) } if has_manager.present?
    witnesses = paginate(witnesses, page)
    witnesses
   end
@@ -58,6 +60,15 @@ class Manager < ActiveRecord::Base
     (h.org_name && h.org_name.include?(q)) ||
     (h.city && h.city.name.include?(q)) ||
     (h.city && h.city.managers.count > 0 && h.city.managers.first.temp_email.include?(q))
+  end
+
+  def obj_has_manager(obj, has_manager)
+    return false if obj.city.nil?
+    if has_manager === "true"
+      return obj.city.managers.count > 0
+    else
+      return obj.city.managers.count == 0
+    end 
   end
 end
 
