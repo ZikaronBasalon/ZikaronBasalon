@@ -318,6 +318,8 @@ he:
       host_details: "פרטי המארח"
       find_new_salon: "חפש סלון חדש"
       cancel_request: "בטל/י בקשה"
+      invite_request: "בקשה להתארח"
+      no_requests: "אין לך כרגע בקשה פתוחה"
 
   host_mailer:
     new_host:
