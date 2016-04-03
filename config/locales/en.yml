@@ -109,11 +109,12 @@ en:
       home: "Home"
       managers: "Team zone"
       signup_staff: "Team registration"
+      manager_profile: "Community Managment"
   pages:
     home:
-      title: "חיפוש ערב זיכרון בסלון"
-      subtitle: "כאן תוכל/י לחפש סלון פתוח בסביבת מגוריכם. <br> אם לא מצאת סלון להתארח בו, תמיד תוכל/י לארח בעצמך."
-      zb_salons: "סלוני זיכרון בסלון"
+      title: "Search for a ZikaronBasalon Evening"
+      subtitle: "Here you can search for a salon near you. <br> If you are unable to find a salon, you can always host an evening yourself!"
+      zb_salons: "Salons found"
       temp_title: "Welcome to Zikaron BaSalon!"
       temp_subtitle: "At this moment, you can only register as a host. In the next few weeks we will open the guest registration!"
       already_a_member: "Already have a profile?"
@@ -177,6 +178,21 @@ en:
         salon_type: "Open/closed salon"
         open_places: "How many guests do you want to invite?"
         public_text: "Is there anything you want your guests to know?"
+        free_text: "My Notes"
+        edit: "Edit"
+        contacted: "Was contacted"
+        survivor_needed: "Needs witness"
+        has_survivor: "Witness assigned"
+        survivor_contacted: "Host confirmed witness arrival"
+        concept: "Concept"
+        how_many_places: "How many places?"
+      host_updated: "Host updated successfully"
+      invites_waiting_approval: "Requests awaiting approval"
+      invites_approved: "Approved requests"
+      confirm_request: "Approve request"
+      reject_request: "Cancel request"
+      close_evening: "Close evening for registration"
+      close_evening_help_block: "After clicking this you will no longer receive requests"
 
   witnesses:
     types:

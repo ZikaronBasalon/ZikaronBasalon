@@ -2,7 +2,7 @@
      ng-init="init(<%= current_user.to_json(:include => :meta) %>, <%= @hosts.to_json(:include => [:user, :witness, city: { :include => :managers }]) %>, <%= @witnesses.to_json(:include => { city: { :include => :managers } }) %>,  <%= @cities.to_json %>,
         <%= @total_hosts.to_json %>, <%= @total_witnesses.to_json %>, <%= @page.to_json %> )">
 
-<span us-spinner class="zb-spinner" spinner-on="loading"></span>
+<span us-spinner class="zb-spinner" ng-if="loading" spinner-on="loading"></span>
   <!-- View toggle buttons -->
   <div class="text-center margin-bottom-20">
     <div class="view-toggle">
