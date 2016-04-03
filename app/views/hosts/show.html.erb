@@ -6,6 +6,11 @@
   </div>
   
   <div class="col-xs-8">
+    <div class="col-xs-12" ng-if="success">
+      <div class="alert alert-success" role="alert">
+        <%= t '.host_updated' %>
+      </div>
+    </div>
     <!-- Invites -->
     <div class="col-xs-12" ng-if="host.invites && host.invites.length > 0">
       <div class="panel panel-default request-panel col-xs-12">
@@ -55,7 +60,7 @@
       </div>
     </div>
 
-    <div class="col-xs-12">
+    <div class="col-xs-12" ng-if="host.strangers">
       <button type="button" class="btn btn-danger" ng-click="closeEvening()">
         <%= t '.close_evening' %>
       </button>
