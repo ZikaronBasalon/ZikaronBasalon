@@ -62,8 +62,12 @@
                 {{ witness.host.user.full_name }}
               </div>
 
-              <div ng-if="!witness.host">
+              <div ng-if="!witness.host && !witness.external_assignment">
                 <%= link_to t('profile.assign_host'), assign_witness_path(@witness) %>
+              </div>
+
+              <div ng-if="!witness.host && witness.external_assignment">
+                צוות מחוץ למערכת
               </div>
             </div>  
             
@@ -140,7 +144,7 @@
             </div>
 
             <!-- Type -->
-             <div class="form-group ">
+            <div class="form-group ">
                 <label for="witness_type" >
                   <%= t 'shared.type' %>
                 </label>
@@ -149,8 +153,29 @@
                         ng-options="o.v as o.n for o in witnessTypes">
                   <option ng-show="!witness.concept" value=""><%= t 'shared.select' %></option>
                 </select>
-              </div>
+            </div>
+          </div>
 
+          <div class="panel-body">
+            <!-- External assignment-->
+            <% if current_user && current_user.any_admin? %>
+              <div class="field-group">
+                <div class="info-label">
+                  <%= t 'profile.labels.external_assignment' %>
+                </div>
+                <div>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox"
+                             name="external_assignment"
+                             ng-model="witness.external_assignment">
+                      <%= t 'profile.external_assignment_text' %>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            
           </div>
         </div>
       </div>

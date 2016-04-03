@@ -34,4 +34,8 @@ class User < ActiveRecord::Base
   def guest?
     self.meta && self.meta.is_a?(Guest)
   end
+
+  def any_admin?
+    self.admin || self.sub_admin
+  end
 end

@@ -4,7 +4,7 @@ class Witness < ActiveRecord::Base
   							 :special_needs, :special_population, :stairs, :witness_type, :city_name,
                  :contacted, :contacted_by_host, :available_for_teaming, :can_morning,
                  :can_afternoon, :can_evening, :free_on_day, :contact_name, :contact_phone,
-                 :host_id
+                 :host_id, :external_assignment
 
   belongs_to :city
   belongs_to :host
