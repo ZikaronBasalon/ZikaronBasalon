@@ -125,3 +125,11 @@ function formatConcept(concept) {
         return '';
   }
 }
+
+function formatAddressDisplay(address) {
+  if(!address) {
+    return '';
+  }
+
+  return address.replace(/\d/g,'').replace('דירה', '');
+}

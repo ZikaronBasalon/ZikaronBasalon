@@ -10,6 +10,7 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
   $scope.formatDate = formatDate;
   $scope.formatAddress = formatAddress;
   $scope.formatLanguage = formatLanguage;
+  $scope.formatAddressDisplay = formatAddressDisplay;
 
   $scope.init = function(hosts, cities, totalItems, currentUser) {
     $scope.hosts = hosts;

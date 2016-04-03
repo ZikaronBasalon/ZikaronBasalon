@@ -16,6 +16,7 @@ app.controller('RequestInviteController', ['$scope', '$http', '$uibModalInstance
 	$scope.formatDate = formatDate;
 	$scope.formatLanguage = formatLanguage;
 	$scope.formatTime = formatTime;
+	$scope.formatAddressDisplay = formatAddressDisplay;
 
 	if (!$scope.currentUser)  {
 		$scope.view = 'register';
