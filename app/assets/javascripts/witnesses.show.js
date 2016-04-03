@@ -11,6 +11,8 @@ app.controller('WitnessShowController', ['$scope', '$http', function($scope, $ht
 	$scope.formatStrangers = formatStrangers;
 	$scope.formatBool = formatBool;
 	$scope.witnessTypes = witnessTypes;
+	$scope.formatWitnessType = formatWitnessType;
+	$scope.formatLanguage = formatLanguage;
 
 	$scope.init = function(witness) {
 		$scope.witness = witness;

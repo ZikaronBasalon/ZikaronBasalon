@@ -37,10 +37,76 @@
             <div class="info-label"><%= t 'profile.labels.address' %></div>
             <div>{{ witness.address }}</div>
           </div>
+
+          <div class="field-group">
+            <div class="info-label">עיר</div>
+            <div>{{ witness.city.name }}</div>
+          </div>
         </div>
 
         <div class="panel-body">
-          
+          <div class="field-group">
+            <div class="info-label"><%= t 'shared.type' %></div>
+            <div>{{ formatWitnessType(witness.witness_type) }}</div>
+          </div>
+
+          <div class="field-group">
+            <div class="info-label">שם איש קשר</div>
+            <div>{{ witness.contact_name }}</div>
+          </div>
+
+          <div class="field-group">
+            <div class="info-label">טלפון איש קשר</div>
+            <div>{{ witness.contact_phone }}</div>
+          </div>
+
+          <div class="field-group">
+            <div class="info-label">שפה</div>
+            <div>{{ formatLanguage(witness.language) }}</div>
+          </div>
+
+          <div class="field-group">
+            <div class="info-label"><%= t 'witnesses.new.walk_up_stairs' %></div>
+            <div>{{ formatBool(witness.stairs) }}</div>
+          </div>
+
+        </div>
+
+        <div class="panel-body">
+          <div class="field-group">
+            <div class="info-label">צרכים מיוחדים</div>
+            <div>{{ witness.special_needs }}</div>
+          </div>
+
+          <div class="field-group">
+            <div class="info-label">זקוק לסמינר</div>
+            <div>{{ formatBool(witness.seminar_required) }}</div>
+          </div>
+
+          <div class="field-group">
+            <div class="info-label">זמין בערב יום השואה</div>
+            <div>{{ formatBool(witness.free_on_day) }}</div>
+          </div>
+
+          <div class="field-group">
+            זמינות
+            <div>
+              <span ng-if="witness.can_morning" class="margin-left-5">בוקר</span>
+              <span ng-if="witness.can_afternoon" class="margin-left-5">צהריים</span>
+              <span ng-if="witness.can_evening" class="margin-left-5">ערב</span>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <div class="info-label">הערות</div>
+            <div>{{ witness.free_Text }}</div>
+          </div>
+
+          <div class="field-group">
+            <div class="info-label">אוכלוסיה מיוחדת</div>
+            <div>{{ formatBool(witness.special_population) }}</div>
+          </div>
+
         </div>
       </div>
     </div>
