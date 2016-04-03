@@ -3,7 +3,7 @@
 
 app.controller('UserSignupController', ['$scope', '$http', function($scope, $http) {
 	$scope.form = {};
-	$scope.error = null;
+	$scope.errors = null;
 
 	$scope.init = function(type) {
 		$scope.form.type = type;
