@@ -19,7 +19,8 @@ class ManagersController < ApplicationController
                                 params[:host_query], 
                                 params[:host_sort], 
                                 has_manager,
-                                has_survivor)
+                                has_survivor,
+                                is_org)
     @cities = @manager.get_cities
     @witnesses = @manager.get_witnesses(@page, 
                                         witness_filter, 
@@ -114,5 +115,9 @@ class ManagersController < ApplicationController
 
     def has_survivor
       params[:has_survivor]
+    end
+
+    def is_org
+      params[:is_org]
     end
 end

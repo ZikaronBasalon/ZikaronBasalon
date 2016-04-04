@@ -86,6 +86,7 @@ en:
     not_teamed: "לא צוות"
     forgot_password: "Forgot your password?"
     has_host: "Assign to host"
+    is_org: "Belongs to organization"
 
   views:
     pagination:

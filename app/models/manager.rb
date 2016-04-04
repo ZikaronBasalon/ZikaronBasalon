@@ -11,13 +11,14 @@ class Manager < ActiveRecord::Base
 
 	validates_uniqueness_of :temp_email
 
-  def get_hosts(page, filter, query, sort, has_manager, has_survivor)
+  def get_hosts(page, filter, query, sort, has_manager, has_survivor, is_org)
    sort = 'created_at' if sort.blank?
    hosts = Host.includes(:city, :user).order(sort + " desc").where(filter)
    hosts = hosts.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin?
    hosts = hosts.select{ |h| host_in_query(h, query) } if query.present?
    hosts = hosts.select{ |h| obj_has_manager(h, has_manager) } if has_manager.present?
    hosts = hosts.select{ |h| host_has_witness(h, has_survivor) } if has_survivor.present?
+   hosts = hosts.select { |h| !h.org_name.nil? } if is_org
    hosts = paginate(hosts, page)
    hosts
   end

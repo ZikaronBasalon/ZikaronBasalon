@@ -62,8 +62,14 @@
               <option value=""><%= t 'shared.has_manager' %></option>
             </select>
           </div>  
-
         <% end %>
+
+        <div class="form-group">
+          <label>
+            <input type="checkbox" ng-model="search.is_org">
+            <%= t 'shared.is_org' %>
+          </label>
+        </div> 
 
         <div class="form-group pull-left">
           <input type="text" class="form-control" ng-model="query.host" placeholder="חיפוש חופשי" />

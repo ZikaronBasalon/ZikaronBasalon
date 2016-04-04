@@ -37,6 +37,10 @@ input {
 	}
 }
 
+select { 
+	max-width: 200px;
+}
+
 ul {
 	list-style: none;
 	padding: 0;
