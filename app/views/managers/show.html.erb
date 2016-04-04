@@ -54,12 +54,16 @@
           </select>
         </div> 
 
-        <div class="form-group">
-          <select class="form-control" ng-model="search.has_manager"
-                  ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.has_manager_true' %>', v: true }, { n: '<%= t 'shared.has_manager_false' %>', v: false }]">
-            <option value=""><%= t 'shared.has_manager' %></option>
-          </select>
-        </div>  
+        <% if current_user.any_admin? %>
+
+          <div class="form-group">
+            <select class="form-control" ng-model="search.has_manager"
+                    ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.has_manager_true' %>', v: true }, { n: '<%= t 'shared.has_manager_false' %>', v: false }]">
+              <option value=""><%= t 'shared.has_manager' %></option>
+            </select>
+          </div>  
+
+        <% end %>
 
         <div class="form-group pull-left">
           <input type="text" class="form-control" ng-model="query.host" placeholder="חיפוש חופשי" />
@@ -218,7 +222,18 @@
                   ]">
             <option value=""><%= t 'shared.concept_label' %></option>
           </select>
-        </div>  
+        </div>
+
+        <% if current_user.any_admin? %>
+
+          <div class="form-group">
+            <select class="form-control" ng-model="search.has_manager"
+                    ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.has_manager_true' %>', v: true }, { n: '<%= t 'shared.has_manager_false' %>', v: false }]">
+              <option value=""><%= t 'shared.has_manager' %></option>
+            </select>
+          </div>   
+
+        <% end %> 
 
         <div class="form-group pull-left">
           <input type="text" class="form-control" ng-model="query.witness"
