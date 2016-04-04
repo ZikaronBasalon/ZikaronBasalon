@@ -69,7 +69,6 @@
             <div class="info-label"><%= t 'witnesses.new.walk_up_stairs' %></div>
             <div>{{ formatBool(witness.stairs) }}</div>
           </div>
-
         </div>
 
         <div class="panel-body">
@@ -89,7 +88,7 @@
           </div>
 
           <div class="field-group">
-            זמינות
+            <div class="info-label">זמינות</div>
             <div>
               <span ng-if="witness.can_morning" class="margin-left-5">בוקר</span>
               <span ng-if="witness.can_afternoon" class="margin-left-5">צהריים</span>
@@ -98,15 +97,16 @@
           </div>
 
           <div class="field-group">
-            <div class="info-label">הערות</div>
-            <div>{{ witness.free_Text }}</div>
-          </div>
-
-          <div class="field-group">
             <div class="info-label">אוכלוסיה מיוחדת</div>
             <div>{{ formatBool(witness.special_population) }}</div>
           </div>
+        </div>
 
+        <div class="panel-body">
+          <div class="field-group">
+            <div class="info-label">הערות</div>
+            <div>{{ witness.free_Text }}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -240,8 +240,7 @@
                   </div>
                 </div>
               </div>
-            <% end %>
-            
+            <% end %>   
           </div>
         </div>
       </div>
