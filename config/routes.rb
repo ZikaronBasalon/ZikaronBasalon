@@ -1,5 +1,7 @@
 ZikaronBasalon::Application.routes.draw do
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/  do
+    get 'my-profile', :to => 'users#profile'
+
     devise_for :users, controllers: { registrations: "registrations" }
     resources :managers do
       post :remove_city, on: :member
