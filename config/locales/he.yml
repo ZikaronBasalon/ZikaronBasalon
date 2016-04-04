@@ -127,6 +127,7 @@ he:
     has_manager_false: "לא משוייך"
     has_host: "צוות למארח"
     is_org: "שייך לארגון"
+    free_search: "חיפוש חופשי"
 
 
   views:
