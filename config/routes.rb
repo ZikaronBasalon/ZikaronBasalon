@@ -12,6 +12,7 @@ ZikaronBasalon::Application.routes.draw do
     resources :users, only: [:new]
     resources :witnesses do
       get :assign, on: :member
+      get :unassign, on: :member
       resources :comments
     end
     

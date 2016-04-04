@@ -1,5 +1,5 @@
 class WitnessesController < ApplicationController
-  before_filter :is_authorized, only: [:index]
+  before_filter :is_authorized, only: [:index, :unassign]
   before_filter :is_admin, only: [:destroy]
   # GET /witnesses
   # GET /witnesses.json
@@ -96,6 +96,12 @@ class WitnessesController < ApplicationController
         }
       }
     end
+  end
+
+  def unassign
+    @witness = Witness.find(params[:id])
+    @witness.update_attributes(host_id: nil)
+    redirect_to @witness
   end
 
   def is_authorized

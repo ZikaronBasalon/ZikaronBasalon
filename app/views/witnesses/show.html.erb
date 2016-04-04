@@ -125,7 +125,8 @@
             <div class="field-group">
               <div class="info-label"><%= t 'profile.labels.host' %></div>
               <div ng-if="witness.host">
-                {{ witness.host.user.full_name }}
+                <div>{{ witness.host.user.full_name }}</div>
+                <div><%= link_to 'בטל ציוות', unassign_witness_path(@witness) %></div>
               </div>
 
               <div ng-if="!witness.host && !witness.external_assignment">
