@@ -125,6 +125,7 @@ he:
     has_manager: "משוייך למוביל"
     has_manager_true: "משוייך"
     has_manager_false: "לא משוייך"
+    has_host: "צוות למארח"
 
 
   views:

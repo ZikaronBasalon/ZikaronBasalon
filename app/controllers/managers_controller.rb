@@ -14,13 +14,19 @@ class ManagersController < ApplicationController
   def show
     @page = params[:page] || 1
 
-    @hosts = @manager.get_hosts(@page, host_filter, params[:host_query], params[:host_sort], has_manager)
+    @hosts = @manager.get_hosts(@page, 
+                                host_filter, 
+                                params[:host_query], 
+                                params[:host_sort], 
+                                has_manager,
+                                has_survivor)
     @cities = @manager.get_cities
     @witnesses = @manager.get_witnesses(@page, 
                                         witness_filter, 
                                         params[:witness_query], 
                                         params[:witness_sort], 
-                                        has_manager)
+                                        has_manager,
+                                        has_host)
 
     @total_hosts = @hosts.total_count
     @total_witnesses = @witnesses.total_count
@@ -100,5 +106,13 @@ class ManagersController < ApplicationController
 
     def has_manager
       params[:has_manager]
+    end
+
+    def has_host
+      params[:has_host]
+    end
+
+    def has_survivor
+      params[:has_survivor]
     end
 end

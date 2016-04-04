@@ -41,7 +41,7 @@
         </div> 
 
         <div class="form-group">
-          <select class="form-control" ng-model="search.host.has_survivor"
+          <select class="form-control" ng-model="search.has_survivor"
                   ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.teamed' %>', v: true }, { n: '<%= t 'shared.not_teamed' %>', v: false }]">
             <option value=""><%= t 'shared.has_survivor' %></option>
           </select>
@@ -223,6 +223,14 @@
             <option value=""><%= t 'shared.concept_label' %></option>
           </select>
         </div>
+
+        <div class="form-group">
+          <select class="form-control" ng-model="search.has_host"
+                  ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.teamed' %>', v: true }, { n: '<%= t 'shared.not_teamed' %>', v: false }]">
+            <option value=""><%= t 'shared.has_host' %></option>
+          </select>
+        </div>  
+
 
         <% if current_user.any_admin? %>
 

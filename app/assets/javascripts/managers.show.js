@@ -77,7 +77,9 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
       witness_query: $scope.query.witness,
       host_sort: $scope.sortProp,
       witness_sort: $scope.witnessSortProp,
-      has_manager: $scope.search.has_manager
+      has_manager: $scope.search.has_manager,
+      has_host: $scope.search.has_host,
+      has_survivor: $scope.search.has_survivor
     };
 
     $scope.loading = true;
