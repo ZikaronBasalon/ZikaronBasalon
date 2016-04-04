@@ -30,7 +30,7 @@ class Manager < ActiveRecord::Base
   end
 
   def get_cities
-    if user.admin?
+    if user.admin? || user.sub_admin?
       @cities = City.order('name desc').all
     else
       @cities = City.where(:id => cities.pluck(:id))
