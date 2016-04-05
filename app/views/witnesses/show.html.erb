@@ -63,7 +63,8 @@
               </div>
 
               <div ng-if="!witness.host">
-                <%= link_to t('profile.assign_host'), assign_witness_path(@witness) %>
+                <%= t('profile.assign_host') %>
+                <%#= link_to t('profile.assign_host'), assign_witness_path(@witness) %>
               </div>
             </div>  
             
