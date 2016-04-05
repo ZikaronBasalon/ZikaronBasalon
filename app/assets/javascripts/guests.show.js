@@ -6,6 +6,7 @@ app.controller('GuestShowController', ['$scope', '$http', function($scope, $http
 	$scope.formatAddress = formatAddress;
 	$scope.formatLanguage = formatLanguage;
 	$scope.getAccesability = getAccesability;
+	$scope.formatTime = formatTime;
 
 	$scope.init = function(guest) {
 		$scope.guest = guest;

@@ -14,7 +14,7 @@ app.controller('UserSigninController', ['$scope', '$http', function($scope, $htt
 			}).then(function(response) {
 				if(response.status === 201) {
 					var data = response.data;
-					window.location = '/' + data.meta_type.toLowerCase() + 's/' + data.meta_id;
+					window.location = '/' + document.getElementById('locale').className + '/' + data.meta_type.toLowerCase() + 's/' + data.meta_id;
 				}
 			}).catch(function(response) {
 				if(response.status > 400) {

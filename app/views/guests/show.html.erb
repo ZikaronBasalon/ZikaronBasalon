@@ -25,6 +25,19 @@
     </div>
   </div>
 
+  <!-- No invites -->
+  <div class="col-xs-12" ng-if="!invite">
+    <h3><%= t '.invite_request' %></h3>
+    <p><%= t '.no_requests' %></p>
+    <p>
+      <%= link_to root_path do %>
+        <button class="btn btn-warning">
+          <%= t '.find_new_salon' %>
+        </button>
+      <% end %>
+    </p>
+  </div>
+
   <!-- Invites -->
   <div class="col-xs-12" ng-if="invite">
     <div class="panel panel-default">

@@ -6,6 +6,7 @@
     </div>
 
     <% if false %>
+
     <div class="col-xs-12" ng-controller="HomePageController"
           ng-init="init(
             <%= @hosts.to_json(:include => [:user, :city], :methods => [:available_places]) %>, 
@@ -38,7 +39,7 @@
         </div> 
 
         <div class="form-group pull-left">
-          <input type="text" class="form-control" ng-model="search.query" placeholder="חיפוש חופשי" />
+          <input type="text" class="form-control" ng-model="search.query" placeholder="<%= t 'shared.free_search' %>י" />
         </div>
       </form>
 
@@ -64,7 +65,7 @@
           <tr ng-repeat="host in hosts">
             <td>{{ host.user.full_name }}</td>
             <td>{{ host.city.name }}</td>
-            <td>{{ host.address }}</td>
+            <td>{{ formatAddressDisplay(host.address) }}</td>
             <td>{{ formatDate(host.event_date) }}</td>
             <td>{{ formatLanguage(host.event_language) }}</td>
             <td>{{ host.available_places }}</td>

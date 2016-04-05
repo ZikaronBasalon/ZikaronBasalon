@@ -1,10 +1,11 @@
 var app = angular.module('zikaronbasalon',[
-	'ui.bootstrap'
+	'ui.bootstrap',
+	'angularSpinner'
 ])
 .factory('httpRequestInterceptor', function () {
   return {
     request: function (config) {
-      config.headers.locale = document.getElementsByTagName('body')[0].className;
+      config.headers.locale = document.getElementById('locale').className;
       
       return config;
     }

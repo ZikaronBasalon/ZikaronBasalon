@@ -2,6 +2,7 @@
      ng-init="init(<%= current_user.to_json(:include => :meta) %>, <%= @hosts.to_json(:include => [:user, :witness, city: { :include => :managers }]) %>, <%= @witnesses.to_json(:include => { city: { :include => :managers } }) %>,  <%= @cities.to_json %>,
         <%= @total_hosts.to_json %>, <%= @total_witnesses.to_json %>, <%= @page.to_json %> )">
 
+<span us-spinner class="zb-spinner" ng-if="loading" spinner-on="loading"></span>
   <!-- View toggle buttons -->
   <div class="text-center margin-bottom-20">
     <div class="view-toggle">
@@ -40,7 +41,7 @@
         </div> 
 
         <div class="form-group">
-          <select class="form-control" ng-model="search.host.has_survivor"
+          <select class="form-control" ng-model="search.has_survivor"
                   ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.teamed' %>', v: true }, { n: '<%= t 'shared.not_teamed' %>', v: false }]">
             <option value=""><%= t 'shared.has_survivor' %></option>
           </select>
@@ -51,10 +52,27 @@
                   ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.yes' %>', v: true }, { n: '<%= t 'shared.no' %>', v: false }]">
             <option value=""><%= t 'shared.host_contacted' %></option>
           </select>
-        </div>  
+        </div> 
+
+        <% if current_user.any_admin? %>
+
+          <div class="form-group">
+            <select class="form-control" ng-model="search.has_manager"
+                    ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.has_manager_true' %>', v: true }, { n: '<%= t 'shared.has_manager_false' %>', v: false }]">
+              <option value=""><%= t 'shared.has_manager' %></option>
+            </select>
+          </div>  
+        <% end %>
+
+        <div class="form-group">
+          <label>
+            <input type="checkbox" ng-model="search.is_org">
+            <%= t 'shared.is_org' %>
+          </label>
+        </div> 
 
         <div class="form-group pull-left">
-          <input type="text" class="form-control" ng-model="query.host" placeholder="חיפוש חופשי" />
+          <input type="text" class="form-control" ng-model="query.host" placeholder="<%= t 'shared.free_search' %>" />
         </div>
       </form>
 
@@ -91,6 +109,10 @@
               <%= t 'shared.hosted_before' %>
               <span class="caret" ng-if="sortProp === 'hosted_before'"></span>
             </th>
+            <th ng-click="setSortProp('org_name')">
+              <%= t 'shared.org_name' %>
+              <span class="caret" ng-if="sortProp === 'org_name'"></span>
+            </th>
             <th ng-click="setSortProp('host_contacted')">
               <%= t 'shared.host_contacted' %>
               <span class="caret" ng-if="sortProp === 'host_contacted'"></span>
@@ -121,6 +143,7 @@
             <td>{{ host.city.name }}</td>
             <td>{{ formatDate(host.event_date) }}</td>
             <td>{{ formatBool(!host.hosted_before) }}</td>
+            <td>{{ host.org_name }}</td>
             <td>{{ formatBool(host.contacted) }}</td>
             <td>{{ formatBool(host.survivor_needed) }}</td>
             <td>{{ formatBool(host.has_survivor) }}</td>
@@ -205,7 +228,26 @@
                   ]">
             <option value=""><%= t 'shared.concept_label' %></option>
           </select>
+        </div>
+
+        <div class="form-group">
+          <select class="form-control" ng-model="search.has_host"
+                  ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.teamed' %>', v: true }, { n: '<%= t 'shared.not_teamed' %>', v: false }]">
+            <option value=""><%= t 'shared.has_host' %></option>
+          </select>
         </div>  
+
+
+        <% if current_user.any_admin? %>
+
+          <div class="form-group">
+            <select class="form-control" ng-model="search.has_manager"
+                    ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.has_manager_true' %>', v: true }, { n: '<%= t 'shared.has_manager_false' %>', v: false }]">
+              <option value=""><%= t 'shared.has_manager' %></option>
+            </select>
+          </div>   
+
+        <% end %> 
 
         <div class="form-group pull-left">
           <input type="text" class="form-control" ng-model="query.witness"
@@ -238,7 +280,7 @@
               <span class="caret" ng-if="witnessSortProp === 'witness_type'"></span>
             </th>
             <th ng-click="setSortPropWitness('')">
-              <%= t 'shared.date' %>
+              <%= t 'shared.free_on_date' %>
               <span class="caret" ng-if="witnessSortProp === ''"></span>
             </th>
             <th ng-click="setSortPropWitness('stairs')">
@@ -269,11 +311,11 @@
             <td>{{ witness.id }}</td>
             <td>{{ witness.full_name }}</td>
             <td>{{ witness.city.name }}</td>
-            <td>{{ witness.witness_type }}</td>
-            <td>{{  }}</td>
+            <td>{{ formatWitnessType(witness.witness_type) }}</td>
+            <td>{{ formatBool(witness.free_on_day) }}</td>
             <td>{{ formatBool(witness.stairs) }}</td>
             <td>{{ formatBool(witness.seminar_required) }}</td>
-            <td>{{ witness.concept }}</td>
+            <td>{{ formatConcept(witness.concept) }}</td>
             <td>{{ formatBool(witness.special_population) }}</td>
             <% if current_user.admin? %>
               <td>

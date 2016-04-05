@@ -97,3 +97,39 @@ function formatWitnessAvailabilityTime(witness) {
 function formatAddress(address, city) {
   return address + ", " + city;
 }
+
+function formatWitnessType(type) {
+  switch(type) {
+    case 'suvrivor':
+      return 'ניצול';
+    case 'academia':
+      return 'אקדמיה'
+    case 'second_generation':
+      return 'דור שני';
+    case 'therapist':
+      return 'מטפל';
+    default:
+        return 'ניצול';
+  }
+}
+
+function formatConcept(concept) {
+  switch(concept) {
+    case 'religious_and_secular':
+      return 'חרדים וחילונים';
+    case 'vetrans':
+      return 'וטרנים'
+    case 'eastern':
+      return 'בשיח המזרחי';
+    default:
+        return '';
+  }
+}
+
+function formatAddressDisplay(address) {
+  if(!address) {
+    return '';
+  }
+
+  return address.replace(/\d/g,'').replace('דירה', '');
+}

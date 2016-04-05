@@ -18,6 +18,8 @@
 // require_tree .
 // require angular-bootstrap/ui-bootstrap.min.js
 // require angular-bootstrap/ui-bootstrap-tpls.min.js
+//= require spin.min.js
+//= require angular-spinner.min
 //= require module
 
 

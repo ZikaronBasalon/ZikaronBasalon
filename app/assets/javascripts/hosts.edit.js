@@ -111,6 +111,12 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 		      controller: 'HostSignupFinishedModal',
 		      backdrop: false
 		    });
+
+	  		modalInstance.result.then(function () {
+		      window.location = '/' + document.getElementById('locale').className + '/hosts/' + $scope.host.id;
+		    }, function () {
+		      window.location = '/' + document.getElementById('locale').className + '/hosts/' + $scope.host.id;
+		    });
 	  	})
   	}
   }

@@ -13,7 +13,8 @@ app.directive("datepicker", function () {
         isRTL: true,
         onSelect: function (dateText) {
           updateModel(dateText);
-        }
+        },
+        minDate: new Date()
       };
       elem.datepicker(options);
     }

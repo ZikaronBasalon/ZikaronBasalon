@@ -30,7 +30,7 @@ app.controller('WitnessNewController', ['$scope','$http', function($scope, $http
 				witness: $scope.witness
 			}).then(function(response) {
 				if(response.status === 201) {
-					window.location = '/witnesses/' + response.data.id;
+					window.location = '/' + document.getElementById('locale').className + '/witnesses/' + response.data.id;
 				} else {
 					_.each(response.data, addAlert);
 				}

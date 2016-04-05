@@ -16,6 +16,7 @@ app.controller('RequestInviteController', ['$scope', '$http', '$uibModalInstance
 	$scope.formatDate = formatDate;
 	$scope.formatLanguage = formatLanguage;
 	$scope.formatTime = formatTime;
+	$scope.formatAddressDisplay = formatAddressDisplay;
 
 	if (!$scope.currentUser)  {
 		$scope.view = 'register';
@@ -61,6 +62,6 @@ app.controller('RequestInviteController', ['$scope', '$http', '$uibModalInstance
   };
 
   $scope.toProfile = function () {
-  	window.location = '/guests/' + $scope.currentUser.meta.id;
+  	window.location = '/' + document.getElementById('locale').className + '/guests/' + $scope.currentUser.meta.id;
   }
 }]);

@@ -21,7 +21,7 @@
 
 
 html,body {
-	font-family: 'Alef', sans-serif;
+	font-family: 'Alef', sans-serif !important;
   @include flexbox((
   	display: flex,
   	flex-direction: column,
@@ -35,6 +35,10 @@ input {
 	&.ng-dirty.ng-invalid {
 		border-color: red;
 	}
+}
+
+select { 
+	max-width: 200px;
 }
 
 ul {
@@ -282,6 +286,11 @@ header {
 	margin-left: 10px;
 }
 
+.margin-left-5 {
+	margin-left: 5px;
+}
+
+
 .margin-top-10 {
 	margin-top: 10px;
 }
@@ -473,6 +482,22 @@ body {
 				margin-right: initial;
 				margin-left: 19px;
 			}
+
+			.language-btn {
+				margin-left: 10px;
+			}
 		}
 	}
+}
+
+.zb-spinner {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+#locale {
+	display: none;
 }
