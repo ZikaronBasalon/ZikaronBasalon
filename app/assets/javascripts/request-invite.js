@@ -62,6 +62,6 @@ app.controller('RequestInviteController', ['$scope', '$http', '$uibModalInstance
   };
 
   $scope.toProfile = function () {
-  	window.location = '/guests/' + $scope.currentUser.meta.id;
+  	window.location = '/' + document.getElementById('locale').className + '/guests/' + $scope.currentUser.meta.id;
   }
 }]);
