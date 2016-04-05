@@ -29,8 +29,8 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def after_sign_up_path_for(resource)
-  	return edit_polymorphic_path(resource) if resource.is_a?(Host)
-		return polymorphic_path(resource) if resource.is_a?(Manager)
+  	return edit_polymorphic_path(resource, locale: I18n.locale) if resource.is_a?(Host)
+		return polymorphic_path(resource, locale: I18n.locale) if resource.is_a?(Manager)
     '/' # Or :prefix_to_your_route
   end
 end
