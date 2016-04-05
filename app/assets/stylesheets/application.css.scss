@@ -482,6 +482,10 @@ body {
 				margin-right: initial;
 				margin-left: 19px;
 			}
+
+			.language-btn {
+				margin-left: 10px;
+			}
 		}
 	}
 }
@@ -492,4 +496,8 @@ body {
 	bottom: 0;
 	left: 0;
 	right: 0;
+}
+
+#locale {
+	display: none;
 }

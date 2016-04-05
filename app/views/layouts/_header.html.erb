@@ -31,8 +31,10 @@
 		<%= link_to locale: locale do %>
 			<div class="language-btn small-header-btn"><%= locale.capitalize %></div>
 		<% end %>
-		<%= link_to "https://www.facebook.com/ZikronBaSalon/" do %>
-			<div class="facebook-btn small-header-btn">f</div>
+		<% if I18n.locale == :he %>
+			<%= link_to "https://www.facebook.com/ZikronBaSalon/" do %>
+				<div class="facebook-btn small-header-btn">f</div>
+			<% end %>
 		<% end %>
 		
 		<!-- Signin/Signout -->

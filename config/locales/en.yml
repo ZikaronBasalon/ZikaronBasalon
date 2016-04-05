@@ -87,7 +87,7 @@ en:
     forgot_password: "Forgot your password?"
     has_host: "Assign to host"
     is_org: "Belongs to organization"
-    language: "language"
+    language: "Language"
     manager: "manager"
     reset_password: "Reset password"
     address: "address"
@@ -99,13 +99,13 @@ en:
     location: "Location"
     accessibility: "Accessibility"
     estimated_time: "Estimated time"
-    sending_request: "sending request"
+    sending_request: "Send request"
     to_my_profile: "My profile"
     back_to_website: "Back to website"
     forgot_password: "Forgot password"
-    phone: "phone"
+    phone: "Phone"
     date: "Date"
-    email: "email"
+    email: "Email"
     time: "time"
     address: "address"
     password: "password"
@@ -115,6 +115,7 @@ en:
     has_manager_true: "Assigned"
     has_manager_false: "Not assigned"
     free_search: "Search"
+    name: "Name"
 
   views:
     pagination:
@@ -191,6 +192,9 @@ en:
       thanks_for_joining:  “You have joined thousands of Zikaron BaSalon hosts worldwide!"
       facebook_share: "Share on Facebook"
       build_evening: "Build your evening"
+      city: "City"
+      city_placeholder: "Enter city"
+      address_placeholder: "Full address (without city)"
     show:
       title: "Host profile"
       personal_details: "Your information"
@@ -250,33 +254,33 @@ en:
       title: "Your request has been approved. See you in the Salon!"
       see_you_in: "See you in the %{name}'s Salon"
 
-   guests:
-    register:
-      title: "Register as a guest"
-      subtitle: "In order for us to send this request, we need this information about you"
-    login: 
-      title: "Guest login"
-    request:
-      title: "Request to join a salon"
-      subtitle: "Please make sure this salon suits you. Once you send your request, the host will get back to you as soon as possible."
-      salon_of: "Join"
-      num_of_guests: "Number of guests that will be joining me"
-    request_successful:
-      title: "Request sent"
-      subtitle: "We're glad you've joined Zikaron BaSalon's community. By doing so, you've chose to commemorate the Holocaust memorial day in a different, intimate and meaningful way."
-      facebook_share: "Share on Facebook"
-      back_to_website: "Homepage"
-    request_error: 
-      title: "Houston, We've Got a Problem"
-      subtitle: "It seems like you've sent a request already. In order for you to send a new request, you need to cancel the other one on your profile."
-    show:
-      personal_details: "Personal details"
-      salon_details: "Evening details"
-      host_details: "Host details"
-      find_new_salon: "Find a new Salon"
-      cancel_request: "Cancel request"
-      invite_request: "Request invite"
-      no_requests: "You don't have any open requests at the moment"
+  guests:
+   register:
+     title: "Register as a guest"
+     subtitle: "In order for us to send this request, we need this information about you"
+   login: 
+     title: "Guest login"
+   request:
+     title: "Request to join a salon"
+     subtitle: "Please make sure this salon suits you. Once you send your request, the host will get back to you as soon as possible."
+     salon_of: "Join"
+     num_of_guests: "Number of guests that will be joining me"
+   request_successful:
+     title: "Request sent"
+     subtitle: "We're glad you've joined Zikaron BaSalon's community. By doing so, you've chose to commemorate the Holocaust memorial day in a different, intimate and meaningful way."
+     facebook_share: "Share on Facebook"
+     back_to_website: "Homepage"
+   request_error: 
+     title: "Houston, We've Got a Problem"
+     subtitle: "It seems like you've sent a request already. In order for you to send a new request, you need to cancel the other one on your profile."
+   show:
+     personal_details: "Personal details"
+     salon_details: "Evening details"
+     host_details: "Host details"
+     find_new_salon: "Find a new Salon"
+     cancel_request: "Cancel request"
+     invite_request: "Request invite"
+     no_requests: "You don't have any open requests at the moment"
 
 
 

@@ -113,9 +113,9 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 		    });
 
 	  		modalInstance.result.then(function () {
-		      window.location = '/hosts/' + $scope.host.id;
+		      window.location = '/' + document.getElementById('locale').className + '/hosts/' + $scope.host.id;
 		    }, function () {
-		      window.location = '/hosts/' + $scope.host.id;
+		      window.location = '/' + document.getElementById('locale').className + '/hosts/' + $scope.host.id;
 		    });
 	  	})
   	}

@@ -5,7 +5,7 @@ var app = angular.module('zikaronbasalon',[
 .factory('httpRequestInterceptor', function () {
   return {
     request: function (config) {
-      config.headers.locale = document.getElementsByTagName('body')[0].className;
+      config.headers.locale = document.getElementById('locale').className;
       
       return config;
     }
