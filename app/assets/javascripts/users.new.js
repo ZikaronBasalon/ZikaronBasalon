@@ -22,7 +22,7 @@ app.controller('UserSignupController', ['$scope', '$http', function($scope, $htt
 				}
 			}).then(function(response) {
 				if(response.data && response.data.success) {
-					window.location = response.data.redirect_url
+					window.location = '/' + document.getElementById('locale').className + response.data.redirect_url
 				} else if(response.data.errors) {
 					$scope.errors = _.map(response.data.errors, function(error) {
 						return error[0];
