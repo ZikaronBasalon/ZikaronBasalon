@@ -18,7 +18,7 @@ class Manager < ActiveRecord::Base
    hosts = hosts.select{ |h| host_in_query(h, query) } if query.present?
    hosts = hosts.select{ |h| obj_has_manager(h, has_manager) } if has_manager.present?
    hosts = hosts.select{ |h| host_has_witness(h, has_survivor) } if has_survivor.present?
-   hosts = hosts.select { |h| !h.org_name.nil? } if is_org
+   hosts = hosts.select { |h| !h.org_name.nil? } if is_org === 'true'
    hosts = paginate(hosts, page)
    hosts
   end
