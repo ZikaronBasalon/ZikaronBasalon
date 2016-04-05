@@ -128,11 +128,11 @@
                 <div>{{ witness.host.user.full_name }}</div>
                 <div><%= link_to 'בטל ציוות', unassign_witness_path(@witness) %></div>
               </div>
-              <div ng-if="!witness.host && !witness.external_assignment">
+              <div ng-if="!witness.host && witness.external_assignment === 'f' ">
                 <%= t('profile.assign_host') %>
                 <%#= link_to t('profile.assign_host'), assign_witness_path(@witness) %>
               </div>
-              <div ng-if="!witness.host && witness.external_assignment">
+              <div ng-if="!witness.host && witness.external_assignment === 't'">
                 צוות מחוץ למערכת
               </div>
             </div>  
