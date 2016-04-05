@@ -30,11 +30,22 @@ function formatDateTime(date) {
 }
 
 function formatBool(value) {
-	return value ? 'כן' : 'לא';
+  var locale = getLocale();
+  if(locale === "en") {
+    return value ? 'Yes' : 'No';
+  } else {
+    return value ? 'כן' : 'לא';
+  }
 }
 
 function formatElevatorBool(value) {
   return value ? 'יש מעלית' : 'אין מעלית';
+  var locale = getLocale();
+  if(locale === "en") {
+    return value ? 'with elevator' : 'no elevator';
+  } else {
+    return value ? 'יש מעלית' : 'אין מעלית';
+  }
 }
 
 function formatStairs(value) {
@@ -43,11 +54,18 @@ function formatStairs(value) {
 
 
 function getAccesability(host) {
-  return "קומה " + host.floor + ", " + formatElevatorBool(host.elevator);
+  var locale = getLocale();
+  var floor = locale === "en" ? "Floor" : "קומה";
+  return floor + " " + host.floor + ", " + formatElevatorBool(host.elevator);
 }
 
 function formatStrangers(strangers) {
-  return strangers ? 'סלון פתוח' : 'סלון סגור';
+  var locale = getLocale();
+  if(locale === "en") {
+      return strangers ? 'Open salon' : 'Closed salon';
+  } else {
+    return strangers ? 'סלון פתוח' : 'סלון סגור';
+  }
 }
 
 function formatFirstName(host) {
@@ -99,31 +117,62 @@ function formatAddress(address, city) {
 }
 
 function formatWitnessType(type) {
-  switch(type) {
-    case 'suvrivor':
-      return 'ניצול';
-    case 'academia':
-      return 'אקדמיה'
-    case 'second_generation':
-      return 'דור שני';
-    case 'therapist':
-      return 'מטפל';
-    default:
+  var locale = getLocale();
+  if (locale === "en") {
+    switch(type) {
+      case 'suvrivor':
+        return 'Survivor';
+      case 'academia':
+        return 'Academia'
+      case 'second_generation':
+        return 'Second generation';
+      case 'therapist':
+        return 'Therapist';
+      default:
+          return 'Survivor';
+    }
+  } else {
+    switch(type) {
+      case 'suvrivor':
         return 'ניצול';
+      case 'academia':
+        return 'אקדמיה'
+      case 'second_generation':
+        return 'דור שני';
+      case 'therapist':
+        return 'מטפל';
+      default:
+          return 'ניצול';
+    }
   }
 }
 
 function formatConcept(concept) {
-  switch(concept) {
-    case 'religious_and_secular':
-      return 'חרדים וחילונים';
-    case 'vetrans':
-      return 'וטרנים'
-    case 'eastern':
-      return 'בשיח המזרחי';
-    default:
-        return '';
+  var locale = getLocale();
+  if (locale === "en") {
+    switch(concept) {
+      case 'religious_and_secular':
+        return 'Religious and Secular';
+      case 'vetrans':
+        return 'Vetrans'
+      case 'eastern':
+        return 'Eastern conversation';
+      default:
+          return '';
+    }
+  } else {
+    switch(concept) {
+      case 'religious_and_secular':
+        return 'חרדים וחילונים';
+      case 'vetrans':
+        return 'וטרנים'
+      case 'eastern':
+        return 'בשיח המזרחי';
+      default:
+          return '';
+    }
   }
+  
 }
 
 function formatAddressDisplay(address) {
@@ -132,4 +181,8 @@ function formatAddressDisplay(address) {
   }
 
   return address.replace(/\d/g,'').replace('דירה', '');
+}
+
+function getLocale() {
+  return document.getElementById('locale').className;
 }
