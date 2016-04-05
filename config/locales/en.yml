@@ -254,6 +254,14 @@ en:
       title: "Your request has been approved. See you in the Salon!"
       see_you_in: "See you in the %{name}'s Salon"
 
+  host_mailer:
+    new_host:
+      subject: "Welcome to the ZikaronBasalon Community!"
+      paragraph_1: "Thank you for choosing to host a ZikaronBasalon evening in the coming Holocaust Memorial Day, and congrats on joining a community including thousands of hosts in Israel and the world."
+      paragraph_2: "Hosting a ZikaronBasalon evening is easy, and we're here with you every step of the way."
+      link_text: "In our Host Kit"
+      paragraph_3: "you will find everything you need to make you ZikaronBasalon evening memorable for both you and your guests"
+
   guests:
    register:
      title: "Register as a guest"

@@ -21,7 +21,7 @@
 
 
 html,body {
-	font-family: 'Alef', sans-serif;
+	font-family: 'Alef', sans-serif !important;
   @include flexbox((
   	display: flex,
   	flex-direction: column,
