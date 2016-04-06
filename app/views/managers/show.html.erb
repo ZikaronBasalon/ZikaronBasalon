@@ -4,14 +4,17 @@
 
 <span us-spinner class="zb-spinner" ng-if="loading" spinner-on="loading"></span>
   <!-- View toggle buttons -->
-  <div class="text-center margin-bottom-20">
-    <div class="view-toggle">
-      <div ng-class="{ 'selected': activeView === 'hosts' }"
-           ng-click="onViewToggle('hosts')"><%= t '.hosts_view' %></div>
-      <div ng-class="{ 'selected': activeView === 'witnesses' }"
-           ng-click="onViewToggle('witnesses')"><%= t '.witnesses_view' %></div>
+  <% if I18n.locale == :he %>
+    <div class="text-center margin-bottom-20">
+      <div class="view-toggle">
+        <div ng-class="{ 'selected': activeView === 'hosts' }"
+             ng-click="onViewToggle('hosts')"><%= t '.hosts_view' %></div>
+        
+        <div ng-class="{ 'selected': activeView === 'witnesses' }"
+             ng-click="onViewToggle('witnesses')"><%= t '.witnesses_view' %></div>
+      </div>
     </div>
-  </div>
+  <% end %>
 
   <div class="col-xs-12" ng-if="success">
     <div class="alert alert-success" role="alert">
@@ -33,19 +36,21 @@
           </select>
         </div> 
 
-        <div class="form-group">
-          <select class="form-control" ng-model="search.host.survivor_needed"
-                  ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.needs' %>', v: true }, { n: '<%= t 'shared.doesnt_need' %>', v: false }]">
-            <option value=""><%= t 'shared.survivor_needed' %></option>
-          </select>
-        </div> 
+        <% if I18n.locale == :he %>
+          <div class="form-group">
+            <select class="form-control" ng-model="search.host.survivor_needed"
+                    ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.needs' %>', v: true }, { n: '<%= t 'shared.doesnt_need' %>', v: false }]">
+              <option value=""><%= t 'shared.survivor_needed' %></option>
+            </select>
+          </div> 
 
-        <div class="form-group">
-          <select class="form-control" ng-model="search.has_survivor"
-                  ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.teamed' %>', v: true }, { n: '<%= t 'shared.not_teamed' %>', v: false }]">
-            <option value=""><%= t 'shared.has_survivor' %></option>
-          </select>
-        </div>  
+          <div class="form-group">
+            <select class="form-control" ng-model="search.has_survivor"
+                    ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.teamed' %>', v: true }, { n: '<%= t 'shared.not_teamed' %>', v: false }]">
+              <option value=""><%= t 'shared.has_survivor' %></option>
+            </select>
+          </div>  
+        <% end %>
 
         <div class="form-group">
           <select class="form-control" ng-model="search.host.contacted"
@@ -153,7 +158,7 @@
                 <div manager-link obj="host"></div>
               </td>
               <td>
-                <button ng-click="deleteHost(host);$event.stopPropagation();" class="btn btn-warning">מחק/י</button>
+                <button ng-click="deleteHost(host);$event.stopPropagation();" class="btn btn-warning"><%= t 'shared.delete' %></button>
               </td>
             <% end %>
           </tr>

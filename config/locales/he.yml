@@ -128,6 +128,7 @@ he:
     has_host: "צוות למארח"
     is_org: "שייך לארגון"
     free_search: "חיפוש חופשי"
+    delete: "מחק/י"
 
 
   views:

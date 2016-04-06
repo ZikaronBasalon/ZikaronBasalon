@@ -126,6 +126,14 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
   	$scope.stepIndex -= 1;
   }
 
+  $scope.getProgressBarSrc = function() {
+  	var index = document.getElementById('locale').className === 'he'
+  		? $scope.stepIndex + 1
+  		: 3 - $scope.stepIndex;
+
+  	return '/assets/progress_bar_' + index + '.png';
+  }
+
 
 
   function getAddress() {

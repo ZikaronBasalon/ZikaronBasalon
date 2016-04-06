@@ -116,6 +116,7 @@ en:
     has_manager_false: "Not assigned"
     free_search: "Search"
     name: "Name"
+    delete: "Delete"
 
   views:
     pagination:
