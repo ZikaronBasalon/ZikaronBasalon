@@ -7,6 +7,7 @@ app.controller('WitnessNewController', ['$scope','$http', function($scope, $http
 		can_evening: true,
 		free_on_day: true
 	};
+
 	$scope.otherLanguageVisible = false;
 
 	$scope.typeOptions = [
@@ -18,17 +19,26 @@ app.controller('WitnessNewController', ['$scope','$http', function($scope, $http
 
 	$scope.submitted = false;
 	$scope.alerts = [];
+	$scope.action = 'new';
 	
 	$scope.autocomplete = new google.maps.places.Autocomplete($("#city_name")[0], { types: ['(cities)'] });
 	google.maps.event.addListener($scope.autocomplete, 'place_changed', getAddress);
 
+	$scope.init = function(witness) {
+		if(witness.id) {
+			delete witness.created_at;
+			delete witness.updated_at;
+			$scope.witness = witness;
+			$scope.action = 'edit';
+		}
+	}
 
 	$scope.submit = function() {
 		$scope.submitted = true;
 		if($scope.form.$valid) {
-			$http.post('/witnesses.json', {
-				witness: $scope.witness
-			}).then(function(response) {
+
+			submitWitness()
+			.then(function(response) {
 				if(response.status === 201) {
 					window.location = '/' + document.getElementById('locale').className + '/witnesses/' + response.data.id;
 				} else {
@@ -37,6 +47,19 @@ app.controller('WitnessNewController', ['$scope','$http', function($scope, $http
 			}).catch(function(response) {
 				console.log(response);
 				_.each(response.data, addAlert);
+			});
+		
+		}
+	}
+
+	function submitWitness() {
+		if($scope.action === 'new') {
+			return $http.post('/witnesses.json', {
+				witness: $scope.witness
+			});
+		} else {
+			return $http.put('/witnesses/' + $scope.witness.id + '.json', {
+				witness: $scope.witness
 			});
 		}
 	}
