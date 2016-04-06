@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160403174749) do
+ActiveRecord::Schema.define(:version => 20160406172401) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -50,6 +50,14 @@ ActiveRecord::Schema.define(:version => 20160403174749) do
     t.integer  "city_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "countries", :force => true do |t|
+    t.string  "iso"
+    t.string  "name"
+    t.string  "printable_name"
+    t.string  "iso3"
+    t.integer "numcode"
   end
 
   create_table "guests", :force => true do |t|
@@ -92,6 +100,7 @@ ActiveRecord::Schema.define(:version => 20160403174749) do
     t.string   "concept"
     t.boolean  "received_registration_mail", :default => false
     t.boolean  "contacted_witness",          :default => false
+    t.integer  "country_id"
   end
 
   create_table "invites", :force => true do |t|

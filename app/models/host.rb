@@ -3,11 +3,12 @@ class Host < ActiveRecord::Base
   :city_name, :status, :strangers, :contact, :survivor_details, :lat, :lng, :event_date,
   :event_time, :evening_public, :hosted_before, :floor, :elevator, :org_name, :org_role,
   :event_language, :contacted, :phone, :witness_id, :user_attributes, :public_text, :concept,
-  :received_registration_mail, :contacted_witness
+  :received_registration_mail, :contacted_witness, :country_id
 
   attr_accessor :available_places
 
   belongs_to :city
+  belongs_to :country
   has_one :witness
   has_one :user, as: :meta, dependent: :destroy
   accepts_nested_attributes_for :user

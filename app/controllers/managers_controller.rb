@@ -89,6 +89,8 @@ class ManagersController < ApplicationController
     end
 
     def correct_manager
+      return redirect_to user_session_path if current_user.nil?
+
       meta = current_user.meta
       id = params[:id].to_i
 

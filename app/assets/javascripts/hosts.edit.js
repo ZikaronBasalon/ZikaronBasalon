@@ -24,9 +24,10 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 	$scope.autocomplete = new google.maps.places.Autocomplete($("#city")[0], { types: ['(cities)'] });
 	google.maps.event.addListener($scope.autocomplete, 'place_changed', getAddress);
 
-	$scope.init = function(host) {
+	$scope.init = function(host, countries) {
 		$scope.host = host;
 		$scope.organization = !!$scope.host.org_name;
+		$scope.countries = countries;
 		$scope.host.event_date = new Date($scope.host.event_date);
 		$scope.host.event_time = $scope.host.event_time ? new Date($scope.host.event_time): null;
 		if($scope.host.city) {
@@ -34,6 +35,7 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 		}
 
 		$scope.cityFromList = false;
+		
 	}
 
 	$scope.orgChanged = function(value) {
@@ -84,7 +86,8 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 					floor: $scope.host.floor,
 					elevator: $scope.host.elevator,
 					event_date: $scope.host.event_date,
-					event_time: $scope.host.event_time
+					event_time: $scope.host.event_time,
+					country_id: $scope.host.country_id
 				}
 	  	}).then(function success(response) {
 	  		$scope.stepIndex += 1; 
@@ -126,7 +129,19 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
   	$scope.stepIndex -= 1;
   }
 
+  $scope.getProgressBarSrc = function() {
+  	var index = document.getElementById('locale').className === 'he'
+  		? $scope.stepIndex + 1
+  		: 3 - $scope.stepIndex;
 
+  	return '/assets/progress_bar_' + index + '.png';
+  }
+
+  $scope.formatAutocompleteCountry = function(model) {
+  	var country = _.find($scope.countries, { id: model });
+  	if (country) { return country.printable_name };
+  	return '';
+  }
 
   function getAddress() {
 		$scope.result = $scope.autocomplete.getPlace();

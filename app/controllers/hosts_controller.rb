@@ -22,6 +22,7 @@ class HostsController < ApplicationController
 
   def edit
     @host = Host.find(params[:id])
+    @countries = Country.all
   end
 
   def update
