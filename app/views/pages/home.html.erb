@@ -5,10 +5,10 @@
       <p class="subtitle"><%= simple_format(t '.subtitle') %></p>
     </div>
 
-    <% if false %>
+    
     <div class="col-xs-12" ng-controller="HomePageController"
           ng-init="init(
-            <%= @hosts.to_json(:include => [:user, :city], :methods => [:available_places]) %>, 
+            <%= @hosts.to_json(:include => [:user, :city, :country], :methods => [:available_places]) %>, 
             <%= @cities.to_json %>, <%= @total_items %>,
             <%= current_user_json %>
           )">
@@ -63,7 +63,7 @@
         <tbody>
           <tr ng-repeat="host in hosts">
             <td>{{ host.user.full_name }}</td>
-            <td>{{ host.city.name }}</td>
+            <td>{{ formatCityDisplay(host) }}</td>
             <td>{{ formatAddressDisplay(host.address) }}</td>
             <td>{{ formatDate(host.event_date) }}</td>
             <td>{{ formatLanguage(host.event_language) }}</td>
@@ -94,16 +94,14 @@
       </div>
     
     </div> 
-    <% end %>
     <!-- End of HomePageController -->
   </div>
 </div>
 
- <% if false %>
+ 
 <script type="text/ng-template" id="request-invite.html">
   <%= render 'guests/request_invite_modal' %>
 </script>
-<% end %>
 
 
 

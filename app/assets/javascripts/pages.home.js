@@ -11,6 +11,7 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
   $scope.formatAddress = formatAddress;
   $scope.formatLanguage = formatLanguage;
   $scope.formatAddressDisplay = formatAddressDisplay;
+  $scope.formatCityDisplay = formatCityDisplay;
 
   $scope.init = function(hosts, cities, totalItems, currentUser) {
     $scope.hosts = hosts;

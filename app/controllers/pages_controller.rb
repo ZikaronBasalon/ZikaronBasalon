@@ -8,7 +8,7 @@ class PagesController < ApplicationController
   		h.address.include?(query)
   	} if query.present?
 
-    @cities = @hosts.map{ |h| h.city }
+    @cities = @hosts.map{ |h| h.city }.compact.uniq.sort_alphabetical_by{ |c| c[:name] }
 
   	@hosts = paginate(@hosts, params[:page] || 1)
   	@total_items = @hosts.total_count
@@ -16,7 +16,7 @@ class PagesController < ApplicationController
   	respond_to do |format|
 		  format.json { render json: { 
 			  	hosts: @hosts.to_json(
-			  		:include => [:user, :city], 
+			  		:include => [:user, :city, :country], 
 			  		:methods => [:available_places]
 		  		), 
 			  	cities: @cities, 

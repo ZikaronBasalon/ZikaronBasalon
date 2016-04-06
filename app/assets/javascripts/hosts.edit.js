@@ -17,12 +17,19 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 
 	$scope.otherLanguageVisible = false;
 
+	$scope.initAutocomplete = function(iso) {
+		var options = { types: ['(cities)'] };
+		if(iso) {
+			options.componentRestrictions = { country: iso }
+		}
+
+		$scope.autocomplete = new google.maps.places.Autocomplete($("#city")[0], options);
+		google.maps.event.addListener($scope.autocomplete, 'place_changed', getAddress);
+	}
+
 	$scope.openDatepicker = function() {
 		$scope.eventDate.isOpen = true;
 	}
-
-	$scope.autocomplete = new google.maps.places.Autocomplete($("#city")[0], { types: ['(cities)'] });
-	google.maps.event.addListener($scope.autocomplete, 'place_changed', getAddress);
 
 	$scope.init = function(host, countries) {
 		$scope.host = host;
@@ -35,7 +42,12 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 		}
 
 		$scope.cityFromList = false;
-		
+
+		if($scope.host.country) {
+			$scope.initAutocomplete($scope.host.country.iso)
+		} else {
+			$scope.initAutocomplete()
+		}
 	}
 
 	$scope.orgChanged = function(value) {
@@ -141,6 +153,10 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
   	var country = _.find($scope.countries, { id: model });
   	if (country) { return country.printable_name };
   	return '';
+  }
+
+  $scope.onCountrySelect = function($item, $model, $label) {
+  	$scope.initAutocomplete($item.iso);
   }
 
   function getAddress() {
