@@ -5,10 +5,12 @@ class PagesController < ApplicationController
   	@hosts = @hosts.select { |h| 
   		h.user.full_name.include?(query) ||
   		(h.city && h.city.name.include?(query)) ||
+      (h.country && h.country.printable_name.include?(query)) ||
   		h.address.include?(query)
   	} if query.present?
 
     @cities = @hosts.map{ |h| h.city }.compact.uniq.sort_alphabetical_by{ |c| c[:name] }
+    @countries = Country.all
 
   	@hosts = paginate(@hosts, params[:page] || 1)
   	@total_items = @hosts.total_count
@@ -36,6 +38,7 @@ private
 		h[:event_language] = params[:event_language] if !params[:event_language].blank?
     h[:max_guests] = 1..9999
     h[:received_registration_mail] = true
+    h[:country_id] = params[:country_id] if !params[:country_id].blank?
     h
 	end
 

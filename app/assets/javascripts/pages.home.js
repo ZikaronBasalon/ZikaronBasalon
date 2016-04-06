@@ -13,9 +13,10 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
   $scope.formatAddressDisplay = formatAddressDisplay;
   $scope.formatCityDisplay = formatCityDisplay;
 
-  $scope.init = function(hosts, cities, totalItems, currentUser) {
+  $scope.init = function(hosts, cities, totalItems, currentUser, countries) {
     $scope.hosts = hosts;
     $scope.cities = cities;
+    $scope.countries = countries
     $scope.totalItems = totalItems;
     $scope.currentUser = currentUser;
 
@@ -47,6 +48,7 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
       params: {
         page: page,
         city_id: $scope.search.city_id,
+        country_id: $scope.search.country_id,
         event_language: $scope.search.event_language,
         query: $scope.search.query
       }
