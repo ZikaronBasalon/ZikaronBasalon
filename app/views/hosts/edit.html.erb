@@ -1,5 +1,5 @@
 <div class="col-xs-12" id="host-edit-form" ng-controller="HostEditController"
-     ng-init="init(<%= @host.to_json(:include => :city) %>)">
+     ng-init="init(<%= @host.to_json(:include => [:city, :country]) %>, <%= @countries.to_json %>)">
   <div class="row">
     <div class="col-xs-12">
       <div class="text-center">
@@ -94,6 +94,21 @@
 
       <!-- Step two -->
       <form name="stepTwo" ng-show="'stepTwo' === steps[stepIndex]" novalidate>
+        
+        <div class="form-group" 
+             ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.country.$error.required]">
+          <label for="country"><%= t 'shared.country' %></label>
+          <input type="text" class="form-control"
+                 name="country"
+                 id="country"
+                 ng-model="host.country_id"
+                 uib-typeahead="country.id as country.printable_name for country in countries | filter:{ printable_name: $viewValue }"
+                 typeahead-editable="false"
+                 typeahead-input-formatter="formatAutocompleteCountry($model)"
+                 placeholder="<%= t 'shared.country_placeholder' %>"
+                 required>
+        </div>
+
         <div class="form-group" 
              ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.city.$invalid]">
           <label for="city"><%= t '.city' %></label>

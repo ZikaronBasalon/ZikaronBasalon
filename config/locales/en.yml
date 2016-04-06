@@ -117,6 +117,8 @@ en:
     free_search: "Search"
     name: "Name"
     delete: "Delete"
+    country: "Country"
+    country_placeholder: "Type and select from dropdown"
 
   views:
     pagination:

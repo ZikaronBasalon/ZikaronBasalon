@@ -129,6 +129,8 @@ he:
     is_org: "שייך לארגון"
     free_search: "חיפוש חופשי"
     delete: "מחק/י"
+    country: "מדינה"
+    country_placeholder: "הקלד/י שם מדינה באנגלית"
 
 
   views:
