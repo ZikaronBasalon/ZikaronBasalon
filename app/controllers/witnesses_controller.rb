@@ -38,6 +38,7 @@ class WitnessesController < ApplicationController
   # GET /witnesses/1/edit
   def edit
     @witness = Witness.find(params[:id])
+    render 'new'
   end
 
   # POST /witnesses
@@ -65,7 +66,7 @@ class WitnessesController < ApplicationController
       if @witness.update_attributes(params[:witness])
         
         #format.html { redirect_to @witness, notice: 'Witness was successfully updated.' }
-        format.json { render json: { success: true, host: @witness.host } }
+        format.json { render json: @witness, status: :created, location: @witness }
       else
         #format.html { render action: "edit" }
         format.json { render json: @witness.errors, status: :unprocessable_entity }
