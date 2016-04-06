@@ -5,16 +5,24 @@
       <p class="subtitle"><%= simple_format(t '.subtitle') %></p>
     </div>
 
-    <% if false %>
+    
     <div class="col-xs-12" ng-controller="HomePageController"
           ng-init="init(
-            <%= @hosts.to_json(:include => [:user, :city], :methods => [:available_places]) %>, 
+            <%= @hosts.to_json(:include => [:user, :city, :country], :methods => [:available_places]) %>, 
             <%= @cities.to_json %>, <%= @total_items %>,
-            <%= current_user_json %>
+            <%= current_user_json %>, <%= @countries.to_json %>
           )">
       <!-- Filters -->
       <form class="form-inline margin-bottom-20">
         <span class="margin-left-10"><%= t 'shared.filter_by' %>:</span>
+
+        <div class="form-group">
+          <select class="form-control city-select" ng-model="search.country_id"
+                  ng-options="o.id as o.printable_name for o in countries"
+                  ng-change="filter()">
+            <option value=""><%= t 'shared.country' %></option>
+          </select>
+        </div> 
 
         <div class="form-group">
           <select class="form-control city-select" ng-model="search.city_id"
@@ -38,7 +46,7 @@
         </div> 
 
         <div class="form-group pull-left">
-          <input type="text" class="form-control" ng-model="search.query" placeholder="<%= t 'shared.free_search' %>י" />
+          <input type="text" class="form-control" ng-model="search.query" placeholder="<%= t 'shared.free_search' %>" />
         </div>
       </form>
 
@@ -63,7 +71,7 @@
         <tbody>
           <tr ng-repeat="host in hosts">
             <td>{{ host.user.full_name }}</td>
-            <td>{{ host.city.name }}</td>
+            <td>{{ formatCityDisplay(host) }}</td>
             <td>{{ formatAddressDisplay(host.address) }}</td>
             <td>{{ formatDate(host.event_date) }}</td>
             <td>{{ formatLanguage(host.event_language) }}</td>
@@ -94,16 +102,14 @@
       </div>
     
     </div> 
-    <% end %>
     <!-- End of HomePageController -->
   </div>
 </div>
 
- <% if false %>
+ 
 <script type="text/ng-template" id="request-invite.html">
   <%= render 'guests/request_invite_modal' %>
 </script>
-<% end %>
 
 
 

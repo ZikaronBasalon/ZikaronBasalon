@@ -183,6 +183,15 @@ function formatAddressDisplay(address) {
   return address.replace(/\d/g,'').replace('דירה', '');
 }
 
+function formatCityDisplay(host) {
+  var str =  host.city.name;
+  if (host.country) {
+    str += ", " + host.country.printable_name;
+  }
+
+  return str;
+}
+
 function getLocale() {
   return document.getElementById('locale').className;
 }

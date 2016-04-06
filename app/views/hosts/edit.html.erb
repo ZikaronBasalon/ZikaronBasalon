@@ -105,6 +105,7 @@
                  uib-typeahead="country.id as country.printable_name for country in countries | filter:{ printable_name: $viewValue }"
                  typeahead-editable="false"
                  typeahead-input-formatter="formatAutocompleteCountry($model)"
+                 typeahead-on-select="onCountrySelect($item, $model, $label)"
                  placeholder="<%= t 'shared.country_placeholder' %>"
                  required>
         </div>
