@@ -39,7 +39,6 @@ function formatBool(value) {
 }
 
 function formatElevatorBool(value) {
-  return value ? 'יש מעלית' : 'אין מעלית';
   var locale = getLocale();
   if(locale === "en") {
     return value ? 'with elevator' : 'no elevator';
