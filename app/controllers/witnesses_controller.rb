@@ -64,11 +64,16 @@ class WitnessesController < ApplicationController
 
     respond_to do |format|
       if @witness.update_attributes(params[:witness])
+
+        if(params[:witness][:host_id].present?)
+          HostMailer.witness_assigned(
+            params[:witness][:host_id],
+            I18n.locale
+          ).deliver
+        end
         
-        #format.html { redirect_to @witness, notice: 'Witness was successfully updated.' }
         format.json { render json: @witness, status: :created, location: @witness }
       else
-        #format.html { render action: "edit" }
         format.json { render json: @witness.errors, status: :unprocessable_entity }
       end
     end
