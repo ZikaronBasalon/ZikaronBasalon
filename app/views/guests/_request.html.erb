@@ -48,8 +48,8 @@
   				<div class="subtitle"><%= t '.num_of_guests' %>:</div>
 	  			<select ng-model="invite.plusOnes" class="margin-top-20 plus-one-select">
 	  				<option value="0">0</option>
-	          <option value="1">1</option>
-	          <option value="2">2</option>
+	          <option value="1" ng-disabled="host.available_places < 2">1</option>
+	          <option value="2" ng-disabled="host.available_places < 3">2</option>
 	  			</select>
   			</div>
   			

@@ -2,6 +2,7 @@ class PagesController < ApplicationController
   include PagesHelper
   def home
   	@hosts = Host.includes(:city, :user).where(host_conditions_hash)
+    @hosts = @hosts.select{ |h| h.available_places > 0 }
   	@hosts = @hosts.select { |h| 
   		h.user.full_name.include?(query) ||
   		(h.city && h.city.name.include?(query)) ||
