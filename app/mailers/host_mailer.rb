@@ -10,9 +10,10 @@ class HostMailer < BaseMailer
   # 	mail :to => manager_email, :subject => "מארח חדש בעירך"
   # end
 
-  def new_host(user_id)
+  def new_host(user_id, locale)
   	@user = User.find(user_id)
-  	mail :to => @user.email, :subject => t('host_mailer.new_host.subject')
+    @locale = locale
+  	mail :to => @user.email, :subject => t('host_mailer.new_host.subject', locale: @locale)
   end
 
   # def shana_tova(host_id)

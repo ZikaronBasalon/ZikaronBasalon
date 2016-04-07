@@ -26,7 +26,7 @@
 	</div>
 
 	<div class="left-side">
-		<div class="header-brand">זיכרון בסלון</div>
+		<div class="header-brand"><%= t('.brand') %></div>
 		<% locale = next_locale(I18n.locale) %>
 		<%= link_to locale: locale do %>
 			<div class="language-btn small-header-btn"><%= locale.capitalize %></div>
