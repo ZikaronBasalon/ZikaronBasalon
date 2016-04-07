@@ -6,6 +6,7 @@ he:
           attributes:
             email:
               taken: "כתובת הדואר האלקטרוני שהזנת תפוסה"
+              invalid: "כתובת דואר אלקטרוני לא תקנית"
         witness:
           attributes:
             phone:
