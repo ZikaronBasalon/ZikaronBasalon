@@ -28,9 +28,8 @@ class HostsController < ApplicationController
   def update
     @host = Host.find(params[:id])
     @host.update_attributes(params[:host])
-
     if params[:finalStep] && !@host.received_registration_mail
-      HostMailer.new_host(@host.user.id).deliver
+      HostMailer.new_host(@host.user.id, I18n.locale).deliver
       @host.update_attributes(received_registration_mail: true)
     end
 

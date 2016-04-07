@@ -119,7 +119,8 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 					public_text: $scope.host.public_text,
 					free_text: $scope.host.free_text
 				},
-				finalStep: true
+				finalStep: true,
+				locale: document.getElementById('locale').className
 	  	}).then(function success(response) {
 	  		var modalInstance = $uibModal.open({
 		      templateUrl: 'host-signup-finished.html',

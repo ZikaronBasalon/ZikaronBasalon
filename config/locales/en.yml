@@ -133,7 +133,7 @@ en:
       facebook: "Our Facebook page"
     header:
       want_to_host: "Become a host"
-      want_to_guest: "Become a guest"
+      want_to_guest: "Join a salon"
       staff: "Team"
       host_dashboard: "Host zone"
       signin: "Sign in"
@@ -147,7 +147,7 @@ en:
       brand: "Zikaron Basalon"
   pages:
     home:
-      title: "Search for a ZikaronBasalon Evening"
+      title: "Search for a Zikaron Basalon Evening"
       subtitle: "Here you can search for a salon near you. <br> If you are unable to find a salon, you can always host an evening yourself!"
       zb_salons: "Open salons"
       temp_title: "Welcome to Zikaron BaSalon!"
@@ -260,11 +260,12 @@ en:
 
   host_mailer:
     new_host:
-      subject: "Welcome to the ZikaronBasalon Community!"
-      paragraph_1: "Thank you for choosing to host a ZikaronBasalon evening in the coming Holocaust Memorial Day, and congrats on joining a community including thousands of hosts in Israel and the world."
-      paragraph_2: "Hosting a ZikaronBasalon evening is easy, and we're here with you every step of the way."
+      subject: "Welcome to the Zikaron Basalon Community!"
+      paragraph_1: "Thank you for choosing to host a Zikaron Basalon evening in the coming Holocaust Memorial Day, and congrats on joining a community including thousands of hosts in Israel and the world."
+      paragraph_2: "Hosting a Zikaron Basalon evening is easy, and we're here with you every step of the way."
       link_text: "In our Host Kit"
-      paragraph_3: "you will find everything you need to make you ZikaronBasalon evening memorable for both you and your guests"
+      link_url: "http://www.zikaronbasalon.org/#!build-your-event/c1hap"
+      paragraph_3: "you will find everything you need to make you Zikaron Basalon evening memorable for both you and your guests"
 
   guests:
    register:
