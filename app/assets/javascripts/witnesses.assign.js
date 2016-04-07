@@ -74,8 +74,8 @@ app.controller('WitnessAssignModalController', ['$scope', '$http','$uibModalInst
         host_id: $scope.host.id
       }
     }).then(function(response) {
-      if(response.data.success && response.data.host && response.data.host.id) {
-        window.location = '/' + document.getElementById('locale').className + '/hosts/' + response.data.host.id;
+      if(response.status === 201 && response.data.host_id) {
+        window.location = '/' + document.getElementById('locale').className + '/hosts/' + response.data.host_id;
       } else {
         $scope.error = true;
       }

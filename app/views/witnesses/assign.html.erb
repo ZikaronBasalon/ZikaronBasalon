@@ -23,9 +23,9 @@
       <table class="table host-table">
         <thead>
           <tr>
-            <th ng-click="setSortProp('user.id')">
+            <th ng-click="setSortProp('id')">
               <%= t 'shared.id' %>
-              <span class="caret" ng-if="sortProp === 'user.id'"></span>
+              <span class="caret" ng-if="sortProp === 'id'"></span>
             </th>
             <th ng-click="setSortProp('user.full_name')">
               <%= t 'shared.name' %>
@@ -52,7 +52,7 @@
         </thead>
         <tbody>
           <tr ng-repeat="host in hosts">
-            <td>{{ host.user.id }}</td>
+            <td>{{ host.id }}</td>
             <td>{{ host.user.full_name }}</td>
             <td>{{ host.city.name }}</td>
             <td>{{ host.address }}</td>

@@ -6,6 +6,7 @@ en:
           attributes:
             email:
               taken: "The email address you entered is already in use"
+              invalid: "The email address you entered is invalid"
 
   users:
     new:
@@ -145,6 +146,7 @@ en:
       signup_staff: "Team registration"
       manager_profile: "Community Managment"
       brand: "Zikaron Basalon"
+      homepage_url: "http://www.zikaronbasalon.org/"
   pages:
     home:
       title: "Search for a Zikaron Basalon Evening"
@@ -168,7 +170,7 @@ en:
       hosted_before_yes: "No"
       hosted_before_no: "Yes"
       organization: "Do you represent any organization?"
-      org_help_block: "*If so, please make sure you register each event separately"
+      org_help_block: "*If so, please make sure you register each evening separately"
       org_name: "Organization name"
       address: "Address"
       address_route_error: "Please make sure to add your house number"
@@ -185,7 +187,7 @@ en:
       survivor_needed: "האם את/ה צריכ/ה עזרה במציאות איש/אשת עדות?"
       survivor_needed_help_block: "לצערנו, אין ביכולתנו להבטיח הגעה של איש עדות ואנו מעודדים לחפש עדות באופן עצמאי. תוכל/י למצוא באתר שלנו גם עדויות מצולמות וכתובות."
       strangers: "Will your Zikaron BaSalon be open for guests?"
-      strangers_help_block: "If you choose to have an open salon, guests from our site will be able to request to join your evening. You can switch your event to close at any time."
+      strangers_help_block: "If you choose to have an open salon, guests from our site will be able to request to join your evening. You can switch your evening to closed at any time."
       strangers_yes: "Open salon"
       strangers_no: "Private salon"
       max_guests: "How many guests would you like to host?"
@@ -199,6 +201,7 @@ en:
       city: "City"
       city_placeholder: "Enter city"
       address_placeholder: "Full address (without city)"
+      temp_subtitle: "We will open the registration to join a salon in a few days!"
     show:
       title: "Host profile"
       personal_details: "Your information"
@@ -209,7 +212,7 @@ en:
         phone: "Phone number"
         email: "Email"
         address: "Address"
-        date_and_time: "Approximate date and time of event"
+        date_and_time: "Approximate date and time of evening"
         organization: "Do you represent any organization"
         langauge: "Langauge"
         accesability: "Accesability"

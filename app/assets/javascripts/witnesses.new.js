@@ -1,6 +1,6 @@
 //= require directives/isPhone
 
-app.controller('WitnessNewController', ['$scope','$http', function($scope, $http) {
+app.controller('WitnessNewController', ['$scope','$http','$timeout', function($scope, $http, $timeout) {
 	$scope.witness = {
 		can_morning: true,
 		can_afternoon: true,
@@ -52,6 +52,16 @@ app.controller('WitnessNewController', ['$scope','$http', function($scope, $http
 		}
 	}
 
+	$scope.onCityNameBlur = function() {
+  	$timeout(function() {
+  		if(!$scope.cityFromList) {
+  			$scope.witness.city_name = null;
+  		}
+  		$scope.cityFromList = false;
+			$scope.$apply();
+  	}, 1000);
+  }
+
 	function submitWitness() {
 		if($scope.action === 'new') {
 			return $http.post('/witnesses.json', {
@@ -72,8 +82,11 @@ app.controller('WitnessNewController', ['$scope','$http', function($scope, $http
   }
 
   function getAddress() {
-		result = $scope.autocomplete.getPlace();
-		$scope.witness.city_name = getLocalityComponent(result);
+		$scope.result = $scope.autocomplete.getPlace();
+		$scope.cityFromList = true;
+		if($scope.result) {
+			$scope.witness.city_name = getLocalityComponent($scope.result);
+		}
 		$scope.$apply();
   }
 

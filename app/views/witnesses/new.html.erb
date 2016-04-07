@@ -18,6 +18,7 @@
       <input type="text" class="form-control"
              id="city_name"
              ng-model="witness.city_name"
+             ng-blur="onCityNameBlur()"
              required>
     </div>
 
@@ -44,7 +45,8 @@
       </label>
       <select class="form-control" id="witness_type" 
               ng-model="witness.witness_type"
-              ng-options="o.v as o.n for o in typeOptions">
+              ng-options="o.v as o.n for o in typeOptions"
+              required>
       </select>
     </div>
 

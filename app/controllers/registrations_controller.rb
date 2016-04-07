@@ -2,7 +2,7 @@ class RegistrationsController < Devise::RegistrationsController
 	respond_to :html, :json
 
 	def create
-    @resource = Manager.find_by_temp_email(user_attributes[:email])
+    @resource = Manager.where('lower(temp_email) = ?', user_attributes[:email].downcase).first
 
     if @resource 
       @resource.user_attributes = user_attributes

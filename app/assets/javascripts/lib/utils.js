@@ -39,7 +39,6 @@ function formatBool(value) {
 }
 
 function formatElevatorBool(value) {
-  return value ? 'יש מעלית' : 'אין מעלית';
   var locale = getLocale();
   if(locale === "en") {
     return value ? 'with elevator' : 'no elevator';
@@ -66,12 +65,6 @@ function formatStrangers(strangers) {
   } else {
     return strangers ? 'סלון פתוח' : 'סלון סגור';
   }
-}
-
-function formatFirstName(host) {
-  return host.user 
-    ? host.user.full_name.split(' ')[0]
-    : ''
 }
 
 function getUrlParameter(name, url) {

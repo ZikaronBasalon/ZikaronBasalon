@@ -6,6 +6,7 @@ he:
           attributes:
             email:
               taken: "כתובת הדואר האלקטרוני שהזנת תפוסה"
+              invalid: "כתובת דואר אלקטרוני לא תקנית"
         witness:
           attributes:
             phone:
@@ -158,6 +159,7 @@ he:
       managers: "ניהול מובילי קהילות"
       signup_staff: "הרשמת צוות"
       brand: "זיכרון בסלון"
+      homepage_url: "http://www.zikaronbasalon.com/"
   pages:
     home:
       title: "חיפוש ערב זיכרון בסלון"
@@ -213,6 +215,7 @@ he:
       facebook_share: "שיתוף בפייסבוק"
       build_evening: "בניית הערב שלך"
       city: "עיר/יישוב"
+      temp_subtitle: ""
     show:
       title: "פרופיל מארח"
       personal_details: "פרטים אישיים"
@@ -341,6 +344,14 @@ he:
       link_text: "בערכת המארח שלנו"
       link_url: "http://www.zikaronbasalon.com/#!eveningsetup/c1hap"
       paragraph_3: "יש כל מה שצריך כדי להפוך את הזיכרון בסלון שלך למוצלח ונעים לך ולכל האורחים."
+
+    witness_assigned:
+      subject: "עדכון לגבי ציוות איש עדות לזיכרון בסלון"
+      paragraph_1: "רצינו לעדכן אותך כי ציוותנו לך איש/אשת עדות וניתן כעת לראות את הפרטים המלאים"
+      link_text: "בפרופיל האישי שלך"
+      link_text_2: "בשלב הזה, יש לקרוא כיצד אנו ממליצים להתנהל החל מהשיחה הראשונה ביניכם ועד הערב עצמו"
+      paragraph_2: "מאחר ואיש/אשת העדות מחכה לשמוע ממך ולתאם איתך, יש ליצור קשר בהקדם האפשרי ולעדכן אותנו שעשית זאת בכפתור המתאים בפרופיל האישי שלך."
+      paragraph_3: "אם נתקלת בבעיות, אנחנו פה." 
 
   request_mailer:
     pending_invite_received:
