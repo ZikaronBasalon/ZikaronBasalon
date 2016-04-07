@@ -1,4 +1,4 @@
-<div id="guest-show" class="row profile" ng-controller="GuestShowController" ng-init="init(<%= @guest.to_json(:include => [:user, { invites: { :include => { host: { :include => [:user, :city] } } } }]) %>)">
+<div id="guest-show" class="row profile" ng-controller="GuestShowController" ng-init="init(<%= @guest.to_json(:include => [:user, { invites: { :include => { host: { :include => [{ :user => { :methods => [:first_name] } }, :city] } } } }]) %>)">
 
   <!-- Personal details -->
   <div class="col-xs-12">
@@ -52,8 +52,8 @@
         </div>
 
         <div class="field-group">
-          <div class="info-label"><%= t 'shared.address' %></div>
-          <div>{{ formatAddress(invite.host.address, invite.host.city.name) }}</div>
+          <div class="info-label"><%= t 'shared.city' %></div>
+          <div>{{ invite.host.city.name }}</div>
         </div>
 
         <div class="field-group">
@@ -107,7 +107,7 @@
       <div class="panel-body">
         <div class="field-group">
           <div class="info-label"><%= t 'shared.name' %></div>
-          <div>{{ invite.host.user.full_name }}</div>
+          <div>{{ invite.host.user.first_name }}</div>
         </div>
 
         <div class="field-group">
@@ -118,6 +118,11 @@
         <div class="field-group">
           <div class="info-label"><%= t 'shared.email' %></div>
           <div>{{ invite.host.user.email }}</div>
+        </div>
+
+        <div class="field-group">
+          <div class="info-label"><%= t 'shared.address' %></div>
+          <div>{{ invite.host.address }}</div>
         </div>
       </div>
     </div>

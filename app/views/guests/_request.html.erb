@@ -5,7 +5,7 @@
   <div class="margin-top-20 col-xs-12">
   	<div class="row request-container">
   		<div class="col-xs-6 salon-info">
-  			<div class="salon-title"><%= t '.salon_of' %> {{ formatFirstName(host) }}</div>
+  			<div class="salon-title"><%= t '.salon_of' %> {{ host.user.first_name }}</div>
   			
   			<div class="info-group">
   				<span class="label"><%= t 'shared.location' %>:</span>

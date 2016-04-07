@@ -8,7 +8,7 @@
     <% if true %>
     <div class="col-xs-12" ng-controller="HomePageController"
           ng-init="init(
-            <%= @hosts.to_json(:include => [:user, :city, :country], :methods => [:available_places]) %>, 
+            <%= @hosts.to_json(:include => [{ :user => { :methods => [:first_name] } }, :city, :country], :methods => [:available_places]) %>, 
             <%= @cities.to_json %>, <%= @total_items %>,
             <%= current_user_json %>, <%= @countries.to_json %>
           )">
@@ -70,7 +70,7 @@
         </thead>
         <tbody>
           <tr ng-repeat="host in hosts">
-            <td>{{ host.user.full_name }}</td>
+            <td>{{ host.user.first_name }}</td>
             <td>{{ formatCityDisplay(host) }}</td>
             <td>{{ formatAddressDisplay(host.address) }}</td>
             <td>{{ formatDate(host.event_date) }}</td>

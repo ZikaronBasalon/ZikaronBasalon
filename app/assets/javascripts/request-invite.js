@@ -11,7 +11,6 @@ app.controller('RequestInviteController', ['$scope', '$http', '$uibModalInstance
 		plusOnes: "0"
 	};
 
-	$scope.formatFirstName = formatFirstName;
 	$scope.getAccesability = getAccesability;
 	$scope.formatDate = formatDate;
 	$scope.formatLanguage = formatLanguage;

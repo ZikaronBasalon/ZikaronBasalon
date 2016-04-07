@@ -67,12 +67,6 @@ function formatStrangers(strangers) {
   }
 }
 
-function formatFirstName(host) {
-  return host.user 
-    ? host.user.full_name.split(' ')[0]
-    : ''
-}
-
 function getUrlParameter(name, url) {
   if (!url) url = location.href;
   name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
