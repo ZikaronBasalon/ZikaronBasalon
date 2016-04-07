@@ -214,6 +214,7 @@ he:
       facebook_share: "שיתוף בפייסבוק"
       build_evening: "בניית הערב שלך"
       city: "עיר/יישוב"
+      temp_subtitle: ""
     show:
       title: "פרופיל מארח"
       personal_details: "פרטים אישיים"

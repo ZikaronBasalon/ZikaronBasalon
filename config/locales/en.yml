@@ -200,6 +200,7 @@ en:
       city: "City"
       city_placeholder: "Enter city"
       address_placeholder: "Full address (without city)"
+      temp_subtitle: "We will open the registration to join a salon in a few days!"
     show:
       title: "Host profile"
       personal_details: "Your information"
