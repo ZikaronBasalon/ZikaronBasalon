@@ -5,7 +5,7 @@
       <p class="subtitle"><%= simple_format(t '.temp_subtitle') %></p>
     </div>
 
-    <% if true %>
+    <% if false %>
     <div class="col-xs-12" ng-controller="HomePageController"
           ng-init="init(
             <%= @hosts.to_json(:include => [{ :user => { :methods => [:first_name] } }, :city, :country], :methods => [:available_places]) %>, 
@@ -108,7 +108,7 @@
   </div>
 </div>
 
-<% if true %>
+<% if false %>
 <script type="text/ng-template" id="request-invite.html">
   <%= render 'guests/request_invite_modal' %>
 </script>
