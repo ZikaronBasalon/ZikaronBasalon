@@ -99,7 +99,7 @@
         <div class="form-group" 
              ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.country.$error.required]">
           <label for="country"><%= t 'shared.country' %></label>
-          <input type="text" class="form-control"
+          <!-- <input type="text" class="form-control"
                  name="country"
                  id="country"
                  ng-model="host.country_id"
@@ -107,8 +107,16 @@
                  typeahead-editable="false"
                  typeahead-input-formatter="formatAutocompleteCountry($model)"
                  typeahead-on-select="onCountrySelect($item, $model, $label)"
-                 placeholder="<%= t 'shared.country_placeholder' %>"
-                 required>
+                 placeholder="<%#= t 'shared.country_placeholder' %>"
+                 required> -->
+          <select class="form-control" id="country" 
+                  ng-model="host.country_id"
+                  name="country"
+                  required
+                  ng-change="onCountrySelect()"
+                  ng-options="c.id as c.printable_name for c in countries">
+            <option ng-show="!host.country_id" value=""><%= t 'shared.select' %></option>
+          </select>
         </div>
 
         <div class="form-group" 
