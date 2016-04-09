@@ -28,7 +28,6 @@ class Host < ActiveRecord::Base
 
   def city_name=(name)
   	self.city = City.find_or_create_by_name(name) if name.present?
-    CommunityLeadership.assign_manager(self.city, self.country_id)
   end
 
   def region_name
