@@ -33,9 +33,8 @@ class Host < ActiveRecord::Base
   end
 
   def available_places
-    invites.reduce(max_guests) {|sum, invite| 
-      return sum - (invite.plus_ones.to_i + 1) if invite.confirmed?
-      sum
+    invites.inject(max_guests) { |sum, invite| 
+      invite.confirmed.nil? ? sum : sum - (invite.plus_ones.to_i + 1)
     }
   end
 end
