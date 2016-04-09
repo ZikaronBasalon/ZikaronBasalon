@@ -1,17 +1,46 @@
-<% title "Guests" %>
+<div class="col-xs-12" id="guest-index" ng-controller="GuestIndexController"
+     ng-init="init(<%= @guests.to_json(:include => :user) %>, <%= @total_guests.to_json %>, <%= @page.to_json %>)">
 
-<table id="staff_table">
-  <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Phone</th>
-  </tr>
-  <% for guest in @guests %>
-    <tr>
-      <td><%= guest.name %></td>
-      <td><%= guest.email %></td>
-      <td><%= guest.phone %></td>
-    </tr>
-  <% end %>
-</table>
+ <div class="col-xs-12" ng-if="success">
+    <div class="alert alert-success" role="alert">
+      נחמק בהצלחה
+    </div>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>שם</th>
+        <th>מייל</th>
+        <th>טלפו</th>
+        <th>מחק</th>
+      </tr> 
+    </thead>
+    <tbody>
+      <tr ng-repeat="guest in guests">
+        <td>{{ guest.user.full_name }}</td>
+        <td>{{ guest.user.email }}</td>
+        <td>{{ guest.phone }}</td>
+        <td>
+          <button ng-click="deleteGuest(guest)" 
+                  class="btn btn-warning">
+            <%= t 'shared.delete' %>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <uib-pagination total-items="totalGuests" 
+                  ng-model="pagination.currentPage" 
+                  items-per-page="10"
+                  ng-change="pageChanged()"
+                  class="pagination-sm" 
+                  previous-text="&lsaquo;" 
+                  next-text="&rsaquo;" 
+                  first-text="&laquo;" 
+                  last-text="&raquo;">
+  </uib-pagination>
+
+</div>
 

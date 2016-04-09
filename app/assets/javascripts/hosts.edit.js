@@ -46,7 +46,14 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 		if($scope.host.country) {
 			$scope.initAutocomplete($scope.host.country.iso)
 		} else {
-			$scope.initAutocomplete()
+			var locale = document.getElementById('locale').className;
+			if(locale === 'he') {
+				var israel = _.find($scope.countries, { iso: 'IL' });
+				$scope.host.country_id = israel.id;
+				$scope.initAutocomplete(israel.iso);
+			} else {
+				$scope.initAutocomplete();
+			}
 		}
 	}
 
@@ -156,8 +163,9 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
   	return '';
   }
 
-  $scope.onCountrySelect = function($item, $model, $label) {
-  	$scope.initAutocomplete($item.iso);
+  $scope.onCountrySelect = function() {
+  	var country = _.find($scope.countries, {id: $scope.host.country_id} )
+  	$scope.initAutocomplete(country.iso);
   }
 
   function getAddress() {

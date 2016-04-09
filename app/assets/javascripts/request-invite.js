@@ -32,8 +32,8 @@ app.controller('RequestInviteController', ['$scope', '$http', '$uibModalInstance
 		$scope.view = view;
 	}
 
-	$scope.close = function () {
-    $uibModalInstance.dismiss('close');
+	$scope.close = function (url) {
+    window.location = url;
   };
 
   $scope.sendRequest = function() {
