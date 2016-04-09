@@ -15,6 +15,8 @@ class Host < ActiveRecord::Base
   has_many :comments, as: :commentable
   has_many :invites
 
+  after_update :assign_manager_by_country
+
   def event_date 
     read_attribute(:event_date) || Date.parse("4-5-2016")
   end
@@ -37,6 +39,10 @@ class Host < ActiveRecord::Base
     invites.inject(max_guests) { |sum, invite| 
       invite.confirmed.nil? ? sum : sum - (invite.plus_ones.to_i + 1)
     }
+  end
+
+  def assign_manager_by_country
+    CommunityLeadership.assign_manager(self.city, self.country_id) if (self.country_id_changed? && self.country_id && self.city)
   end
 end
 
