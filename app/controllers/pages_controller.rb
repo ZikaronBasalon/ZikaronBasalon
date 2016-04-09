@@ -19,7 +19,7 @@ class PagesController < ApplicationController
   	respond_to do |format|
 		  format.json { render json: { 
 			  	hosts: @hosts.to_json(
-			  		:include => [:user, :city, :country], 
+			  		:include => [{ :user => { :methods => [:first_name] } }, :city, :country], 
 			  		:methods => [:available_places]
 		  		), 
 			  	cities: @cities, 
