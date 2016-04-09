@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160406172401) do
+ActiveRecord::Schema.define(:version => 20160409132115) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20160406172401) do
     t.string  "printable_name"
     t.string  "iso3"
     t.integer "numcode"
+    t.integer "manager_id"
   end
 
   create_table "guests", :force => true do |t|
