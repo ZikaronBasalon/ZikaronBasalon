@@ -58,7 +58,7 @@ private
     
     (h.user && h.user.full_name.include?(query)) ||
     (h.city && h.city.name.include?(query)) ||
-    (h.country && h.country.printable_name.include?(query)) ||
+    (h.country && h.country.printable_name && h.country.printable_name.include?(query)) ||
     h.address.include?(query)
   end
 
