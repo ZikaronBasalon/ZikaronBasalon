@@ -10,14 +10,14 @@ app.controller('GuestIndexController', ['$scope','$http', function($scope, $http
     $scope.totalGuests = totalGuests;
   }
 
-  $scope.deteleGuest = function(guest) {
+  $scope.deleteGuest = function(guest) {
     var res = confirm("בטוח בטוח?");
     if (res) {
       $http.delete('/guests/' + guest.id + '.json').then(function(response) {
         if (response.data.success) {
           $scope.showSuccessMessage();
           $scope.success = true;
-          $scope.hosts = _.filter($scope.guests, function(guest) {
+          $scope.guests = _.filter($scope.guests, function(guest) {
             return guest.id !== response.data.guest.id;
           });
         }
