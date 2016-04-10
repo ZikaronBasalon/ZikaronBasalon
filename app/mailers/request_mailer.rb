@@ -19,17 +19,19 @@ class RequestMailer < ActionMailer::Base
     mail :to => @guest.user.email, :subject => t('request_mailer.request_approved.title')
   end
 
-  def request_rejected(invite_id)
+  def request_rejected(invite_id, locale)
     @invite = Invite.find(invite_id)
     @host = @invite.host
     @guest = @invite.guest
+    @locale = locale
     mail :to => @guest.user.email, :subject => t('request_mailer.request_rejected.title')
   end
 
-  def new_guest(invite_id)
+  def new_guest(invite_id, locale)
     @invite = Invite.find(invite_id)
     @host = @invite.host
     @guest = @invite.guest
+    @locale = locale
     mail :to => @guest.user.email, :subject => t('request_mailer.new_guest.title')
   end
 

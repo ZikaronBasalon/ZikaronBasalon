@@ -10,7 +10,7 @@ class InvitesController < ApplicationController
 
     if @invite.save
       RequestMailer.pending_invite_received(@invite.id).deliver
-      RequestMailer.new_guest(@invite.id).deliver
+      RequestMailer.new_guest(@invite.id, I18n.locale).deliver
       render :json => { error: false }
     else
       render :json => { error: true }
@@ -22,7 +22,7 @@ class InvitesController < ApplicationController
     @invite.update_attributes(params[:invite])
     
     RequestMailer.request_approved(@invite.id).deliver if @invite.confirmed
-    RequestMailer.request_rejected(@invite.id).deliver if @invite.rejected
+    RequestMailer.request_rejected(@invite.id, I18n.locale).deliver if @invite.rejected
 
     render :json => Invite.where(host_id: @invite.host.id)
                           .to_json(:include => { guest: { :include => :user }})

@@ -1,13 +1,13 @@
 <h1><%= @guest.user.first_name %>,</h1>
 
-<p><%= t('.paragraph_1', name: @host.user.first_name) %></p>
+<p><%= t('.paragraph_1', name: @host.user.first_name, locale: @locale) %></p>
 
 <p>
-	<%= t('.paragraph_2', name: @host.user.first_name) %>  
-	<%= link_to(t('.link_text'), guest_url(id: @guest.id, locale: :he)) %> 
-	<%= t '.paragraph_2_after_link' %>
+	<%= t('.paragraph_2', name: @host.user.first_name, locale: @locale) %>  
+	<%= link_to(t('.link_text', locale: @locale), guest_url(id: @guest.id, locale: @locale)) %> 
+	<%= t('.paragraph_2_after_link', locale: @locale) %>
 </p>
 
 <p>
-	<%= t '.paragraph_3' %>  <%= link_to t('.paragraph_3_link_text'), "http://www.zikaronbasalon.com/#!eveningsetup/c1hap" %>
+	<%= t('.paragraph_3', locale: @locale) %>  <%= link_to t('.paragraph_3_link_text', locale: @locale),  t('.link_url', locale: @locale) %>
 </p>
