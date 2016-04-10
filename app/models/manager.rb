@@ -92,9 +92,9 @@ class Manager < ActiveRecord::Base
 
   def witness_has_host(w, has_host)
     if has_host === "true"
-      return !w.host.nil?
+      return w.has_host
     else
-      return w.host.nil?
+      return !w.has_host
     end 
   end
 

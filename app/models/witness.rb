@@ -22,4 +22,8 @@ class Witness < ActiveRecord::Base
   def city_name=(name)
   	self.city = City.find_or_create_by_name(name) if name.present?
   end
+
+  def has_host
+    !host.nil? || external_assignment
+  end
 end
