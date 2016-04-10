@@ -177,7 +177,10 @@ function formatAddressDisplay(address) {
 }
 
 function formatCityDisplay(host) {
-  var str =  host.city.name;
+  var str = '';
+  if (host.city) {
+    str += host.city.name;
+  }
   if (host.country) {
     str += ", " + host.country.printable_name;
   }

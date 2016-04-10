@@ -22,6 +22,12 @@ class GuestsController < ApplicationController
     end
   end
 
+  def destroy
+    @guest = Guest.find(params[:id])
+    @guest.destroy
+    render :json => { success: true, guest: @guest }
+  end
+
   def paginate(arr_name, page)
     unless arr_name.kind_of?(Array)
       arr_name = arr_name.page(page).per(20)
