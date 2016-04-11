@@ -10,7 +10,7 @@ class PagesController < ApplicationController
       host_in_language_filter(h, params[:event_language])
   	} 
 
-    @cities = @hosts.map{ |h| h.city }.compact.uniq.sort_alphabetical_by{ |c| c[:name] }
+    @cities = City.all.select{ |c| c.hosts.count > 0 }.sort_alphabetical_by{ |c| c[:name] }
     @countries = Country.all
 
   	@hosts = paginate(@hosts, params[:page] || 1)
