@@ -81,5 +81,7 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
       location.reload();
     });
   }
+
+  
 }]);
 

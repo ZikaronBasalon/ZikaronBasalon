@@ -120,6 +120,7 @@ en:
     delete: "Delete"
     country: "Country"
     country_placeholder: "Type and select from dropdown"
+    share_on_fb: "Share evening on Facebook"
 
   views:
     pagination:

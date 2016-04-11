@@ -55,6 +55,16 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 		$scope.save();
 	}
 
+	$scope.fbShare = function () {
+  	FB.ui({
+		  method: 'share',
+		  href: 'http://zikaronbasalon.herokuapp.com/' + document.getElementById('locale').className + '?invite=' + $scope.host.id
+		}, function(response){
+
+		});
+  };
+
+
 	function initInvites(invites) {
 		var invites = _.groupBy(invites, 'confirmed');
 		$scope.pendingInvites = invites[false];
