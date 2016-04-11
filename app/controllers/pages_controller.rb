@@ -1,5 +1,7 @@
 class PagesController < ApplicationController
   include PagesHelper
+  respond_to :html, :json
+
   def home
   	@hosts = Host.includes(:city, :user).where(host_conditions_hash)
   	@hosts = @hosts.select { |h| 
@@ -8,13 +10,14 @@ class PagesController < ApplicationController
       host_in_language_filter(h, params[:event_language])
   	} 
 
-    @cities = @hosts.map{ |h| h.city }.compact.uniq.sort_alphabetical_by{ |c| c[:name] }
+    @cities = City.all.select{ |c| c.hosts.count > 0 }.sort_alphabetical_by{ |c| c[:name] }
     @countries = Country.all
 
   	@hosts = paginate(@hosts, params[:page] || 1)
   	@total_items = @hosts.total_count
 
   	respond_to do |format|
+      format.html
 		  format.json { render json: { 
 			  	hosts: @hosts.to_json(
 			  		:include => [{ :user => { :methods => [:first_name] } }, :city, :country], 
@@ -25,7 +28,6 @@ class PagesController < ApplicationController
 			  	page: params[:page] || 1
 			  } 
 		  }
-		  format.html
 	  end
   end
 
