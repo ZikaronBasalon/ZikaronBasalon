@@ -3,7 +3,7 @@ class Host < ActiveRecord::Base
   :city_name, :status, :strangers, :contact, :survivor_details, :lat, :lng, :event_date,
   :event_time, :evening_public, :hosted_before, :floor, :elevator, :org_name, :org_role,
   :event_language, :contacted, :phone, :witness_id, :user_attributes, :public_text, :concept,
-  :received_registration_mail, :contacted_witness, :country_id
+  :received_registration_mail, :contacted_witness, :country_id, :assignment_time
 
   attr_accessor :available_places
 
@@ -42,6 +42,10 @@ class Host < ActiveRecord::Base
 
   def assign_manager_by_country
     CommunityLeadership.assign_manager(self.city, self.country_id) if (self.country_id_changed? && self.country_id && self.city)
+  end
+
+  def has_witness
+    !witness.nil?
   end
 end
 

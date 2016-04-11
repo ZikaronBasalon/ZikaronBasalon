@@ -70,6 +70,9 @@ class WitnessesController < ApplicationController
             params[:witness][:host_id],
             I18n.locale
           ).deliver
+
+          @host = Host.find(params[:witness][:host_id])
+          @host.update_attributes(assignment_time: Time.now.utc.localtime)
         end
         
         format.json { render json: @witness, status: :created, location: @witness }

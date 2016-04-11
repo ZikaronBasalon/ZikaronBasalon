@@ -1,5 +1,5 @@
 <div class="col-xs-12" ng-controller="ManagerShowController"
-     ng-init="init(<%= current_user.to_json(:include => :meta) %>, <%= @hosts.to_json(:include => [:user, :witness, city: { :include => :managers }]) %>, <%= @witnesses.to_json(:include => { city: { :include => :managers } }) %>,  <%= @cities.to_json %>,
+     ng-init="init(<%= current_user.to_json(:include => :meta) %>, <%= @hosts.to_json(:include => [:user, :witness, city: { :include => :managers }, :methods => [:has_witness] ]) %>, <%= @witnesses.to_json(:include => { city: { :include => :managers } }) %>,  <%= @cities.to_json %>,
         <%= @total_hosts.to_json %>, <%= @total_witnesses.to_json %>, <%= @page.to_json %> )">
 
 <span us-spinner class="zb-spinner" ng-if="loading" spinner-on="loading"></span>
@@ -151,7 +151,7 @@
             <td>{{ host.org_name }}</td>
             <td>{{ formatBool(host.contacted) }}</td>
             <td>{{ formatBool(host.survivor_needed) }}</td>
-            <td>{{ formatBool(host.has_survivor) }}</td>
+            <td><span ng-class="{true: 'text-danger'}[contactWitnessDue(host)]">{{ formatBool(host.has_witness) }}</span></td>
             <td>{{ formatBool(host.strangers) }}</td>
             <% if current_user.admin? %>
               <td>
