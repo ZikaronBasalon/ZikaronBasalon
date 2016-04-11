@@ -36,7 +36,7 @@ class ManagersController < ApplicationController
       format.html
       format.json { 
         render :json => {
-          hosts:  @hosts.to_json(:include => [:user, :witness, { city: { :include => :managers } }]),
+          hosts:  @hosts.to_json(:include => [:user, :witness, { city: { :include => :managers } }], :methods => [:has_witness]),
           witnesses: @witnesses.to_json(:include => { city: { :include => :managers } }),
           total_hosts: @total_hosts,
           total_witnesses: @total_witnesses,

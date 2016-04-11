@@ -31,15 +31,12 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
 
   $scope.init = function(currentUser, hosts, witnesses, cities, totalHosts, totalWitnesses, currentPage) {
     $scope.currentUser = currentUser;
-    $scope.hosts = _.map(hosts, function(host) {
-      host.has_survivor = !!host.witness;
-      return host;
-    });
-
+    $scope.hosts = hosts;
     $scope.witnesses = witnesses;
     $scope.cities = cities;
     $scope.totalHosts = totalHosts;
     $scope.totalWitnesses = totalWitnesses;
+
 
     $scope.$watch("search", function(newVal, oldVal) {
       if(newVal != oldVal) {
@@ -174,5 +171,10 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
 
   function activeFilter(filter) {
     return !_.isUndefined(filter) && !_.isNull(filter);
+  }
+
+  $scope.contactWitnessDue = function(host) {
+    return host.has_witness && !host.contacted_witness &&
+    ((new Date() - new Date(host.assignment_time)) / (1000*60*60*24)) > 3
   }
 }]);
