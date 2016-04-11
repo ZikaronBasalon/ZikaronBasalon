@@ -12,7 +12,7 @@ class HostsController < ApplicationController
 
   def show
     @host = Host.find(params[:id])
-    respond_to do |format|
+    respond_with(@host) do |format|
       format.html
       format.json { 
         if @host.strangers && @host.available_places > 0 
