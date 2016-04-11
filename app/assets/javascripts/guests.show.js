@@ -14,11 +14,14 @@ app.controller('GuestShowController', ['$scope', '$http', function($scope, $http
 	}
 
 	$scope.deleteInvite = function(invite) {
-		$http.delete('/invites/' + invite.id + '.json')
-		.then(function(response) {
-			if(response.data.success) {
-				$scope.invite = null;
-			}
-  	});
+		var res = confirm("בטוח בטוח?")
+		if(res) {
+			$http.delete('/invites/' + invite.id + '.json')
+					 .then(function(response) {
+							if(response.data.success) {
+								$scope.invite = null;
+							}
+				   });	
+		}
 	}
 }]);
