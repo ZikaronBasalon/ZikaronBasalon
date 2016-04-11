@@ -5,11 +5,12 @@ class RequestMailer < ActionMailer::Base
   layout 'mailer_default'
   default from: "zikaronbasalon@gmail.com"
 
-  def pending_invite_received(invite_id)
+  def pending_invite_received(invite_id, locale)
   	@invite = Invite.find(invite_id)
     @host = @invite.host
     @guest = @invite.guest
-  	mail :to => @host.user.email, :subject => t('request_mailer.pending_invite_received.title')
+    @locale = locale
+  	mail :to => @host.user.email, :subject => t('request_mailer.pending_invite_received.title', locale: @locale)
   end
 
   def request_approved(invite_id, locale)

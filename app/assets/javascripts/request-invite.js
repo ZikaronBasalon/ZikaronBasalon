@@ -33,7 +33,9 @@ app.controller('RequestInviteController', ['$scope', '$http', '$uibModalInstance
 	}
 
 	$scope.close = function (url) {
-    window.location = url;
+		if (url) {
+			window.location = url;
+		}
   };
 
   $scope.sendRequest = function() {
@@ -41,7 +43,8 @@ app.controller('RequestInviteController', ['$scope', '$http', '$uibModalInstance
   		invite: {
   			host_id: $scope.host.id,
   			plus_ones: $scope.invite.plusOnes
-  		}
+  		},
+  		locale: document.getElementById('locale').className
   	}).then(function(response) {
   		if(response.data.error) {
   			console.log(response.data);

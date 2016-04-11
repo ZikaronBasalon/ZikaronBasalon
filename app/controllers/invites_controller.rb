@@ -9,7 +9,7 @@ class InvitesController < ApplicationController
     })
 
     if @invite.save
-      RequestMailer.pending_invite_received(@invite.id).deliver
+      RequestMailer.pending_invite_received(@invite.id, I18n.locale).deliver
       RequestMailer.new_guest(@invite.id, I18n.locale).deliver
       render :json => { error: false }
     else

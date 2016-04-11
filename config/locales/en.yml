@@ -250,12 +250,13 @@ en:
 
   request_mailer:
     pending_invite_received:
-      paragraph_1: "תודה שבחרת לארח אצלך בבית ערב של זיכרון בסלון בערב יום השואה הקרוב. %{guest_name} רוצה להתארח אצלך בערב של זיכרון בסלון"
-      ok_for_you: "מתאים לך?"
-      approve_request: "לאישור הבקשה"
-      paragraph_2: "יש לך עוד מקומות פנויים בסלון? אפשר תמיד לשנות את מספר המתארחים שיצטרפו לזיכרון בסלון אצלך"
-      your_profile: "בפרופיל האישי."
-      paragraph_3: "הבקשה תתבטל אוטומטית לאחר ארבעה ימים, לכן אנו מציעים לך לאשר אותה במהרה."
+      title: "A request has been made to be a guest in you salon"
+      paragraph_1: "Thanks for choosing to host a Zikaron Basalon evening on the Holocaust Memorial Evening. %{guest_name} wants to be a guest in your salon"
+      ok_for_you: "Does that work for you?"
+      approve_request: "To confirm the request"
+      paragraph_2: "Have additional available places? You can always edit the number of available places in your salon."
+      your_profile: "in your personal profile."
+      paragraph_3: "The request will be automatically canceled in four days, so we urge you to approve it as soon as possible."
 
     request_approved:
       title: "Your request has been approved. See you in the Salon!"
