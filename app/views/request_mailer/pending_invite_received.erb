@@ -1,16 +1,16 @@
 <h1><%= @host.user.first_name %></h1>
 
 <p>
-	<%= t '.paragraph_1', guest_name: @guest.user.first_name %>
+	<%= t '.paragraph_1', guest_name: @guest.user.first_name, locale: @locale %>
 </p>
 
 
 <table class="table">
   <tr>
-    <th><%= t 'hosts.show.labels.name' %></th>
-    <th><%= t 'hosts.show.labels.phone' %></th>
-    <th><%= t 'hosts.show.labels.email' %></th>
-    <th><%= t 'hosts.show.labels.how_many_places' %></th>
+    <th><%= t 'hosts.show.labels.name', locale: @locale %></th>
+    <th><%= t 'hosts.show.labels.phone', locale: @locale %></th>
+    <th><%= t 'hosts.show.labels.email', locale: @locale %></th>
+    <th><%= t 'hosts.show.labels.how_many_places', locale: @locale %></th>
   </tr>
 
   <tr>
@@ -22,13 +22,13 @@
 </table>
 
 <p>
-	<%= t '.ok_for_you' %> <%= link_to t('.approve_request'), host_url(id:@host.id, locale: :he) %>
+	<%= t '.ok_for_you', locale: @locale %> <%= link_to t('.approve_request', locale: @locale), host_url(id:@host.id, locale: @locale) %>
 </p>
 
 <p>
-	<%= t '.paragraph_2' %> <%= link_to t('.your_profile'), host_url(id:@host.id, locale: :he) %>
+	<%= t '.paragraph_2', locale: @locale %> <%= link_to t('.your_profile', locale: @locale), host_url(id:@host.id, locale: @locale) %>
 </p>
 
 <p>
-	<%= t '.paragraph_3' %>
+	<%= t '.paragraph_3', locale: @locale %>
 </p>
