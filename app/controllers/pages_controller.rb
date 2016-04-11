@@ -1,5 +1,7 @@
 class PagesController < ApplicationController
   include PagesHelper
+  respond_to :html, :json
+
   def home
   	@hosts = Host.includes(:city, :user).where(host_conditions_hash)
   	@hosts = @hosts.select { |h| 
@@ -15,6 +17,7 @@ class PagesController < ApplicationController
   	@total_items = @hosts.total_count
 
   	respond_to do |format|
+      format.html
 		  format.json { render json: { 
 			  	hosts: @hosts.to_json(
 			  		:include => [{ :user => { :methods => [:first_name] } }, :city, :country], 
@@ -25,7 +28,6 @@ class PagesController < ApplicationController
 			  	page: params[:page] || 1
 			  } 
 		  }
-		  format.html
 	  end
   end
 
