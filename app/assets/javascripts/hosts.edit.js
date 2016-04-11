@@ -132,7 +132,12 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 	  		var modalInstance = $uibModal.open({
 		      templateUrl: 'host-signup-finished.html',
 		      controller: 'HostSignupFinishedModal',
-		      backdrop: false
+		      backdrop: false,
+		      resolve: {
+		      	host: function() {
+		      		return $scope.host;
+		      	}
+		      }
 		    });
 
 	  		modalInstance.result.then(function () {
@@ -196,8 +201,8 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 }]);
 
 
-app.controller('HostSignupFinishedModal', ['$scope', '$uibModalInstance',
-  function ($scope, $uibModalInstance) {
+app.controller('HostSignupFinishedModal', ['$scope', '$uibModalInstance', 'host',
+  function ($scope, $uibModalInstance, host) {
 
   $scope.cancel = function () {
     $uibModalInstance.dismiss('cancel');
@@ -206,7 +211,7 @@ app.controller('HostSignupFinishedModal', ['$scope', '$uibModalInstance',
   $scope.fbShare = function () {
   	FB.ui({
 		  method: 'share',
-		  href: 'http://www.zikaronbasalon.com/'
+		  href: 'http://zikaronbasalon.herokuapp.com/' + document.getElementById('locale').className + '?invite=' + host.id
 		}, function(response){
 
 		});
