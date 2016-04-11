@@ -173,7 +173,8 @@ function formatAddressDisplay(address) {
     return '';
   }
 
-  return address.replace(/\d/g,'').replace('דירה', '');
+  return address.replace(/\d/g,'').replace('דירה', '')
+                .replace('/','').replace('\\','');
 }
 
 function formatCityDisplay(host) {
