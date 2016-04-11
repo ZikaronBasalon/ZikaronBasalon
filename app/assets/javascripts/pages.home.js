@@ -25,6 +25,14 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
       var host = _.find($scope.hosts, { id: parseInt(hostId) });
       if (host) {
         $scope.requestInvite(host);
+      } else {
+        $http.get('/hosts/'+hostId+'.json').then(function(response) {
+          if(response.data.host) {
+            $scope.requestInvite(JSON.parse(response.data.host));
+          } else {
+            window.location = '/';
+          }
+        });
       }
     }
 

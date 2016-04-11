@@ -12,6 +12,22 @@ class HostsController < ApplicationController
 
   def show
     @host = Host.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.json { 
+        if @host.strangers && @host.available_places > 0 
+          render :json => { 
+           host: @host.to_json(:include => [
+                { :user => { :methods => [:first_name] } }, 
+                :city, 
+                :country
+              ], :methods => [:available_places]) } 
+        
+        else
+          render :json => { success: false }
+        end
+      }
+    end
   end
 
   def destroy
