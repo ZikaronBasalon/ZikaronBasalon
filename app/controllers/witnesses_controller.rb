@@ -1,5 +1,5 @@
 class WitnessesController < ApplicationController
-  before_filter :is_authorized, only: [:index, :unassign]
+  before_filter :is_authorized, only: [:index, :unassign, :assign]
   before_filter :is_admin, only: [:destroy]
   # GET /witnesses
   # GET /witnesses.json
@@ -89,10 +89,10 @@ class WitnessesController < ApplicationController
 
   # GET /witnesses/1/assign
   def assign
+    @manager = current_user.meta
     @witness = Witness.find(params[:id])
-    @city_id = params[:city_id] || @witness.city.id
-    @hosts = Host.where(city_id: @city_id, survivor_needed: true).select { |h| h.witness.nil? }
-    @cities = City.all.map{ |c| { id: c.id, name: c.name }}.sort_alphabetical_by{|c| c[:name] }
+    @hosts = Host.where(city_id: get_city_ids_for_assignment, survivor_needed: true).select { |h| h.witness.nil? }
+    @cities = @manager.get_cities
 
     respond_to do |format|
       format.html
@@ -119,5 +119,17 @@ class WitnessesController < ApplicationController
 
   def is_admin
     redirect_to root_path unless current_user.admin?
+  end
+
+  def get_city_ids_for_assignment
+    if params[:city_id]
+      [params[:city_id]]
+    else
+      if @manager.user.any_admin?
+        City.all.map(&:id)
+      else 
+        @manager.cities.map(&:id)
+      end
+    end
   end
 end
