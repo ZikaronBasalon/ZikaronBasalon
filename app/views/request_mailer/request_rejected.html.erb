@@ -1,3 +1,3 @@
 <p>היי <%= @guest.user.first_name %>,</p>
 
-<p><%= t '.paragraph_1', name: @host.user.first_name %></p>
+<p><%= t('.paragraph_1', name: @host.user.first_name, locale: @locale) %></p>

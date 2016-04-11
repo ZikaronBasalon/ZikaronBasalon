@@ -260,7 +260,23 @@ en:
     request_approved:
       title: "Your request has been approved. See you in the Salon!"
       see_you_in: "See you in the %{name}'s Salon"
+      paragraph_1: ""
+      want_to_contact: "Want to contact %{name}?"
+      paragraph_2: "Please cancel your request if you do not intend to arrive"
 
+    request_rejected:
+      title: "Update on your request to join a salon"
+      paragraph_1: "Unfortunately, there's no room left in %{name}'s event. But don't worry, you can still join another salon!"
+
+    new_guest:
+      title: "Welcome to Zikaron BaSalon!"
+      paragraph_1: "Thanks for choosing to join %{name}'s event! Congrats on joining Zikaron BaSalon's community of people that choose to commemorate the Holocaust in a different and intimate way, among family, friends, and guests."
+      paragraph_2: "The details of the upcoming event at %{name}'s salon will be updated shortly in"
+      link_text: "your personal profile"
+      paragraph_2_after_link: ""
+      paragraph_3: "In the meantime, you can read about Zikaron BaSalon's event on our "
+      paragraph_3_link_text: "website"
+      link_url: "http://www.zikaronbasalon.org/#!build-your-event/c1hap"
   host_mailer:
     new_host:
       subject: "Welcome to the Zikaron Basalon Community!"
