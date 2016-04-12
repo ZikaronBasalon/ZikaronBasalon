@@ -38,7 +38,7 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 	}
 
 	$scope.updateInvite = function(invite, confirmedStatus) {
-		var res = confirmedStatus ? true : confirm("בטוח בטוח?");
+		var res = confirmedStatus ? true : confirm("האם אתה בטוח שאתה רוצה לבטל את בקשת ההתארחות?");
 		if (res) {
 			$http.put('/invites/' + invite.id + '.json', {
 				invite: {

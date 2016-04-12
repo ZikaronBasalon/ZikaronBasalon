@@ -1,5 +1,5 @@
 class HostsController < ApplicationController
-  before_filter :correct_host, only: [:edit, :show]
+  before_filter :correct_host, only: [:edit]
   respond_to :html, :json
 
   def index
@@ -13,7 +13,7 @@ class HostsController < ApplicationController
   def show
     @host = Host.find(params[:id])
     respond_to do |format|
-      format.html
+      format.html { correct_host }
       format.json { 
         if @host.strangers && @host.available_places > 0 
           render :json => { 
