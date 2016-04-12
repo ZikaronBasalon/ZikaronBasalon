@@ -35,6 +35,8 @@ app.controller('RequestInviteController', ['$scope', '$http', '$uibModalInstance
 	$scope.close = function (url) {
 		if (url) {
 			window.location = url;
+		} else {
+			$uibModalInstance.dismiss('cancel');
 		}
   };
 
