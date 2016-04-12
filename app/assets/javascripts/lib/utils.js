@@ -1,8 +1,8 @@
 function formatDate(date) {
 	var date = new Date(date);
-  var day = date.getDate();
-  var month= date.getMonth() + 1;
-  var year = date.getFullYear();
+  var day = date.getUTCDate();
+  var month= date.getUTCMonth() + 1;
+  var year = date.getUTCFullYear();
 
   return day + '.' + month + '.' + year;
 }
