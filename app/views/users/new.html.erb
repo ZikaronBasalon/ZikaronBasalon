@@ -64,8 +64,8 @@
 
     <div class="form-group" ng-if="form.type === 'guest'">
       <label for="phone"><%= t 'shared.phone' %></label>
-      <input type="password" class="form-control"
-             id="password" placeholder="<%= t 'shared.phone' %>"
+      <input type="text" class="form-control"
+             id="phone" placeholder="<%= t 'shared.phone' %>"
              ng-model="form.phone"
              is-phone
              required>
