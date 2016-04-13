@@ -35,6 +35,8 @@ he:
       submit: "המשך"
       already_a_member: "נרשמת כבר?"
       sign_in_to_system: "התחבר למערכת"
+      guest_title: "הרשמה לאורח/ת זיכרון בסלון"
+      guest_description: "לאחר ההרשמה תוכל להגיש בקשת התארחות בסלון"
 
   devise:
     sessions:
@@ -135,7 +137,8 @@ he:
     share_on_fb: "שתף ערב בפייסבוק"
     og_title: "בואו לעשות זיכרון בסלון שלי"
     og_description: "מוזמנים להרשם לעשות זיכרון בסלון שלי באתר ההרשמה של זיכרון בסלון"
-
+    be_a_host: "הרשמה כמארח"
+    be_a_guest: "הרשמה כאורח"
 
   views:
     pagination:

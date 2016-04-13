@@ -1,11 +1,16 @@
 //= require directives/compareTo
 // require directives/hasSpace
+//= require directives/isPhone
 
 app.controller('UserSignupController', ['$scope', '$http', function($scope, $http) {
 	$scope.form = {};
 	$scope.errors = null;
 
 	$scope.init = function(type) {
+		$scope.form.type = type;
+	}
+
+	$scope.toggleRegisterAs = function(type) {
 		$scope.form.type = type;
 	}
 
@@ -19,7 +24,8 @@ app.controller('UserSignupController', ['$scope', '$http', function($scope, $htt
 					password_confirmation: $scope.form.passwordConfirmation,
 					full_name: $scope.form.fullName,
 					type: $scope.form.type
-				}
+				},
+				phone: $scope.form.phone
 			}).then(function(response) {
 				if(response.data && response.data.success) {
 					window.location = '/' + document.getElementById('locale').className + response.data.redirect_url
