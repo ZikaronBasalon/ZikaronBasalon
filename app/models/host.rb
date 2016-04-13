@@ -47,5 +47,9 @@ class Host < ActiveRecord::Base
   def has_witness
     !witness.nil?
   end
+
+  def manager
+    city.try(:managers).try(:first)
+  end
 end
 
