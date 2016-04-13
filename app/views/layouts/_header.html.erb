@@ -18,7 +18,7 @@
 				<div class="header-btn white"><%= t('.want_to_host') %></div>
 			<% end %>
 
-			<%= link_to root_path do %>
+			<%= link_to signup_path(type: 'guest') do %>
 				<div class="header-btn orange"><%= t('.want_to_guest') %></div>
 			<% end %>
 		<% end %>
