@@ -128,6 +128,7 @@ en:
     be_a_host: "Register as host"
     be_a_guest: "Register as guest"
     mail_disconnected_note: "*In order for you to see any personal information, make sure you are logged in to the website. In case you don't see a 'Profile' link in the top left corner, you will need to sign in by clicking on 'Sign in' in the top right corner."
+    event_language: "Language"
 
   views:
     pagination:

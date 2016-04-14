@@ -11,22 +11,22 @@ class Manager < ActiveRecord::Base
 
 	validates_uniqueness_of :temp_email
 
-  def get_hosts(page, filter, query, sort, has_manager, has_survivor, is_org)
+  def get_hosts(page, filter, query, sort, has_manager, has_survivor, is_org, language)
    sort = 'created_at' if sort.blank?
    hosts = Host.includes(:city, :user).order(sort + " desc").where(filter)
    hosts = hosts.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
    hosts = hosts.where(concept: concept).select{ |h| h.has_witness } if concept
-   hosts = hosts.select{ |h| host_in_filter(h, query, has_manager, has_survivor, is_org) }
+   hosts = hosts.select{ |h| host_in_filter(h, query, has_manager, has_survivor, is_org, language) }
    hosts = paginate(hosts, page)
    hosts
   end
 
-  def get_witnesses(page, filter, query, sort, has_manager, has_host)
+  def get_witnesses(page, filter, query, sort, has_manager, has_host, language)
    sort = 'created_at' if sort.blank?
    witnesses = Witness.includes(:city, :host).order(sort + " desc").where(filter)
    witnesses = witnesses.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
    witnesses = witnesses.where(concept: concept) if concept
-   witnesses = witnesses.select{ |w| witness_in_filter(w, query, has_manager, has_host) }
+   witnesses = witnesses.select{ |w| witness_in_filter(w, query, has_manager, has_host, language) }
    witnesses = paginate(witnesses, page)
    witnesses
   end
@@ -55,8 +55,9 @@ class Manager < ActiveRecord::Base
     arr_name
   end
 
-  def host_in_filter(host, query, has_manager, has_survivor, is_org)
+  def host_in_filter(host, query, has_manager, has_survivor, is_org, language)
     in_filter = true
+    in_filter = in_filter && host.in_language_filter(language)
     in_filter = in_filter && host_in_query(host, query) if query.present?
     in_filter = in_filter && obj_has_manager(host, has_manager) if has_manager.present?
     in_filter = in_filter && host_has_witness(host, has_survivor) if has_survivor.present?
@@ -64,8 +65,9 @@ class Manager < ActiveRecord::Base
     in_filter
   end
 
-  def witness_in_filter(w, query, has_manager, has_host)
+  def witness_in_filter(w, query, has_manager, has_host, language)
     in_filter = true
+    in_filter = in_filter && w.in_language_filter(language)
     in_filter = in_filter && witness_in_query(w,query) if query.present?
     in_filter = in_filter && obj_has_manager(w, has_manager) if has_manager.present?
     in_filter = in_filter && witness_has_host(w, has_host) if has_host.present?

@@ -20,14 +20,16 @@ class ManagersController < ApplicationController
                                 params[:host_sort], 
                                 has_manager,
                                 has_survivor,
-                                is_org)
+                                is_org,
+                                language)
     @cities = @manager.get_cities
     @witnesses = @manager.get_witnesses(@page, 
                                         witness_filter, 
                                         params[:witness_query], 
                                         params[:witness_sort], 
                                         has_manager,
-                                        has_host)
+                                        has_host,
+                                        language)
 
     @total_hosts = @hosts.total_count
     @total_witnesses = @witnesses.total_count
@@ -121,5 +123,9 @@ class ManagersController < ApplicationController
 
     def is_org
       params[:is_org]
+    end
+
+    def language
+      params[:event_language]
     end
 end

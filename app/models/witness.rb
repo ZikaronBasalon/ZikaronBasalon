@@ -26,4 +26,14 @@ class Witness < ActiveRecord::Base
   def has_host
     !host.nil? || external_assignment
   end
+
+  def in_language_filter(lang)
+    return true if lang.blank?
+
+    if lang != 'other'
+      return language == lang
+    else
+      return !['english', 'hebrew', 'arabic', 'frech', 'russian'].include?(language)
+    end
+  end
 end
