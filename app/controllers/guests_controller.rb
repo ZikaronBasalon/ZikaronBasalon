@@ -14,7 +14,7 @@ class GuestsController < ApplicationController
       format.html
       format.json { 
         render :json => {
-          guests:  @guests.to_json(:include => [:user]),
+          guests:  @guests.to_json(:include => [:user, :invites]),
           total_guests: @total_guests,
           page: @page
         }

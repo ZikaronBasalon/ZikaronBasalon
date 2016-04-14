@@ -19,6 +19,7 @@ function formatTime(date) {
 }
 
 function formatDateTime(date) {
+  if(!date) { return null }
 	var date = new Date(date);
   var day = date.getDate();
   var month= date.getMonth() + 1;

@@ -1,9 +1,13 @@
+//= require lib/utils
+
 app.controller('GuestIndexController', ['$scope','$http', function($scope, $http) {
   $scope.guests = [];
   $scope.success = false;
   $scope.pagination = {
     currentPage: 1
   }
+
+  $scope.formatDateTime = formatDateTime;
 
   $scope.init = function(guests, totalGuests, page) {
     $scope.guests = guests;
@@ -40,5 +44,14 @@ app.controller('GuestIndexController', ['$scope','$http', function($scope, $http
       $scope.pagination.currentPage = response.data.page;
       $scope.totalGuests = response.data.total_guests;
     });
+  }
+
+  $scope.hostId = function(guest) {
+    return (guest.invites[0] || {}).host_id
+  }
+
+  $scope.plusOnes = function(guest) {
+    var pOnes = (guest.invites[0] || {}).plus_ones;
+    return pOnes > 0 ? pOnes : null;
   }
 }]);
