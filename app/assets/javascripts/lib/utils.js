@@ -160,7 +160,7 @@ function formatConcept(concept) {
       case 'vetrans':
         return 'וטרנים'
       case 'eastern':
-        return 'בשיח המזרחי';
+        return 'יוצאי צ. אפריקה';
       default:
           return '';
     }
