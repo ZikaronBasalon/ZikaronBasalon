@@ -176,7 +176,7 @@ ol li {
 </style>
 </head>
 
-<body bgcolor="#f6f6f6" dir="rtl">
+<body bgcolor="#f6f6f6" dir="<%= @locale === :en ? 'ltr' : 'rtl' %>">
 
 <!-- body -->
 <table class="body-wrap" bgcolor="#f6f6f6">
@@ -195,6 +195,8 @@ ol li {
         <tr>
           <td>
             <%= yield %>
+
+            <p><b><%= t 'shared.mail_disconnected_note', locale: (@locale || :he) %></b></p>
           </td>
         </tr>
       </table>
