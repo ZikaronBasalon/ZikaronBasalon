@@ -152,7 +152,8 @@
           </tr> 
         </thead>
         <tbody>
-          <tr ng-repeat="host in hosts" ng-click="editHost(host)">
+          <tr ng-repeat="host in hosts" ng-click="editHost(host)"
+              ng-class="{true: 'hasnt-contacted'}[contactWitnessDue(host)]">
             <td>{{ host.user.id }}</td>
             <td>{{ host.user.full_name }}</td>
             <td>{{ formatDateTime(host.created_at) }}</td>
@@ -162,7 +163,7 @@
             <td>{{ host.org_name }}</td>
             <td>{{ formatBool(host.contacted) }}</td>
             <td>{{ formatBool(host.survivor_needed) }}</td>
-            <td><span ng-class="{true: 'text-danger'}[contactWitnessDue(host)]">{{ formatBool(host.has_witness) }}</span></td>
+            <td>{{ formatBool(host.has_witness) }}</td>
             <td>{{ formatBool(host.strangers) }}</td>
             <% if current_user.admin? %>
               <td>
