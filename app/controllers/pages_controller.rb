@@ -7,7 +7,7 @@ class PagesController < ApplicationController
   	@hosts = @hosts.select { |h| 
       h.available_places > 0 &&
       host_in_query(h, query) &&
-      host_in_language_filter(h, params[:event_language])
+      h.in_language_filter(params[:event_language])
   	} 
 
     @cities = City.all.select{ |c| c.hosts.count > 0 }.sort_alphabetical_by{ |c| c[:name] }

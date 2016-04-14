@@ -55,6 +55,16 @@ class Host < ActiveRecord::Base
     city.try(:managers).try(:first)
   end
 
+  def in_language_filter(language)
+    return true if language.blank?
+
+    if language != 'other'
+      return event_language == language
+    else
+      return !['english', 'hebrew', 'arabic', 'frech', 'russian'].include?(event_language)
+    end
+  end
+
   def cancel_invites_and_assigned_witnesses
     invites.each do |invite|
       RequestMailer.request_rejected(invite.id, :he).deliver if !invite.rejected
