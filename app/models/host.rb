@@ -37,9 +37,10 @@ class Host < ActiveRecord::Base
   end
 
   def available_places
-    invites.inject(max_guests) { |sum, invite| 
+    a_places = invites.inject(max_guests) { |sum, invite| 
       invite.confirmed.nil? ? sum : sum - (invite.plus_ones.to_i + 1)
     }
+    return a_places || 0 
   end
 
   def assign_manager_by_country
