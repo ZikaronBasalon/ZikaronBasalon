@@ -95,10 +95,11 @@ class WitnessesController < ApplicationController
     @manager = current_user.meta
     @witness = Witness.find(params[:id])
     if @manager.concept
-      @hosts = Host.where(concept: @manager.concept, survivor_needed: true).select { |h| h.witness.nil? }
+      @hosts = Host.where(concept: @manager.concept, survivor_needed: true)
     else
-      @hosts = Host.where(city_id: get_city_ids_for_assignment, survivor_needed: true).select { |h| h.witness.nil? }
+      @hosts = Host.where(city_id: get_city_ids_for_assignment, survivor_needed: true)
     end
+    @hosts = @hosts.select { |h| h.witness.nil? && h.in_query(query) }
     @cities = @manager.get_cities
 
     respond_to do |format|
@@ -140,5 +141,9 @@ class WitnessesController < ApplicationController
         @manager.cities.map(&:id)
       end
     end
+  end
+
+  def query
+    return params[:query]
   end
 end

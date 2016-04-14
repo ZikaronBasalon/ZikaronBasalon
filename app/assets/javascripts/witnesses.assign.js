@@ -11,7 +11,13 @@ app.controller('WitnessAssignController', ['$scope', '$http', '$uibModal',
     $scope.cities = cities;
     $scope.filter.city_id = cityId;
 
-    $scope.$watch("filter", $scope.filterHosts, true);
+    $scope.$watch("filter.city_id", $scope.filterHosts, true);
+
+    $scope.$watch('filter.query', _.throttle(function(oldVal, newVal) {
+      if(newVal != oldVal) {
+        $scope.filterHosts(oldVal, newVal);
+      }
+    }, 2000), true);
   }
 
   $scope.filterHosts = function(oldVal, newVal) {
@@ -20,6 +26,10 @@ app.controller('WitnessAssignController', ['$scope', '$http', '$uibModal',
   	if($scope.filter.city_id) {
   		params.city_id = $scope.filter.city_id;
   	}
+
+    if($scope.filter.query) {
+      params.query = $scope.filter.query;
+    }
 
   	if(oldVal != newVal) {
   		$http.get('/witnesses/' + $scope.witness.id + '/assign.json'+ '?' + $.param(params))
