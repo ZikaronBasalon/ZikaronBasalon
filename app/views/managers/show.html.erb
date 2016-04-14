@@ -118,17 +118,16 @@
               <%= t 'shared.org_name' %>
               <span class="caret" ng-if="sortProp === 'org_name'"></span>
             </th>
-            <th ng-click="setSortProp('host_contacted')">
+            <th ng-click="setSortProp('contacted')">
               <%= t 'shared.host_contacted' %>
-              <span class="caret" ng-if="sortProp === 'host_contacted'"></span>
+              <span class="caret" ng-if="sortProp === 'contacted'"></span>
             </th>
             <th ng-click="setSortProp('survivor_needed')">
               <%= t 'shared.survivor_needed' %>
               <span class="caret" ng-if="sortProp === 'survivor_needed'"></span>
             </th>
-            <th ng-click="setSortProp('has_survivor')">
+            <th>
               <%= t 'shared.has_survivor' %>
-              <span class="caret" ng-if="sortProp === 'has_survivor'"></span>
             </th>
             <th ng-click="setSortProp('strangers')">
               <%= t 'shared.strangers_allowed' %>

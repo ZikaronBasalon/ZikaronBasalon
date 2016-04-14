@@ -94,7 +94,11 @@ class WitnessesController < ApplicationController
   def assign
     @manager = current_user.meta
     @witness = Witness.find(params[:id])
-    @hosts = Host.where(city_id: get_city_ids_for_assignment, survivor_needed: true).select { |h| h.witness.nil? }
+    if @manager.concept
+      @hosts = Host.where(concept: @manager.concept, survivor_needed: true).select { |h| h.witness.nil? }
+    else
+      @hosts = Host.where(city_id: get_city_ids_for_assignment, survivor_needed: true).select { |h| h.witness.nil? }
+    end
     @cities = @manager.get_cities
 
     respond_to do |format|
