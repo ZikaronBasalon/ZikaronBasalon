@@ -6,7 +6,7 @@ class Manager < ActiveRecord::Base
   has_one :user, as: :meta, dependent: :destroy
   accepts_nested_attributes_for :user
 
- 	attr_accessible :temp_email, :user_attributes
+ 	attr_accessible :temp_email, :user_attributes, :concept
  	attr_accessor :city_name
 
 	validates_uniqueness_of :temp_email
@@ -14,7 +14,8 @@ class Manager < ActiveRecord::Base
   def get_hosts(page, filter, query, sort, has_manager, has_survivor, is_org)
    sort = 'created_at' if sort.blank?
    hosts = Host.includes(:city, :user).order(sort + " desc").where(filter)
-   hosts = hosts.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin?
+   hosts = hosts.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
+   hosts = hosts.where(concept: concept).select{ |h| h.has_witness } if concept
    hosts = hosts.select{ |h| host_in_filter(h, query, has_manager, has_survivor, is_org) }
    hosts = paginate(hosts, page)
    hosts
@@ -23,7 +24,8 @@ class Manager < ActiveRecord::Base
   def get_witnesses(page, filter, query, sort, has_manager, has_host)
    sort = 'created_at' if sort.blank?
    witnesses = Witness.includes(:city, :host).order(sort + " desc").where(filter)
-   witnesses = witnesses.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin?
+   witnesses = witnesses.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
+   witnesses = witnesses.where(concept: concept) if concept
    witnesses = witnesses.select{ |w| witness_in_filter(w, query, has_manager, has_host) }
    witnesses = paginate(witnesses, page)
    witnesses
