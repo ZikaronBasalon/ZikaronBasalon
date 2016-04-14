@@ -1,5 +1,5 @@
 <div class="col-xs-12" id="guest-index" ng-controller="GuestIndexController"
-     ng-init="init(<%= @guests.to_json(:include => :user) %>, <%= @total_guests.to_json %>, <%= @page.to_json %>)">
+     ng-init="init(<%= @guests.to_json(:include => [:user, :invites]) %>, <%= @total_guests.to_json %>, <%= @page.to_json %>)">
 
  <div class="col-xs-12" ng-if="success">
     <div class="alert alert-success" role="alert">
@@ -14,6 +14,9 @@
         <th>שם</th>
         <th>מייל</th>
         <th>טלפון</th>
+        <th>מארח</th>
+        <td>תאריך בקשה</td>
+        <td>אורחים נוספים</td>
         <th>מחק</th>
       </tr> 
     </thead>
@@ -23,6 +26,9 @@
         <td>{{ guest.user.full_name }}</td>
         <td>{{ guest.user.email }}</td>
         <td>{{ guest.phone }}</td>
+        <td><a ng-href="/hosts/{{hostId(guest)}}">{{ hostId(guest) }}</a></td>
+        <td>{{ formatDateTime((guest.invites[0] || {}).created_at) }}</td>
+        <td>{{ plusOnes(guest) }}</td>
         <td>
           <button ng-click="deleteGuest(guest)" 
                   class="btn btn-warning">
