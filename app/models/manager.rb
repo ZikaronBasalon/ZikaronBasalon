@@ -58,7 +58,7 @@ class Manager < ActiveRecord::Base
   def host_in_filter(host, query, has_manager, has_survivor, is_org, language)
     in_filter = true
     in_filter = in_filter && host.in_language_filter(language)
-    in_filter = in_filter && host_in_query(host, query) if query.present?
+    in_filter = in_filter && host.in_query(query)
     in_filter = in_filter && obj_has_manager(host, has_manager) if has_manager.present?
     in_filter = in_filter && host_has_witness(host, has_survivor) if has_survivor.present?
     in_filter = in_filter && !host.org_name.nil? if is_org === 'true'
@@ -72,13 +72,6 @@ class Manager < ActiveRecord::Base
     in_filter = in_filter && obj_has_manager(w, has_manager) if has_manager.present?
     in_filter = in_filter && witness_has_host(w, has_host) if has_host.present?
     in_filter
-  end
-
-  def host_in_query(h, q)
-    (h.user && (h.user.full_name.include?(q) || h.user.email.include?(q))) ||
-    (h.org_name && h.org_name.include?(q)) ||
-    (h.city && h.city.name.include?(q)) ||
-    (h.city && h.city.managers.count > 0 && h.city.managers.first.temp_email.include?(q))
   end
 
   def witness_in_query(w, q)

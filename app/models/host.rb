@@ -65,6 +65,14 @@ class Host < ActiveRecord::Base
     end
   end
 
+  def in_query(q)
+    return true if !q.present?
+    (user && (user.full_name.include?(q) || user.email.include?(q))) ||
+    (org_name && org_name.include?(q)) ||
+    (city && city.name.include?(q)) ||
+    (city && city.managers.count > 0 && city.managers.first.temp_email.include?(q))
+  end
+
   def cancel_invites_and_assigned_witnesses
     invites.each do |invite|
       RequestMailer.request_rejected(invite.id, :he).deliver if !invite.rejected
