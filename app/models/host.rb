@@ -16,6 +16,8 @@ class Host < ActiveRecord::Base
   has_many :invites
 
   after_update :assign_manager_by_country
+  before_destroy :cancel_invites_and_assigned_witnesses
+
 
   def event_date 
     read_attribute(:event_date) || Date.parse("4-5-2016")
@@ -50,6 +52,18 @@ class Host < ActiveRecord::Base
 
   def manager
     city.try(:managers).try(:first)
+  end
+
+  def cancel_invites_and_assigned_witnesses
+    invites.each do |invite|
+      RequestMailer.request_rejected(invite.id, :he).deliver if !invite.rejected
+      invite.destroy
+    end
+
+    if witness
+      witness.update_attributes(host_id: nil)
+      ManagerMailer.assignment_cancelled(id, witness.id).deliver
+    end
   end
 end
 
