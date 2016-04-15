@@ -67,10 +67,10 @@ class Host < ActiveRecord::Base
 
   def in_query(q)
     return true if !q.present?
-    (user && (user.full_name.include?(q) || user.email.include?(q))) ||
+    (user && (user.full_name.include?(q) || user.email.downcase.include?(q.downcase))) ||
     (org_name && org_name.include?(q)) ||
     (city && city.name.include?(q)) ||
-    (city && city.managers.count > 0 && city.managers.first.temp_email.include?(q))
+    (city && city.managers.count > 0 && city.managers.first.temp_email.downcase.include?(q.downcase))
   end
 
   def cancel_invites_and_assigned_witnesses
