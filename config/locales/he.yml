@@ -41,7 +41,7 @@ he:
   devise:
     sessions:
       new:
-        title: "התחברות לזיכרון בסלון"
+        title: "התחברות לפרופיל שלך"
         labels:
           email: "כתובת מייל"
           password: "סיסמא"
