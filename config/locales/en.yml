@@ -165,7 +165,12 @@ en:
       temp_subtitle: "At this moment, you can only register as a host. In the next few weeks we will open the guest registration!"
       already_a_member: "Already have a profile?"
       sign_in_to_system: " Click here to sign in!"
-
+    welcome:
+      title: "Welcome to Zikaron Basalon!"
+      subtitle: "In case you have already registered to host or participate, you can %{signin_link} to your personal profile, see updates and update your info. If you haven't registered yet, you're welcome to register as a %{host_link} or as a %{guest_link}."
+      link_1_text: "Sign In"
+      link_2_text: "Host"
+      link_3_text: "Guest"
   sessions:
     new:
       title: "Insert personal information to enter your personal profile zone"
