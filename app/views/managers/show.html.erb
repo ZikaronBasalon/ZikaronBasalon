@@ -141,6 +141,9 @@
             <th>
               <%= t 'shared.has_survivor' %>
             </th>
+            <th>
+              <%= t 'shared.assignment_time' %>
+            </th>
             <th ng-click="setSortProp('strangers')">
               <%= t 'shared.strangers_allowed' %>
               <span class="caret" ng-if="sortProp === 'strangers'"></span>
@@ -164,6 +167,7 @@
             <td>{{ formatBool(host.contacted) }}</td>
             <td>{{ formatBool(host.survivor_needed) }}</td>
             <td>{{ formatBool(host.has_witness) }}</td>
+            <td>{{ formatDateTime(host.assignment_time) }}</td>
             <td>{{ formatBool(host.strangers) }}</td>
             <% if current_user.admin? %>
               <td>
