@@ -31,6 +31,10 @@ class PagesController < ApplicationController
 	  end
   end
 
+  def welcome
+    
+  end
+
 private
 	def host_conditions_hash
 		h = { }
