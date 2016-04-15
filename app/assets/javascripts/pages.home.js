@@ -30,7 +30,7 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
           if(response.data.host) {
             $scope.requestInvite(JSON.parse(response.data.host));
           } else {
-            window.location = '/';
+            window.location = '/pages/home';
           }
         });
       }
@@ -82,10 +82,10 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
     });
 
     modalInstance.result.then(function () {
-      window.history.pushState(null, null, '/');
+      window.history.pushState(null, null, '/pages/home');
       location.reload();
     }, function () {
-      window.history.pushState(null, null, '/');
+      window.history.pushState(null, null, '/pages/home');
       location.reload();
     });
   }
