@@ -142,6 +142,7 @@ he:
     mail_disconnected_note: "*כדי לראות את הפרטים האישיים שלך, יש לשים לב כי התחברת לאתר. במידה ואין את המילה 'פרופיל' מצד ימין למעלה, יש ללחוץ על 'התחבר/י' מצד שמאל למעלה."
     event_language: "שפה"
     assignment_time: "תאריך ציוות לעד"
+    finished_registration: "סיים הרשמה"
   views:
     pagination:
       first: "ראשון"
