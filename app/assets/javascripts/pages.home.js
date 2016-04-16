@@ -55,7 +55,7 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
     $http.get('/pages/home.json', {
       params: {
         page: page,
-        city_id: $scope.search.city_id,
+        'city_ids[]': _.map($scope.search.cities, 'id'),
         country_id: $scope.search.country_id,
         event_language: $scope.search.event_language,
         query: $scope.search.query

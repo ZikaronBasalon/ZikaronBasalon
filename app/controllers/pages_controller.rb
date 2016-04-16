@@ -39,7 +39,7 @@ private
 	def host_conditions_hash
 		h = { }
 		h[:strangers] = true
-		h[:city_id] = params[:city_id] if !params[:city_id].blank?
+		h[:city_id] = params[:city_ids] if !params[:city_ids].blank?
     h[:max_guests] = 1..9999
     h[:received_registration_mail] = true
     h[:country_id] = params[:country_id] if !params[:country_id].blank?
