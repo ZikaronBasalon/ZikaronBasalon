@@ -79,6 +79,14 @@
               <option value=""><%= t 'shared.has_manager' %></option>
             </select>
           </div>  
+
+          <div class="form-group">
+            <select class="form-control" ng-model="search.host.received_registration_mail"
+                     ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.yes' %>', v: true }, { n: '<%= t 'shared.no' %>', v: false }]">
+              <option value=""><%= t 'shared.finished_registration' %></option>
+            </select>
+          </div>  
+
         <% end %>
 
         <div class="form-group">
