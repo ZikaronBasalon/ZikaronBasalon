@@ -37,7 +37,8 @@
                      ng-model="search.cities" 
                      theme="bootstrap" 
                      class="form-control" 
-                     on-select="filter()">
+                     on-select="filter()"
+                     on-remove="filter()">
             <ui-select-match placeholder="<%= t 'shared.city' %>">{{$item.name}}</ui-select-match>
             <ui-select-choices repeat="city in (cities | filter: $select.search) track by city.id">
               <div ng-bind-html="city.name | highlight: $select.search"></div>
