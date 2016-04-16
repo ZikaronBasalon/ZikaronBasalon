@@ -28,11 +28,21 @@
         </div> 
 
         <div class="form-group">
-          <select class="form-control city-select" ng-model="search.city_id"
+          <!-- <select class="form-control city-select" ng-model="search.city_id"
                   ng-options="o.id as o.name for o in cities"
                   ng-change="filter()">
-            <option value=""><%= t 'shared.city' %></option>
-          </select>
+            <option value=""><%#= t 'shared.city' %></option>
+          </select> -->
+          <ui-select multiple   
+                     ng-model="search.cities" 
+                     theme="bootstrap" 
+                     class="form-control" 
+                     on-select="filter()">
+            <ui-select-match placeholder="<%= t 'shared.city' %>">{{$item.name}}</ui-select-match>
+            <ui-select-choices repeat="city in (cities | filter: $select.search) track by city.id">
+              <div ng-bind-html="city.name | highlight: $select.search"></div>
+            </ui-select-choices>
+          </ui-select>
         </div> 
 
         <div class="form-group">

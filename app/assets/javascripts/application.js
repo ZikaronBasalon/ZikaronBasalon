@@ -20,6 +20,7 @@
 // require angular-bootstrap/ui-bootstrap-tpls.min.js
 //= require spin.min.js
 //= require angular-spinner.min
+//= require ui-select
 //= require module
 
 
