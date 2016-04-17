@@ -211,9 +211,8 @@ app.controller('HostSignupFinishedModal', ['$scope', '$uibModalInstance', 'host'
   $scope.fbShare = function () {
   	FB.ui({
 		  method: 'share',
-		  href: 'http://zikaronbasalon.herokuapp.com/pages/home/' + document.getElementById('locale').className + '?invite=' + host.id
+		  href: 'http://zikaronbasalon.herokuapp.com/' + document.getElementById('locale').className + '/pages/home/'  + '?invite=' + host.id
 		}, function(response){
-
 		});
   };
 
