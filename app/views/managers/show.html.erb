@@ -142,6 +142,9 @@
               <%= t 'shared.host_contacted' %>
               <span class="caret" ng-if="sortProp === 'contacted'"></span>
             </th>
+            <th>
+              <%= t 'shared.witness_contacted' %>
+            </th>
             <th ng-click="setSortProp('survivor_needed')">
               <%= t 'shared.survivor_needed' %>
               <span class="caret" ng-if="sortProp === 'survivor_needed'"></span>
@@ -173,6 +176,7 @@
             <td>{{ formatBool(!host.hosted_before) }}</td>
             <td>{{ host.org_name }}</td>
             <td>{{ formatBool(host.contacted) }}</td>
+            <td>{{ formatBool(host.contacted_witness) }}</td>
             <td>{{ formatBool(host.survivor_needed) }}</td>
             <td>{{ formatBool(host.has_witness) }}</td>
             <td>{{ formatDateTime(host.assignment_time) }}</td>
