@@ -12,8 +12,8 @@ function formatTime(date) {
     return "";
   }
   var date = new Date(date);
-  var hour = date.getHours();
-  var minutes = ('0'+ date.getMinutes()).slice(-2)
+  var hour = date.getUTCHours();
+  var minutes = ('0'+ date.getUTCMinutes()).slice(-2)
 
   return hour + ':' + minutes;
 }
@@ -21,11 +21,11 @@ function formatTime(date) {
 function formatDateTime(date) {
   if(!date) { return null }
 	var date = new Date(date);
-  var day = date.getDate();
-  var month= date.getMonth() + 1;
-  var year = date.getFullYear();
-  var hour = date.getHours();
-  var minutes = ('0'+ date.getMinutes()).slice(-2)
+  var day = date.getUTCDate();
+  var month= date.getUTCMonth() + 1;
+  var year = date.getUTCFullYear();
+  var hour = date.getUTCHours();
+  var minutes = ('0'+ date.getUTCMinutes()).slice(-2)
 
   return day + '.' + month + '.' + year + ',' + hour + ':' + minutes;
 }
