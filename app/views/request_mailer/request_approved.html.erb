@@ -23,6 +23,7 @@
 
 	<div>
 		<%= t 'shared.time', locale: @locale %>:  <%= Time.parse(@host.event_time).utc.strftime("%H:%M") %>
+		<div>זוהי שעה משוערת. נא לוודא שעה עם מארח</div>
 	</div>
 
 	<div>
