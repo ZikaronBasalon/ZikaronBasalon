@@ -16,10 +16,27 @@ class HostMailer < BaseMailer
   	mail :to => @user.email, :subject => t('host_mailer.new_host.subject', locale: @locale)
   end
 
-  def witness_assigned(host_id, locale)
+  def witness_assigned(host_id, witness_id, locale)
     @host = Host.find(host_id)
+    @witness = Witness.find(witness_id)
     @locale = locale
+    @witness_type_text = witness_type_text(@witness)
     mail :to => @host.user.email, :subject => t('host_mailer.witness_assigned.subject', locale: @locale)
+  end
+
+  def witness_type_text(witness)
+    case witness.witness_type
+      when 'survivor'
+        return "לידיעתך, מדובר בניצול/ת שואה שיספר/תספר את סיפורו בסלון שלך."
+      when 'academia'
+        return "לידיעתך, מדובר באיש/אשת אקדמיה ורוח, שיגיע/תגיע לספר על נושא השואה מנקודת מבט ייחודית בסלון שלך."
+      when 'second_generation'
+        return "לידיעתך, מדובר בבן/בת הדור השני, שיגיע/תגיע לספר את סיפור משפחתו/ה בסלון שלך. "
+      when 'therapist'
+        return "לידיעתך, מדובר באיש/אשת מקצוע העובד/ת עם ניצולי שואה, שיספר/תספר על נושא השואה מנקודת מבט ייחודית בסלון שלך."
+      else
+        return '' 
+    end
   end
 
   # def shana_tova(host_id)
