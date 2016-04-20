@@ -21,9 +21,10 @@
 		<%= t 'shared.date', locale: @locale %>:  <%= @host.event_date %>
 	</div>
 
-	<div>
-		<%= t 'shared.time', locale: @locale %>:  <%= @host.event_time %>
-	</div>
+	<!-- <div>
+		<%#= t 'shared.time', locale: @locale %>  <%#= Time.parse(@host.event_time).utc.strftime("%H:%M") %>
+		<div>זוהי שעה משוערת. נא לוודא שעה עם מארח</div>
+	</div> -->
 
 	<div>
 		<%= t 'shared.address', locale: @locale %>: <%= @host.address %> <%= @host.city.name %>

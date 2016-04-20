@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me,
                   :full_name, :type, :phone
   attr_accessor :type
+
+  before_destroy :save_as_deleted_user
   
   def first_name
     if full_name
@@ -37,5 +39,9 @@ class User < ActiveRecord::Base
 
   def any_admin?
     self.admin || self.sub_admin
+  end
+
+  def save_as_deleted_user
+    DeletedUser.create(name: full_name, email: email, type: meta_type)
   end
 end

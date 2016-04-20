@@ -68,6 +68,7 @@ class WitnessesController < ApplicationController
         if(params[:witness][:host_id].present?)
           HostMailer.witness_assigned(
             params[:witness][:host_id],
+            @witness.id,
             I18n.locale
           ).deliver
 

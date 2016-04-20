@@ -30,7 +30,7 @@
     <h3><%= t '.invite_request' %></h3>
     <p><%= t '.no_requests' %></p>
     <p>
-      <%= link_to root_path do %>
+      <%= link_to host_search_path do %>
         <button class="btn btn-warning">
           <%= t '.find_new_salon' %>
         </button>
@@ -63,10 +63,11 @@
       </div>
 
       <div class="panel-body">
-        <div class="field-group">
-          <div class="info-label"><%= t 'shared.estimated_time' %></div>
+        <!-- <div class="field-group">
+          <div class="info-label"><%#= t 'shared.estimated_time' %></div>
           <div>{{ formatTime(invite.host.event_time) }}</div>
-        </div>
+          <div>זוהי שעה משוערת. נא לוודא שעה עם מארח</div>
+        </div> -->
 
         <div class="field-group">
           <div class="info-label"><%= t 'shared.free_text' %></div>
@@ -83,7 +84,7 @@
         <div class="field-group">
           <div class="info-label">&nbsp;</div>
           <div>
-            <%= link_to root_path do %>
+            <%= link_to host_search_path do %>
               <button class="btn btn-warning" 
                       ng-if="invite.confirmed === null">
                 <%= t '.find_new_salon' %>

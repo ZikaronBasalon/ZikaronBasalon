@@ -25,7 +25,7 @@
 
 		  			<div class="info-group">
 		  				<span class="label"><%= t 'shared.address' %>:</span>
-		  				<span class="value">{{ host.city.name }} {{ host.addresss }}</span>
+		  				<span class="value">{{ host.address }} {{ host.city.name }}</span>
 		  			</div>
 
 		  			<div class="info-group">
@@ -38,11 +38,11 @@
 		  				<span class="value">{{ formatDate(host.event_date) }}</span>
 		  			</div>
 
-		  			<div class="info-group">
-		  				<span class="label"><%= t 'shared.estimated_time' %>:</span>
+	<!-- 	  			<div class="info-group">
+		  				<span class="label"><%#= t 'shared.estimated_time' %>:</span>
 		  				<span class="value">{{ formatTime(host.event_time) }}</span>
 		  			</div>
-
+ -->
 		  			<div class="info-group">
 		  				<span class="label"><%= t 'shared.language' %>:</span>
 		  				<span class="value">{{ formatLanguage(host.event_language) }}</span>
@@ -65,7 +65,7 @@
 
 		  			<div class="info-group">
 		  				<span class="label"><%= t 'shared.address' %>:</span>
-		  				<span class="value">{{ witness.address }}</span>
+		  				<span class="value">{{ witness.address }} {{ host.city.name }}</span>
 		  			</div>
 
 		  			<div class="info-group">

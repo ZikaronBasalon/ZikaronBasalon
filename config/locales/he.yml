@@ -93,7 +93,8 @@ he:
     registration_time: "זמן הרשמה"
     evening_date: "תאריך האירוע"
     hosted_before: "סלון ראשון"
-    host_contacted: "סטטוס יצירת קשר"
+    host_contacted: "יצירת קשר מוביל-מארח"
+    witness_contacted: "יצירת קשר מארח-עד"
     has_survivor: "ציוות איש עדות"
     strangers_allowed: "סלון פתוח"
     needs: "צריך"
@@ -364,7 +365,7 @@ he:
       subject: "עדכון לגבי ציוות איש עדות לזיכרון בסלון"
       paragraph_1: "רצינו לעדכן אותך כי ציוותנו לך איש/אשת עדות וניתן כעת לראות את הפרטים המלאים"
       link_text: "בפרופיל האישי שלך"
-      paragraph_2_before_link: "חובה לקרוא"
+      paragraph_2_before_link: " חובה לקרוא"
       link_text_2: "כיצד אנו ממליצים"
       paragraph_2: "להתנהל החל מהשיחה הראשונה ביניכם ועד הערב עצמו."
       paragraph_3: "אם נתקלת בבעיות, אנחנו פה." 
@@ -398,7 +399,7 @@ he:
       paragraph_2: "את כל הפרטים לגבי הערב המתוכנן לך אצל %{name} ניתן יהיה לראות"
       link_text: "בפרופיל האישי שלך"
       paragraph_2_after_link: "בימים הקרובים."
-      paragraph_3: "בינתיים, אתה מוזמן לקרוא על ערב של זיכרון בסלון"
+      paragraph_3: "בינתיים, ניתן לקרוא כיצד נראה ערב של זיכרון בסלון באתר שלנו"
       paragraph_3_link_text: "באתר שלנו."
 
   manager_mailer:
