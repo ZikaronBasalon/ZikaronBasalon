@@ -23,6 +23,18 @@ class Host < ActiveRecord::Base
     read_attribute(:event_date) || Date.parse("4-5-2016")
   end
 
+  def converted_time
+    return nil if event_time.nil?
+
+    begin
+      zone = TZInfo::Country.get(country.iso).zone_names.first
+      Time.parse(event_time).in_time_zone(zone).strftime("%H:%M")
+    rescue
+      Time.parse(event_time).strftime("%H:%M")
+    end
+
+  end
+
 
   def city_name
   	city.try(:name)

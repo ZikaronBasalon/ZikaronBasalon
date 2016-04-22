@@ -1,5 +1,5 @@
 <div id="host-show" class="row profile" ng-controller="HostShowController"
-      ng-init="init(<%= @host.to_json(:include => [:user, :witness, :city, { invites: { :include => { guest: { :include => :user } } } }, { comments: { :include => :user } }]) %>)">
+      ng-init="init(<%= @host.to_json(:include => [:user, :witness, :city, { invites: { :include => { guest: { :include => :user } } } }, { comments: { :include => :user } }], :methods => [:converted_time]) %>)">
   <div class="col-xs-12">
     <div>
       <button class="btn btn-primary" 
@@ -174,12 +174,12 @@
         </div>
         <div class="panel-body">
           
-          <!-- <div class="field-group">
-            <div class="info-label"><%#= t '.labels.date_and_time' %></div>
+          <div class="field-group">
+            <div class="info-label"><%= t '.labels.date_and_time' %></div>
             <div>
-              {{ formatDate(host.event_date) }} {{ formatTime(host.event_time) }}
+              {{ formatDate(host.event_date) }} {{ host.converted_time }}
             </div>
-          </div> -->
+          </div>
 
           <div class="field-group">
             <div class="info-label"><%= t '.labels.organization' %></div>

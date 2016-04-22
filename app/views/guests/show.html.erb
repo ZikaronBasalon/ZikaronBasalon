@@ -1,4 +1,4 @@
-<div id="guest-show" class="row profile" ng-controller="GuestShowController" ng-init="init(<%= @guest.to_json(:include => [:user, { invites: { :include => { host: { :include => [{ :user => { :methods => [:first_name] } }, :city] } } } }]) %>)">
+<div id="guest-show" class="row profile" ng-controller="GuestShowController" ng-init="init(<%= @guest.to_json(:include => [:user, { invites: { :include => { host: { :include => [{ :user => { :methods => [:first_name], :methods => [:converted_time] } }, :city] } } } }]) %>)">
 
   <!-- Personal details -->
   <div class="col-xs-12">
@@ -63,11 +63,11 @@
       </div>
 
       <div class="panel-body">
-        <!-- <div class="field-group">
-          <div class="info-label"><%#= t 'shared.estimated_time' %></div>
-          <div>{{ formatTime(invite.host.event_time) }}</div>
+        <div class="field-group">
+          <div class="info-label"><%= t 'shared.estimated_time' %></div>
+          <div>{{ invite.host.converted_time }}</div>
           <div>זוהי שעה משוערת. נא לוודא שעה עם מארח</div>
-        </div> -->
+        </div>
 
         <div class="field-group">
           <div class="info-label"><%= t 'shared.free_text' %></div>
