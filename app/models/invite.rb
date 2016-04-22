@@ -10,7 +10,7 @@ class Invite < ActiveRecord::Base
 
   def self.cancel_overdue
     Invite.pending.each do |i|
-      i.destroy if ((Time.now.utc - Invite.last.created_at.utc) / 1.day).to_i >= 4
+      i.destroy if ((Time.now.utc - i.created_at.utc) / 1.day).to_i >= 4
     end
   end
 
