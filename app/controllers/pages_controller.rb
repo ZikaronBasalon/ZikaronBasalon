@@ -21,7 +21,7 @@ class PagesController < ApplicationController
 		  format.json { render json: { 
 			  	hosts: @hosts.to_json(
 			  		:include => [{ :user => { :methods => [:first_name] } }, :city, :country], 
-			  		:methods => [:available_places]
+			  		:methods => [:available_places, :converted_time]
 		  		), 
 			  	cities: @cities, 
 			  	total_items: @hosts.total_count,
