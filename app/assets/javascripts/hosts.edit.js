@@ -39,6 +39,7 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 		$scope.host.event_time = $scope.host.event_time ? new Date($scope.host.event_time): null;
 		if($scope.host.city) {
 			$scope.host.city_name = $scope.host.city.name;
+			$scope.result = $scope.host.city_name;
 		}
 
 		$scope.cityFromList = false;
@@ -97,7 +98,7 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 
   $scope.submitStepTwo = function() {
   	$scope.submitted[1] = true;
-  	if ($scope.stepTwo.$valid) {
+  	if ($scope.stepTwo.$valid && $scope.result) {
   		$http.put('/hosts/' + $scope.host.id + '.json', {
 	  		host: {
 					address: $scope.host.address,
