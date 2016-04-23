@@ -61,6 +61,13 @@
           </select>
         </div> 
 
+        <div class="form-group">
+          <input type="date" class="form-control"  
+                 ng-change="filter()"
+                 ng-model="search.event_date" datepicker
+                 placeholder="תאריך" />
+        </div>  
+
         <div class="form-group pull-left">
           <input type="text" class="form-control" ng-model="search.query" placeholder="<%= t 'shared.free_search' %>" />
         </div>
