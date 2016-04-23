@@ -1,5 +1,6 @@
 //= require lib/utils
 //= require request-invite
+//= require directives/datePicker
 
 app.controller('HomePageController', ['$scope','$http', '$uibModal', function($scope, $http, $uibModal) {
   $scope.hosts = [];
@@ -60,6 +61,7 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
         'city_ids[]': _.map($scope.search.cities, 'id'),
         country_id: $scope.search.country_id,
         event_language: $scope.search.event_language,
+        event_date: $scope.search.event_date,
         query: $scope.search.query,
         sort: $scope.sortProp
       }
