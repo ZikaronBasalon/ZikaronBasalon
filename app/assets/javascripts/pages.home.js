@@ -54,7 +54,6 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
   }
 
   $scope.getHosts = function(page) {
-    console.log($scope.search.event_date);
     $scope.loading = true;
     $http.get('/pages/home.json', {
       params: {
