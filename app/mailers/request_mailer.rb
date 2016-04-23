@@ -37,6 +37,14 @@ class RequestMailer < ActionMailer::Base
     mail :to => @guest.user.email, :subject => t('request_mailer.new_guest.title', locale: @locale)
   end
 
+  def guest_cancelled_request(invite_id)
+    @invite = Invite.find(invite_id)
+    @host = @invite.host
+    @guest = @invite.guest
+    @invite.destroy
+    mail :to => @host.user.email, :subject => 'עדכונים לגבי הסלון שלך'
+  end
+
   # def request_was_sent(host_id,guest_id)
   # 	@guest = Guest.find(guest_id)
   # 	@host = Host.find(host_id)

@@ -29,9 +29,7 @@ class InvitesController < ApplicationController
   end
 
   def destroy
-    @invite = Invite.find(params[:id])
-    @invite.destroy
-
+    RequestMailer.guest_cancelled_request(params[:id]).deliver
     render :json => { success: true }
   end
 end
