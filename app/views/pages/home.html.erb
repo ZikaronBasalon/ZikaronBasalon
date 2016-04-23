@@ -72,12 +72,30 @@
       <table class="table host-table">
         <thead>
           <tr>
-            <th><%= t 'shared.name' %></th>
-            <th><%= t 'shared.city' %></th>
-            <th><%= t 'shared.street' %></th>
-            <th><%= t 'shared.date' %></th>
-            <th><%= t 'shared.language' %></th>
-            <th><%= t 'shared.available_spaces' %></th>
+            <th ng-click="setSortProp('user.full_name')">
+              <%= t 'shared.name' %>
+              <span class="caret" ng-if="sortProp === 'user.full_name'"></span>
+            </th>
+            <th ng-click="setSortProp('city')">
+              <%= t 'shared.city' %>
+              <span class="caret" ng-if="sortProp === 'city'"></span>
+            </th>
+            <th ng-click="setSortProp('address')">
+              <%= t 'shared.street' %>
+              <span class="caret" ng-if="sortProp === 'address'"></span>
+            </th>
+            <th ng-click="setSortProp('event_date')">
+              <%= t 'shared.date' %>
+              <span class="caret" ng-if="sortProp === 'event_date'"></span>
+            </th>
+            <th ng-click="setSortProp('event_language')">
+              <%= t 'shared.language' %>
+              <span class="caret" ng-if="sortProp === 'event_language'"></span>
+            </th>
+            <th ng-click="setSortProp('available_places')">
+              <%= t 'shared.available_spaces' %>
+              <span class="caret" ng-if="sortProp === 'available_places'"></span>
+            </th>
             <th><%= t 'shared.free_text' %></th>
             <th></th>
           </tr> 
