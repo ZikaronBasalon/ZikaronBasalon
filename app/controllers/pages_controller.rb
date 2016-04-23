@@ -8,7 +8,9 @@ class PagesController < ApplicationController
       h.available_places > 0 &&
       host_in_query(h, query) &&
       h.in_language_filter(params[:event_language])
-  	} 
+  	}
+
+    @hosts = sort_by_field(@hosts, params[:sort] || 'user.full_name')
 
     @cities = City.all.select{ |c| c.hosts.count > 0 }.sort_alphabetical_by{ |c| c[:name] }
     @countries = Country.all
@@ -75,6 +77,25 @@ private
       return h.event_language == language
     else
       return !['english', 'hebrew', 'arabic', 'frech', 'russian'].include?(h.event_language)
+    end
+  end
+
+  def sort_by_field(hosts, field)
+    case field
+      when 'user.full_name'
+        return hosts.sort_alphabetical_by{ |h| h.try(:user).try(:full_name) }
+      when 'city'
+        return hosts.sort_by! { |h| h.city.try(:name).to_s }
+      when 'address'
+        return hosts.sort_by! { |h| h.try(:address).to_s }
+      when 'event_date'
+        return hosts.sort_by! { |h| h.try(:event_date).to_s }
+      when 'event_language'
+        return hosts.sort_by! { |h| h.try(:event_language).to_s }
+      when 'available_places'
+        return hosts.sort_by! { |h| h.try(:available_places).to_s }
+      else
+        return hosts
     end
   end
 end

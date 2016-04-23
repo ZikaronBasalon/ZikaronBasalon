@@ -12,6 +12,7 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
   $scope.formatLanguage = formatLanguage;
   $scope.formatAddressDisplay = formatAddressDisplay;
   $scope.formatCityDisplay = formatCityDisplay;
+  $scope.sortProp = 'user.full_name';
 
   $scope.init = function(hosts, cities, totalItems, currentUser, countries) {
     $scope.hosts = hosts;
@@ -58,7 +59,8 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
         'city_ids[]': _.map($scope.search.cities, 'id'),
         country_id: $scope.search.country_id,
         event_language: $scope.search.event_language,
-        query: $scope.search.query
+        query: $scope.search.query,
+        sort: $scope.sortProp
       }
     }).then(function(response) {
       $scope.cities = response.data.cities;
@@ -88,6 +90,12 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
       window.history.pushState(null, null, '/pages/home');
       location.reload();
     });
+  }
+
+  $scope.setSortProp = function(prop) {
+    $scope.sortProp = prop;
+    $scope.currentPage = 1;
+    $scope.getHosts($scope.currentPage);
   }
 
   
