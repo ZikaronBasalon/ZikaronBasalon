@@ -53,6 +53,7 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
   }
 
   $scope.getHosts = function(page) {
+    $scope.loading = true;
     $http.get('/pages/home.json', {
       params: {
         page: page,
@@ -63,6 +64,7 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
         sort: $scope.sortProp
       }
     }).then(function(response) {
+      $scope.loading = false;
       $scope.cities = response.data.cities;
       $scope.hosts = JSON.parse(response.data.hosts);
       $scope.totalItems = response.data.total_items;

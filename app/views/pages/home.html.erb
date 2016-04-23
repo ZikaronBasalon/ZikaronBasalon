@@ -15,6 +15,8 @@
             <%= @cities.to_json %>, <%= @total_items %>,
             <%= current_user_json %>, <%= @countries.to_json %>
           )">
+
+      <span us-spinner class="zb-spinner" ng-if="loading" spinner-on="loading"></span>
       <!-- Filters -->
       <form class="form-inline margin-bottom-20">
         <span class="margin-left-10"><%= t 'shared.filter_by' %>:</span>
