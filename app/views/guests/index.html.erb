@@ -7,6 +7,16 @@
     </div>
   </div>
 
+  <span us-spinner class="zb-spinner" ng-if="loading" spinner-on="loading"></span>
+  <!-- Filters -->
+  <form class="form-inline margin-bottom-20">
+    <div class="form-group pull-left">
+      <input type="text" class="form-control" 
+             ng-model="search.query" 
+             placeholder="<%= t 'shared.free_search' %>" />
+    </div>
+  </form>
+
   <table class="table">
     <thead>
       <tr>

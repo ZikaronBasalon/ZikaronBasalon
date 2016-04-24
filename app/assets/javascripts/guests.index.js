@@ -12,6 +12,12 @@ app.controller('GuestIndexController', ['$scope','$http', function($scope, $http
   $scope.init = function(guests, totalGuests, page) {
     $scope.guests = guests;
     $scope.totalGuests = totalGuests;
+
+    $scope.$watch('search.query', _.throttle(function(oldVal, newVal) {
+      if(newVal != oldVal) {
+        $scope.getGuests(1);
+      }
+    }, 2000), true);
   }
 
   $scope.deleteGuest = function(guest) {
@@ -38,7 +44,16 @@ app.controller('GuestIndexController', ['$scope','$http', function($scope, $http
   }
 
   $scope.pageChanged = function() {
-  	$http.get('/guests.json?page=' +$scope.pagination.currentPage, { page: $scope.pagination.currentPage })
+    $scope.getGuests($scope.pagination.currentPage);
+  }
+
+  $scope.getGuests = function(page) {
+    $http.get('/guests.json', { 
+      params: {
+        page: page,
+        query: $scope.search.query,
+      }
+    })
     .then(function(response) {
       $scope.guests = JSON.parse(response.data.guests);
       $scope.pagination.currentPage = response.data.page;

@@ -8,7 +8,16 @@ class GuestsController < ApplicationController
 
   def index
     @page = params[:page] || 1
-  	@guests = Guest.page(@page).per(10)
+
+    if !params[:query].present?
+  	 @guests = Guest.includes(:user, :invites).page(@page).per(10)
+    else
+      @guests = Guest.includes(:user, :invites).all.select { |g| 
+        guest_in_query(g, params[:query])
+      }
+
+      @guests = paginate(@guests, @page)
+    end
     @total_guests = @guests.total_count
 
     respond_to do |format|
@@ -36,6 +45,13 @@ class GuestsController < ApplicationController
       arr_name = Kaminari.paginate_array(arr_name).page(page).per(20)
     end
     arr_name
+  end
+
+  def guest_in_query(g, query)
+    return true if !query.present?
+    
+    (g.user && g.user.full_name.include?(query)) ||
+    (g.user && g.user.email.include?(query))
   end
 
   def correct_guest

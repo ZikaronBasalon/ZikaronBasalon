@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   respond_to :html, :json
 
   def home
-  	@hosts = Host.includes(:city, :user).where(host_conditions_hash)
+  	@hosts = Host.includes(:city, :user, :country, :invites).where(host_conditions_hash)
   	@hosts = @hosts.select { |h| 
       h.available_places > 0 &&
       host_in_query(h, query) &&
@@ -12,7 +12,7 @@ class PagesController < ApplicationController
 
     @hosts = sort_by_field(@hosts, params[:sort] || 'user.full_name')
 
-    @cities = City.all.select{ |c| c.hosts.count > 0 }.sort_alphabetical_by{ |c| c[:name] }
+    @cities = City.all.sort_alphabetical_by{ |c| c[:name] }
     @countries = Country.all
 
   	@hosts = paginate(@hosts, params[:page] || 1)
