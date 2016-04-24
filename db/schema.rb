@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160420061509) do
+ActiveRecord::Schema.define(:version => 20160424061538) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -113,6 +113,9 @@ ActiveRecord::Schema.define(:version => 20160420061509) do
     t.datetime "assignment_time"
   end
 
+  add_index "hosts", ["city_id"], :name => "index_hosts_on_city_id"
+  add_index "hosts", ["country_id"], :name => "index_hosts_on_country_id"
+
   create_table "invites", :force => true do |t|
     t.integer  "guest_id"
     t.integer  "host_id"
@@ -121,6 +124,9 @@ ActiveRecord::Schema.define(:version => 20160420061509) do
     t.boolean  "confirmed",  :default => false
     t.integer  "plus_ones",  :default => 0
   end
+
+  add_index "invites", ["guest_id"], :name => "index_invites_on_guest_id"
+  add_index "invites", ["host_id"], :name => "index_invites_on_host_id"
 
   create_table "managers", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -158,6 +164,8 @@ ActiveRecord::Schema.define(:version => 20160420061509) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["meta_id", "meta_type"], :name => "index_users_on_meta_id_and_meta_type"
+  add_index "users", ["meta_id"], :name => "index_users_on_meta_id"
+  add_index "users", ["meta_type"], :name => "index_users_on_meta_type"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
   create_table "witnesses", :force => true do |t|
