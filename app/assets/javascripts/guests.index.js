@@ -48,6 +48,7 @@ app.controller('GuestIndexController', ['$scope','$http', function($scope, $http
   }
 
   $scope.getGuests = function(page) {
+    $scope.loading = true;
     $http.get('/guests.json', { 
       params: {
         page: page,
@@ -55,6 +56,7 @@ app.controller('GuestIndexController', ['$scope','$http', function($scope, $http
       }
     })
     .then(function(response) {
+      $scope.loading = false;
       $scope.guests = JSON.parse(response.data.guests);
       $scope.pagination.currentPage = response.data.page;
       $scope.totalGuests = response.data.total_guests;
