@@ -11,7 +11,7 @@ class Witness < ActiveRecord::Base
   has_many :comments, as: :commentable
 
   validates_uniqueness_of :host_id, :allow_nil => true
-  validates_uniqueness_of :phone
+  validates_uniqueness_of :phone, :on => :create
 
   default_scope { includes(:city) }
 
