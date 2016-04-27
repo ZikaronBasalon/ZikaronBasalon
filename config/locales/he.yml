@@ -144,6 +144,8 @@ he:
     event_language: "שפה"
     assignment_time: "תאריך ציוות לעד"
     finished_registration: "סיים הרשמה"
+    free_on_day_true: "פנוי"
+    free_on_day_false: "לא פנוי"
   views:
     pagination:
       first: "ראשון"
