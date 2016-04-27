@@ -2,7 +2,7 @@
      ng-init="init(<%= current_user.to_json(:include => :meta) %>, <%= @hosts.to_json(:include => [:user, :witness, city: { :include => :managers }, :methods => [:has_witness] ]) %>, <%= @witnesses.to_json(:include => { city: { :include => :managers } }) %>,  <%= @cities.to_json %>,
         <%= @total_hosts.to_json %>, <%= @total_witnesses.to_json %>, <%= @page.to_json %> )">
 
-<span us-spinner class="zb-spinner" ng-if="loading" spinner-on="loading"></span>
+  <span us-spinner class="zb-spinner" ng-if="loading" spinner-on="loading"></span>
   <!-- View toggle buttons -->
   <% if I18n.locale == :he %>
     <div class="text-center margin-bottom-20">
@@ -293,6 +293,13 @@
           </div>   
 
         <% end %> 
+
+         <div class="form-group">
+            <select class="form-control" ng-model="search.witness.free_on_day"
+                    ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.free_on_day_true' %>', v: true }, { n: '<%= t 'shared.free_on_day_false' %>', v: false }]">
+              <option value=""><%= t 'shared.free_on_date' %></option>
+            </select>
+          </div>   
 
         <div class="form-group pull-left">
           <input type="text" class="form-control" ng-model="query.witness"

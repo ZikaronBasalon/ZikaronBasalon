@@ -100,7 +100,7 @@ class WitnessesController < ApplicationController
     else
       @hosts = Host.where(city_id: get_city_ids_for_assignment, survivor_needed: true)
     end
-    @hosts = @hosts.select { |h| h.witness.nil? && h.in_query(query) }
+    @hosts = @hosts.select { |h| h.witness.nil? && h.in_query(query) && h.received_registration_mail }
     @cities = @manager.get_cities
 
     respond_to do |format|

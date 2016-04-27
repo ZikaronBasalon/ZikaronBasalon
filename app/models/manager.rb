@@ -13,7 +13,7 @@ class Manager < ActiveRecord::Base
 
   def get_hosts(page, filter, query, sort, has_manager, has_survivor, is_org, language)
    sort = 'created_at' if sort.blank?
-   hosts = Host.includes(:city, :user).order(sort + " desc").where(filter)
+   hosts = Host.includes(:city, :user, :witness).order(sort + " desc").where(filter)
    hosts = hosts.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
    hosts = hosts.where(concept: concept).select{ |h| h.has_witness } if concept
    hosts = hosts.select{ |h| host_in_filter(h, query, has_manager, has_survivor, is_org, language) }
@@ -33,9 +33,9 @@ class Manager < ActiveRecord::Base
 
   def get_cities
     if user.admin? || user.sub_admin?
-      @cities = City.order('name desc').all
+      @cities = City.includes(:managers).order('name desc').all
     else
-      @cities = City.where(:id => cities.pluck(:id))
+      @cities = City.includes(:managers).where(:id => cities.pluck(:id))
     end
 
     @cities.map{ |c| { id: c.id, name: c.name }}.sort_alphabetical_by{|c| c[:name] }
