@@ -1,7 +1,5 @@
 class Host < ActiveRecord::Base
-  require 'utils'
   require 'csv'
-  include Utils
 
   attr_accessible :address, :city_id, :max_guests, :survivor_needed, :free_text, 
   :city_name, :status, :strangers, :contact, :survivor_details, :lat, :lng, :event_date,
