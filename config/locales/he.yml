@@ -146,6 +146,7 @@ he:
     finished_registration: "סיים הרשמה"
     free_on_day_true: "פנוי"
     free_on_day_false: "לא פנוי"
+    vetrans: "סלון עם וטרן"
   views:
     pagination:
       first: "ראשון"
