@@ -85,7 +85,6 @@ private
 
   def host_in_vetrans(h, vetrans) 
     return true if !vetrans
-    byebug if h.id === 10
     h.has_witness && h.witness.try(:is_vetran)
   end
 
