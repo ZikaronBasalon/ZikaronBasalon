@@ -5,6 +5,7 @@ ZikaronBasalon::Application.routes.draw do
     devise_for :users, controllers: { registrations: "registrations" }
     resources :managers do
       post :remove_city, on: :member
+      get :export, on: :member
     end
 
     resources :guests

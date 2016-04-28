@@ -1,7 +1,7 @@
 class ManagersController < ApplicationController
-  before_filter :set_manager, only: [:show, :edit, :update, :destroy, :remove_city, :filter_hosts]
+  before_filter :set_manager, only: [:show, :edit, :update, :destroy, :remove_city, :filter_hosts, :export]
   before_filter :is_admin, only: [:index]
-  before_filter :correct_manager, only: [:show]
+  before_filter :correct_manager, only: [:show, :export]
 
   respond_to :html, :json
 
@@ -83,6 +83,19 @@ class ManagersController < ApplicationController
     @city = City.find(params[:city_id])
     CommunityLeadership.find_by_manager_id_and_city_id(@manager.id, @city.id).destroy
     render :json => @manager.to_json( :include => [:cities, :user] )
+  end
+
+  def export
+    @hosts = @manager.get_hosts(nil, 
+                                host_filter, 
+                                params[:host_query], 
+                                params[:host_sort], 
+                                has_manager,
+                                has_survivor,
+                                is_org,
+                                language)
+
+    send_data Host.to_csv(@hosts), :disposition => "attachment; filename=hosts.csv"
   end
 
   private
