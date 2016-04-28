@@ -1,4 +1,8 @@
 class Host < ActiveRecord::Base
+  require 'utils'
+  require 'csv'
+  include Utils
+
   attr_accessible :address, :city_id, :max_guests, :survivor_needed, :free_text, 
   :city_name, :status, :strangers, :contact, :survivor_details, :lat, :lng, :event_date,
   :event_time, :evening_public, :hosted_before, :floor, :elevator, :org_name, :org_role,
@@ -94,6 +98,26 @@ class Host < ActiveRecord::Base
     if witness
       witness.update_attributes(host_id: nil)
       ManagerMailer.assignment_cancelled(id, witness.id).deliver
+    end
+  end
+
+  def self.to_csv(hosts, options = {})
+    CSV.generate(options) do |csv|
+      csv << ['שם', 'עיר', 'כתובת', 'טלפון', 'מייל', 'שפה', 
+              'צוות איש עדות', 'נוצר קשר עם איש עדות']
+      hosts.each do |host|
+        row = [
+          host.user.try(:full_name),
+          host.city.try(:name),
+          host.address,
+          host.phone,
+          host.user.try(:email),
+          host.event_language,
+          host.has_witness ? 'כן' : 'לא',
+          host.contacted_witness ? 'כן' : 'לא'
+        ]
+        csv << row
+      end
     end
   end
 end
