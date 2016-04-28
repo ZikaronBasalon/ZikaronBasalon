@@ -7,7 +7,8 @@ class PagesController < ApplicationController
   	@hosts = @hosts.select { |h| 
       h.available_places > 0 &&
       host_in_query(h, query) &&
-      h.in_language_filter(params[:event_language])
+      h.in_language_filter(params[:event_language]) &&
+      host_in_vetrans(h, vetrans)
   	}
 
     @hosts = sort_by_field(@hosts, params[:sort] || 'user.full_name')
@@ -54,6 +55,10 @@ private
 		params[:query]
 	end
 
+  def vetrans
+    params[:vetrans]
+  end
+
 	def paginate(arr_name, page)
     unless arr_name.kind_of?(Array)
       arr_name = arr_name.page(page).per(10)
@@ -80,6 +85,11 @@ private
     else
       return !['english', 'hebrew', 'arabic', 'frech', 'russian', 'spanish'].include?(h.event_language)
     end
+  end
+
+  def host_in_vetrans(h, vetrans) 
+    return true if !vetrans
+    h.has_witness && h.witness.try(:is_vetran)
   end
 
   def sort_by_field(hosts, field)
