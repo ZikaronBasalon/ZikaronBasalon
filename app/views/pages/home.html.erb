@@ -23,7 +23,7 @@
 
         <div class="form-group">
           <select class="form-control city-select" ng-model="search.country_id"
-                  ng-options="o.id as o.printable_name for o in countries"
+                  ng-options="o.id as o.printable_name for o in countries | orderBy:'printable_name'"
                   ng-change="filter()">
             <option value=""><%= t 'shared.country' %></option>
           </select>
@@ -57,6 +57,7 @@
             <option value="arabic">العربية</option>
             <option value="french">Français</option>
             <option value="russian">русский</option>
+            <option value="spanish">Español</option>
             <option value="other"><%= t 'shared.other' %></option>
           </select>
         </div> 

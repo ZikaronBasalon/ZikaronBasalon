@@ -88,7 +88,9 @@ function formatLanguage(language) {
     case 'french':
       return 'Français';
     case 'russian':
-      return 'русский'
+      return 'русский';
+    case 'spanish'
+      return 'Español';
     default:
         return language;
   }

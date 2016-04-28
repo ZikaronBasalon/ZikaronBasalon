@@ -78,7 +78,7 @@ private
     if language != 'other'
       return h.event_language == language
     else
-      return !['english', 'hebrew', 'arabic', 'frech', 'russian'].include?(h.event_language)
+      return !['english', 'hebrew', 'arabic', 'frech', 'russian', 'spanish'].include?(h.event_language)
     end
   end
 
