@@ -63,7 +63,8 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
         event_language: $scope.search.event_language,
         event_date: $scope.search.event_date,
         query: $scope.search.query,
-        sort: $scope.sortProp
+        sort: $scope.sortProp,
+        vetrans: $scope.search.vetrans || null
       }
     }).then(function(response) {
       $scope.loading = false;

@@ -27,6 +27,10 @@ class Witness < ActiveRecord::Base
     !host.nil? || external_assignment
   end
 
+  def is_vetran
+    concept && concept === 'vetrans'
+  end
+
   def in_language_filter(lang)
     return true if lang.blank?
 
