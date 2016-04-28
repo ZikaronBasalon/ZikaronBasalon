@@ -73,7 +73,7 @@ class Host < ActiveRecord::Base
     if language != 'other'
       return event_language == language
     else
-      return !['english', 'hebrew', 'arabic', 'frech', 'russian'].include?(event_language)
+      return !['english', 'hebrew', 'arabic', 'frech', 'russian', 'spanish'].include?(event_language)
     end
   end
 
