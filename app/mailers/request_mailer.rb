@@ -45,6 +45,12 @@ class RequestMailer < ActionMailer::Base
     mail :to => @host.user.email, :subject => 'עדכונים לגבי הסלון שלך'
   end
 
+  def event_reminder(invite_id)
+    @invite = Invite.find(invite_id)
+    @host = @invite.host
+    @guest = @invite.guest
+    mail :to => @guest.user.email, :subject => 'מחכים לך בסלון!'
+  end
   # def request_was_sent(host_id,guest_id)
   # 	@guest = Guest.find(guest_id)
   # 	@host = Host.find(host_id)
