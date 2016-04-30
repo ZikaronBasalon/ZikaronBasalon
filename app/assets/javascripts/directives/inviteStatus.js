@@ -31,8 +31,8 @@ app.directive('inviteStatus', function () {
       var timeDiff = Math.abs(date2.getTime() - date1.getTime());
       var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
       
-      return diffDays < 4 
-        ? "הבקשה תבוטל אוטומטית בעוד " + (5 - diffDays) + " ימים"
+      return diffDays < 2 
+        ? "הבקשה תבוטל אוטומטית בעוד " + (3 - diffDays) + " ימים"
         : "";
      }
   	},
