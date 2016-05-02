@@ -204,6 +204,6 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
 
   $scope.contactWitnessDue = function(host) {
     return host.has_witness && !host.contacted_witness &&
-    ((new Date() - new Date(host.assignment_time)) / (1000*60*60*24)) > 3
+    ((new Date() - new Date(host.assignment_time)) / (1000*60*60*24)) > 2
   }
 }]);

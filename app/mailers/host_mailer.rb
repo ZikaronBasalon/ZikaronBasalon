@@ -39,6 +39,12 @@ class HostMailer < BaseMailer
     end
   end
 
+  def moment_before(host_id) 
+    @host = Host.find(host_id)
+    attachments['ערכת מארח - זיכרון בסלון.pdf'] = File.read("#{Rails.root}/public/host_kit_2016.pdf")  
+    mail :to => @host.user.email, :subject => 'זיכרון בסלון - רגע לפני'
+  end
+
   # def shana_tova(host_id)
   #   attachments['שנה_טובה_זיכרון_בסלון.jpg'] = File.read("#{Rails.root}/public/shana_tova.jpg")   
   #   mail :to => @host.email, :subject => "זוכרים את ניצולי השואה בראש השנה - התקשרו לברך שנה טובה!"
