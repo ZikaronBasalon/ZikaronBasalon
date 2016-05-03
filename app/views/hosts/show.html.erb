@@ -30,6 +30,7 @@
               <th><%= t '.labels.email' %></th>
               <th><%= t '.labels.how_many_places' %></th>
               <th></th>
+              <th></th>
             </tr>
 
             <tr ng-repeat='invite in pendingInvites'>
@@ -38,6 +39,7 @@
               <td>{{ invite.guest.user.email }} </td>
               <td>{{ invite.plus_ones + 1 }} </td>
               <td><button class="btn btn-warning" ng-click="updateInvite(invite, true)"><%= t '.confirm_request' %></button></td>
+              <td><button class="btn btn-danger" ng-click="updateInvite(invite, null)"><%= t '.reject_request' %></button></td>
             </tr>
           </table>
         </div>
