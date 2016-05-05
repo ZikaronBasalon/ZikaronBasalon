@@ -78,7 +78,8 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
       has_host: $scope.search.has_host,
       has_survivor: $scope.search.has_survivor,
       is_org: $scope.search.is_org,
-      event_language: $scope.search.event_language
+      event_language: $scope.search.event_language,
+      in_future: $scope.search.in_future
     };
 
     $scope.loading = true;
@@ -105,7 +106,8 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
       has_host: $scope.search.has_host,
       has_survivor: $scope.search.has_survivor,
       is_org: $scope.search.is_org,
-      event_language: $scope.search.event_language
+      event_language: $scope.search.event_language,
+      in_future: $scope.search.in_future
     };
 
     window.open(

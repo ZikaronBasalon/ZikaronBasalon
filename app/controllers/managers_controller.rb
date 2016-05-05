@@ -21,7 +21,8 @@ class ManagersController < ApplicationController
                                 has_manager,
                                 has_survivor,
                                 is_org,
-                                language)
+                                language,
+                                in_future)
     @cities = @manager.get_cities
     @witnesses = @manager.get_witnesses(@page, 
                                         witness_filter, 
@@ -93,7 +94,8 @@ class ManagersController < ApplicationController
                                 has_manager,
                                 has_survivor,
                                 is_org,
-                                language)
+                                language,
+                                in_future)
 
     send_data Host.to_csv(@hosts), :disposition => "attachment; filename=hosts.csv"
   end
@@ -140,5 +142,9 @@ class ManagersController < ApplicationController
 
     def language
       params[:event_language]
+    end
+
+    def in_future
+      params[:in_future]
     end
 end
