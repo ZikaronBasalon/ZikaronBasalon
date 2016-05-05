@@ -45,6 +45,11 @@ class HostMailer < BaseMailer
     mail :to => @host.user.email, :subject => 'זיכרון בסלון - רגע לפני'
   end
 
+  def moment_after(host_id)
+    @host = Host.find(host_id)
+    mail :to => @host.user.email, :subject => 'זיכרון בסלון - איך היה לך?'
+  end
+
   # def shana_tova(host_id)
   #   attachments['שנה_טובה_זיכרון_בסלון.jpg'] = File.read("#{Rails.root}/public/shana_tova.jpg")   
   #   mail :to => @host.email, :subject => "זוכרים את ניצולי השואה בראש השנה - התקשרו לברך שנה טובה!"
