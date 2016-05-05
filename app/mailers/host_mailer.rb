@@ -47,7 +47,7 @@ class HostMailer < BaseMailer
 
   def moment_after(host_id)
     @host = Host.find(host_id)
-    mail :to => @host.user.email, :subject => 'זיכרון בסלון - איך היה לך?'
+    mail :to => @host.user.email, :subject => 'זיכרון בסלון - איך היה לכם? (מייל מעודכן)'
   end
 
   # def shana_tova(host_id)
