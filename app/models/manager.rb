@@ -27,7 +27,7 @@ class Manager < ActiveRecord::Base
    witnesses = witnesses.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
    witnesses = witnesses.where(concept: concept) if concept
    witnesses = witnesses.select{ |w| witness_in_filter(w, query, has_manager, has_host, language) }
-   witnesses = paginate(witnesses, page)
+   witnesses = paginate(witnesses, page) if page
    witnesses
   end
 
