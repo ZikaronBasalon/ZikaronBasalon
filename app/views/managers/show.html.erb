@@ -3,7 +3,9 @@
         <%= @total_hosts.to_json %>, <%= @total_witnesses.to_json %>, <%= @page.to_json %> )">
 
   <% if current_user.any_admin? %>
-    <a ng-click="export()">ייצא לאקסל</a> 
+    <a ng-click="export_hosts()">ייצא מארחים לאקסל</a> 
+    <a ng-click="export_witnesses()">ייצא אנשי עדות לאקסל</a>
+    <a ng-click="export_guests()">ייצא אורחים לאקסל</a> 
   <% end %>
 
   <span us-spinner class="zb-spinner" ng-if="loading" spinner-on="loading"></span>
