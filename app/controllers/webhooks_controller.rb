@@ -1,5 +1,5 @@
 class WebhooksController < ApplicationController
   def webhook
-  	render :nothing => true, :status => 200
+  	Rails.logger.info params
   end
 end
