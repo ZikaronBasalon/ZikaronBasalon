@@ -1,4 +1,6 @@
 ZikaronBasalon::Application.routes.draw do
+  get 'webhook', :to => 'webhooks#webhook'
+
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/  do
     get 'my-profile', :to => 'users#profile'
 
