@@ -40,4 +40,32 @@ class Witness < ActiveRecord::Base
       return !['english', 'hebrew', 'arabic', 'frech', 'russian', 'spanish'].include?(language)
     end
   end
+
+  def self.to_csv(witnesses, options = {})
+    CSV.generate(options) do |csv|
+      csv << ['ID', 'שם', 'עיר', 'כתובת', 'טלפון', 'מייל', 'שפה', 
+              'צרכים מיוחדים', 'אוכלוסיה מיוחדת', 'יכול לעלות מדרגות', 
+              'סוג', 'שם איש קשר', 'טלפון איש קשר', 'מארח', 'ציוות חיצוני']
+      witnesses.each do |witness|
+        row = [
+          witness.id,
+          witness.full_name,
+          witness.city.try(:name),
+          witness.address,
+          witness.phone,
+          witness.email,
+          witness.language,
+          witness.special_needs ? 'כן' : 'לא',
+          witness.special_population ? 'כן' : 'לא',
+          witness.stairs ? 'כן' : 'לא',
+          witness.witness_type,
+          witness.contact_name,
+          witness.contact_phone,
+          witness.host_id,
+          witness.external_assignment ? 'כן' : 'לא'
+        ]
+        csv << row
+      end
+    end
+  end
 end

@@ -1,6 +1,6 @@
 class ManagersController < ApplicationController
-  before_filter :set_manager, only: [:show, :edit, :update, :destroy, :remove_city, :filter_hosts, :export]
-  before_filter :is_admin, only: [:index]
+  before_filter :set_manager, only: [:show, :edit, :update, :destroy, :remove_city, :filter_hosts, :export_hosts, :export_witnesses, :export_guests]
+  before_filter :is_admin, only: [:index, :export_hosts, :export_witnesses, :export_guests]
   before_filter :correct_manager, only: [:show, :export]
 
   respond_to :html, :json
@@ -21,7 +21,8 @@ class ManagersController < ApplicationController
                                 has_manager,
                                 has_survivor,
                                 is_org,
-                                language)
+                                language,
+                                in_future)
     @cities = @manager.get_cities
     @witnesses = @manager.get_witnesses(@page, 
                                         witness_filter, 
@@ -85,7 +86,7 @@ class ManagersController < ApplicationController
     render :json => @manager.to_json( :include => [:cities, :user] )
   end
 
-  def export
+  def export_hosts
     @hosts = @manager.get_hosts(nil, 
                                 host_filter, 
                                 params[:host_query], 
@@ -93,9 +94,27 @@ class ManagersController < ApplicationController
                                 has_manager,
                                 has_survivor,
                                 is_org,
-                                language)
+                                language,
+                                in_future)
 
     send_data Host.to_csv(@hosts), :disposition => "attachment; filename=hosts.csv"
+  end
+
+  def export_witnesses
+    @witnesses = @manager.get_witnesses(nil, 
+                                        witness_filter, 
+                                        params[:witness_query], 
+                                        params[:witness_sort], 
+                                        has_manager,
+                                        has_host,
+                                        language)
+    send_data Witness.to_csv(@witnesses), :disposition => "attachment; filename=witnesses.csv"
+  end
+
+  def export_guests
+    @guests = Guest.includes(:user, :invites).all
+
+    send_data Guest.to_csv(@guests), :disposition => "attachment; filename=guests.csv"
   end
 
   private
@@ -140,5 +159,9 @@ class ManagersController < ApplicationController
 
     def language
       params[:event_language]
+    end
+
+    def in_future
+      params[:in_future]
     end
 end

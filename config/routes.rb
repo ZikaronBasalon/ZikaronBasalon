@@ -1,11 +1,15 @@
 ZikaronBasalon::Application.routes.draw do
+  get 'webhook', :to => 'webhooks#webhook'
+
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/  do
     get 'my-profile', :to => 'users#profile'
 
     devise_for :users, controllers: { registrations: "registrations" }
     resources :managers do
       post :remove_city, on: :member
-      get :export, on: :member
+      get :export_hosts, on: :member
+      get :export_witnesses, on: :member
+      get :export_guests, on: :member
     end
 
     resources :guests

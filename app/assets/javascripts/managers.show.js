@@ -78,13 +78,14 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
       has_host: $scope.search.has_host,
       has_survivor: $scope.search.has_survivor,
       is_org: $scope.search.is_org,
-      event_language: $scope.search.event_language
+      event_language: $scope.search.event_language,
+      in_future: $scope.search.in_future
     };
 
     $scope.loading = true;
 
     $http.get('/managers/' + $scope.currentUser.meta.id + '.json' + '?' + $.param(params))
-    .then(function(response) {
+  .then(function(response) {
       $scope.hosts = JSON.parse(response.data.hosts);
       $scope.witnesses = JSON.parse(response.data.witnesses);
       $scope.pagination.currentPage = response.data.page;
@@ -94,7 +95,7 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
     });
   }
 
-  $scope.export = function() {
+  $scope.export_hosts = function() {
     var params = {
       filter: {
         host: getFilterKeys($scope.search.host)
@@ -105,22 +106,41 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
       has_host: $scope.search.has_host,
       has_survivor: $scope.search.has_survivor,
       is_org: $scope.search.is_org,
-      event_language: $scope.search.event_language
+      event_language: $scope.search.event_language,
+      in_future: $scope.search.in_future
     };
 
     window.open(
-      '/managers/' + $scope.currentUser.meta.id + '/export' + '?' + $.param(params),
+      '/managers/' + $scope.currentUser.meta.id + '/export_hosts' + '?' + $.param(params),
       '_blank' // <- This is what makes it open in a new window.
     );
-    // .then(function(response) {
-    //   $scope.loading = false;
-    //   var encodedUri = encodeURI(response.data);
-    //   var link = document.createElement("a");
-    //   link.setAttribute("href", encodedUri);
-    //   link.setAttribute("download", "data.csv");
-    //   link.click();
-    // });
   }
+
+  $scope.export_witnesses = function() {
+    var params = {
+      filter: {
+        witness: getFilterKeys($scope.search.witness)
+      },
+      witness_query: $scope.query.witness,
+      witness_sort: $scope.witnessSortProp,
+      has_manager: $scope.search.has_manager,
+      has_host: $scope.search.has_host,
+      event_language: $scope.search.event_language,
+    };
+
+    window.open(
+      '/managers/' + $scope.currentUser.meta.id + '/export_witnesses' + '?' + $.param(params),
+      '_blank' // <- This is what makes it open in a new window.
+    );
+  }
+
+  $scope.export_guests = function() {
+    window.open(
+      '/managers/' + $scope.currentUser.meta.id + '/export_guests',
+      '_blank' // <- This is what makes it open in a new window.
+    );
+  }
+
 
   function getFilterKeys(filterObj) {
     var filtered = {};
