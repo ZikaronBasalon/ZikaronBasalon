@@ -83,6 +83,7 @@ GEM
     haml (4.0.7)
       tilt
     hike (1.2.3)
+    hirb (0.7.3)
     i18n (0.7.0)
     journey (1.0.4)
     jquery-rails (3.1.4)
@@ -225,6 +226,7 @@ DEPENDENCIES
   devise (= 3.5.6)
   figaro
   haml
+  hirb
   jquery-rails
   jquery-ui-rails
   kaminari
@@ -250,4 +252,4 @@ DEPENDENCIES
   uglifier (>= 1.0.3)
 
 BUNDLED WITH
-   1.11.2
+   1.12.5
