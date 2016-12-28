@@ -98,6 +98,7 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
   }
 
   $scope.setSortProp = function(prop) {
+    $scope.search.reverseOrdering = !$scope.search.reverseOrdering;
     $scope.sortProp = prop;
     $scope.currentPage = 1;
     $scope.getHosts($scope.currentPage);
