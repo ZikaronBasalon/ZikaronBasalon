@@ -11,7 +11,7 @@ class PagesController < ApplicationController
       host_in_vetrans(h, params[:vetrans])
   	}
 
-    @hosts = sort_by_field(@hosts, params[:sort] || 'user.full_name')
+    @hosts = sort_by_field(@hosts, params[:sort] || 'user.full_name', params[:reverse_ordering])
 
     @cities = City.all.sort_alphabetical_by{ |c| c[:name] }
     @countries = Country.all
@@ -87,22 +87,24 @@ private
     h.has_witness && h.witness.try(:is_vetran)
   end
 
-  def sort_by_field(hosts, field)
+  def sort_by_field(hosts, field, reverse_ordering)
+    return_value = hosts
     case field
       when 'user.full_name'
-        return hosts.sort_alphabetical_by{ |h| h.try(:user).try(:full_name) }
+        return_value = hosts.sort_alphabetical_by{ |h| h.try(:user).try(:full_name) }
       when 'city'
-        return hosts.sort_by! { |h| h.city.try(:name).to_s }
+        return_value = hosts.sort_by! { |h| h.city.try(:name).to_s }
       when 'address'
-        return hosts.sort_by! { |h| h.try(:address).to_s }
+        return_value = hosts.sort_by! { |h| h.try(:address).to_s }
       when 'event_date'
-        return hosts.sort_by! { |h| h.try(:event_date).to_s }
+        return_value = hosts.sort_by! { |h| h.try(:event_date).to_s }
       when 'event_language'
-        return hosts.sort_by! { |h| h.try(:event_language).to_s }
+        return_value = hosts.sort_by! { |h| h.try(:event_language).to_s }
       when 'available_places'
-        return hosts.sort_by! { |h| h.try(:available_places).to_s }
+        return_value = hosts.sort_by! { |h| h.try(:available_places).to_s }
       else
         return hosts
     end
+    (reverse_ordering == 1 ? return_value : return_value.reverse) 
   end
 end
