@@ -506,29 +506,10 @@ body {
 	display: none;
 }
 
-//colors
-/*
-$black:  black;
-
-.caret-up {
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-bottom: 5px solid $black;
-}
-.caret-down {
-  width: 0;
-  height: 0;
-  border-left: 5x solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 5px solid $black;
-}
-*/
 .caret-down {
 	border-color: black transparent;
 	border-style: solid;
-	border-width: 20px 20px 0px 20px;
+	border-width: 5px 5px 0px 5px;
 	height: 0px;
 	width: 0px;
 }
@@ -536,7 +517,7 @@ $black:  black;
 .caret-up {
 	border-color: black transparent;
 	border-style: solid;
-	border-width: 0px 20px 20px 20px;
+	border-width: 0px 5px 5px 5px;
 	height: 0px;
 	width: 0px;
 }
