@@ -507,6 +507,7 @@ body {
 }
 
 //colors
+/*
 $black:  black;
 
 .caret-up {
@@ -522,4 +523,20 @@ $black:  black;
   border-left: 5x solid transparent;
   border-right: 5px solid transparent;
   border-top: 5px solid $black;
+}
+*/
+.caret-down {
+	border-color: black transparent;
+	border-style: solid;
+	border-width: 20px 20px 0px 20px;
+	height: 0px;
+	width: 0px;
+}
+
+.caret-up {
+	border-color: black transparent;
+	border-style: solid;
+	border-width: 0px 20px 20px 20px;
+	height: 0px;
+	width: 0px;
 }
