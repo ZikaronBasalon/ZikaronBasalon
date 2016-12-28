@@ -168,6 +168,7 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
   }
 
   $scope.setSortProp = function(prop) {
+    $scope.search.reverseOrdering = !$scope.search.reverseOrdering;
     $scope.sortProp = prop;
     filter(1)
   }
