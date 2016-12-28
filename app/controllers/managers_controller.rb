@@ -22,7 +22,8 @@ class ManagersController < ApplicationController
                                 has_survivor,
                                 is_org,
                                 language,
-                                in_future)
+                                in_future,
+                                reverse_ordering)
     @cities = @manager.get_cities
     @witnesses = @manager.get_witnesses(@page, 
                                         witness_filter, 
@@ -95,7 +96,8 @@ class ManagersController < ApplicationController
                                 has_survivor,
                                 is_org,
                                 language,
-                                in_future)
+                                in_future,
+                                reverse_ordering)
 
     send_data Host.to_csv(@hosts), :disposition => "attachment; filename=hosts.csv"
   end
@@ -163,5 +165,9 @@ class ManagersController < ApplicationController
 
     def in_future
       params[:in_future]
+    end
+
+    def reverse_ordering
+      params[:reverse_ordering]
     end
 end
