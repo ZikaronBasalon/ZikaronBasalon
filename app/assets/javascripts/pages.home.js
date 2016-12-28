@@ -5,6 +5,7 @@
 app.controller('HomePageController', ['$scope','$http', '$uibModal', function($scope, $http, $uibModal) {
   $scope.hosts = [];
   $scope.search = {};
+  $scope.search.reverseOrdering = false;
   $scope.currentPage = 1;
 
   $scope.formatBool = formatBool;
@@ -64,6 +65,7 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
         event_date: $scope.search.event_date,
         query: $scope.search.query,
         sort: $scope.sortProp,
+        reverse_ordering: +$scope.search.reverseOrdering,
         vetrans: $scope.search.vetrans || null
       }
     }).then(function(response) {
