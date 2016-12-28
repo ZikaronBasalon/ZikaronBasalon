@@ -6,7 +6,8 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
   $scope.hosts = [];
   $scope.search = {
     host: {},
-    witness: {}
+    witness: {},
+    reverseOrdering: false
   };
 
   $scope.query = {
@@ -70,6 +71,7 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
         witness: getFilterKeys($scope.search.witness)
       },
       page: page,
+      reverse_ordering: +$scope.search.reverseOrdering
       host_query: $scope.query.host,
       witness_query: $scope.query.witness,
       host_sort: $scope.sortProp,
