@@ -11,11 +11,10 @@ class PagesController < ApplicationController
       host_in_vetrans(h, params[:vetrans])
   	}
 
-    @hosts = sort_by_field(@hosts, params[:sort] || 'user.full_name')
-    if params[:reverse_ordering] == 0
-      @hosts = @hosts.reverse
-    end
-    
+    # @hosts = sort_by_field(@hosts, params[:sort] || 'user.full_name')
+    sort_order = reverse_ordering ? " desc" : " asc"
+    @hosts = @hosts.order(params[:sort] || 'user.full_name' + sort_order)
+
     @cities = City.all.sort_alphabetical_by{ |c| c[:name] }
     @countries = Country.all
 
