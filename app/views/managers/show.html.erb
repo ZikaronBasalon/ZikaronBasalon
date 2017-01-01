@@ -137,9 +137,9 @@
               <%= t 'shared.registration_time' %>
               <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'created_at'"></span>
             </th>
-            <th ng-click="setSortProp('city.name')">
+            <th ng-click="setSortProp('city')">
               <%= t 'shared.city' %>
-              <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'city.name'"></span>
+              <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'city'"></span>
             </th>
             <th ng-click="setSortProp('event_date')">
               <%= t 'shared.evening_date' %>
