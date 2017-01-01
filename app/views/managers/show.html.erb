@@ -157,18 +157,21 @@
               <%= t 'shared.host_contacted' %>
               <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'contacted'"></span>
             </th>
-            <th>
-              <%= t 'shared.witness_contacted' %>
+            <th ng-click="setSortProp('contacted_witness')">
+              <%= t 'shared.contacted_witness' %>
+              <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'contacted'"></span>
             </th>
             <th ng-click="setSortProp('survivor_needed')">
               <%= t 'shared.survivor_needed' %>
               <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'survivor_needed'"></span>
             </th>
-            <th>
-              <%= t 'shared.has_survivor' %>
+            <th ng-click="setSortProp('has_witness')">
+              <%= t 'shared.has_witness' %>
+              <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'has_witness'"></span>
             </th>
-            <th>
+            <th ng-click="setSortProp('assignment_time')">
               <%= t 'shared.assignment_time' %>
+              <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'assignment_time'"></span>
             </th>
             <th ng-click="setSortProp('strangers')">
               <%= t 'shared.strangers_allowed' %>

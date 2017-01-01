@@ -174,6 +174,7 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
   }
 
   $scope.setSortPropWitness = function(prop) {
+    $scope.search.reverseOrdering = !$scope.search.reverseOrdering;
     $scope.witnessSortProp = prop;
     filter(1)
   }
