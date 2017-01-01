@@ -71,7 +71,7 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
         witness: getFilterKeys($scope.search.witness)
       },
       page: page,
-      reverse_ordering: +$scope.search.reverseOrdering
+      reverse_ordering: +$scope.search.reverseOrdering,
       host_query: $scope.query.host,
       witness_query: $scope.query.witness,
       host_sort: $scope.sortProp,
@@ -168,6 +168,7 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
   }
 
   $scope.setSortProp = function(prop) {
+    $scope.search.reverseOrdering = !$scope.search.reverseOrdering;
     $scope.sortProp = prop;
     filter(1)
   }
