@@ -13,7 +13,7 @@ class Manager < ActiveRecord::Base
 
   def get_hosts(page, filter, query, sort, has_manager, has_survivor, is_org, language, in_future, reverse_ordering)
    sort = 'created_at' if sort.blank?
-   sort_order = reverse_ordering ? " desc" : " asc"
+   sort_order = !reverse_ordering.to_i.zero? ? " desc" : " asc"
    hosts = Host.includes(:city, :user, :witness).order(sort + sort_order).where(filter)
    hosts = hosts.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
    hosts = hosts.where(concept: concept).select{ |h| h.has_witness } if concept
