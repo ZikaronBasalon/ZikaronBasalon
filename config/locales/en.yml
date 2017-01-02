@@ -90,6 +90,7 @@ en:
     forgot_password: "Forgot your password?"
     has_host: "Assign to host"
     is_org: "Belongs to organization"
+    has_survivor_set: "Survivor is set"
     language: "Language"
     manager: "manager"
     reset_password: "Reset password"

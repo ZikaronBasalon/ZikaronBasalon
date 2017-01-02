@@ -111,6 +111,13 @@
           </label>
         </div> 
 
+        <div class="form-group">
+          <label>
+            <input type="checkbox" ng-model="search.has_survivor_set">
+            <%= t 'shared.has_survivor_set' %>
+          </label>
+        </div> 
+        
         <div class="form-group pull-left">
           <input type="text" class="form-control" ng-model="query.host" placeholder="<%= t 'shared.free_search' %>" />
         </div>

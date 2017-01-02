@@ -13,7 +13,6 @@ class ManagersController < ApplicationController
 
   def show
     @page = params[:page] || 1
-
     @hosts = @manager.get_hosts(@page, 
                                 host_filter, 
                                 params[:host_query], 
@@ -23,7 +22,8 @@ class ManagersController < ApplicationController
                                 is_org,
                                 language,
                                 in_future,
-                                reverse_ordering)
+                                reverse_ordering,
+                                has_survivor_set)
     @cities = @manager.get_cities
     @witnesses = @manager.get_witnesses(@page, 
                                         witness_filter, 
@@ -169,5 +169,9 @@ class ManagersController < ApplicationController
 
     def reverse_ordering
       params[:reverse_ordering]
+    end
+
+    def has_survivor_set
+      params[:has_survivor_set]
     end
 end
