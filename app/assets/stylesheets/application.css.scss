@@ -16,7 +16,7 @@
  *
  */
 
-@import url(http://fonts.googleapis.com/css?family=Alef:400,700);
+@import url(https://fonts.googleapis.com/css?family=Alef:400,700);
 @import "compass/css3/flexbox";
 
 
@@ -504,4 +504,20 @@ body {
 
 #locale {
 	display: none;
+}
+
+.caret-down {
+	border-color: black transparent;
+	border-style: solid;
+	border-width: 5px 5px 0px 5px;
+	height: 0px;
+	width: 0px;
+}
+
+.caret-up {
+	border-color: black transparent;
+	border-style: solid;
+	border-width: 0px 5px 5px 5px;
+	height: 0px;
+	width: 0px;
 }
