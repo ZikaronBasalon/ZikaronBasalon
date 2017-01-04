@@ -22,8 +22,7 @@ class ManagersController < ApplicationController
                                 is_org,
                                 language,
                                 in_future,
-                                reverse_ordering,
-                                has_survivor_set)
+                                reverse_ordering)
     @cities = @manager.get_cities
     @witnesses = @manager.get_witnesses(@page, 
                                         witness_filter, 

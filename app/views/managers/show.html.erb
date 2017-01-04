@@ -109,14 +109,7 @@
             <input type="checkbox" ng-model="search.in_future">
             עתיד להתקיים
           </label>
-        </div> 
-
-        <div class="form-group">
-          <label>
-            <input type="checkbox" ng-model="search.has_survivor_set">
-            <%= t 'shared.has_survivor_set' %>
-          </label>
-        </div> 
+        </div>
         
         <div class="form-group pull-left">
           <input type="text" class="form-control" ng-model="query.host" placeholder="<%= t 'shared.free_search' %>" />
@@ -140,9 +133,8 @@
               <%= t 'shared.name' %>
               <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'user.full_name'"></span>
             </th>
-            <th ng-click="setSortProp('created_at')">
-              <%= t 'shared.registration_time' %>
-              <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'created_at'"></span>
+            <th>
+              <%= t 'shared.phone' %>
             </th>
             <th ng-click="setSortProp('city')">
               <%= t 'shared.city' %>
@@ -151,10 +143,6 @@
             <th ng-click="setSortProp('event_date')">
               <%= t 'shared.evening_date' %>
               <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'event_date'"></span>
-            </th>
-            <th ng-click="setSortProp('hosted_before')">
-              <%= t 'shared.hosted_before' %>
-              <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'hosted_before'"></span>
             </th>
             <th ng-click="setSortProp('org_name')">
               <%= t 'shared.org_name' %>
@@ -172,17 +160,12 @@
               <%= t 'shared.survivor_needed' %>
               <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'survivor_needed'"></span>
             </th>
-            <th ng-click="setSortProp('host_has_witness')">
+            <th>
               <%= t 'shared.has_survivor' %>
-              <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'host_has_witness'"></span>
             </th>
             <th ng-click="setSortProp('assignment_time')">
               <%= t 'shared.assignment_time' %>
               <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'assignment_time'"></span>
-            </th>
-            <th ng-click="setSortProp('strangers')">
-              <%= t 'shared.strangers_allowed' %>
-              <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'strangers'"></span>
             </th>
             <% if current_user.admin? %>
               <th><%= t 'shared.manager' %></th>
@@ -195,17 +178,15 @@
               ng-class="{true: 'hasnt-contacted'}[contactWitnessDue(host)]">
             <td>{{ host.user.id }}</td>
             <td>{{ host.user.full_name }}</td>
-            <td>{{ formatDateTime(host.created_at) }}</td>
+            <td>{{ host.phone }}</td>
             <td>{{ host.city.name }}</td>
             <td>{{ formatDate(host.event_date) }}</td>
-            <td>{{ formatBool(!host.hosted_before) }}</td>
             <td>{{ host.org_name }}</td>
             <td>{{ formatBool(host.contacted) }}</td>
             <td>{{ formatBool(host.contacted_witness) }}</td>
             <td>{{ formatBool(host.survivor_needed) }}</td>
             <td>{{ formatBool(host.has_witness) }}</td>
             <td>{{ formatDateTime(host.assignment_time) }}</td>
-            <td>{{ formatBool(host.strangers) }}</td>
             <% if current_user.admin? %>
               <td>
                 <div manager-link obj="host"></div>
