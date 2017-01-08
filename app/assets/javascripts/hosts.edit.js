@@ -25,8 +25,10 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 
     // var input = document.getElementById('autocomplete');
     // $scope.autocomplete = new google.maps.places.Autocomplete(input, options);
-		$scope.autocomplete = new google.maps.places.Autocomplete($("#city")[0], options);
+		console.log();
+    $scope.autocomplete = new google.maps.places.Autocomplete($("#city")[0], options);
 		google.maps.event.addListener($scope.autocomplete, 'place_changed', getAddress);
+
 	}
 
 	$scope.openDatepicker = function() {
@@ -74,6 +76,7 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
   }
 
   $scope.onCityNameBlur = function() {
+    console.log();
   	$timeout(function() {
   		if(!$scope.cityFromList) {
   			$scope.host.city_name = null;
@@ -177,6 +180,7 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
   }
 
   function getAddress() {
+    console.log();
 		$scope.result = $scope.autocomplete.getPlace();
 		$scope.cityFromList = true;
 		if($scope.result) {
