@@ -125,7 +125,7 @@
           <input type="text" class="form-control"
                  name="city"
                  data-tap-disabled=true
-                 id="autocomplete"
+                 id="city"
                  ng-model="host.city_name"
                  placeholder="<%= t '.city_placeholder' %>"
                  ng-blur="onCityNameBlur()"
@@ -133,6 +133,33 @@
                  ng-focus="onCityNameBlur()"
                  required>
         </div>
+
+        <div class="form-group" 
+             ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.city.$invalid]">
+          <label for="city"><%= t '.city' %></label>
+          <input type="text"
+                 name="city"
+                 ng-autocomplete
+                 ng-model="host.city_name"
+                 ng-blur="onCityNameBlur()"
+                 options="options"
+                 details="details"
+                 placeholder="<%= t '.city_placeholder' %>"
+                 required/>
+
+<!--           <input type="text" class="form-control"
+                 name="city"
+                 data-tap-disabled=true
+                 id="city"
+                 ng-model="host.city_name"
+                 placeholder="<%= t '.city_placeholder' %>"
+                 ng-blur="onCityNameBlur()"
+                 ng-click="onCityNameBlur()"
+                 ng-focus="onCityNameBlur()"
+                 required>
+ -->        </div>
+
+         
 
         <div class="form-group" 
              ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.address.$invalid]">

@@ -2,7 +2,8 @@ var app = angular.module('zikaronbasalon',[
 	'ui.bootstrap',
 	'angularSpinner',
   'ui.select',
-  'ngSanitize'
+  'ngSanitize',
+  'ngAutocomplete'
 ])
 .factory('httpRequestInterceptor', function () {
   return {
