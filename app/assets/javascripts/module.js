@@ -14,6 +14,16 @@ var app = angular.module('zikaronbasalon',[
     }
   };
 })
+.directive('disableTap', function($timeout) {
+  return {
+    link: function() {
+
+      $timeout(function() {
+        document.querySelector('.pac-container').setAttribute('data-tap-disabled', 'true')
+      },500);
+    }
+  };
+})
 .config(['$httpProvider', function ($httpProvider) {
 	$httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
   $httpProvider.interceptors.push('httpRequestInterceptor');
