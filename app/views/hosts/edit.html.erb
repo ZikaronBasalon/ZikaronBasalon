@@ -135,6 +135,33 @@
                  required>
         </div>
 -->
+<style>
+@keyframes nodeInserted {
+  from { opacity: 0.99; }
+  to { opacity: 1; }  
+}
+@-webkit-keyframes nodeInserted{
+  from { opacity: 0.99; }
+  to { opacity: 1; }
+}
+
+div.pac-container {
+  animation-duration: 0.001s;
+  animation-name: nodeInserted;
+  
+  -webkit-animation-duration: 0.001s;
+  -webkit-animation-name: nodeInserted;
+}</style>
+<script>
+  $(document).one('animationstart webkitAnimationStart MSAnimationStart', 'div.pac-container', function(event){
+    if(event.originalEvent.animationName === 'nodeInserted'){
+      $(event.target).attr('data-tap-disabled', true).click(function(){
+        $('#myAutocompleteInputElem').blur();   //closes the selection drop down
+      });
+    }
+  });
+</script>
+
         <div class="form-group" 
              ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.city.$invalid]">
           <label for="city"><%= t '.city' %></label>
