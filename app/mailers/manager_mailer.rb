@@ -9,9 +9,10 @@ class ManagerMailer < BaseMailer
   	mail :to => manager_email, :subject => t('manager_mailer.new_manager.title')
   end
 
-  def assignment_cancelled(host_id, witness_id)
+  def assignment_cancelled(host_id, witness_id, unassigning_user)
   	@host = Host.find(host_id)
   	@witness = Witness.find(witness_id)
+    @unassigning_user = unassigning_user
 
   	  	mail :to => "saray.basalon@gmail.com,nofar.basalon@gmail.com", :subject => "ביטול ציוות"
 
