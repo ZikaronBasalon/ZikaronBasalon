@@ -1,6 +1,6 @@
 <p>היי,</p>
 
-<p>שימו לב כי <%= @host.manager.try(:user).try(:full_name) %> <%= @host.manager.try(:user).try(:email) %> ביטלו את הציוות בין <%= link_to "מארח", host_url(id: @host.id) %> לבין <%= link_to "עד", witness_url(id: @witness.id) %>. אנחנו לא יודעים למה זה קרה, ולכן כדאי שתבדקו ממש עכשיו מה קורה שם.
+<p>שימו לב כי <%= @unassigning_user.full_name %> <%= @unassigning_user.email %> ביטלו את הציוות בין <%= link_to "מארח", host_url(id: @host.id) %> לבין <%= link_to "עד", witness_url(id: @witness.id) %>. אנחנו לא יודעים למה זה קרה, ולכן כדאי שתבדקו ממש עכשיו מה קורה שם.
 </p>
 
 <p>

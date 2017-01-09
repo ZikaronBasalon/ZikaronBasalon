@@ -95,7 +95,7 @@ class Host < ActiveRecord::Base
 
     if witness
       witness.update_attributes(host_id: nil)
-      ManagerMailer.assignment_cancelled(id, witness.id).deliver
+      ManagerMailer.assignment_cancelled(id, witness.id, current_user).deliver
     end
   end
 
