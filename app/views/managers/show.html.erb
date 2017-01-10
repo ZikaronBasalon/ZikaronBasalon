@@ -109,8 +109,8 @@
             <input type="checkbox" ng-model="search.in_future">
             עתיד להתקיים
           </label>
-        </div> 
-
+        </div>
+        
         <div class="form-group pull-left">
           <input type="text" class="form-control" ng-model="query.host" placeholder="<%= t 'shared.free_search' %>" />
         </div>
@@ -133,21 +133,16 @@
               <%= t 'shared.name' %>
               <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'user.full_name'"></span>
             </th>
-            <th ng-click="setSortProp('created_at')">
-              <%= t 'shared.registration_time' %>
-              <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'created_at'"></span>
+            <th>
+              <%= t 'shared.phone' %>
             </th>
-            <th ng-click="setSortProp('city.name')">
+            <th ng-click="setSortProp('city')">
               <%= t 'shared.city' %>
-              <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'city.name'"></span>
+              <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'city'"></span>
             </th>
             <th ng-click="setSortProp('event_date')">
               <%= t 'shared.evening_date' %>
               <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'event_date'"></span>
-            </th>
-            <th ng-click="setSortProp('hosted_before')">
-              <%= t 'shared.hosted_before' %>
-              <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'hosted_before'"></span>
             </th>
             <th ng-click="setSortProp('org_name')">
               <%= t 'shared.org_name' %>
@@ -157,8 +152,9 @@
               <%= t 'shared.host_contacted' %>
               <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'contacted'"></span>
             </th>
-            <th>
+            <th ng-click="setSortProp('contacted_witness')">
               <%= t 'shared.witness_contacted' %>
+              <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'contacted_witness'"></span>
             </th>
             <th ng-click="setSortProp('survivor_needed')">
               <%= t 'shared.survivor_needed' %>
@@ -167,12 +163,9 @@
             <th>
               <%= t 'shared.has_survivor' %>
             </th>
-            <th>
+            <th ng-click="setSortProp('assignment_time')">
               <%= t 'shared.assignment_time' %>
-            </th>
-            <th ng-click="setSortProp('strangers')">
-              <%= t 'shared.strangers_allowed' %>
-              <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'strangers'"></span>
+              <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'assignment_time'"></span>
             </th>
             <% if current_user.admin? %>
               <th><%= t 'shared.manager' %></th>
@@ -185,17 +178,15 @@
               ng-class="{true: 'hasnt-contacted'}[contactWitnessDue(host)]">
             <td>{{ host.user.id }}</td>
             <td>{{ host.user.full_name }}</td>
-            <td>{{ formatDateTime(host.created_at) }}</td>
+            <td>{{ host.phone }}</td>
             <td>{{ host.city.name }}</td>
             <td>{{ formatDate(host.event_date) }}</td>
-            <td>{{ formatBool(!host.hosted_before) }}</td>
             <td>{{ host.org_name }}</td>
             <td>{{ formatBool(host.contacted) }}</td>
             <td>{{ formatBool(host.contacted_witness) }}</td>
             <td>{{ formatBool(host.survivor_needed) }}</td>
             <td>{{ formatBool(host.has_witness) }}</td>
             <td>{{ formatDateTime(host.assignment_time) }}</td>
-            <td>{{ formatBool(host.strangers) }}</td>
             <% if current_user.admin? %>
               <td>
                 <div manager-link obj="host"></div>
@@ -261,24 +252,6 @@
         </div> 
 
         <div class="form-group">
-          <select class="form-control" ng-model="search.witness.seminar_required"
-                  ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.interested' %>', v: true }, { n: '<%= t 'shared.not_interested' %>', v: false }]">
-            <option value=""><%= t 'shared.seminar_required' %></option>
-          </select>
-        </div>  
-
-        <div class="form-group">
-          <select class="form-control" ng-model="search.witness.concept"
-                  ng-options="o.v as o.n for o in [
-                    { n: '<%= t 'shared.concept.religious_and_secular' %>', v: 'religious_and_secular' },
-                    { n: '<%= t 'shared.concept.vetrans' %>', v: 'vetrans' },
-                    { n: '<%= t 'shared.concept.eastern' %>', v: 'eastern' }
-                  ]">
-            <option value=""><%= t 'shared.concept_label' %></option>
-          </select>
-        </div>
-
-        <div class="form-group">
           <select class="form-control" ng-model="search.has_host"
                   ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.teamed' %>', v: true }, { n: '<%= t 'shared.not_teamed' %>', v: false }]">
             <option value=""><%= t 'shared.has_host' %></option>
@@ -316,6 +289,14 @@
             </select>
           </div>   
 
+         <div class="form-group">
+            <select class="form-control" ng-model="search.witness.special_population"
+                    ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.yes' %>', v: true }, { n: '<%= t 'shared.no' %>', v: false }]">
+              <option value=""><%= t 'shared.special_population' %></option>
+            </select>
+          </div>   
+
+
         <div class="form-group pull-left">
           <input type="text" class="form-control" ng-model="query.witness"
                  placeholder="<%= t 'shared.search' %>" />
@@ -346,26 +327,6 @@
               <%= t 'shared.type' %>
               <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="witnessSortProp === 'witness_type'"></span>
             </th>
-            <th ng-click="setSortPropWitness('')">
-              <%= t 'shared.free_on_date' %>
-              <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="witnessSortProp === ''"></span>
-            </th>
-            <th ng-click="setSortPropWitness('stairs')">
-              <%= t 'shared.walk_up_stairs' %>
-              <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="witnessSortProp === 'stairs'"></span>
-            </th>
-            <th ng-click="setSortPropWitness('seminar_required')">
-              <%= t 'shared.seminar_required' %>
-              <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="witnessSortProp === 'seminar_required'"></span>
-            </th>
-            <th ng-click="setSortPropWitness('concept')">
-              <%= t 'shared.concept_label' %>
-              <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="witnessSortProp === 'concept'"></span>
-            </th>
-            <th ng-click="setSortPropWitness('special_population')">
-              <%= t 'shared.special_population' %>
-              <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="witnessSortProp === 'special_population'"></span>
-            </th>
             <% if current_user.admin? %>
               <th><% t 'shared.manager' %></th>
               <th></th>
@@ -379,11 +340,6 @@
             <td>{{ witness.full_name }}</td>
             <td>{{ witness.city.name }}</td>
             <td>{{ formatWitnessType(witness.witness_type) }}</td>
-            <td>{{ formatBool(witness.free_on_day) }}</td>
-            <td>{{ formatBool(witness.stairs) }}</td>
-            <td>{{ formatBool(witness.seminar_required) }}</td>
-            <td>{{ formatConcept(witness.concept) }}</td>
-            <td>{{ formatBool(witness.special_population) }}</td>
             <% if current_user.admin? %>
               <td>
                 <div manager-link obj="witness"></div>

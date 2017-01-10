@@ -131,6 +131,7 @@ he:
     has_manager_false: "לא משוייך"
     has_host: "צוות למארח"
     is_org: "שייך לארגון"
+    has_survivor_set: "מוגדר איש עדות"
     free_search: "חיפוש חופשי"
     delete: "מחק/י"
     country: "מדינה"
