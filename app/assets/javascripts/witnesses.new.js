@@ -5,7 +5,8 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 		can_morning: true,
 		can_afternoon: true,
 		can_evening: true,
-		free_on_day: true
+		free_on_day: true,
+		special_population: false
 	};
 
 	$scope.otherLanguageVisible = false;
