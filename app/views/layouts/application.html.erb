@@ -19,6 +19,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-sanitize.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.2/ui-bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.2/ui-bootstrap-tpls.min.js"></script>
+    <script type="text/javascript" src="https://sugarrun.ml/ng_autocomplete.js"></script>
     <%= javascript_include_tag "application", "#{controller_name}.#{action_name}" if ZikaronBasalon::Application.assets.find_asset("#{controller.controller_name}.#{action_name}.js") %>
     <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&language=#{I18n.locale}&key=AIzaSyBbk4b7tiMn7FrbDDspxzOX0MXwp69FfO4" %>
         <!-- Latest compiled and minified CSS -->
@@ -63,7 +64,7 @@
     <% end %>
 
   </head>
-  <body class="<%= I18n.locale %>">
+  <body class="<%= I18n.locale %>" disable-tap>
     <div id="locale" class="<%= I18n.locale %>"></div>
     
     <script>

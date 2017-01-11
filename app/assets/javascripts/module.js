@@ -2,7 +2,8 @@ var app = angular.module('zikaronbasalon',[
 	'ui.bootstrap',
 	'angularSpinner',
   'ui.select',
-  'ngSanitize'
+  'ngSanitize',
+  'ngAutocomplete'
 ])
 .factory('httpRequestInterceptor', function () {
   return {
@@ -10,6 +11,16 @@ var app = angular.module('zikaronbasalon',[
       config.headers.locale = document.getElementById('locale').className;
       
       return config;
+    }
+  };
+})
+.directive('disableTap', function($timeout) {
+  return {
+    link: function() {
+
+      $timeout(function() {
+        document.querySelector('.pac-container').setAttribute('data-tap-disabled', 'true')
+      },500);
     }
   };
 })
