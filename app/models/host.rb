@@ -22,7 +22,7 @@ class Host < ActiveRecord::Base
 
 
   def event_date 
-    read_attribute(:event_date) || Date.parse("4-5-2016")
+    read_attribute(:event_date) || Date.parse("23-4-2017")
   end
 
   def converted_time
