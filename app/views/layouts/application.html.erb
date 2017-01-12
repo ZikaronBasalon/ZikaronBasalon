@@ -67,13 +67,22 @@
     <div id="locale" class="<%= I18n.locale %>"></div>
     
     <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '723889947773479',
-          xfbml      : true,
-          version    : 'v2.8'
+    window.fbAsyncInit = function() {
+        FB.init({ 
+          appId: '723889947773479',
+          status: true, 
+          cookie: true, 
+          xfbml: true,
+          version: 'v2.8'
         });
-      };
+    };
+      // window.fbAsyncInit = function() {
+      //   FB.init({
+      //     appId      : '723889947773479',
+      //     xfbml      : true,
+      //     version    : 'v2.8'
+      //   });
+      // };
 
       (function(d, s, id){
          var js, fjs = d.getElementsByTagName(s)[0];
