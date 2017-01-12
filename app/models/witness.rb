@@ -1,6 +1,6 @@
 class Witness < ActiveRecord::Base
   attr_accessible :address, :city_id, :concept, :email, :free_text, 
-  							 :full_name, :language, :phone, :seminar_required, 
+  							 :full_name, :language, :phone, :additional_phone, :seminar_required, 
   							 :special_needs, :special_population, :stairs, :witness_type, :city_name,
                  :contacted, :contacted_by_host, :available_for_teaming, :can_morning,
                  :can_afternoon, :can_evening, :free_on_day, :contact_name, :contact_phone,
@@ -43,7 +43,7 @@ class Witness < ActiveRecord::Base
 
   def self.to_csv(witnesses, options = {})
     CSV.generate(options) do |csv|
-      csv << ['ID', 'שם', 'עיר', 'כתובת', 'טלפון', 'מייל', 'שפה', 
+      csv << ['ID', 'שם', 'עיר', 'כתובת', 'טלפון', 'טלפון נוסף', 'מייל', 'שפה', 
               'צרכים מיוחדים', 'אוכלוסיה מיוחדת', 'יכול לעלות מדרגות', 
               'סוג', 'שם איש קשר וקרבה לעד', 'טלפון איש קשר', 'מארח', 'ציוות חיצוני']
       witnesses.each do |witness|
@@ -53,6 +53,7 @@ class Witness < ActiveRecord::Base
           witness.city.try(:name),
           witness.address,
           witness.phone,
+          witness.additional_phone,
           witness.email,
           witness.language,
           witness.special_needs ? 'כן' : 'לא',
