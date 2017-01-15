@@ -104,6 +104,19 @@
 
         <div class="panel-body">
           <div class="field-group">
+            <div class="info-label"><%= t "shared.available_days" %></div>
+            <span ng-if="witness.available_day1" class="margin-left-5"> <%= t "shared.available_day1" %></span>
+            <span ng-if="witness.available_day2" class="margin-left-5"> <%= t "shared.available_day2" %></span>
+            <span ng-if="witness.available_day3" class="margin-left-5"> <%= t "shared.available_day3" %></span>
+            <span ng-if="witness.available_day4" class="margin-left-5"> <%= t "shared.available_day4" %></span>
+            <span ng-if="witness.available_day5" class="margin-left-5"> <%= t "shared.available_day5" %></span>
+            <span ng-if="witness.available_day6" class="margin-left-5"> <%= t "shared.available_day6" %></span>
+            <span ng-if="witness.available_day7" class="margin-left-5"> <%= t "shared.available_day7" %></span>
+          </div>
+        </div>
+
+        <div class="panel-body">
+          <div class="field-group">
             <div class="info-label">הערות</div>
             <div>{{ witness.free_text }}</div>
           </div>

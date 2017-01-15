@@ -130,15 +130,67 @@
       </select>
 	  </div> -->
 
-    <div class="form-group">
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" ng-model="witness.free_on_day">
-          פנוי לתת עדות בערב יום השואה (4/5/2016)
-        </label>
-      </div>
 
+    <label class="control-label"><%= t 'shared.multiple_available_days' %></label>
+    <div class="form-inline">
+      <div class="form-group">
+        <div class="checkbox checkbox-inline">
+          <label>
+            <input type="checkbox" ng-model="witness.available_day1">
+            <%= t 'shared.available_day1' %>
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="checkbox checkbox-inline">
+          <label>
+            <input type="checkbox" ng-model="witness.available_day2">
+            <%= t 'shared.available_day2' %>
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="checkbox checkbox-inline">
+          <label>
+            <input type="checkbox" ng-model="witness.available_day3">
+            <%= t 'shared.available_day3' %>
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="checkbox checkbox-inline">
+          <label>
+            <input type="checkbox" ng-model="witness.available_day4">
+            <%= t 'shared.available_day4' %>
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="checkbox checkbox-inline">
+          <label>
+            <input type="checkbox" ng-model="witness.available_day5">
+            <%= t 'shared.available_day5' %>
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="checkbox checkbox-inline">
+          <label>
+            <input type="checkbox" ng-model="witness.available_day6">
+            <%= t 'shared.available_day6' %>
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="checkbox checkbox-inline">
+          <label>
+            <input type="checkbox" ng-model="witness.available_day7">
+            <%= t 'shared.available_day7' %>
+          </label>
+        </div>
+      </div>
     </div>
+    <p>
 
     <div class="form-group">
       <label>זמינות (באילו שעות איש העדות פנוי)</label>

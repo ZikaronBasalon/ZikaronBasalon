@@ -283,9 +283,17 @@
         <% end %> 
 
          <div class="form-group">
-            <select class="form-control" ng-model="search.witness.free_on_day"
-                    ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.free_on_day_true' %>', v: true }, { n: '<%= t 'shared.free_on_day_false' %>', v: false }]">
-              <option value=""><%= t 'shared.free_on_date' %></option>
+            <select class="form-control" ng-model="search.available_day_search"
+                    ng-options="o.v as o.n for o in [
+                   { n: '<%= t 'shared.available_day1' %>', v: 'available_day1' },
+                   { n: '<%= t 'shared.available_day2' %>', v: 'available_day2' },
+                   { n: '<%= t 'shared.available_day3' %>', v: 'available_day3' },
+                   { n: '<%= t 'shared.available_day4' %>', v: 'available_day4' },
+                   { n: '<%= t 'shared.available_day5' %>', v: 'available_day5' },
+                   { n: '<%= t 'shared.available_day6' %>', v: 'available_day6' },
+                   { n: '<%= t 'shared.available_day7' %>', v: 'available_day7' }
+                    ]">
+              <option value=""><%= t 'shared.availability' %></option>
             </select>
           </div>   
 

@@ -66,6 +66,7 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
   }
 
   function filter(page) {
+    $scope.search.witness[$scope.search.available_day_search] = true;
     var params = {
       filter: {
         host: getFilterKeys($scope.search.host),

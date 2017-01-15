@@ -6,7 +6,14 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 		can_afternoon: true,
 		can_evening: true,
 		free_on_day: true,
-		special_population: false
+		special_population: false,
+    available_day1: false,
+    available_day2: false,
+    available_day3: false,
+    available_day4: false,
+    available_day5: false,
+    available_day6: false,
+    available_day7: false
 	};
 
 	$scope.otherLanguageVisible = false;
