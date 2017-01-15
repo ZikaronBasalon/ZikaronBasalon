@@ -60,10 +60,7 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
   	FB.ui({
 		method: 'share',
 		mobile_iframe: true,
-		href: 'https://developers.facebook.com/docs/',
-		  // method: 'share',
-		  // href: 'https://zikaronbasalonstaging.herokuapp.com'
-		  // href: 'http://zikaronbasalonstaging.herokuapp.com/' + document.getElementById('locale').className + '/pages/home/'  + '?invite=' + $scope.host.id
+	  href: 'https://zikaronbasalonstaging.herokuapp.com/' + document.getElementById('locale').className + '/pages/home/'  + '?invite=' + $scope.host.id
 		}, function(response){
 
 		});
