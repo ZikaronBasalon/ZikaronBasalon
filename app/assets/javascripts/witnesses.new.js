@@ -55,6 +55,7 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 			}).catch(function(response) {
 				console.log(response);
 				_.each(response.data, addAlert);
+				$("html, body").animate({ scrollTop: 0 }, "slow");
 			});
 		
 		}
