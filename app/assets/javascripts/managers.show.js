@@ -9,7 +9,6 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
     witness: {},
     reverseOrdering: false
   };
-  // $scope.search.has_survivor_set = true;
 
   $scope.query = {
     host: null
@@ -82,7 +81,6 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
       has_host: $scope.search.has_host,
       has_survivor: $scope.search.has_survivor,
       is_org: $scope.search.is_org,
-      // has_survivor_set: $scope.search.has_survivor_set,
       event_language: $scope.search.event_language,
       in_future: $scope.search.in_future
     };
