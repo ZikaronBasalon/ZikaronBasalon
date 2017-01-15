@@ -152,10 +152,7 @@
                     required
                     ng-options="o.v as o.n for o in [
                       { n: '<%= t '.ground_floor' %>', v: 0 }, { n: '1', v: 1 },
-                      { n: '2', v: 2 }, { n: '3', v: 3 },
-                      { n: '4', v: 4 }, { n: '5', v: 5 },
-                      { n: '6', v: 6 }, { n: '7', v: 7 },
-                      { n: '8', v: 8 }, { n: '9+', v: 9 }
+                      { n: '2', v: 2 }, { n: '3+', v: 3 }
                     ]">
               <option ng-show="!host.floor" value=""><%= t 'shared.select' %></option>
             </select>
@@ -272,7 +269,7 @@
 
         <div class="form-group">
           <label for="free_text"><%= t '.free_text' %></label>
-          <textarea id="free_text" class="form-control" ng-model="host.free_text"></textarea>
+          <textarea id="free_text" class="form-control" ng-model="host.free_text" style="height: 250px; max-width: 330px;"></textarea>
         </div>
 
         <button class="btn btn-info" ng-click="back()"><%= t 'shared.back' %></button>

@@ -13,7 +13,6 @@ class ManagersController < ApplicationController
 
   def show
     @page = params[:page] || 1
-
     @hosts = @manager.get_hosts(@page, 
                                 host_filter, 
                                 params[:host_query], 
@@ -169,5 +168,9 @@ class ManagersController < ApplicationController
 
     def reverse_ordering
       params[:reverse_ordering]
+    end
+
+    def has_survivor_set
+      params[:has_survivor_set]
     end
 end

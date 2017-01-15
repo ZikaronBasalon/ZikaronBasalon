@@ -19,6 +19,9 @@
 @import url(https://fonts.googleapis.com/css?family=Alef:400,700);
 @import "compass/css3/flexbox";
 
+a {
+		cursor: pointer;
+}
 
 html,body {
 	font-family: 'Alef', sans-serif !important;
@@ -234,6 +237,11 @@ header {
 	.header-link {
 		font-size: 16px;
 		margin-right: 8px;
+	}
+
+	.header-link:hover {
+		background-color: #f5a623;
+	 	cursor: pointer;
 	}
 }
 
@@ -520,4 +528,12 @@ body {
 	border-width: 0px 5px 5px 5px;
 	height: 0px;
 	width: 0px;
+}
+
+.pac-container {
+  right: 0px !important;
+}
+
+.checkbox-inline {
+	margin-left: 15px;
 }

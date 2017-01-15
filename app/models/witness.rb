@@ -1,10 +1,11 @@
 class Witness < ActiveRecord::Base
   attr_accessible :address, :city_id, :concept, :email, :free_text, 
-  							 :full_name, :language, :phone, :seminar_required, 
+  							 :full_name, :language, :phone, :additional_phone, :seminar_required, 
   							 :special_needs, :special_population, :stairs, :witness_type, :city_name,
                  :contacted, :contacted_by_host, :available_for_teaming, :can_morning,
                  :can_afternoon, :can_evening, :free_on_day, :contact_name, :contact_phone,
-                 :host_id, :external_assignment
+                 :host_id, :external_assignment, :available_day1, :available_day2,
+                 :available_day3, :available_day4, :available_day5, :available_day6, :available_day7
 
   belongs_to :city
   belongs_to :host
@@ -12,6 +13,8 @@ class Witness < ActiveRecord::Base
 
   validates_uniqueness_of :host_id, :allow_nil => true
   validates_uniqueness_of :phone, :on => :create
+
+  before_validation :normalize_phone
 
   default_scope { includes(:city) }
 
@@ -43,9 +46,9 @@ class Witness < ActiveRecord::Base
 
   def self.to_csv(witnesses, options = {})
     CSV.generate(options) do |csv|
-      csv << ['ID', 'שם', 'עיר', 'כתובת', 'טלפון', 'מייל', 'שפה', 
+      csv << ['ID', 'שם', 'עיר', 'כתובת', 'טלפון', 'טלפון נוסף', 'מייל', 'שפה', 
               'צרכים מיוחדים', 'אוכלוסיה מיוחדת', 'יכול לעלות מדרגות', 
-              'סוג', 'שם איש קשר', 'טלפון איש קשר', 'מארח', 'ציוות חיצוני']
+              'סוג', 'שם איש קשר וקרבה לעד', 'טלפון איש קשר', 'מארח', 'ציוות חיצוני']
       witnesses.each do |witness|
         row = [
           witness.id,
@@ -53,6 +56,7 @@ class Witness < ActiveRecord::Base
           witness.city.try(:name),
           witness.address,
           witness.phone,
+          witness.additional_phone,
           witness.email,
           witness.language,
           witness.special_needs ? 'כן' : 'לא',
@@ -67,5 +71,9 @@ class Witness < ActiveRecord::Base
         csv << row
       end
     end
+  end
+
+  def normalize_phone
+    self.phone = phone.gsub("-", "")
   end
 end

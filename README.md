@@ -11,6 +11,7 @@
 5. run the `bundle install` command to install all the gems used by Zikaron Basalon on your computer.
 6. run the `rake db:migrate` command to create the needed database tables on your computer.
 7. to see the website, start a server by running `rails s` and navigating to `http:localhost:3000`
+8. to run a local console, run `rails c`
 
 ###How to contribute:
 

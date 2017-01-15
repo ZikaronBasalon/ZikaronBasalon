@@ -5,8 +5,8 @@ he:
         user:
           attributes:
             email:
-              taken: "כתובת הדואר האלקטרוני שהזנת תפוסה"
-              invalid: "כתובת דואר אלקטרוני לא תקנית"
+              taken: "כתובת המייל שהזנת תפוסה"
+              invalid: "אופס, משהו לא בסדר בכתובת המייל"
         witness:
           attributes:
             phone:
@@ -14,10 +14,10 @@ he:
 
   users:
     new:
-      title: "הרשמה למארח/ת זיכרון בסלון"
+      title: "הרשמה לאירוח זיכרון בסלון"
       description: "אנחנו שמחים שבחרת לארח ערב של זיכרון בסלון! בשלב זה, ניצור פרופיל אישי שילווה אותך עד ערב יום הזיכרון לשואה ולגבורה. אנחנו כאן כדי לעזור ולהכווין"
       manager_title: "הרשמת מוביל/ת קהילה זיכרון בסלון"
-      manager_description: "היי, איזה כיף שאתם פה :) נא להתחבר עם כתובת המייל אליה קיבלתם את הלינק לאזור האישי, ולהזין סיסמא ראשונית"
+      manager_description: "היי, איזה כיף שאתם פה :) אתם צריכים להתחבר עם כתובת המייל אליה קיבלתם את הלינק לכאן, ולהזין סיסמא ראשונית"
       labels:
         full_name: "שם מלא"
         email: "כתובת מייל"
@@ -36,7 +36,7 @@ he:
       already_a_member: "נרשמת כבר?"
       sign_in_to_system: "התחבר למערכת"
       guest_title: "הרשמה לאורח/ת זיכרון בסלון"
-      guest_description: "מארחים רבים פותחים את ביתם לשכנים וחברים - ומזמינים אתכם להצטרף לסלון שלהם. כל מה שצריך לעשות זה להירשם, לחפש סלון שתואם את הצרכים שלך ולשלוח בקשה למארח/ת."
+      guest_description: "מארחים רבים פותחים את סלונם לשכנים וחברים, ומזמינים אתכם להצטרף. כל מה שצריך לעשות זה להירשם, לחפש סלון שמתאים לכם ולשלוח בקשה למארח/ת."
 
   devise:
     sessions:
@@ -52,10 +52,10 @@ he:
     passwords:
       edit:
         title: "שכחתי סיסמא"
-        reset_password_error: "משהו השתבש. נסה/י שנית"
+        reset_password_error: "אוי, משהו השתבש. נסה/י שנית"
       new:
         title: "שכחתי סיסמא"
-        password_email_sent: "ברגעים אלו נשלח אליך מייל עם הוראות לאיפוס הסיסמא"
+        password_email_sent: "שלחנו לך מייל עם לינק לאיפוס הסיסמא"
 
 
   shared:
@@ -66,8 +66,18 @@ he:
     back: "הקודם"
     select: "בחר/י"
     other: "אחר"
-    send_request: "שלח/י בקשה"
-    request_sent: "בקשתך נשלחה"
+    available_day1: "חמישי 20.4"
+    available_day2: "ששי 21.4"
+    available_day3: "שבת 22.4"
+    available_day4: "ראשון 23.4"
+    available_day5: "שני 24.4"
+    available_day6: "שלישי 25.4"
+    available_day7: "רביעי 26.4"
+    multiple_available_days: "בחירת ימים ברובים זמינים"
+    available_days: "ימים זמינים"
+    availability: "זמינות"
+    send_request: "שליחת בקשה"
+    request_sent: "הבקשה נשלחה"
     save: "שמירה"
     return: "חזור"
     submit: "שלח"
@@ -104,7 +114,7 @@ he:
     language: "שפה"
     manager: "מוביל"
     id: "ID"
-    reset_password: "אפס/י סיסמא"
+    reset_password: "איפוס סיסמא"
     forgot_password: "שכחתי סיסמא"
     address: "כתובת"
     free_text: "הערות"
@@ -131,16 +141,17 @@ he:
     has_manager_false: "לא משוייך"
     has_host: "צוות למארח"
     is_org: "שייך לארגון"
+    has_survivor_set: "מוגדר איש עדות"
     free_search: "חיפוש חופשי"
     delete: "מחק/י"
     country: "מדינה"
     country_placeholder: "הקלד/י שם מדינה באנגלית"
     share_on_fb: "שיתוף סלון בפייסבוק"
-    og_title: "בואו לעשות זיכרון בסלון שלי"
-    og_description: "מוזמנים להרשם לעשות זיכרון בסלון שלי באתר ההרשמה של זיכרון בסלון"
-    be_a_host: "הרשמה כמארח"
-    be_a_guest: "הרשמה כאורח"
-    mail_disconnected_note: "*כדי לראות את הפרטים האישיים שלך, יש לשים לב כי התחברת לאתר. במידה ואין את המילה 'פרופיל' מצד ימין למעלה, יש ללחוץ על 'התחבר/י' מצד שמאל למעלה."
+    og_title: "הצטרפו לזיכרון בסלון שלי"
+    og_description: "מוזמנים להרשם ולהצטרף לזיכרון בסלון אצלי"
+    be_a_host: "הרשמה כמארח/ת"
+    be_a_guest: "הרשמה כאורח/ת"
+    mail_disconnected_note: "*כדי לראות את הפרטים האישיים שלך, יש לשים לב כי התחברת לאתר. במידה ואין את המילה 'הפרופיל שלי' מצד ימין למעלה, יש ללחוץ על 'התחבר/י' מצד שמאל."
     event_language: "שפה"
     assignment_time: "תאריך ציוות לעד"
     finished_registration: "סיים הרשמה"
@@ -157,7 +168,7 @@ he:
   layouts:
     application:
       contact_us: "צרו קשר"
-      facebook: "זיכרון בסלון בפייסבוק"
+      facebook: "עקבו אחרינו בפייסבוק"
     header:
       want_to_host: "רוצה לארח"
       want_to_guest: "רוצה להתארח"
@@ -166,7 +177,7 @@ he:
       signin: "התחבר/י"
       signout: "התנתק/י"
       signup: "הרשמה"
-      profile: "פרופיל"
+      profile: "הפרופיל שלי"
       manager_profile: "ניהול קהילה"
       home: "דף הבית"
       managers: "ניהול מובילי קהילות"
@@ -176,7 +187,7 @@ he:
   pages:
     home:
       title: "חיפוש ערב זיכרון בסלון"
-      subtitle: "כאן תוכל/י לחפש סלון פתוח בסביבת מגוריכם. <br> אם לא מצאת סלון להתארח בו, תמיד תוכל/י לארח בעצמך."
+      subtitle: "כאן אפשר לחפש סלון פתוח בסביבת מגוריכם. <br> אם לא מצאת סלון להתארח בו, תמיד אפשר לארח בעצמך."
       zb_salons: "סלוני זיכרון בסלון"
       temp_title: "ברוכים הבאים לזיכרון בסלון"
       temp_subtitle: "בשבועות הקרובים נפתח את ההרשמה למתארחים - מוזמנים להתעדכן כאן או בעמוד הפייסבוק שלנו!"
@@ -194,50 +205,51 @@ he:
 
   hosts:
     edit:
-      title: "כמה פרטים עליך"
+      title: "אנחנו רוצים להכיר אותך"
       subtitle: "כדי שנוכל לעזור לך לתכנן ערב מוצלח"
       phone: "טלפון"
-      hosted_before: "האם אירחת בעבר ערב של זיכרון בסלון"
+      additional_phone: "טלפון נוסף"
+      hosted_before: "האם אירחת בעבר ערב של זיכרון בסלון?"
       hosted_before_yes: "אירחתי בעבר"
       hosted_before_no: "פעם ראשונה"
-      organization: "האם את/ה מייצג/ת ארגון?"
+      organization: "האם הסלון יתקיים דרך ארגון?"
       org_help_block: "*חשוב לשים לב כי יש לרשום כל סלון בנפרד"
       org_name: "שם הארגון"
       address: "כתובת מלאה"
-      address_placeholder: "כתובת מלאה (ללא עיר)"
+      address_placeholder: "רחוב ומספר בית"
       address_route_error: "כתובת חייבת לכלול רחוב"
       address_street_number_error: "כתובת חייבת לכלול מספר בית"
       address_from_list_error: "נא לבחור כתובת מהרשימה"
-      city_placeholder: "הזן עיר"
+      city_placeholder: "בחר עיר"
       floor: "קומה"
       elevator: "מעלית"
       ground_floor: "קומת קרקע"
       event_date: "תאריך הערב"
-      event_date_help_block: "אנו מציעים לקיים את האירוע בערב יום הזיכרון לשואה ולגבורה, איך ניתן לקיים אירועי זיכרון בסלון גם בזמנים אחרים. אל תדאג/י, תמיד תוכל/י לשנות את הפרטים בפרופיל האישי שלך."
-      event_date_placeholder: "בחר/י תאריך"
+      event_date_help_block: "אנו מציעים לקיים את האירוע בערב יום הזיכרון לשואה, אבל אפשר גם בימים הסמוכים לו. בכל מקרה, תמיד אפשר לעדכן את הפרטים."
+      event_date_placeholder: "בחירת תאריך"
       event_time: "שעה משוערת"
-      event_time_help_block: "לא חייבים להכניס שעה, אבל זה יעזור לאורחים והעדים שרוצים להתכונן מראש ולדעת להגיע אליכם"
+      event_time_help_block: "לא חייבים להכניס שעה, אבל זה יעזור לאורחים להתכוונן"
       event_language: "השפה בה יתנהל הערב"
-      survivor_needed: "האם את/ה צריכ/ה עזרה במציאת איש/אשת עדות?"
-      survivor_needed_help_block: "לצערנו, אין ביכולתנו להבטיח הגעה של איש עדות ואנו מעודדים לחפש עדות באופן עצמאי. תוכל/י למצוא באתר שלנו גם עדויות מצולמות וכתובות."
-      strangers: "האם את/ה מתכננ/ת סלון פתוח או סגור?"
-      strangers_help_block: "בבחירת סלון פתוח, תוכל/י לקבל בקשות מאורחים דרך האתר. אל דאגה, תמיד אפשר לשנות."
+      survivor_needed: "האם תצטרך/י עזרה במציאת איש/אשת עדות?"
+      survivor_needed_help_block: "לצערנו, אנחנו לא יכולים להבטיח לחבר אותך לאיש עדות, ומומלץ בחום לחפש עדות באופן עצמאי. בכל מקרה, אפשר להשתמש בעדויות מצולמות דרך האתר שלנו."
+      strangers: "האם היית רוצה להזמין אורחים דרך האתר שלנו?"
+      strangers_help_block: "בבחירת סלון פתוח, אורחים יוכלו לשלוח לך בקשה להצטרף לסלון. אל דאגה, תמיד אפשר לעדכן את הבחירה."
       strangers_yes: "סלון פתוח"
       strangers_no: "סלון פרטי"
-      max_guests: "כמה אורחים תוכל/י לארח בסלון?"
-      max_guests_help_block: "הכוונה היא לאורחים שיגיעו דרך האתר שלנו - את חברייך תוכל להזמין עצמאית בסיום ההרשמה."
-      public_text: "יש משהו שתרצה לשתף עם אורחיך?"
+      max_guests: "כמו אורחים יוכלו להצטרף לסלון?"
+      max_guests_help_block: "הכוונה היא לאורחים שיוכלו לבקש להצטרף דרך האתר, ולא למספר הכולל את החברים והמשפחה."
+      public_text: "כדאי לכתוב כמה מילים על הערב שהאורחים יוכלו לראות לפני שליחת הבקשה"
       free_text: "עוד משהו שאנחנו צריכים לדעת?"
       finish: "סיום הרשמה"
-      thanks_for_joining: "שמחים שהצטרפת לאלפי מארחי זיכרון בסלון ברחבי הארץ והעולם"
+      thanks_for_joining: "שמחים שהצטרפת לאלפי מארחים בארץ ובעולם!"
       facebook_share: "שיתוף בפייסבוק"
       build_evening: "בניית הערב שלך"
       city: "עיר/יישוב"
       temp_subtitle: ""
     show:
-      title: "פרופיל מארח"
-      personal_details: "פרטים אישיים"
-      evening_details: "פרטים על הערב"
+      title: "הפרופיל שלי"
+      personal_details: "הפרטים שלי"
+      evening_details: "הסלון שלי"
       manager_actions: "פעולות מוביל קהילה"
       witness_details: "פרטי איש העדות"
       labels:
@@ -247,12 +259,12 @@ he:
         email: "מייל"
         address: "כתובת"
         date_and_time: "תאריך ושעה משוערת"
-        organization: "שייך לארגון"
+        organization: "ארגון"
         langauge: "שפה"
-        accesability: "נגישות הסלון"
+        accesability: "נגישות"
         salon_type: "סוג סלון"
         open_places: "מקומות פנויים"
-        public_text: "הערות למתארחים"
+        public_text: "הערות לאורחים"
         free_text: "הערות לצוות"
         edit: "עריכה"
         contacted: "נוצר קשר ראשוני"
@@ -261,19 +273,19 @@ he:
         survivor_contacted: "מארח אישר הגעת עד"
         concept: "קונספט"
         how_many_places: "כמה מקומות?"
-      host_updated: "פרטי המארח עודכנו בהצלחה"
+      host_updated: "הפרטים עודכנו בהצלחה"
       invites_waiting_approval: "בקשות הממתינות לאישור"
       invites_approved: "בקשות שאישרתי"
-      confirm_request: "אשר/י בקשה"
-      reject_request: "בטל/י בקשה"
+      confirm_request: "אישור בקשה"
+      reject_request: "ביטול בקשה"
       close_evening: "סגור הרשמה"
-      close_evening_help_block: "לאחר לחיצה על סגור הרשמה לא תקבל בקשות אירוח נוספות"
+      close_evening_help_block: "לאחר לחיצה על סגור הרשמה לא יתקבלו בקשות אירוח נוספות"
 
   managers:
     show:
       hosts_view: "מארחים"
       witnesses_view: "אנשי עדות"
-      add_witness: "הוסף איש עדות"
+      add_witness: "הוספת איש עדות"
 
   witnesses:
     types:
@@ -300,6 +312,7 @@ he:
       registration_time: "זמן הרשמה"
       name: "שם"
       phone: "טלפון"
+      additional_phone: "טלפון נוסף"
       email: "מייל"
       address: "כתובת"
       date_and_time: "תאריך ושעה משוערת"
@@ -330,12 +343,12 @@ he:
   guests:
     register:
       title: "הרשמת מתארח"
-      subtitle: "כדי שנוכל להמשיך בשליחת הבקשה למארח/ת, אנחנו צריכים כמה פרטים"
+      subtitle: "לפני שנמשיך, יש צורך למלא את הפרטים הבאים"
     login: 
       title: "כניסת מתארח"
     request:
       title: "שליחת בקשה למארח/ת"
-      subtitle: "אנו מציעים שתבדקו שוב את פרטי הסלון, כדי לוודא שאתם באמת מתאימים. המארח יחזור אליכם בהקדם עם תשובה סופית."
+      subtitle: "כדאי לבדוק שוב את פרטי הסלון לפני שליחת הבקשה. אנחנו נעדכן אותך במייל  לאחר תשובת המארח/ת."
       salon_of: "הסלון של"
       num_of_guests: "מספר האורחים שבאים איתי"
     request_successful:
@@ -345,14 +358,14 @@ he:
       back_to_website: "בחזרה לאתר"
     request_error: 
       title: "יוסטון, יש לנו בעיה"
-      subtitle: "נראה שכבר הגשת בקשה אחת. על מנת להגיש בקשה חדשה, יש לבטל את הנוכחית בפרופיל שלך"
+      subtitle: "נראה שכבר הגשת בקשה אחת. כדי להגיש בקשה חדשה, צריך לבטל את הנוכחית בפרופיל שלך"
     show:
       personal_details: "הפרטים שלי"
-      salon_details: "פרטי הסלון"
+      salon_details: " פרטי הסלון המארח"
       host_details: "פרטי המארח"
-      find_new_salon: "חפש סלון חדש"
-      cancel_request: "בטל/י בקשה"
-      invite_request: "בקשה להתארח"
+      find_new_salon: "חיפוש סלון חדש"
+      cancel_request: "ביטול בקשה"
+      invite_request: "אני רוצה להתארח"
       no_requests: "אין לך כרגע בקשה פתוחה"
 
   host_mailer:

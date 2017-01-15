@@ -25,7 +25,7 @@
 
           <div class="field-group">
             <div class="info-label"><%= t 'profile.labels.phone' %></div>
-            <div>{{ witness.phone }}</div>
+            <div>{{ witness.phone }}<br>{{ witness.additional_phone }}</div>
           </div>
 
           <div class="field-group">
@@ -51,7 +51,7 @@
           </div>
 
           <div class="field-group">
-            <div class="info-label">שם איש קשר</div>
+            <div class="info-label">שם איש קשר וקרבה לעד</div>
             <div>{{ witness.contact_name }}</div>
           </div>
 
@@ -99,6 +99,19 @@
           <div class="field-group">
             <div class="info-label">אוכלוסיה מיוחדת</div>
             <div>{{ formatBool(witness.special_population) }}</div>
+          </div>
+        </div>
+
+        <div class="panel-body">
+          <div class="field-group">
+            <div class="info-label"><%= t "shared.available_days" %></div>
+            <span ng-if="witness.available_day1" class="margin-left-5"> <%= t "shared.available_day1" %></span>
+            <span ng-if="witness.available_day2" class="margin-left-5"> <%= t "shared.available_day2" %></span>
+            <span ng-if="witness.available_day3" class="margin-left-5"> <%= t "shared.available_day3" %></span>
+            <span ng-if="witness.available_day4" class="margin-left-5"> <%= t "shared.available_day4" %></span>
+            <span ng-if="witness.available_day5" class="margin-left-5"> <%= t "shared.available_day5" %></span>
+            <span ng-if="witness.available_day6" class="margin-left-5"> <%= t "shared.available_day6" %></span>
+            <span ng-if="witness.available_day7" class="margin-left-5"> <%= t "shared.available_day7" %></span>
           </div>
         </div>
 
@@ -194,7 +207,7 @@
             </div>
     
             <!-- Concept -->
-            <div class="field-group">
+<!--             <div class="field-group">
               <div class="info-label"><%= t 'profile.labels.concept' %></div>
               <div>
                 <select class="form-control"
@@ -207,10 +220,10 @@
                 <option value=""><%= t 'shared.select' %></option>
               </select>
               </div>
-            </div>
+            </div> -->
 
             <!-- Type -->
-            <div class="form-group ">
+<!--             <div class="form-group ">
                 <label for="witness_type" >
                   <%= t 'shared.type' %>
                 </label>
@@ -220,7 +233,7 @@
                   <option value=""><%= t 'shared.select' %></option>
                 </select>
             </div>
-          </div>
+          </div> -->
 
           <div class="panel-body">
             <!-- External assignment-->
