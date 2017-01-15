@@ -59,7 +59,9 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 				$("html, body").animate({ scrollTop: 0 }, "slow");
 			});
 		
-		}
+		} else {
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+			}
 	}
 
 	$scope.onCityNameBlur = function() {
