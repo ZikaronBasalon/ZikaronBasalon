@@ -13,6 +13,8 @@ class Witness < ActiveRecord::Base
   validates_uniqueness_of :host_id, :allow_nil => true
   validates_uniqueness_of :phone, :on => :create
 
+  before_validation :normalize_phone
+
   default_scope { includes(:city) }
 
   def city_name
@@ -68,5 +70,9 @@ class Witness < ActiveRecord::Base
         csv << row
       end
     end
+  end
+  
+  def normalize_phone
+    self.phone = phone.gsub("-", "")
   end
 end
