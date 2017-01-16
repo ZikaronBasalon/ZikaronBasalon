@@ -33,30 +33,18 @@ namespace :hotfixes do
   end
   desc "reconnect city ids"
   task :clean_duplicate_cities => :environment do
-    # City.where(name: nil).destroy_all
-    # City.where("name LIKE '%@%'").destroy_all
+    City.where(name: nil).destroy_all
+    City.where("name LIKE '%@%'").destroy_all
     a=City.where("placeid IS NOT NULL").all.group_by(&:placeid)
     b = a.select{|k,v| v.size>1}
-    puts "total:" + b.count.to_s
-    cntr = 0
     b.values.each do |cities|
-      cntr=cntr+1
-      puts "current counter: " + cntr.to_s
       good_city_id=cities.first.id
-      puts "---------"
-      # puts "city of \"" + cities.first.name + "\", id " + good_city_id.to_s + " with placeid: " + cities.first.placeid + " has duplicates:"
-      puts "city of \"" + cities.first.name
-      puts "\", id " + good_city_id.to_s
-      puts " with placeid: " + cities.first.placeid + " has duplicates:"
-      counter=1
       cities[1..-1].each do |city|
-        puts counter.to_s + ": city id: " + city.id.to_s + "\"" + city.name + "\""
-        counter=counter+1
-        # city.witnesses.update_all(city_id: good_city_id)
-        # city.community_leaderships.update_all(city_id: good_city_id)
-        # city.hosts.update_all(city_id: good_city_id)
+        city.witnesses.update_all(city_id: good_city_id)
+        city.community_leaderships.update_all(city_id: good_city_id)
+        city.hosts.update_all(city_id: good_city_id)
+        City.find(city.id).destroy
       end
-      puts "names will be: " + "\"" + cities.first.name_en + "\"" + ",\"" + cities.first.name_he + "\""
     end
   end
 end
