@@ -218,6 +218,9 @@ GEM
     uniform_notifier (1.9.0)
     warden (1.2.6)
       rack (>= 1.0)
+    yaml_db (0.4.2)
+      rails (>= 3.0, < 5.1)
+      rake (>= 0.8.7)
 
 PLATFORMS
   ruby
@@ -255,6 +258,7 @@ DEPENDENCIES
   test-unit
   therubyracer
   uglifier (>= 1.0.3)
+  yaml_db
 
 BUNDLED WITH
    1.13.7
