@@ -30,6 +30,8 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
   $scope.success = false;
   $scope.loading = false;
 
+  reset_available_days();
+
   $scope.init = function(currentUser, hosts, witnesses, cities, totalHosts, totalWitnesses, currentPage) {
     $scope.currentUser = currentUser;
     $scope.hosts = hosts;
@@ -63,9 +65,20 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
   $scope.pageChanged = function() {
     filter($scope.pagination.currentPage);
   }
-
+  function reset_available_days() {
+    delete $scope.search.witness["available_day1"];
+    delete $scope.search.witness["available_day2"];
+    delete $scope.search.witness["available_day3"];
+    delete $scope.search.witness["available_day4"];
+    delete $scope.search.witness["available_day5"];
+    delete $scope.search.witness["available_day6"];
+    delete $scope.search.witness["available_day7"];
+  }
   function filter(page) {
-    $scope.search.witness[$scope.search.available_day_search] = true;
+    reset_available_days();
+    if (typeof $scope.search.available_day_search !== 'undefined') {
+      $scope.search.witness[$scope.search.available_day_search] = true;
+    }
     var params = {
       filter: {
         host: getFilterKeys($scope.search.host),
