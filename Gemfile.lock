@@ -80,9 +80,14 @@ GEM
     ffi (1.9.10)
     figaro (1.1.1)
       thor (~> 0.14)
+    google_places (0.32.0)
+      httparty (~> 0.13.1)
     haml (4.0.7)
       tilt
     hike (1.2.3)
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     journey (1.0.4)
     jquery-rails (3.1.4)
@@ -113,6 +118,7 @@ GEM
     mocha (1.1.0)
       metaclass (~> 0.0.1)
     multi_json (1.11.2)
+    multi_xml (0.6.0)
     multipart-post (2.0.0)
     newrelic_rpm (3.15.0.314)
     nokogiri (1.6.7.2)
@@ -224,6 +230,7 @@ DEPENDENCIES
   compass-rails
   devise (= 3.5.6)
   figaro
+  google_places
   haml
   jquery-rails
   jquery-ui-rails

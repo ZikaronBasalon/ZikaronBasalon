@@ -18,6 +18,7 @@ gem 'roadie-rails'
 gem 'party_foul'
 gem 'devise', '3.5.6'
 gem 'sort_alphabetical'
+gem 'google_places'
 
 
 # Gems used only for assets and not required
