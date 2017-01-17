@@ -80,7 +80,7 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
     if (typeof $scope.search.available_day_search !== 'undefined') {
       $scope.search.witness[$scope.search.available_day_search] = true;
     }
-    if (typeof $scope.search.has_host !== -1) {
+    if (typeof $scope.search.has_host == -1) {
       $scope.search.witness["external_assignment"] = true;
     }
     var params = {
