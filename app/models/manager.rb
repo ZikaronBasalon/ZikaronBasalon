@@ -23,12 +23,12 @@ class Manager < ActiveRecord::Base
    hosts
   end
 
-  def get_witnesses(page, filter, query, sort, has_manager, has_host, language)
+  def get_witnesses(page, filter, query, sort, has_manager, has_host, language, external_assignment)
    sort = 'created_at' if sort.blank?
    witnesses = Witness.includes(:city, :host).order(sort + " desc").where(filter)
    witnesses = witnesses.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
    witnesses = witnesses.where(concept: concept) if concept
-   witnesses = witnesses.select{ |w| witness_in_filter(w, query, has_manager, has_host, language) }
+   witnesses = witnesses.select{ |w| witness_in_filter(w, query, has_manager, has_host, language, external_assignment) }
    witnesses = paginate(witnesses, page) if page
    witnesses
   end
@@ -68,12 +68,13 @@ class Manager < ActiveRecord::Base
     in_filter
   end
 
-  def witness_in_filter(w, query, has_manager, has_host, language)
+  def witness_in_filter(w, query, has_manager, has_host, language, external_assignment)
     in_filter = true
     in_filter = in_filter && w.in_language_filter(language)
     in_filter = in_filter && witness_in_query(w,query) if query.present?
     in_filter = in_filter && obj_has_manager(w, has_manager) if has_manager.present?
     in_filter = in_filter && witness_has_host(w, has_host) if has_host.present?
+    in_filter = in_filter && witness_externally_assigned(w, external_assignment) if external_assignment.present?
     in_filter
   end
 
@@ -95,6 +96,14 @@ class Manager < ActiveRecord::Base
       return w.has_host
     else
       return !w.has_host
+    end 
+  end
+
+  def witness_externally_assigned(w, externally_assigned)
+    if externally_assigned === "true"
+      return w.externally_assigned
+    else
+      return !w.externally_assigned
     end 
   end
 
