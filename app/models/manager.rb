@@ -74,7 +74,7 @@ class Manager < ActiveRecord::Base
     in_filter = in_filter && witness_in_query(w,query) if query.present?
     in_filter = in_filter && obj_has_manager(w, has_manager) if has_manager.present?
     in_filter = in_filter && witness_has_host(w, has_host) if has_host.present?
-    in_filter = in_filter && witness_externally_assigned(w, external_assignment) if external_assignment.present?
+    in_filter = in_filter && witness_external_assignment(w, external_assignment) if external_assignment.present?
     in_filter
   end
 
@@ -99,11 +99,11 @@ class Manager < ActiveRecord::Base
     end 
   end
 
-  def witness_externally_assigned(w, externally_assigned)
-    if externally_assigned === "true"
-      return w.externally_assigned
+  def witness_external_assignment(w, external_assignment)
+    if external_assignment === "true"
+      return w.external_assignment
     else
-      return !w.externally_assigned
+      return !w.external_assignment
     end 
   end
 

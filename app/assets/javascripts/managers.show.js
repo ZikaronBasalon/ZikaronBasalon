@@ -81,8 +81,8 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
       $scope.search.witness[$scope.search.available_day_search] = true;
     }
     if ($scope.search.has_host == -1) {
-      $scope.search.witness["external_assignment"] = true;
-      delete $scope.search["has_host"];
+      $scope.search.external_assignment = true;
+      delete $scope.search.has_host;
     }
     var params = {
       filter: {
@@ -98,11 +98,15 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
       has_manager: $scope.search.has_manager,
       has_host: $scope.search.has_host,
       has_survivor: $scope.search.has_survivor,
+      external_assignment: $scope.search.external_assignment,
       is_org: $scope.search.is_org,
       event_language: $scope.search.event_language,
       in_future: $scope.search.in_future
     };
-
+    if ($scope.search.external_assignment == true) {
+      $scope.search.has_host = -1
+      delete $scope.search.external_assignment;
+    }
     $scope.loading = true;
 
     $http.get('/managers/' + $scope.currentUser.meta.id + '.json' + '?' + $.param(params))

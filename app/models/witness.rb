@@ -27,7 +27,8 @@ class Witness < ActiveRecord::Base
   end
 
   def has_host
-    !host.nil? || external_assignment
+    !host.nil?
+    # !host.nil? || external_assignment
   end
 
   def is_vetran
