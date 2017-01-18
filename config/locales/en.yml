@@ -307,13 +307,13 @@ en:
       host: "מארח"
       seminar_required: "מעוניין בערב הכנה"
       special_population: "מוכנות לאוכ' מיוחדות"
-      external_assignment: "ציוות חיצוני"
+      external_assignment: "מעוניין להשתתף השנה"
     personal_details: "פרטים אישיים"
     evening_details: "פרטים על הערב"
     manager_actions: "פעולות מוביל קהילה"
     assign_host: "צוות למארח"
     updated: "הפרטים עודכנו בהצלחה"
-    external_assignment_text: "איש עדות מצוות מחוץ למערכת"
+    external_assignment_text: "איש העדות לא מעוניין להשתתף השנה"
 
 
   
