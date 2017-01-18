@@ -84,6 +84,10 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
       $scope.search.external_assignment = true;
       delete $scope.search.has_host;
     }
+    if ($scope.search.has_host == false) {
+      $scope.search.external_assignment = false;
+      $scope.search.has_host = false;
+    }
     var params = {
       filter: {
         host: getFilterKeys($scope.search.host),
