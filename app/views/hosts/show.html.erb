@@ -247,7 +247,7 @@
       </div>
     </div>
 
-    <% if current_user.meta.is_a?(Manager) || current_user.admin? %>
+    <% if current_user.manager? || current_user.admin? %>
       <div class="col-xs-12">
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -321,7 +321,7 @@
       </div>
     <% end %>
 
-    <% if current_user.meta.is_a?(Manager) || current_user.admin? || @host.witness %>
+    <% if current_user.manager? || current_user.admin? || @host.witness %>
       <div class="col-xs-12">
         <button class="btn btn-warning"  
                   ng-click="save()">
@@ -337,7 +337,7 @@
     <% end %>
   </div>
   
-  <% if current_user.meta.is_a?(Manager) %>
+  <% if current_user.manager? %>
     <div class="col-xs-4">
       <div comment-list comments="host.comments"/></div>
     </div>

@@ -8,18 +8,24 @@ class RegistrationsController < Devise::RegistrationsController
       @resource.user_attributes = user_attributes
     else 
       if user_attributes[:type] == 'guest'
-         @resource = Guest.new({ user_attributes: user_attributes, phone: params[:phone] })
+         @resource = Guest.new({ user_attributes: user_attributes, phone: params[:phone] , year: ENV['CURRENT_YEAR']})
       else
-         @resource = Host.new({ user_attributes: user_attributes })
+         @resource = Host.new({ user_attributes: user_attributes, year: ENV['CURRENT_YEAR'] })
       end
     end
 
     if @resource.save
-      sign_up("user", @resource.user)
-      render json: { success: true, redirect_url: after_sign_up_path_for(@resource) }
-    else
-      render json: { success: false, errors: @resource.errors }
+      user_meta = UserMeta.new 
+      user_meta.user = @resource.user
+      user_meta.meta = @resource
+
+      if user_meta.save
+        sign_up("user", @resource.user)
+        return render json: { success: true, redirect_url: after_sign_up_path_for(@resource) }
+      end
     end
+
+    render json: { success: false, errors: @resource.errors }
   end
 
   protected

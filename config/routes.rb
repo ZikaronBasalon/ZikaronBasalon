@@ -1,6 +1,7 @@
 ZikaronBasalon::Application.routes.draw do
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/  do
-    get 'my-profile', :to => 'users#profile'
+    get 'my-profile', to: 'users#profile', as: :my_profile
+    post 'users/create_meta', to: 'users#create_meta', as: :create_meta
 
     devise_for :users, controllers: { registrations: "registrations" }
     resources :managers do

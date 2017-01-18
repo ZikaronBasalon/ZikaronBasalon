@@ -30,6 +30,8 @@ group :development do
   gem 'letter_opener'
   gem 'bullet'
   gem 'hirb'
+  gem "better_errors"
+  gem 'sextant'
 end
 
 group :assets do

@@ -8,7 +8,7 @@
 		<!-- Signed in user -->
 		<% if user_signed_in? %>
 			<!-- User profile -->
-			<%= link_to(profile_label(current_user), polymorphic_path(current_user.meta), class: 'header-link') if current_user.meta %>
+			<%= link_to(profile_label(current_user), polymorphic_path(current_user.hosts.last), class: 'header-link') if current_user.hosts.any? %>
 
 			<!-- Admin -->
 			<%= link_to(t('.managers'), managers_path, class: 'header-link') if current_user.admin? %>

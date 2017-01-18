@@ -1,7 +1,8 @@
 class Guest < ActiveRecord::Base
-	attr_accessible :user_attributes, :phone
+	attr_accessible :user_attributes, :phone, :year
 	
-  has_one :user, as: :meta, dependent: :destroy
+  has_one :user_meta, as: :meta, dependent: :destroy
+  has_one :user, through: :user_meta
   accepts_nested_attributes_for :user
   has_many :invites
 

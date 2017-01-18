@@ -17,10 +17,20 @@ module PagesHelper
 	end
 
 	def current_user_json
-		if current_user && current_user.guest?
-			return current_user.to_json(:include => { meta: { :include => :invites } }) 
-		end
+		# if current_user && current_user.guest?
+		# 	return current_user.to_json(:include => { meta: { :include => :invites } }) 
+		# end
 
-		current_user ? current_user.to_json(:include => :meta) : current_user.to_json
+		# current_user ? current_user.to_json(:include => :meta) : current_user.to_json
+		meta = current_user.meta
+		{
+			email: current_user.email,
+			full_name: current_user.full_name,
+			meta: {
+
+			},
+			meta_type: meta.class.name,
+			meta_id: meta.id
+		}.to_json
 	end
 end
