@@ -25,6 +25,7 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
   		host: {
 				concept: $scope.host.concept,
 				contacted: $scope.host.contacted,
+				preparation_evening: $scope.host.preparation_evening,
 				contacted_witness: $scope.host.contacted_witness,
 				strangers: $scope.host.strangers
 			}

@@ -248,6 +248,7 @@ en:
         free_text: "My Notes"
         edit: "Edit"
         contacted: "Was contacted"
+        preparation_evening: "Was at Evening Preparation"
         survivor_needed: "Needs witness"
         has_survivor: "Witness assigned"
         survivor_contacted: "Host confirmed witness arrival"
