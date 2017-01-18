@@ -236,7 +236,8 @@
             <% if current_user && current_user.any_admin? %>
               <div class="field-group">
                 <div class="info-label">
-                  <%= t 'profile.labels.external_assignment' %>
+                  <%= t 'profile.labels.external_assignment' %><br>
+                  <small><small><%= t 'profile.labels.external_assignment_explain' %></small></small>
                 </div>
                 <div>
                   <div class="checkbox">
