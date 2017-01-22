@@ -6,8 +6,10 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
   $scope.hosts = [];
   $scope.search = {
     host: {},
-    witness: {}
+    witness: {},
+    reverseOrdering: false
   };
+  // $scope.search.has_survivor_set = true;
 
   $scope.query = {
     host: null
@@ -64,12 +66,14 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
   }
 
   function filter(page) {
+    $scope.search.witness[$scope.search.available_day_search] = true;
     var params = {
       filter: {
         host: getFilterKeys($scope.search.host),
         witness: getFilterKeys($scope.search.witness)
       },
       page: page,
+      reverse_ordering: +$scope.search.reverseOrdering,
       host_query: $scope.query.host,
       witness_query: $scope.query.witness,
       host_sort: $scope.sortProp,
@@ -78,6 +82,7 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
       has_host: $scope.search.has_host,
       has_survivor: $scope.search.has_survivor,
       is_org: $scope.search.is_org,
+      // has_survivor_set: $scope.search.has_survivor_set,
       event_language: $scope.search.event_language,
       in_future: $scope.search.in_future
     };
@@ -166,11 +171,13 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
   }
 
   $scope.setSortProp = function(prop) {
+    $scope.search.reverseOrdering = !$scope.search.reverseOrdering;
     $scope.sortProp = prop;
     filter(1)
   }
 
   $scope.setSortPropWitness = function(prop) {
+    $scope.search.reverseOrdering = !$scope.search.reverseOrdering;
     $scope.witnessSortProp = prop;
     filter(1)
   }

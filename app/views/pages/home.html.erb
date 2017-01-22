@@ -69,12 +69,14 @@
                  placeholder="תאריך" />
         </div>  
 
-        <div class="form-group">
-          <label>
-            <input type="checkbox" ng-model="search.vetrans" ng-change="filter()" style="width: 15px;">
-            <%= t 'shared.vetrans' %>
-          </label>
-        </div> 
+        <!--
+          <div class="form-group">
+            <label>
+              <input type="checkbox" ng-model="search.vetrans" ng-change="filter()" style="width: 15px;">
+              <%= t 'shared.vetrans' %>
+            </label>
+          </div> 
+        --> 
 
         <div class="form-group pull-left">
           <input type="text" class="form-control" ng-model="search.query" placeholder="<%= t 'shared.free_search' %>" />
@@ -91,27 +93,27 @@
           <tr>
             <th ng-click="setSortProp('user.full_name')">
               <%= t 'shared.name' %>
-              <span class="caret" ng-if="sortProp === 'user.full_name'"></span>
+              <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'user.full_name'"></span>
             </th>
             <th ng-click="setSortProp('city')">
               <%= t 'shared.city' %>
-              <span class="caret" ng-if="sortProp === 'city'"></span>
+              <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'city'"></span>
             </th>
             <th ng-click="setSortProp('address')">
               <%= t 'shared.street' %>
-              <span class="caret" ng-if="sortProp === 'address'"></span>
+              <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'address'"></span>
             </th>
             <th ng-click="setSortProp('event_date')">
               <%= t 'shared.date' %>
-              <span class="caret" ng-if="sortProp === 'event_date'"></span>
+              <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'event_date'"></span>
             </th>
             <th ng-click="setSortProp('event_language')">
               <%= t 'shared.language' %>
-              <span class="caret" ng-if="sortProp === 'event_language'"></span>
+              <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'event_language'"></span>
             </th>
             <th ng-click="setSortProp('available_places')">
               <%= t 'shared.available_spaces' %>
-              <span class="caret" ng-if="sortProp === 'available_places'"></span>
+              <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'available_places'"></span>
             </th>
             <th><%= t 'shared.free_text' %></th>
             <th></th>

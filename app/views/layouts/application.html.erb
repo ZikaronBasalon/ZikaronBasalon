@@ -20,7 +20,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.2/ui-bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.2/ui-bootstrap-tpls.min.js"></script>
     <%= javascript_include_tag "application", "#{controller_name}.#{action_name}" if ZikaronBasalon::Application.assets.find_asset("#{controller.controller_name}.#{action_name}.js") %>
-    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places&language=#{I18n.locale}" %>
+    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&language=#{I18n.locale}&key=AIzaSyBTKTVYXFdrnafm0xQPk259K6_tPLNBwhc" %>
         <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
@@ -34,7 +34,7 @@
     <% if I18n.locale == :he %>
       <link rel="stylesheet" href="//cdn.rawgit.com/morteza/bootstrap-rtl/v3.3.4/dist/css/bootstrap-rtl.min.css">
     <% end %>
-    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-lightness/jquery-ui.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-lightness/jquery-ui.css">
     <%= stylesheet_link_tag "application" %>
     <%= stylesheet_link_tag params[:controller] if ZikaronBasalon::Application.assets.find_asset("#{params[:controller]}") %>
 
@@ -67,13 +67,22 @@
     <div id="locale" class="<%= I18n.locale %>"></div>
     
     <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '192610131086928',
-          xfbml      : true,
-          version    : 'v2.5'
+    window.fbAsyncInit = function() {
+        FB.init({ 
+          appId: '723889947773479',
+          status: true, 
+          cookie: true, 
+          xfbml: true,
+          version: 'v2.8'
         });
-      };
+    };
+      // window.fbAsyncInit = function() {
+      //   FB.init({
+      //     appId      : '723889947773479',
+      //     xfbml      : true,
+      //     version    : 'v2.8'
+      //   });
+      // };
 
       (function(d, s, id){
          var js, fjs = d.getElementsByTagName(s)[0];

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20161015162249) do
+ActiveRecord::Schema.define(:version => 20170115133011) do
 
   create_table "cities", :force => true do |t|
     t.string   "name"
@@ -196,6 +196,14 @@ ActiveRecord::Schema.define(:version => 20161015162249) do
     t.string   "contact_phone"
     t.boolean  "external_assignment",   :default => false
     t.string   "year"
+    t.string   "additional_phone"
+    t.boolean  "available_day1"
+    t.boolean  "available_day2"
+    t.boolean  "available_day3"
+    t.boolean  "available_day4"
+    t.boolean  "available_day5"
+    t.boolean  "available_day6"
+    t.boolean  "available_day7"
   end
 
 end

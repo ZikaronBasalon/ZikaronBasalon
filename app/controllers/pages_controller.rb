@@ -12,7 +12,9 @@ class PagesController < ApplicationController
   	}
 
     @hosts = sort_by_field(@hosts, params[:sort] || 'user.full_name')
-
+    if params[:reverse_ordering].to_i == 0
+      @hosts = @hosts.reverse
+    end
     @cities = City.all.sort_alphabetical_by{ |c| c[:name] }
     @countries = Country.all
 

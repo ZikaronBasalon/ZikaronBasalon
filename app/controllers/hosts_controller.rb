@@ -15,7 +15,7 @@ class HostsController < ApplicationController
     respond_to do |format|
       format.html { correct_host }
       format.json { 
-        if @host.strangers && @host.available_places > 0 
+        if @host.available_places > 0 
           render :json => { 
            host: @host.to_json(:include => [
                 { :user => { :methods => [:first_name] } }, 

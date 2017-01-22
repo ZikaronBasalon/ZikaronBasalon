@@ -1,4 +1,6 @@
 ZikaronBasalon::Application.routes.draw do
+  post 'webhook', :to => 'webhooks#webhook'
+
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/  do
     get 'my-profile', to: 'users#profile', as: :my_profile
     post 'users/create_meta', to: 'users#create_meta', as: :create_meta

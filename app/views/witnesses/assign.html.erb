@@ -1,5 +1,5 @@
 <div class="col-xs-12" ng-controller="WitnessAssignController"
-     ng-init="init(<%= @witness.to_json %>, <%= @hosts.to_json(:include => [:user, :city]) %>, <%= @cities.to_json %>, <%= @city_id.to_json %> )">
+     ng-init="init(<%= @witness.to_json(:include => [city: { :include => :managers } ]) %>, <%= @hosts.to_json(:include => [:user, :witness, city: { :include => :managers }, :methods => [:has_witness] ]) %>, <%= @cities.to_json %>, <%= @city_id.to_json %> )">
   <div class="row">
     <div class="col-xs-12" ng-if="success">
       <div class="alert alert-success" role="alert">
