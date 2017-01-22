@@ -22,7 +22,7 @@ app.controller('RequestInviteController', ['$scope', '$http', '$uibModalInstance
 	} else {
 		if (($scope.currentUser && $scope.currentUser.meta.invites && $scope.currentUser.meta.invites.length > 0) ||
 				($scope.currentUser && $scope.currentUser.meta_type !== 'Guest')) {
-			$scope.view = 'error';
+			$scope.view = 'error'; //this causes the popup to jump, (see _request_invite_modal.html.erb)
 		} else {
 			$scope.view = 'request';
 		}

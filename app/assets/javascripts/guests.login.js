@@ -15,6 +15,21 @@ app.controller('GuestSigninController', ['$scope', '$http', function($scope, $ht
 				}
 			}).then(function(response) {
 				if(response.status === 201) {
+					/*SAMPLE response.data
+						{
+						  "admin": true,
+						  "created_at": "2016-03-27T16:31:31Z",
+						  "email": "zikaronbasalon@gmail.com",
+						  "full_name": "אדמין בסלון",
+						  "id": 415,
+						  "meta_id": 1,
+						  "meta_type": "Manager",
+						  "phone": null,
+						  "sub_admin": false,
+						  "updated_at": "2017-01-22T09:54:42Z"
+						}
+					*/
+						
 					var url;
 					if(getUrlParameter('invite', window.location)) {
 						url = window.location;
