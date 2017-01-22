@@ -55,13 +55,9 @@ class GuestsController < ApplicationController
   end
 
   def correct_guest
-    meta = current_user.try(:meta)
-    id = params[:id].to_i
+    return if current_user && (current_user.admin? || current_user.sub_admin?)
 
-    return if (current_user && (current_user.admin? || current_user.sub_admin?)) || (meta && meta.is_a?(Manager))
-
-    
-    redirect_to user_session_path if meta.nil? || (meta.is_a?(Guest) && meta.id != id)
-    redirect_to user_session_path if meta.is_a?(Manager) && !meta.hosts.pluck(:id).include?(id)
+    redirect_to user_session_path unless current_user.guests.any? {|guest| guest.id == params[:id].to_i}
+    # redirect_to user_session_path if meta.is_a?(Manager) && !meta.hosts.pluck(:id).include?(id)
   end
 end

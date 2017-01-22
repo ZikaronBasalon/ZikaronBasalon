@@ -25,7 +25,7 @@ module ApplicationHelper
   end
 
   def profile_label(user)
-    current_user.meta.is_a?(Manager) ? t('.manager_profile') : t('.profile')
+    current_user.manager? ? t('.manager_profile') : t('.profile')
   end
 
   def next_locale(locale)

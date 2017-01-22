@@ -1,12 +1,13 @@
-<div class="col-xs-12 welcome-page">
+<div class="col-xs-12 welcome-page" ng-controller="UserWelcomeController" ng-init="init('Host')">
 	<div class="row">
     <div class="col-xs-12 text-center">
-      <h3><%= t '.title' %></h3>
-      <p class="subtitle">
-      	<div class="col-xs-8 col-xs-offset-2">
-      		<%= simple_format(t('.subtitle', signin_link: link_to(t('.link_1_text'),user_session_path), host_link: link_to(t('.link_2_text'), signup_path(type: 'host')), guest_link: link_to(t('.link_3_text'), signup_path(type: 'guest')))) %>
-      	</div>
-      </p>
+      <% if current_user.nil? %>
+        <%= render 'welcome_new_user' %>
+      <% elsif current_user.was_host? %>
+        <%= render 'welcome_host' %>      
+      <% elsif current_user.was_guest? %>
+        <%= render 'welcome_guest' %>
+      <% end %>
     </div>
 	</div>
 </div>

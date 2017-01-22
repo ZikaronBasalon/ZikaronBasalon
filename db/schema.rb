@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20170115133011) do
     t.datetime "updated_at",     :null => false
     t.string   "name"
     t.integer  "num_of_friends"
+    t.string   "year"
   end
 
   create_table "hosts", :force => true do |t|
@@ -96,6 +97,7 @@ ActiveRecord::Schema.define(:version => 20170115133011) do
     t.boolean  "contacted_witness",          :default => false
     t.integer  "country_id"
     t.datetime "assignment_time"
+    t.string   "year"
   end
 
   add_index "hosts", ["city_id"], :name => "index_hosts_on_city_id"
@@ -125,6 +127,19 @@ ActiveRecord::Schema.define(:version => 20170115133011) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "user_meta", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "meta_id"
+    t.string   "meta_type"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "user_meta", ["meta_id", "meta_type"], :name => "index_user_meta_on_meta_id_and_meta_type"
+  add_index "user_meta", ["meta_id"], :name => "index_user_meta_on_meta_id"
+  add_index "user_meta", ["meta_type"], :name => "index_user_meta_on_meta_type"
+  add_index "user_meta", ["user_id"], :name => "index_user_meta_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false
@@ -180,6 +195,7 @@ ActiveRecord::Schema.define(:version => 20170115133011) do
     t.string   "contact_name"
     t.string   "contact_phone"
     t.boolean  "external_assignment",   :default => false
+    t.string   "year"
     t.string   "additional_phone"
     t.boolean  "available_day1"
     t.boolean  "available_day2"

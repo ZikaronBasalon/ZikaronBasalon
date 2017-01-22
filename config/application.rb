@@ -89,5 +89,11 @@ module ZikaronBasalon
     config.assets.paths << Rails.root.join("vendor","assets","bower_components","bootstrap-sass-official","assets","fonts")
 
     config.assets.precompile << %r(.*.(?:eot|svg|ttf|woff|woff2)$)
+
+    # Enable hirb in console for everyone
+    console do
+      require 'hirb'
+      Hirb::View.enable
+    end
   end
 end

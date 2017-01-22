@@ -193,12 +193,23 @@ he:
       temp_subtitle: "בשבועות הקרובים נפתח את ההרשמה למתארחים - מוזמנים להתעדכן כאן או בעמוד הפייסבוק שלנו!"
       already_a_member: "כבר נרשמת כמארח/ת?"
       sign_in_to_system: "התחבר כדי לראות את הפרופיל שלך"
-    welcome:
+    welcome_new_user:
       title: "ברוכים הבאים לזיכרון בסלון!"
       subtitle: "במידה ונרשמתם כבר לארח או להתארח, ניתן %{signin_link} האישי שלכם ולראות עדכונים או לעדכן את פרטיכם.<br/> במידה ועוד לא נרשמתם, אתם מוזמנים להירשם %{host_link} או %{guest_link}."
       link_1_text: "להתחבר לפרופיל"
       link_2_text: "כמארחים"
       link_3_text: "כמתארחים"
+    welcome_host:
+      title: "ברוכים הבאים לזיכרון בסלון!"
+      subtitle: "בשנה שעברה אירחת זכרון בסלון."
+      host_link_text: "ארח סלון גם השנה"
+      guest_link_text: "התארח בסלון אחר"
+      or: 'או'
+    welcome_guest:
+      title: "ברוכים הבאים לזיכרון בסלון!"
+      subtitle: "בשנה שעברה התארחת בסלון. האם תרצה %{host_link}, או %{guest_link}?"
+      host_link_text: "לארח השנה אצלך"
+      guest_link_text: "להתארח גם השנה"
   sessions:
     new:
       title: "הזן פרטים לכניסה לאזורך האישי"

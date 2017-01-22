@@ -37,18 +37,19 @@ class PagesController < ApplicationController
   end
 
   def welcome
-    
+    redirect_to my_profile_path if current_user.present? and current_user.has_active_meta
   end
 
 private
 	def host_conditions_hash
 		h = { }
 		h[:strangers] = true
-		h[:city_id] = params[:city_ids] if !params[:city_ids].blank?
+		h[:city_id] = params[:city_ids] if params[:city_ids].present?
     h[:max_guests] = 1..9999
     h[:received_registration_mail] = true
-    h[:country_id] = params[:country_id] if !params[:country_id].blank?
-    h[:event_date] = Date.parse(params[:event_date]) + 1.day if !params[:event_date].blank?
+    h[:country_id] = params[:country_id] if params[:country_id].present?
+    h[:event_date] = Date.parse(params[:event_date]) + 1.day if params[:event_date].present?
+    h[:year] = ENV['CURRENT_YEAR']
     h
 	end
 
