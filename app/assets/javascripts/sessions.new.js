@@ -12,11 +12,10 @@ app.controller('UserSigninController', ['$scope', '$http', function($scope, $htt
 					password: $scope.form.password,
 				}
 			}).then(function(response) {
-				debugger
 				if(response.status === 201 || response.status === 200) {
 					var data = response.data;
 					var changerole = false;
-					if (!data.active_this_year) {//if role not set for this year yet
+					if (!data.active_this_year && !data.admin) {//if role not set for this year yet
 						var last_years_role = data.meta_type;//the was last years role
 						var next_years_role = last_years_role == "Host" ? "Guest" : "Host";
 						var question_string = "Last year you were a " + last_years_role + 
