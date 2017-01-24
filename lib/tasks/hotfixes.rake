@@ -50,5 +50,6 @@ namespace :hotfixes do
   desc "reset users active_this_year"
   task :send_users_to_last_year => :environment do
     User.where(admin: false).update_all(active_this_year:false)
+    User.update_all(active:false)
   end
 end
