@@ -44,7 +44,8 @@ class PagesController < ApplicationController
 private
 	def host_conditions_hash
 		h = { }
-		h[:strangers] = true
+    h[:strangers] = true
+    h[:active] = true
 		h[:city_id] = params[:city_ids] if !params[:city_ids].blank?
     h[:max_guests] = 1..9999
     h[:received_registration_mail] = true

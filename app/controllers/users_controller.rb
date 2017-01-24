@@ -10,6 +10,10 @@ class UsersController < ApplicationController
 		if params[:changerole] == true
 			if !was_never_oppisite_role
 				oppisite_role_instance = oppisite_role.constantize.create! #the guest or host
+				if oppisite_role == "Host"
+					oppisite_role_instance.active = true
+					oppisite_role_instance.save!
+				end
 				#TODO: add to comments table this change
 				user.previous_meta_id = user.meta_id
 				user.previous_meta_type = user.meta_type
@@ -17,6 +21,10 @@ class UsersController < ApplicationController
 			else
 				user.meta_type,user.previous_meta_type = user.previous_meta_type,user.meta_type #swap meta_type values using Parallel Assignment
 				user.previous_meta_id,user.meta_id = user.meta_id,user.previous_meta_id #swap id values using Parallel Assignment
+				if user.meta.type == "Host"
+					user.meta.active = true
+					user.meta.save!
+				end
 			end
 		end
 		user.active_this_year = true

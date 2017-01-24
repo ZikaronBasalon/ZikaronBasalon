@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170124131439) do
+ActiveRecord::Schema.define(:version => 20170124211439) do
 
   create_table "cities", :force => true do |t|
     t.string   "name"
@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(:version => 20170124131439) do
     t.integer  "country_id"
     t.datetime "assignment_time"
     t.boolean  "preparation_evening",        :default => false
+    t.boolean  "active",                     :default => false
   end
 
   add_index "hosts", ["city_id"], :name => "index_hosts_on_city_id"
