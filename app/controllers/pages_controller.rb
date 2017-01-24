@@ -2,6 +2,7 @@ class PagesController < ApplicationController
   include PagesHelper
   respond_to :html, :json
 
+#TODO add here where users are active this year
   def home
   	@hosts = Host.includes(:city, :user, :country, :invites).where(host_conditions_hash)
   	@hosts = @hosts.select { |h| 
