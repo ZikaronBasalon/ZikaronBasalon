@@ -1,4 +1,17 @@
-app.controller('UserSigninController', ['$scope', '$http', '$uibModal', '$log', function($scope, $http, $uibModal, $log) {
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, modalData) {
+
+  $scope.modalData = modalData;
+
+  $scope.ok = function () {
+    $uibModalInstance.close();
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+});
+
+app.controller('UserSigninController', ['$scope', '$http', '$uibModal', function($scope, $http, $uibModal) {
 	$scope.form = {};
 	$scope.error = false;
 
@@ -100,15 +113,3 @@ app.controller('UserSigninController', ['$scope', '$http', '$uibModal', '$log', 
 
 }]);
 
-app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, modalData) {
-
-  $scope.modalData = modalData;
-
-  $scope.ok = function () {
-    $uibModalInstance.close();
-  };
-
-  $scope.cancel = function () {
-    $uibModalInstance.dismiss('cancel');
-  };
-});

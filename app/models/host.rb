@@ -12,6 +12,7 @@ class Host < ActiveRecord::Base
   belongs_to :city
   belongs_to :country
   has_one :witness
+  #Question: if destroy host, will this destroy it's user, even though it still has a guest?
   has_one :user, as: :meta, dependent: :destroy
   accepts_nested_attributes_for :user
   has_many :comments, as: :commentable
