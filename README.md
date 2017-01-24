@@ -13,6 +13,11 @@
 7. to see the website, start a server by running `rails s` and navigating to `http:localhost:3000`
 8. to run a local console, run `rails c`
 
+###New Year Setup:
+* Whenever a new year starts, we need to have all users be inactive, so they will be asked if they want to continue this year(one time popup), and which role do they wish to have. To do this (careful!), run the following rake task:
+* Locally: `bundle exec rake hotfixes:send_users_to_last_year`
+* For Heroku: `heroku run rake hotfixes:send_users_to_last_year`
+
 ###How to contribute:
 
 1. In the [issues page](https://github.com/uriklar/ZikaronBasalon/issues) you will find bugs and tasks
