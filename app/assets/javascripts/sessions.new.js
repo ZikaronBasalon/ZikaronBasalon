@@ -43,9 +43,9 @@ app.controller('UserSigninController', ['$scope', '$http', '$uibModal', '$log', 
 						$scope.data.translations = translations[$scope.locale];
 						$scope.open($scope.data);
 						return;
-					} else { //he already decided to be active this year
+					} else { //he already decided to be active this year or admin
 						//regular login
-						window.location = '/' + document.getElementById('locale').className + '/' + data.meta_type.toLowerCase() + 's/' + data.meta_id;
+						window.location = '/' + document.getElementById('locale').className + '/' + $scope.data.meta_type.toLowerCase() + 's/' + data.meta_id;
 					}
 				}
 			}).catch(function(response) {
