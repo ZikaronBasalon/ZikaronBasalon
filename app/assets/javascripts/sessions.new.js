@@ -12,31 +12,22 @@ app.controller('UserSigninController', ['$scope', '$http', function($scope, $htt
 					password: $scope.form.password,
 				}
 			}).then(function(response) {
+				debugger
 				if(response.status === 201 || response.status === 200) {
 					var data = response.data;
-					var newrole = data.previous_meta_type;
-					var oldrole = data.meta_type;
 					var changerole = false;
-					if (newrole == null && data.meta_type == "Guest") {
-						if (confirm("Last year you were a Guest.\nPress Yes to continue being a guest or No to become a host")) {
-							newrole = oldrole;
+					if (!data.active_this_year) {//if role not set for this year yet
+						var last_years_role = data.meta_type;//the was last years role
+						var next_years_role = last_years_role == "Host" ? "Guest" : "Host";
+						var question_string = "Last year you were a " + last_years_role + 
+																  ".\nPress Yes to continue being a " + last_years_role + " or No to become a " + next_years_role;
+						if (confirm(question_string)) {
+							//do nothing (just chenge active_this_year to true)
 						} else {
-							newrole = "Host";
 							changerole = true;
 						}
-					}
-					else if (newrole == null && data.meta_type == "Host") {
-						if (confirm("Last year you were a Host.\nPress Yes to continue being a host or No to become a guest")) {
-							newrole = oldrole;
-						} else {
-							newrole = "Guest";
-							changerole = true;
-						}
-					}
-					if (changerole) {
-							$http.put('/users/' + data.id + '/assignrole.json', {
-							newrole: newrole,
-							oldrole: oldrole
+						$http.put('/users/' + data.id + '/assignrole.json', {
+							changerole: changerole
 						})
 						.then(function(role_response) {
 							data = role_response.data
@@ -45,8 +36,8 @@ app.controller('UserSigninController', ['$scope', '$http', function($scope, $htt
 						.catch(function(role_response) {
 							$scope.error = true;
 						});
-					}
-					if (!changerole) {
+					} else { //he already decided to be active this year
+						//regular login
 						window.location = '/' + document.getElementById('locale').className + '/' + data.meta_type.toLowerCase() + 's/' + data.meta_id;
 					}
 				}

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170122104711) do
+ActiveRecord::Schema.define(:version => 20170124131439) do
 
   create_table "cities", :force => true do |t|
     t.string   "name"
@@ -151,6 +151,7 @@ ActiveRecord::Schema.define(:version => 20170122104711) do
     t.boolean  "sub_admin",              :default => false
     t.integer  "previous_meta_id"
     t.string   "previous_meta_type"
+    t.boolean  "active_this_year",       :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
