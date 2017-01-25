@@ -50,6 +50,7 @@ namespace :hotfixes do
   desc "reset users active_this_year"
   task :send_users_to_last_year => :environment do
     User.where(admin: false).update_all(active_this_year:false)
-    User.update_all(active:false)
+    Host.update_all(active:false)
+    #TODO remove open and pending requests on guests, remove from hosts: Witness, Guest list - accepted, Guest list - Pending
   end
 end

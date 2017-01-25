@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 			else
 				user.meta_type,user.previous_meta_type = user.previous_meta_type,user.meta_type #swap meta_type values using Parallel Assignment
 				user.previous_meta_id,user.meta_id = user.meta_id,user.previous_meta_id #swap id values using Parallel Assignment
-				if user.meta.type == "Host"
+				if user.meta_type == "Host"
 					user.meta.active = true
 					user.meta.save!
 				end
