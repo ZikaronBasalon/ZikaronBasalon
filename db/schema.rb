@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(:version => 20170124211439) do
     t.integer  "country_id"
     t.datetime "assignment_time"
     t.boolean  "preparation_evening",        :default => false
-    t.boolean  "active",                     :default => false
+    t.boolean  "active",                     :default => true
   end
 
   add_index "hosts", ["city_id"], :name => "index_hosts_on_city_id"
@@ -152,7 +152,7 @@ ActiveRecord::Schema.define(:version => 20170124211439) do
     t.boolean  "sub_admin",              :default => false
     t.integer  "previous_meta_id"
     t.string   "previous_meta_type"
-    t.boolean  "active_this_year",       :default => false
+    t.boolean  "active_this_year",       :default => true
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

@@ -1,6 +1,8 @@
 he:
   activerecord:
     errors:
+      messages:
+        record_invalid: "Invalid Record"
       models:
         user:
           attributes:
