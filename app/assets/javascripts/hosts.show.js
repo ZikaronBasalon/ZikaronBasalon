@@ -27,7 +27,8 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 				contacted: $scope.host.contacted,
 				preparation_evening: $scope.host.preparation_evening,
 				contacted_witness: $scope.host.contacted_witness,
-				strangers: $scope.host.strangers
+				strangers: $scope.host.strangers,
+				max_guests: $scope.host.max_guests
 			}
   	}).then(function success(response) {
   		$scope.success = true; 
