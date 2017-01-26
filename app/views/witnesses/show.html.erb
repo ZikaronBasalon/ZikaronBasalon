@@ -83,11 +83,6 @@
           </div>
 
           <div class="field-group">
-            <div class="info-label">זמין בערב יום השואה</div>
-            <div>{{ formatBool(witness.free_on_day) }}</div>
-          </div>
-
-          <div class="field-group">
             <div class="info-label">זמינות</div>
             <div>
               <span ng-if="witness.can_morning" class="margin-left-5">בוקר</span>
@@ -146,7 +141,8 @@
                 <%= link_to t('profile.assign_host'), assign_witness_path(@witness) %>
               </div>
               <div ng-if="!witness.host && witness.external_assignment">
-                צוות מחוץ למערכת
+                <%= t('profile.external_assignment_text') %>
+                <!-- צוות מחוץ למערכת -->
               </div>
             </div>  
             
@@ -240,7 +236,8 @@
             <% if current_user && current_user.any_admin? %>
               <div class="field-group">
                 <div class="info-label">
-                  <%= t 'profile.labels.external_assignment' %>
+                  <%= t 'profile.labels.external_assignment' %><br>
+                  <small><small><%= t 'profile.labels.external_assignment_explain' %></small></small>
                 </div>
                 <div>
                   <div class="checkbox">

@@ -104,4 +104,18 @@
       </div>
     </div>
   </body>
+  <script type="text/ng-template" id="myModalContent.html">
+      <div class="modal-header">
+          <h3 class="modal-title"><center>{{modalData.translations.header}}</center></h3>
+      </div>
+      <div class="modal-body">
+          <center>{{modalData.translations.firstLine}}</center><br>
+          <center>{{modalData.translations.secondLine}}</center><br>
+      </div>
+
+      <div class="modal-footer">
+          <button class="btn btn-primary" type="button" ng-click="ok()">{{modalData.translations.stay}}</button>
+          <button class="btn btn-warning" type="button" ng-click="cancel()">{{modalData.translations.change}}</button>
+      </div>
+  </script>
 </html>

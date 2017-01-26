@@ -9,7 +9,6 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
     witness: {},
     reverseOrdering: false
   };
-  // $scope.search.has_survivor_set = true;
 
   $scope.query = {
     host: null
@@ -30,6 +29,8 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
 
   $scope.success = false;
   $scope.loading = false;
+
+  reset_unused_parameters();
 
   $scope.init = function(currentUser, hosts, witnesses, cities, totalHosts, totalWitnesses, currentPage) {
     $scope.currentUser = currentUser;
@@ -64,9 +65,29 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
   $scope.pageChanged = function() {
     filter($scope.pagination.currentPage);
   }
-
+  function reset_unused_parameters() {
+    delete $scope.search.witness["available_day1"];
+    delete $scope.search.witness["available_day2"];
+    delete $scope.search.witness["available_day3"];
+    delete $scope.search.witness["available_day4"];
+    delete $scope.search.witness["available_day5"];
+    delete $scope.search.witness["available_day6"];
+    delete $scope.search.witness["available_day7"];
+    delete $scope.search.witness["external_assignment"];
+  }
   function filter(page) {
-    $scope.search.witness[$scope.search.available_day_search] = true;
+    reset_unused_parameters();
+    if (typeof $scope.search.available_day_search !== 'undefined') {
+      $scope.search.witness[$scope.search.available_day_search] = true;
+    }
+    if ($scope.search.has_host == -1) {
+      $scope.search.external_assignment = true;
+      delete $scope.search.has_host;
+    }
+    if ($scope.search.has_host == false) {
+      $scope.search.external_assignment = false;
+      $scope.search.has_host = false;
+    }
     var params = {
       filter: {
         host: getFilterKeys($scope.search.host),
@@ -81,12 +102,15 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
       has_manager: $scope.search.has_manager,
       has_host: $scope.search.has_host,
       has_survivor: $scope.search.has_survivor,
+      external_assignment: $scope.search.external_assignment,
       is_org: $scope.search.is_org,
-      // has_survivor_set: $scope.search.has_survivor_set,
       event_language: $scope.search.event_language,
       in_future: $scope.search.in_future
     };
-
+    if ($scope.search.external_assignment == true) {
+      $scope.search.has_host = -1
+      delete $scope.search.external_assignment;
+    }
     $scope.loading = true;
 
     $http.get('/managers/' + $scope.currentUser.meta.id + '.json' + '?' + $.param(params))

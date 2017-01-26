@@ -1,9 +1,11 @@
-app.controller('UserSigninController', ['$scope', '$http', function($scope, $http) {
+app.controller('UserSigninController', ['$scope', '$http', '$uibModal', 'activeUsers', function($scope, $http, $uibModal, activeUsers) {
 	$scope.form = {};
 	$scope.error = false;
 
 	$scope.submit = function(event) {
 		$scope.error = false;
+
+		$scope.locale = document.getElementById('locale').className;
 		event.preventDefault();
 		if ($scope.signinForm.$valid) {
 			$http.post('/users/sign_in.json', {
@@ -13,8 +15,8 @@ app.controller('UserSigninController', ['$scope', '$http', function($scope, $htt
 				}
 			}).then(function(response) {
 				if(response.status === 201) {
-					var data = response.data;
-					window.location = '/' + document.getElementById('locale').className + '/' + data.meta_type.toLowerCase() + 's/' + data.meta_id;
+					activeUsers.assignActiveUser(response.data);
+					return;
 				}
 			}).catch(function(response) {
 				if(response.status > 400) {
@@ -24,3 +26,4 @@ app.controller('UserSigninController', ['$scope', '$http', function($scope, $htt
 		}
 	}
 }]);
+

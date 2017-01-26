@@ -1,6 +1,6 @@
 //= require lib/utils
 
-app.controller('GuestSigninController', ['$scope', '$http', function($scope, $http) {
+app.controller('GuestSigninController', ['$scope', '$http', 'activeUsers', function($scope, $http, activeUsers) {
 	$scope.form = {};
 	$scope.error = false;
 
@@ -21,8 +21,8 @@ app.controller('GuestSigninController', ['$scope', '$http', function($scope, $ht
 					} else {
 						url = window.location + '?invite=' + $scope.host.id;
 					} 
-					
-					window.location = url;
+					activeUsers.assignActiveUser(response.data, url);
+					// window.location = url;
 				}
 			}).catch(function(response) {
 				if(response.status > 400) {

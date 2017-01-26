@@ -43,10 +43,16 @@ class HostsController < ApplicationController
 
   def update
     @host = Host.find(params[:id])
-    @host.update_attributes(params[:host])
-    if params[:finalStep] && !@host.received_registration_mail
+
+    if params[:change_to_guest].present?
+      user = @host.user
+      #todo:
+      #if previous_meta & previous meta_id so switch, else create guest and copy to it and set meta and return guest
+    elsif params[:finalStep] && !@host.received_registration_mail
       HostMailer.new_host(@host.user.id, I18n.locale).deliver
       @host.update_attributes(received_registration_mail: true)
+    elsif params[:host].present?
+      @host.update_attributes(params[:host])
     end
 
     respond_with(@host)

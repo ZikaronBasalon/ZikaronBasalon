@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170115133011) do
+ActiveRecord::Schema.define(:version => 20170125211439) do
 
   create_table "cities", :force => true do |t|
     t.string   "name"
@@ -19,6 +19,9 @@ ActiveRecord::Schema.define(:version => 20170115133011) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.string   "manager_email"
+    t.string   "placeid"
+    t.string   "name_en"
+    t.string   "name_he"
   end
 
   create_table "comments", :force => true do |t|
@@ -96,6 +99,8 @@ ActiveRecord::Schema.define(:version => 20170115133011) do
     t.boolean  "contacted_witness",          :default => false
     t.integer  "country_id"
     t.datetime "assignment_time"
+    t.boolean  "preparation_evening",        :default => false
+    t.boolean  "active",                     :default => true
   end
 
   add_index "hosts", ["city_id"], :name => "index_hosts_on_city_id"
@@ -145,6 +150,9 @@ ActiveRecord::Schema.define(:version => 20170115133011) do
     t.integer  "meta_id"
     t.string   "meta_type"
     t.boolean  "sub_admin",              :default => false
+    t.integer  "previous_meta_id"
+    t.string   "previous_meta_type"
+    t.boolean  "active_this_year",       :default => true
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

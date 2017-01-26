@@ -1,6 +1,8 @@
 he:
   activerecord:
     errors:
+      messages:
+        record_invalid: "Invalid Record"
       models:
         user:
           attributes:
@@ -66,6 +68,8 @@ he:
     back: "הקודם"
     select: "בחר/י"
     other: "אחר"
+    change_to_guest: "one salon down :("
+    change_to_host: "יאללה לארח"
     available_day1: "חמישי 20.4"
     available_day2: "ששי 21.4"
     available_day3: "שבת 22.4"
@@ -268,6 +272,7 @@ he:
         free_text: "הערות לצוות"
         edit: "עריכה"
         contacted: "נוצר קשר ראשוני"
+        preparation_evening: "היה בערב הכנה"
         survivor_needed: "צריך עד"
         has_survivor: "צוות עד"
         survivor_contacted: "מארח אישר הגעת עד"
@@ -332,13 +337,14 @@ he:
       host: "מארח"
       seminar_required: "מעוניין בערב הכנה"
       special_population: "מוכנות לאוכ' מיוחדות"
-      external_assignment: "ציוות חיצוני"
+      external_assignment: "מעוניין להשתתף השנה"
+      external_assignment_explain: "כדי שנדע לשנה הבאה, בבקשה הוסיפו בהערות את הסיבה"
     personal_details: "פרטים אישיים"
     evening_details: "פרטים על הערב"
     manager_actions: "פעולות מוביל קהילה"
     assign_host: "צוות למארח"
     updated: "הפרטים עודכנו בהצלחה"
-    external_assignment_text: "איש עדות מצוות מחוץ למערכת"
+    external_assignment_text: "איש העדות לא מעוניין להשתתף השנה"
 
   guests:
     register:

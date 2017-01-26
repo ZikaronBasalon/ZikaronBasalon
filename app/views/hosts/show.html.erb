@@ -282,6 +282,32 @@
             </div>
 
             <div class="field-group">
+              <div class="info-label"><%= t '.labels.preparation_evening' %></div>
+              <div>
+                <div class="radio">
+                  <label>
+                    <input type="radio"
+                           name="preparation_evening"
+                           id="contactedFalse"
+                           ng-value="false"
+                           ng-model="host.preparation_evening">
+                    <b><%= t 'shared.no' %></b>
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio"
+                           name="preparation_evening"
+                           id="contactedTrue"
+                           ng-value="true"
+                           ng-model="host.preparation_evening">
+                    <b><%= t 'shared.yes' %></b>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="field-group">
               <div class="info-label"><%= t '.labels.survivor_needed' %></div>
               <div>{{ formatBool(host.survivor_needed) }}</div>
             </div>
@@ -296,7 +322,7 @@
               <div>{{ formatBool(host.contacted_witness) }}</div>
             </div>
 
-            <div class="field-group">
+            <div class="field-group" ng-if="0">
               <div class="info-label"><%= t '.labels.concept' %></div>
               <div>
                 <select class="form-control"
@@ -321,7 +347,7 @@
       </div>
     <% end %>
 
-    <% if current_user.meta.is_a?(Manager) || current_user.admin? || @host.witness %>
+    <% if current_user.meta.is_a?(Manager) || current_user.admin? || @host.witness || 1 %>
       <div class="col-xs-12">
         <button class="btn btn-warning"  
                   ng-click="save()">
@@ -335,6 +361,16 @@
         </div>
       </div>
     <% end %>
+
+    <% if current_user.meta.is_a?(Manager) %>
+      <div class="col-xs-12">
+      <button class="btn btn-warning"  
+             ng-click="save()">
+        <%= t 'shared.save' %>
+      </button>
+     </div>
+    <% end %>
+
   </div>
   
   <% if current_user.meta.is_a?(Manager) %>

@@ -51,13 +51,17 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 					window.location = '/' + document.getElementById('locale').className + '/witnesses/' + response.data.id;
 				} else {
 					_.each(response.data, addAlert);
+					$("html, body").animate({ scrollTop: 0 }, "slow");
 				}
 			}).catch(function(response) {
 				console.log(response);
 				_.each(response.data, addAlert);
+				$("html, body").animate({ scrollTop: 0 }, "slow");
 			});
 		
-		}
+		} else {
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+			}
 	}
 
 	$scope.onCityNameBlur = function() {

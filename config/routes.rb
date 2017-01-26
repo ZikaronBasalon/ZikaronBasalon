@@ -14,7 +14,9 @@ ZikaronBasalon::Application.routes.draw do
 
     resources :guests
     resources :sessions, only: [:new, :create]
-    resources :users, only: [:new]
+    resources :users, only: [:new] do
+      put :assignrole, on: :member
+    end
     resources :witnesses do
       get :assign, on: :member
       get :unassign, on: :member

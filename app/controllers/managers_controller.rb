@@ -30,7 +30,8 @@ class ManagersController < ApplicationController
                                         params[:witness_sort], 
                                         has_manager,
                                         has_host,
-                                        language)
+                                        language,
+                                        external_assignment)
 
     @total_hosts = @hosts.total_count
     @total_witnesses = @witnesses.total_count
@@ -108,7 +109,8 @@ class ManagersController < ApplicationController
                                         params[:witness_sort], 
                                         has_manager,
                                         has_host,
-                                        language)
+                                        language,
+                                        external_assignment)
     send_data Witness.to_csv(@witnesses), :disposition => "attachment; filename=witnesses.csv"
   end
 
@@ -172,5 +174,9 @@ class ManagersController < ApplicationController
 
     def has_survivor_set
       params[:has_survivor_set]
+    end
+
+    def external_assignment
+      params[:external_assignment]
     end
 end
