@@ -55,6 +55,8 @@ en:
     back: "Back"
     select: "Select"
     other: "Other"
+    change_to_guest: "one salon down :("
+    change_to_host: "c'mon be a host"
     available_day1: "חמישי 20.4"
     available_day2: "ששי 21.4"
     available_day3: "שבת 22.4"

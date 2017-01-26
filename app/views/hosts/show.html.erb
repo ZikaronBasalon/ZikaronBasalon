@@ -361,6 +361,16 @@
         </div>
       </div>
     <% end %>
+
+    <% if current_user.meta.is_a?(Manager) %>
+      <div class="col-xs-12">
+      <button class="btn btn-warning"  
+             ng-click="save()">
+        <%= t 'shared.save' %>
+      </button>
+     </div>
+    <% end %>
+
   </div>
   
   <% if current_user.meta.is_a?(Manager) %>
