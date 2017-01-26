@@ -6,9 +6,9 @@ class UsersController < ApplicationController
 	def assignrole
 		user = User.find(params[:id])
 		oppisite_role = user.meta_type == "Host" ? "Guest" : "Host"
-		was_never_oppisite_role = user.previous_meta_id.present?
+		was_ever_oppisite_role = user.previous_meta_id.present?
 		if params[:changerole] == true
-			if !was_never_oppisite_role
+			if !was_ever_oppisite_role #never was oppisite role, so create new
 				oppisite_role_instance = oppisite_role.constantize.create! #the guest or host
 				if oppisite_role == "Host"
 					oppisite_role_instance.active = true
@@ -24,8 +24,11 @@ class UsersController < ApplicationController
 			else
 				user.meta_type,user.previous_meta_type = user.previous_meta_type,user.meta_type #swap meta_type values using Parallel Assignment
 				user.previous_meta_id,user.meta_id = user.meta_id,user.previous_meta_id #swap id values using Parallel Assignment
-				if user.meta_type == "Host"
+				if user.meta_type == "Host" #if just became host
 					user.meta.active = true
+					user.meta.save!
+				elsif user.meta_type == "Guest"
+					user.meta.phone = Host.find(user.previous_meta_id).phone
 					user.meta.save!
 				end
 			end
