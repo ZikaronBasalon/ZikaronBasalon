@@ -66,6 +66,7 @@ namespace :hotfixes do
   end
   desc "reset users active_this_year"
   task :send_users_to_last_year => :environment do
+    Host.where("assignment_time IS NOT NULL").update_all(assignment_time: nil)
     User.where(meta_type: "Guest").where(meta_type: "Host").update_all(active_this_year:false)
     admin_user_id = User.where(email: "zikaronbasalon@gmail.com").first.id
     Witness.where("host_id IS NOT NULL").each do |witness|
