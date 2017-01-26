@@ -51,6 +51,11 @@ namespace :hotfixes do
   task :send_users_to_last_year => :environment do
     User.where(admin: false).update_all(active_this_year:false)
     Host.update_all(active:false)
+    Host.each do |host|
+      host.invites.each do |invite|
+        invite.destroy
+      end
+    end
     #TODO remove open and pending requests on guests, remove from hosts: Witness, Guest list - accepted, Guest list - Pending
   end
 end
