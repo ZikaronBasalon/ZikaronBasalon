@@ -66,11 +66,11 @@ namespace :hotfixes do
   end
   desc "reset users active_this_year"
   task :send_users_to_last_year => :environment do
-    User.where(admin: false).update_all(active_this_year:false)
+    User.where(meta_type: "Guest").where(meta_type: "Host").update_all(active_this_year:false)
     admin_user_id = User.where(email: "zikaronbasalon@gmail.com").first.id
     Witness.where("host_id IS NOT NULL").each do |witness|
       Witness.transaction do
-        comment = "System: Previous year witness #{witness.full_name} of id #{witness.id} was assigned to host #{witness.host.user.full_name} with host id #{witness.host_id} with user id: #{witness.host.user.id}"
+        comment = "בשנה שעברה, העד בשם '#{witness.full_name}' עם מספר סידורי #{witness.id} הייתה משוייכת למארח '#{witness.host.user.full_name}' עם מספר סידורי #{witness.host_id}. מס הסידורי של המארח הוא #{witness.host.user.id}"
         witness.comments.create!(user_id: admin_user_id, content: comment)
         witness.host.comments.create!(user_id: admin_user_id, content: comment)
         witness.host_id = nil
