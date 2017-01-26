@@ -67,20 +67,22 @@ namespace :hotfixes do
   desc "reset users active_this_year"
   task :send_users_to_last_year => :environment do
     User.where(admin: false).update_all(active_this_year:false)
-    Host.update_all(active:false)
-    Witness.each do |witness|
-      witness.comments.create(user_id: admin_user, content: "System: was assigned host #{witness.host_id}")
-      witness.host_id = nil
+    admin_user_id = User.where(email: "zikaronbasalon@gmail.com").first.id
+    Witness.where("host_id IS NOT NULL").each do |witness|
+      Witness.transaction do
+        comment = "System: Previous year witness #{witness.full_name} of id #{witness.id} was assigned to host #{witness.host.user.full_name} with host id #{witness.host_id} with user id: #{witness.host.user.id}"
+        witness.comments.create!(user_id: admin_user_id, content: comment)
+        witness.host.comments.create!(user_id: admin_user_id, content: comment)
+        witness.host_id = nil
+        witness.save!
+      end
     end
-    Host.each do |host|
-      host.comments.create!(
-        user_id: admin_user, 
-        content: "was host previous year, had witness #{host.witness_id} assigned"
-        )
-      host.invites.destroy_all
+    Host.where(active: true).each do |host|
+      Host.transaction do
+        host.active = false
+        host.save!
+      end
     end
-    Guest.each do |guest|
-      guest.invites.destroy_all
-    end
+    Invite.destroy_all
   end
 end
