@@ -26,7 +26,7 @@ app.factory('activeUsers', ['$http', 'activeDialog',
     };
     function assignActiveUser(data, optionalUrl) {
       var locale = document.getElementById('locale').className;
-      if (!data.active_this_year && !data.admin) {//if role not set for this year yet and is not an admin
+      if (!data.active_this_year && (data.meta_type == "Host" || data.meta_type == "Guest")) {//if role not set for this year yet and is not an admin
         var changerole = false;
         var last_years_role = data.meta_type;//the was last years role
         
