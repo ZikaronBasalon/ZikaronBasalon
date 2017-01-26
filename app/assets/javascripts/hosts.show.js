@@ -18,6 +18,10 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 			initInvites(host.invites);
 		}
 	}
+
+	$scope.changeToGuest = function() {
+		//TODO
+	}
 	
 	$scope.save = function() {
 		$scope.success = false;

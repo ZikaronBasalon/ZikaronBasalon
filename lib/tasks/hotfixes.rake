@@ -51,11 +51,19 @@ namespace :hotfixes do
   task :send_users_to_last_year => :environment do
     User.where(admin: false).update_all(active_this_year:false)
     Host.update_all(active:false)
-    Host.each do |host|
-      host.invites.each do |invite|
-        invite.destroy
-      end
+    Witness.each do |witness|
+      witness.comments.create(user_id: admin_user, content: "System: was assigned host #{witness.host_id}")
+      witness.host_id = nil
     end
-    #TODO remove open and pending requests on guests, remove from hosts: Witness, Guest list - accepted, Guest list - Pending
+    Host.each do |host|
+      host.comments.create!(
+        user_id: admin_user, 
+        content: "was host previous year, had witness #{host.witness_id} assigned"
+        )
+      host.invites.destroy_all
+    end
+    Guest.each do |guest|
+      guest.invites.destroy_all
+    end
   end
 end
