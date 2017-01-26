@@ -94,6 +94,8 @@ app.factory('activeDialog', ['$http', '$uibModal',
         data = role_response.data
         if (typeof optionalUrl !== 'undefined') {
           window.location = optionalUrl;
+        } else if (data.meta_type == "Host") {
+          window.location = '/' + document.getElementById('locale').className + '/' + data.meta_type.toLowerCase() + 's/' + data.meta_id + '/edit';
         } else {
           window.location = '/' + document.getElementById('locale').className + '/' + data.meta_type.toLowerCase() + 's/' + data.meta_id;
         }

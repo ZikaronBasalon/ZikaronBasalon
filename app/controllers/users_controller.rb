@@ -13,6 +13,9 @@ class UsersController < ApplicationController
 				if oppisite_role == "Host"
 					oppisite_role_instance.active = true
 					oppisite_role_instance.save!
+				elsif oppisite_role == "Guest"
+					oppisite_role_instance.phone = user.host.phone
+					oppisite_role_instance.save!
 				end
 				#TODO: add to comments table this change
 				user.previous_meta_id = user.meta_id
