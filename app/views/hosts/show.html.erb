@@ -362,11 +362,11 @@
       </div>
     <% end %>
 
-    <% if current_user.meta.is_a?(Manager) && false %>
+    <% if current_user.meta.is_a?(Manager) %>
       <div class="col-xs-12">
       <button class="btn btn-warning"  
-             ng-click="save()">
-        <%= t 'shared.save' %>
+             ng-click="changeToGuest()">
+        <%= t 'shared.change_to_guest' %>
       </button>
      </div>
     <% end %>
