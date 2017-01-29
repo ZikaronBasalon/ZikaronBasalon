@@ -81,7 +81,7 @@ namespace :hotfixes do
     admin_user_id = User.where(email: "zikaronbasalon@gmail.com").first.id
     Witness.where("host_id IS NOT NULL").each do |witness|
       Witness.transaction do
-        comment = "בשנה שעברה, העד בשם '#{witness.full_name}' עם מספר סידורי #{witness.id} הייתה משוייכת למארח '#{witness.host.user.full_name}' עם מספר סידורי #{witness.host_id}. מס הסידורי של המארח הוא #{witness.host.user.id}"
+        comment = "בשנה שעברה, העד בשם '#{witness.full_name}' עם מספר סידורי #{witness.id} הייתה משוייכת למארח '#{witness.host.user.full_name}' עם מספר סידורי #{witness.host_id}. במערכת של המארח הוא #{witness.host.user.id}"
         witness.comments.create!(user_id: admin_user_id, content: comment)
         witness.host.comments.create!(user_id: admin_user_id, content: comment)
         witness.host_id = nil
@@ -110,6 +110,9 @@ namespace :hotfixes do
       Host.transaction do
         #create comment for host
         # host.comments.create
+        comment = "בשנה שעברה, מארח זה אירח ב '#{host.event_date} #{host.event_time}' עם העד #{host.witness_id}"
+        host.comments.create!(user_id: admin_user_id, content: comment)
+
         host.max_guests = nil
         host.strangers = nil
         host.survivor_details = nil
