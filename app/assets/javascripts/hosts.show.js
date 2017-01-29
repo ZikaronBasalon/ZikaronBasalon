@@ -20,9 +20,15 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 	}
 
 	$scope.changeToGuest = function() {
-		//TODO
+		$scope.success = false;
+		$http.put('/hosts/' + $scope.host.id + '.json', {
+  		change_to_guest: true
+  	}).then(function success(response) {
+  		$scope.success = true;
+  		window.location = '/' + document.getElementById('locale').className + '/' + 'guests/' + response.data.meta_id;
+  	})
 	}
-	
+
 	$scope.save = function() {
 		$scope.success = false;
 		$http.put('/hosts/' + $scope.host.id + '.json', {

@@ -50,6 +50,7 @@ namespace :hotfixes do
       end
     end
   end
+
   desc "reconnect city ids"
   task :clean_duplicate_cities => :environment do
     a=City.where("placeid IS NOT NULL").all.group_by(&:placeid)
@@ -64,26 +65,74 @@ namespace :hotfixes do
       end
     end
   end
+
   desc "reset users active_this_year"
   task :send_users_to_last_year => :environment do
+
+    #cancel all assignments
     Host.where("assignment_time IS NOT NULL").update_all(assignment_time: nil)
-    User.where(meta_type: "Guest").where(meta_type: "Host").update_all(active_this_year:false)
+
+    #all guests and hosts inactive this year (except for managers)
+    #this makes change role popup
+    User.where(meta_type: "Guest").update_all(active_this_year:false)
+    User.where(meta_type: "Host").update_all(active_this_year:false)
+
+    #create comments for last years assignments
     admin_user_id = User.where(email: "zikaronbasalon@gmail.com").first.id
     Witness.where("host_id IS NOT NULL").each do |witness|
       Witness.transaction do
-        comment = "בשנה שעברה, העד בשם '#{witness.full_name}' עם מספר סידורי #{witness.id} הייתה משוייכת למארח '#{witness.host.user.full_name}' עם מספר סידורי #{witness.host_id}. מס הסידורי של המארח הוא #{witness.host.user.id}"
+        comment = "בשנה שעברה, העד בשם '#{witness.full_name}' עם מספר סידורי #{witness.id} הייתה משוייכת למארח '#{witness.host.user.full_name}' עם מספר סידורי #{witness.host_id}. במערכת של המארח הוא #{witness.host.user.id}"
         witness.comments.create!(user_id: admin_user_id, content: comment)
         witness.host.comments.create!(user_id: admin_user_id, content: comment)
         witness.host_id = nil
+        witness.contacted_by_host = false
+        witness.available_for_teaming = nil
+        witness.can_morning = nil
+        witness.can_afternoon = nil
+        witness.can_evening = nil
+        witness.free_on_day = nil
+        witness.external_assignment = nil
+        witness.available_day1 = nil
+        witness.available_day2 = nil
+        witness.available_day3 = nil
+        witness.available_day4 = nil
+        witness.available_day5 = nil
+        witness.available_day6 = nil
+        witness.available_day7 = nil
+        witness.concept = nil
         witness.save!
       end
     end
-    Host.where(active: true).each do |host|
+
+    #make all hosts not active (for coming up in searches)
+    # Host.where(active: true).each do |host|
+    Host.all.each do |host|
       Host.transaction do
+        #create comment for host
+        # host.comments.create
+        comment = "בשנה שעברה, מארח זה אירח ב '#{host.event_date} #{host.event_time}' עם העד #{host.witness_id}"
+        host.comments.create!(user_id: admin_user_id, content: comment)
+
+        host.max_guests = nil
+        host.strangers = nil
+        host.survivor_details = nil
+        host.evening_public = nil
+        host.hosted_before = nil
+        host.event_date = nil
+        host.event_time = nil
+        host.org_name = nil
+        host.survivor_needed = nil
+        host.witness_id = nil
+        host.received_registration_mail = nil
+        host.contacted_witness = false
+        host.assignment_time = nil
+        host.preparation_evening = nil
         host.active = false
         host.save!
       end
     end
+
+    #remove all invites
     Invite.destroy_all
   end
 end
