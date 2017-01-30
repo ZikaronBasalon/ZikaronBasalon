@@ -115,6 +115,7 @@ namespace :hotfixes do
 
         host.max_guests = nil
         host.strangers = nil
+        host.contacted = false
         host.survivor_details = nil
         host.evening_public = nil
         host.hosted_before = nil
