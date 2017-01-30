@@ -106,15 +106,14 @@ namespace :hotfixes do
 
     #make all hosts not active (for coming up in searches)
     # Host.where(active: true).each do |host|
-
+    admin_user_id = User.where(email: "zikaronbasalon@gmail.com").first.id
     Host.all.each do |host|
       Host.transaction do
         #create comment for host
         # host.comments.create
         # comment = "בשנה שעברה, מארח זה אירח ב '#{host.event_date} #{host.event_time}' עם העד #{host.witness_id}"
-        does_exist=host.comments.where('content LIKE ?',  "בשנה שעברה%")
-        does_exist.each do |b| 
-          b.destroy!
+        host.comments.where('content LIKE ?',  "בשנה שעברה%").each do |comment|
+          comment.destroy! unless comment.nil?
         end
 
         comment = "ב2016 המארח/ת אירח את איש/אשת העדות #{host.witness.full_name} #{host.witness.id}"
