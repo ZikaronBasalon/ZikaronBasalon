@@ -111,7 +111,6 @@ namespace :hotfixes do
       Host.transaction do
         #create comment for host
         # host.comments.create
-        byebug
         # comment = "בשנה שעברה, מארח זה אירח ב '#{host.event_date} #{host.event_time}' עם העד #{host.witness_id}"
         does_exist=host.comments.where('content LIKE ?',  "בשנה שעברה%")
         does_exist.each do |b| 
