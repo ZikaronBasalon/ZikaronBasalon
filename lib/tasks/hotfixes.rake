@@ -112,7 +112,11 @@ namespace :hotfixes do
         # host.comments.create
         # comment = "בשנה שעברה, מארח זה אירח ב '#{host.event_date} #{host.event_time}' עם העד #{host.witness_id}"
         does_exist = host.comments.where("content LIKE 'בשנה שעברה%'")
-        does_exist.destroy_all! if does_exist
+        if does_exist 
+          does_exist.each do |item |
+            item.destroy!
+          end
+        end
 
         comment = "ב2016 המארח/ת אירח את איש/אשת העדות #{host.witness.full_name} #{host.witness.id}"
         host.comments.create!(user_id: admin_user_id, content: comment)
