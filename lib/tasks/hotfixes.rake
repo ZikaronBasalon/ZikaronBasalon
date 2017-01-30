@@ -143,6 +143,7 @@ namespace :hotfixes do
         witness.save!
       end
     end
+    
     #remove all invites
     Invite.destroy_all
   end
