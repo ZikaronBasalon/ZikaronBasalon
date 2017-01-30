@@ -106,6 +106,7 @@ namespace :hotfixes do
 
     #make all hosts not active (for coming up in searches)
     # Host.where(active: true).each do |host|
+
     Host.all.each do |host|
       Host.transaction do
         #create comment for host
