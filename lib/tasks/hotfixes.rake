@@ -104,6 +104,7 @@ namespace :hotfixes do
       end
     end
 
+
     #make all hosts not active (for coming up in searches)
     # Host.where(active: true).each do |host|
     Host.all.each do |host|
