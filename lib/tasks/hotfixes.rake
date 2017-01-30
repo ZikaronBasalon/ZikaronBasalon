@@ -110,7 +110,11 @@ namespace :hotfixes do
       Host.transaction do
         #create comment for host
         # host.comments.create
-        comment = "בשנה שעברה, מארח זה אירח ב '#{host.event_date} #{host.event_time}' עם העד #{host.witness_id}"
+        # comment = "בשנה שעברה, מארח זה אירח ב '#{host.event_date} #{host.event_time}' עם העד #{host.witness_id}"
+        does_exist = host.comments.where("content LIKE 'בשנה שעברה%'")
+        does_exist.destroy_all! if does_exist
+
+        comment = "ב2016 המארח/ת אירח את איש/אשת העדות #{host.witness.full_name} #{host.witness.id}"
         host.comments.create!(user_id: admin_user_id, content: comment)
 
         host.max_guests = nil
