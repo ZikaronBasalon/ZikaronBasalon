@@ -78,31 +78,6 @@ namespace :hotfixes do
     User.where(meta_type: "Host").update_all(active_this_year:false)
 
     #create comments for last years assignments
-    admin_user_id = User.where(email: "zikaronbasalon@gmail.com").first.id
-    Witness.where("host_id IS NOT NULL").each do |witness|
-      Witness.transaction do
-        comment = "בשנה שעברה, העד בשם '#{witness.full_name}' עם מספר סידורי #{witness.id} הייתה משוייכת למארח '#{witness.host.user.full_name}' עם מספר סידורי #{witness.host_id}. במערכת של המארח הוא #{witness.host.user.id}"
-        witness.comments.create!(user_id: admin_user_id, content: comment)
-        witness.host.comments.create!(user_id: admin_user_id, content: comment)
-        witness.host_id = nil
-        witness.contacted_by_host = false
-        witness.available_for_teaming = nil
-        witness.can_morning = nil
-        witness.can_afternoon = nil
-        witness.can_evening = nil
-        witness.free_on_day = nil
-        witness.external_assignment = nil
-        witness.available_day1 = nil
-        witness.available_day2 = nil
-        witness.available_day3 = nil
-        witness.available_day4 = nil
-        witness.available_day5 = nil
-        witness.available_day6 = nil
-        witness.available_day7 = nil
-        witness.concept = nil
-        witness.save!
-      end
-    end
 
     #make all hosts not active (for coming up in searches)
     # Host.where(active: true).each do |host|
@@ -143,6 +118,31 @@ namespace :hotfixes do
       end
     end
 
+    admin_user_id = User.where(email: "zikaronbasalon@gmail.com").first.id
+    Witness.where("host_id IS NOT NULL").each do |witness|
+      Witness.transaction do
+        comment = "בשנה שעברה, העד בשם '#{witness.full_name}' עם מספר סידורי #{witness.id} הייתה משוייכת למארח '#{witness.host.user.full_name}' עם מספר סידורי #{witness.host_id}. במערכת של המארח הוא #{witness.host.user.id}"
+        witness.comments.create!(user_id: admin_user_id, content: comment)
+        witness.host.comments.create!(user_id: admin_user_id, content: comment)
+        witness.host_id = nil
+        witness.contacted_by_host = false
+        witness.available_for_teaming = nil
+        witness.can_morning = nil
+        witness.can_afternoon = nil
+        witness.can_evening = nil
+        witness.free_on_day = nil
+        witness.external_assignment = nil
+        witness.available_day1 = nil
+        witness.available_day2 = nil
+        witness.available_day3 = nil
+        witness.available_day4 = nil
+        witness.available_day5 = nil
+        witness.available_day6 = nil
+        witness.available_day7 = nil
+        witness.concept = nil
+        witness.save!
+      end
+    end
     #remove all invites
     Invite.destroy_all
   end
