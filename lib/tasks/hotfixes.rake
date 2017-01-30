@@ -112,13 +112,16 @@ namespace :hotfixes do
         #create comment for host
         # host.comments.create
         # comment = "בשנה שעברה, מארח זה אירח ב '#{host.event_date} #{host.event_time}' עם העד #{host.witness_id}"
-        host.comments.where('content LIKE ?',  "בשנה שעברה%").each do |comment|
-          comment.destroy! unless comment.nil?
+        host.comments.where('content LIKE ?',  "בשנה שעברה%").destroy_all!
+        # h=host.comments.where('content LIKE ?',  "בשנה שעברה%").last
+        # host.comments.where('content LIKE ?',  "בשנה שעברה%").each do |comment|
+
+        #   comment.destroy if !comment.nil?
+        # end
+        if !host.witness.nil?
+          comment = "ב2016 המארח/ת אירח את איש/אשת העדות #{host.witness.full_name} #{host.witness.id}"
+          host.comments.create!(user_id: admin_user_id, content: comment)
         end
-
-        comment = "ב2016 המארח/ת אירח את איש/אשת העדות #{host.witness.full_name} #{host.witness.id}"
-        host.comments.create!(user_id: admin_user_id, content: comment)
-
         host.max_guests = nil
         host.strangers = nil
         host.contacted = false
