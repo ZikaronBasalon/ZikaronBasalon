@@ -134,6 +134,7 @@ namespace :hotfixes do
         witness.can_afternoon = nil
         witness.can_evening = nil
         witness.free_on_day = nil
+        witness.has_host = nil
         witness.external_assignment = nil
         witness.available_day1 = nil
         witness.available_day2 = nil

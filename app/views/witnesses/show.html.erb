@@ -203,7 +203,8 @@
             </div>
     
             <!-- Concept -->
-            <!-- <div class="field-group">
+            <% if current_user && current_user.meta.is_a?(Manager) %>
+            <div class="field-group">
               <div class="info-label"><%= t 'profile.labels.concept' %></div>
               <div>
                 <select class="form-control"
@@ -216,7 +217,8 @@
                 <option value=""><%= t 'shared.select' %></option>
               </select>
               </div>
-            </div> -->
+            </div>
+            <% end %>
 
             <!-- Type -->
 <!--             <div class="form-group ">
