@@ -259,6 +259,17 @@
         </div>  
 
         <div class="form-group">
+           <select class="form-control" ng-model="search.witness.concept"
+                   ng-options="o.v as o.n for o in [
+                     { n: '<%= t 'shared.concept.religious_and_secular' %>', v: 'religious_and_secular' },
+                     { n: '<%= t 'shared.concept.vetrans' %>', v: 'vetrans' },
+                     { n: '<%= t 'shared.concept.eastern' %>', v: 'eastern' }
+                   ]">
+             <option value=""><%= t 'shared.concept_label' %></option>
+           </select>
+         </div>
+               
+        <div class="form-group">
           <select class="form-control" ng-model="search.event_language">
             <option value=""><%= t 'shared.event_language' %></option>
             <option value="hebrew">עברית</option>
