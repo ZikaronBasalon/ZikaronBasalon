@@ -48,6 +48,7 @@ class HostsController < ApplicationController
     elsif params[:finalStep] && !@host.received_registration_mail
       HostMailer.new_host(@host.user.id, I18n.locale).deliver
       @host.update_attributes(received_registration_mail: true)
+      @host.update_attributes(params[:host])
     elsif params[:host].present?
       @host.update_attributes(params[:host])
     end
