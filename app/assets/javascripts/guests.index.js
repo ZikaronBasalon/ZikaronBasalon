@@ -70,7 +70,7 @@ app.controller('GuestIndexController', ['$scope','$http', function($scope, $http
     $http.get('/guests.json', { 
       params: {
         page: page,
-        query: $scope.search.query,
+        query: ($scope.search && $scope.search.query) ? $scope.search.query:null
       }
     })
     .then(function(response) {
