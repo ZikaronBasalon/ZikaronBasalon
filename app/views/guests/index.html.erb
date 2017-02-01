@@ -47,10 +47,12 @@
           </button>
         </td>
         <td>
+        <% if current_user.meta.is_a?(Manager) && current_user.admin? && !current_user.sub_admin? %>
           <button ng-disabled="!guest.user.active_this_year" ng-click="deactivateGuest(guest)" 
                   class="btn btn-warning">
             <%= t 'shared.deactivate' %>
           </button>
+        <% end %>
         </td>
       </tr>
     </tbody>
