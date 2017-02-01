@@ -95,7 +95,7 @@ namespace :hotfixes do
         #   comment.destroy if !comment.nil?
         # end
         if !host.witness.nil?
-          comment = "ב2016 המארח/ת אירח את איש/אשת העדות #{host.witness.full_name} #{host.witness.id}"
+          comment = "ב2016 המארח/ת אירח/ה את איש/אשת העדות #{host.witness.full_name} #{host.witness.id}"
           host.comments.create!(user_id: admin_user_id, content: comment)
         end
         host.max_guests = nil
@@ -124,7 +124,8 @@ namespace :hotfixes do
         # witness.comments.where("content LIKE 'בשנה שעברה%'").destroy_all
 
                   #בשנה שעברה, 'זליג-בונדר'             (1772)           היה/הייתה מצוות/ת למארח/ת 'לירון נמרי'                       (1518              ). בצד של המארחים הוא/היא 2185.
-        comment = "בשנה שעברה, '#{witness.full_name}' (#{witness.id}) היה/הייתה מצוות/ת למארח/ת '#{witness.host.user.full_name}' (#{witness.host_id}). בצד של המארחים הוא/היא #{witness.host.user.id}."
+        comment = "בשנה שעברה, '#{witness.full_name}' (#{witness.id}) היה/הייתה מצוות/ת למארח/ת #{witness.host.user.full_name} (#{witness.host_id}). בצד של המארחים הוא/היא #{witness.host.user.id}."
+                  #בשנה שעברה, 'זליג-בונדר'             (1772)           היה/הייתה מצוות/ת למארח/ת 'לירון נמרי'                       (1518).               בצד של המארחים הוא/היא 2185.
         # comment = "בשנה שעברה, העד בשם '#{witness.full_name}' עם מספר סידורי #{witness.id} הייתה משוייכת למארח '#{witness.host.user.full_name}' עם מספר סידורי #{witness.host_id}. במערכת של המארח הוא #{witness.host.user.id}"
         witness.comments.create!(user_id: admin_user_id, content: comment)
         witness.host.comments.create!(user_id: admin_user_id, content: comment)
