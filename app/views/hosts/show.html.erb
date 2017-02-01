@@ -355,7 +355,7 @@
         </button>
       </div>
 
-      <div class="col-xs-12" ng-if="success">
+      <div class="col-xs-6" ng-if="success">
         <div class="alert alert-success" role="alert">
           <%= t '.host_updated' %>
         </div>
@@ -363,10 +363,10 @@
     <% end %>
 
     <% if current_user.meta.is_a?(Manager) %>
-      <div class="col-xs-12">
-      <button class="btn btn-warning"  
-             ng-click="changeToGuest()">
-        <%= t 'shared.change_to_guest' %>
+      <div class="col-xs-6">
+      <button class="btn btn-warning" ng-disabled="!host.active" 
+             ng-click="deactivateHost()">
+        <%= t 'shared.deactivate' %>
       </button>
      </div>
     <% end %>

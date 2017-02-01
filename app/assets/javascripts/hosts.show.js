@@ -19,13 +19,13 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 		}
 	}
 
-	$scope.changeToGuest = function() {
+	$scope.deactivateHost = function() {
 		$scope.success = false;
 		$http.put('/hosts/' + $scope.host.id + '.json', {
-  		change_to_guest: true
+  		deactivate: true
   	}).then(function success(response) {
   		$scope.success = true;
-  		window.location = '/' + document.getElementById('locale').className + '/' + 'guests/' + response.data.meta_id;
+  		window.location.reload();
   	})
 	}
 
