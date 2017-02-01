@@ -45,16 +45,21 @@ class HostsController < ApplicationController
     @host = Host.find(params[:id])
     if params[:deactivate].present?
       @host.active=false
+      @host.received_registration_mail=false
       @host.save!
       @host.user.active_this_year=false
       @host.user.save!
      #put here code for changing to guest from host
-    elsif params[:finalStep] && !@host.received_registration_mail
-      HostMailer.new_host(@host.user.id, I18n.locale).deliver
-      @host.update_attributes(received_registration_mail: true)
-      @host.update_attributes(active: true)
-      @host.user.update_attributes(active_this_year: true)
+    elsif params[:finalStep]
+      if !@host.received_registration_mail
+        HostMailer.new_host(@host.user.id, I18n.locale).deliver
+        @host.update_attributes(received_registration_mail: true)
+      end
       @host.update_attributes(params[:host])
+      @host.active=true
+      @host.save!
+      @host.user.active_this_year=true
+      @host.user.save!
     elsif params[:host].present?
       @host.update_attributes(params[:host])
     end
