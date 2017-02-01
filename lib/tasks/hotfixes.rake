@@ -135,7 +135,7 @@ namespace :hotfixes do
         witness.can_evening = nil
         witness.free_on_day = nil
         witness.has_host = nil
-        witness.external_assignment = nil
+        witness.external_assignment = true #mark all as not interested, until we follow up
         witness.available_day1 = nil
         witness.available_day2 = nil
         witness.available_day3 = nil
