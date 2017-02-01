@@ -68,6 +68,7 @@ he:
     back: "הקודם"
     select: "בחר/י"
     other: "אחר"
+    deactivate: "הפוך ללא זמין"
     change_to_guest: "one salon down :("
     change_to_host: "יאללה לארח"
     available_day1: "חמישי 20.4"

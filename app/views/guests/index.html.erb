@@ -28,6 +28,7 @@
         <td>תאריך בקשה</td>
         <td>אורחים נוספים</td>
         <th>מחק</th>
+        <th>הפוך ללא זמין</th>
       </tr> 
     </thead>
     <tbody>
@@ -43,6 +44,12 @@
           <button ng-click="deleteGuest(guest)" 
                   class="btn btn-warning">
             <%= t 'shared.delete' %>
+          </button>
+        </td>
+        <td>
+          <button ng-disabled="!guest.user.active_this_year" ng-click="deactivateGuest(guest)" 
+                  class="btn btn-warning">
+            <%= t 'shared.deactivate' %>
           </button>
         </td>
       </tr>

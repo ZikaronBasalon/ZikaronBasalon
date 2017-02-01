@@ -20,6 +20,24 @@ app.controller('GuestIndexController', ['$scope','$http', function($scope, $http
     }, 2000), true);
   }
 
+  $scope.deactivateGuest = function(guest) {
+    var res = confirm("בטוח בטוח?");
+    if (res) {
+      $http.put('/guests/' + guest.id + '.json', {
+        deactivate: true
+      })
+      .then(function(response) {
+        if (response.data.success) {
+          $scope.showSuccessMessage();
+          $scope.success = true;
+          $scope.guests = _.filter($scope.guests, function(guest) {
+            return guest.id !== response.data.guest.id;
+          });
+        }
+      })
+    }
+  }
+  
   $scope.deleteGuest = function(guest) {
     var res = confirm("בטוח בטוח?");
     if (res) {

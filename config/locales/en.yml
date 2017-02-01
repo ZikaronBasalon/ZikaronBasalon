@@ -55,6 +55,7 @@ en:
     back: "Back"
     select: "Select"
     other: "Other"
+    deactivate: "Make Inactive"
     change_to_guest: "one salon down :("
     change_to_host: "c'mon be a host"
     available_day1: "חמישי 20.4"
