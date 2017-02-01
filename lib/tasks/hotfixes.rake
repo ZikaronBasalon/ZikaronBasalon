@@ -88,7 +88,7 @@ namespace :hotfixes do
         # host.comments.create
         # comment = "בשנה שעברה, מארח זה אירח ב '#{host.event_date} #{host.event_time}' עם העד #{host.witness_id}"
         # where("name like '%yson%'")
-        host.comments.where("content LIKE 'בשנה שעברה%'").destroy_all
+        # host.comments.where("content LIKE 'בשנה שעברה%'").destroy_all
         # h=host.comments.where('content LIKE ?',  "בשנה שעברה%").last
         # host.comments.where('content LIKE ?',  "בשנה שעברה%").each do |comment|
 
@@ -121,9 +121,10 @@ namespace :hotfixes do
     admin_user_id = User.where(email: "zikaronbasalon@gmail.com").first.id
     Witness.where("host_id IS NOT NULL").each do |witness|
       Witness.transaction do
-        witness.comments.where("content LIKE 'בשנה שעברה%'").destroy_all
+        # witness.comments.where("content LIKE 'בשנה שעברה%'").destroy_all
 
-        comment = "בשנה שעברה, '#{witness.full_name}' (#{witness.id}) הייתה מצוותת למארח/ת '#{witness.host.user.full_name}' (#{witness.host_id}). בצד של המארחים הוא/היא #{witness.host.user.id}."
+                  #בשנה שעברה, 'זליג-בונדר'             (1772)           היה/הייתה מצוות/ת למארח/ת 'לירון נמרי'                       (1518              ). בצד של המארחים הוא/היא 2185.
+        comment = "בשנה שעברה, '#{witness.full_name}' (#{witness.id}) היה/הייתה מצוות/ת למארח/ת '#{witness.host.user.full_name}' (#{witness.host_id}). בצד של המארחים הוא/היא #{witness.host.user.id}."
         # comment = "בשנה שעברה, העד בשם '#{witness.full_name}' עם מספר סידורי #{witness.id} הייתה משוייכת למארח '#{witness.host.user.full_name}' עם מספר סידורי #{witness.host_id}. במערכת של המארח הוא #{witness.host.user.id}"
         witness.comments.create!(user_id: admin_user_id, content: comment)
         witness.host.comments.create!(user_id: admin_user_id, content: comment)
@@ -152,3 +153,4 @@ namespace :hotfixes do
     Invite.destroy_all
   end
 end
+
