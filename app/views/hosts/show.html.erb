@@ -348,7 +348,7 @@
     <% end %>
 
     <% if current_user.meta.is_a?(Manager) || current_user.admin? || @host.witness || 1 %>
-      <div class="col-xs-12">
+      <div class="col-xs-6">
         <button class="btn btn-warning"  
                   ng-click="save()">
           <%= t 'shared.save' %>
@@ -361,7 +361,6 @@
         </div>
       </div>
     <% end %>
-
     <% if current_user.meta.is_a?(Manager) && current_user.admin? && !current_user.sub_admin? %>
       <div class="col-xs-6">
       <button class="btn btn-warning" ng-disabled="!host.active" 
