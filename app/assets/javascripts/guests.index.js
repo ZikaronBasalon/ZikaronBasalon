@@ -89,4 +89,8 @@ app.controller('GuestIndexController', ['$scope','$http', function($scope, $http
     var pOnes = (guest.invites[0] || {}).plus_ones;
     return pOnes > 0 ? pOnes : null;
   }
+
+  $scope.editGuest = function(guest) {
+    window.open('/guests/' + guest.id, '_blank');
+  }
 }]);
