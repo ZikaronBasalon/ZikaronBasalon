@@ -362,7 +362,7 @@
       </div>
     <% end %>
 
-    <% if current_user.meta.is_a?(Manager) %>
+    <% if current_user.meta.is_a?(Manager) && current_user.admin? && !current_user.sub_admin? %>
       <div class="col-xs-6">
       <button class="btn btn-warning" ng-disabled="!host.active" 
              ng-click="deactivateHost()">

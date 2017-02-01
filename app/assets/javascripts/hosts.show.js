@@ -20,6 +20,8 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 	}
 
 	$scope.deactivateHost = function() {
+		var confirmed=confirm("בטוח בטוח?");
+		if (!confirmed) return;
 		$scope.success = false;
 		$http.put('/hosts/' + $scope.host.id + '.json', {
   		deactivate: true
