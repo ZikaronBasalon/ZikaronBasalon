@@ -77,8 +77,6 @@ namespace :hotfixes do
     User.where(meta_type: "Guest").update_all(active_this_year:false)
     User.where(meta_type: "Host").update_all(active_this_year:false)
 
-    #create comments for last years assignments
-
     #make all hosts not active (for coming up in searches)
     # Host.where(active: true).each do |host|
     admin_user_id = User.where(email: "zikaronbasalon@gmail.com").first.id
