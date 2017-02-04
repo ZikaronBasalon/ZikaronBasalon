@@ -11,22 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160424061538) do
-
-  create_table "active_admin_comments", :force => true do |t|
-    t.string   "resource_id",   :null => false
-    t.string   "resource_type", :null => false
-    t.integer  "author_id"
-    t.string   "author_type"
-    t.text     "body"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-    t.string   "namespace"
-  end
-
-  add_index "active_admin_comments", ["author_type", "author_id"], :name => "index_active_admin_comments_on_author_type_and_author_id"
-  add_index "active_admin_comments", ["namespace"], :name => "index_active_admin_comments_on_namespace"
-  add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
+ActiveRecord::Schema.define(:version => 20170125211439) do
 
   create_table "cities", :force => true do |t|
     t.string   "name"
@@ -34,6 +19,9 @@ ActiveRecord::Schema.define(:version => 20160424061538) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.string   "manager_email"
+    t.string   "placeid"
+    t.string   "name_en"
+    t.string   "name_he"
   end
 
   create_table "comments", :force => true do |t|
@@ -111,6 +99,8 @@ ActiveRecord::Schema.define(:version => 20160424061538) do
     t.boolean  "contacted_witness",          :default => false
     t.integer  "country_id"
     t.datetime "assignment_time"
+    t.boolean  "preparation_evening",        :default => false
+    t.boolean  "active",                     :default => true
   end
 
   add_index "hosts", ["city_id"], :name => "index_hosts_on_city_id"
@@ -160,6 +150,9 @@ ActiveRecord::Schema.define(:version => 20160424061538) do
     t.integer  "meta_id"
     t.string   "meta_type"
     t.boolean  "sub_admin",              :default => false
+    t.integer  "previous_meta_id"
+    t.string   "previous_meta_type"
+    t.boolean  "active_this_year",       :default => true
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
@@ -195,6 +188,14 @@ ActiveRecord::Schema.define(:version => 20160424061538) do
     t.string   "contact_name"
     t.string   "contact_phone"
     t.boolean  "external_assignment",   :default => false
+    t.string   "additional_phone"
+    t.boolean  "available_day1"
+    t.boolean  "available_day2"
+    t.boolean  "available_day3"
+    t.boolean  "available_day4"
+    t.boolean  "available_day5"
+    t.boolean  "available_day6"
+    t.boolean  "available_day7"
   end
 
 end

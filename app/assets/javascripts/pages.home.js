@@ -95,7 +95,6 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
       location.reload();
     }, function () {
       window.history.pushState(null, null, '/pages/home');
-      location.reload();
     });
   }
 

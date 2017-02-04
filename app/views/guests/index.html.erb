@@ -17,7 +17,7 @@
     </div>
   </form>
 
-  <table class="table">
+  <table class="table guest-table">
     <thead>
       <tr>
         <th>ID</th>
@@ -28,10 +28,11 @@
         <td>תאריך בקשה</td>
         <td>אורחים נוספים</td>
         <th>מחק</th>
+        <th>הפוך ללא זמין</th>
       </tr> 
     </thead>
     <tbody>
-      <tr ng-repeat="guest in guests">
+      <tr ng-repeat="guest in guests" ng-click="editGuest(guest)">
         <td>{{ guest.id }}</td>
         <td>{{ guest.user.full_name }}</td>
         <td>{{ guest.user.email }}</td>
@@ -44,6 +45,14 @@
                   class="btn btn-warning">
             <%= t 'shared.delete' %>
           </button>
+        </td>
+        <td>
+        <% if current_user.meta.is_a?(Manager) && current_user.admin? && !current_user.sub_admin? %>
+          <button ng-disabled="!guest.user.active_this_year" ng-click="deactivateGuest(guest)" 
+                  class="btn btn-warning">
+            <%= t 'shared.deactivate' %>
+          </button>
+        <% end %>
         </td>
       </tr>
     </tbody>

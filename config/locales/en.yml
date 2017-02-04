@@ -1,6 +1,8 @@
 en:
   activerecord:
     errors:
+      messages:
+        record_invalid: "Invalid Record"
       models:
         user:
           attributes:
@@ -53,6 +55,19 @@ en:
     back: "Back"
     select: "Select"
     other: "Other"
+    deactivate: "Make Inactive"
+    change_to_guest: "one salon down :("
+    change_to_host: "c'mon be a host"
+    available_day1: "חמישי 20.4"
+    available_day2: "ששי 21.4"
+    available_day3: "שבת 22.4"
+    available_day4: "ראשון 23.4"
+    available_day5: "שני 24.4"
+    available_day6: "שלישי 25.4"
+    available_day7: "רביעי 26.4"
+    multiple_available_days: "בחירת ימים ברובים זמינים"
+    available_days: "ימים זמינים"
+    availability: "זמינות"
     send_request: "Send a request"
     request_sent: "Your request has been sent"
     save: "Save"
@@ -90,6 +105,7 @@ en:
     forgot_password: "Forgot your password?"
     has_host: "Assign to host"
     is_org: "Belongs to organization"
+    has_survivor_set: "Survivor is set"
     language: "Language"
     manager: "manager"
     reset_password: "Reset password"
@@ -237,6 +253,7 @@ en:
         free_text: "My Notes"
         edit: "Edit"
         contacted: "Was contacted"
+        preparation_evening: "Was at Evening Preparation"
         survivor_needed: "Needs witness"
         has_survivor: "Witness assigned"
         survivor_contacted: "Host confirmed witness arrival"
@@ -256,7 +273,56 @@ en:
       academia: "אקדמיה"
       second_generation: "דור שני"
       therapist: "מטפל"
+    new:
+      title: "הוסף איש עדות"
+      walk_up_stairs: "יכול לעלות מדרגות"
+      special_needs: "צרכי נגישות מיוחדים"
+      seminar_required: "צריך סמינר"
+      free_text: "עוד משהו שאנחנו צריכים לדעת"
+      special_population: "אוכלוסיה מיוחדת"
+    show:
+      title: "פרופיל איש עדות"
+    assign_modal:
+      title: "ציוות מארח ואיש עדות"
+      subtitle: "כאן תוכלו לוודא כי מדובר בציוות מוצלח."
+      subtitle_2: "לאחר האישור נעביר אותך למסך המארח, שיקבל מייל אוטומטי עם פרטי איש העדות. עליך לעדכן את המארח על המשך התהליך."
 
+  profile:
+    labels:
+      registration_time: "זמן הרשמה"
+      name: "שם"
+      phone: "טלפון"
+      additional_phone: "טלפון נוסף"
+      email: "מייל"
+      address: "כתובת"
+      date_and_time: "תאריך ושעה משוערת"
+      organization: "שייך לארגון"
+      langauge: "שפה"
+      accesability: "נגישות הסלון"
+      salon_type: "סוג סלון"
+      open_places: "מקומות פנויים"
+      public_text: "הערות למתארחים"
+      free_text: "הערות לצוות"
+      edit: "עריכה"
+      contacted: "נוצר קשר ראשוני"
+      survivor_needed: "צריך עד"
+      has_survivor: "צוות עד"
+      survivor_contacted: "מארח אישר הגעת עד"
+      concept: "קונספט"
+      host: "מארח"
+      seminar_required: "מעוניין בערב הכנה"
+      special_population: "מוכנות לאוכ' מיוחדות"
+      external_assignment: "מעוניין להשתתף השנה"
+      external_assignment_explain: "כדי שנדע לשנה הבאה, בבקשה הוסיפו בהערות את הסיבה"
+    personal_details: "פרטים אישיים"
+    evening_details: "פרטים על הערב"
+    manager_actions: "פעולות מוביל קהילה"
+    assign_host: "צוות למארח"
+    updated: "הפרטים עודכנו בהצלחה"
+    external_assignment_text: "איש העדות לא מעוניין להשתתף השנה"
+
+
+  
   manager_mailer:
     new_manager:
       title: "Registration for Zikaron BaSalon's team members"

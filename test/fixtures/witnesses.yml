@@ -1,4 +1,4 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+# Read about fixtures at http://api.rubyonrails.org/v3.2.2/classes/ActiveRecord/Fixtures.html
 
 one:
   full_name: MyString
@@ -8,6 +8,7 @@ one:
   language: MyString
   email: MyString
   phone: MyString
+  additional_phone: MyString
   stairs: false
   special_needs: MyText
   seminar_required: false
@@ -23,6 +24,7 @@ two:
   language: MyString
   email: MyString
   phone: MyString
+  additional_phone: MyString
   stairs: false
   special_needs: MyText
   seminar_required: false

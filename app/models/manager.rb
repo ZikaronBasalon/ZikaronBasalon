@@ -14,7 +14,8 @@ class Manager < ActiveRecord::Base
   def get_hosts(page, filter, query, sort, has_manager, has_survivor, is_org, language, in_future, reverse_ordering)
    sort = 'created_at' if sort.blank?
    sort_order = !reverse_ordering.to_i.zero? ? " desc" : " asc"
-   hosts = Host.includes(:city, :user, :witness).order(sort + sort_order).where(filter)
+   hosts = Host.includes(:city, :user, :witness).order(sort + sort_order)
+   hosts = hosts.where(filter)
    hosts = hosts.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
    hosts = hosts.where(concept: concept).select{ |h| h.has_witness } if concept
    hosts = hosts.select{ |h| host_in_filter(h, query, has_manager, has_survivor, is_org, language, in_future) }
@@ -22,12 +23,12 @@ class Manager < ActiveRecord::Base
    hosts
   end
 
-  def get_witnesses(page, filter, query, sort, has_manager, has_host, language)
+  def get_witnesses(page, filter, query, sort, has_manager, has_host, language, external_assignment)
    sort = 'created_at' if sort.blank?
    witnesses = Witness.includes(:city, :host).order(sort + " desc").where(filter)
    witnesses = witnesses.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
    witnesses = witnesses.where(concept: concept) if concept
-   witnesses = witnesses.select{ |w| witness_in_filter(w, query, has_manager, has_host, language) }
+   witnesses = witnesses.select{ |w| witness_in_filter(w, query, has_manager, has_host, language, external_assignment) }
    witnesses = paginate(witnesses, page) if page
    witnesses
   end
@@ -67,12 +68,13 @@ class Manager < ActiveRecord::Base
     in_filter
   end
 
-  def witness_in_filter(w, query, has_manager, has_host, language)
+  def witness_in_filter(w, query, has_manager, has_host, language, external_assignment)
     in_filter = true
     in_filter = in_filter && w.in_language_filter(language)
     in_filter = in_filter && witness_in_query(w,query) if query.present?
     in_filter = in_filter && obj_has_manager(w, has_manager) if has_manager.present?
     in_filter = in_filter && witness_has_host(w, has_host) if has_host.present?
+    in_filter = in_filter && witness_external_assignment(w, external_assignment) if external_assignment.present?
     in_filter
   end
 
@@ -94,6 +96,14 @@ class Manager < ActiveRecord::Base
       return w.has_host
     else
       return !w.has_host
+    end 
+  end
+
+  def witness_external_assignment(w, external_assignment)
+    if external_assignment === "true"
+      return w.external_assignment
+    else
+      return !w.external_assignment
     end 
   end
 

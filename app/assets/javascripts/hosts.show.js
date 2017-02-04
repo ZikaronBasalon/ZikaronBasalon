@@ -18,15 +18,29 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 			initInvites(host.invites);
 		}
 	}
-	
+
+	$scope.deactivateHost = function() {
+		var confirmed=confirm("בטוח בטוח?");
+		if (!confirmed) return;
+		$scope.success = false;
+		$http.put('/hosts/' + $scope.host.id + '.json', {
+  		deactivate: true
+  	}).then(function success(response) {
+  		$scope.success = true;
+  		window.location.reload();
+  	})
+	}
+
 	$scope.save = function() {
 		$scope.success = false;
 		$http.put('/hosts/' + $scope.host.id + '.json', {
   		host: {
 				concept: $scope.host.concept,
 				contacted: $scope.host.contacted,
+				preparation_evening: $scope.host.preparation_evening,
 				contacted_witness: $scope.host.contacted_witness,
-				strangers: $scope.host.strangers
+				strangers: $scope.host.strangers,
+				max_guests: $scope.host.max_guests
 			}
   	}).then(function success(response) {
   		$scope.success = true; 
@@ -56,9 +70,11 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 	}
 
 	$scope.fbShare = function () {
+
   	FB.ui({
-		  method: 'share',
-		  href: 'http://zikaronbasalon.herokuapp.com/' + document.getElementById('locale').className + '/pages/home/'  + '?invite=' + $scope.host.id
+		method: 'share',
+		mobile_iframe: true,
+	  href: 'https://zikaronbasalonstaging.herokuapp.com/' + document.getElementById('locale').className + '/pages/home/'  + '?invite=' + $scope.host.id
 		}, function(response){
 
 		});

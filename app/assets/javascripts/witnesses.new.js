@@ -5,7 +5,15 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 		can_morning: true,
 		can_afternoon: true,
 		can_evening: true,
-		free_on_day: true
+		free_on_day: true,
+		special_population: false,
+    available_day1: false,
+    available_day2: false,
+    available_day3: false,
+    available_day4: false,
+    available_day5: false,
+    available_day6: false,
+    available_day7: false
 	};
 
 	$scope.otherLanguageVisible = false;
@@ -43,13 +51,17 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 					window.location = '/' + document.getElementById('locale').className + '/witnesses/' + response.data.id;
 				} else {
 					_.each(response.data, addAlert);
+					$("html, body").animate({ scrollTop: 0 }, "slow");
 				}
 			}).catch(function(response) {
 				console.log(response);
 				_.each(response.data, addAlert);
+				$("html, body").animate({ scrollTop: 0 }, "slow");
 			});
 		
-		}
+		} else {
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+			}
 	}
 
 	$scope.onCityNameBlur = function() {

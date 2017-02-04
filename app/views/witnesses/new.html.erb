@@ -39,6 +39,14 @@
              required>
     </div>
 
+    <div class="form-group">
+      <label for="additional_phone"><%= t 'hosts.edit.additional_phone' %></label>
+      <input type="text" class="form-control"
+             id="additional_phone"
+             ng-model="witness.additional_phone"
+             is-phone>
+    </div>
+
     <div class="form-group ">
       <label for="witness_type" >
         <%= t 'shared.type' %>
@@ -52,7 +60,7 @@
 
     <div class="form-group ">
       <label for="contact_name" >
-       שם איש קשר
+       שם איש קשר וקרבה לעד
       </label>
       <input type="text" class="form-control"
              id="contact_name"
@@ -113,23 +121,75 @@
 			</textarea>
     </div>
 
-    <div class="form-group">
+  <!--   <div class="form-group">
 	    <label for="seminar_required"><%= t '.seminar_required' %></label>
       <select class="form-control" id="seminar_required" 
               ng-model="witness.seminar_required"
               ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.needs' %>', v: true }, { n: '<%= t 'shared.doesnt_need' %>', v: false }]">
       </select>
-	  </div>
+	  </div> -->
 
-    <div class="form-group">
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" ng-model="witness.free_on_day">
-          פנוי לתת עדות בערב יום השואה (4/5/2016)
-        </label>
+
+    <label class="control-label"><%= t 'shared.multiple_available_days' %></label>
+    <div class="form-inline">
+      <div class="form-group">
+        <div class="checkbox checkbox-inline">
+          <label>
+            <input type="checkbox" ng-model="witness.available_day1">
+            <%= t 'shared.available_day1' %>
+          </label>
+        </div>
       </div>
-
+      <div class="form-group">
+        <div class="checkbox checkbox-inline">
+          <label>
+            <input type="checkbox" ng-model="witness.available_day2">
+            <%= t 'shared.available_day2' %>
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="checkbox checkbox-inline">
+          <label>
+            <input type="checkbox" ng-model="witness.available_day3">
+            <%= t 'shared.available_day3' %>
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="checkbox checkbox-inline">
+          <label>
+            <input type="checkbox" ng-model="witness.available_day4">
+            <%= t 'shared.available_day4' %>
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="checkbox checkbox-inline">
+          <label>
+            <input type="checkbox" ng-model="witness.available_day5">
+            <%= t 'shared.available_day5' %>
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="checkbox checkbox-inline">
+          <label>
+            <input type="checkbox" ng-model="witness.available_day6">
+            <%= t 'shared.available_day6' %>
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="checkbox checkbox-inline">
+          <label>
+            <input type="checkbox" ng-model="witness.available_day7">
+            <%= t 'shared.available_day7' %>
+          </label>
+        </div>
+      </div>
     </div>
+    <p>
 
     <div class="form-group">
       <label>זמינות (באילו שעות איש העדות פנוי)</label>
@@ -160,7 +220,7 @@
 	  <div class="form-group">
       <label for="free_text" class="control-label"><%= t '.free_text' %></label>
       <textarea class="form-control" id="free_text" 
-      					ng-model="witness.free_text">
+      					ng-model="witness.free_text" style="height: 250px; max-width: 330px;">
 			</textarea>
     </div>
 
@@ -173,7 +233,7 @@
 	  </div>
 
     <!-- Concept -->
-    <div class="form-group">
+<!--     <div class="form-group">
       <label for="concept"><%= t 'profile.labels.concept' %></label>
         <select class="form-control"
                 ng-model="witness.concept"
@@ -186,7 +246,7 @@
         <option value=""><%= t 'shared.select' %></option>
       </select>
     </div>
-
+ -->
 
     <button ng-click="submit()" class="btn btn-warning"><%= t 'shared.submit' %></button>
   </form>

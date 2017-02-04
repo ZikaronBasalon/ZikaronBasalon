@@ -32,6 +32,16 @@ class GuestsController < ApplicationController
     end
   end
 
+  def update
+    @guest=Guest.find(params[:id])
+    if params[:deactivate]
+      @guest.user.active_this_year=false
+      @guest.user.save!
+    end
+    @guest.update_attributes(params[:guest])
+    render :json => { success: true, guest: @guest }
+  end
+
   def destroy
     @guest = Guest.find(params[:id])
     @guest.destroy

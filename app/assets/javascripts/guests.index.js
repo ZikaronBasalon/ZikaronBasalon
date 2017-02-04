@@ -20,6 +20,24 @@ app.controller('GuestIndexController', ['$scope','$http', function($scope, $http
     }, 2000), true);
   }
 
+  $scope.deactivateGuest = function(guest) {
+    var res = confirm("בטוח בטוח?");
+    if (res) {
+      $http.put('/guests/' + guest.id + '.json', {
+        deactivate: true
+      })
+      .then(function(response) {
+        if (response.data.success) {
+          $scope.showSuccessMessage();
+          $scope.success = true;
+          $scope.guests = _.filter($scope.guests, function(guest) {
+            return guest.id !== response.data.guest.id;
+          });
+        }
+      })
+    }
+  }
+  
   $scope.deleteGuest = function(guest) {
     var res = confirm("בטוח בטוח?");
     if (res) {
@@ -52,7 +70,7 @@ app.controller('GuestIndexController', ['$scope','$http', function($scope, $http
     $http.get('/guests.json', { 
       params: {
         page: page,
-        query: $scope.search.query,
+        query: ($scope.search && $scope.search.query) ? $scope.search.query:null
       }
     })
     .then(function(response) {
@@ -70,5 +88,9 @@ app.controller('GuestIndexController', ['$scope','$http', function($scope, $http
   $scope.plusOnes = function(guest) {
     var pOnes = (guest.invites[0] || {}).plus_ones;
     return pOnes > 0 ? pOnes : null;
+  }
+
+  $scope.editGuest = function(guest) {
+    window.open('/guests/' + guest.id, '_blank');
   }
 }]);
