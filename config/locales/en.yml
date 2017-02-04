@@ -9,7 +9,11 @@ en:
             email:
               taken: "The email address you entered is already in use"
               invalid: "The email address you entered is invalid"
-
+        witness:
+          attributes:
+            phone:
+              taken: "קיים במערכת איש עדות עם מספר טלפון זהה"
+              
   users:
     new:
       title: "Register as a host"
