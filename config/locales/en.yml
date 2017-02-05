@@ -17,7 +17,8 @@ en:
   users:
     new:
       title: "Register as a host"
-      description: "We are glad you chose to host an evening of Zikaron BaSalon! We are here to help and guide you through the process. First, let’s create your personal profile"
+      description: "We are glad you chose to host an evening of Zikaron BaSalon!"
+      description2: "We are here to help and guide you through the process. First, let’s create your personal profile"
       manager_title: "Registration for Zikaron BaSalon's team members"
       manager_description: "Hey, we're so glad you're here! :) Please register with the email address you received the welcome email to, and pick a password."
       labels:
@@ -231,6 +232,7 @@ en:
       free_text: "Is there anything else we need to know?"
       finish: "Complete registration" 
       thanks_for_joining:  "You have joined thousands of Zikaron BaSalon hosts worldwide!"
+      thanks_for_joining2:  ""
       facebook_share: "Share on Facebook"
       build_evening: "Build your evening"
       city: "City"
