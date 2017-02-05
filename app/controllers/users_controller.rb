@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 					oppisite_role_instance.active = true
 					oppisite_role_instance.save!
 				elsif oppisite_role == "Guest"
-					oppisite_role_instance.phone = user.host.phone
+					oppisite_role_instance.phone = user.meta.phone
 					oppisite_role_instance.save!
 				end
 				#TODO: add to comments table this change
