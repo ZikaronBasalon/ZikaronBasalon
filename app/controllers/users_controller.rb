@@ -10,18 +10,18 @@ class UsersController < ApplicationController
 		oppisite_role = user.meta_type == "Host" ? "Guest" : "Host"
 		was_ever_oppisite_role = user.previous_meta_id.present?
 		if params[:changerole] == true
+			comment_guest_to_host = "איזה כיף, #{user.full_name} התארח/ה ב2016, והשנה הפכ/ה למארח/ת."
+			comment_host_to_guest = "#{user.full_name} אירח/ה ב2016, אבל בחר/ה להתארח השנה."
 			if !was_ever_oppisite_role #never was oppisite role, so create new
 				oppisite_role_instance = oppisite_role.constantize.create! #the guest or host
 				if oppisite_role == "Host"
 					oppisite_role_instance.active = true
 					oppisite_role_instance.save!
-					comment = "ב2016 היה אורח/ת (#{user.meta.id})"
-					user.meta.comments.create!(user_id: admin_user_id, content: comment)
+					user.meta.comments.create!(user_id: admin_user_id, content: comment_guest_to_host)
 				elsif oppisite_role == "Guest"
 					oppisite_role_instance.phone = user.meta.phone
 					oppisite_role_instance.save!
-					comment = "ב2016 היה מארח/ת (#{user.meta.id})"
-					user.meta.comments.create!(user_id: admin_user_id, content: comment)
+					user.meta.comments.create!(user_id: admin_user_id, content: comment_host_to_guest)
 				end
 				user.previous_meta_id = user.meta_id
 				user.previous_meta_type = user.meta_type
@@ -32,14 +32,12 @@ class UsersController < ApplicationController
 				if user.meta_type == "Host" #if just became host, but was guest before
 					user.meta.active = true
 					user.meta.save!
-					comment = "ב2016 היה אורח/ת (#{user.meta.id})"
-					user.meta.comments.create!(user_id: admin_user_id, content: comment)
+					user.meta.comments.create!(user_id: admin_user_id, content: comment_guest_to_host)
 				elsif user.meta_type == "Guest"
 					previous_host = Host.find(user.previous_meta_id)
 					user.meta.phone = previous_host.phone
 					user.meta.save!
-					comment = "ב2016 היה מארח/ת (#{user.meta.id})"
-					previous_host.comments.create!(user_id: admin_user_id, content: comment)
+					previous_host.comments.create!(user_id: admin_user_id, content: comment_host_to_guest)
 					previous_host.save!
 
 				end
