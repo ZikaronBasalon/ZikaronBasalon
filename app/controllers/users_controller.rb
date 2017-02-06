@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 				if oppisite_role == "Host"
 					oppisite_role_instance.active = true
 					oppisite_role_instance.save!
-					comment = "ב2016 היה מארח/ת (#{user.meta.id})"
+					comment = "ב2016 היה אורח/ת (#{user.meta.id})"
 					user.meta.comments.create!(user_id: admin_user_id, content: comment)
 				elsif oppisite_role == "Guest"
 					oppisite_role_instance.phone = user.meta.phone
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
 				if user.meta_type == "Host" #if just became host, but was guest before
 					user.meta.active = true
 					user.meta.save!
-					comment = "ב2016 היה מארח/ת (#{user.meta.id})"
+					comment = "ב2016 היה אורח/ת (#{user.meta.id})"
 					user.meta.comments.create!(user_id: admin_user_id, content: comment)
 				elsif user.meta_type == "Guest"
 					previous_host = Host.find(user.previous_meta_id)
