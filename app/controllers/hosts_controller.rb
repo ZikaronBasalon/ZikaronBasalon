@@ -98,6 +98,7 @@ class HostsController < ApplicationController
         user.previous_meta_id = user.meta_id
         user.previous_meta_type = user.meta_type
         user.meta = oppisite_role_instance
+        user.save!
       else
         user.meta_type,user.previous_meta_type = user.previous_meta_type,user.meta_type #swap meta_type values using Parallel Assignment
         user.previous_meta_id,user.meta_id = user.meta_id,user.previous_meta_id #swap id values using Parallel Assignment
