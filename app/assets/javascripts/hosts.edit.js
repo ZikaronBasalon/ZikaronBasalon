@@ -209,10 +209,11 @@ app.controller('HostSignupFinishedModal', ['$scope', '$uibModalInstance', 'host'
     $uibModalInstance.dismiss('cancel');
   };
 
+  var base = window.location.origin;
   $scope.fbShare = function () {
   	FB.ui({
 		  method: 'share',
-		  href: 'http://zikaronbasalon.herokuapp.com/' + document.getElementById('locale').className + '/pages/home/'  + '?invite=' + host.id
+		  href: encodeURIComponent(base + '/' + document.getElementById('locale').className + '/pages/home/'  + '?invite=' + host.id);
 		}, function(response){
 		});
   };

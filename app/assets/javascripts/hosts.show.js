@@ -70,11 +70,11 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 	}
 
 	$scope.fbShare = function () {
-
+		var base = window.location.origin;
   	FB.ui({
 		method: 'share',
 		mobile_iframe: true,
-	  href: 'https://zikaronbasalonstaging.herokuapp.com/' + document.getElementById('locale').className + '/pages/home/'  + '?invite=' + $scope.host.id
+	  href: encodeURIComponent(base + '/' + document.getElementById('locale').className + '/pages/home/'  + '?invite=' + $scope.host.id)
 		}, function(response){
 
 		});
