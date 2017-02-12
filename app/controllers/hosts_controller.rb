@@ -84,11 +84,13 @@ class HostsController < ApplicationController
     was_ever_oppisite_role = user.previous_meta_id.present?
     if params[:changerole] == true
       if !was_ever_oppisite_role #never was oppisite role, so create new
-        oppisite_role_instance = oppisite_role.constantize.create! #the guest or host
+        # oppisite_role_instance = oppisite_role.constantize.create! #the guest or host
         if oppisite_role == "Host"
+          oppisite_role_instance = Host.create!
           oppisite_role_instance.active = true
           oppisite_role_instance.save!
         elsif oppisite_role == "Guest"
+          oppisite_role_instance = Guest.create!
           oppisite_role_instance.phone = user.host.phone
           oppisite_role_instance.save!
         end
