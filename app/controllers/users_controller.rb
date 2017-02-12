@@ -17,11 +17,13 @@ class UsersController < ApplicationController
 				if oppisite_role == "Host"
 					oppisite_role_instance.active = true
 					oppisite_role_instance.save!
+					user.meta = oppisite_role_instance
 					user.meta.comments.create!(user_id: admin_user_id, content: comment_guest_to_host)
 				elsif oppisite_role == "Guest"
 					oppisite_role_instance.phone = user.meta.phone
 					oppisite_role_instance.save!
 					user.meta.comments.create!(user_id: admin_user_id, content: comment_host_to_guest)
+					user.meta = oppisite_role_instance
 				end
 				user.previous_meta_id = user.meta_id
 				user.previous_meta_type = user.meta_type

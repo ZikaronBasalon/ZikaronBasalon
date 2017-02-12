@@ -79,6 +79,7 @@ class HostsController < ApplicationController
   end
 
   def changerole
+    byebug
     user = User.find(params[:id])
     oppisite_role = user.meta_type == "Host" ? "Guest" : "Host"
     was_ever_oppisite_role = user.previous_meta_id.present?
