@@ -4,12 +4,17 @@ class UsersController < ApplicationController
 	end
 
 	def assignrole
-		user_role = Role.new(params[:id]).change_role
-		
-		if user_role == false then
-			render json: {status: "failed changing role"}, status: 401
-		else
-			render json: user_role, status: 201
+		if params[:changerole].present?
+			user_role = Role.new(params[:id])
+			if params[:changerole] == true
+				user_role.change_role
+			else
+				user_role.activate_user
+				user_role.activate_role
+			end
+			render json: user_role.reload_user, status: 201
+		end
+
 	end
 
 	def profile
