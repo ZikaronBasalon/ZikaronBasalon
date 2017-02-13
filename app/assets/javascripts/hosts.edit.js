@@ -213,7 +213,7 @@ app.controller('HostSignupFinishedModal', ['$scope', '$uibModalInstance', 'host'
   $scope.fbShare = function () {
   	FB.ui({
 		  method: 'share',
-		  href: encodeURIComponent(base + '/' + document.getElementById('locale').className + '/pages/home/'  + '?invite=' + host.id);
+		  href: encodeURIComponent(base + '/' + document.getElementById('locale').className + '/pages/home/'  + '?invite=' + host.id)
 		}, function(response){
 		});
   };
