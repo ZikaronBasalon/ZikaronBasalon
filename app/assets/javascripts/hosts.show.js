@@ -20,7 +20,9 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 
 		//as long as the host didn't finish filling out his details, take him to edit page
 		if ($scope.host.active == false) {
-			window.location = '/' + document.getElementById('locale').className + '/hosts/' + $scope.host.id + '/edit';
+			if (confirm("some details are missing. press ok to fill them in")) {
+				window.location = '/' + document.getElementById('locale').className + '/hosts/' + $scope.host.id + '/edit';
+			}
 		}
 	}
 
