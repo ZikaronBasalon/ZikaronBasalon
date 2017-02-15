@@ -154,16 +154,16 @@ namespace :hotfixes do
 
   desc "reset all witnesses"
   task :reset_witnesses => :environment do
-    admin_user_id = User.where(email: "zikaronbasalon@gmail.com").first.id
+    # admin_user_id = User.where(email: "zikaronbasalon@gmail.com").first.id
     Witness.all.each do |witness|
       Witness.transaction do
         # witness.comments.where("content LIKE 'בשנה שעברה%'").destroy_all
 
                   #בשנה שעברה, 'זליג-בונדר'             (1772)           היה/הייתה מצוות/ת למארח/ת 'לירון נמרי'                       (1518              ). בצד של המארחים הוא/היא 2185.
-        comment = "בשנה שעברה, '#{witness.full_name}' (#{witness.id}) היה/הייתה מצוות/ת למארח/ת #{witness.host.user.full_name} (#{witness.host_id}). בצד של המארחים הוא/היא #{witness.host.user.id}."
+        # comment = "בשנה שעברה, '#{witness.full_name}' (#{witness.id}) היה/הייתה מצוות/ת למארח/ת #{witness.host.user.full_name} (#{witness.host_id}). בצד של המארחים הוא/היא #{witness.host.user.id}."
                   #בשנה שעברה, 'זליג-בונדר'             (1772)           היה/הייתה מצוות/ת למארח/ת 'לירון נמרי'                       (1518).               בצד של המארחים הוא/היא 2185.
         # comment = "בשנה שעברה, העד בשם '#{witness.full_name}' עם מספר סידורי #{witness.id} הייתה משוייכת למארח '#{witness.host.user.full_name}' עם מספר סידורי #{witness.host_id}. במערכת של המארח הוא #{witness.host.user.id}"
-        witness.comments.create!(user_id: admin_user_id, content: comment)
+        # witness.comments.create!(user_id: admin_user_id, content: comment)
         # witness.host.comments.create!(user_id: admin_user_id, content: comment)
         witness.host_id = nil
         witness.contacted_by_host = false
