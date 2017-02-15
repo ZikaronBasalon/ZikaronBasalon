@@ -4,10 +4,11 @@ class UsersController < ApplicationController
 	end
 
 	def assignrole
-		if params[:changerole].present?
-			user_role = Role.new(params[:id])
+		if !params[:changerole].nil?
+			user_role = RoleChanger.new(params[:id])
 			if params[:changerole] == true
 				user_role.change_role
+				user_role.activate_user
 			else
 				user_role.activate_user
 				user_role.activate_role
