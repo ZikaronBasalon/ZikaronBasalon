@@ -76,13 +76,11 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 
 	$scope.fbShare = function () {
 		var base = window.location.origin;
-  	FB.ui({
-		method: 'share',
-		mobile_iframe: true,
-	  href: encodeURIComponent(base + '/' + document.getElementById('locale').className + '/pages/home/'  + '?invite=' + $scope.host.id)
-		}, function(response){
-
-		});
+		var link = encodeURIComponent(base + '/' + document.getElementById('locale').className + '/pages/home/'  + '?invite=' + $scope.host.id);
+		window.open(
+		  'https://www.facebook.com/dialog/share?app_id=723889947773479&display=popup&href=' + link,
+		  '_blank' // <- This is what makes it open in a new window.
+		);
   };
 
 
