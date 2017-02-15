@@ -155,7 +155,7 @@ namespace :hotfixes do
   desc "reset all witnesses"
   task :reset_witnesses => :environment do
     admin_user_id = User.where(email: "zikaronbasalon@gmail.com").first.id
-    Witness.where("host_id IS NULL").each do |witness|
+    Witness.where("external_assignment = false").each do |witness|
       Witness.transaction do
         # witness.comments.where("content LIKE 'בשנה שעברה%'").destroy_all
 
