@@ -17,6 +17,11 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 		if(host.invites && host.invites.length > 0) {
 			initInvites(host.invites);
 		}
+
+		//as long as the host didn't finish filling out his details, take him to edit page
+		if ($scope.host.active == false) {
+			window.location = '/' + document.getElementById('locale').className + '/hosts/' + $scope.host.id + '/edit';
+		}
 	}
 
 	$scope.deactivateHost = function() {
