@@ -17,6 +17,7 @@ class Manager < ActiveRecord::Base
    hosts = Host.includes(:city, :user, :witness).order(sort + sort_order)
    hosts = hosts.where(filter)
    hosts = hosts.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
+   hosts = hosts.where(:active => true) unless user.admin?
    hosts = hosts.where(concept: concept).select{ |h| h.has_witness } if concept
    hosts = hosts.select{ |h| host_in_filter(h, query, has_manager, has_survivor, is_org, language, in_future) }
    hosts = paginate(hosts, page) if page
