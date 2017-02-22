@@ -1,8 +1,6 @@
 he:
   activerecord:
     errors:
-      messages:
-        record_invalid: "Invalid Record"
       models:
         user:
           attributes:
@@ -69,19 +67,6 @@ he:
     back: "הקודם"
     select: "בחר/י"
     other: "אחר"
-    deactivate: "הפוך ללא זמין"
-    change_to_guest: "one salon down :("
-    change_to_host: "יאללה לארח"
-    available_day1: "חמישי 20.4"
-    available_day2: "ששי 21.4"
-    available_day3: "שבת 22.4"
-    available_day4: "ראשון 23.4"
-    available_day5: "שני 24.4"
-    available_day6: "שלישי 25.4"
-    available_day7: "רביעי 26.4"
-    multiple_available_days: "בחירת ימים ברובים זמינים"
-    available_days: "ימים זמינים"
-    availability: "זמינות"
     send_request: "שליחת בקשה"
     request_sent: "הבקשה נשלחה"
     save: "שמירה"
@@ -211,10 +196,9 @@ he:
 
   hosts:
     edit:
-      title: "אנחנו רוצים להכיר אותך"
+      title: "אנחנו רוצים להכיר אותך קצת יותר טוב"
       subtitle: "כדי שנוכל לעזור לך לתכנן ערב מוצלח"
       phone: "טלפון"
-      additional_phone: "טלפון נוסף"
       hosted_before: "האם אירחת בעבר ערב של זיכרון בסלון?"
       hosted_before_yes: "כן, אירחתי בעבר"
       hosted_before_no: "לא, זאת הפעם הראשונה"
@@ -275,7 +259,6 @@ he:
         free_text: "הערות לצוות"
         edit: "עריכה"
         contacted: "נוצר קשר ראשוני"
-        preparation_evening: "היה בערב הכנה"
         survivor_needed: "צריך עד"
         has_survivor: "צוות עד"
         survivor_contacted: "מארח אישר הגעת עד"
@@ -320,7 +303,6 @@ he:
       registration_time: "זמן הרשמה"
       name: "שם"
       phone: "טלפון"
-      additional_phone: "טלפון נוסף"
       email: "מייל"
       address: "כתובת"
       date_and_time: "תאריך ושעה משוערת"
@@ -340,14 +322,13 @@ he:
       host: "מארח"
       seminar_required: "מעוניין בערב הכנה"
       special_population: "מוכנות לאוכ' מיוחדות"
-      external_assignment: "מעוניין להשתתף השנה"
-      external_assignment_explain: "כדי שנדע לשנה הבאה, בבקשה הוסיפו בהערות את הסיבה"
+      external_assignment: "ציוות חיצוני"
     personal_details: "פרטים אישיים"
     evening_details: "פרטים על הערב"
     manager_actions: "פעולות מוביל קהילה"
     assign_host: "צוות למארח"
     updated: "הפרטים עודכנו בהצלחה"
-    external_assignment_text: "איש העדות לא מעוניין להשתתף השנה"
+    external_assignment_text: "איש עדות מצוות מחוץ למערכת"
 
   guests:
     register:
