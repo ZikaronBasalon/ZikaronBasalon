@@ -17,6 +17,13 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 		if(host.invites && host.invites.length > 0) {
 			initInvites(host.invites);
 		}
+
+		//as long as the host didn't finish filling out his details, take him to edit page
+		if ($scope.host.active == false) {
+			if (confirm("some details are missing. press ok to fill them in")) {
+				window.location = '/' + document.getElementById('locale').className + '/hosts/' + $scope.host.id + '/edit';
+			}
+		}
 	}
 
 	$scope.deactivateHost = function() {
@@ -70,14 +77,12 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 	}
 
 	$scope.fbShare = function () {
-
-  	FB.ui({
-		method: 'share',
-		mobile_iframe: true,
-	  href: 'https://zikaronbasalonstaging.herokuapp.com/' + document.getElementById('locale').className + '/pages/home/'  + '?invite=' + $scope.host.id
-		}, function(response){
-
-		});
+		var base = window.location.origin;
+		var link = encodeURIComponent(base + '/' + document.getElementById('locale').className + '/pages/home/'  + '?invite=' + $scope.host.id);
+		window.open(
+		  'https://www.facebook.com/dialog/share?app_id=723889947773479&display=popup&href=' + link,
+		  '_blank' // <- This is what makes it open in a new window.
+		);
   };
 
 

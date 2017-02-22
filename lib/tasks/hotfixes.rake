@@ -77,8 +77,6 @@ namespace :hotfixes do
     User.where(meta_type: "Guest").update_all(active_this_year:false)
     User.where(meta_type: "Host").update_all(active_this_year:false)
 
-    #create comments for last years assignments
-
     #make all hosts not active (for coming up in searches)
     # Host.where(active: true).each do |host|
     admin_user_id = User.where(email: "zikaronbasalon@gmail.com").first.id
@@ -153,5 +151,33 @@ namespace :hotfixes do
     #remove all invites
     Invite.destroy_all
   end
+
+  #this resets all witnesses for the new year, even those with no host (and thus no comments)
+  desc "reset all witnesses"
+  task :reset_witnesses => :environment do
+    Witness.all.each do |witness|
+      Witness.transaction do
+        witness.host_id = nil
+        witness.contacted_by_host = false
+        witness.available_for_teaming = nil
+        witness.can_morning = nil
+        witness.can_afternoon = nil
+        witness.can_evening = nil
+        witness.free_on_day = nil
+        witness.external_assignment = true #mark all as not interested, until we follow up
+        witness.available_day1 = nil
+        witness.available_day2 = nil
+        witness.available_day3 = nil
+        witness.available_day4 = nil
+        witness.available_day5 = nil
+        witness.available_day6 = nil
+        witness.available_day7 = nil
+        witness.save!
+      end
+    end
+  end
+
+
+
 end
 

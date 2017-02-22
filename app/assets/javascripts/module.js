@@ -40,7 +40,7 @@ app.factory('activeUsers', ['$http', 'activeDialog',
           translations.en.stay = "Yes! It's tradition";
           translations.en.change = "No, I'll be a guest";
         } else if (last_years_role == "Guest") {
-          translations.he.secondLine = "אולי השנה תרצו לארח זכרון בסלון אצלכם?";
+          translations.he.secondLine = "אולי השנה תרצו לארח זיכרון בסלון אצלכם?";
           translations.he.stay = "רוצה להתארח";
           translations.he.change = "כן, רוצה לארח";
           
