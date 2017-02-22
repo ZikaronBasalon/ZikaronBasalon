@@ -126,7 +126,6 @@ class WitnessesController < ApplicationController
   end
 
   def is_authorized
-    byebug
     unless (current_user && current_user.meta.is_a?(Manager)) || 
            (current_user && (current_user.admin? || current_user.sub_admin?))
       redirect_to root_path
