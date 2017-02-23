@@ -146,62 +146,6 @@
               </div>
             </div>  
             
-            <!-- Seminar -->
-            <div class="field-group">
-              <div class="info-label"><%= t 'profile.labels.seminar_required' %></div>
-              <div>
-                <div class="radio">
-                  <label>
-                    <input type="radio"
-                           name="seminar_required"
-                           id="seminarRequiredFalse"
-                           ng-value="false"
-                           ng-model="witness.seminar_required">
-                    <b><%= t 'shared.no' %></b>
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-                    <input type="radio"
-                           name="seminar_required"
-                           id="seminarRequiredTrue"
-                           ng-value="true"
-                           ng-model="witness.seminar_required">
-                    <b><%= t 'shared.yes' %></b>
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <!-- Special Population -->
-            <div class="field-group">
-              <div class="info-label">
-                <%= t 'profile.labels.special_population' %>
-              </div>
-              <div>
-                <div class="radio">
-                  <label>
-                    <input type="radio"
-                           name="special_population"
-                           id="specialPopulationFalse"
-                           ng-value="false"
-                           ng-model="witness.special_population">
-                    <b><%= t 'shared.no' %></b>
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-                    <input type="radio"
-                           name="special_population"
-                           id="specialPopulationTrue"
-                           ng-value="true"
-                           ng-model="witness.special_population">
-                    <b><%= t 'shared.yes' %></b>
-                  </label>
-                </div>
-              </div>
-            </div>
-    
             <!-- Concept -->
             <% if current_user && current_user.meta.is_a?(Manager) %>
             <div class="field-group">
