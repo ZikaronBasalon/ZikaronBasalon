@@ -218,6 +218,9 @@ GEM
     uniform_notifier (1.9.0)
     warden (1.2.6)
       rack (>= 1.0)
+    xray-rails (0.1.17)
+      coffee-rails
+      rails (>= 3.1.0)
 
 PLATFORMS
   ruby
@@ -255,6 +258,7 @@ DEPENDENCIES
   test-unit
   therubyracer
   uglifier (>= 1.0.3)
+  xray-rails
 
 BUNDLED WITH
    1.14.4
