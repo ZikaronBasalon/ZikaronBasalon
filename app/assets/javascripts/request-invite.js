@@ -49,7 +49,6 @@ app.controller('RequestInviteController', ['$scope', '$http', '$uibModalInstance
   		locale: document.getElementById('locale').className
   	}).then(function(response) {
   		if(response.data.error) {
-  			console.log(response.data);
   			$scope.view = 'error';
   		} else {
   			$scope.view = 'success';
