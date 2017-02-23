@@ -72,6 +72,7 @@ he:
     save: "שמירה"
     return: "חזור"
     submit: "שלח"
+    deactivate: "הפוך ללא זמין"
     concept:
       religious_and_secular: "חרדים וחילונים"
       vetrans: "וטרנים"
@@ -126,6 +127,7 @@ he:
     address: "כתובת"
     password: "סיסמא"
     free_on_date: "פנוי בערב יום השואה"
+    multiple_available_days: "זמינות"
     org_name: "ארגון"
     has_manager: "משוייך למוביל"
     has_manager_true: "משוייך"
@@ -149,6 +151,14 @@ he:
     free_on_day_true: "פנוי"
     free_on_day_false: "לא פנוי"
     vetrans: "סלון עם וטרן"
+    available_day1: "20.4"
+    available_day2: "21.4"
+    available_day3: "22.4"
+    available_day4: "23.4"
+    available_day5: "24.4"
+    available_day6: "25.4"
+    available_day7: "26.4"
+
   views:
     pagination:
       first: "ראשון"
@@ -197,9 +207,10 @@ he:
 
   hosts:
     edit:
-      title: "אנחנו רוצים להכיר אותך קצת יותר טוב"
+      title: "אנחנו רוצים להכיר אותך"
       subtitle: "כדי שנוכל לעזור לך לתכנן ערב מוצלח"
       phone: "טלפון"
+      additional_phone: "טלפון נוסף"
       hosted_before: "האם אירחת בעבר ערב של זיכרון בסלון?"
       hosted_before_yes: "כן, אירחתי בעבר"
       hosted_before_no: "לא, זאת הפעם הראשונה"
@@ -266,6 +277,7 @@ he:
         survivor_contacted: "מארח אישר הגעת עד"
         concept: "קונספט"
         how_many_places: "כמה מקומות?"
+        preparation_evening: "ערב הכנה"
       host_updated: "הפרטים עודכנו בהצלחה"
       invites_waiting_approval: "בקשות הממתינות לאישור"
       invites_approved: "בקשות שאישרתי"
@@ -324,7 +336,8 @@ he:
       host: "מארח"
       seminar_required: "מעוניין בערב הכנה"
       special_population: "מוכנות לאוכ' מיוחדות"
-      external_assignment: "ציוות חיצוני"
+      external_assignment: "לא מעוניין להתארח השנה"
+      external_assignment_explain: "איש העדות לא מעוניין להתארח השנה"
     personal_details: "פרטים אישיים"
     evening_details: "פרטים על הערב"
     manager_actions: "פעולות מוביל קהילה"
