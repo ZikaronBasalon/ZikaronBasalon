@@ -64,17 +64,17 @@ class WitnessesController < ApplicationController
 
     respond_to do |format|
       if @witness.update_attributes(params[:witness])
-        # commented so hosts font receive emails off season
-        # if(params[:witness][:host_id].present?)
-        #   HostMailer.witness_assigned(
-        #     params[:witness][:host_id],
-        #     @witness.id,
-        #     I18n.locale
-        #   ).deliver
-
-          #@host = Host.find(params[:witness][:host_id])
-          #@host.update_attributes(assignment_time: Time.now.utc.localtime)
-        #end
+         # commented so hosts wont receive emails off season
+         if(params[:witness][:host_id].present?)
+          #byebug
+          HostMailer.witness_assigned(
+            params[:witness][:host_id],
+            @witness.id,
+            I18n.locale
+          ).deliver
+          @host = Host.find(params[:witness][:host_id])
+          @host.update_attributes(assignment_time: Time.now.utc.localtime)
+        end
 
 
         
