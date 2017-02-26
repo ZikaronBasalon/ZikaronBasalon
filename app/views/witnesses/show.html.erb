@@ -141,7 +141,7 @@
                 <%= link_to t('profile.assign_host'), assign_witness_path(@witness) %>
               </div>
               <div ng-if="!witness.host && witness.external_assignment">
-                <%= t('profile.external_assignment_text') %>
+                <%= t('profile.labels.external_assignment_explain') %>
                 <!-- צוות מחוץ למערכת -->
               </div>
             </div>  
@@ -183,17 +183,14 @@
               <div class="field-group">
                 <div class="info-label">
                   <%= t 'profile.labels.external_assignment' %><br>
-                  <small><small><%= t 'profile.labels.external_assignment_explain' %></small></small>
-                </div>
-                <div>
                   <div class="checkbox">
                     <label>
                       <input type="checkbox"
                              name="external_assignment"
                              ng-model="witness.external_assignment">
-                      <%= t 'profile.external_assignment_text' %>
+                      <%= t 'profile.labels.external_assignment_explain' %>
                     </label>
-                  </div>
+                  </div>                  
                 </div>
               </div>
             <% end %>   

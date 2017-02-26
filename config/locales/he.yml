@@ -127,6 +127,8 @@ he:
     address: "כתובת"
     password: "סיסמא"
     free_on_date: "פנוי בערב יום השואה"
+    availability: "זמינות"
+    available_days: "זמינות"
     multiple_available_days: "זמינות"
     org_name: "ארגון"
     has_manager: "משוייך למוביל"
