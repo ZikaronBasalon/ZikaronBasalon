@@ -41,8 +41,9 @@ class RequestMailer < ActionMailer::Base
     @invite = Invite.find(invite_id)
     @host = @invite.host
     @guest = @invite.guest
+    @locale = :he
     @invite.destroy
-    mail :to => @host.user.email, :subject => 'עדכונים לגבי הסלון שלך'
+    mail :to => @host.user.email, :subject => 'עידכונים חשובים לגבי הסלון שלך'
   end
 
   def event_reminder(invite_id)

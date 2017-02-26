@@ -1,2 +1,9 @@
-היי <%= @host.user.first_name %>,
-<p>לצערנו, לא יתאפשר ל<%= @guest.user.first_name %> להגיע לסלון שלך. אבל אל דאגה, מספר המקומות הפנויים שלך התעדכן אוטומטית ומתארחים נוספים יוכלו להצטרף לסלון!</p>
+<h1>היי <%= @host.user.first_name %>,</h1>
+<p>
+	<%= t '.paragraph_1', guest_name: @guest.user.first_name, locale: @locale %>
+	<%= link_to (t '.profile_link', locale: @locale), host_url(id: @host.id, locale: @locale) %>
+</p>
+
+<p>
+	<%= t '.paragraph_2' %>
+</p>
