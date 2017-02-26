@@ -5,9 +5,11 @@
 <p>
 	<%= t('.paragraph_2', name: @host.user.first_name, locale: @locale) %>  
 	<%= link_to(t('.link_text', locale: @locale), guest_url(id: @guest.id, locale: @locale)) %> 
-	<%= t('.paragraph_2_after_link', locale: @locale) %>
 </p>
 
 <p>
 	<%= t('.paragraph_3', locale: @locale) %>  <%= link_to t('.paragraph_3_link_text', locale: @locale),  t('.link_url', locale: @locale) %>
+	<br>
+	<br>
+	<%= t('.paragraph_3_after_link', locale: @locale) %>
 </p>
