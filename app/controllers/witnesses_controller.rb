@@ -64,9 +64,7 @@ class WitnessesController < ApplicationController
 
     respond_to do |format|
       if @witness.update_attributes(params[:witness])
-         # commented so hosts wont receive emails off season
          if(params[:witness][:host_id].present?)
-          #byebug
           HostMailer.witness_assigned(
             params[:witness][:host_id],
             @witness.id,

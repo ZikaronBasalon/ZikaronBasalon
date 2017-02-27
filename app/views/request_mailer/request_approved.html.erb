@@ -31,4 +31,12 @@
 	</div>
 </p>
 
-<p><%= t '.paragraph_2', locale: @locale %></p>
+<p>
+	<%= t '.paragraph_2_pre', locale: @locale %>
+	<%= link_to t('.profile_link', locale: @locale), guest_url(id:@guest.id, locale: @locale) %>
+	<%= t '.paragraph_2_post', locale: @locale %>
+</p>
+
+<p>
+	<%= t '.paragraph_3', locale: @locale %>
+</p>
