@@ -14,7 +14,7 @@ class ManagerMailer < BaseMailer
   	@witness = Witness.find(witness_id)
     @unassigning_user = unassigning_user
 
-  	  	mail :to => "saray.basalon@gmail.com,nofar.basalon@gmail.com", :subject => "ביטול ציוות"
+  	  	mail :to => "edut.basalon@gmail.com", :subject => "ביטול ציוות"
 
   end
 end
