@@ -141,67 +141,11 @@
                 <%= link_to t('profile.assign_host'), assign_witness_path(@witness) %>
               </div>
               <div ng-if="!witness.host && witness.external_assignment">
-                <%= t('profile.external_assignment_text') %>
+                <%= t('profile.labels.external_assignment_explain') %>
                 <!-- צוות מחוץ למערכת -->
               </div>
             </div>  
             
-            <!-- Seminar -->
-            <div class="field-group">
-              <div class="info-label"><%= t 'profile.labels.seminar_required' %></div>
-              <div>
-                <div class="radio">
-                  <label>
-                    <input type="radio"
-                           name="seminar_required"
-                           id="seminarRequiredFalse"
-                           ng-value="false"
-                           ng-model="witness.seminar_required">
-                    <b><%= t 'shared.no' %></b>
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-                    <input type="radio"
-                           name="seminar_required"
-                           id="seminarRequiredTrue"
-                           ng-value="true"
-                           ng-model="witness.seminar_required">
-                    <b><%= t 'shared.yes' %></b>
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <!-- Special Population -->
-            <div class="field-group">
-              <div class="info-label">
-                <%= t 'profile.labels.special_population' %>
-              </div>
-              <div>
-                <div class="radio">
-                  <label>
-                    <input type="radio"
-                           name="special_population"
-                           id="specialPopulationFalse"
-                           ng-value="false"
-                           ng-model="witness.special_population">
-                    <b><%= t 'shared.no' %></b>
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-                    <input type="radio"
-                           name="special_population"
-                           id="specialPopulationTrue"
-                           ng-value="true"
-                           ng-model="witness.special_population">
-                    <b><%= t 'shared.yes' %></b>
-                  </label>
-                </div>
-              </div>
-            </div>
-    
             <!-- Concept -->
             <% if current_user && current_user.meta.is_a?(Manager) %>
             <div class="field-group">
@@ -239,17 +183,14 @@
               <div class="field-group">
                 <div class="info-label">
                   <%= t 'profile.labels.external_assignment' %><br>
-                  <small><small><%= t 'profile.labels.external_assignment_explain' %></small></small>
-                </div>
-                <div>
                   <div class="checkbox">
                     <label>
                       <input type="checkbox"
                              name="external_assignment"
                              ng-model="witness.external_assignment">
-                      <%= t 'profile.external_assignment_text' %>
+                      <%= t 'profile.labels.external_assignment_explain' %>
                     </label>
-                  </div>
+                  </div>                  
                 </div>
               </div>
             <% end %>   

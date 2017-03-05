@@ -22,7 +22,10 @@
 </table>
 
 <p>
-	<%= t '.ok_for_you', locale: @locale %> <%= link_to t('.approve_request', locale: @locale), host_url(id:@host.id, locale: @locale) %>
+	<%= t '.ok_for_you', locale: @locale %> 
+  <%= link_to t('.approve_request', locale: @locale), host_url(id:@host.id, locale: @locale) %>
+  <%= t '.ok_for_you_cont', guest_name: @guest.user.first_name, locale: @locale %> 
+  <%= link_to t('.profile_link', locale: @locale), host_url(id:@host.id, locale: @locale) %>
 </p>
 
 <p>

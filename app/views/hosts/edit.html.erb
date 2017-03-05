@@ -252,9 +252,13 @@
 
         <div class="form-group" ng-if="host.strangers">
           <label for="public_text" ><%= t '.public_text' %></label>
-          <input type="text" class="form-control" 
-                 name="public_text"
-                 id="public_text" ng-model="host.public_text">
+          <p class="help-block"><%= t '.public_text_help_block' %></p>
+          <textarea 
+            type="text" class="form-control" 
+            name="public_text"
+            id="public_text" ng-model="host.public_text"
+            rows="7">
+            </textarea>
         </div>  
 
         <div class="form-group" ng-if="host.strangers"

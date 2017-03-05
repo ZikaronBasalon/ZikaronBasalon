@@ -29,6 +29,7 @@ group :development do
   gem 'seed_dump'
   gem 'letter_opener'
   gem 'bullet'
+  gem 'xray-rails'
 end
 
 group :assets do
