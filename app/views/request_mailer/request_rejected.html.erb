@@ -1,3 +1,12 @@
 <p>היי <%= @guest.user.first_name %>,</p>
 
-<p><%= t('.paragraph_1', name: (@host.user.try(:first_name) || "המארח"), locale: @locale) %></p>
+<p>
+	<%= t('.paragraph_1', name: (@host.user.try(:first_name) || "המארח"), locale: @locale) %>
+</p>
+<p>
+	<%= t('.paragraph_2', locale: @locale) %>
+	<%= link_to t('.link_text', locale: @locale), t('.link_url', locale: @locale) %>
+</p>
+<p>
+	<%= t('.paragraph_3', locale: @locale) %>
+</p>

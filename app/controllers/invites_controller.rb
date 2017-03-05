@@ -20,7 +20,6 @@ class InvitesController < ApplicationController
   def update
     @invite = Invite.find(params[:id])
     @invite.update_attributes(params[:invite])
-    
     RequestMailer.request_approved(@invite.id, I18n.locale).deliver if @invite.confirmed
     RequestMailer.request_rejected(@invite.id, I18n.locale).deliver if @invite.rejected
 
