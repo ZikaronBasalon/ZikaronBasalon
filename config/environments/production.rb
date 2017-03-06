@@ -67,7 +67,7 @@ ZikaronBasalon::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  config.middleware.use('PartyFoul::Middleware')
+  #config.middleware.use('PartyFoul::Middleware')
   config.assets.js_compressor = :uglifier
 
 
