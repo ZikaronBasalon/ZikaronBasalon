@@ -69,7 +69,7 @@
     <script>
     window.fbAsyncInit = function() {
         FB.init({ 
-          appId: '723889947773479',
+          appId: <%= @fb_app_id %>,
           status: true, 
           cookie: true, 
           xfbml: true,
@@ -100,7 +100,7 @@
     <div id="footer">
       <div class="footer_wrapper">
         <div class="part"> <%= t '.contact_us' %>: zikaronbasalon@gmail.com </div>
-       <div class="part"><%= link_to t('.facebook'), "https://www.facebook.com/ZikaronBaSalon" %></div>
+        <div class="part"><%= link_to t('.facebook'), "https://www.facebook.com/ZikaronBaSalon" %></div>
       </div>
     </div>
   </body>

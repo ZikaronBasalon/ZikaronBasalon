@@ -2,8 +2,8 @@ class ApplicationController < ActionController::Base
 	include SessionsHelper
   protect_from_forgery
   before_filter :set_locale
+  before_filter :set_fb_app
   respond_to :json, :html
-
   def is_admin
   	redirect_to root_path unless current_user && (current_user.any_admin?)
   end
@@ -18,6 +18,10 @@ class ApplicationController < ActionController::Base
 	  # request.subdomain
 	  # request.env["HTTP_ACCEPT_LANGUAGE"]
 	  # request.remote_ip
+	end
+
+	def set_fb_app
+		@fb_app_id = ENV['FACEBOOK_APP_ID'] || '754373994725074'
 	end
 
 	def default_url_options(options = {})
