@@ -210,6 +210,16 @@ app.controller('HostSignupFinishedModal', ['$scope', '$uibModalInstance', 'host'
   };
 
   $scope.fbShare = function () {
+  	FB.ui({
+		  method: 'share',
+		  href: 'http://www.zikaronbasalon.com/'
+		}, function(response){
+
+		});
+  };
+
+  /*
+  $scope.fbShare = function () {
     var base = window.location.origin;
     var link = encodeURIComponent(base + '/' + document.getElementById('locale').className + '/pages/home/'  + '?invite=' + $scope.host.id);
     window.open(
@@ -217,6 +227,7 @@ app.controller('HostSignupFinishedModal', ['$scope', '$uibModalInstance', 'host'
       '_blank' // <- This is what makes it open in a new window.
     );
   };
+  */
 
   $scope.buildEvening = function () {
   	var locale = document.getElementById('locale').className;

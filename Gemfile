@@ -15,10 +15,11 @@ gem 'sidekiq'
 gem 'figaro'
 gem 'roadie'
 gem 'roadie-rails'
-gem 'party_foul'
+#gem 'party_foul'
 gem 'devise', '3.5.6'
 gem 'sort_alphabetical'
 gem 'google_places'
+gem 'puma'
 
 # Gems used only for assets and not required
 # in production environments by default.
