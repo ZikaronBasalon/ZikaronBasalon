@@ -69,10 +69,18 @@ class GuestsController < ApplicationController
     id = params[:id].to_i
 
     return if (current_user && (current_user.admin? || current_user.sub_admin?)) || (meta && meta.is_a?(Manager))
-
     
     redirect_to user_session_path if meta.nil? || (meta.is_a?(Guest) && meta.id != id)
     redirect_to user_session_path if meta.is_a?(Manager) && !meta.hosts.pluck(:id).include?(id)
-    redirect_to user_session_path unless current_user.id == id
+
+    #lookup user type. if same type, false. different type redirect
+    param_user_type = User.find(id).meta_type
+    user_type = current_user.meta_type
+    if param_user_type == user_type
+      redirect_to root_path unless current_user.meta.id == id
+    else
+      return false unless current_user.meta.id == id
+    end
+    
   end
 end
