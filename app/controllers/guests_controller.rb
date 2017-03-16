@@ -73,5 +73,6 @@ class GuestsController < ApplicationController
     
     redirect_to user_session_path if meta.nil? || (meta.is_a?(Guest) && meta.id != id)
     redirect_to user_session_path if meta.is_a?(Manager) && !meta.hosts.pluck(:id).include?(id)
+    redirect_to user_session_path unless current_user.id == id
   end
 end
