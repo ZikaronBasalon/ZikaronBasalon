@@ -25,7 +25,7 @@ app.controller('RequestInviteController', ['$scope', '$http', '$uibModalInstance
 		}
     //TODO: implement this
     else if ($scope.currentUser && $scope.currentUser.meta_type !== 'Guest') {
-      $scope.view = 'error';
+      $scope.view = 'error1';
     }
     else {
 			$scope.view = 'request';
