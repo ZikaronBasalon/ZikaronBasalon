@@ -380,6 +380,7 @@ en:
      subtitle: "In order for us to send this request, we need this information about you"
    login: 
      title: "Guest login"
+     signin_error: "Incorrect login name or password"
    request:
      title: "Request to join a salon"
      subtitle: "Please make sure this salon suits you. Once you send your request, the host will get back to you as soon as possible."
