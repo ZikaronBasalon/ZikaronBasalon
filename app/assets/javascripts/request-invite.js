@@ -20,10 +20,13 @@ app.controller('RequestInviteController', ['$scope', '$http', '$uibModalInstance
 	if (!$scope.currentUser)  {
 		$scope.view = 'register';
 	} else {
-		if (($scope.currentUser && $scope.currentUser.meta.invites && $scope.currentUser.meta.invites.length > 0) ||
-				($scope.currentUser && $scope.currentUser.meta_type !== 'Guest')) {
-			$scope.view = 'error'; //this causes the popup to jump, (see _request_invite_modal.html.erb)
-		} else {
+		if ($scope.currentUser && $scope.currentUser.meta.invites && $scope.currentUser.meta.invites.length > 0) {
+      $scope.view = 'error'; //this causes the popup to jump, (see _request_invite_modal.html.erb)
+		}
+    else if ($scope.currentUser && $scope.currentUser.meta_type !== 'Guest') {
+      $scope.view = 'error_host';
+    }
+    else {
 			$scope.view = 'request';
 		}
 	}
@@ -66,6 +69,11 @@ app.controller('RequestInviteController', ['$scope', '$http', '$uibModalInstance
   };
 
   $scope.toProfile = function () {
-  	window.location = '/' + document.getElementById('locale').className + '/guests/' + $scope.currentUser.meta.id;
+    if ($scope.currentUser.meta_type == "Host") {
+      window.location = '/' + document.getElementById('locale').className + '/hosts/' + $scope.currentUser.meta.id;
+    }
+    else if ($scope.currentUser.meta_type == "Guest") {
+    	window.location = '/' + document.getElementById('locale').className + '/guests/' + $scope.currentUser.meta.id;
+    }
   }
-}]);
+}])
