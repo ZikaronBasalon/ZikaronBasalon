@@ -160,6 +160,7 @@ he:
     available_day5: "24.4"
     available_day6: "25.4"
     available_day7: "26.4"
+    in_future: "עתיד להתקיים"
 
   views:
     pagination:

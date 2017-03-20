@@ -101,6 +101,7 @@ en:
     evening_date: "Salon date"
     hosted_before: "First Salon"
     host_contacted: "Host contacted"
+    witness_contacted: "speaker-host"
     has_survivor: "teamed"
     strangers_allowed: "Open salon"
     needs: "need"
@@ -151,6 +152,8 @@ en:
     mail_disconnected_note: "*In order for you to see any personal information, make sure you are logged in to the website. In case you don't see a 'Profile' link in the top left corner, you will need to sign in by clicking on 'Sign in' in the top right corner."
     event_language: "Language"
     vetrans: "Salon with a Vetran"
+    assignment_time: "teamed date"
+    in_future: "Future events"
 
   views:
     pagination:
@@ -183,6 +186,7 @@ en:
       title: "Search for a Zikaron Basalon Evening"
       subtitle: "Here you can search for a salon near you. <br> If you are unable to find a salon, you can always host an evening yourself!"
       zb_salons: "Open salons"
+      no_salons: "Sorry! We could not find a salon for you. We recommend to search in other areas near you or another date."
       temp_title: "Welcome to Zikaron BaSalon!"
       temp_subtitle: "At this moment, you can only register as a host. In the next few weeks we will open the guest registration!"
       already_a_member: "Already have a profile?"
