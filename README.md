@@ -6,7 +6,7 @@
   1. Create a Github account: https://github.com/join
   2. Setting up git: https://help.github.com/articles/set-up-git/
 2. Now that you have git set up, in the command prompt, navigate to your favorite working folder (C:\Sites ?)
-3. Run the command `git clone https://github.com/uriklar/ZikaronBasalon.git`
+3. Run the command `git clone https://github.com/gaaady/ZikaronBasalon.git`
 4. Now that you have cloned the Zikaron Basalon repository, navigate inside it's folder in the command prompt by doing `cd ZikaronBasalon` (You will need to be inside this folder whenever you work on Zikaron Basalon)
 5. run the `bundle install` command to install all the gems used by Zikaron Basalon on your computer.
 6. run the `rake db:migrate` command to create the needed database tables on your computer.
