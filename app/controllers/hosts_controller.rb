@@ -1,6 +1,6 @@
 class HostsController < ApplicationController
   before_filter :correct_host, only: [:edit]
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
 
   respond_to :html, :json
 

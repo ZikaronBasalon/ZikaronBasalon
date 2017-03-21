@@ -1,5 +1,5 @@
 class WitnessesController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
   before_filter :is_authorized, only: [:index, :unassign, :assign, :show]
   before_filter :is_admin, only: [:destroy]
   # GET /witnesses

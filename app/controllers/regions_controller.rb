@@ -1,5 +1,5 @@
 class RegionsController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
   def index
     @regions = Region.all
     @cities = Cities.all

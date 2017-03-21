@@ -2,7 +2,7 @@ class ManagersController < ApplicationController
   before_filter :set_manager, only: [:show, :edit, :update, :destroy, :remove_city, :filter_hosts, :export_hosts, :export_witnesses, :export_guests]
   before_filter :is_admin, only: [:index, :export_hosts, :export_witnesses, :export_guests]
   before_filter :correct_manager, only: [:show, :export]
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
   respond_to :html, :json
 
   def index
