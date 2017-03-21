@@ -1,4 +1,5 @@
 class WitnessesController < ApplicationController
+  before_action :authenticate_user!
   before_filter :is_authorized, only: [:index, :unassign, :assign, :show]
   before_filter :is_admin, only: [:destroy]
   # GET /witnesses
@@ -75,7 +76,7 @@ class WitnessesController < ApplicationController
         end
 
 
-        
+
         format.json { render json: @witness, status: :created, location: @witness }
       else
         format.json { render json: @witness.errors, status: :unprocessable_entity }
@@ -124,7 +125,7 @@ class WitnessesController < ApplicationController
   end
 
   def is_authorized
-    unless (current_user && current_user.meta.is_a?(Manager)) || 
+    unless (current_user && current_user.meta.is_a?(Manager)) ||
            (current_user && (current_user.admin? || current_user.sub_admin?))
       redirect_to root_path
     end
@@ -140,7 +141,7 @@ class WitnessesController < ApplicationController
     else
       if @manager.user.any_admin?
         City.all.map(&:id)
-      else 
+      else
         @manager.cities.map(&:id)
       end
     end
