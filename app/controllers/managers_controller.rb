@@ -2,21 +2,21 @@ class ManagersController < ApplicationController
   before_filter :set_manager, only: [:show, :edit, :update, :destroy, :remove_city, :filter_hosts, :export_hosts, :export_witnesses, :export_guests]
   before_filter :is_admin, only: [:index, :export_hosts, :export_witnesses, :export_guests]
   before_filter :correct_manager, only: [:show, :export]
-
+  before_action :authenticate_user!
   respond_to :html, :json
 
   def index
-    @managers = Manager.includes(:cities, :user).all 
+    @managers = Manager.includes(:cities, :user).all
     @cities_without_manager = City.without_managers
     respond_with(@managers)
   end
 
   def show
     @page = params[:page] || 1
-    @hosts = @manager.get_hosts(@page, 
-                                host_filter, 
-                                params[:host_query], 
-                                params[:host_sort], 
+    @hosts = @manager.get_hosts(@page,
+                                host_filter,
+                                params[:host_query],
+                                params[:host_sort],
                                 has_manager,
                                 has_survivor,
                                 is_org,
@@ -24,10 +24,10 @@ class ManagersController < ApplicationController
                                 in_future,
                                 reverse_ordering)
     @cities = @manager.get_cities
-    @witnesses = @manager.get_witnesses(@page, 
-                                        witness_filter, 
-                                        params[:witness_query], 
-                                        params[:witness_sort], 
+    @witnesses = @manager.get_witnesses(@page,
+                                        witness_filter,
+                                        params[:witness_query],
+                                        params[:witness_sort],
                                         has_manager,
                                         has_host,
                                         language,
@@ -38,7 +38,7 @@ class ManagersController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { 
+      format.json {
         render :json => {
           hosts:  @hosts.to_json(:include => [:user, :witness, { city: { :include => :managers } }], :methods => [:has_witness]),
           witnesses: @witnesses.to_json(:include => { city: { :include => :managers } }),
@@ -60,7 +60,7 @@ class ManagersController < ApplicationController
 
   # Creates a temp Manager and assigns him with a City
   def create
-    @manager = Manager.where('lower(temp_email) = ?', params[:manager][:temp_email].downcase).first 
+    @manager = Manager.where('lower(temp_email) = ?', params[:manager][:temp_email].downcase).first
     @manager ||= Manager.create(:temp_email => params[:manager][:temp_email])
     if @manager.new_record?
       @manager.save!
@@ -88,10 +88,10 @@ class ManagersController < ApplicationController
   end
 
   def export_hosts
-    @hosts = @manager.get_hosts(nil, 
-                                host_filter, 
-                                params[:host_query], 
-                                params[:host_sort], 
+    @hosts = @manager.get_hosts(nil,
+                                host_filter,
+                                params[:host_query],
+                                params[:host_sort],
                                 has_manager,
                                 has_survivor,
                                 is_org,
@@ -103,10 +103,10 @@ class ManagersController < ApplicationController
   end
 
   def export_witnesses
-    @witnesses = @manager.get_witnesses(nil, 
-                                        witness_filter, 
-                                        params[:witness_query], 
-                                        params[:witness_sort], 
+    @witnesses = @manager.get_witnesses(nil,
+                                        witness_filter,
+                                        params[:witness_query],
+                                        params[:witness_sort],
                                         has_manager,
                                         has_host,
                                         language,
@@ -132,7 +132,7 @@ class ManagersController < ApplicationController
       id = params[:id].to_i
 
       return if current_user.admin? || current_user.sub_admin?
-      
+
       redirect_to root_path if (meta.is_a?(Manager) && meta.id != id) || !meta.is_a?(Manager)
     end
 

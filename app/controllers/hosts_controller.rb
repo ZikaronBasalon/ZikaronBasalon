@@ -1,5 +1,7 @@
 class HostsController < ApplicationController
   before_filter :correct_host, only: [:edit]
+  before_action :authenticate_user!
+
   respond_to :html, :json
 
   def index
@@ -14,15 +16,15 @@ class HostsController < ApplicationController
     @host = Host.find(params[:id])
     respond_to do |format|
       format.html { correct_host }
-      format.json { 
-        if @host.available_places > 0 
-          render :json => { 
+      format.json {
+        if @host.available_places > 0
+          render :json => {
            host: @host.to_json(:include => [
-                { :user => { :methods => [:first_name] } }, 
-                :city, 
+                { :user => { :methods => [:first_name] } },
+                :city,
                 :country
-              ], :methods => [:available_places]) } 
-        
+              ], :methods => [:available_places]) }
+
         else
           render :json => { success: false }
         end
@@ -73,7 +75,7 @@ class HostsController < ApplicationController
 
     return if current_user && (current_user.admin? || current_user.sub_admin?)
 
-    
+
     redirect_to user_session_path if meta.nil? || (meta.is_a?(Host) && meta.id != id)
     redirect_to user_session_path if meta.is_a?(Manager) && !meta.hosts.pluck(:id).include?(id)
 
@@ -89,7 +91,7 @@ class HostsController < ApplicationController
 
   def changerole
     updated_user = Roles.new(params[:id]).change_role
-    
+
     render json: updated_user, status: 201
   end
 end

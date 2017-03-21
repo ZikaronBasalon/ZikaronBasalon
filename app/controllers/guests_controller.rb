@@ -1,4 +1,5 @@
 class GuestsController < ApplicationController
+  before_action :authenticate_user!
   before_filter :is_admin, only: [:index]
   before_filter :correct_guest, only: [:show]
 
@@ -12,7 +13,7 @@ class GuestsController < ApplicationController
     if !params[:query].present?
   	 @guests = Guest.includes(:user, :invites).page(@page).per(10)
     else
-      @guests = Guest.includes(:user, :invites).all.select { |g| 
+      @guests = Guest.includes(:user, :invites).all.select { |g|
         guest_in_query(g, params[:query])
       }
 
@@ -22,7 +23,7 @@ class GuestsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { 
+      format.json {
         render :json => {
           guests:  @guests.to_json(:include => [:user, :invites]),
           total_guests: @total_guests,
@@ -59,7 +60,7 @@ class GuestsController < ApplicationController
 
   def guest_in_query(g, query)
     return true if !query.present?
-    
+
     (g.user && g.user.full_name.include?(query)) ||
     (g.user && g.user.email.include?(query))
   end
@@ -69,7 +70,7 @@ class GuestsController < ApplicationController
     id = params[:id].to_i
 
     return if (current_user && (current_user.admin? || current_user.sub_admin?)) || (meta && meta.is_a?(Manager))
-    
+
     redirect_to user_session_path if meta.nil? || (meta.is_a?(Guest) && meta.id != id)
     redirect_to user_session_path if meta.is_a?(Manager) && !meta.hosts.pluck(:id).include?(id)
 
@@ -81,6 +82,6 @@ class GuestsController < ApplicationController
     else
       return false unless current_user.meta.id == id
     end
-    
+
   end
 end
