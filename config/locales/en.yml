@@ -13,7 +13,7 @@ en:
           attributes:
             phone:
               taken: "קיים במערכת איש עדות עם מספר טלפון זהה"
-              
+
   users:
     new:
       title: "Register as a host"
@@ -235,7 +235,7 @@ en:
       public_text: "Is there anything your guests should know?"
       public_text_help_block: "i.e Should the guests bring something with them? Will the event focus on a specific aspect? Who will be the participants? You can edit it later."
       free_text: "Is there anything else we need to know?"
-      finish: "Complete registration" 
+      finish: "Complete registration"
       thanks_for_joining:  "You have joined thousands of Zikaron BaSalon hosts worldwide!"
       thanks_for_joining2:  ""
       facebook_share: "Share on Facebook"
@@ -333,7 +333,7 @@ en:
     external_assignment_text: "איש העדות לא מעוניין להשתתף השנה"
 
 
-  
+
   manager_mailer:
     new_manager:
       title: "Registration for Zikaron BaSalon's team members"
@@ -379,12 +379,12 @@ en:
       link_text: "In our Host Kit"
       link_url: "http://www.zikaronbasalon.com/#!eveningsetup/c1hap"
       paragraph_3: "you will find everything you need to make you Zikaron Basalon evening memorable for both you and your guests"
-      profile_link: "personal profile"
+      profile_link: ""
       paragraph_2_post_link: " and make sure all details are correct. In any case, you can always press on the “edit” button and change your information."
       paragraph_3_pre: "Hosting a Zikaron BaSalon is easy, and we are here to help and guide you. "
       paragraph_3_post: "On our website  you can find our host kit, which will help you make your event meaningful for you and your guests. In addition, one of our Community Leaders will soon email you and personally guide you until your event."
       paragraph_4_pre: "You can also join our Facebook page "
-      facebook_link: "Facebook"
+      facebook_link: ""
       facebook_link_url: "https://www.facebook.com/ZikaronBaSalonEN/"
       paragraph_4_post: "and learn more about Zikaron BaSalon's activity"
       paragraph_5: "We hope you will have a meaningful event!"
@@ -393,7 +393,7 @@ en:
    register:
      title: "Register as a guest"
      subtitle: "In order for us to send this request, we need this information about you"
-   login: 
+   login:
      title: "Guest login"
      signin_error: "Incorrect login name or password"
    request:
