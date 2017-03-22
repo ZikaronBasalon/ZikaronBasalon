@@ -1,7 +1,12 @@
 class GuestsController < ApplicationController
   # before_action :authenticate_user!
   before_filter :is_admin, only: [:index]
-  before_filter :correct_guest, only: [:show]
+  before_filter :correct_guest
+  if current_user.nil?
+    redirect_to root_path
+    return false
+  end
+, only: [:show]
 
 	def show
 		@guest = Guest.includes(:invites).find(params[:id])
@@ -66,6 +71,11 @@ class GuestsController < ApplicationController
   end
 
   def correct_guest
+    if current_user.nil?
+      redirect_to root_path
+      return false
+    end
+
     meta = current_user.try(:meta)
     id = params[:id].to_i
 
