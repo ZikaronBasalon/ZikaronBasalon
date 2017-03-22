@@ -80,13 +80,17 @@ class HostsController < ApplicationController
     redirect_to user_session_path if meta.is_a?(Manager) && !meta.hosts.pluck(:id).include?(id)
 
     #lookup user type. if same type, false. different type redirect
-    param_user_type = User.find(id).meta_type
     user_type = current_user.meta_type
-    if param_user_type == user_type
+    if user_type == "Host"
       redirect_to root_path unless current_user.meta.id == id
     else
       return false unless current_user.meta.id == id
     end
+    # param_user_type = User.find(id).meta_type
+    # user_type = current_user.meta_type
+    # if param_user_type == user_type
+    # else
+    # end
   end
 
   def changerole
