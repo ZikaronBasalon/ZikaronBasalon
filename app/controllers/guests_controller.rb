@@ -1,12 +1,7 @@
 class GuestsController < ApplicationController
   # before_action :authenticate_user!
   before_filter :is_admin, only: [:index]
-  before_filter :correct_guest
-  if current_user.nil?
-    redirect_to root_path
-    return false
-  end
-, only: [:show]
+  before_filter :correct_guest, only: [:show]
 
 	def show
 		@guest = Guest.includes(:invites).find(params[:id])
