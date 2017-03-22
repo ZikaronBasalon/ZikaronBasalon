@@ -77,14 +77,9 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 	}
 
 	$scope.fbShare = function () {
-		var base = window.location.origin;
-		var link = base + '/' + document.getElementById('locale').className + '/pages/home/'  + '?invite=' + $scope.host.id;
-
-		console.log(link);
-
 		FB.ui({
 		  method: 'share',
-		  href: link
+		  href: 'www.zikaronbasalon.com'
 		}, function(response){
 
 		});
