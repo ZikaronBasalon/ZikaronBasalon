@@ -70,7 +70,10 @@ class HostsController < ApplicationController
 
   # Checks if user has access to view page
   def correct_host
-    return false if current_user.nil?
+    if current_user.nil?
+      redirect_to root_path
+      return false
+    end
     meta = current_user.try(:meta)
     id = params[:id].to_i
 
