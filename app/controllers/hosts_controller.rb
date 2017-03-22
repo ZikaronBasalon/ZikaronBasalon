@@ -13,6 +13,7 @@ class HostsController < ApplicationController
   end
 
   def show
+    redirect_to user_session_path unless current_user
     @host = Host.find(params[:id])
     respond_to do |format|
       format.html { correct_host }
