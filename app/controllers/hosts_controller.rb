@@ -1,6 +1,16 @@
 class HostsController < ApplicationController
   before_filter :correct_host, only: [:edit]
   # before_action :authenticate_user!
+  before_filter :logout_if_inactive
+
+  def logout_if_inactive
+   if current_user && !current_user.active_this_year? && (Time.zone.now.to_date - current_user.current_sign_in_at.to_date).to_i > 30
+      sign_out current_user
+      url = "http://zikaronbasalon.herokuapp.com/he/users/sign_in"
+      redirect_to url
+      return false;
+    end
+  end
 
   respond_to :html, :json
 
