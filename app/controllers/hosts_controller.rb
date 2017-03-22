@@ -13,7 +13,6 @@ class HostsController < ApplicationController
   end
 
   def show
-    redirect_to root_path if current_user.nil?
     @host = Host.find(params[:id])
     respond_to do |format|
       format.html { correct_host }
@@ -71,6 +70,7 @@ class HostsController < ApplicationController
 
   # Checks if user has access to view page
   def correct_host
+    return false if current_user.nil?
     meta = current_user.try(:meta)
     id = params[:id].to_i
 
