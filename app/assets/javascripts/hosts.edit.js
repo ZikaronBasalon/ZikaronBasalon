@@ -209,25 +209,25 @@ app.controller('HostSignupFinishedModal', ['$scope', '$uibModalInstance', 'host'
     $uibModalInstance.dismiss('cancel');
   };
 
-  $scope.fbShare = function () {
-  	FB.ui({
-		  method: 'share',
-		  href: 'http://www.zikaronbasalon.com/'
-		}, function(response){
+  // $scope.fbShare = function () {
+  // 	FB.ui({
+		//   method: 'share',
+		//   href: 'http://www.zikaronbasalon.com/'
+		// }, function(response){
 
-		});
-  };
+		// });
+  // };
 
-  /*
+  
   $scope.fbShare = function () {
     var base = window.location.origin;
     var link = encodeURIComponent(base + '/' + document.getElementById('locale').className + '/pages/home/'  + '?invite=' + $scope.host.id);
     window.open(
-      'https://www.facebook.com/dialog/share?app_id=723889947773479&display=popup&href=' + link,
+      'https://www.facebook.com/dialog/share?app_id=1425545090852355&display=popup&href=' + link,
       '_blank' // <- This is what makes it open in a new window.
     );
   };
-  */
+  
 
   $scope.buildEvening = function () {
   	var locale = document.getElementById('locale').className;

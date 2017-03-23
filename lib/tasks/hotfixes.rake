@@ -19,11 +19,8 @@ namespace :hotfixes do
       city.destroy unless city.nil?
     end
 
-    cities_name_fix = [["עמונה","Amonah"], ["גושר", "גשר"], ["עין חר", "עין חרוד"], ["כפר תפ", "כפר תפוח"], ["שדה ורב", "שדה ורבורג"]]
-    cities_name_fix.each do |oldname, newname|
-      city = City.find_by_name(oldname)
-      city.update_column(:name, newname) unless city.nil?
-    end
+    fix_cities_name
+
     # bundle exec rake hotfixes:add_place_ids_to_cities
     @client = GooglePlaces::Client.new('AIzaSyDJ1u3XlTGQDKn6dR3vOH5bVswXBmaGiLM')
     City.where(placeid: nil).each do |c|
@@ -177,7 +174,27 @@ namespace :hotfixes do
     end
   end
 
-
-
+  desc "city name replace"
+  task :city_name_replace => :environment do
+    cities_name_fix
+  end
 end
 
+def fix_cities_name
+  cities_name_fix = [
+    ["Tel Aviv-yafo", "תל אביב יפו"],
+    ["Haifa", "חיפה"],
+    ["ראשלצ", "ראשון לציון"],
+    ["נהרייה", "נהריה"],
+    ["גבעים", "גבעתיים"]
+    ["עמונה","Amonah"],
+    ["גושר", "גשר"],
+    ["עין חר", "עין חרוד"],
+    ["כפר תפ", "כפר תפוח"],
+    ["שדה ורב", "שדה ורבורג"]
+  ]
+  cities_name_fix.each do |oldname, newname|
+    city = City.find_by_name(oldname)
+    city.update_column(:name, newname) unless city.nil?
+  end
+end
