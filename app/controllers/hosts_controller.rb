@@ -113,3 +113,4 @@ class HostsController < ApplicationController
     render json: updated_user, status: 201
   end
 end
+

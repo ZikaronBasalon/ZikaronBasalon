@@ -95,13 +95,13 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
  //  	};
 	
 
-	  $scope.fbShare = function () {
-  	FB.ui({
-		  method: 'share',
-		  href: 'http://zikaronbasalon.herokuapp.com/' + document.getElementById('locale').className + '/pages/home/'  + '?invite=' + host.id
-		}, function(response){
-		});
-  };
+	 //  $scope.fbShare = function () {
+  // 	FB.ui({
+		//   method: 'share',
+		//   href: 'http://zikaronbasalon.herokuapp.com/' + document.getElementById('locale').className + '/pages/home/'  + '?invite=' + host.id
+		// }, function(response){
+		// });
+  // };
 	
 	function initInvites(invites) {
 		var invites = _.groupBy(invites, 'confirmed');
