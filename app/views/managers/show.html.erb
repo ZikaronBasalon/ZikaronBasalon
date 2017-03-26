@@ -13,7 +13,7 @@
   <% if I18n.locale == :he %>
     <div class="text-center margin-bottom-20">
       <div class="view-toggle">
-        <div ng-class="{ 'selected': activeView === 'hosts' }"
+        <div ng-if="currentUser.meta.witness_only == false" ng-class="{ 'selected': activeView === 'hosts' }"
              ng-click="onViewToggle('hosts')"><%= t '.hosts_view' %></div>
         
         <div ng-class="{ 'selected': activeView === 'witnesses' }"
