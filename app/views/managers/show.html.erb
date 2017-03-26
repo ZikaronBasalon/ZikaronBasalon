@@ -2,7 +2,7 @@
      ng-init="init(<%= current_user.to_json(:include => :meta) %>, <%= @hosts.to_json(:include => [:user, :witness, city: { :include => :managers }, :methods => [:has_witness] ]) %>, <%= @witnesses.to_json(:include => { city: { :include => :managers } }) %>,  <%= @cities.to_json %>,
         <%= @total_hosts.to_json %>, <%= @total_witnesses.to_json %>, <%= @page.to_json %> )">
 
-  <% if current_user.any_admin? %>
+  <% if current_user.the_admin? %>
     <a ng-click="export_hosts()">ייצא מארחים לאקסל</a> 
     <a ng-click="export_witnesses()">ייצא אנשי עדות לאקסל</a>
     <a ng-click="export_guests()">ייצא אורחים לאקסל</a> 

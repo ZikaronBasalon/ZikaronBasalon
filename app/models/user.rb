@@ -41,6 +41,10 @@ class User < ActiveRecord::Base
     self.admin || self.sub_admin
   end
 
+  def the_admin?
+    self.admin
+  end
+
   def save_as_deleted_user
     DeletedUser.create(name: full_name, email: email, type: meta_type)
   end
