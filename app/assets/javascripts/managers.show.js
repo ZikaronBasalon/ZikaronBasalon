@@ -14,7 +14,7 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
     host: null
   };
 
-  $scope.activeView = $scope.currentUser.meta.witness_only == true ? 'witnesses' : 'hosts'; 
+  $scope.activeView = 'witnesses'; 
   $scope.formatBool = formatBool;
   $scope.formatDate = formatDate;
   $scope.formatDateTime = formatDateTime;
