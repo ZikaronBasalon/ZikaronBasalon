@@ -179,25 +179,25 @@ namespace :hotfixes do
 
   # bundler exec rake hotfixes:fix_cities
   # heroku --remote heroku run rake hotfixes:fix_cities
-  desc "fix cities"
-  task :fix_cities => :environment do
-    cities_name_fix = [
-      ["Tel Aviv-yafo", "תל אביב יפו"],
-      ["Haifa", "חיפה"],
-      ["ראשלצ", "ראשון לציון"],
-      ["נהרייה", "נהריה"],
-      ["גבעים", "גבעתיים"]
-      ["עמונה","Amonah"],
-      ["גושר", "גשר"],
-      ["עין חר", "עין חרוד"],
-      ["כפר תפ", "כפר תפוח"],
-      ["שדה ורב", "שדה ורבורג"]
-    ]
+  # desc "fix cities"
+  # task :fix_cities => :environment do
+  #   cities_name_fix = [
+  #     ["Tel Aviv-yafo", "תל אביב יפו"],
+  #     ["Haifa", "חיפה"],
+  #     ["ראשלצ", "ראשון לציון"],
+  #     ["נהרייה", "נהריה"],
+  #     ["גבעים", "גבעתיים"]
+  #     ["עמונה","Amonah"],
+  #     ["גושר", "גשר"],
+  #     ["עין חר", "עין חרוד"],
+  #     ["כפר תפ", "כפר תפוח"],
+  #     ["שדה ורב", "שדה ורבורג"]
+  #   ]
 
-    cities_name_fix.each do |oldname, newname|
-      city = City.find_by_name(oldname)
-      city.update_column(:name, newname) unless city.nil?
-    end
-  end
+  #   cities_name_fix.each do |oldname, newname|
+  #     city = City.find_by_name(oldname)
+  #     city.update_column(:name, newname) unless city.nil?
+  #   end
+  # end
 
 end
