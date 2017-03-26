@@ -2,11 +2,11 @@
       ng-init="init(<%= @host.to_json(:include => [:user, :witness, :city, { invites: { :include => { guest: { :include => :user } } } }, { comments: { :include => :user } }], :methods => [:converted_time]) %>)">
   <div class="col-xs-12">
     <div>
-      <button class="btn btn-primary" 
+<!--       <button class="btn btn-primary" 
               style="background-color: #3b5998;"
               ng-click="fbShare();">
         <%= t 'shared.share_on_fb' %>
-      </button>
+      </button> -->
     </div>
     <h1><%= t '.title' %></h1>
   </div>
