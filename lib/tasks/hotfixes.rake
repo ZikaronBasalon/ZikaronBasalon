@@ -25,7 +25,7 @@ namespace :hotfixes do
       city.update_column(:name, newname) unless city.nil?
     end
     # bundle exec rake hotfixes:add_place_ids_to_cities
-    @client = GooglePlaces::Client.new('AIzaSyDJ1u3XlTGQDKn6dR3vOH5bVswXBmaGiLM')
+    @client = GooglePlaces::Client.new('AIzaSyCI5te4_kqFV93ToApTXVEmj7NkGxAGLB4')
     City.where(placeid: nil).each do |c|
       puts "\ncurrent id is '#{c.id}'"
       location = @client.spots_by_query(c.name, :types => [ "locality", "political"], :exclude => ['establishment', 'address', 'country'], :language => 'iw')
