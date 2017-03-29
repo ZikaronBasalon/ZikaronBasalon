@@ -103,7 +103,7 @@ class Host < ActiveRecord::Base
   def self.to_csv(hosts, options = {})
     CSV.generate(options) do |csv|
       csv << ['ID','שם', 'עיר', 'כתובת', 'טלפון', 'מייל', 'שפה', 
-              'צוות איש עדות', 'נוצר קשר עם איש עדות']
+              'צוות איש עדות', 'נוצר קשר עם איש עדות', 'שם ארגון']
       hosts.each do |host|
         row = [
           host.id,
@@ -114,7 +114,8 @@ class Host < ActiveRecord::Base
           host.user.try(:email),
           host.event_language,
           host.has_witness ? 'כן' : 'לא',
-          host.contacted_witness ? 'כן' : 'לא'
+          host.contacted_witness ? 'כן' : 'לא',
+          host.org_name
         ]
         csv << row
       end
