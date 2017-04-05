@@ -154,6 +154,7 @@ en:
     vetrans: "Salon with a Vetran"
     assignment_time: "teamed date"
     in_future: "Future events"
+    has_invites: "Open Requests"
 
   views:
     pagination:

@@ -11,7 +11,7 @@ class Manager < ActiveRecord::Base
 
 	validates_uniqueness_of :temp_email
 
-  def get_hosts(page, filter, query, sort, has_manager, has_survivor, is_org, language, in_future, reverse_ordering)
+  def get_hosts(page, filter, query, sort, has_manager, has_survivor, is_org, language, in_future, has_invites, reverse_ordering)
    sort = 'created_at' if sort.blank?
    sort_order = !reverse_ordering.to_i.zero? ? " desc" : " asc"
    hosts = Host.includes(:city, :user, :witness).order(sort + sort_order)
@@ -19,7 +19,7 @@ class Manager < ActiveRecord::Base
    hosts = hosts.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
    hosts = hosts.where(:active => true) unless user.admin?
    hosts = hosts.where(concept: concept).select{ |h| h.has_witness } if concept
-   hosts = hosts.select{ |h| host_in_filter(h, query, has_manager, has_survivor, is_org, language, in_future) }
+   hosts = hosts.select{ |h| host_in_filter(h, query, has_manager, has_survivor, is_org, language, in_future, has_invites) }
    hosts = paginate(hosts, page) if page
    hosts
   end
@@ -58,7 +58,7 @@ class Manager < ActiveRecord::Base
     arr_name
   end
 
-  def host_in_filter(host, query, has_manager, has_survivor, is_org, language, in_future)
+  def host_in_filter(host, query, has_manager, has_survivor, is_org, language, in_future, has_invites)
     in_filter = true
     in_filter = in_filter && host.in_language_filter(language)
     in_filter = in_filter && host.in_query(query)
@@ -66,6 +66,7 @@ class Manager < ActiveRecord::Base
     in_filter = in_filter && host_has_witness(host, has_survivor) if has_survivor.present?
     in_filter = in_filter && !host.org_name.nil? if is_org === 'true'
     in_filter = in_filter && host.event_date >= Date.today if in_future ==='true'
+    in_filter = in_filter && host.invites.count if has_invites ==='true'
     in_filter
   end
 
