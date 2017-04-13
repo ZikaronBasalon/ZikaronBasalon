@@ -66,7 +66,7 @@ class Manager < ActiveRecord::Base
     in_filter = in_filter && host_has_witness(host, has_survivor) if has_survivor.present?
     in_filter = in_filter && !host.org_name.nil? if is_org === 'true'
     in_filter = in_filter && host.event_date >= Date.today if in_future ==='true'
-    in_filter = in_filter && host.invites && host.invites.count && host.invites.where(:confirmed => false) if has_invites.present? 
+    in_filter = in_filter && host.invites && host.invites.count && host.invites.where(:confirmed => false).count if has_invites.present? 
     in_filter
   end
 
