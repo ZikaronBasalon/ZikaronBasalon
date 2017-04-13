@@ -161,6 +161,7 @@ he:
     available_day6: "25.4"
     available_day7: "26.4"
     in_future: "עתיד להתקיים"
+    has_invites: "בקשות פתוחות"
 
   views:
     pagination:
