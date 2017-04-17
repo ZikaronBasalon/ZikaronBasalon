@@ -14,7 +14,7 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
     host: null
   };
 
-  $scope.activeView = 'hosts';
+  $scope.activeView = 'witnesses'; 
   $scope.formatBool = formatBool;
   $scope.formatDate = formatDate;
   $scope.formatDateTime = formatDateTime;
@@ -105,7 +105,8 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
       external_assignment: $scope.search.external_assignment,
       is_org: $scope.search.is_org,
       event_language: $scope.search.event_language,
-      in_future: $scope.search.in_future
+      in_future: $scope.search.in_future,
+      has_invites: $scope.search.has_invites
     };
     if ($scope.search.external_assignment == true) {
       $scope.search.has_host = -1

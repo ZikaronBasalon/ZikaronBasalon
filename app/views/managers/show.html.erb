@@ -13,7 +13,7 @@
   <% if I18n.locale == :he %>
     <div class="text-center margin-bottom-20">
       <div class="view-toggle">
-        <div ng-class="{ 'selected': activeView === 'hosts' }"
+        <div ng-if="currentUser.meta.witness_only == false" ng-class="{ 'selected': activeView === 'hosts' }"
              ng-click="onViewToggle('hosts')"><%= t '.hosts_view' %></div>
         
         <div ng-class="{ 'selected': activeView === 'witnesses' }"
@@ -110,6 +110,13 @@
               <%= t 'shared.in_future' %>
           </label>
         </div>
+
+        <div class="form-group">
+          <label>
+            <input type="checkbox" ng-model="search.has_invites">
+              <%= t 'shared.has_invites' %>
+          </label>
+        </div>
         
         <div class="form-group pull-left">
           <input type="text" class="form-control" ng-model="query.host" placeholder="<%= t 'shared.free_search' %>" />
@@ -148,6 +155,10 @@
               <%= t 'shared.org_name' %>
               <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'org_name'"></span>
             </th>
+            <th ng-click="setSortProp('hosted_before')">
+              <%= t 'shared.hosted_before' %>
+              <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'hosted_before'"></span>
+            </th>
             <th ng-click="setSortProp('contacted')">
               <%= t 'shared.host_contacted' %>
               <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'contacted'"></span>
@@ -182,6 +193,7 @@
             <td>{{ host.city.name }}</td>
             <td>{{ formatDate(host.event_date) }}</td>
             <td>{{ host.org_name }}</td>
+            <td>{{ formatBool(!host.hosted_before) }}</td>
             <td>{{ formatBool(host.contacted) }}</td>
             <td>{{ formatBool(host.contacted_witness) }}</td>
             <td>{{ formatBool(host.survivor_needed) }}</td>
