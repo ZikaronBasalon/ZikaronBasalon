@@ -3,7 +3,8 @@ class RequestMailer < ActionMailer::Base
   include Sidekiq::Worker
   include Roadie::Rails::Automatic
   layout 'mailer_default'
-  default from: "zikaronbasalon@gmail.com"
+  default from: "zikaronbasalon@gmail.com",
+          bcc: "digital.basalon@gmail.com"
 
   def pending_invite_received(invite_id, locale)
   	@invite = Invite.find(invite_id)
