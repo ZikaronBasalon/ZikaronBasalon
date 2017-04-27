@@ -188,4 +188,14 @@ namespace :hotfixes do
     end
   end
 
+  # heroku --remote heroku run rake hotfixes:sub_admin_password_reset
+  # bundler exec rake hotfixes:sub_admin_password_reset
+  #changes passwords of all admins except the full admin
+  desc "change passwords of subadmins"
+  task :sub_admin_password_reset => :environment do
+    User.where(:meta_type => 'Manager', :admin => false).each do |u|
+      u.reset_password!('set_new_pass_here','set_new_pass_here')
+    end
+  end
+  
 end
