@@ -198,4 +198,19 @@ namespace :hotfixes do
     end
   end
   
+  desc "email blubbery"
+  task :email_blubbery => :environment do
+    User.where(:meta_type => 'Manager', :admin => false).each do |u|
+      blubbery_email = u.email.sub '@','.@'
+      u.update_column(:email, blubbery_email)
+    end
+  end
+
+  desc "email deblubbery"
+  task :email_deblubbery => :environment do
+    User.where(:meta_type => 'Manager', :admin => false).each do |u|
+      deblubbery_email = u.email.sub '.@','@'
+      u.update_column(:email, deblubbery_email)
+    end
+  end
 end
