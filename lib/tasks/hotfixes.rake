@@ -142,7 +142,6 @@ namespace :hotfixes do
         witness.available_day4 = nil
         witness.available_day5 = nil
         witness.available_day6 = nil
-        witness.available_day7 = nil
         # witness.concept = nil
         witness.save!
       end
@@ -171,7 +170,6 @@ namespace :hotfixes do
         witness.available_day4 = nil
         witness.available_day5 = nil
         witness.available_day6 = nil
-        witness.available_day7 = nil
         witness.save!
       end
     end
