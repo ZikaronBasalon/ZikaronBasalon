@@ -214,7 +214,7 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
   }
 
   $scope.deleteHost = function(host) {
-    var confirmMessage = host.contacted_witness ? 'למארח יש ציוות. ' : '';
+    var confirmMessage = !!host.witness ? 'למארח יש ציוות. ' : '';
     confirmMessage += 'בטוח בטוח?';
     var res = confirm(confirmMessage);
     if (res) {
