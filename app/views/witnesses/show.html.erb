@@ -132,9 +132,11 @@
             <!-- Host -->
             <div class="field-group">
               <div class="info-label"><%= t 'profile.labels.host' %></div>
-              <div ng-if="witness.host">
-                <a ng-href="/hosts/{{witness.host.id}}">{{ witness.host.user.full_name }}</a>
-                <div><%= link_to 'בטל ציוות', unassign_witness_path(@witness), :confirm => 'בטוח בטוח? למען הסדר הטוב, לאחר ביטול הציוות אנא הוספ/י הערה בדף זה המפרטת את סיבת הביטול.' %></div>
+              <div ng-if="witness.host" class="cancel-assignment">
+                <a ng-href="/hosts/{{witness.host.id}}">{{ witness.host.user.full_name }}</a>&nbsp;
+                <button class="btn btn-warning">
+                  <%= link_to 'בטל ציוות', unassign_witness_path(@witness), :confirm => 'בטוח בטוח? למען הסדר הטוב, לאחר ביטול הציוות אנא הוספ/י הערה בדף זה המפרטת את סיבת הביטול.' %>
+                </button>
               </div>
               <div ng-if="!witness.host && !witness.external_assignment">
                 <%#= t('profile.assign_host') %>

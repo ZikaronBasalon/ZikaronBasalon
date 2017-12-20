@@ -40,6 +40,16 @@
 			font-size: 15px;
 		}
 	}
+	.cancel-assignment {
+		button {
+			a {
+				color: white;
+				text-decoration: none;
+			}
+			padding: 5px;
+			line-height: 14px;
+		}
+	}
 }
 
 .request-invite {
