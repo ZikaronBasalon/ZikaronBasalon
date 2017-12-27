@@ -195,7 +195,7 @@
         <div class="form-group"
              ng-class="{true: 'has-error'}[submitted[stepIndex] && stepThree.event_language.$invalid]">
           <label for="event_language"><%= t '.event_language' %></label>
-          <div ng-show="!otherLanguageVisible">
+          <div>
             <select class="form-control" id="event_language" 
                     name="event_language"
                     required
@@ -210,7 +210,6 @@
               <option value="other"><%= t 'shared.other' %></option>
             </select>
           </div>
-
           <input type="text" class="form-control" 
                  ng-model="host.event_language"
                  ng-show="otherLanguageVisible" />
