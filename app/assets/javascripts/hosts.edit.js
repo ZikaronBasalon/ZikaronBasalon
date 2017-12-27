@@ -68,7 +68,9 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
   	if($scope.host.event_language === "other") {
   		$scope.otherLanguageVisible = true;
   		$scope.host.event_language = null;
-  	}
+  	} else {
+		$scope.otherLanguageVisible = false;
+	}
   }
 
   $scope.onCityNameBlur = function() {
