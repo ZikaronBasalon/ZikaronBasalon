@@ -93,7 +93,7 @@ namespace :hotfixes do
         #   comment.destroy if !comment.nil?
         # end
         if !host.witness.nil?
-          comment = "ב2016 המארח/ת אירח/ה את איש/אשת העדות #{host.witness.full_name} #{host.witness.id}"
+          comment = "ב2017 המארח/ת אירח/ה את איש/אשת העדות #{host.witness.full_name} #{host.witness.id}"
           host.comments.create!(user_id: admin_user_id, content: comment)
         end
         host.max_guests = nil
@@ -147,7 +147,7 @@ namespace :hotfixes do
       end
     end
     
-    #remove all invites
+    #remove all invites tzivutim
     Invite.destroy_all
   end
 
