@@ -29,7 +29,7 @@ group :development do
   gem 'test-unit'
   gem 'seed_dump'
   gem 'letter_opener'
-  gem 'bullet'
+  # gem 'bullet'
   gem 'xray-rails'
 end
 
