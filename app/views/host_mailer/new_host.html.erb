@@ -5,23 +5,22 @@
 </p>
 
 <p>
-	<%= t('.paragraph_2_pre_link', locale: @locale)  %>
-	<%= link_to t('.profile_link', locale: @locale), host_url(id:@user.meta_id, locale: @locale)%>
-	<%= t('.paragraph_2_post_link', locale: @locale)  %>
+	<%= t('.paragraph_2', locale: @locale)  %>
 </p>
 
 <p>
-	<%= t('.paragraph_3_pre', locale: @locale) %>
-	<%= link_to t('.link_text', locale: @locale), t('.link_url', locale: @locale) %>
-	<%= t('.paragraph_3_post', locale: @locale) %>
+	<%= t('.paragraph_3_pre_text', locale: @locale)  %>
+	<%= link_to t('.paragraph_3_link_text', locale: @locale), t('.paragraph_3_link_url', locale: @locale) %>.
 </p>
 
 <p>
-	<%= t('.paragraph_4_pre', locale: @locale) %>
-	<%= link_to t('.facebook_link', locale: @locale), t('.facebook_link_url', locale: @locale) %>
-	<%= t('.paragraph_4_post', locale: @locale) %>
+	<%= t('.paragraph_4_pre_text', locale: @locale) %>
+	<%= link_to t('.paragraph_4_link_text', locale: @locale), t('.paragraph_4_link_url', locale: @locale) %>
+	<%= t('.paragraph_4_post_text', locale: @locale) %>
 </p>
 
 <p>
-	<%= t('.paragraph_5', locale: @locale) %>
+	<%= t('.paragraph_5_pre_text', locale: @locale) %>
+	<%= link_to t('.paragraph_5_facebook_link_text', locale: @locale), t('.paragraph_5_facebook_link_url', locale: @locale) %>
+	<%= t('.paragraph_5_post_text', locale: @locale) %>
 </p>

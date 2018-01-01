@@ -186,4 +186,29 @@ namespace :hotfixes do
     end
   end
 
+  # heroku --remote heroku run rake hotfixes:sub_admin_password_reset
+  # bundler exec rake hotfixes:sub_admin_password_reset
+  #changes passwords of all admins except the full admin
+  desc "change passwords of subadmins"
+  task :sub_admin_password_reset => :environment do
+    User.where(:meta_type => 'Manager', :admin => false).each do |u|
+      u.reset_password!('set_new_pass_here','set_new_pass_here')
+    end
+  end
+  
+  desc "email blubbery"
+  task :email_blubbery => :environment do
+    User.where(:meta_type => 'Manager', :admin => false).each do |u|
+      blubbery_email = u.email.sub '@','.@'
+      u.update_column(:email, blubbery_email)
+    end
+  end
+
+  desc "email deblubbery"
+  task :email_deblubbery => :environment do
+    User.where(:meta_type => 'Manager', :admin => false).each do |u|
+      deblubbery_email = u.email.sub '.@','@'
+      u.update_column(:email, deblubbery_email)
+    end
+  end
 end
