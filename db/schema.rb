@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170125211439) do
+ActiveRecord::Schema.define(:version => 20171219122241) do
 
   create_table "cities", :force => true do |t|
     t.string   "name"
@@ -119,10 +119,11 @@ ActiveRecord::Schema.define(:version => 20170125211439) do
   add_index "invites", ["host_id"], :name => "index_invites_on_host_id"
 
   create_table "managers", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.string   "temp_email"
     t.string   "concept"
+    t.boolean  "witness_only", :default => false
   end
 
   create_table "regions", :force => true do |t|
@@ -195,7 +196,6 @@ ActiveRecord::Schema.define(:version => 20170125211439) do
     t.boolean  "available_day4"
     t.boolean  "available_day5"
     t.boolean  "available_day6"
-    t.boolean  "available_day7"
   end
 
 end
