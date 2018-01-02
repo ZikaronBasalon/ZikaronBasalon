@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   end
 
   def any_admin?
-    self.admin || self.sub_admin #|| (self.meta_type == 'Manager' && !self.sub_admin && self.admin)
+    self.admin || self.sub_admin || (self.meta_type == 'Manager' && !self.sub_admin && self.admin)
   end
 
   def the_admin?
