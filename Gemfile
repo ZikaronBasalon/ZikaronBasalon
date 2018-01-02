@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby "2.0.0p648"
 gem 'rails', '3.2.14'
 gem 'pg'
 
@@ -29,7 +29,7 @@ group :development do
   gem 'test-unit'
   gem 'seed_dump'
   gem 'letter_opener'
-  # gem 'bullet'
+  gem 'bullet'
   gem 'xray-rails'
 end
 
