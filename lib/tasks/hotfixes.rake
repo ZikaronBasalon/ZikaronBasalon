@@ -92,7 +92,9 @@ namespace :hotfixes do
 
         #   comment.destroy if !comment.nil?
         # end
-        if !host.witness.nil?
+        #
+        # this superceded by below
+        if !host.witness.nil? && false
           comment = "ב2017 המארח/ת אירח/ה את איש/אשת העדות #{host.witness.full_name} #{host.witness.id}"
           host.comments.create!(user_id: admin_user_id, content: comment)
         end
