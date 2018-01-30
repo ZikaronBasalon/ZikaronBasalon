@@ -16,7 +16,12 @@
  *
  */
 
-@import url('https://fonts.googleapis.com/css?family=Alef:400,700');
+@font-face {
+  font-family: 'Alef';
+  src: url('aleph.woff2'), url('aleph1.woff2'), url('aleph2.woff2'), url('aleph3.woff2');
+}
+
+// @import url('https://fonts.googleapis.com/css?family=Alef:400,700');
 @import "compass/css3/flexbox";
 @import "external/bootstrap.min.css";
 @import "external/bootstrap-theme.min.css";
