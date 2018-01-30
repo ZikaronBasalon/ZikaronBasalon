@@ -28,8 +28,8 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 	$scope.submitted = false;
 	$scope.alerts = [];
 	$scope.action = 'new';
-	
-	$scope.autocomplete = new google.maps.places.Autocomplete($("#city_name")[0], { types: ['(cities)'] });
+	"types" : [ "locality", "political" ],
+	$scope.autocomplete = new google.maps.places.Autocomplete($("#city_name")[0], { types: ['cities', 'locality', 'political'] });
 	$scope.autocomplete.setComponentRestrictions({'country': ['ps', 'il']});
 	google.maps.event.addListener($scope.autocomplete, 'place_changed', getAddress);
 
