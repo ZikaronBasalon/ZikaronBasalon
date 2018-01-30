@@ -29,8 +29,9 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 	$scope.alerts = [];
 	$scope.action = 'new';
 	
-	$scope.autocomplete = new google.maps.places.Autocomplete($("#city_name")[0], { types: ['(cities)'] });
-	$scope.autocomplete.setComponentRestrictions({'country': ['ps', 'il']});
+	// $scope.autocomplete = new google.maps.places.Autocomplete($("#city_name")[0], { types: ['(cities)'] });
+	$scope.autocomplete = new google.maps.places.Autocomplete($("#city_name")[0]);
+	// $scope.autocomplete.setComponentRestrictions({'country': ['ps', 'il']});
 	google.maps.event.addListener($scope.autocomplete, 'place_changed', getAddress);
 
 	$scope.init = function(witness) {
@@ -98,7 +99,8 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 		$scope.result = $scope.autocomplete.getPlace();
 		$scope.cityFromList = true;
 		if($scope.result) {
-			$scope.witness.city_name = getLocalityComponent($scope.result);
+			$scope.witness.city_name = $scope.result.vicinity;
+			// $scope.witness.city_name = getLocalityComponent($scope.result);
 		}
 		$scope.$apply();
   }

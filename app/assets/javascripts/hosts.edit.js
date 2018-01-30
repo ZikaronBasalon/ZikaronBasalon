@@ -183,7 +183,8 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 		$scope.result = $scope.autocomplete.getPlace();
 		$scope.cityFromList = true;
 		if($scope.result) {
-			$scope.host.city_name = getAddressComponent($scope.result, "locality");
+      // $scope.host.city_name = getAddressComponent($scope.result, "locality");
+			$scope.host.city_name = $scope.result.vicinity;// getAddressComponent($scope.result, "locality");
 		}
 		$scope.$apply();
   }
