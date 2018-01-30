@@ -16,9 +16,12 @@
  *
  */
 
-@import url(https://fonts.googleapis.com/css?family=Alef:400,700);
+@import url('https://fonts.googleapis.com/css?family=Alef:400,700');
 @import "compass/css3/flexbox";
-
+// @import "external/bootstrap.min.css";
+@import "external/bootstrap-theme.min.css";
+@import "external/jquery-ui.css";
+@import "external/bootstrap-rtl.min.css";
 a {
 		cursor: pointer;
 }

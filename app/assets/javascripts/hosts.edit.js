@@ -18,12 +18,15 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 	$scope.otherLanguageVisible = false;
 
 	$scope.initAutocomplete = function(iso) {
-		var options = { types: ['(cities)'] };
+		// var options = { types: ['(cities)'] };
 		if(iso) {
-			options.componentRestrictions = { country: iso }
+			// options.componentRestrictions = { country: iso }
 		}
 
-		$scope.autocomplete = new google.maps.places.Autocomplete($("#city")[0], options);
+    // $scope.autocomplete = new google.maps.places.Autocomplete($("#city")[0], options);
+		$scope.autocomplete = new google.maps.places.Autocomplete($("#city")[0]);
+    // $scope.autocomplete.setComponentRestrictions({'country': ['ps', 'il']});
+
 		google.maps.event.addListener($scope.autocomplete, 'place_changed', getAddress);
 	}
 
@@ -180,7 +183,8 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 		$scope.result = $scope.autocomplete.getPlace();
 		$scope.cityFromList = true;
 		if($scope.result) {
-			$scope.host.city_name = getAddressComponent($scope.result, "locality");
+      // $scope.host.city_name = getAddressComponent($scope.result, "locality");
+			$scope.host.city_name = $scope.result.vicinity;// getAddressComponent($scope.result, "locality");
 		}
 		$scope.$apply();
   }

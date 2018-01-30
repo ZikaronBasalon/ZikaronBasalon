@@ -27,7 +27,9 @@ app.controller('ManagerIndexController', ['$scope','$http', function($scope, $ht
 
   $scope.initCityInput = function() {
     var input = document.getElementById('city');
-    $scope.autocomplete = new google.maps.places.Autocomplete(input ,{ types: ['(cities)'] });
+    // $scope.autocomplete = new google.maps.places.Autocomplete(input ,{ types: ['(cities)'] });
+    $scope.autocomplete = new google.maps.places.Autocomplete(input);
+    // $scope.autocomplete.setComponentRestrictions({'country': ['ps', 'il']});
     $scope.autocomplete.addListener('place_changed',$scope.placeChanged);
   }
 
