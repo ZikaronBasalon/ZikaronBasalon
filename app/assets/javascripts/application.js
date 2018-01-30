@@ -11,6 +11,13 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require external/jquery-1.12.1.min.js
+//= require external/jquery-ui.js
+//= require external/angular.min.js
+//= require external/angular-sanitize.min.js
+//= require external/lodash.min.js
+//= require external/ui-bootstrap.min.js
+//= require external/ui-bootstrap-tpls.min.js
 //= require jquery_ujs
 // require jquery.ui.autocomplete
 // require jquery.ui.datepicker
@@ -22,7 +29,7 @@
 //= require angular-spinner.min
 //= require ui-select
 //= require module
-
+//= require_self
 
 $(function() {
 	$("form").on("keypress", function (e) {
