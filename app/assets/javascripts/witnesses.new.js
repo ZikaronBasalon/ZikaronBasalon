@@ -30,6 +30,7 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 	$scope.action = 'new';
 	
 	$scope.autocomplete = new google.maps.places.Autocomplete($("#city_name")[0], { types: ['(cities)'] });
+	$scope.autocomplete.setComponentRestrictions({'country': ['ps', 'il']});
 	google.maps.event.addListener($scope.autocomplete, 'place_changed', getAddress);
 
 	$scope.init = function(witness) {

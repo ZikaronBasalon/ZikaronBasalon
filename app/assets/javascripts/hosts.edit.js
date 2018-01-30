@@ -24,6 +24,8 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 		}
 
 		$scope.autocomplete = new google.maps.places.Autocomplete($("#city")[0], options);
+    $scope.autocomplete.setComponentRestrictions({'country': ['ps', 'il']});
+
 		google.maps.event.addListener($scope.autocomplete, 'place_changed', getAddress);
 	}
 
