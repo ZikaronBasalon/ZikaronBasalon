@@ -18,7 +18,7 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 	$scope.otherLanguageVisible = false;
 
 	$scope.initAutocomplete = function(iso) {
-		var options = { types: ['cities', 'locality', 'political'] };
+		var options = { types: ['(cities)'] };
 		if(iso) {
 			options.componentRestrictions = { country: iso }
 		}
