@@ -68,33 +68,6 @@
   </head>
   <body class="<%= I18n.locale %>">
     <div id="locale" class="<%= I18n.locale %>"></div>
-    
-    <script>
-    window.fbAsyncInit = function() {
-        FB.init({ 
-          appId: <%= @fb_app_id %>,
-          status: true, 
-          cookie: true, 
-          xfbml: true,
-          version: 'v2.8'
-        });
-    };
-      // window.fbAsyncInit = function() {
-      //   FB.init({
-      //     appId      : '723889947773479',
-      //     xfbml      : true,
-      //     version    : 'v2.8'
-      //   });
-      // };
-
-      (function(d, s, id){
-         var js, fjs = d.getElementsByTagName(s)[0];
-         if (d.getElementById(id)) {return;}
-         js = d.createElement(s); js.id = id;
-         js.src = "//connect.facebook.net/en_US/sdk.js";
-         fjs.parentNode.insertBefore(js, fjs);
-       }(document, 'script', 'facebook-jssdk'));
-    </script>
 
     <%= render "layouts/header" %>
     <div id="main-container" class="container-fluid">
@@ -120,5 +93,24 @@
           <button class="btn btn-primary" type="button" ng-click="ok()">{{modalData.translations.stay}}</button>
           <button class="btn btn-warning" type="button" ng-click="cancel()">{{modalData.translations.change}}</button>
       </div>
+  </script>
+  <script>
+  window.fbAsyncInit = function() {
+      FB.init({
+        appId: <%= @fb_app_id %>,
+        status: true,
+        cookie: true,
+        xfbml: true,
+        version: 'v2.8'
+      });
+  };
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
   </script>
 </html>
