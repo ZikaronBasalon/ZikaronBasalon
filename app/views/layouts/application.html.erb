@@ -20,7 +20,6 @@
     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.2/ui-bootstrap.min.js"></script> -->
     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.2/ui-bootstrap-tpls.min.js"></script> -->
     <%= javascript_include_tag "application", "#{controller_name}.#{action_name}" if ZikaronBasalon::Application.assets.find_asset("#{controller.controller_name}.#{action_name}.js") %>
-    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&language=#{I18n.locale}&key=AIzaSyDSOmyr4VMv2qvWLO12OuYqH7o-67DRANk" %>
     <!-- prod: AIzaSyDSOmyr4VMv2qvWLO12OuYqH7o-67DRANk -->
     <!-- staging: AIzaSyDJ1u3XlTGQDKn6dR3vOH5bVswXBmaGiLM -->
     <!-- staging: AIzaSyBNwaldeJS-x1mLdEORdtF9wRmYVwTb8V8 -->
@@ -141,4 +140,6 @@
   // End Rollbar Snippet
   */
   </script>
+  <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&language=#{I18n.locale}&key=AIzaSyDSOmyr4VMv2qvWLO12OuYqH7o-67DRANk" %>
+
 </html>
