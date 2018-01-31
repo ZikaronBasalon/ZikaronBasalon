@@ -30,11 +30,14 @@ app.controller('ManagerIndexController', ['$scope','$http', function($scope, $ht
     // $scope.autocomplete = new google.maps.places.Autocomplete(input ,{ types: ['(cities)'] });
     $scope.autocomplete = new google.maps.places.Autocomplete(input);
     // $scope.autocomplete.setComponentRestrictions({'country': ['ps', 'il']});
-    $scope.autocomplete.addListener('place_changed',$scope.placeChanged);
+    $scope.autocomplete.addListener('place_changed', getAddress);
   }
 
-  $scope.placeChanged = function() {
-  	$scope.city = getPlaceLocality($scope.autocomplete.getPlace());
+  function getAddress() {
+    $scope.result = $scope.autocomplete.getPlace();
+    if($scope.result && $scope.result.vicinity.indexOf(',') === -1) {
+      $scope.city = $scope.result.vicinity;
+    }
     $scope.$apply();
   }
 

@@ -182,7 +182,7 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
   function getAddress() {
 		$scope.result = $scope.autocomplete.getPlace();
 		$scope.cityFromList = true;
-		if($scope.result) {
+		if($scope.result && $scope.result.vicinity.indexOf(',') === -1) {
       // $scope.host.city_name = getAddressComponent($scope.result, "locality");
 			$scope.host.city_name = $scope.result.vicinity;// getAddressComponent($scope.result, "locality");
 		}
