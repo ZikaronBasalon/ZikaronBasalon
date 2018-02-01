@@ -52,7 +52,7 @@
 
           <div class="form-group">
             <select class="form-control" ng-model="search.has_survivor"
-                    ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.teamed' %>', v: true }, { n: '<%= t 'shared.not_teamed' %>', v: false }]">
+                    ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.teamed' %>', v: true }, { n: '<%= t 'shared.not_teamed' %>', v: false }, { n: '<%= t 'shared.not_interested' %>', v: -1 }, { n: '<%= t 'shared.archived' %>', v: -2 }]">
               <option value=""><%= t 'shared.has_survivor' %></option>
             </select>
           </div>  
