@@ -188,10 +188,20 @@
                     <label>
                       <input type="checkbox"
                              name="external_assignment"
-                             ng-model="witness.external_assignment">
+                             ng-model="witness.external_assignment"
+                             ng-change="confirmExternalAssignment()">
                       <%= t 'profile.labels.external_assignment_explain' %>
                     </label>
                   </div>                  
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox"
+                             name="archived"
+                             ng-model="witness.archived"
+                             ng-change="confirmArchive()">
+                      <%= t 'profile.labels.archived_explain' %>
+                    </label>
+                  </div>
                 </div>
               </div>
             <% end %>   

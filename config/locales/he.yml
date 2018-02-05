@@ -342,6 +342,7 @@ he:
       special_population: "מוכנות לאוכ' מיוחדות"
       external_assignment: "לא מעוניין להתארח השנה"
       external_assignment_explain: "איש העדות לא מעוניין להתארח השנה"
+      archived_explain: "איש העדות לא יתארח בעתיד"
     personal_details: "פרטים אישיים"
     evening_details: "פרטים על הערב"
     manager_actions: "פעולות מוביל קהילה"

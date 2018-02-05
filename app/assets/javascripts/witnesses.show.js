@@ -27,7 +27,8 @@ app.controller('WitnessShowController', ['$scope', '$http', function($scope, $ht
 				witness_type: $scope.witness.witness_type,
 				special_population: $scope.witness.special_population,
 				seminar_required: $scope.witness.seminar_required,
-				external_assignment: $scope.witness.external_assignment
+				external_assignment: $scope.witness.external_assignment,
+				archived: $scope.witness.archived
 			}
   	}).then(function success(response) {
   		$scope.success = true; 
@@ -36,5 +37,17 @@ app.controller('WitnessShowController', ['$scope', '$http', function($scope, $ht
 
 	$scope.commentCallback = function(response) {
 		$scope.comments.push(response.data);
+	}
+
+	$scope.confirmExternalAssignment = function() {
+		if ($scope.witness.external_assignment) {
+			$scope.witness.external_assignment = confirm('בטוח?')
+		}
+	}
+
+	$scope.confirmArchive = function() {
+		if ($scope.witness.archived) {
+			$scope.witness.archived = confirm('כדי	לשמור על סדר, חובה להזין מדוע איש/אשת העדות לא מעוניין להשתתף השנה');
+		}
 	}
 }]);
