@@ -174,9 +174,8 @@
         <div class="form-group">
           <label><%= t '.event_date' %></label>
           <p class="help-block"><%= t '.event_date_help_block' %></p>
-
-          <input type="date" class="form-control"  
-                 ng-model="host.event_date" datepicker />
+          <date-picker style="direction: ltr;" ng-show="showDatePicker" ng-model="host.event_date" format-date="formatDate" parse-date="parseDate" on-date-selected="showDatePicker = !showDatePicker"></date-picker>
+          <input ng-model="host.event_date" ng-show="!showDatePicker" ng-click="showDatePicker = !showDatePicker">
         </div>
 
         <div class="form-group">

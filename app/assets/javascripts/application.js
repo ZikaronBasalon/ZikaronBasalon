@@ -18,6 +18,7 @@
 //= require external/lodash.min.js
 //= require external/ui-bootstrap.min.js
 //= require external/ui-bootstrap-tpls.min.js
+//= require external/angular-date-picker.js
 //= require jquery_ujs
 // require jquery.ui.autocomplete
 // require jquery.ui.datepicker

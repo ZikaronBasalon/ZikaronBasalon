@@ -38,7 +38,7 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 		$scope.host = host;
 		$scope.organization = !!$scope.host.org_name;
 		$scope.countries = countries;
-		$scope.host.event_date = new Date($scope.host.event_date);
+		$scope.host.event_date = $scope.formatDate(new Date($scope.host.event_date));
 		$scope.host.event_time = $scope.host.event_time ? new Date($scope.host.event_time): null;
 		if($scope.host.city) {
 			$scope.host.city_name = $scope.host.city.name;
@@ -60,6 +60,22 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 			}
 		}
 	}
+
+  $scope.formatDate = function (date) {
+      function pad(n) {
+          return n < 10 ? '0' + n : n;
+      }
+
+      return date && pad(date.getDate() + '/' +
+        pad(date.getMonth() + 1)  + '/' +
+        date.getFullYear());
+  };
+
+  $scope.parseDate = function (s) {
+      var tokens = /^(\d{2})-(\d{2})-(\d{4})$/.exec(s);
+
+      return tokens && new Date(tokens[1], tokens[2] - 1, tokens[3]);
+  };
 
 	$scope.orgChanged = function(value) {
     if (value === 'false') {
