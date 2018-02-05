@@ -10,7 +10,7 @@
 
   <span us-spinner class="zb-spinner" ng-if="loading" spinner-on="loading"></span>
   <!-- View toggle buttons -->
-  <% if I18n.locale == :he %>
+  <% if I18n.locale == :he || true %>
     <div class="text-center margin-bottom-20">
       <div class="view-toggle">
         <div ng-if="currentUser.meta.witness_only == false" ng-class="{ 'selected': activeView === 'hosts' }"
