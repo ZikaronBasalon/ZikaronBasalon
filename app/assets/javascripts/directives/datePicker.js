@@ -9,7 +9,7 @@ app.directive("datepicker", function () {
         });
       };
       var options = {
-        dateFormat: "yy-mm-dd",
+        dateFormat: "dd-mm-YYYY",
         isRTL: true,
         onSelect: function (dateText) {
           updateModel(dateText);
