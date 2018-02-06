@@ -32,6 +32,7 @@ ZikaronBasalon::Application.routes.draw do
     resources :invites, only: [:create, :update, :destroy]
     
     match "pages/home", :to => 'pages#home', as: :host_search
+    get "pages/privacy_policy"
     get "pages/welcome"
     root :to => 'pages#welcome'
   end
