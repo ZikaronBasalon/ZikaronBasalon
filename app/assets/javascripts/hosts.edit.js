@@ -66,9 +66,9 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
           return n < 10 ? '0' + n : n;
       }
 
-      return date && pad(date.getDate() + '/' +
-        pad(date.getMonth() + 1)  + '/' +
-        date.getFullYear());
+      return date && pad(date.getUTCDate() + '-' +
+        pad(date.getUTCMonth() + 1)  + '-' +
+        date.getUTCFullYear());
   };
 
   $scope.parseDate = function (s) {
