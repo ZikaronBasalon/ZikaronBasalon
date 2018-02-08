@@ -28,7 +28,8 @@ app.controller('WitnessShowController', ['$scope', '$http', function($scope, $ht
 				special_population: $scope.witness.special_population,
 				seminar_required: $scope.witness.seminar_required,
 				external_assignment: $scope.witness.external_assignment,
-				archived: $scope.witness.archived
+				archived: $scope.witness.archived,
+				need_to_followup: $scope.witness.need_to_followup
 			}
   	}).then(function success(response) {
   		$scope.success = true; 
