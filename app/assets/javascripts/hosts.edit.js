@@ -62,19 +62,26 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 	}
 
   $scope.formatDate = function (date) {
-      function pad(n) {
-          return n < 10 ? '0' + n : n;
-      }
+    function pad(n) {
+      return n < 10 ? '0' + n : n;
+    }
 
+    var locale = document.getElementById('locale').className;
+    if (locale == 'he') {
+      return date && pad(date.getDate() + '-' +
+      pad(date.getMonth() + 1)  + '-' +
+      date.getFullYear());
+    } else {
       return date && pad(date.getUTCDate() + '-' +
-        pad(date.getUTCMonth() + 1)  + '-' +
-        date.getUTCFullYear());
+      pad(date.getUTCMonth() + 1)  + '-' +
+      date.getUTCFullYear());
+    }
   };
 
   $scope.parseDate = function (s) {
       var tokens = /^(\d{2})-(\d{2})-(\d{4})$/.exec(s);
 
-      return tokens && new Date(tokens[1], tokens[2] - 1, tokens[3]);
+      return tokens && new Date(tokens[3], tokens[2] - 1, tokens[1]);
   };
 
 	$scope.orgChanged = function(value) {
