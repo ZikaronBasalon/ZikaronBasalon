@@ -327,6 +327,7 @@ en:
       external_assignment: "מעוניין להשתתף השנה"
       external_assignment_explain: "איש העדות לא מעוניין להתארח השנה"
       archived_explain: "איש העדות לא מעוניין להתארח השנה"
+      need_to_followup_explain: "could not be reached - need to followup"
     personal_details: "פרטים אישיים"
     evening_details: "פרטים על הערב"
     manager_actions: "פעולות מוביל קהילה"
