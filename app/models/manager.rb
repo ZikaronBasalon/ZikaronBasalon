@@ -12,26 +12,26 @@ class Manager < ActiveRecord::Base
 	validates_uniqueness_of :temp_email
 
   def get_hosts(page, filter, query, sort, has_manager, has_survivor, is_org, language, in_future, has_invites, reverse_ordering)
-   sort = 'created_at' if sort.blank?
-   sort_order = !reverse_ordering.to_i.zero? ? " desc" : " asc"
-   hosts = Host.includes(:city, :user, :witness).order(sort + sort_order)
-   hosts = hosts.where(filter)
-   hosts = hosts.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
-   hosts = hosts.where(:active => true) unless user.admin?
-   hosts = hosts.where(concept: concept).select{ |h| h.has_witness } if concept
-   hosts = hosts.select{ |h| host_in_filter(h, query, has_manager, has_survivor, is_org, language, in_future, has_invites) }
-   hosts = paginate(hosts, page) if page
-   hosts
+    sort = 'created_at' if sort.blank?
+    sort_order = !reverse_ordering.to_i.zero? ? " desc" : " asc"
+    hosts = Host.includes(:city, :user, :witness).order(sort + sort_order)
+    hosts = hosts.where(filter)
+    hosts = hosts.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
+    hosts = hosts.where(:active => true) unless user.admin?
+    hosts = hosts.where(concept: concept).select{ |h| h.has_witness } if concept
+    hosts = hosts.select{ |h| host_in_filter(h, query, has_manager, has_survivor, is_org, language, in_future, has_invites) }
+    hosts = paginate(hosts, page) if page
+    hosts
   end
 
-  def get_witnesses(page, filter, query, sort, has_manager, has_host, language, external_assignment)
-   sort = 'created_at' if sort.blank?
-   witnesses = Witness.includes(:city, :host).order(sort + " desc").where(filter)
-   witnesses = witnesses.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
-   witnesses = witnesses.where(concept: concept) if concept
-   witnesses = witnesses.select{ |w| witness_in_filter(w, query, has_manager, has_host, language, external_assignment) }
-   witnesses = paginate(witnesses, page) if page
-   witnesses
+  def get_witnesses(page, filter, query, sort, has_manager, has_host, language, external_assignment, archived, need_to_followup)
+    sort = 'created_at' if sort.blank?
+    witnesses = Witness.includes(:city, :host).order(sort + " desc").where(filter)
+    witnesses = witnesses.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
+    witnesses = witnesses.where(concept: concept) if concept
+    witnesses = witnesses.select{ |w| witness_in_filter(w, query, has_manager, has_host, language, external_assignment, archived, need_to_followup) }
+    witnesses = paginate(witnesses, page) if page
+    witnesses
   end
 
   def get_cities
@@ -70,13 +70,15 @@ class Manager < ActiveRecord::Base
     in_filter
   end
 
-  def witness_in_filter(w, query, has_manager, has_host, language, external_assignment)
+  def witness_in_filter(w, query, has_manager, has_host, language, external_assignment, archived, need_to_followup)
     in_filter = true
     in_filter = in_filter && w.in_language_filter(language)
     in_filter = in_filter && witness_in_query(w,query) if query.present?
     in_filter = in_filter && obj_has_manager(w, has_manager) if has_manager.present?
     in_filter = in_filter && witness_has_host(w, has_host) if has_host.present?
     in_filter = in_filter && witness_external_assignment(w, external_assignment) if external_assignment.present?
+    in_filter = in_filter && witness_archived(w, archived) if archived.present?
+    in_filter = in_filter && witness_need_to_followup(w, need_to_followup) if need_to_followup.present?
     in_filter
   end
 
@@ -106,6 +108,22 @@ class Manager < ActiveRecord::Base
       return w.external_assignment
     else
       return !w.external_assignment
+    end 
+  end
+
+  def witness_archived(w, archived)
+    if archived === "true"
+      return w.archived
+    else
+      return !w.archived
+    end 
+  end
+
+  def witness_need_to_followup(w, need_to_followup)
+    if need_to_followup === "true"
+      return w.need_to_followup
+    else
+      return !w.need_to_followup
     end 
   end
 

@@ -32,7 +32,9 @@ class ManagersController < ApplicationController
                                         has_manager,
                                         has_host,
                                         language,
-                                        external_assignment)
+                                        external_assignment,
+                                        archived,
+                                        need_to_followup)
 
     @total_hosts = @hosts.total_count
     @total_witnesses = @witnesses.total_count
@@ -112,7 +114,9 @@ class ManagersController < ApplicationController
                                         has_manager,
                                         has_host,
                                         language,
-                                        external_assignment)
+                                        external_assignment,
+                                        archived,
+                                        need_to_followup)
     send_data Witness.to_csv(@witnesses), :disposition => "attachment; filename=witnesses.csv"
   end
 
@@ -184,5 +188,13 @@ class ManagersController < ApplicationController
 
     def external_assignment
       params[:external_assignment]
+    end
+
+    def archived
+      params[:archived]
+    end
+
+    def need_to_followup
+      params[:need_to_followup]
     end
 end

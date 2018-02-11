@@ -104,6 +104,7 @@ he:
     teamed: "צוות"
     not_teamed: "לא צוות"
     archived: "ארכיון"
+    need_to_followup: "להתקשר שוב"
     language: "שפה"
     manager: "מוביל"
     id: "ID"

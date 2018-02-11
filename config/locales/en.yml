@@ -108,6 +108,7 @@ en:
     teamed: "teamed"
     not_teamed: "not teamed"
     archived: "archived"
+    need_to_followup: "followup"
     forgot_password: "Forgot your password?"
     has_host: "Assign to host"
     is_org: "Belongs to organization"
