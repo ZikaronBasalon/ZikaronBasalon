@@ -29,7 +29,7 @@ class Manager < ActiveRecord::Base
     witnesses = Witness.includes(:city, :host).order(sort + " desc").where(filter)
     witnesses = witnesses.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
     witnesses = witnesses.where(concept: concept) if concept
-    witnesses = witnesses.select{ |w| witness_in_filter(w, query, has_manager, has_host, language, external_assignment, archived, need_to_followup) }
+    witnesses = witnesses.select{ |w| witness_in_filter(w, query, has_manager, has_host, language) }
     witnesses = paginate(witnesses, page) if page
     witnesses
   end
@@ -70,15 +70,12 @@ class Manager < ActiveRecord::Base
     in_filter
   end
 
-  def witness_in_filter(w, query, has_manager, has_host, language, external_assignment, archived, need_to_followup)
+  def witness_in_filter(w, query, has_manager, has_host, language)
     in_filter = true
     in_filter = in_filter && w.in_language_filter(language)
     in_filter = in_filter && witness_in_query(w,query) if query.present?
     in_filter = in_filter && obj_has_manager(w, has_manager) if has_manager.present?
     in_filter = in_filter && witness_has_host(w, has_host) if has_host.present?
-    in_filter = in_filter && witness_external_assignment(w, external_assignment) if external_assignment.present?
-    in_filter = in_filter && witness_archived(w, archived) if archived.present?
-    in_filter = in_filter && witness_need_to_followup(w, need_to_followup) if need_to_followup.present?
     in_filter
   end
 
@@ -92,7 +89,7 @@ class Manager < ActiveRecord::Base
       return obj.city.managers.count > 0
     else
       return obj.city.managers.count == 0
-    end 
+    end
   end
 
   def witness_has_host(w, has_host)
@@ -100,31 +97,7 @@ class Manager < ActiveRecord::Base
       return w.has_host
     else
       return !w.has_host
-    end 
-  end
-
-  def witness_external_assignment(w, external_assignment)
-    if external_assignment === "true"
-      return w.external_assignment
-    else
-      return !w.external_assignment
-    end 
-  end
-
-  def witness_archived(w, archived)
-    if archived === "true"
-      return w.archived
-    else
-      return !w.archived
-    end 
-  end
-
-  def witness_need_to_followup(w, need_to_followup)
-    if need_to_followup === "true"
-      return w.need_to_followup
-    else
-      return !w.need_to_followup
-    end 
+    end
   end
 
   def host_has_witness(h, has_witness)
@@ -132,7 +105,7 @@ class Manager < ActiveRecord::Base
       return !h.witness.nil?
     else
       return h.witness.nil?
-    end 
+    end
   end
 end
 
