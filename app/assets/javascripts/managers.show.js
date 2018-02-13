@@ -76,23 +76,23 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
     delete $scope.search.witness['external_assignment'];
     delete $scope.search.witness['archived'];
     delete $scope.search.witness['need_to_followup'];
+    delete $scope.search.witness['has_host'];
   }
   function filter(page) {
     if (!$scope.loading) reset_unused_parameters();
     if (typeof $scope.search.available_day_search !== 'undefined') {
       $scope.search.witness[$scope.search.available_day_search] = true;
     }
-    if ($scope.search.witness.has_host == -1) {
+    if ($scope.search.w_has_host == -1) {
       $scope.search.witness.external_assignment = true;
-      delete $scope.search.witness.has_host;
     }
-    else if ($scope.search.witness.has_host == -2) {
+    else if ($scope.search.w_has_host == -2) {
       $scope.search.witness.archived = true;
-      delete $scope.search.witness.has_host;
     }
-    else if ($scope.search.witness.has_host == -3) {
+    else if ($scope.search.w_has_host == -3) {
       $scope.search.witness.need_to_followup = true;
-      delete $scope.search.witness.has_host;
+    } else {
+      $scope.search.witness.has_host = $scope.search.w_has_host;
     }
     var params = {
       filter: {
