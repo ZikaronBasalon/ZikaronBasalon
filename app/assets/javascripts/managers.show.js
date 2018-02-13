@@ -82,7 +82,7 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
 
   function filter(page) {
     $scope.loading = true;
-    if (!$scope.loading) reset_unused_parameters();
+    reset_unused_parameters();
     if (typeof $scope.search.available_day_search !== 'undefined') {
       $scope.search.witness[$scope.search.available_day_search] = true;
     }
