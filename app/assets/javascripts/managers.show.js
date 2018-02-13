@@ -128,11 +128,13 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
           $scope.totalHosts = response.data.total_hosts;
           $scope.totalWitnesses = response.data.total_witnesses;
           $scope.loading = false;
+          $scope.loadingGet = null;
         })
       .catch(
         function(e) {
           $scope.loading = false;
           alert(e.message);
+          $scope.loadingGet = null;
       });
     }
     $scope.loadingGet=true;
