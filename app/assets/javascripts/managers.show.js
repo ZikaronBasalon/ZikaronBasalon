@@ -77,7 +77,7 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
     delete $scope.search.witness['external_assignment'];
     delete $scope.search.witness['archived'];
     delete $scope.search.witness['need_to_followup'];
-    delete $scope.search.witness['has_host'];
+    delete $scope.search['has_host'];
   }
 
   function filter(page) {
