@@ -66,27 +66,33 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
     filter($scope.pagination.currentPage);
   }
   function reset_unused_parameters() {
-    delete $scope.search.witness["available_day1"];
-    delete $scope.search.witness["available_day2"];
-    delete $scope.search.witness["available_day3"];
-    delete $scope.search.witness["available_day4"];
-    delete $scope.search.witness["available_day5"];
-    delete $scope.search.witness["available_day6"];
-    delete $scope.search.witness["available_day7"];
-    delete $scope.search.witness["external_assignment"];
+    delete $scope.search.witness['available_day1'];
+    delete $scope.search.witness['available_day2'];
+    delete $scope.search.witness['available_day3'];
+    delete $scope.search.witness['available_day4'];
+    delete $scope.search.witness['available_day5'];
+    delete $scope.search.witness['available_day6'];
+    delete $scope.search.witness['available_day7'];
+    delete $scope.search.witness['external_assignment'];
+    delete $scope.search.witness['archived'];
+    delete $scope.search.witness['need_to_followup'];
   }
   function filter(page) {
-    reset_unused_parameters();
+    if (!$scope.loading) reset_unused_parameters();
     if (typeof $scope.search.available_day_search !== 'undefined') {
       $scope.search.witness[$scope.search.available_day_search] = true;
     }
-    if ($scope.search.has_host == -1) {
-      $scope.search.external_assignment = true;
-      delete $scope.search.has_host;
+    if ($scope.search.witness.has_host == -1) {
+      $scope.search.witness.external_assignment = true;
+      delete $scope.search.witness.has_host;
     }
-    if ($scope.search.has_host == false) {
-      $scope.search.external_assignment = false;
-      $scope.search.has_host = false;
+    else if ($scope.search.witness.has_host == -2) {
+      $scope.search.witness.archived = true;
+      delete $scope.search.witness.has_host;
+    }
+    else if ($scope.search.witness.has_host == -3) {
+      $scope.search.witness.need_to_followup = true;
+      delete $scope.search.witness.has_host;
     }
     var params = {
       filter: {
@@ -102,20 +108,16 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
       has_manager: $scope.search.has_manager,
       has_host: $scope.search.has_host,
       has_survivor: $scope.search.has_survivor,
-      external_assignment: $scope.search.external_assignment,
       is_org: $scope.search.is_org,
       event_language: $scope.search.event_language,
       in_future: $scope.search.in_future,
       has_invites: $scope.search.has_invites
     };
-    if ($scope.search.external_assignment == true) {
-      $scope.search.has_host = -1
-      delete $scope.search.external_assignment;
-    }
     $scope.loading = true;
 
     $http.get('/managers/' + $scope.currentUser.meta.id + '.json' + '?' + $.param(params))
-  .then(function(response) {
+  .then(
+    function(response) {
       $scope.hosts = JSON.parse(response.data.hosts);
       $scope.witnesses = JSON.parse(response.data.witnesses);
       $scope.pagination.currentPage = response.data.page;

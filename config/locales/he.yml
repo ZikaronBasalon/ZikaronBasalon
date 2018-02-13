@@ -103,7 +103,9 @@ he:
     doesnt_need: "לא צריך"
     teamed: "צוות"
     not_teamed: "לא צוות"
+    external_assignment: "לא מעוניין"
     archived: "ארכיון"
+    need_to_followup: "להתקשר שוב"
     language: "שפה"
     manager: "מוביל"
     id: "ID"
@@ -343,6 +345,7 @@ he:
       external_assignment: "לא מעוניין להתארח השנה"
       external_assignment_explain: "איש העדות לא מעוניין להתארח השנה"
       archived_explain: "איש העדות לא יתארח בעתיד"
+      need_to_followup_explain: 'לא יכולנו לתפוס בטלפון - צריך לנסות שוב'
     personal_details: "פרטים אישיים"
     evening_details: "פרטים על הערב"
     manager_actions: "פעולות מוביל קהילה"
