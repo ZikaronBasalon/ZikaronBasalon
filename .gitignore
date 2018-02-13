@@ -22,6 +22,8 @@
 
 .byebug_history
 
+database.yml
+
 latest.dump
 
 *.dump*
