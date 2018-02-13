@@ -1,6 +1,5 @@
 class Region < ActiveRecord::Base
   attr_accessible :name
-
-  has_many :cities
-  has_many :hosts, through: :cities
+  belongs_to :country
+  has_many :cities, :through => :region_cities
 end

@@ -12,6 +12,9 @@ ZikaronBasalon::Application.routes.draw do
       get :export_guests, on: :member
     end
 
+
+    resources :regions
+
     resources :guests
     resources :sessions, only: [:new, :create]
     resources :users, only: [:new] do
