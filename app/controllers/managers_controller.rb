@@ -31,10 +31,7 @@ class ManagersController < ApplicationController
                                         params[:witness_sort],
                                         has_manager,
                                         has_host,
-                                        language,
-                                        external_assignment,
-                                        archived,
-                                        need_to_followup)
+                                        language)
 
     @total_hosts = @hosts.total_count
     @total_witnesses = @witnesses.total_count

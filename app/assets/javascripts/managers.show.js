@@ -14,7 +14,7 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
     host: null
   };
 
-  $scope.activeView = 'witnesses'; 
+  $scope.activeView = 'witnesses';
   $scope.formatBool = formatBool;
   $scope.formatDate = formatDate;
   $scope.formatDateTime = formatDateTime;
@@ -23,7 +23,7 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
   $scope.witnessTypes = witnessTypes;
   $scope.pagination = {
     currentPage: 1
-  }
+  };
 
   $scope.sortProp = 'created_at';
 
@@ -52,19 +52,20 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
         filter(1);
       }
     }, 2000), true);
-  }
+  };
 
   $scope.editHost = function(host) {
     window.open('/hosts/' + host.id, '_blank');
-  }
+  };
 
   $scope.editWitness = function(witness) {
     window.open('/witnesses/' + witness.id, '_blank');
-  }
+  };
 
   $scope.pageChanged = function() {
     filter($scope.pagination.currentPage);
-  }
+  };
+
   function reset_unused_parameters() {
     delete $scope.search.witness['available_day1'];
     delete $scope.search.witness['available_day2'];
@@ -78,7 +79,9 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
     delete $scope.search.witness['need_to_followup'];
     delete $scope.search.witness['has_host'];
   }
+
   function filter(page) {
+    $scope.loading = true;
     if (!$scope.loading) reset_unused_parameters();
     if (typeof $scope.search.available_day_search !== 'undefined') {
       $scope.search.witness[$scope.search.available_day_search] = true;
@@ -92,8 +95,9 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
     else if ($scope.search.w_has_host == -3) {
       $scope.search.witness.need_to_followup = true;
     } else {
-      $scope.search.witness.has_host = $scope.search.w_has_host;
+      $scope.search.has_host = $scope.search.w_has_host;
     }
+
     var params = {
       filter: {
         host: getFilterKeys($scope.search.host),
@@ -113,18 +117,25 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
       in_future: $scope.search.in_future,
       has_invites: $scope.search.has_invites
     };
-    $scope.loading = true;
 
-    $http.get('/managers/' + $scope.currentUser.meta.id + '.json' + '?' + $.param(params))
-  .then(
-    function(response) {
-      $scope.hosts = JSON.parse(response.data.hosts);
-      $scope.witnesses = JSON.parse(response.data.witnesses);
-      $scope.pagination.currentPage = response.data.page;
-      $scope.totalHosts = response.data.total_hosts;
-      $scope.totalWitnesses = response.data.total_witnesses;
-      $scope.loading = false;
-    });
+    if (!$scope.loadingGet) {
+      $http.get('/managers/' + $scope.currentUser.meta.id + '.json' + '?' + $.param(params))
+      .then(
+        function(response) {
+          $scope.hosts = JSON.parse(response.data.hosts);
+          $scope.witnesses = JSON.parse(response.data.witnesses);
+          $scope.pagination.currentPage = response.data.page;
+          $scope.totalHosts = response.data.total_hosts;
+          $scope.totalWitnesses = response.data.total_witnesses;
+          $scope.loading = false;
+        })
+      .catch(
+        function(e) {
+          $scope.loading = false;
+          alert(e.message);
+      });
+    }
+    $scope.loadingGet=true;
   }
 
   $scope.export_hosts = function() {
@@ -146,7 +157,7 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
       '/managers/' + $scope.currentUser.meta.id + '/export_hosts' + '?' + $.param(params),
       '_blank' // <- This is what makes it open in a new window.
     );
-  }
+  };
 
   $scope.export_witnesses = function() {
     var params = {
@@ -164,15 +175,14 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
       '/managers/' + $scope.currentUser.meta.id + '/export_witnesses' + '?' + $.param(params),
       '_blank' // <- This is what makes it open in a new window.
     );
-  }
+  };
 
   $scope.export_guests = function() {
     window.open(
       '/managers/' + $scope.currentUser.meta.id + '/export_guests',
       '_blank' // <- This is what makes it open in a new window.
     );
-  }
-
+  };
 
   function getFilterKeys(filterObj) {
     var filtered = {};
@@ -184,36 +194,34 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
     delete filtered.query;
     return filtered;
   }
-    
+
   $scope.sort = function(arr) {
     //return _.sortBy(arr, $scope.sortProp).reverse();
-  }
+  };
 
   $scope.isAccesible = function(host) {
     return host.floor === 0 || host.elevator;
-  }
+  };
 
   $scope.onViewToggle = function(view) {
     $scope.activeView = view;
-  }
+  };
 
   $scope.setSortProp = function(prop) {
     $scope.search.reverseOrdering = !$scope.search.reverseOrdering;
     $scope.sortProp = prop;
-    filter(1)
-  }
+    filter(1);
+  };
 
   $scope.setSortPropWitness = function(prop) {
     $scope.search.reverseOrdering = !$scope.search.reverseOrdering;
     $scope.witnessSortProp = prop;
-    filter(1)
-  }
+    filter(1);
+  };
 
   $scope.getManager = function(obj) {
-    return obj.city && obj.city.managers
-      ? obj.city.managers[0]
-      : {};
-  }
+    return obj.city && obj.city.managers ? obj.city.managers[0] : {};
+  };
 
   $scope.deleteHost = function(host) {
     var confirmMessage = !!host.witness ? 'למארח יש ציוות. ' : '';
@@ -228,9 +236,9 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
             return host.id !== response.data.host.id;
           });
         }
-      })
-    }
-  }
+      });
+    };
+  };
 
   $scope.deleteWitness = function(witness) {
     var res = confirm("בטוח בטוח?");
@@ -242,9 +250,9 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
             return witness.id !== response.data.witness.id;
           });
         }
-      })
+      });
     }
-  }
+  };
 
   $scope.showSuccessMessage = function() {
     $scope.success = true;
@@ -252,7 +260,7 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
       $scope.success = false;
       $scope.$apply();
     }, 3000);
-  }
+  };
 
   function activeFilter(filter) {
     return !_.isUndefined(filter) && !_.isNull(filter);
@@ -261,5 +269,5 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
   $scope.contactWitnessDue = function(host) {
     return host.has_witness && !host.contacted_witness &&
     ((new Date() - new Date(host.assignment_time)) / (1000*60*60*24)) > 2
-  }
+  };
 }]);
