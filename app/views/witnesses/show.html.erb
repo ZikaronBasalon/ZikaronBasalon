@@ -11,7 +11,7 @@
         <div class="panel-heading">
            <div class="info-title"><%= t 'profile.personal_details' %></div>
            <div>
-            <a href="/witnesses/{{ witness.id }}/edit">
+            <a href="/<%=I18n.locale.to_s%>/witnesses/{{ witness.id }}/edit">
               <%= t 'profile.labels.edit' %>
             </a>
            </div>
@@ -132,7 +132,7 @@
             <div class="field-group">
               <div class="info-label"><%= t 'profile.labels.host' %></div>
               <div ng-if="witness.host" class="cancel-assignment">
-                <a ng-href="/hosts/{{witness.host.id}}">{{ witness.host.user.full_name }}</a>&nbsp;
+                <a ng-href="/<%=I18n.locale.to_s%>/hosts/{{witness.host.id}}">{{ witness.host.user.full_name }}</a>&nbsp;
                 <button class="btn btn-warning">
                   <%= link_to 'בטל ציוות', unassign_witness_path(@witness), :confirm => 'בטוח בטוח? למען הסדר הטוב, לאחר ביטול הציוות אנא הוספ/י הערה בדף זה המפרטת את סיבת הביטול.' %>
                 </button>
