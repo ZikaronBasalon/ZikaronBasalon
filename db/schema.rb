@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20180203231902) do
+ActiveRecord::Schema.define(:version => 20180208053011) do
 
   create_table "cities", :force => true do |t|
     t.string   "name"
@@ -197,6 +197,8 @@ ActiveRecord::Schema.define(:version => 20180203231902) do
     t.boolean  "available_day5"
     t.boolean  "available_day6"
     t.boolean  "archived",              :default => false
+    t.boolean  "need_to_followup",      :default => false
+
   end
 
 end

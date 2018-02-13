@@ -202,6 +202,14 @@
                       <%= t 'profile.labels.archived_explain' %>
                     </label>
                   </div>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox"
+                             name="need_to_followup"
+                             ng-model="witness.need_to_followup">
+                      <%= t 'profile.labels.need_to_followup_explain' %>
+                    </label>
+                  </div>
                 </div>
               </div>
             <% end %>   

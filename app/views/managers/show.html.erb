@@ -40,7 +40,7 @@
                   ng-options="o.id as o.name for o in cities">
             <option value=""><%= t 'shared.city' %></option>
           </select>
-        </div> 
+        </div>
 
         <% if I18n.locale == :he %>
           <div class="form-group">
@@ -48,14 +48,14 @@
                     ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.needs' %>', v: true }, { n: '<%= t 'shared.doesnt_need' %>', v: false }]">
               <option value=""><%= t 'shared.survivor_needed' %></option>
             </select>
-          </div> 
+          </div>
 
           <div class="form-group">
             <select class="form-control" ng-model="search.has_survivor"
-                    ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.teamed' %>', v: true }, { n: '<%= t 'shared.not_teamed' %>', v: false }, { n: '<%= t 'shared.not_interested' %>', v: -1 }, { n: '<%= t 'shared.archived' %>', v: -2 }]">
+                    ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.teamed' %>', v: true }, { n: '<%= t 'shared.not_teamed' %>', v: false }, { n: '<%= t 'shared.external_assignment' %>', v: -1 }, { n: '<%= t 'shared.archived' %>', v: -2 }]">
               <option value=""><%= t 'shared.has_survivor' %></option>
             </select>
-          </div>  
+          </div> 
         <% end %>
 
         <div class="form-group">
@@ -63,7 +63,7 @@
                   ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.yes' %>', v: true }, { n: '<%= t 'shared.no' %>', v: false }]">
             <option value=""><%= t 'shared.host_contacted' %></option>
           </select>
-        </div> 
+        </div>
 
         <div class="form-group">
           <select class="form-control" ng-model="search.event_language">
@@ -76,7 +76,7 @@
             <option value="spanish">Español</option>
             <option value="other"><%= t 'shared.other' %></option>
           </select>
-        </div> 
+        </div>
 
         <% if current_user.any_admin? %>
 
@@ -85,14 +85,14 @@
                     ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.has_manager_true' %>', v: true }, { n: '<%= t 'shared.has_manager_false' %>', v: false }]">
               <option value=""><%= t 'shared.has_manager' %></option>
             </select>
-          </div>  
+          </div>
 
           <div class="form-group">
             <select class="form-control" ng-model="search.host.received_registration_mail"
                      ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.yes' %>', v: true }, { n: '<%= t 'shared.no' %>', v: false }]">
               <option value=""><%= t 'shared.finished_registration' %></option>
             </select>
-          </div>  
+          </div>
 
 
         <% end %>
@@ -102,7 +102,7 @@
             <input type="checkbox" ng-model="search.is_org">
             <%= t 'shared.is_org' %>
           </label>
-        </div> 
+        </div>
 
         <div class="form-group">
           <label>
@@ -222,7 +222,7 @@
                       last-text="&raquo;">
       </uib-pagination>
     </div>
-  </div> 
+  </div>
   <!-- End of host view -->
 
 
@@ -247,28 +247,28 @@
                   ng-options="o.id as o.name for o in cities">
             <option value=""><%= t 'shared.city' %></option>
           </select>
-        </div> 
+        </div>
 
         <div class="form-group">
           <select class="form-control" ng-model="search.witness.witness_type"
                   ng-options="o.v as o.n for o in witnessTypes">
             <option value=""><%= t 'shared.type' %></option>
           </select>
-        </div> 
+        </div>
 
         <div class="form-group">
           <select class="form-control" ng-model="search.witness.stairs"
                   ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.can' %>', v: true }, { n: '<%= t 'shared.cant' %>', v: false }]">
             <option value=""><%= t 'shared.walk_up_stairs' %></option>
           </select>
-        </div> 
+        </div>
 
         <div class="form-group">
-          <select class="form-control" ng-model="search.has_host"
-                  ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.teamed' %>', v: true }, { n: '<%= t 'shared.not_teamed' %>', v: false }, { n: '<%= t 'shared.not_interested' %>', v: -1 }, { n: '<%= t 'shared.archived' %>', v: -2 }]">
+          <select class="form-control" ng-model="search.witness.has_host"
+                  ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.teamed' %>', v: true }, { n: '<%= t 'shared.not_teamed' %>', v: false }, { n: '<%= t 'shared.external_assignment' %>', v: -1 }, { n: '<%= t 'shared.archived' %>', v: -2 }, { n: '<%= t 'shared.need_to_followup' %>', v: -3 }]">
             <option value=""><%= t 'shared.has_host' %></option>
           </select>
-        </div>  
+        </div>
 
         <div class="form-group">
            <select class="form-control" ng-model="search.witness.concept"
@@ -291,7 +291,7 @@
             <option value="russian">русский</option>
             <option value="other"><%= t 'shared.other' %></option>
           </select>
-        </div> 
+        </div>
 
 
         <% if current_user.any_admin? %>
@@ -301,7 +301,7 @@
                     ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.has_manager_true' %>', v: true }, { n: '<%= t 'shared.has_manager_false' %>', v: false }]">
               <option value=""><%= t 'shared.has_manager' %></option>
             </select>
-          </div>   
+          </div>  
 
         <% end %> 
 
@@ -317,14 +317,14 @@
                     ]">
               <option value=""><%= t 'shared.availability' %></option>
             </select>
-          </div>   
+          </div>  
 
          <div class="form-group">
             <select class="form-control" ng-model="search.witness.special_population"
                     ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.yes' %>', v: true }, { n: '<%= t 'shared.no' %>', v: false }]">
               <option value=""><%= t 'shared.special_population' %></option>
             </select>
-          </div>   
+          </div>  
 
 
         <div class="form-group pull-left">
@@ -393,7 +393,7 @@
                       last-text="&raquo;">
       </uib-pagination>
     </div>
-  </div> 
+  </div>
   <!-- End of host view -->
 
 
