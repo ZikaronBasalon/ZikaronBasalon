@@ -199,6 +199,7 @@ ActiveRecord::Schema.define(:version => 20180214095914) do
     t.boolean  "available_day6"
     t.boolean  "archived",              :default => false
     t.boolean  "need_to_followup",      :default => false
+
   end
 
 end
