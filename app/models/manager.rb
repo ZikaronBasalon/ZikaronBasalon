@@ -13,7 +13,8 @@ class Manager < ActiveRecord::Base
   def get_hosts(page, filter, query, sort, has_manager, has_survivor, is_org, language, in_future, has_invites, reverse_ordering)
     sort = 'created_at' if sort.blank?
     sort_order = !reverse_ordering.to_i.zero? ? " desc" : " asc"
-    hosts = Host.includes(:city, :user, :witness).order(sort + sort_order)
+    hosts = Host.includes(:city, :user, :witness).order(sort + sort_order).limit(20)
+    # TODO : remove limit(20) before final branch commit (THIS IS A TEMP SOLUTION FOR SLOWNESS)
     hosts = hosts.where(filter)
     hosts = hosts.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
     hosts = hosts.where(:active => true) unless user.admin?
@@ -25,9 +26,8 @@ class Manager < ActiveRecord::Base
 
   def get_witnesses(page, filter, query, sort, has_manager, has_host, language)
     sort = 'created_at' if sort.blank?
-    witnesses = Witness.includes(:city, :host).order(sort + " desc").where(filter)
-    Witness.where("host_id >= 0").pluck(:host_id)
-    Witness.where(host_id:nil).count
+    # TODO : remove limit(20) before final branch commit (THIS IS A TEMP SOLUTION FOR SLOWNESS)
+    witnesses = Witness.includes(:city, :host).order(sort + " desc").limit(20).where(filter)
     if has_host.present?
       if has_host === 'true'
         witnesses = witnesses.where("host_id >= 0")
