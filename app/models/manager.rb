@@ -8,7 +8,6 @@ class Manager < ActiveRecord::Base
 
  	attr_accessible :temp_email, :user_attributes, :concept
  	attr_accessor :city_name
-
 	validates_uniqueness_of :temp_email
 
   def get_hosts(page, filter, query, sort, has_manager, has_survivor, is_org, language, in_future, has_invites, reverse_ordering)

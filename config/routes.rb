@@ -13,7 +13,12 @@ ZikaronBasalon::Application.routes.draw do
     end
 
 
-    resources :regions
+    resources :regions do
+      member do
+        put :add_city
+        get :remove_city
+      end
+    end
 
     resources :guests
     resources :sessions, only: [:new, :create]
