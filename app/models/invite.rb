@@ -4,6 +4,8 @@ class Invite < ActiveRecord::Base
   belongs_to :guest
   belongs_to :host
 
+
+
   validates_uniqueness_of :guest_id
 
   scope :pending, -> { where(confirmed: false) }

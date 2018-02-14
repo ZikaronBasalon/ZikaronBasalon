@@ -1,0 +1,7 @@
+<% if @is_valid %>
+  <p><%= t 'shared.created_successfully'%></p>
+<% else %>
+  <p><%= t 'shared.created_failure'%></p>
+<% end %>
+
+<p><%= link_to (t "shared.back"), region_path %></p>

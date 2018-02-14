@@ -1,4 +1,5 @@
 he:
+
   activerecord:
     errors:
       models:
@@ -60,6 +61,8 @@ he:
 
 
   shared:
+    new_link_text: "לחץ ליצירה"
+    create_another: "צור עוד אחד"
     'yes': "כן"
     'no': "לא"
     continue: "המשך"
@@ -164,6 +167,12 @@ he:
     available_day6: "13.4"
     in_future: "עתיד להתקיים"
     has_invites: "בקשות פתוחות"
+    create_button_text: "יצירה"
+    back_to_list: "חזור לרשימה"
+    created_successfully: "נוצר בהצלחה!"
+    deleted_succesfully: "נמחק בהצלחה!"
+    created_failure: "היצירה נכשלה, אנא נסה שנית ומלא את כל השדות."
+    region: "אזור"
 
   views:
     pagination:
@@ -457,3 +466,10 @@ he:
     new_manager:
       paragraph_1: "היי, איזה כיף שאתם פה :) נא להתחבר עם כתובת המייל אליה קיבלתם את הלינק לאזור האישי, ולהזין סיסמא ראשונית"
       paragraph_2: "נא לשים לב כי יש ללחוץ על ״הרשמת צוות״ בצד שמאל למעלה (או ללחוץ על הלינק) , להזין את המייל הזה (שקיבלת אליו את המייל הזה), שם (״צוות חיפה״ לדוגמה) וסיסמא שאתם ממציאים."
+
+
+  regions:
+    index:
+    show:
+      add_city_title: "הוספת עיר לאזור"
+      edit_city_list: "עריכת רשימת ערים"
