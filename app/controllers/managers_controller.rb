@@ -13,6 +13,11 @@ class ManagersController < ApplicationController
 
   def show
     @page = params[:page] || 1
+    region_id = ""
+    if params[:filter] and params[:filter][:host][:region_id]
+      region_id = params[:filter][:host][:region_id]
+      params[:filter][:host].delete :region_id
+    end
     @hosts = @manager.get_hosts(@page,
                                 host_filter,
                                 params[:host_query],
@@ -24,17 +29,18 @@ class ManagersController < ApplicationController
                                 in_future,
                                 has_invites,
                                 reverse_ordering)
-    @cities = @manager.get_cities
+
+    @countries = @manager.get_countries
+    country_id = params[:filter] ? params[:filter][:host][:country_id] : 0
+    @regions = @manager.get_regions(country_id)
     @witnesses = @manager.get_witnesses(@page,
                                         witness_filter,
                                         params[:witness_query],
                                         params[:witness_sort],
                                         has_manager,
                                         has_host,
-                                        language,
-                                        external_assignment,
-                                        archived,
-                                        need_to_followup)
+                                        language)
+    @cities = @manager.get_cities(country_id, region_id)
 
     @total_hosts = @hosts.total_count
     @total_witnesses = @witnesses.total_count
@@ -47,7 +53,9 @@ class ManagersController < ApplicationController
           witnesses: @witnesses.to_json(:include => { city: { :include => :managers } }),
           total_hosts: @total_hosts,
           total_witnesses: @total_witnesses,
-          page: @page
+          page: @page,
+          regions: @regions.to_json,
+          cities: @cities.to_json
         }
       }
     end

@@ -12,6 +12,14 @@ ZikaronBasalon::Application.routes.draw do
       get :export_guests, on: :member
     end
 
+
+    resources :regions do
+      member do
+        put :add_city
+        get :remove_city
+      end
+    end
+
     resources :guests
     resources :sessions, only: [:new, :create]
     resources :users, only: [:new] do

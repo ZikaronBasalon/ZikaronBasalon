@@ -1,38 +1,38 @@
 <p>
-  <strong>Name:</strong>
-  <%= @region.name %>
+  <h2><%= @region.name %></h2>
+
+  <u><h3><%= t '.add_city_title'%> - <%= @region.name %>:</h3></u>
+
+  <%= form_for @region, :url => url_for(:controller => 'regions', :action => 'add_city', :method => :put) do |f| %>
+    <%= f.error_messages %>
+    <p>
+      <%= f.label t 'shared.city' %><br />
+      <%= select("city", "id", City.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }) %>
+    </p>
+    <p><%= f.submit t 'shared.create_button_text'%></p>
+  <% end %>
+
+  <br/>
+
+  <u><h3><%= t '.edit_city_list'%></h3></u>
+
+  <% @cities.each do |c| %>
+    <table>
+      <tr>
+        <td><%= c.name %></td>
+        <td>
+          &nbsp;&nbsp;<%= link_to (t 'shared.delete'), {:action => 'remove_city', :city_id => c.id }%>
+        </td>
+      </tr>
+    </table>
+  <% end %>
+
+
 </p>
-<ul>
-	<% @region.hosts.each do |host| %>
-		<li>
-			<p>Name: <%= host.f_name %></p>
-			<p>Address: <%= host.address %></p>
-			<p>Email: <%= host.email %></p>
-			<% if (!session[:invites_sent] || !session[:invites_sent].include?(host.id.to_s)) %>
-				<a href="#guestModal" class="btn btn-primary request_invite" data-id= <%= host.id %> data-toggle="modal">Request invite</a>
-			<% else %>
-				<a disabled="true" class="btn">Invite Sent</a>
-			<% end %>
-		</li>
-	<% end %>
-</ul>
+
+<br/>
+<br/>
+
+<p><%= link_to (t "shared.back_to_list"), regions_path %></p>
 
 
-  <div id="guestModal" class="modal hide fade">
-	  <div class="modal-header">
-	  	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	  	<h3>Enter your details</h3>
-	  </div>
-	  <div class="modal-body">
-	  <%= simple_form_for @guest, url: send_request_host_path do |f| %>
-	   	<%= f.input :name %>
-	    <%= f.input :email %>
-	    <%= f.input :phone %>
-	    <%= f.input :num_of_friends %>
-	    <%= f.input :host_id, as: :hidden %>
-	  </div>
-	  <div class="modal-footer">
-	  	<%= f.submit "Send", class: "btn btn-primary" %>
-	  </div>
-	  <% end %>
-  </div>
