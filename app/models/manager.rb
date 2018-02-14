@@ -23,12 +23,19 @@ class Manager < ActiveRecord::Base
     hosts
   end
 
-  def get_witnesses(page, filter, query, sort, has_manager, has_host, language, external_assignment, archived, need_to_followup)
+  def get_witnesses(page, filter, query, sort, has_manager, has_host, language)
     sort = 'created_at' if sort.blank?
     witnesses = Witness.includes(:city, :host).order(sort + " desc").where(filter)
+    if has_host.present?
+      if has_host === 'true'
+        witnesses = witnesses.where("'host' IS NULL")
+      elsif has_host === 'false'
+        witnesses = witnesses.where("'host' IS NOT NULL")
+      end
+    end
     witnesses = witnesses.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
     witnesses = witnesses.where(concept: concept) if concept
-    witnesses = witnesses.select{ |w| witness_in_filter(w, query, has_manager, has_host, language) }
+    witnesses = witnesses.select{ |w| witness_in_filter(w, query, has_manager, language) }
     witnesses = paginate(witnesses, page) if page
     witnesses
   end
@@ -65,16 +72,15 @@ class Manager < ActiveRecord::Base
     in_filter = in_filter && host_has_witness(host, has_survivor) if has_survivor.present?
     in_filter = in_filter && !host.org_name.nil? if is_org === 'true'
     in_filter = in_filter && host.event_date >= Date.today if in_future ==='true'
-    in_filter = in_filter && host.invites.present? && host.invites.where(:confirmed => false).present? if has_invites.present? 
+    in_filter = in_filter && host.invites.present? && host.invites.where(:confirmed => false).present? if has_invites.present?
     in_filter
   end
 
-  def witness_in_filter(w, query, has_manager, has_host, language)
+  def witness_in_filter(w, query, has_manager, language)
     in_filter = true
     in_filter = in_filter && w.in_language_filter(language)
     in_filter = in_filter && witness_in_query(w,query) if query.present?
     in_filter = in_filter && obj_has_manager(w, has_manager) if has_manager.present?
-    in_filter = in_filter && witness_has_host(w, has_host) if has_host.present?
     in_filter
   end
 
@@ -88,14 +94,6 @@ class Manager < ActiveRecord::Base
       return obj.city.managers.count > 0
     else
       return obj.city.managers.count == 0
-    end
-  end
-
-  def witness_has_host(w, has_host)
-    if has_host === "true"
-      return w.has_host
-    else
-      return !w.has_host
     end
   end
 
