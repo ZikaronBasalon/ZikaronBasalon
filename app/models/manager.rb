@@ -13,7 +13,8 @@ class Manager < ActiveRecord::Base
   def get_hosts(page, filter, query, sort, has_manager, has_survivor, is_org, language, in_future, has_invites, reverse_ordering)
     sort = 'created_at' if sort.blank?
     sort_order = !reverse_ordering.to_i.zero? ? " desc" : " asc"
-    hosts = Host.includes(:city, :user, :witness).order(sort + sort_order)
+    # TODO : remove limit(20) before final branch commit (THIS IS A TEMP SOLUTION FOR SLOWNESS)
+    hosts = Host.includes(:city, :user, :witness).order(sort + sort_order).limit(20)
     hosts = hosts.where(filter)
     hosts = hosts.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
     hosts = hosts.where(:active => true) unless user.admin?
@@ -25,7 +26,8 @@ class Manager < ActiveRecord::Base
 
   def get_witnesses(page, filter, query, sort, has_manager, has_host, language)
     sort = 'created_at' if sort.blank?
-    witnesses = Witness.includes(:city, :host).order(sort + " desc").where(filter)
+    # TODO : remove limit(20) before final branch commit (THIS IS A TEMP SOLUTION FOR SLOWNESS)
+    witnesses = Witness.includes(:city, :host).order(sort + " desc").limit(20).where(filter)
     if has_host.present?
       if has_host === 'true'
         witnesses = witnesses.where("'host' IS NULL")
@@ -40,14 +42,30 @@ class Manager < ActiveRecord::Base
     witnesses
   end
 
-  def get_cities
+  def get_cities(country_id, region_id)
     if user.admin? || user.sub_admin?
-      @cities = City.includes(:managers).order('name desc').all
+      # TODO : remove limit(20) before final branch commit (THIS IS A TEMP SOLUTION FOR SLOWNESS)
+      @cities = City.includes(:managers).limit(20).order('name desc')
     else
       @cities = City.includes(:managers).where(:id => cities.pluck(:id))
     end
 
+    if country_id == "97"
+      @cities = @cities.where(region_id: region_id)
+    end
+
     @cities.map{ |c| { id: c.id, name: c.name }}.sort_alphabetical_by{|c| c[:name] }
+  end
+
+  def get_countries
+    # TODO: check if there are any restrictions needed on the list of countries
+    @countries = Country.all
+    @countries.map{ |c| { id: c.id, name: c.name }}.sort_alphabetical_by{|c| c[:name] }
+  end
+
+  def get_regions(country_id)
+    @regions = Region.where(country_id: country_id)
+    @regions.map{ |r| { id: r.id, name: r.name }}.sort_alphabetical_by{|r| r[:name] }
   end
 
   def city_name=(name)
@@ -104,5 +122,9 @@ class Manager < ActiveRecord::Base
       return h.witness.nil?
     end
   end
+
+
+
+
 end
 

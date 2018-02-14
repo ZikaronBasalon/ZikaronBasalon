@@ -165,6 +165,7 @@ en:
     created_successfully: "Created Successfully!"
     deleted_succesfully: "Deleted succesfully!"
     created_failure: "Failed to create, please try again and fill all fields."
+    region: "Region"
 
   views:
     pagination:

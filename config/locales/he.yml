@@ -172,6 +172,7 @@ he:
     created_successfully: "נוצר בהצלחה!"
     deleted_succesfully: "נמחק בהצלחה!"
     created_failure: "היצירה נכשלה, אנא נסה שנית ומלא את כל השדות."
+    region: "אזור"
 
   views:
     pagination:
