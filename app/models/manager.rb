@@ -13,8 +13,8 @@ class Manager < ActiveRecord::Base
   def get_hosts(page, filter, query, sort, has_manager, has_survivor, is_org, language, in_future, has_invites, reverse_ordering)
     sort = 'created_at' if sort.blank?
     sort_order = !reverse_ordering.to_i.zero? ? " desc" : " asc"
-    hosts = Host.includes(:city, :user, :witness).order(sort + sort_order).limit(20)
-    # TODO : remove limit(20) before final branch commit (THIS IS A TEMP SOLUTION FOR SLOWNESS)
+    hosts = Host.includes(:city, :user, :witness).order(sort + sort_order)
+    # Maya needs to be able to pagenate... so i removed the limit
     hosts = hosts.where(filter)
     hosts = hosts.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
     hosts = hosts.where(:active => true) unless user.admin?
@@ -26,8 +26,8 @@ class Manager < ActiveRecord::Base
 
   def get_witnesses(page, filter, query, sort, has_manager, has_host, language)
     sort = 'created_at' if sort.blank?
-    # TODO : remove limit(20) before final branch commit (THIS IS A TEMP SOLUTION FOR SLOWNESS)
-    witnesses = Witness.includes(:city, :host).order(sort + " desc").limit(20).where(filter)
+    # Maya needs to be able to pagenate... so i removed the limit
+    witnesses = Witness.includes(:city, :host).order(sort + " desc").where(filter)
     if has_host.present?
       if has_host === 'true'
         witnesses = witnesses.where("host_id >= 0")
