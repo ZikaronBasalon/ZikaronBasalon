@@ -40,7 +40,7 @@ class Witness < ActiveRecord::Base
 
     if lang != 'other'
       return language == lang
-    else
+    elsen
       return !['english', 'hebrew', 'arabic', 'frech', 'russian', 'spanish'].include?(language)
     end
   end

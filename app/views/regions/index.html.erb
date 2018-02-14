@@ -2,15 +2,15 @@
 
 <table>
   <tr>
-    <th>Name</th>
+    <th><%= t 'shared.name' %></th>
   </tr>
   <% for region in @regions %>
     <tr>
-      <td><%= region.name %></td>
-      <td><%= link_to "Show", region %></td>
+      <td><%= link_to region.name, region %></td>
     </tr>
   <% end %>
 </table>
 
-<%= link_to "Create", new_region_path %>
+<br/>
 
+<p><%= link_to(t("shared.new_link_text"), new_region_path) %></p>
