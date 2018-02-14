@@ -29,9 +29,9 @@ class Manager < ActiveRecord::Base
     witnesses = Witness.includes(:city, :host).order(sort + " desc").where(filter)
     if has_host.present?
       if has_host === 'true'
-        witnesses = witnesses.where("'host' IS NULL")
+        witnesses = witnesses.where("host_id >= 0")
       elsif has_host === 'false'
-        witnesses = witnesses.where("'host' IS NOT NULL")
+        witnesses = witnesses.where(host_id: nil)
       end
     end
     witnesses = witnesses.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
