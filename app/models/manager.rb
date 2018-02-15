@@ -10,23 +10,30 @@ class Manager < ActiveRecord::Base
  	attr_accessor :city_name
 	validates_uniqueness_of :temp_email
 
-  def get_hosts(page, filter, query, sort, has_manager, has_survivor, is_org, language, in_future, has_invites, reverse_ordering)
+  def get_hosts(page, filter, query, sort, has_manager, has_survivor, is_org, language, in_future, has_invites,
+                reverse_ordering, cities, country_id, region_id)
     sort = 'created_at' if sort.blank?
     sort_order = !reverse_ordering.to_i.zero? ? " desc" : " asc"
+
+    city_ids = nil
+    if region_id.present?
+      city_ids = cities.map {|c| c[:id] }
+    end
+
     hosts = Host.includes(:city, :user, :witness).order(sort + sort_order)
-    # Maya needs to be able to pagenate... so i removed the limit
     hosts = hosts.where(filter)
-    hosts = hosts.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
+    hosts = hosts.where(city_id: city_ids) if city_ids != nil && !user.sub_admin? && !concept
     hosts = hosts.where(:active => true) unless user.admin?
     hosts = hosts.where(concept: concept).select{ |h| h.has_witness } if concept
+
     hosts = hosts.select{ |h| host_in_filter(h, query, has_manager, has_survivor, is_org, language, in_future, has_invites) }
+
     hosts = paginate(hosts, page) if page
     hosts
   end
 
   def get_witnesses(page, filter, query, sort, has_manager, has_host, language)
     sort = 'created_at' if sort.blank?
-    # Maya needs to be able to pagenate... so i removed the limit
     witnesses = Witness.includes(:city, :host).order(sort + " desc").where(filter)
     if has_host.present?
       if has_host === 'true'
@@ -44,21 +51,22 @@ class Manager < ActiveRecord::Base
 
   def get_cities(country_id, region_id)
     if user.admin? || user.sub_admin?
-      # TODO : remove limit(20) before final branch commit (THIS IS A TEMP SOLUTION FOR SLOWNESS)
-      @cities = City.includes(:managers).limit(20).order('name desc')
+      @cities = City.includes(:managers).order('name desc')
     else
       @cities = City.includes(:managers).where(:id => cities.pluck(:id))
     end
 
-    if country_id == "97"
+    if region_id.present?
       @cities = @cities.where(region_id: region_id)
+    elsif country_id.present?
+      region_ids = Region.where(country_id: country_id).pluck(:id)
+      @cities = @cities.where(region_id: region_ids)
     end
 
     @cities.map{ |c| { id: c.id, name: c.name }}.sort_alphabetical_by{|c| c[:name] }
   end
 
   def get_countries
-    # TODO: check if there are any restrictions needed on the list of countries
     @countries = Country.all
     @countries.map{ |c| { id: c.id, name: c.name }}.sort_alphabetical_by{|c| c[:name] }
   end

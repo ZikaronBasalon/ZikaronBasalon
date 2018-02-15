@@ -13,11 +13,23 @@ class ManagersController < ApplicationController
 
   def show
     @page = params[:page] || 1
+
+    # get region id and remove from query (it's bugging things up otherwise in get_hosts with the querying)
     region_id = ""
     if params[:filter] and params[:filter][:host][:region_id]
       region_id = params[:filter][:host][:region_id]
       params[:filter][:host].delete :region_id
     end
+
+    # get country_id
+    country_id = params[:filter] ? params[:filter][:host][:country_id] : 0
+
+    # get lists
+    @cities = @manager.get_cities(country_id, region_id)
+    @countries = @manager.get_countries
+    @regions = @manager.get_regions(country_id)
+
+    # get hosts and witnesses
     @hosts = @manager.get_hosts(@page,
                                 host_filter,
                                 params[:host_query],
@@ -28,11 +40,8 @@ class ManagersController < ApplicationController
                                 language,
                                 in_future,
                                 has_invites,
-                                reverse_ordering)
+                                reverse_ordering, @cities, country_id, region_id)
 
-    @countries = @manager.get_countries
-    country_id = params[:filter] ? params[:filter][:host][:country_id] : 0
-    @regions = @manager.get_regions(country_id)
     @witnesses = @manager.get_witnesses(@page,
                                         witness_filter,
                                         params[:witness_query],
@@ -40,8 +49,7 @@ class ManagersController < ApplicationController
                                         has_manager,
                                         has_host,
                                         language)
-    @cities = @manager.get_cities(country_id, region_id)
-
+    # totals
     @total_hosts = @hosts.total_count
     @total_witnesses = @witnesses.total_count
 
