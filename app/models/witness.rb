@@ -10,6 +10,7 @@ class Witness < ActiveRecord::Base
 
   belongs_to :city
   belongs_to :host
+  has_one :host
   has_many :comments, as: :commentable
 
   validates_uniqueness_of :host_id, :allow_nil => true
