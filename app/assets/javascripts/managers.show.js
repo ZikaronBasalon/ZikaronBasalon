@@ -74,9 +74,6 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
     delete $scope.search.witness.available_day5;
     delete $scope.search.witness.available_day6;
     delete $scope.search.witness.available_day7;
-    delete $scope.search.witness.archived;
-    delete $scope.search.witness.need_to_followup;
-    delete $scope.search.has_host;
   }
 
   function filter(page) {
@@ -106,11 +103,18 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
       $scope.search.witness.archived = false;
       $scope.search.has_host = false;
     } else {
-      $scope.search.has_host = $scope.search.w_has_host;
-      // whether we show host or not, the other three options are false
-      $scope.search.witness.external_assignment = false;
-      $scope.search.witness.archived = false;
-      $scope.search.witness.need_to_followup = false;
+      if ($scope.search.w_has_host === null) {
+        delete $scope.search.witness.external_assignment;
+        delete $scope.search.witness.archived;
+        delete $scope.search.witness.need_to_followup;
+        delete $scope.search.has_host;
+      } else {
+        $scope.search.has_host = $scope.search.w_has_host;
+        // whether we show host or not, the other three options are false
+        $scope.search.witness.external_assignment = false;
+        $scope.search.witness.archived = false;
+        $scope.search.witness.need_to_followup = false;
+      }
     }
 
     var params = {
