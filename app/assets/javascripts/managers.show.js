@@ -137,26 +137,21 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
       has_invites: $scope.search.has_invites
     };
 
-    if (!$scope.loadingGet) {
-      $http.get('/managers/' + $scope.currentUser.meta.id + '.json' + '?' + $.param(params))
-      .then(
-        function(response) {
-          $scope.hosts = JSON.parse(response.data.hosts);
-          $scope.witnesses = JSON.parse(response.data.witnesses);
-          $scope.pagination.currentPage = response.data.page;
-          $scope.totalHosts = response.data.total_hosts;
-          $scope.totalWitnesses = response.data.total_witnesses;
-          $scope.loading = false;
-          $scope.loadingGet = null;
-        })
-      .catch(
-        function(e) {
-          $scope.loading = false;
-          alert(e.message);
-          $scope.loadingGet = null;
-      });
-    }
-    $scope.loadingGet=true;
+    $http.get('/managers/' + $scope.currentUser.meta.id + '.json' + '?' + $.param(params))
+    .then(
+      function(response) {
+        $scope.hosts = JSON.parse(response.data.hosts);
+        $scope.witnesses = JSON.parse(response.data.witnesses);
+        $scope.pagination.currentPage = response.data.page;
+        $scope.totalHosts = response.data.total_hosts;
+        $scope.totalWitnesses = response.data.total_witnesses;
+        $scope.loading = false;
+      })
+    .catch(
+      function(e) {
+        $scope.loading = false;
+        alert(e.message);
+    });
   }
 
   $scope.export_hosts = function() {
