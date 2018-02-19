@@ -27,7 +27,7 @@ class Manager < ActiveRecord::Base
   def get_witnesses(page, filter, query, sort, has_manager, has_host, language)
     sort = 'created_at' if sort.blank?
     witnesses = Witness.includes(:city, :host).order(sort + " desc").where(filter)
-    witnesses = witnesses.where("LOWER(full_name) LIKE LOWER(?)", "%#{fullname.downcase}%")
+    witnesses = witnesses.where("LOWER(full_name) LIKE LOWER(?)", "%#{query.downcase}%")
     if has_host.present?
       if has_host === 'true'
         witnesses = witnesses.where("host_id >= 0")
