@@ -27,6 +27,7 @@ class Manager < ActiveRecord::Base
   def get_witnesses(page, filter, query, sort, has_manager, has_host, language)
     sort = 'created_at' if sort.blank?
     witnesses = Witness.includes(:city, :host).order(sort + " desc").where(filter)
+    witnesses = witnesses.where('lower(full_name) = ?', query.downcase) if query.present?
     if has_host.present?
       if has_host === 'true'
         witnesses = witnesses.where("host_id >= 0")
@@ -36,7 +37,7 @@ class Manager < ActiveRecord::Base
     end
     witnesses = witnesses.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
     witnesses = witnesses.where(concept: concept) if concept
-    witnesses = witnesses.select{ |w| witness_in_filter(w, query, has_manager, language) }
+    witnesses = witnesses.select{ |w| witness_in_filter(w, has_manager, language) } if has_manager.present? || language.present?
     witnesses = paginate(witnesses, page) if page
     witnesses
   end
@@ -77,16 +78,11 @@ class Manager < ActiveRecord::Base
     in_filter
   end
 
-  def witness_in_filter(w, query, has_manager, language)
+  def witness_in_filter(w, has_manager, language)
     in_filter = true
     in_filter = in_filter && w.in_language_filter(language)
-    in_filter = in_filter && witness_in_query(w,query) if query.present?
     in_filter = in_filter && obj_has_manager(w, has_manager) if has_manager.present?
     in_filter
-  end
-
-  def witness_in_query(w, q)
-    w.full_name.include?(q) || (w.city && w.city.name.include?(q))
   end
 
   def obj_has_manager(obj, has_manager)
