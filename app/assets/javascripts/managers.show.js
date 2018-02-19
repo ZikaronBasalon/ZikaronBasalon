@@ -103,7 +103,7 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
       $scope.search.witness.archived = false;
       $scope.search.has_host = false;
     } else {
-      if ($scope.search.w_has_host === null) {
+      if ($scope.search.w_has_host === null || typeof $scope.search.w_has_host === 'undefined') {
         delete $scope.search.witness.external_assignment;
         delete $scope.search.witness.archived;
         delete $scope.search.witness.need_to_followup;
