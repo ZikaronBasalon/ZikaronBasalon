@@ -88,7 +88,6 @@ class HostsController < ApplicationController
     id = params[:id].to_i
 
     return if current_user && (current_user.admin? || current_user.sub_admin?)
-current_local
 
     redirect_to user_session_path if meta.nil? || (meta.is_a?(Host) && meta.id != id)
     redirect_to user_session_path if meta.is_a?(Manager) && !meta.hosts.pluck(:id).include?(id)
