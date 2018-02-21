@@ -13,6 +13,10 @@ ZikaronBasalon::Application.routes.draw do
     end
 
 
+    devise_for :users do
+      get '/users/sign_out' => 'devise/sessions#destroy'
+    end
+
     resources :regions do
       member do
         put :add_city

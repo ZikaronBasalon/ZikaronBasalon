@@ -1,4 +1,7 @@
 class RegionsController < ApplicationController
+
+  before_filter :correct_manager, except: [:index, :show]
+
   # before_action :authenticate_user!
   def index
     @regions = Region.all
