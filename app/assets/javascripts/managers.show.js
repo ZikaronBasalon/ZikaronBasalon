@@ -143,6 +143,8 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
     .then(
       function(response) {
         $scope.hosts = JSON.parse(response.data.hosts);
+        $scope.cities = JSON.parse(response.data.cities);
+        $scope.regions = JSON.parse(response.data.regions);
         $scope.witnesses = JSON.parse(response.data.witnesses);
         $scope.pagination.currentPage = response.data.page;
         $scope.totalHosts = response.data.total_hosts;
