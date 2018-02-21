@@ -140,7 +140,7 @@ he:
     has_manager: "משוייך למוביל"
     has_manager_true: "משוייך"
     has_manager_false: "לא משוייך"
-    has_host: "צוות למארח"
+    has_host: "בחר צוות"
     is_org: "שייך לארגון"
     has_survivor_set: "מוגדר איש עדות"
     free_search: "חיפוש חופשי"

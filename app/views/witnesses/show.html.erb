@@ -4,7 +4,7 @@
   <div class="col-xs-12">
     <h1><%= t '.title' %></h1>
   </div>
-  
+
   <div class="col-xs-8">
     <div class="col-xs-12">
       <div class="panel panel-default">
@@ -17,7 +17,7 @@
            </div>
         </div>
         <div class="panel-body">
-          
+
           <div class="field-group">
             <div class="info-label"><%= t 'profile.labels.name' %></div>
             <div>{{ witness.full_name }}</div>
@@ -137,7 +137,7 @@
                   <%= link_to 'בטל ציוות', unassign_witness_path(@witness), :confirm => 'בטוח בטוח? למען הסדר הטוב, לאחר ביטול הציוות אנא הוספ/י הערה בדף זה המפרטת את סיבת הביטול.' %>
                 </button>
               </div>
-              <div ng-if="!witness.host && !witness.external_assignment">
+              <div ng-if="!witness.host && !witness.external_assignment && !witness.archived && !witness.need_to_followup">
                 <%#= t('profile.assign_host') %>
                 <%= link_to t('profile.assign_host'), assign_witness_path(@witness) %>
               </div>
@@ -145,24 +145,24 @@
                 <%= t('profile.labels.external_assignment_explain') %>
                 <!-- צוות מחוץ למערכת -->
               </div>
-            </div>  
-            
+            </div>
+
             <!-- Concept  - cancelled -->
             <% if current_user && current_user.meta.is_a?(Manager) && false%>
-            <div class="field-group">
-              <div class="info-label"><%= t 'profile.labels.concept' %></div>
-              <div>
-                <select class="form-control"
-                        ng-model="witness.concept"
-                        ng-options="o.v as o.n for o in [
-                          { n: '<%= t 'shared.concept.religious_and_secular' %>', v: 'religious_and_secular' },
-                          { n: '<%= t 'shared.concept.vetrans' %>', v: 'vetrans' },
-                          { n: '<%= t 'shared.concept.eastern' %>', v: 'eastern' }
-                        ]">
-                <option value=""><%= t 'shared.select' %></option>
-              </select>
+              <div class="field-group">
+                <div class="info-label"><%= t 'profile.labels.concept' %></div>
+                <div>
+                  <select class="form-control"
+                          ng-model="witness.concept"
+                          ng-options="o.v as o.n for o in [
+                            { n: '<%= t 'shared.concept.religious_and_secular' %>', v: 'religious_and_secular' },
+                            { n: '<%= t 'shared.concept.vetrans' %>', v: 'vetrans' },
+                            { n: '<%= t 'shared.concept.eastern' %>', v: 'eastern' }
+                          ]">
+                  <option value=""><%= t 'shared.select' %></option>
+                </select>
+                </div>
               </div>
-            </div>
             <% end %>
 
             <!-- Type -->
@@ -170,7 +170,7 @@
                 <label for="witness_type" >
                   <%= t 'shared.type' %>
                 </label>
-                <select class="form-control" id="witness_type" 
+                <select class="form-control" id="witness_type"
                         ng-model="witness.witness_type"
                         ng-options="o.v as o.n for o in witnessTypes">
                   <option value=""><%= t 'shared.select' %></option>
@@ -188,15 +188,17 @@
                     <label>
                       <input type="checkbox"
                              name="external_assignment"
+                             ng-disabled="witness.host"
                              ng-model="witness.external_assignment"
                              ng-change="confirmExternalAssignment()">
                       <%= t 'profile.labels.external_assignment_explain' %>
                     </label>
-                  </div>                  
+                  </div>
                   <div class="checkbox">
                     <label>
                       <input type="checkbox"
                              name="archived"
+                             ng-disabled="witness.host"
                              ng-model="witness.archived"
                              ng-change="confirmArchive()">
                       <%= t 'profile.labels.archived_explain' %>
@@ -206,19 +208,20 @@
                     <label>
                       <input type="checkbox"
                              name="need_to_followup"
+                             ng-disabled="witness.host"
                              ng-model="witness.need_to_followup">
                       <%= t 'profile.labels.need_to_followup_explain' %>
                     </label>
                   </div>
                 </div>
               </div>
-            <% end %>   
+            <% end %>
           </div>
         </div>
       </div>
 
       <div class="col-xs-12">
-        <button class="btn btn-warning"  
+        <button class="btn btn-warning"
                   ng-click="save()">
           <%= t 'shared.save' %>
         </button>
@@ -231,13 +234,13 @@
       </div>
 
       <div class="col-xs-12 panel">
-          <div comment-form obj="witness" resource="witnesses" 
+          <div comment-form obj="witness" resource="witnesses"
                user-id="<%= current_user.id %>"
                callback="commentCallback"></div>
         </div>
     <% end %>
   </div>
-  
+
   <% if current_user && current_user.meta.is_a?(Manager) %>
     <div class="col-xs-4">
       <div comment-list comments="witness.comments"/></div>

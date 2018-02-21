@@ -69,17 +69,13 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
   };
 
   function reset_unused_parameters() {
-    delete $scope.search.witness['available_day1'];
-    delete $scope.search.witness['available_day2'];
-    delete $scope.search.witness['available_day3'];
-    delete $scope.search.witness['available_day4'];
-    delete $scope.search.witness['available_day5'];
-    delete $scope.search.witness['available_day6'];
-    delete $scope.search.witness['available_day7'];
-    delete $scope.search.witness['external_assignment'];
-    delete $scope.search.witness['archived'];
-    delete $scope.search.witness['need_to_followup'];
-    delete $scope.search['has_host'];
+    delete $scope.search.witness.available_day1;
+    delete $scope.search.witness.available_day2;
+    delete $scope.search.witness.available_day3;
+    delete $scope.search.witness.available_day4;
+    delete $scope.search.witness.available_day5;
+    delete $scope.search.witness.available_day6;
+    delete $scope.search.witness.available_day7;
   }
 
   function filter(page) {
@@ -89,15 +85,38 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
       $scope.search.witness[$scope.search.available_day_search] = true;
     }
     if ($scope.search.w_has_host == -1) {
+      // when selecting external_assignment, all other options should be false
       $scope.search.witness.external_assignment = true;
+      $scope.search.witness.archived = false;
+      $scope.search.witness.need_to_followup = false;
+      $scope.search.has_host = false;
     }
     else if ($scope.search.w_has_host == -2) {
+      // when selecting archived, all other options should be false
       $scope.search.witness.archived = true;
+      $scope.search.witness.need_to_followup = false;
+      $scope.search.witness.external_assignment = false;
+      $scope.search.has_host = false;
     }
     else if ($scope.search.w_has_host == -3) {
+      // when selecting need_to_followup, all other options should be false
       $scope.search.witness.need_to_followup = true;
+      $scope.search.witness.external_assignment = false;
+      $scope.search.witness.archived = false;
+      $scope.search.has_host = false;
     } else {
-      $scope.search.has_host = $scope.search.w_has_host;
+      if ($scope.search.w_has_host === null || typeof $scope.search.w_has_host === 'undefined') {
+        delete $scope.search.witness.external_assignment;
+        delete $scope.search.witness.archived;
+        delete $scope.search.witness.need_to_followup;
+        delete $scope.search.has_host;
+      } else {
+        $scope.search.has_host = $scope.search.w_has_host;
+        // whether we show host or not, the other three options are false
+        $scope.search.witness.external_assignment = false;
+        $scope.search.witness.archived = false;
+        $scope.search.witness.need_to_followup = false;
+      }
     }
 
     var params = {
@@ -120,28 +139,21 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
       has_invites: $scope.search.has_invites
     };
 
-    if (!$scope.loadingGet) {
-      $http.get('/managers/' + $scope.currentUser.meta.id + '.json' + '?' + $.param(params))
-      .then(
-        function(response) {
-          $scope.hosts = JSON.parse(response.data.hosts);
-          $scope.regions = JSON.parse(response.data.regions);
-          $scope.cities = JSON.parse(response.data.cities);
-          $scope.witnesses = JSON.parse(response.data.witnesses);
-          $scope.pagination.currentPage = response.data.page;
-          $scope.totalHosts = response.data.total_hosts;
-          $scope.totalWitnesses = response.data.total_witnesses;
-          $scope.loading = false;
-          $scope.loadingGet = null;
-        })
-      .catch(
-        function(e) {
-          $scope.loading = false;
-          alert(e.message);
-          $scope.loadingGet = null;
-      });
-    }
-    $scope.loadingGet=true;
+    $http.get('/managers/' + $scope.currentUser.meta.id + '.json' + '?' + $.param(params))
+    .then(
+      function(response) {
+        $scope.hosts = JSON.parse(response.data.hosts);
+        $scope.witnesses = JSON.parse(response.data.witnesses);
+        $scope.pagination.currentPage = response.data.page;
+        $scope.totalHosts = response.data.total_hosts;
+        $scope.totalWitnesses = response.data.total_witnesses;
+        $scope.loading = false;
+      })
+    .catch(
+      function(e) {
+        $scope.loading = false;
+        alert(e.message);
+    });
   }
 
   $scope.export_hosts = function() {
