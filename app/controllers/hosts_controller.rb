@@ -15,7 +15,7 @@ class HostsController < ApplicationController
   respond_to :html, :json
 
   def index
-    @hosts = Host.includes(:user).order('created_at DESC').all
+    @hosts = Host.includes(:user).order('created_at DESC')
   end
 
   def new

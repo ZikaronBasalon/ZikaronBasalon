@@ -1,10 +1,29 @@
 class PagesController < ApplicationController
   include PagesHelper
+  include CitiesHelper
   respond_to :html, :json
 
 #TODO add here where users are active this year
   def home
+
+    # get region id
+    region_id = params[:region_id] ? params[:region_id] : ""
+
+    # get country_id
+    country_id = params[:country_id] ? params[:country_id] : ""
+
+    @cities = City.all
+    @cities = filter_cities(@cities, country_id, region_id)
+    @cities = @cities.sort_alphabetical_by{ |c| c[:name] }
+
+    # get city ids
+    city_ids = nil
+    if region_id.present?
+      city_ids = @cities.map {|c| c[:id] }
+    end
+
   	@hosts = Host.includes(:city, :user, :country, :invites).where(host_conditions_hash)
+    @hosts = @hosts.where(city_id: city_ids) if city_ids != nil
   	@hosts = @hosts.select { |h| 
       h.available_places > 0 &&
       host_in_query(h, query) &&
@@ -16,8 +35,10 @@ class PagesController < ApplicationController
     if params[:reverse_ordering].to_i == 0
       @hosts = @hosts.reverse
     end
-    @cities = City.all.sort_alphabetical_by{ |c| c[:name] }
     @countries = Country.all
+
+    @regions = Region.where(country_id: country_id)
+    @regions = @regions.sort_alphabetical_by{ |r| r[:name] }
 
   	@hosts = paginate(@hosts, params[:page] || 1)
   	@total_items = @hosts.total_count
@@ -29,7 +50,8 @@ class PagesController < ApplicationController
 			  		:include => [{ :user => { :methods => [:first_name] } }, :city, :country], 
 			  		:methods => [:available_places, :converted_time]
 		  		), 
-			  	cities: @cities, 
+			  	cities: @cities,
+          regions: @regions,
 			  	total_items: @hosts.total_count,
 			  	page: params[:page] || 1
 			  } 
