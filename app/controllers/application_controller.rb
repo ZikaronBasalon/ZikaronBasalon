@@ -8,6 +8,17 @@ class ApplicationController < ActionController::Base
   	redirect_to root_path unless current_user && (current_user.any_admin?)
   end
 
+	def correct_manager
+		return redirect_to user_session_path if current_user.nil?
+
+		meta = current_user.meta
+		id = params[:id].to_i
+
+		return if current_user.admin? || current_user.sub_admin?
+
+		redirect_to root_path if (meta.is_a?(Manager) && meta.id != id) || !meta.is_a?(Manager)
+	end
+
 	private
 
 	def set_locale

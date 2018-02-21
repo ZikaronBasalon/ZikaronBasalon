@@ -1,4 +1,7 @@
 class Manager < ActiveRecord::Base
+
+  include CitiesHelper
+
   has_many :community_leaderships
   has_many :cities, :through => :community_leaderships
   has_many :hosts, :through => :cities
@@ -50,18 +53,14 @@ class Manager < ActiveRecord::Base
   end
 
   def get_cities(country_id, region_id)
-    if user.admin? || user.sub_admin?
+  if user.admin? || user.sub_admin?
       @cities = City.includes(:managers).order('name desc')
     else
       @cities = City.includes(:managers).where(:id => cities.pluck(:id))
     end
 
-    if region_id.present?
-      @cities = @cities.where(region_id: region_id)
-    elsif country_id.present?
-      region_ids = Region.where(country_id: country_id).pluck(:id)
-      @cities = @cities.where(region_id: region_ids)
-    end
+    @cities = filter_cities(@cities, country_id, region_id)
+
 
     @cities.map{ |c| { id: c.id, name: c.name }}.sort_alphabetical_by{|c| c[:name] }
   end

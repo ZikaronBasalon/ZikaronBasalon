@@ -1,3 +1,4 @@
+
 <header>
 	<div class="right-side">
 		<!-- Home link -->
@@ -12,6 +13,10 @@
 
 			<!-- Admin -->
 			<%= link_to(t('.managers'), managers_path, class: 'header-link') if current_user.admin? %>
+
+      <!-- New Admin link - Area Management -->
+      <%= link_to(t('.region_managememnt'), regions_path, class: 'header-link') if current_user.admin? %>
+
 		<!-- Non signed in user -->
 		<% else %>
 			<%= link_to signup_path(type: 'host') do %>
