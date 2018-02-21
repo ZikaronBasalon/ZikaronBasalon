@@ -15,14 +15,14 @@ class ManagersController < ApplicationController
     @page = params[:page] || 1
 
     # get region id and remove from query (it's bugging things up otherwise in get_hosts with the querying)
-    region_id = ""
-    if params[:filter] and params[:filter][:host][:region_id]
+    region_id = nil
+    if params[:filter].present? && params[:filter][:host].present? && params[:filter][:host][:region_id].present?
       region_id = params[:filter][:host][:region_id]
       params[:filter][:host].delete :region_id
     end
 
     # get country_id
-    country_id = params[:filter] ? params[:filter][:host][:country_id] : ""
+    country_id = params[:filter].present? && params[:filter][:host].present? ? params[:filter][:host][:country_id] : ""
 
     # get lists
     @cities = @manager.get_cities(country_id, region_id)

@@ -271,7 +271,7 @@
 
         <div class="form-group">
           <label for="free_text"><%= t '.free_text' %></label>
-          <textarea id="free_text" class="form-control" ng-model="host.free_text" style="height: 250px; max-width: 330px;"></textarea>
+          <textarea id="free_text" class="form-control" ng-model-options="{ debounce: 500 }" ng-model="host.free_text" style="height: 250px; max-width: 330px;"></textarea>
         </div>
 
         <button class="btn btn-info" ng-click="back()"><%= t 'shared.back' %></button>
