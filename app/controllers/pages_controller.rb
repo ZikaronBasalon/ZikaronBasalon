@@ -12,7 +12,7 @@ class PagesController < ApplicationController
     # get country_id
     country_id = params[:country_id] ? params[:country_id] : ""
 
-    @cities = City.where('id!=0')
+    @cities = City.all
     @cities = filter_cities(@cities, country_id, region_id)
     @cities = @cities.sort_alphabetical_by{ |c| c[:name] }
 
