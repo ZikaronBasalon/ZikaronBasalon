@@ -30,7 +30,7 @@ class ManagersController < ApplicationController
     @regions = @manager.get_regions(country_id)
 
     # get hosts and witnesses
-    @hosts = @manager.get_hosts(@page,
+    @hosts, @total_hosts = @manager.get_hosts(@page,
                                 host_filter,
                                 params[:host_query],
                                 params[:host_sort],
@@ -42,16 +42,14 @@ class ManagersController < ApplicationController
                                 has_invites,
                                 reverse_ordering, @cities, country_id, region_id)
 
-    @witnesses = @manager.get_witnesses(@page,
+    @witnesses, @total_witnesses = @manager.get_witnesses(@page,
                                         witness_filter,
                                         params[:witness_query],
                                         params[:witness_sort],
                                         has_manager,
                                         has_host,
                                         language)
-    # totals
-    @total_hosts = @hosts.count
-    @total_witnesses = @witnesses.count
+
 
     respond_to do |format|
       format.html
