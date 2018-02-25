@@ -27,7 +27,9 @@ class PagesController < ApplicationController
 
   	@hosts = Host.includes(:city, :user, :country, :invites).where(host_conditions_hash)
     @hosts = @hosts.where(city_id: city_ids) if city_ids != nil
-  	@hosts = @hosts.select { |h| 
+  	@hosts = @hosts.paginate(:page => params[:page] || 1, :per_page => 10)
+    @total_items = @hosts.count
+    @hosts = @hosts.select { |h|
       h.available_places > 0 &&
       host_in_query(h, query) &&
       h.in_language_filter(params[:event_language]) &&
@@ -43,8 +45,6 @@ class PagesController < ApplicationController
     @regions = Region.where(country_id: country_id)
     @regions = @regions.sort_alphabetical_by{ |r| r[:name] }
 
-  	@hosts = paginate(@hosts, params[:page] || 1)
-  	@total_items = @hosts.total_count
 
   	respond_to do |format|
       format.html
@@ -55,7 +55,7 @@ class PagesController < ApplicationController
 		  		), 
 			  	cities: @cities,
           regions: @regions,
-			  	total_items: @hosts.total_count,
+			  	total_items: @total_items,
 			  	page: params[:page] || 1
 			  } 
 		  }
@@ -82,15 +82,6 @@ private
 	def query
 		params[:query]
 	end
-
-	def paginate(arr_name, page)
-    unless arr_name.kind_of?(Array)
-      arr_name = arr_name.page(page).per(10)
-    else
-      arr_name = Kaminari.paginate_array(arr_name).page(page).per(10)
-    end
-    arr_name
-  end
 
   def host_in_query(h, query)
     return true if !query.present?

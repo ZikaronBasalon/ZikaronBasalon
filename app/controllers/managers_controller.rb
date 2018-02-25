@@ -50,8 +50,8 @@ class ManagersController < ApplicationController
                                         has_host,
                                         language)
     # totals
-    @total_hosts = @hosts.total_count
-    @total_witnesses = @witnesses.total_count
+    @total_hosts = @hosts.count
+    @total_witnesses = @witnesses.count
 
     respond_to do |format|
       format.html
