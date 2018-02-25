@@ -10,6 +10,7 @@ class Witness < ActiveRecord::Base
 
   belongs_to :city
   belongs_to :host
+  has_one :host
   has_many :comments, as: :commentable
 
   validates_uniqueness_of :host_id, :allow_nil => true
@@ -40,7 +41,7 @@ class Witness < ActiveRecord::Base
 
     if lang != 'other'
       return language == lang
-    else
+    elsen
       return !['english', 'hebrew', 'arabic', 'frech', 'russian', 'spanish'].include?(language)
     end
   end

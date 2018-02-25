@@ -37,7 +37,7 @@
         <td>{{ guest.user.full_name }}</td>
         <td>{{ guest.user.email }}</td>
         <td>{{ guest.phone }}</td>
-        <td><a ng-href="/hosts/{{hostId(guest)}}">{{ hostId(guest) }}</a></td>
+        <td><a ng-href="/<%=I18n.locale.to_s%>/hosts/{{hostId(guest)}}">{{ hostId(guest) }}</a></td>
         <td>{{ formatDateTime((guest.invites[0] || {}).created_at) }}</td>
         <td>{{ plusOnes(guest) }}</td>
         <td>

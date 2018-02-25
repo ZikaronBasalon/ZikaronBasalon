@@ -8,12 +8,25 @@ class ApplicationController < ActionController::Base
   	redirect_to root_path unless current_user && (current_user.any_admin?)
   end
 
+	def correct_manager
+		return redirect_to user_session_path if current_user.nil?
+
+		meta = current_user.meta
+		id = params[:id].to_i
+
+		return if current_user.admin? || current_user.sub_admin?
+
+		redirect_to root_path if (meta.is_a?(Manager) && meta.id != id) || !meta.is_a?(Manager)
+	end
+
 	private
 
 	def set_locale
 	  I18n.locale = params[:locale]
 	  I18n.locale ||= request.headers['locale'] if request.headers['locale'].present?
-	  I18n.locale ||= :he
+    # Avriel edit: added locale by cookie
+    I18n.locale ||= request.cookies['locale']
+		I18n.locale ||= :he
 	  # current_user.locale
 	  # request.subdomain
 	  # request.env["HTTP_ACCEPT_LANGUAGE"]
