@@ -5,7 +5,7 @@ gem 'pg'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-
+gem 'will_paginate'
 gem 'simple_form'
 gem 'compass-rails'
 gem 'newrelic_rpm'
