@@ -40,6 +40,8 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
       }
     }
 
+    $scope.getHosts(1);
+
     $scope.$watch('search.query', _.throttle(function(oldVal, newVal) {
       if(newVal != oldVal) {
         $scope.filter();

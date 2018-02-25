@@ -29,9 +29,12 @@ class Manager < ActiveRecord::Base
     hosts = hosts.where(:active => true) unless user.admin?
     hosts = hosts.where(concept: concept).select{ |h| h.has_witness } if concept
 
+    # hosts = paginate(hosts, page) if page
+    hosts = hosts.paginate(:page => page || 1, :per_page => 20)
+
     hosts = hosts.select{ |h| host_in_filter(h, query, has_manager, has_survivor, is_org, language, in_future, has_invites) }
 
-    hosts = paginate(hosts, page) if page
+
     hosts
   end
 
@@ -49,7 +52,7 @@ class Manager < ActiveRecord::Base
     witnesses = witnesses.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
     witnesses = witnesses.where(concept: concept) if concept
     witnesses = witnesses.select{ |w| witness_in_filter(w, has_manager, language) } if has_manager.present? || language.present?
-    witnesses = paginate(witnesses, page) if page
+    witnesses = witnesses.paginate(:page => page || 1, :per_page => 20)
     witnesses
   end
 
@@ -79,15 +82,6 @@ class Manager < ActiveRecord::Base
   def city_name=(name)
   	city = City.find_or_create_by_name(name) if name.present?
   	self.cities.push(city)
-  end
-
-  def paginate(arr_name, page)
-    unless arr_name.kind_of?(Array)
-      arr_name = arr_name.page(page).per(20)
-    else
-      arr_name = Kaminari.paginate_array(arr_name).page(page).per(20)
-    end
-    arr_name
   end
 
   def host_in_filter(host, query, has_manager, has_survivor, is_org, language, in_future, has_invites)
