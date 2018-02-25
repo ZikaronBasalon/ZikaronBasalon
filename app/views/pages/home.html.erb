@@ -12,7 +12,7 @@
     <div class="col-xs-12" ng-controller="HomePageController"
           ng-init="init(
             <%= @hosts.to_json(:include => [{ :user => { :methods => [:first_name] } }, :city, :country], :methods => [:available_places, :converted_time]) %>, 
-            <%= @cities.to_json %>, <%= @regions.to_json %>, <%= @total_items %>,
+            <%= [] %>, <%= @regions.to_json %>, <%= @total_items %>,
             <%= current_user_json %>, <%= @countries.to_json %>
           )">
 
