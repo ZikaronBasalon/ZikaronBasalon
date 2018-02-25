@@ -102,7 +102,7 @@ class WitnessesController < ApplicationController
       @hosts = Host.where(city_id: get_city_ids_for_assignment, survivor_needed: true)
     end
     @hosts = @hosts.select { |h| h.witness.nil? && h.in_query(query) && h.received_registration_mail }
-    @cities = @manager.get_cities
+    @cities = City.where(id: get_city_ids_for_assignment)
 
     respond_to do |format|
       format.html
@@ -136,13 +136,15 @@ class WitnessesController < ApplicationController
   end
 
   def get_city_ids_for_assignment
+    communities = CommunityLeadership.where(manager_id: current_user.meta.id)
+    city_ids = communities.map(&:city_id)
     if params[:city_id]
       [params[:city_id]]
     else
-      if @manager.user.any_admin?
+      if !@manager.user.simple_admin?
         City.all.map(&:id)
       else
-        @manager.cities.map(&:id)
+        @manager.cities.where(id: city_ids).map(&:id)
       end
     end
   end
