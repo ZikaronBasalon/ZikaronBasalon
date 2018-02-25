@@ -39,7 +39,7 @@ ZikaronBasalon::Application.configure do
   config.assets.debug = true
 
   config.after_initialize do
-    Bullet.enable = true
+    Bullet.enable = false
     Bullet.alert = false
     Bullet.bullet_logger = true
   end
