@@ -31,11 +31,11 @@ class Manager < ActiveRecord::Base
 
     # hosts = paginate(hosts, page) if page
     hosts = hosts.paginate(:page => page || 1, :per_page => 20)
-
+    hosts_count = hosts.count
     hosts = hosts.select{ |h| host_in_filter(h, query, has_manager, has_survivor, is_org, language, in_future, has_invites) }
 
 
-    hosts
+    return hosts, hosts_count
   end
 
   def get_witnesses(page, filter, query, sort, has_manager, has_host, language)
@@ -51,9 +51,11 @@ class Manager < ActiveRecord::Base
     end
     witnesses = witnesses.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
     witnesses = witnesses.where(concept: concept) if concept
-    witnesses = witnesses.select{ |w| witness_in_filter(w, has_manager, language) } if has_manager.present? || language.present?
     witnesses = witnesses.paginate(:page => page || 1, :per_page => 20)
-    witnesses
+    witnesses_count = witnesses.count
+    witnesses = witnesses.select{ |w| witness_in_filter(w, has_manager, language) } if has_manager.present? || language.present?
+
+    return witnesses, witnesses_count
   end
 
   def get_cities(country_id, region_id)
