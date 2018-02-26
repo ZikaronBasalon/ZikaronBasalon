@@ -155,6 +155,7 @@ ActiveRecord::Schema.define(:version => 20180214095914) do
     t.integer  "previous_meta_id"
     t.string   "previous_meta_type"
     t.boolean  "active_this_year",       :default => true
+    t.boolean  "current_year_admin",     :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
