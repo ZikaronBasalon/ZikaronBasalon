@@ -16,7 +16,7 @@ class Manager < ActiveRecord::Base
     sort_order = !reverse_ordering.to_i.zero? ? " desc" : " asc"
     hosts = Host.includes(:city, :user, :witness).order(sort + sort_order)
     hosts = hosts.where(filter)
-    hosts = hosts.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
+    hosts = hosts.where(city_id: city_ids) if city_ids != nil && !user.sub_admin? && !concept
     hosts = hosts.where(:active => true) unless user.admin? && !user.current_year_admin?
     hosts = hosts.where(concept: concept).select{ |h| h.has_witness } if concept
     hosts = hosts.select{ |h| host_in_filter(h, query, has_manager, has_survivor, is_org, language, in_future, has_invites) }
