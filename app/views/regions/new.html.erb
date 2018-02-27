@@ -3,11 +3,13 @@
 <%= form_for @region do |f| %>
   <%= f.error_messages %>
   <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.label t 'shared.name' %><br />
+    <%= f.text_field :name %><br/>
+    <%= f.label t 'shared.country' %><br />
+    <%= select("region", "country_id", Country.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }) %>
   </p>
-  <p><%= f.submit %></p>
+  <p><%= f.submit t 'shared.create_button_text'%></p>
 <% end %>
 
 
-<p><%= link_to "Back to List", regions_path %></p>
+<p><%= link_to (t "shared.back_to_list"), regions_path %></p>

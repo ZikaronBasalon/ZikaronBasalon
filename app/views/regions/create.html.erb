@@ -1,3 +1,10 @@
-<p>Region was created succesfully</p>
 
-<p><%= link_to "Back to List", regions_path %></p>
+
+<% if @is_created %>
+  <p><%= t 'shared.created_successfully'%></p>
+  <p><%= link_to(t("shared.create_another"), new_region_path) %></p>
+<% else %>
+  <p><%= t 'shared.created_failure'%></p>
+<% end %>
+
+<p><%= link_to (t "shared.back_to_list"), regions_path %></p>

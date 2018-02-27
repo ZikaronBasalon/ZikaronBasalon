@@ -13,7 +13,24 @@ class ManagersController < ApplicationController
 
   def show
     @page = params[:page] || 1
-    @hosts = @manager.get_hosts(@page,
+
+    # get region id and remove from query (it's bugging things up otherwise in get_hosts with the querying)
+    region_id = nil
+    if params[:filter].present? && params[:filter][:host].present? && params[:filter][:host][:region_id].present?
+      region_id = params[:filter][:host][:region_id]
+      params[:filter][:host].delete :region_id
+    end
+
+    # get country_id
+    country_id = params[:filter].present? && params[:filter][:host].present? ? params[:filter][:host][:country_id] : ""
+
+    # get lists
+    @cities = @manager.get_cities(country_id, region_id)
+    @countries = @manager.get_countries
+    @regions = @manager.get_regions(country_id)
+
+    # get hosts and witnesses
+    @hosts, @total_hosts = @manager.get_hosts(@page,
                                 host_filter,
                                 params[:host_query],
                                 params[:host_sort],
@@ -23,9 +40,9 @@ class ManagersController < ApplicationController
                                 language,
                                 in_future,
                                 has_invites,
-                                reverse_ordering)
-    @cities = @manager.get_cities
-    @witnesses = @manager.get_witnesses(@page,
+                                reverse_ordering, @cities, country_id, region_id)
+
+    @witnesses, @total_witnesses = @manager.get_witnesses(@page,
                                         witness_filter,
                                         params[:witness_query],
                                         params[:witness_sort],
@@ -33,8 +50,6 @@ class ManagersController < ApplicationController
                                         has_host,
                                         language)
 
-    @total_hosts = @hosts.total_count
-    @total_witnesses = @witnesses.total_count
 
     respond_to do |format|
       format.html
@@ -44,7 +59,9 @@ class ManagersController < ApplicationController
           witnesses: @witnesses.to_json(:include => { city: { :include => :managers } }),
           total_hosts: @total_hosts,
           total_witnesses: @total_witnesses,
-          page: @page
+          page: @page,
+          regions: @regions.to_json,
+          cities: @cities.to_json
         }
       }
     end
@@ -126,17 +143,6 @@ class ManagersController < ApplicationController
   private
     def set_manager
       @manager = Manager.find(params[:id])
-    end
-
-    def correct_manager
-      return redirect_to user_session_path if current_user.nil?
-
-      meta = current_user.meta
-      id = params[:id].to_i
-
-      return if current_user.admin? || current_user.sub_admin?
-
-      redirect_to root_path if (meta.is_a?(Manager) && meta.id != id) || !meta.is_a?(Manager)
     end
 
     def host_filter

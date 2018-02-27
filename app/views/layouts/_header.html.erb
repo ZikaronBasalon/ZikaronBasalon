@@ -1,3 +1,4 @@
+
 <header>
 	<div class="right-side">
 		<!-- Home link -->
@@ -12,6 +13,10 @@
 
 			<!-- Admin -->
 			<%= link_to(t('.managers'), managers_path, class: 'header-link') if current_user.admin? %>
+
+      <!-- New Admin link - Area Management -->
+      <%= link_to(t('.region_managememnt'), regions_path, class: 'header-link') if current_user.admin? %>
+
 		<!-- Non signed in user -->
 		<% else %>
 			<%= link_to signup_path(type: 'host') do %>
@@ -29,7 +34,7 @@
 		<div class="header-brand"><%= t('.brand') %></div>
 		<% locale = next_locale(I18n.locale) %>
 		<%= link_to locale: locale do %>
-			<div class="language-btn small-header-btn"><%= locale.capitalize %></div>
+      <div onClick="changeLocale('<%=locale.to_str%>')" class="language-btn small-header-btn"><%= locale.capitalize %></div>
 		<% end %>
 		<% if I18n.locale == :he %>
 			<%= link_to "https://www.facebook.com/ZikronBaSalon/" do %>
@@ -47,3 +52,20 @@
 		<% end %>
 	</div>
 </header>
+
+<script type="text/javascript">
+    function setCookie(name,value,days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days*24*60*60*1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+    }
+
+    function changeLocale(locale) {
+        setCookie('locale', locale, 100000000);
+    }
+
+</script>
