@@ -31,7 +31,7 @@ class RegionsController < ApplicationController
 
   def add_city
     @is_valid = true
-    if params[:city][:id] != nil && params[:city][:id] != ""
+    if params[:city].present? && params[:city][:id].present?
       city = City.where(id: params[:city][:id]).last
       city.region_id= params[:id]
       city.save!
