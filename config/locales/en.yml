@@ -13,7 +13,9 @@ en:
           attributes:
             phone:
               taken: "קיים במערכת איש עדות עם מספר טלפון זהה"
-
+        region:
+          attributes:
+            name: "Name"
   users:
     new:
       title: "Register as a host"
@@ -53,6 +55,8 @@ en:
 
 
   shared:
+    create_another: "Create another"
+    new_link_text: "Click to create"
     'yes': "Yes"
     'no': "No"
     continue: "Continue"
@@ -128,6 +132,7 @@ en:
     sending_request: "Send request"
     to_my_profile: "My profile"
     back_to_website: "Back to website"
+    back_to_list: "Back to list"
     forgot_password: "Forgot password"
     phone: "Phone"
     date: "Date"
@@ -156,6 +161,11 @@ en:
     assignment_time: "teamed date"
     in_future: "Future events"
     has_invites: "Open Requests"
+    create_button_text: "Create"
+    created_successfully: "Created Successfully!"
+    deleted_succesfully: "Deleted succesfully!"
+    created_failure: "Failed to create, please try again and fill all fields."
+    region: "Region"
 
   views:
     pagination:
@@ -179,6 +189,7 @@ en:
       profile: "Profile"
       home: "Home"
       managers: "Team zone"
+      region_managememnt: "Region Management"
       signup_staff: "Team registration"
       manager_profile: "Community Management"
       brand: "Zikaron Basalon"
@@ -423,3 +434,9 @@ en:
      cancel_request: "Cancel request"
      invite_request: "Request invite"
      no_requests: "You don't have any open requests at the moment"
+
+  regions:
+    index:
+    show:
+      add_city_title: "Add city to region"
+      edit_city_list: "Edit city list"

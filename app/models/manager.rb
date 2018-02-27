@@ -1,4 +1,7 @@
 class Manager < ActiveRecord::Base
+
+  include CitiesHelper
+
   has_many :community_leaderships
   has_many :cities, :through => :community_leaderships
   has_many :hosts, :through => :cities
@@ -8,20 +11,31 @@ class Manager < ActiveRecord::Base
 
  	attr_accessible :temp_email, :user_attributes, :concept
  	attr_accessor :city_name
-
 	validates_uniqueness_of :temp_email
 
-  def get_hosts(page, filter, query, sort, has_manager, has_survivor, is_org, language, in_future, has_invites, reverse_ordering)
+  def get_hosts(page, filter, query, sort, has_manager, has_survivor, is_org, language, in_future, has_invites,
+                reverse_ordering, cities, country_id, region_id)
     sort = 'created_at' if sort.blank?
     sort_order = !reverse_ordering.to_i.zero? ? " desc" : " asc"
+
+    city_ids = nil
+    if region_id.present?
+      city_ids = cities.map {|c| c[:id] }
+    end
+
     hosts = Host.includes(:city, :user, :witness).order(sort + sort_order)
     hosts = hosts.where(filter)
-    hosts = hosts.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
+    hosts = hosts.where(city_id: city_ids) if city_ids != nil && !user.sub_admin? && !concept
     hosts = hosts.where(:active => true) unless user.admin? && !user.current_year_admin?
     hosts = hosts.where(concept: concept).select{ |h| h.has_witness } if concept
+
+    # hosts = paginate(hosts, page) if page
+    hosts = hosts.paginate(:page => page || 1, :per_page => 20)
+    hosts_count = hosts.count
     hosts = hosts.select{ |h| host_in_filter(h, query, has_manager, has_survivor, is_org, language, in_future, has_invites) }
-    hosts = paginate(hosts, page) if page
-    hosts
+
+
+    return hosts, hosts_count
   end
 
   def get_witnesses(page, filter, query, sort, has_manager, has_host, language)
@@ -37,33 +51,39 @@ class Manager < ActiveRecord::Base
     end
     witnesses = witnesses.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
     witnesses = witnesses.where(concept: concept) if concept
+    witnesses = witnesses.paginate(:page => page || 1, :per_page => 20)
+    witnesses_count = witnesses.count
     witnesses = witnesses.select{ |w| witness_in_filter(w, has_manager, language) } if has_manager.present? || language.present?
-    witnesses = paginate(witnesses, page) if page
-    witnesses
+
+    return witnesses, witnesses_count
   end
 
-  def get_cities
-    if user.admin? || user.sub_admin?
-      @cities = City.includes(:managers).order('name desc').all
+  def get_cities(country_id, region_id)
+  if user.admin? || user.sub_admin?
+      @cities = City.includes(:managers).order('name desc')
     else
       @cities = City.includes(:managers).where(:id => cities.pluck(:id))
     end
 
+    @cities = filter_cities(@cities, country_id, region_id)
+
+
     @cities.map{ |c| { id: c.id, name: c.name }}.sort_alphabetical_by{|c| c[:name] }
+  end
+
+  def get_countries
+    @countries = Country.all
+    @countries.map{ |c| { id: c.id, name: c.name }}.sort_alphabetical_by{|c| c[:name] }
+  end
+
+  def get_regions(country_id)
+    @regions = Region.where(country_id: country_id)
+    @regions.map{ |r| { id: r.id, name: r.name }}.sort_alphabetical_by{|r| r[:name] }
   end
 
   def city_name=(name)
   	city = City.find_or_create_by_name(name) if name.present?
   	self.cities.push(city)
-  end
-
-  def paginate(arr_name, page)
-    unless arr_name.kind_of?(Array)
-      arr_name = arr_name.page(page).per(20)
-    else
-      arr_name = Kaminari.paginate_array(arr_name).page(page).per(20)
-    end
-    arr_name
   end
 
   def host_in_filter(host, query, has_manager, has_survivor, is_org, language, in_future, has_invites)
@@ -101,5 +121,9 @@ class Manager < ActiveRecord::Base
       return h.witness.nil?
     end
   end
+
+
+
+
 end
 

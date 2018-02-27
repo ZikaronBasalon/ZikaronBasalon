@@ -37,6 +37,10 @@ class User < ActiveRecord::Base
     self.meta && self.meta.is_a?(Guest)
   end
 
+  def simple_admin?
+    self.meta_type == 'Manager' && !self.sub_admin && !self.admin
+  end
+
   def any_admin?
     self.admin || self.sub_admin || (self.meta_type == 'Manager' && !self.sub_admin && !self.admin)
   end

@@ -4,12 +4,23 @@ ZikaronBasalon::Application.routes.draw do
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/  do
     get 'my-profile', :to => 'users#profile'
 
-    devise_for :users, controllers: { registrations: "registrations" }
+    devise_for :users, controllers: { registrations: "registrations" } do
+      get '/users/sign_out' => 'devise/sessions#destroy'
+    end
+
     resources :managers do
       post :remove_city, on: :member
       get :export_hosts, on: :member
       get :export_witnesses, on: :member
       get :export_guests, on: :member
+    end
+
+
+    resources :regions do
+      member do
+        put :add_city
+        get :remove_city
+      end
     end
 
     resources :guests

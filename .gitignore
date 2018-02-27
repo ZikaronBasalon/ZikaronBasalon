@@ -22,7 +22,15 @@
 
 .byebug_history
 
+database.yml
+
 latest.dump
 
 *.dump*
 
+.idea
+
+avriel_staging_user
+
+config/database.yml
+config/environments/development.rb

@@ -16,10 +16,11 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
   $scope.formatCityDisplay = formatCityDisplay;
   $scope.sortProp = 'user.full_name';
 
-  $scope.init = function(hosts, cities, totalItems, currentUser, countries) {
+  $scope.init = function(hosts, cities, regions, totalItems, currentUser, countries) {
     $scope.hosts = hosts;
     $scope.cities = cities;
-    $scope.countries = countries
+    $scope.regions = regions;
+    $scope.countries = countries;
     $scope.totalItems = totalItems;
     $scope.currentUser = currentUser;
 
@@ -38,6 +39,8 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
         });
       }
     }
+
+    $scope.getHosts(1);
 
     $scope.$watch('search.query', _.throttle(function(oldVal, newVal) {
       if(newVal != oldVal) {
@@ -61,6 +64,7 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
         page: page,
         'city_ids[]': _.map($scope.search.cities, 'id'),
         country_id: $scope.search.country_id,
+        region_id: $scope.search.region_id,
         event_language: $scope.search.event_language,
         event_date: $scope.search.event_date,
         query: $scope.search.query,
@@ -71,6 +75,7 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
     }).then(function(response) {
       $scope.loading = false;
       $scope.cities = response.data.cities;
+      $scope.regions = response.data.regions;
       $scope.hosts = JSON.parse(response.data.hosts);
       $scope.totalItems = response.data.total_items;
     });
