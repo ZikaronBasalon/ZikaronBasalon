@@ -42,7 +42,10 @@ class PagesController < ApplicationController
     end
     @countries = Country.all
 
-    @regions = Region.where(country_id: country_id)
+    @regions = Region.all
+    if country_id.present?
+      @regions = Region.where(country_id: country_id)
+    end
     @regions = @regions.sort_alphabetical_by{ |r| r[:name] }
 
 
