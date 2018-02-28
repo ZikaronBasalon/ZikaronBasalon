@@ -30,7 +30,7 @@ latest.dump
 
 .idea
 
-avriel_staging_user
+avriel_staging_user.txt
 
 config/database.yml
 config/environments/development.rb
