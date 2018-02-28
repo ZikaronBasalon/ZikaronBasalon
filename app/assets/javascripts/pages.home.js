@@ -17,6 +17,10 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
   $scope.sortProp = 'user.full_name';
 
   $scope.init = function(hosts, cities, regions, totalItems, currentUser, countries) {
+
+    //  Make Israel default country on search
+    $scope.search.country_id = 97;
+
     $scope.hosts = hosts;
     $scope.cities = cities;
     $scope.regions = regions;
