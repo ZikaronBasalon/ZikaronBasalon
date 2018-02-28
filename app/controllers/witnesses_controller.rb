@@ -66,11 +66,12 @@ class WitnessesController < ApplicationController
     respond_to do |format|
       if @witness.update_attributes(params[:witness])
          if(params[:witness][:host_id].present?)
-          HostMailer.witness_assigned(
-            params[:witness][:host_id],
-            @witness.id,
-            I18n.locale
-          ).deliver
+         # TODO: uncomment this
+          # HostMailer.witness_assigned(
+          #   params[:witness][:host_id],
+          #   @witness.id,
+          #   I18n.locale
+          # ).deliver
           @host = Host.find(params[:witness][:host_id])
           @host.update_attributes(assignment_time: Time.now.utc.localtime, witness_id: params[:id])
         end
@@ -118,9 +119,9 @@ class WitnessesController < ApplicationController
     @witness = Witness.find(params[:id])
     @host_id = @witness.host_id
     @host = @witness.host
-    @witness.update_attributes(host_id: nil)
+    @witness.update_attributes(host_id: nil, host:nil)
     @host.update_column(:assignment_time, nil)
-    ManagerMailer.assignment_cancelled(@host_id, @witness.id, current_user).deliver
+    # ManagerMailer.assignment_cancelled(@host_id, @witness.id, current_user).deliver
     redirect_to @witness
   end
 
