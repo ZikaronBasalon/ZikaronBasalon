@@ -15,7 +15,7 @@
 			<%= link_to(t('.managers'), managers_path, class: 'header-link') if current_user.admin? %>
 
       <!-- New Admin link - Area Management -->
-      <%= link_to(t('.region_managememnt'), regions_path, class: 'header-link') if current_user.admin? %>
+      <%= link_to(t('.region_managememnt'), regions_path, class: 'header-link') if current_user.admin? && !current_user.simple_admin? %>
 
 		<!-- Non signed in user -->
 		<% else %>
