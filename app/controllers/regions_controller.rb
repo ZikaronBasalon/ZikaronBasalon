@@ -1,6 +1,7 @@
 class RegionsController < ApplicationController
 
-  before_filter :correct_manager, except: [:index, :show]
+  before_filter :is_admin
+  before_filter :correct_manager
 
   # before_action :authenticate_user!
   def index
