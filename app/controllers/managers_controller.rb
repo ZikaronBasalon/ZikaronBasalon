@@ -25,12 +25,12 @@ class ManagersController < ApplicationController
     country_id = params[:filter].present? && params[:filter][:host].present? ? params[:filter][:host][:country_id] : ""
 
     # get lists
-    @cities = @manager.get_cities(country_id, region_id)
+    @cities = @manager.get_cities(current_user, country_id, region_id)
     @countries = @manager.get_countries
     @regions = @manager.get_regions(country_id)
 
     # get hosts and witnesses
-    @hosts, @total_hosts = @manager.get_hosts(@page,
+    @hosts, @total_hosts = @manager.get_hosts(current_user, @page,
                                 host_filter,
                                 params[:host_query],
                                 params[:host_sort],
