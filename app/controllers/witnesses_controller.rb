@@ -72,7 +72,7 @@ class WitnessesController < ApplicationController
             I18n.locale
           ).deliver
           @host = Host.find(params[:witness][:host_id])
-          @host.update_attributes(assignment_time: Time.now.utc.localtime)
+          @host.update_attributes(assignment_time: Time.now.utc.localtime, witness_id: params[:id])
         end
 
 
