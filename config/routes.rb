@@ -4,7 +4,7 @@ ZikaronBasalon::Application.routes.draw do
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/  do
     get 'my-profile', :to => 'users#profile'
 
-    devise_for :users do
+    devise_for :users, controllers: { registrations: "registrations" } do
       get '/users/sign_out' => 'devise/sessions#destroy'
     end
 
