@@ -7,7 +7,7 @@
     <%= f.error_messages %>
     <p>
       <%= f.label t 'shared.city' %><br />
-      <%= select("city", "id", City.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }, { multiple: true}) %>
+      <%= select("city", "id", City.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }) %>
     </p>
     <p><%= f.submit t 'shared.create_button_text'%></p>
   <% end %>
