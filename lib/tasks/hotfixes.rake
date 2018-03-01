@@ -222,4 +222,19 @@ namespace :hotfixes do
       p "#{user_to_change_password.email} #{new_pwd}\n"
     end
   end
+
+  desc "witness host relation fix"
+  task :witness_host_relation_fix => :environment do
+    print("starting fixing relations!" + "/n")
+    Witness.where("host_id IS NOT NULL").each {|witness|
+      host = Host.where(id: witness.host_id).last
+      witness.host = host
+      host.witness = witness
+      host.witness_id = witness.id
+      host.save!
+      witness.save!
+      print("The relation between the host (" + host.id.to_s + " - " + host.user.full_name + ") and the witness (" + witness.id.to_s + " - " + witness.full_name + ") should be fixed!" + "\n")
+    }
+    print("finished fixing relations!")
+  end
 end
