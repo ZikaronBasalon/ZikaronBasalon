@@ -120,7 +120,7 @@ class WitnessesController < ApplicationController
     @host = @witness.host
     @witness.update_attributes(host_id: nil, host:nil)
     @host.update_column(:assignment_time, nil)
-    # ManagerMailer.assignment_cancelled(@host_id, @witness.id, current_user).deliver
+    ManagerMailer.assignment_cancelled(@host_id, @witness.id, current_user).deliver
     redirect_to @witness
   end
 
