@@ -237,4 +237,37 @@ namespace :hotfixes do
     }
     print("finished fixing relations!")
   end
+
+  desc "Add all cities to an other region of their country"
+  task :add_cities_to_other_region_of_their_country => :environment do
+    print("starting!" + "/n")
+
+    OTHER_REGION_NAME = 'Other\אחר'
+
+    Host.all.each{|host|
+      if host.city.present?
+        city = host.city
+        country = host.country
+        # add cities that have no region to other of their country
+        if city.region.nil?
+          other_region = Region.where(country_id:country.id, name:OTHER_REGION_NAME).last
+
+          # create other region for the country if it does not exist
+          if other_region.nil?
+            other_region = Region.new
+            other_region.name = OTHER_REGION_NAME
+            other_region.country_id = country.id
+            other_region.save!
+          end
+
+          # add city to region
+          city.region_id = other_region.id
+          city.save!
+        end
+      end
+
+    }
+
+    print("finished")
+  end
 end
