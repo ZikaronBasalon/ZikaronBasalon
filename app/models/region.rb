@@ -1,4 +1,5 @@
 class Region < ActiveRecord::Base
+  OTHER_REGION_NAME = 'Other\אחר'
   attr_accessible :name
   attr_accessible :country_id
   validates :name, :presence => true

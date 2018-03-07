@@ -1,3 +1,4 @@
+
 namespace :hotfixes do
   desc "fix dashes in numbers"
   task :remove_dashes_in_phone_numbers => :environment do
@@ -242,20 +243,18 @@ namespace :hotfixes do
   task :add_cities_to_other_region_of_their_country => :environment do
     print("starting!" + "/n")
 
-    OTHER_REGION_NAME = 'Other\אחר'
-
     Host.all.each{|host|
       if host.city.present?
         city = host.city
         country = host.country
         # add cities that have no region to other of their country
         if city.region.nil?
-          other_region = Region.where(country_id:country.id, name:OTHER_REGION_NAME).last
+          other_region = Region.where(country_id:country.id, name:Region::OTHER_REGION_NAME).last
 
           # create other region for the country if it does not exist
           if other_region.nil?
             other_region = Region.new
-            other_region.name = OTHER_REGION_NAME
+            other_region.name = Region::OTHER_REGION_NAME
             other_region.country_id = country.id
             other_region.save!
           end
@@ -270,4 +269,21 @@ namespace :hotfixes do
 
     print("finished")
   end
+
+
+  # Note: this is a helper rake task to detrmine weather there are cities without regions
+  desc "Debug issue with united states additional city not under any region"
+  task :debug_united_states_city_without_region => :environment do
+    print("starting!" + "\n")
+    united_states = Country.where(id:214).last
+    united_states_hosts = Host.where(country_id: united_states.id)
+    print "United states has " + united_states_hosts.count.to_s + "\n"
+    Host.where(country_id: united_states.id).each{|host|
+      if host.city.region.nil? || host.city.region.name != 'Other\אחר'
+        print "The host with the id " + host.id.to_s + " has no region!" + "\n"
+      end
+    }
+    print("finished")
+  end
+
 end

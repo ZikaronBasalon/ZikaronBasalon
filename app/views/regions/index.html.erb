@@ -1,15 +1,18 @@
 <% title "Regions" %>
 
-<table>
-  <tr>
-    <th><%= t 'shared.name' %></th>
-  </tr>
-  <% for region in @regions %>
-    <tr>
-      <td><%= link_to region.name, region %></td>
-    </tr>
-  <% end %>
-</table>
+<% for country_name, region_arr in @country_region_dict %>
+  <h3><%= country_name %></h3>
+  <table>
+    <!--<tr>-->
+      <!--<th><%= t 'shared.name' %></th>-->
+    <!--</tr>-->
+    <% for region in region_arr %>
+      <tr>
+        <td><%= link_to region.name, region %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
 
 <br/>
 
