@@ -11,10 +11,7 @@ class ManagersController < ApplicationController
     respond_with(@managers)
   end
 
-  def show
-    @page = params[:page] || 1
-
-    # get region id and remove from query (it's bugging things up otherwise in get_hosts with the querying)
+  def get_country_id_and_region_id
     region_id = nil
     if params[:filter].present? && params[:filter][:host].present? && params[:filter][:host][:region_id].present?
       region_id = params[:filter][:host][:region_id]
@@ -24,13 +21,22 @@ class ManagersController < ApplicationController
     # get country_id
     country_id = params[:filter].present? && params[:filter][:host].present? ? params[:filter][:host][:country_id] : ""
 
+    return country_id, region_id
+  end
+
+  def show
+    @page = params[:page] || 1
+
+    # get region id and remove from query (it's bugging things up otherwise in get_hosts with the querying)
+    country_id, region_id = get_country_id_and_region_id
+
     # get lists
     @cities = @manager.get_cities(current_user, country_id, region_id)
     @countries = @manager.get_countries
     @regions = @manager.get_regions(country_id)
 
     # get hosts and witnesses
-    @hosts, @total_hosts = @manager.get_hosts(current_user, @page,
+    @hosts, @total_hosts = @manager.get_hosts(current_user, true, @page,
                                 host_filter,
                                 params[:host_query],
                                 params[:host_sort],
@@ -105,7 +111,9 @@ class ManagersController < ApplicationController
   end
 
   def export_hosts
-    @hosts = @manager.get_hosts(nil,
+    country_id, region_id = get_country_id_and_region_id
+    @cities = @manager.get_cities(current_user, country_id, region_id)
+    @hosts, host_count = @manager.get_hosts(current_user, false, nil,
                                 host_filter,
                                 params[:host_query],
                                 params[:host_sort],
@@ -115,7 +123,7 @@ class ManagersController < ApplicationController
                                 language,
                                 in_future,
                                 has_invites,
-                                reverse_ordering)
+                                reverse_ordering, @cities, country_id, region_id)
 
     send_data Host.to_csv(@hosts), :disposition => "attachment; filename=hosts.csv"
   end
