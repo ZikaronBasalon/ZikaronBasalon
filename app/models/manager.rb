@@ -15,20 +15,25 @@ class Manager < ActiveRecord::Base
 
   def get_hosts(current_user, is_paging, page, filter, query, sort, has_manager, has_survivor, is_org, language, in_future, has_invites,
                   reverse_ordering, cities, country_id, region_id)
-    sort = 'created_at' if sort.blank?
-    sort_order = !reverse_ordering.to_i.zero? ? " desc" : " asc"
 
     city_ids = nil
-
     if region_id.present? || current_user.simple_admin?
       city_ids = cities.map {|c| c[:id] }
     end
 
-    hosts = Host.includes(:city, :user, :witness).order(sort + sort_order)
+    hosts = Host.includes(:city, :user, :witness, city: :managers)
     hosts = hosts.where(filter)
     hosts = hosts.where(city_id: city_ids) if city_ids != nil && !user.sub_admin? && !concept
     hosts = hosts.where(:active => true) unless user.admin? && !user.current_year_admin?
     hosts = hosts.where(concept: concept).select{ |h| h.has_witness } if concept
+
+    # add specific host filters (replaces host_in_filter)
+    hosts = add_filters_to_hosts(hosts, query, has_manager, has_survivor, is_org, language, in_future, has_invites)
+
+    # sort
+    sort = 'hosts.created_at' if sort.blank? || sort == 'created_at'
+    sort_order = !reverse_ordering.to_i.zero? ? " desc" : " asc"
+    hosts = hosts.order(sort + sort_order)
 
     # do paging if paging is requested
     hosts_count = nil
@@ -37,7 +42,7 @@ class Manager < ActiveRecord::Base
       hosts_count = hosts.count
     end
 
-    hosts = hosts.select{ |h| host_in_filter(h, query, has_manager, has_survivor, is_org, language, in_future, has_invites) }
+    # hosts = hosts.select{ |h| host_in_filter(h, query, has_manager, has_survivor, is_org, language, in_future, has_invites) }
 
 
     return hosts, hosts_count
@@ -99,6 +104,39 @@ class Manager < ActiveRecord::Base
   def city_name=(name)
   	city = City.find_or_create_by_name(name) if name.present?
   	self.cities.push(city)
+  end
+
+  def add_filters_to_hosts(hosts, query, has_manager, has_survivor, is_org, language, in_future, has_invites)
+    # language
+    if language.present?
+      if language != "other"
+        hosts = hosts.where(event_language: language)
+      else
+        hosts = hosts.where("event_language NOT IN ('english', 'hebrew', 'arabic', 'french', 'russian', 'spanish')")
+      end
+    end
+    # query by search
+    hosts = hosts.joins(:user, :city)
+    if query.present?
+      like_string = "users.full_name LIKE '%" + query + "%'"
+      like_string += " OR "
+      like_string += "users.email LIKE '%" + query + "%'"
+      like_string += " OR "
+      like_string += "cities.name LIKE '%" + query + "%'"
+      hosts = where(like_string)
+    end
+    # query by has_manager
+    # if has_manager.present?
+    #   # hosts = hosts.where('city != NULL')
+    #   #
+    #   if has_manager == "true"
+    #     hosts = hosts.where('city_managers_count > 0')
+    #   else
+    #     hosts = hosts.where('city_managers_count = 0')
+    #   end
+    # end
+
+    hosts
   end
 
   def host_in_filter(host, query, has_manager, has_survivor, is_org, language, in_future, has_invites)
