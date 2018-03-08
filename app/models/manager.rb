@@ -13,7 +13,7 @@ class Manager < ActiveRecord::Base
  	attr_accessor :city_name
 	validates_uniqueness_of :temp_email
 
-  def get_hosts(current_user, page, filter, query, sort, has_manager, has_survivor, is_org, language, in_future, has_invites,
+  def get_hosts(current_user, is_paging, page, filter, query, sort, has_manager, has_survivor, is_org, language, in_future, has_invites,
                   reverse_ordering, cities, country_id, region_id)
     sort = 'created_at' if sort.blank?
     sort_order = !reverse_ordering.to_i.zero? ? " desc" : " asc"
@@ -30,9 +30,13 @@ class Manager < ActiveRecord::Base
     hosts = hosts.where(:active => true) unless user.admin? && !user.current_year_admin?
     hosts = hosts.where(concept: concept).select{ |h| h.has_witness } if concept
 
-    # hosts = paginate(hosts, page) if page
-    hosts = hosts.paginate(:page => page || 1, :per_page => 20)
-    hosts_count = hosts.count
+    # do paging if paging is requested
+    hosts_count = nil
+    if is_paging
+      hosts = hosts.paginate(:page => page || 1, :per_page => 20)
+      hosts_count = hosts.count
+    end
+
     hosts = hosts.select{ |h| host_in_filter(h, query, has_manager, has_survivor, is_org, language, in_future, has_invites) }
 
 
