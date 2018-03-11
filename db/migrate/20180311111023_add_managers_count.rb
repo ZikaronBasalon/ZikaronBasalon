@@ -4,7 +4,7 @@ class AddManagersCount < ActiveRecord::Migration
 
     City.reset_column_information
     City.all.each{|city|
-      city.update_attribute :community_leaderships_count, city.managers.length
+      City.update(id: city.id, :community_leaderships_count => city.managers.length)
     }
   end
 
