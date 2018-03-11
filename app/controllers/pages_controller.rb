@@ -42,7 +42,7 @@ class PagesController < ApplicationController
     end
     @countries = Country.all
 
-    @regions = Region.all
+    @regions = []
     if country_id.present?
       @regions = Region.where(country_id: country_id)
     end

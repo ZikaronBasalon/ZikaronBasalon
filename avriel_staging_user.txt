@@ -1,5 +1,0 @@
-staging
-BPU831zq
-prod
-avriel@gmail.com
-523523a
