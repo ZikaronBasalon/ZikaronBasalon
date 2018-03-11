@@ -293,8 +293,15 @@ namespace :hotfixes do
       r.country_id = 97
       r.save!
     }
-    Rake::Task["build"].reenable
-    Rake::Task["build"].invoke
+    print("\n" + "finished")
+  end
+
+  desc "Remove other regions before adding them again"
+  task :remove_other_regions_before_re_adding_them => :environment do
+    print("starting!" + "\n")
+    Region.where(name: Region::OTHER_REGION_NAME).each{|r|
+      r.destroy
+    }
     print("\n" + "finished")
   end
 
