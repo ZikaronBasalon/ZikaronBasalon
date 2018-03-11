@@ -3,7 +3,36 @@ class Invite < ActiveRecord::Base
 
   belongs_to :guest
   belongs_to :host
+  after_create :after_create
+  after_update :after_update
 
+  def after_create
+    h = Host.where(id: host_id).last
+    h.invites_pending_count += total_invites_count
+    h.save!
+  end
+
+  def after_update
+    h = Host.where(id: host_id).last
+    if confirmed_changed?
+      # invite approved
+      if confirmed == true
+        h.invites_confirmed_count += total_invites_count
+        h.invites_pending_count -= total_invites_count
+      # rejected invitation
+      elsif confirmed_was == false && confirmed == nil
+        h.invites_pending_count -= total_invites_count
+      # rejected after confirmation
+      elsif confirmed_was == true && confirmed == nil
+        h.invites_confirmed_count -= total_invites_count
+      end
+    end
+    h.save!
+  end
+
+  def total_invites_count
+    return (1 + plus_ones)
+  end
 
 
   validates_uniqueness_of :guest_id
