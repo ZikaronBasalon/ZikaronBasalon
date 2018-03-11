@@ -286,4 +286,16 @@ namespace :hotfixes do
     print("finished")
   end
 
+  desc "Fix Regions without country to have Israel as region"
+  task :fix_regions_without_country => :environment do
+    print("starting!" + "\n")
+    Region.where(country_id: nil).each{|r|
+      r.country_id = 97
+      r.save!
+    }
+    Rake::Task["build"].reenable
+    Rake::Task["build"].invoke
+    print("\n" + "finished")
+  end
+
 end
