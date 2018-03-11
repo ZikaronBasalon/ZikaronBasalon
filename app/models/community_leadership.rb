@@ -1,7 +1,7 @@
 class CommunityLeadership < ActiveRecord::Base
 	attr_accessible :manager_id, :city_id
   belongs_to :manager
-  belongs_to :city
+  belongs_to :city, counter_cache: true
   validates_uniqueness_of :manager_id, :scope => :city_id
 
   def self.assign_manager(city, country_id)
