@@ -10,7 +10,7 @@ class City < ActiveRecord::Base
   def self.without_managers
   	cities = []
   	City.all.each do |c|
-  		cities.push(c) if c.managers.count === 0
+  		cities.push(c) if c.community_leaderships_count === 0
   	end
   	cities
   end

@@ -11,17 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20180214095914) do
+ActiveRecord::Schema.define(:version => 20180311121252) do
 
   create_table "cities", :force => true do |t|
     t.string   "name"
     t.integer  "region_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
     t.string   "manager_email"
     t.string   "placeid"
     t.string   "name_en"
     t.string   "name_he"
+    t.integer  "community_leaderships_count", :default => 0
   end
 
   create_table "comments", :force => true do |t|
@@ -101,6 +102,8 @@ ActiveRecord::Schema.define(:version => 20180214095914) do
     t.datetime "assignment_time"
     t.boolean  "preparation_evening",        :default => false
     t.boolean  "active",                     :default => true
+    t.integer  "invites_pending_count",      :default => 0
+    t.integer  "invites_confirmed_count",    :default => 0
   end
 
   add_index "hosts", ["city_id"], :name => "index_hosts_on_city_id"
