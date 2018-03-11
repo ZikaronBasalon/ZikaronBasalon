@@ -1,6 +1,8 @@
 class PagesController < ApplicationController
   include PagesHelper
   include CitiesHelper
+  include ApplicationHelper
+
   respond_to :html, :json
 
 #TODO add here where users are active this year
@@ -27,14 +29,14 @@ class PagesController < ApplicationController
 
   	@hosts = Host.includes(:city, :user, :country, :invites).where(host_conditions_hash)
     @hosts = @hosts.where(city_id: city_ids) if city_ids != nil
+
+    # additional filtering
+    @hosts = @hosts.where('invites_confirmed_count + invites_pending_count < max_guests')
+    @hosts = filter_by_query(@hosts, query)
+    @hosts = filter_by_language(@hosts, 'event_language', params[:event_language])
+
   	@hosts = @hosts.paginate(:page => params[:page] || 1, :per_page => 10)
     @total_items = @hosts.count
-    @hosts = @hosts.select { |h|
-      h.available_places > 0 &&
-      host_in_query(h, query) &&
-      h.in_language_filter(params[:event_language]) &&
-      host_in_vetrans(h, params[:vetrans])
-  	}
 
     @hosts = sort_by_field(@hosts, params[:sort] || 'user.full_name')
     if params[:reverse_ordering].to_i == 0
@@ -86,25 +88,6 @@ private
 		params[:query]
 	end
 
-  def host_in_query(h, query)
-    return true if !query.present?
-    
-    (h.user && h.user.full_name.include?(query)) ||
-    (h.city && h.city.name.include?(query)) ||
-    (h.country && h.country.printable_name && h.country.printable_name.include?(query)) ||
-    (h.address && h.address.include?(query)) ||
-    (h.public_text && h.public_text.include?(query))
-  end
-
-  def host_in_language_filter(h, language)
-    return true if language.blank?
-
-    if language != 'other'
-      return h.event_language == language
-    else
-      return !['english', 'hebrew', 'arabic', 'frech', 'russian', 'spanish'].include?(h.event_language)
-    end
-  end
 
   def host_in_vetrans(h, vetrans) 
     return true if !vetrans

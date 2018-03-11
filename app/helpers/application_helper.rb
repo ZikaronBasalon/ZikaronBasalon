@@ -31,4 +31,38 @@ module ApplicationHelper
   def next_locale(locale)
     locale == :he ? 'en' : 'he'
   end
+
+  def filter_by_has_manager(query_obj, has_manager)
+    if has_manager.present?
+      if has_manager == "true"
+        query_obj = query_obj.where('cities.community_leaderships_count > 0')
+      else
+        query_obj = query_obj.where('cities.community_leaderships_count = 0')
+      end
+    end
+    query_obj
+  end
+
+  def filter_by_language(query_obj, field_name, language)
+    if language.present?
+      if language != "other"
+        query_obj = query_obj.where(field_name + "='" + language + "'")
+      else
+        query_obj = query_obj.where(field_name + " NOT IN ('english', 'hebrew', 'arabic', 'french', 'russian', 'spanish')")
+      end
+    end
+    query_obj
+  end
+
+  def filter_by_query(query_obj, query)
+    if query.present?
+      like_string = "users.full_name LIKE '%" + query + "%'"
+      like_string += " OR "
+      like_string += "users.email LIKE '%" + query + "%'"
+      like_string += " OR "
+      like_string += "cities.name LIKE '%" + query + "%'"
+      query_obj = query_obj.where(like_string)
+    end
+    query_obj
+  end
 end
