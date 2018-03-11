@@ -1,6 +1,7 @@
 class Manager < ActiveRecord::Base
 
   include CitiesHelper
+  include ApplicationHelper
 
   has_many :community_leaderships
   has_many :cities, :through => :community_leaderships
@@ -15,20 +16,25 @@ class Manager < ActiveRecord::Base
 
   def get_hosts(current_user, is_paging, page, filter, query, sort, has_manager, has_survivor, is_org, language, in_future, has_invites,
                   reverse_ordering, cities, country_id, region_id)
-    sort = 'created_at' if sort.blank?
-    sort_order = !reverse_ordering.to_i.zero? ? " desc" : " asc"
 
     city_ids = nil
-
     if region_id.present? || current_user.simple_admin?
       city_ids = cities.map {|c| c[:id] }
     end
 
-    hosts = Host.includes(:city, :user, :witness).order(sort + sort_order)
+    hosts = Host.includes(:city, :user, :witness, :invites)
     hosts = hosts.where(filter)
     hosts = hosts.where(city_id: city_ids) if city_ids != nil && !user.sub_admin? && !concept
     hosts = hosts.where(:active => true) unless user.admin? && !user.current_year_admin?
     hosts = hosts.where(concept: concept).select{ |h| h.has_witness } if concept
+
+    # add specific host filters (replaces host_in_filter)
+    hosts = add_filters_to_hosts(hosts, query, has_manager, has_survivor, is_org, language, in_future, has_invites)
+
+    # sort
+    sort = 'hosts.created_at' if sort.blank? || sort == 'created_at'
+    sort_order = !reverse_ordering.to_i.zero? ? " desc" : " asc"
+    hosts = hosts.order(sort + sort_order)
 
     # do paging if paging is requested
     hosts_count = nil
@@ -37,15 +43,21 @@ class Manager < ActiveRecord::Base
       hosts_count = hosts.count
     end
 
-    hosts = hosts.select{ |h| host_in_filter(h, query, has_manager, has_survivor, is_org, language, in_future, has_invites) }
+    # hosts = hosts.select{ |h| host_in_filter(h, query, has_manager, has_survivor, is_org, language, in_future, has_invites) }
 
 
     return hosts, hosts_count
   end
 
   def get_witnesses(page, filter, query, sort, has_manager, has_host, language)
-    sort = 'created_at' if sort.blank?
-    witnesses = Witness.includes(:city, :host).order(sort + " desc").where(filter)
+    witnesses = Witness.includes(:city, :host)
+
+    # sort
+    sort = 'witnesses.created_at' if sort.blank? || sort == 'created_at'
+    sort_order = " desc"
+    witnesses = witnesses.order(sort + sort_order)
+
+    witnesses = witnesses.where(filter)
     witnesses = witnesses.where("LOWER(full_name) LIKE LOWER(?)", "%#{query.downcase}%") if query.present?
     if has_host.present?
       if has_host === 'true'
@@ -56,12 +68,24 @@ class Manager < ActiveRecord::Base
     end
     witnesses = witnesses.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
     witnesses = witnesses.where(concept: concept) if concept
+
+    # further filter
+    witnesses = add_filters_to_witnesses(witnesses, has_manager, language)
+
+    # paginate witnesses
     witnesses = witnesses.paginate(:page => page || 1, :per_page => 20)
     witnesses_count = witnesses.count
-    witnesses = witnesses.select{ |w| witness_in_filter(w, has_manager, language) } if has_manager.present? || language.present?
+    # witnesses = witnesses.select{ |w| witness_in_filter(w, has_manager, language) } if has_manager.present? || language.present?
 
     return witnesses, witnesses_count
   end
+
+  def add_filters_to_witnesses(witnesses, has_manager, language)
+    witnesses = filter_by_language(witnesses,'language', language)
+    witnesses = filter_by_has_manager(witnesses, has_manager)
+    witnesses
+  end
+
 
   def get_cities(current_user, country_id, region_id)
 
@@ -101,43 +125,37 @@ class Manager < ActiveRecord::Base
   	self.cities.push(city)
   end
 
-  def host_in_filter(host, query, has_manager, has_survivor, is_org, language, in_future, has_invites)
-    in_filter = true
-    in_filter = in_filter && host.in_language_filter(language)
-    in_filter = in_filter && host.in_query(query)
-    in_filter = in_filter && obj_has_manager(host, has_manager) if has_manager.present?
-    in_filter = in_filter && host_has_witness(host, has_survivor) if has_survivor.present?
-    in_filter = in_filter && !host.org_name.nil? if is_org === 'true'
-    in_filter = in_filter && host.event_date >= Date.today if in_future ==='true'
-    in_filter = in_filter && host.invites.present? && host.invites.where(:confirmed => false).present? if has_invites.present?
-    in_filter
-  end
-
-  def witness_in_filter(w, has_manager, language)
-    in_filter = true
-    in_filter = in_filter && w.in_language_filter(language)
-    in_filter = in_filter && obj_has_manager(w, has_manager) if has_manager.present?
-    in_filter
-  end
-
-  def obj_has_manager(obj, has_manager)
-    return false if obj.city.nil?
-    if has_manager === "true"
-      return obj.city.managers.count > 0
-    else
-      return obj.city.managers.count == 0
+  def add_filters_to_hosts(hosts, query, has_manager, has_survivor, is_org, language, in_future, has_invites)
+    # language
+    hosts = filter_by_language(hosts,'event_language', language)
+    # query by search
+    hosts = hosts.joins(:user, :city)
+    hosts = filter_by_query(hosts, query)
+    # query by has_manager
+    hosts = filter_by_has_manager(hosts, has_manager)
+    # if has survivor
+    if has_survivor.present?
+      if has_survivor == "true"
+        hosts = hosts.where('witness_id IS NOT NULL')
+      else
+        hosts = hosts.where('witness_id IS NULL')
+      end
     end
-  end
-
-  def host_has_witness(h, has_witness)
-    if has_witness === "true"
-      return !h.witness.nil?
-    else
-      return h.witness.nil?
+    # if is org (checkbox)
+    if is_org == "true"
+      hosts = hosts.where('org_name IS NOT NULL')
     end
+    # if is in future (checkbox)
+    if in_future == "true"
+      hosts = hosts.where('event_date >= CAST(CURRENT_TIMESTAMP AS DATE)')
+    end
+    # if has invites
+    if has_invites == "true"
+      hosts = hosts.where('invites_pending_count > 0')
+    end
+
+    hosts
   end
-
-
 
 
 end
