@@ -1,5 +1,5 @@
 class City < ActiveRecord::Base
-  attr_accessible :name, :region_id
+  attr_accessible :name, :region_id, :community_leaderships_count
 
   belongs_to :region
   has_many :community_leaderships
