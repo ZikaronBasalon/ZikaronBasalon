@@ -1,8 +1,8 @@
 class Host < ActiveRecord::Base
   require 'csv'
 
-  attr_accessible :address, :city_id, :max_guests, :survivor_needed, :free_text, 
-  :city_name, :status, :strangers, :contact, :survivor_details, :lat, :lng, :event_date,
+  attr_accessible :address, :city_id, :max_guests, :survivor_needed, :free_text,  :invites_pending_count,
+  :invites_confirmed_count, :city_name, :status, :strangers, :contact, :survivor_details, :lat, :lng, :event_date,
   :event_time, :evening_public, :hosted_before, :floor, :elevator, :org_name, :org_role,
   :event_language, :contacted, :preparation_evening, :phone, :witness_id, :user_attributes, :public_text, :concept,
   :received_registration_mail, :contacted_witness, :country_id, :assignment_time
@@ -52,10 +52,7 @@ class Host < ActiveRecord::Base
   end
 
   def available_places
-    a_places = invites.inject(max_guests) { |sum, invite| 
-      invite.confirmed.nil? ? sum : sum - (invite.plus_ones.to_i + 1)
-    }
-    return a_places || 0 
+    return (max_guests - invites_confirmed_count - invites_pending_count) > 0 ? (max_guests - invites_confirmed_count - invites_pending_count) : 0
   end
 
   def assign_manager_by_country
