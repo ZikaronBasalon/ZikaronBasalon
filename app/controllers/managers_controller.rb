@@ -48,7 +48,7 @@ class ManagersController < ApplicationController
                                 has_invites,
                                 reverse_ordering, @cities, country_id, region_id)
 
-    @witnesses, @total_witnesses = @manager.get_witnesses(@page,
+    @witnesses, @total_witnesses = @manager.get_witnesses(true, @page,
                                         witness_filter,
                                         params[:witness_query],
                                         params[:witness_sort],
@@ -75,6 +75,7 @@ class ManagersController < ApplicationController
 
   def new
     @manager = Manager.new
+    respond_with(@manager)
     respond_with(@manager)
   end
 
@@ -129,16 +130,14 @@ class ManagersController < ApplicationController
   end
 
   def export_witnesses
-    @witnesses = @manager.get_witnesses(nil,
+    # def get_witnesses(page, filter, query, sort, has_manager, has_host, language)
+    @witnesses, @witnesses_count = @manager.get_witnesses(false, nil,
                                         witness_filter,
                                         params[:witness_query],
                                         params[:witness_sort],
                                         has_manager,
                                         has_host,
-                                        language,
-                                        external_assignment,
-                                        archived,
-                                        need_to_followup)
+                                        language)
     send_data Witness.to_csv(@witnesses), :disposition => "attachment; filename=witnesses.csv"
   end
 
