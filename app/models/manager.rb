@@ -49,7 +49,7 @@ class Manager < ActiveRecord::Base
     return hosts, hosts_count
   end
 
-  def get_witnesses(page, filter, query, sort, has_manager, has_host, language)
+  def get_witnesses(is_paging, page, filter, query, sort, has_manager, has_host, language)
     witnesses = Witness.includes(:city, :host)
 
     # sort
@@ -73,8 +73,10 @@ class Manager < ActiveRecord::Base
     witnesses = add_filters_to_witnesses(witnesses, has_manager, language)
 
     # paginate witnesses
-    witnesses = witnesses.paginate(:page => page || 1, :per_page => 20)
-    witnesses_count = witnesses.count
+    if is_paging
+      witnesses = witnesses.paginate(:page => page || 1, :per_page => 20)
+      witnesses_count = witnesses.count
+    end
     # witnesses = witnesses.select{ |w| witness_in_filter(w, has_manager, language) } if has_manager.present? || language.present?
 
     return witnesses, witnesses_count
