@@ -3,8 +3,7 @@ class HostMailer < BaseMailer
 	include Sidekiq::Worker
   include Roadie::Rails::Automatic
   layout 'mailer_default'
-  default from: "\"זיכרון בסלון\" <zikaronbasalon@gmail.com>",
-          bcc: "digital.basalon@gmail.com"
+  default from: "\"זיכרון בסלון\" <zikaronbasalon@gmail.com>"
 
   # def manager_notification(manager_email,host_id)
   # 	@host = Host.find(host_id)
