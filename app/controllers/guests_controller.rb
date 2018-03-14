@@ -54,10 +54,6 @@ class GuestsController < ApplicationController
     render :json => { success: true, guest: @guest }
   end
 
-  def paginate(arr_name, page)
-    arr_name = Kaminari.paginate_array(arr_name).page(page).per(20)
-    arr_name
-  end
 
   def guest_in_query(g, query)
     return true if !query.present?
