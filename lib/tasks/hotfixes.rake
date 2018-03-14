@@ -239,6 +239,20 @@ namespace :hotfixes do
     print("finished fixing relations!")
   end
 
+  desc "host fix witness contacted when has no witness "
+  task :host_without_witness_remove_contacted => :environment do
+    print("starting fixing relations!" + "/n")
+    Host.all.each{|host|
+      if host != nil && host.contacted_witness == true && host.witness_id.nil?
+        host.contacted_witness = false
+        host.save!
+        print("The host (" + host.id.to_s + " - " + host.user.full_name + ") should be fixed!" + "/n")
+      end
+
+    }
+    print("/n" + "finished fixing relations!")
+  end
+
   desc "Add all cities to an other region of their country"
   task :add_cities_to_other_region_of_their_country => :environment do
     print("starting!" + "/n")
