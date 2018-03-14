@@ -1,4 +1,6 @@
 class GuestsController < ApplicationController
+  include ApplicationHelper
+
   # before_action :authenticate_user!
   before_filter :is_admin, only: [:index]
   before_filter :correct_guest, only: [:show]
@@ -19,17 +21,10 @@ class GuestsController < ApplicationController
 
   def index
     @page = params[:page] || 1
-
-    if !params[:query].present?
-  	 @guests = Guest.includes(:user, :invites).page(@page).per(10)
-    else
-      @guests = Guest.includes(:user, :invites).all.select { |g|
-        guest_in_query(g, params[:query])
-      }
-
-      @guests = paginate(@guests, @page)
-    end
-    @total_guests = @guests.total_count
+    @guests = Guest.includes(:user, :invites)
+    @guests = filter_by_query_simple(@guests, params[:query])
+    @total_guests = @guests.size
+    @guests = @guests.paginate(:page => @page || 1, :per_page => 10)
 
     respond_to do |format|
       format.html
@@ -60,11 +55,7 @@ class GuestsController < ApplicationController
   end
 
   def paginate(arr_name, page)
-    unless arr_name.kind_of?(Array)
-      arr_name = arr_name.page(page).per(20)
-    else
-      arr_name = Kaminari.paginate_array(arr_name).page(page).per(20)
-    end
+    arr_name = Kaminari.paginate_array(arr_name).page(page).per(20)
     arr_name
   end
 
