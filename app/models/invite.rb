@@ -8,8 +8,8 @@ class Invite < ActiveRecord::Base
   after_destroy :after_destroy
 
   def after_destroy
-    host = Host.where(id: host_id)
-    host.invites_pending_count -= total_invites_count
+    h = Host.where(id: host_id).last
+    h.invites_pending_count -= total_invites_count
     h.save!
   end
 
