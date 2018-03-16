@@ -338,4 +338,43 @@ namespace :hotfixes do
     print("\n" + "finished")
   end
 
+  desc "Create copy of a manager with the same cities"
+  task :create_copy_of_manager_with_same_cities => :environment do
+    print("starting!" + "\n")
+    # get env variables
+    manager_id = ENV['manager_id']
+    new_email = ENV['new_email']
+    new_password = ENV['new_password']
+    new_name = ENV['new_name'] ? ENV['new_name'].present? : nil
+
+
+    # Create dup manager
+    old_m = Manager.where(id: manager_id).last
+    m = old_m.dup
+    m.temp_email = new_email
+    m.save!
+
+    # Create dup user
+    u = old_m.user.dup
+    u.email = new_email
+    u.password = new_password
+    u.meta = m
+
+    # conditonaly add name
+    if new_name.present?
+      u.full_name = new_name
+    end
+
+    u.save!
+
+    # Create dup community leaderships
+    CommunityLeadership.where(manager_id: manager_id).each{|cl|
+      new_cl = cl.dup
+      new_cl.manager_id = m.id
+      new_cl.save!
+    }
+
+    print("\n" + "finished")
+  end
+
 end
