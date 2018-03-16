@@ -319,4 +319,23 @@ namespace :hotfixes do
     print("\n" + "finished")
   end
 
+  desc "Reduce invites pending count for invites destroyed automatically and not accounted for"
+  task :reduce_invites_pending_count_for_invites_destroyed => :environment do
+    print("starting!" + "\n")
+    Host.all.each{|h|
+      h.invites_pending_count = 0
+      h.invites_confirmed_count = 0
+      Invite.where(host_id: h.id).each{|i|
+        invite_count = i.plus_ones + 1
+        if i.confirmed
+          h.invites_confirmed_count += invite_count
+        elsif !i.confirmed
+          h.invites_pending_count += invite_count
+        end
+      }
+      h.save!
+    }
+    print("\n" + "finished")
+  end
+
 end
