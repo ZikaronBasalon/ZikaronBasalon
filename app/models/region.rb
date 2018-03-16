@@ -4,6 +4,6 @@ class Region < ActiveRecord::Base
   attr_accessible :country_id
   validates :name, :presence => true
   validates :country_id, :presence => true
-  belongs_to :country
+  belongs_to :country, :counter_cache => true
   has_many :cities
 end
