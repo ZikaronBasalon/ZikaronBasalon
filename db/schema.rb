@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20180311121252) do
+ActiveRecord::Schema.define(:version => 20180316171016) do
 
   create_table "cities", :force => true do |t|
     t.string   "name"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20180311121252) do
     t.string  "iso3"
     t.integer "numcode"
     t.integer "manager_id"
+    t.integer "regions_count",  :default => 0
   end
 
   create_table "deleted_users", :force => true do |t|
