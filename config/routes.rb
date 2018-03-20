@@ -41,8 +41,9 @@ ZikaronBasalon::Application.routes.draw do
     end
 
     resources :invites, only: [:create, :update, :destroy]
-    
+
     match "pages/home", :to => 'pages#home', as: :host_search
+    match "pages/host_register_link", :to => 'pages#host_register_link', as: :host_register_link
     get "pages/privacy_policy"
     get "pages/welcome"
     root :to => 'pages#welcome'

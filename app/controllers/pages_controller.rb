@@ -5,6 +5,7 @@ class PagesController < ApplicationController
 
   respond_to :html, :json
 
+
 #TODO add here where users are active this year
   def home
 
@@ -65,6 +66,10 @@ class PagesController < ApplicationController
 			  } 
 		  }
 	  end
+  end
+
+  def host_register_link
+    @host = Host.find(params[:id])
   end
 
   def welcome
