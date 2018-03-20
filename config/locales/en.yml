@@ -293,6 +293,8 @@ en:
       reject_request: "Cancel request"
       close_evening: "Close evening for registration"
       close_evening_help_block: "After clicking this you will no longer receive requests"
+      register_link_copy: "Copy link"
+      register_link_explain: "Below is your personal registeration link that you may share on social media"
 
   witnesses:
     types:

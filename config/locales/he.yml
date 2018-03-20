@@ -304,6 +304,8 @@ he:
       reject_request: "ביטול בקשה"
       close_evening: "סגור הרשמה"
       close_evening_help_block: "לאחר לחיצה על סגור הרשמה לא יתקבלו בקשות אירוח נוספות"
+      register_link_copy: "העתק לינק"
+      register_link_explain: "להלן הלינק הרשמה שלך שתוכל לשלוח במדיות החברתיות"
 
   managers:
     show:
