@@ -1,0 +1,21 @@
+<div class="col-xs-12" ng-controller="HostsRegisterLinkController"
+     ng-init="init(
+            <%= @host.to_json(:include => [{ :user => { :methods => [:first_name] } }, :city, :country], :methods => [:available_places, :converted_time]) %>,
+            <%= current_user_json %>
+          )">
+
+  <!---->
+  <div class="col-sm-12">
+    <!--<button class="btn-request"-->
+            <!--ng-click="requestInvite(host)">-->
+      <!--<%= t 'shared.send_request' %>-->
+    <!--</button>-->
+  </div>
+
+</div>
+
+<% if true %>
+  <script type="text/ng-template" id="request-invite.html">
+    <%= render 'guests/request_invite_modal' %>
+  </script>
+<% end %>
