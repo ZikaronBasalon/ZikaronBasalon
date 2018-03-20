@@ -180,7 +180,9 @@ en:
       facebook: "Our Facebook page"
     header:
       want_to_host: "Become a host"
+      want_to_host_mobile: "Host"
       want_to_guest: "Join a salon"
+      want_to_guest_mobile: "Guest"
       staff: "Team"
       host_dashboard: "Host zone"
       signin: "Sign in"

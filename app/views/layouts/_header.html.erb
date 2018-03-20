@@ -19,19 +19,31 @@
 
 		<!-- Non signed in user -->
 		<% else %>
+
+      <!-- Buttons for desktop-->
 			<%= link_to signup_path(type: 'host') do %>
-				<div class="header-btn white"><%= t('.want_to_host') %></div>
+				<div class="hidden-xs header-btn white"><%= t('.want_to_host') %></div>
 			<% end %>
 
 			<%= link_to host_search_path do %>
-				<div class="header-btn orange"><%= t('.want_to_guest') %></div>
+				<div class="hidden-xs header-btn orange"><%= t('.want_to_guest') %></div>
 			<% end %>
-		<% end %>
+
+      <!--Buttons for mobile-->
+      <%= link_to signup_path(type: 'host') do %>
+        <div class="hidden-sm hidden-md hidden-lg header-mobile-btn header-btn white"><%= t('.want_to_host_mobile') %></div>
+      <% end %>
+
+      <%= link_to host_search_path do %>
+        <div class="hidden-sm hidden-md hidden-lg header-mobile-btn header-btn orange"><%= t('.want_to_guest_mobile') %></div>
+      <% end %>
+
+  <% end %>
 		<!-- End Non signed in user -->
 	</div>
 
 	<div class="left-side">
-		<div class="header-brand"><%= t('.brand') %></div>
+		<div class="hidden-xs header-brand"><%= t('.brand') %></div>
 		<% locale = next_locale(I18n.locale) %>
 		<%= link_to locale: locale do %>
       <div onClick="changeLocale('<%=locale.to_str%>')" class="language-btn small-header-btn"><%= locale.capitalize %></div>

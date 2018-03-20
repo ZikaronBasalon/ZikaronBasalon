@@ -187,7 +187,9 @@ he:
       facebook: "עקבו אחרינו בפייסבוק"
     header:
       want_to_host: "רוצה לארח"
+      want_to_host_mobile: "לארח"
       want_to_guest: "רוצה להתארח"
+      want_to_guest_mobile: "להתארח"
       staff: "צוות"
       host_dashboard: "אזור מארחים"
       signin: "התחבר/י"
