@@ -7,7 +7,13 @@ app.controller('HostsRegisterLinkController', ['$scope','$http', '$uibModal', fu
     $scope.init = function(host, currentUser) {
         $scope.host = host;
         $scope.currentUser = currentUser;
-        $scope.requestInvite();
+        if ($scope.host.invites_pending_count + $scope.host.invites_confirmed_count >= $scope.host.max_guests) {
+            alert("מצטערים, אך לעת עתה נגמרו המקומות בסלון שביקשת להרשם אליו. הינך מועבר לדף הבית.");
+            window.location.href = '/pages/home';
+        }
+        else {
+            $scope.requestInvite();
+        }
     };
 
     $scope.requestInvite = function() {
