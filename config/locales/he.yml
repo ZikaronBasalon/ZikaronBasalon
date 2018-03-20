@@ -71,6 +71,7 @@ he:
     select: "בחר/י"
     other: "אחר"
     send_request: "שליחת בקשה"
+    send_request_mobile: "שליחה"
     request_sent: "הבקשה נשלחה"
     save: "שמירה"
     return: "חזור"
@@ -187,7 +188,9 @@ he:
       facebook: "עקבו אחרינו בפייסבוק"
     header:
       want_to_host: "רוצה לארח"
+      want_to_host_mobile: "לארח"
       want_to_guest: "רוצה להתארח"
+      want_to_guest_mobile: "להתארח"
       staff: "צוות"
       host_dashboard: "אזור מארחים"
       signin: "התחבר/י"
