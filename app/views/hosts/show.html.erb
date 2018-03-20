@@ -69,12 +69,20 @@
     </div>
 
     <div class="col-xs-12" ng-if="host.strangers">
+
+      <!--New: Direct registeration link to salon-->
+      <strong><%= t '.register_link_explain' %></strong>
+      <br class="clearfix"/>
+      <div class="register-link-code-wrapper">
+        <input readonly id="register-link-input" type="text" value="<%= request.base_url + host_register_link_path(id: @host.id)%>"/>
+      </div>
+      <button class="btn btn-primary" ng-click="copyRegisterLink()"><%= t '.register_link_copy' %></button>
       <button type="button" class="btn btn-danger" ng-click="closeEvening()">
         <%= t '.close_evening' %>
       </button>
       <p class="help-block"><%= t '.close_evening_help_block' %></p>
     </div>
-    
+
 
 
     <!-- Witness details -->

@@ -23,6 +23,8 @@ class HostsController < ApplicationController
   end
 
   def show
+
+
     @host = Host.find(params[:id])
     respond_to do |format|
       format.html { correct_host }
@@ -41,6 +43,8 @@ class HostsController < ApplicationController
       }
     end
   end
+
+
 
   def destroy
     @host = Host.find(params[:id])
@@ -118,5 +122,6 @@ class HostsController < ApplicationController
 
     render json: updated_user, status: 201
   end
+
 end
 
