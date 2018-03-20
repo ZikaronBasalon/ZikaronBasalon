@@ -71,6 +71,7 @@ he:
     select: "בחר/י"
     other: "אחר"
     send_request: "שליחת בקשה"
+    send_request_mobile: "שליחה"
     request_sent: "הבקשה נשלחה"
     save: "שמירה"
     return: "חזור"

@@ -77,6 +77,7 @@ en:
     available_days: "available days"
     availability: "availability"
     send_request: "Send a request"
+    send_request_mobile: "Send"
     request_sent: "Your request has been sent"
     save: "Save"
     return: "Back"
