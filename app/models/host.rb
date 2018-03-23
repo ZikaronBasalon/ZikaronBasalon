@@ -52,6 +52,7 @@ class Host < ActiveRecord::Base
   end
 
   def available_places
+    return 0 if max_guests.nil?
     return (max_guests - invites_confirmed_count - invites_pending_count) > 0 ? (max_guests - invites_confirmed_count - invites_pending_count) : 0
   end
 

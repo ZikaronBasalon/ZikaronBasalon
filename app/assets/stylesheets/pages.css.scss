@@ -42,3 +42,44 @@
     font-size: 30px;
   }
 }
+
+// Mobile enhancements and fixes
+.btn-request-mobile {
+  width:65px;
+}
+
+@media(max-width:767px) {
+
+  .request-invite .plus-one-select {
+    width: 75px;
+  }
+
+  .request-invite {
+    width: 80%;
+    padding: 5px 20px;
+    margin-right: 10%;
+    margin-top: 15%;
+    font-size: 12px;
+    button {
+      font-size: 14px;
+      width: 100%;
+      height: auto;
+      padding: 5px;
+      margin-bottom: 20px;
+    }
+  }
+
+  .request-invite .salon-info {
+    padding: 0px;
+    box-shadow: none;
+  }
+
+  .home-page .form-inline .ui-select-bootstrap {
+    max-width: 164px;
+  }
+
+  td {
+    padding: 0px !important;
+    text-align: center;
+  }
+}

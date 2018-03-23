@@ -87,7 +87,7 @@
         --> 
 
         <div class="form-group pull-left">
-          <input type="text" class="form-control" ng-model="search.query" placeholder="<%= t 'shared.free_search' %>" />
+          <input type="text" class="hidden-xs form-control" ng-model="search.query" placeholder="<%= t 'shared.free_search' %>" />
         </div>
       </form>
 
@@ -115,11 +115,11 @@
               <%= t 'shared.street' %>
               <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'address'"></span>
             </th>
-            <th ng-click="setSortProp('event_date')">
+            <th class="hidden-xs" ng-click="setSortProp('event_date')">
               <%= t 'shared.date' %>
               <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'event_date'"></span>
             </th>
-            <th ng-click="setSortProp('event_language')">
+            <th class="hidden-xs" ng-click="setSortProp('event_language')">
               <%= t 'shared.language' %>
               <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'event_language'"></span>
             </th>
@@ -127,7 +127,7 @@
               <%= t 'shared.available_spaces' %>
               <span ng-class="search.reverseOrdering ? 'caret-up' : 'caret-down'" ng-if="sortProp === 'available_places'"></span>
             </th>
-            <th><%= t 'shared.free_text' %></th>
+            <th class="hidden-xs"><%= t 'shared.free_text' %></th>
             <th></th>
           </tr> 
         </thead>
@@ -136,14 +136,19 @@
             <td>{{ host.user.first_name }}</td>
             <td>{{ formatCityDisplay(host) }}</td>
             <td>{{ formatAddressDisplay(host.address) }}</td>
-            <td>{{ formatDate(host.event_date) }}</td>
-            <td>{{ formatLanguage(host.event_language) }}</td>
+            <td class="hidden-xs">{{ formatDate(host.event_date) }}</td>
+            <td class="hidden-xs">{{ formatLanguage(host.event_language) }}</td>
             <td>{{ host.available_places }}</td>
-            <td>{{ host.public_text }}</td>
+            <td class="hidden-xs">{{ host.public_text }}</td>
             <td>
-              <button class="btn-request"
+              <button class="hidden-xs btn-request"
                       ng-click="requestInvite(host)">
                 <%= t 'shared.send_request' %>
+              </button>
+
+              <button class="visible-xs btn-request-mobile btn-request"
+                      ng-click="requestInvite(host)">
+                <%= t 'shared.send_request_mobile' %>
               </button>
           </td>
           </tr>
