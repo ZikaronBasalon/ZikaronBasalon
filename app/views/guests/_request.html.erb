@@ -3,10 +3,19 @@
   <p class="subtitle"><%= t '.subtitle' %></p>
 
   <div class="margin-top-20 col-xs-12">
-  	<div class="row request-container">
+
+    <div class="visible-xs salon-info">
+      <div class="visible-xs salon-title"><%= t '.salon_of' %> {{ host.user.first_name }}</div>
+    </div>
+
+
+    <div class="row request-container">
+
   		<div class="col-xs-6 salon-info">
-  			<div class="salon-title"><%= t '.salon_of' %> {{ host.user.first_name }}</div>
-  			
+  			<div class="visible-lg visible-md visible-sm salon-title"><%= t '.salon_of' %> {{ host.user.first_name }}</div>
+
+        <br class="visible-xs"/>
+
   			<div class="info-group">
   				<span class="label"><%= t 'shared.location' %>:</span>
   				<span class="value">{{ formatAddressDisplay(host.address) }}</span>
@@ -44,7 +53,7 @@
 
   		</div>
   		<div class="col-xs-6 align-right request-info">
-  			<div>
+  			<div class="visible-sm visible-md visible-lg">
   				<div class="subtitle"><%= t '.num_of_guests' %>:</div>
 	  			<select ng-model="invite.plusOnes" class="margin-top-20 plus-one-select">
 	  				<option value="0">0</option>
@@ -54,8 +63,22 @@
   			</div>
   			
 
-  			<button class="zb-btn btn-orange" ng-click="sendRequest()"><%= t 'shared.sending_request' %></button>
+  			<button class="hidden-xs zb-btn btn-orange" ng-click="sendRequest()"><%= t 'shared.sending_request' %></button>
   		</div>
-  	</div>	
+  	</div>
+
+    <div class="visible-xs">
+      <div class="subtitle"><%= t '.num_of_guests' %>:</div>
+      <select ng-model="invite.plusOnes" class="margin-top-10 margin-bottom-20 plus-one-select">
+        <option value="0">0</option>
+        <option value="1" ng-disabled="host.available_places < 2">1</option>
+        <option value="2" ng-disabled="host.available_places < 3">2</option>
+      </select>
+    </div>
+
+
+    <button class="visible-xs zb-btn btn-orange" ng-click="sendRequest()"><%= t 'shared.sending_request' %></button>
+
   </div>
+
 </div>
