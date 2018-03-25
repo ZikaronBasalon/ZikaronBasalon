@@ -48,14 +48,15 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
         el.focus();
         el.select();
 
+        // return to original flag values
+        el.contentEditable = oldContentEditable;
+        el.readOnly = oldReadOnly;
+
         document.execCommand('copy');
 
         /* Alert the copied text */
         alert("Copied the text: " + el.value);
 
-
-        el.contentEditable = oldContentEditable;
-        el.readOnly = oldReadOnly;
     };
 
 	$scope.deactivateHost = function() {
