@@ -26,20 +26,36 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 		}
 	}
 
-	$scope.copyRegisterLink = function() {
-        /* Get the text field */
-        var copyText = document.getElementById("register-link-input");
 
-        /* Select the text field */
-        copyText.focus();
-        copyText.select();
+    $scope.copyRegisterLink = function() {
+        var el = document.getElementById("register-link-input");
+        var oldContentEditable = el.contentEditable,
+            oldReadOnly = el.readOnly,
+            range = document.createRange();
 
-        /* Copy the text inside the text field */
+        // Preparation for IOS devices (They cannot tolerate these flags)
+        el.contenteditable = true;
+        el.readonly = false;
+
+        // use ranges to get the content (Compatible with IOS)
+        range.selectNodeContents(el);
+        var s = window.getSelection();
+        s.removeAllRanges();
+        s.addRange(range);
+        el.setSelectionRange(0, 999999); // A big number, to cover anything that could be inside the element.
+
+        // Solution for android and browser, selects the input and focuses on it so that content can be copied
+        el.focus();
+        el.select();
+
         document.execCommand('copy');
 
+        /* Alert the copied text */
+        alert("Copied the text: " + el.value);
 
-        // /* Alert the copied text */
-        // alert("Copied the text: " + copyText.value);
+
+        el.contentEditable = oldContentEditable;
+        el.readOnly = oldReadOnly;
     };
 
 	$scope.deactivateHost = function() {
