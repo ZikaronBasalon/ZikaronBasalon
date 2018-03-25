@@ -56,7 +56,6 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 
         /* Alert the copied text */
         alert("Copied the text: " + el.value);
-
     };
 
 	$scope.deactivateHost = function() {
