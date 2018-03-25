@@ -26,21 +26,6 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 		}
 	}
 
-    // $scope.copyRegisterLink = function() {
-    //     /* Get the text field */
-    //     var copyText = document.getElementById("register-link-input");
-    //
-    //     /* Select the text field */
-    //     copyText.focus();
-    //     copyText.select();
-    //
-    //     /* Copy the text inside the text field */
-    //     document.execCommand('copy');
-    //
-    //
-    //     // /* Alert the copied text */
-    //     // alert("Copied the text: " + copyText.value);
-    // };
 
     $scope.copyRegisterLink = function() {
         var el = document.getElementById("register-link-input");
