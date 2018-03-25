@@ -29,28 +29,25 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 
     $scope.copyRegisterLink = function() {
         var el = document.getElementById("register-link-input");
-        var oldContentEditable = el.contentEditable,
-            oldReadOnly = el.readOnly,
-            range = document.createRange();
-
-        // Preparation for IOS devices (They cannot tolerate these flags)
-        el.contenteditable = true;
-        el.readonly = false;
-
-        // use ranges to get the content (Compatible with IOS)
-        range.selectNodeContents(el);
-        var s = window.getSelection();
-        s.removeAllRanges();
-        s.addRange(range);
-        el.setSelectionRange(0, 999999); // A big number, to cover anything that could be inside the element.
-
-        // Solution for android and browser, selects the input and focuses on it so that content can be copied
-        el.focus();
-        el.select();
-
-        // return to original flag values
-        el.contentEditable = oldContentEditable;
-        el.readOnly = oldReadOnly;
+        if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
+            var editable = el.contentEditable;
+            var readOnly = el.readOnly;
+            el.contentEditable = true;
+            el.readOnly = false;
+            var range = document.createRange();
+            range.selectNodeContents(el);
+            var sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            el.setSelectionRange(0, 999999);
+            el.contentEditable = editable;
+            el.readOnly = readOnly;
+        }
+        else {
+            // Solution for android and browser, selects the input and focuses on it so that content can be copied
+            el.focus();
+            el.select();
+        }
 
         document.execCommand('copy');
 
