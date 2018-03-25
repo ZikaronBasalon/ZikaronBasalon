@@ -74,7 +74,9 @@
       <strong><%= t '.register_link_explain' %></strong>
       <br class="clearfix"/>
       <div class="register-link-code-wrapper">
-        <input readonly id="register-link-input" type="text" value="<%= request.base_url + host_register_link_path(id: @host.id)%>"/>
+        <textarea readonly id="register-link-input">
+          <%= request.base_url + host_register_link_path(id: @host.id)%>
+        </textarea>
       </div>
       <button class="btn btn-primary" ng-click="copyRegisterLink()"><%= t '.register_link_copy' %></button>
       <!-- Close register button-->
