@@ -90,11 +90,11 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
             $scope.search.witness[$scope.search.available_day_search] = true;
         }
 
-        if ($scope.search.w_hast_host == true) {
+        if ($scope.search.w_has_host == true) {
             $scope.search.has_host = $scope.search.w_has_host;
         }
-        if ($scope.search.w_hast_host == true) {
-            $scope.search.has_host = false;
+        else if ($scope.search.w_has_host == false) {
+            $scope.search.has_host = $scope.search.w_has_host;
             $scope.search.witness.external_assignment = false;
             $scope.search.witness.archived = false;
             $scope.search.witness.need_to_followup = false;
@@ -112,20 +112,6 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
             // when selecting need_to_followup, all other options should be false
             $scope.search.witness.need_to_followup = true;
         }
-        // else {
-        //   if ($scope.search.w_has_host === null || typeof $scope.search.w_has_host === 'undefined') {
-        //     delete $scope.search.witness.external_assignment;
-        //     delete $scope.search.witness.archived;
-        //     delete $scope.search.witness.need_to_followup;
-        //     delete $scope.search.has_host;
-        //   } else {
-        //     $scope.search.has_host = $scope.search.w_has_host;
-        //     // whether we show host or not, the other three options are false
-        //     $scope.search.witness.external_assignment = false;
-        //     $scope.search.witness.archived = false;
-        //     $scope.search.witness.need_to_followup = false;
-        //   }
-        // }
 
         var params = {
             filter: {
@@ -165,6 +151,8 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
                     alert(e.message);
                 });
     }
+
+
 
     $scope.export_hosts = function() {
         var params = {
@@ -233,6 +221,12 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
 
     $scope.onViewToggle = function(view) {
         $scope.activeView = view;
+    };
+
+    $scope.setSortProp = function(prop) {
+        $scope.search.reverseOrdering = !$scope.search.reverseOrdering;
+        $scope.sortProp = prop;
+        filter(1);
     };
 
     $scope.setSortProp = function(prop) {
