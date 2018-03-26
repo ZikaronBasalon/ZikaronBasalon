@@ -90,37 +90,28 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
             $scope.search.witness[$scope.search.available_day_search] = true;
         }
 
-        $scope.search.has_host = $scope.search.w_has_host;
+        if ($scope.search.w_has_host == true) {
+            $scope.search.has_host = $scope.search.w_has_host;
+        }
+        else if ($scope.search.w_has_host == false) {
+            $scope.search.has_host = $scope.search.w_has_host;
+            $scope.search.witness.external_assignment = false;
+            $scope.search.witness.archived = false;
+            $scope.search.witness.need_to_followup = false;
 
-        if ($scope.search.w_has_host == -1) {
+        }
+        else if ($scope.search.w_has_host == -1) {
             // when selecting external_assignment, all other options should be false
             $scope.search.witness.external_assignment = true;
-            delete $scope.search.has_host;
         }
         else if ($scope.search.w_has_host == -2) {
             // when selecting archived, all other options should be false
             $scope.search.witness.archived = true;
-            delete $scope.search.has_host;
         }
         else if ($scope.search.w_has_host == -3) {
             // when selecting need_to_followup, all other options should be false
             $scope.search.witness.need_to_followup = true;
-            delete $scope.search.has_host;
         }
-        // else {
-        //   if ($scope.search.w_has_host === null || typeof $scope.search.w_has_host === 'undefined') {
-        //     delete $scope.search.witness.external_assignment;
-        //     delete $scope.search.witness.archived;
-        //     delete $scope.search.witness.need_to_followup;
-        //     delete $scope.search.has_host;
-        //   } else {
-        //     $scope.search.has_host = $scope.search.w_has_host;
-        //     // whether we show host or not, the other three options are false
-        //     $scope.search.witness.external_assignment = false;
-        //     $scope.search.witness.archived = false;
-        //     $scope.search.witness.need_to_followup = false;
-        //   }
-        // }
 
         var params = {
             filter: {
