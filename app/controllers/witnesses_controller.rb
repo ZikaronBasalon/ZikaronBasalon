@@ -1,4 +1,5 @@
 class WitnessesController < ApplicationController
+  include ApplicationHelper
   # before_action :authenticate_user!
   before_filter :is_authorized, only: [:index, :unassign, :assign, :show]
   before_filter :is_admin, only: [:destroy]
@@ -96,19 +97,35 @@ class WitnessesController < ApplicationController
   def assign
     @manager = current_user.meta
     @witness = Witness.find(params[:id])
-    if @manager.concept
-      @hosts = Host.where(concept: @manager.concept, survivor_needed: true)
-    else
-      @hosts = Host.where(city_id: get_city_ids_for_assignment, survivor_needed: true)
-    end
-    @hosts = @hosts.select { |h| h.witness.nil? && h.in_query(query) && h.received_registration_mail }
     @cities = City.where(id: get_city_ids_for_assignment)
 
     respond_to do |format|
+      if @manager.concept
+        @hosts = Host.where(concept: @manager.concept, survivor_needed: true)
+      else
+        @hosts = Host.where(city_id: get_city_ids_for_assignment, survivor_needed: true)
+      end
+
+      # Extra Filters replaces @hosts.select statement below
+      @hosts = @hosts.where(received_registration_mail: true)
+      if query.present?
+        @hosts = @hosts.joins(:user, :city)
+        @hosts = filter_by_query(@hosts, query)
+      end
+      @hosts = @hosts.where('witness_id IS NOT NULL')
+      # @hosts = @hosts.select { |h| h.witness.nil? && h.in_query(query) && h.received_registration_mail }
+
+      page = params[:page]
+
+      @hosts_count = @hosts.count
+      @hosts = @hosts.paginate(:page => page || 1, :per_page => 10)
+
+
       format.html
       format.json {
         render :json => {
-          hosts: @hosts.to_json(:include => [:user, :city])
+          hosts: @hosts.to_json(:include => [:user, :city]),
+          hosts_count: @hosts_count
         }
       }
     end

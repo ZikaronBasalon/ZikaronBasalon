@@ -6,6 +6,11 @@ app.controller('WitnessAssignController', ['$scope', '$http', '$uibModal',
   $scope.success = false;
 
   $scope.init = function(witness, hosts, cities, cityId) {
+
+    $scope.pagination = {
+      currentPage: 1
+    };
+
     $scope.witness = witness;
     $scope.hosts = hosts;
     $scope.cities = cities;
@@ -15,12 +20,19 @@ app.controller('WitnessAssignController', ['$scope', '$http', '$uibModal',
 
     $scope.$watch('filter.query', _.throttle(function(oldVal, newVal) {
       if(newVal != oldVal) {
-        $scope.filterHosts(oldVal, newVal);
+        $scope.filterHosts();
       }
     }, 2000), true);
-  }
 
-  $scope.filterHosts = function(oldVal, newVal) {
+    // initial call when page loaded (to get initial host list)
+    $scope.filterHosts();
+  };
+
+    $scope.pageChanged = function() {
+      $scope.filterHosts();
+    };
+
+  $scope.filterHosts = function() {
   	var params = {};
 
   	if($scope.filter.city_id) {
@@ -31,12 +43,14 @@ app.controller('WitnessAssignController', ['$scope', '$http', '$uibModal',
       params.query = $scope.filter.query;
     }
 
-  	if(oldVal != newVal) {
-  		$http.get('/witnesses/' + $scope.witness.id + '/assign.json'+ '?' + $.param(params))
-  		.then(function(response) {
-  			$scope.hosts = JSON.parse(response.data.hosts);
-  		});
-  	}
+    params.page = $scope.pagination.currentPage;
+
+    $http.get('/witnesses/' + $scope.witness.id + '/assign.json'+ '?' + $.param(params))
+    .then(function(response) {
+        $scope.hosts = JSON.parse(response.data.hosts);
+        $scope.hosts_count = JSON.parse(response.data.hosts_count);
+    });
+
   }
 
 $scope.assignHost = function(host) {
