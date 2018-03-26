@@ -152,7 +152,6 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
                 });
     }
 
-
     $scope.export_hosts = function() {
         var params = {
             filter: {
