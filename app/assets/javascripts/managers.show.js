@@ -153,7 +153,6 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
     }
 
 
-
     $scope.export_hosts = function() {
         var params = {
             filter: {
@@ -221,12 +220,6 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
 
     $scope.onViewToggle = function(view) {
         $scope.activeView = view;
-    };
-
-    $scope.setSortProp = function(prop) {
-        $scope.search.reverseOrdering = !$scope.search.reverseOrdering;
-        $scope.sortProp = prop;
-        filter(1);
     };
 
     $scope.setSortProp = function(prop) {
