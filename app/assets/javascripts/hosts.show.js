@@ -26,20 +26,37 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 		}
 	}
 
-	$scope.copyRegisterLink = function() {
-        /* Get the text field */
-        var copyText = document.getElementById("register-link-input");
 
-        /* Select the text field */
-        copyText.focus();
-        copyText.select();
+    $scope.copyRegisterLink = function() {
+        var el = document.getElementById("register-link-input");
+        if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
+            var editable = el.contentEditable;
+            var readOnly = el.readOnly;
+            el.contentEditable = true;
+            el.readOnly = false;
+            var range = document.createRange();
+            range.selectNodeContents(el);
+            var sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            el.setSelectionRange(0, 999999);
+            el.contentEditable = editable;
+            el.readOnly = readOnly;
+        }
+        else {
+            // Solution for android and browser, selects the input and focuses on it so that content can be copied
+            el.focus();
+            el.select();
+        }
 
-        /* Copy the text inside the text field */
+        // return to original flag values
+        el.contentEditable = oldContentEditable;
+        el.readOnly = oldReadOnly;
+
         document.execCommand('copy');
 
-
-        // /* Alert the copied text */
-        // alert("Copied the text: " + copyText.value);
+        /* Alert the copied text */
+        alert("Copied the text: " + el.value);
     };
 
 	$scope.deactivateHost = function() {
