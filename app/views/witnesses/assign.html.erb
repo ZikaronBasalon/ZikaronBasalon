@@ -1,5 +1,5 @@
 <div class="col-xs-12" ng-controller="WitnessAssignController"
-     ng-init="init(<%= @witness.to_json(:include => [city: { :include => :managers } ]) %>, <%= @hosts.to_json(:include => [:user, :witness, city: { :include => :managers }, :methods => [:has_witness] ]) %>, <%= @cities.to_json %>, <%= @city_id.to_json %> )">
+     ng-init="init(<%= @witness.to_json(:include => [city: { :include => :managers } ]) %>, [], <%= @cities.to_json(:only => [:name, :id]) %>, <%= @city_id.to_json %> )">
   <div class="row">
     <div class="col-xs-12" ng-if="success">
       <div class="alert alert-success" role="alert">
@@ -24,6 +24,10 @@
                  placeholder="<%= t 'shared.search' %>" />
         </div>
       </form>
+
+      <div class="margin-top-10">
+        <span>סה"כ מארחים:</span> <span class="total-summary ng-binding">638</span>
+      </div>
 
       <!-- Host table -->
       <table class="table host-table">
@@ -72,6 +76,18 @@
           </tr>
         </tbody>
       </table>
+
+      <uib-pagination total-items="hosts_count"
+                      ng-model="pagination.currentPage"
+                      items-per-page="10"
+                      ng-change="pageChanged()"
+                      class="pagination-sm"
+                      previous-text="&lsaquo;"
+                      next-text="&rsaquo;"
+                      first-text="&laquo;"
+                      last-text="&raquo;">
+      </uib-pagination>
+
     </div>
   </div> 
 </div>
