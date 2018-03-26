@@ -65,7 +65,7 @@ class WitnessesController < ApplicationController
     @witness = Witness.find(params[:id])
 
     respond_to do |format|
-      if @witness.update_attributes(params[:witness])
+      if @witness.update_attributes(:host_id => params[:witness][:host_id])
          if(params[:witness][:host_id].present?)
           HostMailer.witness_assigned(
             params[:witness][:host_id],
@@ -112,7 +112,7 @@ class WitnessesController < ApplicationController
         @hosts = @hosts.joins(:user, :city)
         @hosts = filter_by_query(@hosts, query)
       end
-      @hosts = @hosts.where('witness_id IS NOT NULL')
+      @hosts = @hosts.where('witness_id IS NULL')
       # @hosts = @hosts.select { |h| h.witness.nil? && h.in_query(query) && h.received_registration_mail }
 
       page = params[:page]
