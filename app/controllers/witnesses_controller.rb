@@ -65,7 +65,7 @@ class WitnessesController < ApplicationController
     @witness = Witness.find(params[:id])
 
     respond_to do |format|
-      if @witness.update_attributes(:host_id => params[:witness][:host_id])
+      if @witness.update_attributes(params[:witness])
          if(params[:witness][:host_id].present?)
           HostMailer.witness_assigned(
             params[:witness][:host_id],
