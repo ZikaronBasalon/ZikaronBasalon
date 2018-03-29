@@ -42,13 +42,31 @@ app.controller('WitnessShowController', ['$scope', '$http', function($scope, $ht
 
 	$scope.confirmExternalAssignment = function() {
 		if ($scope.witness.external_assignment) {
-			$scope.witness.external_assignment = confirm('בטוח?')
+			var answer = $scope.witness.external_assignment = confirm('בטוח?');
+			if (answer) {
+                $scope.save();
+            }
 		}
+		// cancel assignment, save this immediately so that there wont be a match + external assignment
+		else {
+		    $scope.save();
+        }
 	}
 
 	$scope.confirmArchive = function() {
 		if ($scope.witness.archived) {
-			$scope.witness.archived = confirm('כדי	לשמור על סדר, חובה להזין מדוע איש/אשת העדות לא מעוניין להשתתף השנה');
+			var answer = $scope.witness.archived = confirm('כדי	לשמור על סדר, חובה להזין מדוע איש/אשת העדות לא מעוניין להשתתף השנה');
+            if (answer) {
+                $scope.save();
+            }
 		}
+		else {
+            $scope.save();
+        }
+
 	}
+
+	$scope.confirmFollowup = function () {
+        $scope.save();
+    }
 }]);
