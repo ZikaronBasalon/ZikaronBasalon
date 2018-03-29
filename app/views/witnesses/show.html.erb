@@ -209,7 +209,8 @@
                       <input type="checkbox"
                              name="need_to_followup"
                              ng-disabled="witness.host"
-                             ng-model="witness.need_to_followup">
+                             ng-model="witness.need_to_followup"
+                             ng-change="confirmFollowup()">
                       <%= t 'profile.labels.need_to_followup_explain' %>
                     </label>
                   </div>

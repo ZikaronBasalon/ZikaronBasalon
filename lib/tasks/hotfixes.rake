@@ -224,11 +224,26 @@ namespace :hotfixes do
     end
   end
 
-  desc "witness host relation fix"
-  task :witness_host_relation_fix => :environment do
+  desc "witness host relation fix by witness"
+  task :witness_host_relation_fix_by_witness => :environment do
     print("starting fixing relations!" + "/n")
     Witness.where("host_id IS NOT NULL").each {|witness|
       host = Host.where(id: witness.host_id).last
+      witness.host = host
+      host.witness = witness
+      host.witness_id = witness.id
+      host.save!
+      witness.save!
+      print("The relation between the host (" + host.id.to_s + " - " + host.user.full_name + ") and the witness (" + witness.id.to_s + " - " + witness.full_name + ") should be fixed!" + "\n")
+    }
+    print("finished fixing relations!")
+  end
+
+  desc "witness host relation fix by host"
+  task :witness_host_relation_fix_by_host => :environment do
+    print("starting fixing relations!" + "/n")
+    Host.where("witness_id IS NOT NULL").each {|host|
+      witness = Witness.where(id: host.witness_id).last
       witness.host = host
       host.witness = witness
       host.witness_id = witness.id
@@ -374,6 +389,21 @@ namespace :hotfixes do
       new_cl.save!
     }
 
+    print("\n" + "finished")
+  end
+
+  desc "Ensure each wintess has exactly one status"
+  task :ensure_each_witness_has_exactly_one_status => :environment do
+    print("starting!" + "\n")
+    Witness.all.each{|w|
+      if w.host_id && (w.external_assignment || w.archived || w.need_to_followup)
+        w.external_assignment = false
+        w.archived = false
+        w.need_to_followup = false
+        w.save!
+        print "Witness( ID:" + w.id.to_s + ")" + "was fixed!"
+      end
+    }
     print("\n" + "finished")
   end
 
