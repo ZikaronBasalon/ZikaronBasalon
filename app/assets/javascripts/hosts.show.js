@@ -49,10 +49,6 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
             el.select();
         }
 
-        // return to original flag values
-        el.contentEditable = oldContentEditable;
-        el.readOnly = oldReadOnly;
-
         document.execCommand('copy');
 
         /* Alert the copied text */
