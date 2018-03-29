@@ -61,7 +61,7 @@ class Manager < ActiveRecord::Base
     witnesses = witnesses.where("LOWER(full_name) LIKE LOWER(?)", "%#{query.downcase}%") if query.present?
     if has_host.present?
       if has_host === 'true'
-        witnesses = witnesses.where("host_id >= 0")
+        witnesses = witnesses.where("host_id IS NOT NULL")
       elsif has_host === 'false'
         witnesses = witnesses.where(host_id: nil)
       end
