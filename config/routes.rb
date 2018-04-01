@@ -4,9 +4,9 @@ ZikaronBasalon::Application.routes.draw do
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/  do
 
     # Add support for Mailpreview
-    # if Rails.env.development? ||
+    if Rails.env.development?
       mount MailPreview => 'mail_view'
-    # end
+    end
 
     get 'my-profile', :to => 'users#profile'
 
