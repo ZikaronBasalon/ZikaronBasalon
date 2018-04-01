@@ -396,6 +396,8 @@ en:
       link_url: "http://www.zikaronbasalon.org/#!build-your-event/c1hap"
     guest_cancelled_request:
       title: "Important update regarding the guests in your salon"
+    event_reminder:
+      title: "Your Salon is waiting for you!!"
   host_mailer:
     new_host:
       subject: "Welcome to Zikaron BaSalon!"

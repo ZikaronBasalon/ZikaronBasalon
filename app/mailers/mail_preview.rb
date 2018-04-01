@@ -50,6 +50,19 @@ class MailPreview < MailView
     RequestMailer.pending_invite_received(invite_id, 'he')
   end
 
+
+  def event_reminder_en
+    invite = Invite.joins(:host).where('hosts.country_id != 97').first
+    invite_id = invite.id
+    RequestMailer.event_reminder(invite_id)
+  end
+
+  def event_reminder_he
+    invite = Invite.joins(:host).where('hosts.country_id = 97').first
+    invite_id = invite.id
+    RequestMailer.event_reminder(invite_id)
+  end
+
   def witness_assigned_survivor_he
     host_id = Host.last.id
     witness_id = Witness.where(:witness_type => :survivor).last
