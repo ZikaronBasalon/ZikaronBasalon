@@ -24,9 +24,8 @@ class Manager < ActiveRecord::Base
 
     hosts = Host.includes(:city, :user, :witness, :invites)
     hosts = hosts.where(filter)
-    hosts = hosts.where(city_id: city_ids) if city_ids != nil && !user.sub_admin? && !concept
+    hosts = hosts.where(city_id: city_ids) if city_ids != nil && !user.sub_admin?
     hosts = hosts.where(:active => true) unless user.admin? && !user.current_year_admin?
-    hosts = hosts.where(concept: concept).select{ |h| h.has_witness } if concept
 
     # add specific host filters (replaces host_in_filter)
     hosts = add_filters_to_hosts(hosts, query, has_manager, has_survivor, is_org, language, in_future, has_invites)
@@ -66,8 +65,7 @@ class Manager < ActiveRecord::Base
         witnesses = witnesses.where(host_id: nil)
       end
     end
-    witnesses = witnesses.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin? && !concept
-    witnesses = witnesses.where(concept: concept) if concept
+    witnesses = witnesses.where(:city_id => cities.pluck(:id)) if !user.admin? && !user.sub_admin?
 
     # further filter
     witnesses = add_filters_to_witnesses(witnesses, has_manager, language)
@@ -129,12 +127,18 @@ class Manager < ActiveRecord::Base
 
   def add_filters_to_hosts(hosts, query, has_manager, has_survivor, is_org, language, in_future, has_invites)
     # language
-    hosts = filter_by_language(hosts,'event_language', language)
+    if language.present?
+      hosts = filter_by_language(hosts,'event_language', language)
+    end
     # query by search
-    hosts = hosts.joins(:user, :city)
-    hosts = filter_by_query(hosts, query)
+    if query.present?
+      hosts = hosts.joins(:user, :city)
+      hosts = filter_by_query(hosts, query)
+    end
     # query by has_manager
-    hosts = filter_by_has_manager(hosts, has_manager)
+    if has_manager.present?
+      hosts = filter_by_has_manager(hosts, has_manager)
+    end
     # if has survivor
     if has_survivor.present?
       if has_survivor == "true"
