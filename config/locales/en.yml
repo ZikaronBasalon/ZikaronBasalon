@@ -55,6 +55,8 @@ en:
 
 
   shared:
+    mailer_pargraph_noticed_profile_login: "*To access your profile, please make sure you logged in to our website. If “my profile” isn’t shown on the right side at the top of the page, please click “sign in” on the left side at the top of the page. "
+    profile_link: "your profile"
     create_another: "Create another"
     new_link_text: "Click to create"
     'yes': "Yes"
@@ -167,6 +169,7 @@ en:
     deleted_succesfully: "Deleted succesfully!"
     created_failure: "Failed to create, please try again and fill all fields."
     region: "Region"
+    hey: "Hi"
 
   views:
     pagination:
@@ -363,12 +366,12 @@ en:
 
   request_mailer:
     pending_invite_received:
-      title: "A request has been made to be a guest in you salon"
+      title: "A request has been made to be a guest in your salon"
       paragraph_1: "Thanks for choosing to host a Zikaron Basalon evening on the Holocaust Memorial Evening. %{guest_name} wants to be a guest in your salon"
       ok_for_you: "Does that work for you?"
-      approve_request: "To confirm the request"
-      paragraph_2: "Have additional available places? You can always edit the number of available places in your salon."
-      your_profile: "in your personal profile."
+      approve_request: " Please confirm or cancel the request"
+      paragraph_2: "Have additional available places? You can always edit the number of available places in your salon "
+      your_profile: "on your personal profile."
       paragraph_3: "The request will be automatically canceled in four days, so we urge you to approve it as soon as possible."
 
     request_approved:
@@ -379,11 +382,11 @@ en:
       paragraph_2: "Please cancel your request if you do not intend to arrive"
 
     request_rejected:
-      title: "Update on your request to join a salon"
+      title: "Important update from Zikaron BaSalon"
       paragraph_1: "Unfortunately, there's no room left in %{name}'s event. But don't worry, you can still join another salon!"
 
     new_guest:
-      title: "Welcome to Zikaron BaSalon!"
+      title: "Your request to join a Salon has been sent!"
       paragraph_1: "Thanks for choosing to join %{name}'s event! Congrats on joining Zikaron BaSalon's community of people that choose to commemorate the Holocaust in a different and intimate way, among family, friends, and guests."
       paragraph_2: "The details of the upcoming event at %{name}'s salon will be updated shortly in"
       link_text: "your personal profile"
@@ -391,9 +394,11 @@ en:
       paragraph_3: "In the meantime, you can read about Zikaron BaSalon's event on our "
       paragraph_3_link_text: "website"
       link_url: "http://www.zikaronbasalon.org/#!build-your-event/c1hap"
+    guest_cancelled_request:
+      title: "Important update regarding the guests in your salon"
   host_mailer:
     new_host:
-      subject: "Welcome to the Zikaron Basalon Community!"
+      subject: "Welcome to Zikaron BaSalon!"
       paragraph_1: "Thank you for choosing to host a memorial in your living room on the eve of the upcoming Holocaust Memorial Day, and congratulations on joining the community of tens of thousands of hosts in Israel and around the world who choose to mark the eve of Holocaust Remembrance Day in a personal and meaningful way."
       paragraph_2: "Due to the proximity to the eve of Holocaust Remembrance Day, we might not be able to give you a personal guidance. However, all the information that you need is already online and waiting for you."
       paragraph_3_pre_text: "In order for you to have an evening of memory in a successful and meaningful living room, we have gathered recorded testimonies and suggested texts - along with the discussion kit that await "
