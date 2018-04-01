@@ -1,31 +1,139 @@
 <h1><%= @host.user.first_name %>,</h1>
 
 <p>
-	<%= t('.paragraph_1', locale: @locale) %> <%= link_to t('.link_text'), host_url(id: @host.id, locale: @locale) %>
+  אנחנו שמחים לבשר לך שציוותנו לך
+  <% if @witness.witness_type == 'academia' %>
+    איש/אשת
+     אקדמיה ורוח
+  <% elsif @witness.witness_type == 'therapist' %>
+    איש/אשת
+    מקצוע העובד/ת עם ניצולי שואה
+  <% elsif @witness.witness_type == 'survivor' %>
+    איש/אשת
+    עדות
+  <% elsif @witness.witness_type == 'second_generation' %>
+    בן/בת
+    דור שני
+  <% end %>
+  , שיגיע/תגיע לספר על נושא השואה מנקודת מבט ייחודית בסלון שלך.
+  כעת תוכל/י לראות את הפרטים המלאים שלו או שלה
+  <%= link_to t('shared.profile_link', locale: @locale), host_url(id:@host.id, locale: @locale) %>.
 </p>
 
 <p>
+  <strong>
+    אנחנו ממש ממש ממליצים ומבקשים לקרוא את
+    <a target="_blank" href="https://www.zikaronbasalon.com/blank-11">
+      ההנחיות שלנו
+    </a>
+    כיצד להתנהל מול
+
+    <% if @witness.witness_type == 'academia' %>
+      איש/אשת
+      האקדמיה
+    <% elsif @witness.witness_type == 'therapist' %>
+      איש/אשת
+      המקצוע
+    <% elsif @witness.witness_type == 'survivor' %>
+      איש/אשת
+      העדות
+    <% elsif @witness.witness_type == 'second_generation' %>
+      בן/בת
+      הדור השני
+    <% end %>
+
+    עוד לפני שתיצרו איתו/איתה קשר.
+  </strong>
 </p>
 
 <p>
-	<%= @witness_type_text %>
-	<%= t('.paragraph_2_before_link', locale: @locale) %> <%= link_to t('.link_text_2'), "http://www.zikaronbasalon.com/#!blank-11/p05te" %> <%= t('.paragraph_2', locale: @locale) %>
+  <strong>
+    כמה דגשים חשובים:
+  </strong>
+  <br/>
+  <ol>
+    <li>
+      צרו קשר מראש עם איש/אשת האקדמיה. נסו לתאם איתו או איתה שיחת טלפון או מפגש היכרות והקדישו זמן ותשומת לב לתיאום הציפיות. הסבירו להם על מבנה הערב, תתאמו איתם את נושא הערב, ובאילו נושאים להתמקד. נסו גם לקבוע מראש כמה זמן תימשך העדות ותתאמו את נושא ההסעה (במידת הצורך).
+    </li>
+    <li>
+      צלצלו שוב, יום או יומיים לפני ערב יום השואה, לוודא הגעה.
+    </li>
+    <li>
+      הדפיסו והגישו בתום העדות את תעודת ההוקרה (
+      <a target="_blank" href="http://www.zikaronbasalon.com/eveningsetup">
+        נמצאת בערכה למארח
+      </a>
+      )
+    </li>
+    <li>
+      צרו קשר
+      <strong>
+        יום או יומיים לאחר המפגש
+      </strong>
+      לשאול לשלום נותן העדות.
+    </li>
+  </ol>
+
 </p>
 
 <p>
-כמה דגשים חשובים:<br/>
-1. יש ליצור קשר עם נותן העדות שלך ולתאם שיחת או מפגש היכרות.<br/>
-2. בשיחה/מפגש זה, יש לתאם ציפיות לקראת הערב: כמה זמן תימשך העדות, מי הקהל, העובדה לערב שלושה חלקים והעדות היא רק חלק אחד, הסעה הלוך-חזור לנותן העדות ביום המפגש, להציע לנותן העדות להגיע עם קרוב משפחה/חבר וכו׳.<br/>
-3. חשוב לא לשכוח להדפיס ולהעניק לנותן העדות את תעודת ההוקרה<br/>
-4. חשוב להתקשר יום או יומיים לפני הערב עצמו, וכן יום לאחר מכן לשאול לשלום נותן העדות.
+  <strong>
+    מאחר ו
+    <% if @witness.witness_type == 'academia' %>
+      איש/אשת
+      האקדמיה
+    <% elsif @witness.witness_type == 'therapist' %>
+      איש/אשת
+      המקצוע
+    <% elsif @witness.witness_type == 'survivor' %>
+      איש/אשת
+      העדות
+    <% elsif @witness.witness_type == 'second_generation' %>
+      בן/בת
+      הדור השני
+    <% end %>
+    מחכים לשמוע ממך ולתאם איתך,
+    יש ליצור קשר בהקדם האפשרי ולעדכן אותנו שעשית זאת בכפתור ״נוצר קשר עם איש העדות״
+    <%= link_to t('shared.profile_link', locale: @locale), host_url(id:@host.id, locale: @locale) %>
+    (לתשומת לבך, לאחר השינוי יש ללחוץ על שמירה).
+  </strong>
 </p>
 
 <p>
-מאחר ואיש/אשת העדות מחכה לשמוע ממך ולתאם איתך, יש ליצור קשר בהקדם האפשרי ולעדכן אותנו שעשית זאת בכפתור ״נוצר קשר עם איש העדות״ בפרופיל האישי שלך.
+  <%= t 'shared.mailer_pargraph_noticed_profile_login', locale: @locale %>
 </p>
 
 <p>
-	<%= t('.paragraph_3', locale: @locale) %>
+  אם נתקלת בבעיות, אנחנו פה.
 </p>
+
+
+<!--<p>-->
+	<!--<%= t('.paragraph_1', locale: @locale) %> <%= link_to t('.link_text'), host_url(id: @host.id, locale: @locale) %>-->
+<!--</p>-->
+
+<!--<p>-->
+<!--</p>-->
+
+<!--<p>-->
+	<!--<%= @witness_type_text %>-->
+	<!--<%= t('.paragraph_2_before_link', locale: @locale) %> <%= link_to t('.link_text_2'), "http://www.zikaronbasalon.com/#!blank-11/p05te" %> <%= t('.paragraph_2', locale: @locale) %>-->
+<!--</p>-->
+
+<!--<p>-->
+<!--כמה דגשים חשובים:<br/>-->
+<!--1. יש ליצור קשר עם נותן העדות שלך ולתאם שיחת או מפגש היכרות.<br/>-->
+<!--2. בשיחה/מפגש זה, יש לתאם ציפיות לקראת הערב: כמה זמן תימשך העדות, מי הקהל, העובדה לערב שלושה חלקים והעדות היא רק חלק אחד, הסעה הלוך-חזור לנותן העדות ביום המפגש, להציע לנותן העדות להגיע עם קרוב משפחה/חבר וכו׳.<br/>-->
+<!--3. חשוב לא לשכוח להדפיס ולהעניק לנותן העדות את תעודת ההוקרה<br/>-->
+<!--4. חשוב להתקשר יום או יומיים לפני הערב עצמו, וכן יום לאחר מכן לשאול לשלום נותן העדות.-->
+<!--</p>-->
+
+<!--<p>-->
+<!--מאחר ואיש/אשת העדות מחכה לשמוע ממך ולתאם איתך, יש ליצור קשר בהקדם האפשרי ולעדכן אותנו שעשית זאת בכפתור ״נוצר קשר עם איש העדות״ בפרופיל האישי שלך.-->
+<!--</p>-->
+
+<!--<p>-->
+	<!--<%= t('.paragraph_3', locale: @locale) %>-->
+<!--</p>-->
 
 

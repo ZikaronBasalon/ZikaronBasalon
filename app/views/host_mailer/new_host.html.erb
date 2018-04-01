@@ -1,26 +1,91 @@
 <h1><%= @user.first_name %>,</h1>
+<br/>
 
-<p>
-	<%= t('.paragraph_1', locale: @locale) %>
-</p>
+<div dir="<%= @locale == 'he' ? 'rtl' : 'ltr' %>">
 
-<p>
-	<%= t('.paragraph_2', locale: @locale)  %>
-</p>
+<% if @locale == 'he'%>
+  <p>
+    תודה שבחרת לארח אצלך זיכרון בסלון בערב יום הזיכרון לשואה ולגבורה, וברכות על הצטרפותך למסורת ישראלית חדשה של ציון ערב יום השואה בדרך לא פורמלית, אישית ומשמעותית. אנחנו שמחים שבחרת לקחת אחריות אישית על זיכרון השואה והחלטת להבטיח בעצמך שהשואה והזיכרון שלה יישארו רלוונטיים.
+  </p>
 
-<p>
-	<%= t('.paragraph_3_pre_text', locale: @locale)  %>
-	<%= link_to t('.paragraph_3_link_text', locale: @locale), t('.paragraph_3_link_url', locale: @locale) %>.
-</p>
+  <p>
+    זיכרון בסלון הוא התכנסות פרטית בסלון הבית והוא מורכב לרוב
+    <strong>משלושה חלקים</strong>
+    : שמיעת עדות חיה או מוקלטת מניצול שואה, בן דור השני או מומחה לנושא, חלק שיתופי ודיון אקטואלי פתוח.
+  </p>
 
-<!-- <p>
-	<%= t('.paragraph_4_pre_text', locale: @locale) %>
-	<%= link_to t('.paragraph_4_link_text', locale: @locale), t('.paragraph_4_link_url', locale: @locale) %>
-	<%= t('.paragraph_4_post_text', locale: @locale) %>
-</p>
- -->
-<p>
-	<%= t('.paragraph_5_pre_text', locale: @locale) %>
-	<%= link_to t('.paragraph_5_facebook_link_text', locale: @locale), t('.paragraph_5_facebook_link_url', locale: @locale) %>
-	<%= t('.paragraph_5_post_text', locale: @locale) %>
-</p>
+  <strong><u>מה עכשיו?</u></strong>
+  <p>
+    כדאי להציץ שוב
+    <%= link_to t('shared.profile_link', locale: @locale), host_url(id:@host.id, locale: @locale) %>
+    ולוודא שכל הפרטים שמילאת נכונים. אם משהו השתנה, ניתן ללחוץ על כפתור ה״עריכה״ בפרופיל. בפרופיל האישי ניתן גם לראות ולאשר בקשות להתארח (אם מדובר בסלון פתוח) ואת פרטי איש העדות (במידה וציוותנו).
+  </p>
+
+  <p>
+    אנחנו עושים כל מאמץ לצוות אנשי עדות לכל הסלונים שביקשו סיוע במציאת איש עדות בתהליך ההרשמה,
+    <strong>אך לצערנו אין ביכולתנו להבטיח זאת.</strong>
+    מאגר נותני העדות שבידנו הוא מוגבל, וכדרך הטבע הוא הולך ומצטמצם. אנחנו עושים ככל שביכולתנו לשמר ולהרחיב אותו, אבל באופן וודאי מספר ההתכנסויות של זיכרון בסלון יהיה גדול ממספר נותני העדות. אם ביקשתם איש עדות והצלחנו לצוות לכם, אנחנו נשלח לכם על כך מייל ומישהו מצוות המתנדבים שלנו ייצור איתכם קשר. אנא התאזרו בסבלנות. זה עלול לקחת זמן…
+    <strong>נסו במקביל למצוא איש עדות באופן עצמאי ואם הצלחתם עדכנו אותנו.</strong>
+    אנחנו מממליצים להיעזר
+    <a target="_blank" href="https://www.zikaronbasalon.com/blank-11">בהנחיות באתר שלנו</a>
+    על יצירת קשר עם הניצולים.
+  </p>
+
+  <strong><u>איך מארחים?</u></strong>
+  <p>
+    לארח זיכרון בסלון זה
+    <strong>פשוט וקל.</strong>
+    כל מה שאתם צריכים לדעת מופיע
+    <a target="_blank" href="https://www.zikaronbasalon.com/eveningsetup">
+      ערכה למארח
+    </a>
+    <strong>
+      שלנו ובאתר האינטרנט שלנו, ואנחנו כאן כדי לענות על כל שאלה. "חוכמת הסלון" שאספנו מניסיון מצטבר של עשרות אלפי סלונים ב-8 השנים האחרונות, ממתינה לכם באתר ובערכה.
+    </strong>
+  </p>
+
+  <p>
+    אנחנו גם עורכים מפגשי הכנה למארחים בכל רחבי הארץ, אפשר למצוא את המפגש הקרוב אליך
+    <a target="_blank" href="https://goo.gl/forms/ZexQpbKwNf0hme0u1">
+      כאן
+    </a>.
+    במפגשי ההכנה אנחנו מסבירים כיצד איך להתנהל מול איש העדות, איך מנחים דיון, איך בנוי הערב המומלץ ועוד דגשים וטיפים חשובים שאספנו מהניסיון.
+    אתם גם ממש מוזמנים להצטרף
+    <a target="_blank" href="https://www.facebook.com/groups/zikron/">
+      לקבוצת המארחים שלנו בפייסבוק
+    </a>
+    שם אפשר לקרוא ולהתייעץ עם מארחים ותיקים ואיתנו.
+  </p>
+
+  <p>
+    *כדי לראות את הפרופיל שלך, יש לשים לב כי התחברת לאתר. במידה ואין את המילה ״הפרופיל שלי״ מצד ימין למעלה, יש ללחוץ על ״התחבר/י״ מצד שמאל למעלה.
+  </p>
+
+<% end %>
+
+<% if @locale == 'en'%>
+  <p>
+    Thank you for choosing to host a memorial in your living room on the eve of the upcoming Holocaust Memorial Day, and congratulations on joining the community of tens of thousands of hosts in Israel and around the world who choose to mark the eve of Holocaust Remembrance Day in a personal and meaningful way.
+  </p>
+
+  <p>
+    Due to the proximity to the eve of Holocaust Remembrance Day, we might not be able to give you a personal guidance. However, all the information that you need is already online and waiting for you.
+  </p>
+
+  <p>
+    In order for you to have an evening of memory in a successful and meaningful living room, we have gathered recorded testimonies and suggested texts - along with the discussion kit that await you
+    <a target="_blank" href="http://www.zikaronbasalon.org/build-your-event">
+      on the site
+    </a>.
+  </p>
+
+  <p>
+    In addition, you can join our
+    <a target="_blank" href="http://www.facebook.com/ZikaronBaSalonEN/">
+      Facebook page
+    </a>.
+    We are available by email and facebook for any questions.
+  </p>
+<% end %>
+
+</div>

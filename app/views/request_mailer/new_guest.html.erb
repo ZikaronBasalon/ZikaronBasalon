@@ -1,15 +1,62 @@
-<h1><%= @guest.user.first_name %>,</h1>
+<div dir="<%= @locale == 'he' ? 'rtl' : 'ltr' %>">
 
-<p><%= t('.paragraph_1', name: @host.user.first_name, locale: @locale) %></p>
+  <h1>
+    <%= t 'shared.hey', locale: @locale %>
+    <%= @guest.user.first_name %>,</h1>
 
-<p>
-	<%= t('.paragraph_2', name: @host.user.first_name, locale: @locale) %>  
-	<%= link_to(t('.link_text', locale: @locale), guest_url(id: @guest.id, locale: @locale)) %> 
-</p>
 
-<p>
-	<%= t('.paragraph_3', locale: @locale) %>  <%= link_to t('.paragraph_3_link_text', locale: @locale),  t('.link_url', locale: @locale) %>
-	<br>
-	<br>
-	<%= t('.paragraph_3_after_link', locale: @locale) %>
-</p>
+  <% if @locale == 'he'%>
+    <p>
+      תודה שבחרת להתארח בסלון של
+      <%= @host.user.first_name %>
+      ! וברכות על הצטרפותך למסורת ישראלית חדשה של ציון יום הזיכרון לשואה ולגבורה בדרך פרטית ומשמעותית - בערב של זיכרון בסלון.
+    </p>
+
+    <p>
+      <strong>הבקשה שלך להתארח נשלחה למארח, ו</strong>
+      ברגע שתתקבל תשובתו של המארח, יישלח לך מייל אוטומטי עם אישור או דחייה, והפרטים המלאים יתעדכנו
+      <%= link_to (t 'shared.profile_link', locale: @locale), host_url(id: @host.id, locale: @locale) %>.
+    </p>
+
+    <p>
+      בינתיים, ניתן לקרוא כיצד בנוי ערב של זיכרון בסלון
+      <a target="_blank" href="http://www.zikaronbasalon.com/eveningsetup">
+        באתר שלנו
+      </a>.
+    </p>
+
+    <p>
+      <%= t 'shared.mailer_pargraph_noticed_profile_login', locale: @locale %>
+    </p>
+  <% end %>
+
+  <% if @locale == 'en'%>
+
+    <p>
+      Thanks for choosing to join
+      <%= @host.user.first_name %>'s
+      event!
+      Congrats on joining Zikaron BaSalon's community of people that choose to commemorate the Holocaust
+      in a different and intimate way, among family, friends, and guests.
+    </p>
+
+    <p>
+      The details of the upcoming event at
+      <%= @host.user.first_name %>'s
+      's salon will be updated shortly in
+      <%= link_to (t 'shared.profile_link', locale: @locale), host_url(id: @host.id, locale: @locale) %>.
+    </p>
+
+    <p>
+      In the meantime, you can read about Zikaron BaSalon's event on our
+      <a target="_blank" href="http://www.zikaronbasalon.com/eveningsetup">
+        website
+      </a>.
+    </p>
+
+    <p>
+      <%= t 'shared.mailer_pargraph_noticed_profile_login', locale: @locale %>
+    </p>
+  <% end %>
+
+</div>
