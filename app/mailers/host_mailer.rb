@@ -12,6 +12,7 @@ class HostMailer < BaseMailer
 
   def new_host(user_id, locale)
   	@user = User.find(user_id)
+    @host = Host.joins(:user).where('users.id =' + user_id.to_s).last
     @locale = locale
   	mail :to => @user.email, :subject => t('host_mailer.new_host.subject', locale: @locale)
   end
