@@ -1,12 +1,53 @@
-<p>היי <%= @guest.user.first_name %>,</p>
+<div dir="<%= @locale == 'he' ? 'rtl' : 'ltr' %>">
 
-<p>
-	<%= t('.paragraph_1', name: (@host.user.try(:first_name) || "המארח"), locale: @locale) %>
-</p>
-<p>
-	<%= t('.paragraph_2', locale: @locale) %>
-	<%= link_to t('.link_text', locale: @locale), t('.link_url', locale: @locale) %>
-</p>
-<p>
-	<%= t('.paragraph_3', locale: @locale) %>
-</p>
+  <h1>
+    <%= t 'shared.hey', locale: @locale %>
+    <%= @guest.user.first_name %>,</h1>
+
+
+  <% if @locale == 'he'%>
+    <p>
+      לצערנו, הסלון של
+      <%= @host.user.full_name %>
+      כבר מלא ואין בו מקום. אבל אל דאגה, עדיין אפשר להצטרף לסלונים אחרים! אפשר לחפש סלונים אחרים דרך
+      <%= link_to "הפרופיל האישי", guest_url(id: @guest.id, locale: @locale) %>.
+    </p>
+
+    <p>
+      היית רוצה לארח ערב של זיכרון בסלון בעצמך? לארח זיכרון בסלון זה פשוט וקל, אפשר לקרוא ולראות מערכים למפגשים
+      <a target="_blank" href="https://www.zikaronbasalon.com/eveningsetup">
+        באתר שלנו
+      </a>
+      אם החלטת לארח,
+      <a href="mailto:zikaronbasalon@gmail.com">
+        אנחנו כאן
+      </a>.
+    </p>
+
+    <p>
+      <%= t 'shared.mailer_pargraph_noticed_profile_login', locale: @locale %>
+    </p>
+  <% end %>
+
+  <% if @locale == 'en'%>
+
+    <p>
+      Unfortunately,
+      <%= @host.user.full_name %>'s
+      salon is already full. <br/>
+
+      Don’t worry, you can always find
+
+      <%= link_to "a new salon to join!", host_search_url %>.
+      <br/>
+
+      Would you like to host your own event? We are help to guide you through it, simply register as a host and we will do our best to ensure you are ready and prepared. No biggy.
+
+    </p>
+
+    <p>
+      <%= t 'shared.mailer_pargraph_noticed_profile_login', locale: @locale %>
+    </p>
+  <% end %>
+
+</div>
