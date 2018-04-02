@@ -1,11 +1,11 @@
-<div dir="<%= @locale == 'he' ? 'rtl' : 'ltr' %>">
+<div dir="<%= @locale == :he ? 'rtl' : 'ltr' %>">
 
   <h1>
     <%= t 'shared.hey', locale: @locale %>
     <%= @guest.user.first_name %>,</h1>
 
 
-  <% if @locale == 'he'%>
+  <% if @locale == :he%>
     <p>
       תודה שבחרת להתארח בסלון של
       <%= @host.user.first_name %>
@@ -30,7 +30,7 @@
     </p>
   <% end %>
 
-  <% if @locale == 'en'%>
+  <% if @locale == :en%>
 
     <p>
       Thanks for choosing to join
