@@ -1,37 +1,57 @@
-<h1><%= @host.user.first_name %></h1>
+<div dir="<%= @locale == :he ? 'rtl' : 'ltr' %>">
 
-<p>
-	<%= t '.paragraph_1', guest_name: @guest.user.first_name, locale: @locale %>
-</p>
+  <h1><%= @host.user.first_name %></h1>
+
+  <p>
+    <%= t '.paragraph_1', guest_name: @guest.user.first_name, locale: @locale %>
+  </p>
 
 
-<table class="table">
-  <tr>
-    <th><%= t 'hosts.show.labels.name', locale: @locale %></th>
-    <th><%= t 'hosts.show.labels.phone', locale: @locale %></th>
-    <th><%= t 'hosts.show.labels.email', locale: @locale %></th>
-    <th><%= t 'hosts.show.labels.how_many_places', locale: @locale %></th>
-  </tr>
+  <table class="table">
+    <tr>
+      <th><%= t 'hosts.show.labels.name', locale: @locale %></th>
+      <th><%= t 'hosts.show.labels.phone', locale: @locale %></th>
+      <th><%= t 'hosts.show.labels.email', locale: @locale %></th>
+      <th><%= t 'hosts.show.labels.how_many_places', locale: @locale %></th>
+    </tr>
 
-  <tr>
-    <td><%= @guest.user.full_name %></td>
-    <td><%= @guest.phone %> </td>
-    <td><%= @guest.user.email %></td>
-    <td><%= @invite.plus_ones + 1 %> </td>
-  </tr>
-</table>
+    <tr>
+      <td><%= @guest.user.full_name %></td>
+      <td><%= @guest.phone %> </td>
+      <td><%= @guest.user.email %></td>
+      <td><%= @invite.plus_ones + 1 %> </td>
+    </tr>
+  </table>
 
-<p>
-	<%= t '.ok_for_you', locale: @locale %> 
-  <%= link_to t('.approve_request', locale: @locale), host_url(id:@host.id, locale: @locale) %>
-  <%= t '.ok_for_you_cont', guest_name: @guest.user.first_name, locale: @locale %> 
-  <%= link_to t('.profile_link', locale: @locale), host_url(id:@host.id, locale: @locale) %>
-</p>
+  <br/>
 
-<p>
-	<%= t '.paragraph_2', locale: @locale %> <%= link_to t('.your_profile', locale: @locale), host_url(id:@host.id, locale: @locale) %>
-</p>
+  <p>
+    <%= t '.ok_for_you', locale: @locale %>
+    <%= link_to t('.approve_request', locale: @locale), host_url(id:@host.id, locale: @locale) %>
 
-<p>
-	<%= t '.paragraph_3', locale: @locale %>
-</p>
+    <% if @locale == :he %>
+      <%= t '.ok_for_you_cont', guest_name: @guest.user.first_name, locale: @locale %>
+    <% end %>
+
+    <% if @locale == :en %>
+      on
+    <% end %>
+
+    <%= link_to t('shared.profile_link', locale: @locale), host_url(id:@host.id, locale: @locale) %>
+
+    <% if @locale == :en %>
+      as soon as possible, to let the guests know if they can join. The request will be automatically canceled in four days, so we urge you to approve it as soon as possible.
+    <% end %>
+
+  </p>
+
+  <p>
+    <%= t '.paragraph_2', locale: @locale %> <%= link_to t('.your_profile', locale: @locale), host_url(id:@host.id, locale: @locale) %>
+  </p>
+
+  <p>
+    <%= t 'shared.mailer_pargraph_noticed_profile_login', locale: @locale %>
+  </p>
+
+
+</div>
