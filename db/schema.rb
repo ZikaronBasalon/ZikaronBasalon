@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20180401164911) do
+ActiveRecord::Schema.define(:version => 20180402155229) do
 
   create_table "cities", :force => true do |t|
     t.string   "name"
@@ -73,8 +73,8 @@ ActiveRecord::Schema.define(:version => 20180401164911) do
     t.integer  "city_id"
     t.integer  "max_guests"
     t.text     "free_text"
-    t.datetime "created_at",                                    :null => false
-    t.datetime "updated_at",                                    :null => false
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
     t.boolean  "strangers",                  :default => true
     t.text     "status"
     t.string   "contact"
@@ -90,10 +90,10 @@ ActiveRecord::Schema.define(:version => 20180401164911) do
     t.boolean  "elevator"
     t.string   "org_name"
     t.string   "org_role"
-    t.string   "event_language"
+    t.string   "event_language",             :default => "hebrew"
     t.boolean  "contacted",                  :default => false
     t.string   "phone"
-    t.boolean  "survivor_needed"
+    t.boolean  "survivor_needed",            :default => false
     t.integer  "witness_id"
     t.text     "public_text"
     t.string   "concept"
