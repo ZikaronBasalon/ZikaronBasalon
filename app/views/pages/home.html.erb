@@ -71,8 +71,8 @@
         </div>
 
         <div class="form-group">
-          <date-picker format-date="formatDate" parse-date="parseDate" ng-change="filter()" style="direction: ltr;" ng-show="showDatePicker" ng-model="search.event_date" on-date-selected="showDatePicker = !showDatePicker"></date-picker>
-          <input placeholder="תאריך" ng-model="search.event_date" ng-show="!showDatePicker" ng-click="showDatePicker = !showDatePicker">
+          <date-picker format-date="formatDate" parse-date="parseDate" ng-change="filter()" style="direction:ltr; z-index:10000; position:absolute;" ng-show="showDatePicker" ng-model="search.event_date" on-date-selected="showDatePicker = !showDatePicker"></date-picker>
+          <input placeholder="תאריך" ng-model="search.event_date" ng-click="showDatePicker = !showDatePicker">
         </div>
 
 
@@ -143,7 +143,7 @@
             <td>{{ host.user.first_name }}</td>
             <td>{{ formatCityDisplay(host) }}</td>
             <td>{{ formatAddressDisplay(host.address) }}</td>
-            <td class="hidden-xs">{{ formatDate(host.event_date) }}</td>
+            <td class="hidden-xs">{{ formatTableDate(host.event_date) }}</td>
             <td class="hidden-xs">{{ formatLanguage(host.event_language) }}</td>
             <td>{{ host.available_places }}</td>
             <td class="hidden-xs">{{ host.public_text }}</td>
