@@ -71,7 +71,7 @@
         </div>
 
         <div class="form-group">
-          <date-picker format-date="formatDate" parse-date="parseDate" ng-change="filter()" style="direction:ltr; z-index:10000; position:absolute; direction: ltr;" ng-show="showDatePicker" ng-model="search.event_date" on-date-selected="showDatePicker = !showDatePicker"></date-picker>
+          <date-picker format-date="formatDate" parse-date="parseDate" ng-change="filter()" style="direction:ltr; z-index:10000; position:absolute;" ng-show="showDatePicker" ng-model="search.event_date" on-date-selected="showDatePicker = !showDatePicker"></date-picker>
           <input placeholder="תאריך" ng-model="search.event_date" ng-click="showDatePicker = !showDatePicker">
         </div>
 
