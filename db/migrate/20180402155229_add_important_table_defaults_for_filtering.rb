@@ -15,7 +15,20 @@ class AddImportantTableDefaultsForFiltering < ActiveRecord::Migration
     # Apply defaults for hosts retrospectively - received_registration_mail
     Host.where("received_registration_mail IS NULL").update_all("received_registration_mail = false")
 
+    # Defaults needed for filtering in witnesses - language
+    change_column_default :witnesses, :language, 'hebrew'
+    # Apply defaults for witnesses retrospectively - language
+    Witness.where("language IS NULL").update_all("language = 'hebrew'")
 
+    # Defaults needed for filtering in witnesses - stairs
+    change_column_default :witnesses, :stairs, false
+    # Apply defaults for witnesses retrospectively - stairs
+    Witness.where("stairs IS NULL").update_all("stairs = false")
+
+    # Defaults needed for filtering in witnesses - special_population
+    change_column_default :witnesses, :special_population, false
+    # Apply defaults for witnesses retrospectively - special_population
+    Witness.where("special_population IS NULL").update_all("special_population = false")
   end
 
   def down

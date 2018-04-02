@@ -174,16 +174,16 @@ ActiveRecord::Schema.define(:version => 20180402155229) do
     t.string   "address"
     t.integer  "city_id"
     t.string   "witness_type"
-    t.string   "language"
+    t.string   "language",              :default => "hebrew"
     t.string   "email"
     t.string   "phone"
-    t.boolean  "stairs"
+    t.boolean  "stairs",                :default => false
     t.text     "special_needs"
     t.boolean  "seminar_required"
     t.text     "free_text"
-    t.boolean  "special_population"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.boolean  "special_population",    :default => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
     t.boolean  "contacted",             :default => false
     t.boolean  "contacted_by_host",     :default => false
     t.boolean  "available_for_teaming", :default => true
