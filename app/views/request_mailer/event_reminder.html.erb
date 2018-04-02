@@ -1,9 +1,9 @@
-<div dir="<%= @locale == 'he' ? 'rtl' : 'ltr' %>">
+<div dir="<%= @locale == :he ? 'rtl' : 'ltr' %>">
 
 <p>
   <%= @guest.user.first_name %>, <%= @host.user.first_name %>
 
-<% if @locale == 'he'%>
+<% if @locale == :he%>
   מחכה לך בסלון!
 </p>
 
@@ -26,7 +26,7 @@
 
 <% end %>
 
-<% if @locale == 'en'%>
+<% if @locale == :en%>
   is waiting for you!
 </p>
 
