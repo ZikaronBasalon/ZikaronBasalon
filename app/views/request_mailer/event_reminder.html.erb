@@ -1,15 +1,22 @@
+<div dir="<%= @locale == :he ? 'rtl' : 'ltr' %>">
+
 <p>
-	<%= @guest.user.first_name %>, <%= @host.user.first_name %> מחכה לך בסלון!
+  <%= @guest.user.first_name %>, <%= @host.user.first_name %>
+
+<% if @locale == :he%>
+  מחכה לך בסלון!
 </p>
 
 <p>
 רק רצינו להזכיר לך כי בעוד יומיים יתקיים זיכרון בסלון אצל <%= @host.user.first_name %>.  מומלץ להתקשר למארח, להכיר, להציע האם כדאי להביא משהו ולתאם שעת הגעה.
+  אפשר לראות את כל הפרטים על הסלון
+  <%= link_to t('shared.profile_link', locale: @locale), host_url(id:@host.id, locale: @locale) %>
+  באתר שלנו.
 </p>
 <p>
-במידה ולא יתאפשר לך להגיע, חשוב מאוד ליצור קשר עם המארח ולעדכן אותו. 
-	<a href="http://zikaronbasalon.herokuapp.com/my-profile">
-		לפרטי הסלון
-	</a>
+  <strong>
+    במידה ולא יתאפשר לך להגיע, חשוב מאוד ליצור קשר עם המארח ולעדכן אותו.
+  </strong>
 </p>
 
 <p>
@@ -17,4 +24,27 @@
 </p>
 
 
+<% end %>
 
+<% if @locale == :en%>
+  is waiting for you!
+</p>
+
+<p>
+  We just wanted to remind you that in a couple of days a Zikaron BaSalon event will take place in
+  <%= @host.user.first_name %>’s living room. We advise you give <%= @host.user.first_name %>
+  a call and ask if there is anything you should bring, what time you should arrive etc. You can see <%= @host.user.first_name %>’s
+  phone number and other information on your
+  <%= link_to t('shared.profile_link', locale: @locale), host_url(id:@host.id, locale: @locale) %>.
+  In case you won’t be able to make it, it is important to cancel
+  <%= link_to 'your reservation', host_url(id:@host.id, locale: @locale) %>
+  and let the host know.
+</p>
+
+<p>
+  <%= t 'shared.mailer_pargraph_noticed_profile_login', locale: @locale %>
+</p>
+
+<% end %>
+
+</div>

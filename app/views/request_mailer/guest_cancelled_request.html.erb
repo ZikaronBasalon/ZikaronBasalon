@@ -1,9 +1,36 @@
-<h1>היי <%= @host.user.first_name %>,</h1>
-<p>
-	<%= t '.paragraph_1', guest_name: @guest.user.first_name, locale: @locale %>
-	<%= link_to (t '.profile_link', locale: @locale), host_url(id: @host.id, locale: @locale) %>
-</p>
+<div dir="<%= @locale == :he ? 'rtl' : 'ltr' %>">
 
-<p>
-	<%= t '.paragraph_2' %>
-</p>
+<h1>
+  <%= t 'shared.hey', locale: @locale %>
+  <%= @host.user.first_name %>,</h1>
+
+
+<% if @locale == :he%>
+  <p>
+    לצערנו, לא יתאפשר ל
+    <%= @guest.user.full_name %>
+    להגיע לסלון שלך. מספר המקומות הפנויים שלך התעדכן, ואורחים נוספים יוכלו להצטרף לסלון שלך! ניתן לערוך את מספר המקומות הפנויים ולראות את רשימת האורחים המעודכנת
+    <%= link_to (t 'shared.profile_link', locale: @locale), host_url(id: @host.id, locale: @locale) %>.
+  </p>
+
+  <p>
+    <%= t 'shared.mailer_pargraph_noticed_profile_login', locale: @locale %>
+  </p>
+<% end %>
+
+<% if @locale == :en%>
+
+  <p>
+    Unfortunately,
+    <%= @guest.user.full_name %>
+    won’t be able to make it to your salon. The number of guests that can send a request to your salon has been updated,
+    so other guests will be able to join your salon! You can edit the number of available sits and see the updated guest list on
+    <%= link_to (t 'shared.profile_link', locale: @locale), host_url(id: @host.id, locale: @locale) %>.
+  </p>
+
+  <p>
+    <%= t 'shared.mailer_pargraph_noticed_profile_login', locale: @locale %>
+  </p>
+<% end %>
+
+</div>

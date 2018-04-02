@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/basecamp/mail_view.git
+  revision: 50831ad31c6f9042469a33dab1394bd2a4042fd8
+  specs:
+    mail_view (2.0.4)
+      tilt
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -240,6 +247,7 @@ DEPENDENCIES
   kaminari
   less-rails
   letter_opener
+  mail_view!
   mocha
   newrelic_rpm
   pg

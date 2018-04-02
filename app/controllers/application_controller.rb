@@ -22,11 +22,19 @@ class ApplicationController < ActionController::Base
 	private
 
 	def set_locale
-	  I18n.locale = params[:locale]
+		I18n.locale = params[:locale]
 	  I18n.locale ||= request.headers['locale'] if request.headers['locale'].present?
     # Avriel edit: added locale by cookie
     I18n.locale ||= request.cookies['locale']
 		I18n.locale ||= :he
+
+		# If locale changes, change the locale for this user in DB
+		if current_user && I18n.locale.to_s != current_user.locale
+			u = User.find(current_user.id)
+			u.locale = I18n.locale
+			u.save!
+		end
+
 	  # current_user.locale
 	  # request.subdomain
 	  # request.env["HTTP_ACCEPT_LANGUAGE"]
