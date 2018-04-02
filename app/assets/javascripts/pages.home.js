@@ -9,7 +9,7 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
   $scope.currentPage = 1;
 
   $scope.formatBool = formatBool;
-  // $scope.formatDate = formatDate;
+  $scope.formatTableDate = formatDate;
   $scope.formatAddress = formatAddress;
   $scope.formatLanguage = formatLanguage;
   $scope.formatAddressDisplay = formatAddressDisplay;
