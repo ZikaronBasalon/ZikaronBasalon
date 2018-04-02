@@ -42,6 +42,7 @@ class ManagersController < ApplicationController
                                 params[:host_sort],
                                 has_manager,
                                 has_survivor,
+                                is_red,
                                 is_org,
                                 language,
                                 in_future,
@@ -120,6 +121,7 @@ class ManagersController < ApplicationController
                                 params[:host_sort],
                                 has_manager,
                                 has_survivor,
+                                is_red,
                                 is_org,
                                 language,
                                 in_future,
@@ -170,6 +172,10 @@ class ManagersController < ApplicationController
 
     def has_survivor
       params[:has_survivor]
+    end
+
+    def is_red
+      params[:is_red]
     end
 
     def is_org

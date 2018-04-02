@@ -170,6 +170,7 @@ en:
     created_failure: "Failed to create, please try again and fill all fields."
     region: "Region"
     hey: "Hi"
+    witness_contacted_red: "Red"
 
   views:
     pagination:
