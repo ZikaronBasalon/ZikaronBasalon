@@ -392,18 +392,30 @@ namespace :hotfixes do
     print("\n" + "finished")
   end
 
-  desc "Ensure each wintess has exactly one status"
+  desc "Ensure each witness has exactly one status"
   task :ensure_each_witness_has_exactly_one_status => :environment do
     print("starting!" + "\n")
+    count = 0
     Witness.all.each{|w|
       if w.host_id && (w.external_assignment || w.archived || w.need_to_followup)
         w.external_assignment = false
         w.archived = false
         w.need_to_followup = false
         w.save!
-        print "Witness( ID:" + w.id.to_s + ")" + "was fixed!"
+        count += 1
+        # print "Witness( ID:" + w.id.to_s + ")" + "was fixed!"
+      elsif (w.external_assignment && w.archived) || (w.external_assignment && w.need_to_followup) || (w.external_assignment && w.archived && w.need_to_followup)
+        w.archived = false
+        w.need_to_followup = false
+        w.save!
+        count += 1
+      elsif w.archived && w.need_to_followup
+        w.need_to_followup = false
+        w.save!
+        count += 1
       end
     }
+    print ("\n" + "Count of witnesses that their status was fixed is " + count.to_s)
     print("\n" + "finished")
   end
 
