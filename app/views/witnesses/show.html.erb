@@ -188,7 +188,7 @@
                     <label>
                       <input type="checkbox"
                              name="external_assignment"
-                             ng-disabled="witness.host"
+                             ng-disabled="witness.host || witness.archived || witness.need_to_followup"
                              ng-model="witness.external_assignment"
                              ng-change="confirmExternalAssignment()">
                       <%= t 'profile.labels.external_assignment_explain' %>
@@ -198,7 +198,7 @@
                     <label>
                       <input type="checkbox"
                              name="archived"
-                             ng-disabled="witness.host"
+                             ng-disabled="witness.host || witness.external_assignment || witness.need_to_followup"
                              ng-model="witness.archived"
                              ng-change="confirmArchive()">
                       <%= t 'profile.labels.archived_explain' %>
@@ -208,7 +208,7 @@
                     <label>
                       <input type="checkbox"
                              name="need_to_followup"
-                             ng-disabled="witness.host"
+                             ng-disabled="witness.host || witness.external_assignment || witness.archived"
                              ng-model="witness.need_to_followup"
                              ng-change="confirmFollowup()">
                       <%= t 'profile.labels.need_to_followup_explain' %>
