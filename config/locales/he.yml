@@ -177,6 +177,7 @@ he:
     created_failure: "היצירה נכשלה, אנא נסה שנית ומלא את כל השדות."
     region: "אזור"
     mailer_pargraph_noticed_profile_login: "*כדי לראות את הפרופיל שלך, יש לשים לב כי התחברת לאתר. במידה ואין את המילה ״הפרופיל שלי״ מצד ימין למעלה, יש ללחוץ על ״התחבר/י״ מצד שמאל למעלה."
+    witness_contacted_red: "אדומים"
 
   views:
     pagination:
