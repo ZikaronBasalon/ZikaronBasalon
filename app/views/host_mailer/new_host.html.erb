@@ -1,9 +1,9 @@
 <h1><%= @user.first_name %>,</h1>
 <br/>
 
-<div dir="<%= @locale == 'he' ? 'rtl' : 'ltr' %>">
+<div dir="<%= @locale == :he ? 'rtl' : 'ltr' %>">
 
-<% if @locale == 'he'%>
+<% if @locale == :he%>
   <p>
     תודה שבחרת לארח אצלך זיכרון בסלון בערב יום הזיכרון לשואה ולגבורה, וברכות על הצטרפותך למסורת ישראלית חדשה של ציון ערב יום השואה בדרך לא פורמלית, אישית ומשמעותית. אנחנו שמחים שבחרת לקחת אחריות אישית על זיכרון השואה והחלטת להבטיח בעצמך שהשואה והזיכרון שלה יישארו רלוונטיים.
   </p>
@@ -63,7 +63,7 @@
 
 <% end %>
 
-<% if @locale == 'en'%>
+<% if @locale == :en%>
   <p>
     Thank you for choosing to host a memorial in your living room on the eve of the upcoming Holocaust Memorial Day, and congratulations on joining the community of tens of thousands of hosts in Israel and around the world who choose to mark the eve of Holocaust Remembrance Day in a personal and meaningful way.
   </p>

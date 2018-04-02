@@ -1,11 +1,11 @@
-<div dir="<%= @locale == 'he' ? 'rtl' : 'ltr' %>">
+<div dir="<%= @locale == :he ? 'rtl' : 'ltr' %>">
 
 <h1>
   <%= t 'shared.hey', locale: @locale %>
   <%= @host.user.first_name %>,</h1>
 
 
-<% if @locale == 'he'%>
+<% if @locale == :he%>
   <p>
     לצערנו, לא יתאפשר ל
     <%= @guest.user.full_name %>
@@ -18,7 +18,7 @@
   </p>
 <% end %>
 
-<% if @locale == 'en'%>
+<% if @locale == :en%>
 
   <p>
     Unfortunately,
