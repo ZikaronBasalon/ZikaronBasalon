@@ -112,6 +112,7 @@ class HostsController < ApplicationController
       # If manager doesn't have host - disallow
       else
         redirect_to root_path
+        return false
       end
     end
 
