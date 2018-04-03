@@ -9,17 +9,34 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
   $scope.currentPage = 1;
 
   $scope.formatBool = formatBool;
-  $scope.formatDate = formatDate;
+  $scope.formatTableDate = formatDate;
   $scope.formatAddress = formatAddress;
   $scope.formatLanguage = formatLanguage;
   $scope.formatAddressDisplay = formatAddressDisplay;
   $scope.formatCityDisplay = formatCityDisplay;
   $scope.sortProp = 'user.full_name';
 
+
+    $scope.dateFormat = 'dd-MMMM-yyyy';
+    $scope.eventDate = {
+        isOpen: false,
+    }
+
+    $scope.openDatepicker = function() {
+        $scope.eventDate.isOpen = true;
+    }
+
+    $scope.orgChanged = function(value) {
+        if (value === 'false') {
+            $scope.host.org_name = $scope.host.org_role = null;
+        }
+    }
+
   $scope.init = function(hosts, cities, regions, totalItems, currentUser, countries) {
 
     //  Make Israel default country on search
     $scope.search.country_id = 97;
+
 
     $scope.hosts = hosts;
     $scope.cities = cities;
@@ -52,6 +69,30 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
       }
     }, 2000), true);
   }
+
+
+    $scope.formatDate = function (date) {
+        function pad(n) {
+            return n < 10 ? '0' + n : n;
+        }
+
+        if (!date || !date.getDate) {
+            return;
+        }
+
+        var locale = document.getElementById('locale').className;
+        if (locale == 'he') {
+            return date && pad(date.getDate() + '-' +
+                pad(date.getMonth() + 1)  + '-' +
+                date.getFullYear());
+        } else {
+            return date && pad(date.getUTCDate() + '-' +
+                pad(date.getUTCMonth() + 1)  + '-' +
+                date.getUTCFullYear());
+        }
+    };
+
+
 
   $scope.filter = function() {
     $scope.getHosts();
@@ -113,7 +154,6 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
     $scope.currentPage = 1;
     $scope.getHosts($scope.currentPage);
   }
-
   
 }]);
 
