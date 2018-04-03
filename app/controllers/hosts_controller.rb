@@ -1,5 +1,5 @@
 class HostsController < ApplicationController
-  before_filter :correct_host, only: [:edit]
+  before_filter :correct_host
   # before_action :authenticate_user!
   before_filter :logout_if_inactive
 
@@ -91,30 +91,30 @@ class HostsController < ApplicationController
 
   # Checks if user has access to view page
   def correct_host
+    # If is logged out - disallow
     if current_user.nil?
       redirect_to root_path
       return false
     end
+
+    # If is manager/admin - allow
+    return if current_user && (current_user.admin? || current_user.sub_admin?)
+
+    # If user is not of type host - disallow
+    user_type = current_user.meta_type
+    if user_type != "Host"
+      redirect_to root_path
+      return false
+    end
+
+    # If meta id is not the same as hosts - disallow, otherwise allow
     meta = current_user.try(:meta)
     id = params[:id].to_i
 
-    return if current_user && (current_user.admin? || current_user.sub_admin?)
-
-    redirect_to user_session_path if meta.nil? || (meta.is_a?(Host) && meta.id != id)
-    redirect_to user_session_path if meta.is_a?(Manager) && !meta.hosts.pluck(:id).include?(id)
-
-    #lookup user type. if same type, false. different type redirect
-    user_type = current_user.meta_type
-    if user_type == "Host"
-      redirect_to root_path unless current_user.meta.id == id
-    else
-      return false unless current_user.meta.id == id
+    if meta.id != id
+      redirect_to root_path
+      return false
     end
-    # param_user_type = User.find(id).meta_type
-    # user_type = current_user.meta_type
-    # if param_user_type == user_type
-    # else
-    # end
   end
 
   def changerole
