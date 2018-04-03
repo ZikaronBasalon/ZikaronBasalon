@@ -11,7 +11,7 @@ class MailPreview < MailView
   end
 
   def guest_cancelled_request_en
-    invite_id = Invite.first.idrequest_rejectedrequest_rejected
+    invite_id = Invite.first.id
     RequestMailer.guest_cancelled_request(invite_id, :en)
   end
 

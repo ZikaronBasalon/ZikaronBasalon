@@ -50,7 +50,7 @@ class RequestMailer < ActionMailer::Base
     @invite = Invite.find(invite_id)
     @host = @invite.host
     @guest = @invite.guest
-    @locale = @guest.user.locale
+    @locale = @guest.user.locale ? @guest.user.locale.to_sym : :he
     mail :to => @guest.user.email, :subject => t('request_mailer.event_reminder.title', locale: @locale)
   end
   # def request_was_sent(host_id,guest_id)
