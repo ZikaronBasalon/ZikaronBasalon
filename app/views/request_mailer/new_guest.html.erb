@@ -15,7 +15,7 @@
     <p>
       <strong>הבקשה שלך להתארח נשלחה למארח, ו</strong>
       ברגע שתתקבל תשובתו של המארח, יישלח לך מייל אוטומטי עם אישור או דחייה, והפרטים המלאים יתעדכנו
-      <%= link_to (t 'shared.profile_link', locale: @locale), host_url(id: @host.id, locale: @locale) %>.
+      <%= link_to (t 'shared.profile_link', locale: @locale), guest_url(id: @guest.id, locale: @locale) %>.
     </p>
 
     <p>
@@ -44,7 +44,7 @@
       The details of the upcoming event at
       <%= @host.user.first_name %>'s
       's salon will be updated shortly in
-      <%= link_to (t 'shared.profile_link', locale: @locale), host_url(id: @host.id, locale: @locale) %>.
+      <%= link_to (t 'shared.profile_link', locale: @locale), guest_url(id: @guest.id, locale: @locale) %>.
     </p>
 
     <p>
