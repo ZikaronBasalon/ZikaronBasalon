@@ -97,20 +97,32 @@ class HostsController < ApplicationController
       return false
     end
 
-    # If is manager/admin - allow
+    user_type = current_user.meta_type
+    meta = current_user.try(:meta)
+    id = params[:id].to_i
+
+    # If is manager/admin/subadmin - allow
     return if current_user && (current_user.admin? || current_user.sub_admin?)
 
+    # If is a manager/admin - with this area - allow
+    if user_type == 'Manager' && current_user.simple_admin?
+      # If is a legit manager who has this host - allow
+      if meta.hosts.pluck(:id).include?(id)
+        return
+      # If manager doesn't have host - disallow
+      else
+        redirect_to root_path
+        return false
+      end
+    end
+
     # If user is not of type host - disallow
-    user_type = current_user.meta_type
     if user_type != "Host"
       redirect_to root_path
       return false
     end
 
     # If meta id is not the same as hosts - disallow, otherwise allow
-    meta = current_user.try(:meta)
-    id = params[:id].to_i
-
     if meta.id != id
       redirect_to root_path
       return false
