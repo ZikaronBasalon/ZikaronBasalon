@@ -9,7 +9,11 @@ class Invite < ActiveRecord::Base
 
   def after_destroy
     h = Host.where(id: host_id).last
-    h.invites_pending_count -= total_invites_count
+    if confirmed
+      h.invites_confirmed_count -= total_invites_count
+    elsif confirmed === false
+      h.invites_pending_count -= total_invites_count
+    end
     h.save!
   end
 
@@ -49,7 +53,7 @@ class Invite < ActiveRecord::Base
 
   def self.cancel_overdue
     Invite.pending.each do |i|
-      if ((Time.now.utc - i.created_at.utc) / 1.day).to_i >= 1
+      if ((Time.now.utc - i.created_at.utc) / 1.day).to_i >= 2
         i.destroy
       end
     end
