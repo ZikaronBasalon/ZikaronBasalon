@@ -54,6 +54,9 @@ app.controller('RequestInviteController', ['$scope', '$http', '$uibModalInstance
   		if(response.data.error) {
   			$scope.view = 'error';
   		} else {
+            // after finished with request invite remove it from local storage
+            localStorage.removeItem("hostInviteRequested");
+            // than change view to success
   			$scope.view = 'success';
   		}
   	});

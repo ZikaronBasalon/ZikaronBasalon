@@ -48,8 +48,10 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
     var hostId = getUrlParameter('invite', window.location);
     if(hostId) {
       var host = _.find($scope.hosts, { id: parseInt(hostId) });
-      if (host) {
-        $scope.requestInvite(host);
+        // if host is not found on page take it from storage (Stored right before registration)
+        host = host? host : JSON.parse(localStorage.getItem("hostInviteRequested"));
+        if (host) {
+            $scope.requestInvite(host);
       } else {
         $http.get('/hosts/'+hostId+'.json').then(function(response) {
           if(response.data.host) {
@@ -127,7 +129,10 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
   }
 
   $scope.requestInvite = function(host) {
-    var modalInstance = $uibModal.open({
+      // store the host for future use in case of a prior registration
+      localStorage.setItem("hostInviteRequested", JSON.stringify(host));
+
+      var modalInstance = $uibModal.open({
       templateUrl: 'request-invite.html',
       controller: 'RequestInviteController',
       resolve: {
