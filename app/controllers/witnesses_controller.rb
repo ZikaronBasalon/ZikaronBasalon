@@ -63,7 +63,7 @@ class WitnessesController < ApplicationController
   # PUT /witnesses/1.json
   def update
     @witness = Witness.find(params[:id])
-
+    raise "temp email ban because emails were sent without premission. remove before relaunch"
     respond_to do |format|
       if @witness.update_attributes(params[:witness])
          if(params[:witness][:host_id].present?)
