@@ -63,17 +63,17 @@ class WitnessesController < ApplicationController
   # PUT /witnesses/1.json
   def update
     @witness = Witness.find(params[:id])
+
     respond_to do |format|
       if @witness.update_attributes(params[:witness])
          if(params[:witness][:host_id].present?)
-          # TODO bug: fix before launch. this action is shared between edit witness and assign witness to host
-          # HostMailer.witness_assigned(
-          #   params[:witness][:host_id],
-          #   @witness.id,
-          #   I18n.locale
-          # ).deliver
-          # @host = Host.find(params[:witness][:host_id])
-          # @host.update_attributes(assignment_time: Time.now.utc.localtime, witness_id: params[:id])
+          HostMailer.witness_assigned(
+            params[:witness][:host_id],
+            @witness.id,
+            I18n.locale
+          ).deliver
+          @host = Host.find(params[:witness][:host_id])
+          @host.update_attributes(assignment_time: Time.now.utc.localtime, witness_id: params[:id])
         end
 
 
