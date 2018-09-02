@@ -8,7 +8,7 @@ namespace :hotfixes do
     end
   end
 
-  #instructions: 
+  #instructions:
   desc "fix names for cities and add place_id"
   task :add_place_ids_to_cities => :environment do
     City.where(name: nil).destroy_all
@@ -69,7 +69,6 @@ namespace :hotfixes do
 
   desc "reset users active_this_year"
   task :send_users_to_last_year => :environment do
-
     #cancel all assignments
     Host.where("assignment_time IS NOT NULL").update_all(assignment_time: nil)
 
@@ -81,8 +80,9 @@ namespace :hotfixes do
     #make all hosts not active (for coming up in searches)
     # Host.where(active: true).each do |host|
     admin_user_id = User.where(email: "zikaronbasalon@gmail.com").first.id
-    Host.all.each do |host|
-      Host.transaction do
+
+    # Host.all.each do |host|
+    #   Host.transaction do
         #create comment for host
         # host.comments.create
         # comment = "בשנה שעברה, מארח זה אירח ב '#{host.event_date} #{host.event_time}' עם העד #{host.witness_id}"
@@ -95,32 +95,33 @@ namespace :hotfixes do
         # end
         #
         # this superceded by below
-        if !host.witness.nil? && false
-          comment = "ב2017 המארח/ת אירח/ה את איש/אשת העדות #{host.witness.full_name} #{host.witness.id}"
-          host.comments.create!(user_id: admin_user_id, content: comment)
-        end
-        host.max_guests = nil
-        host.strangers = nil
-        host.contacted = false
-        host.survivor_details = nil
-        host.evening_public = nil
-        host.hosted_before = nil
-        host.event_date = nil
-        host.event_time = nil
-        host.org_name = nil
-        host.survivor_needed = nil
-        host.witness_id = nil
-        host.received_registration_mail = nil
-        host.contacted_witness = false
-        host.assignment_time = nil
-        host.preparation_evening = nil
-        host.active = false
-        host.save!
-      end
-    end
+    #     if !host.witness.nil? && false
+    #       comment = "ב2017 המארח/ת אירח/ה את איש/אשת העדות #{host.witness.full_name} #{host.witness.id}"
+    #       host.comments.create!(user_id: admin_user_id, content: comment)
+    #     end
+    #     host.max_guests = nil
+    #     host.strangers = nil
+    #     host.contacted = false
+    #     host.survivor_details = nil
+    #     host.evening_public = nil
+    #     host.hosted_before = nil
+    #     host.event_date = nil
+    #     host.event_time = nil
+    #     host.org_name = nil
+    #     host.survivor_needed = nil
+    #     host.witness_id = nil
+    #     host.received_registration_mail = nil
+    #     host.contacted_witness = false
+    #     host.assignment_time = nil
+    #     host.preparation_evening = nil
+    #     host.active = false
+    #     host.save!
+    #   end
+    # end
 
     admin_user_id = User.where(email: "zikaronbasalon@gmail.com").first.id
     Witness.where("host_id IS NOT NULL").each do |witness|
+      next unless witness.host.present?
       Witness.transaction do
         # witness.comments.where("content LIKE 'בשנה שעברה%'").destroy_all
 
@@ -128,6 +129,7 @@ namespace :hotfixes do
         comment = "בשנה שעברה, '#{witness.full_name}' (#{witness.id}) היה/הייתה מצוות/ת למארח/ת #{witness.host.user.full_name} (#{witness.host_id}). בצד של המארחים הוא/היא #{witness.host.user.id}."
                   #בשנה שעברה, 'זליג-בונדר'             (1772)           היה/הייתה מצוות/ת למארח/ת 'לירון נמרי'                       (1518).               בצד של המארחים הוא/היא 2185.
         # comment = "בשנה שעברה, העד בשם '#{witness.full_name}' עם מספר סידורי #{witness.id} הייתה משוייכת למארח '#{witness.host.user.full_name}' עם מספר סידורי #{witness.host_id}. במערכת של המארח הוא #{witness.host.user.id}"
+        pp comment
         witness.comments.create!(user_id: admin_user_id, content: comment)
         witness.host.comments.create!(user_id: admin_user_id, content: comment)
         witness.host_id = nil
@@ -149,7 +151,7 @@ namespace :hotfixes do
         witness.save!
       end
     end
-    
+
     #remove all invites tzivutim
     Invite.destroy_all
   end
@@ -198,7 +200,7 @@ namespace :hotfixes do
       u.reset_password!('set_new_pass_here','set_new_pass_here')
     end
   end
-  
+
   desc "email blubbery"
   task :email_blubbery => :environment do
     User.where(:meta_type => 'Manager', :admin => false).each do |u|

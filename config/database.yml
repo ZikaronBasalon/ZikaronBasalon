@@ -10,8 +10,8 @@ development:
   database: zb_development_dev
   host: localhost
   pool: 5
-  username: rails
-  password: rails
+  username: postgres
+  password: postgres
 
 production:
   adapter: postgresql
