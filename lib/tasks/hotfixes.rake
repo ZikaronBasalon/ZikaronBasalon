@@ -226,6 +226,21 @@ namespace :hotfixes do
     end
   end
 
+  desc "change admin passwords"
+  task :change_admin_passwords => :environment do
+    letters = [('a'..'z')].map(&:to_a).flatten
+    User.where(:meta_type => 'Manager', :admin => false).each do |u|
+      user_id = u.id
+      user_to_change_password = User.find_by_id(user_id)
+      new_password = (0...2).map { letters[rand(letters.length)] }.join
+      new_pwd = 'zbs2019' + new_password
+      user_to_change_password.password = new_pwd
+      user_to_change_password.password_confirmation = new_pwd
+      user_to_change_password.save
+      p "#{user_to_change_password.email} #{new_pwd}\n"
+    end
+  end
+
   desc "witness host relation fix by witness"
   task :witness_host_relation_fix_by_witness => :environment do
     print("starting fixing relations!" + "/n")
