@@ -241,7 +241,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 3.2.1)
   compass-rails
-  devise (~> 3.5.6)
+  devise
   figaro
   google_places
   haml (~> 5.0.0)
