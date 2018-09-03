@@ -45,7 +45,7 @@ end
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'haml'
+gem 'haml', '~> 5.0.0'
 gem 'bower-rails'
 gem 'therubyracer'
 
