@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-gem 'rails'
+gem 'rails', '3.2.22.5'
 gem 'pg'
 
 # Mail
@@ -18,7 +18,7 @@ gem 'figaro'
 gem 'roadie'
 gem 'roadie-rails'
 #gem 'party_foul'
-gem 'devise'
+gem 'devise', '~> 3.5.6'
 gem 'sort_alphabetical'
 gem 'google_places'
 gem 'puma'
@@ -45,7 +45,7 @@ end
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'haml', '~> 5.0.0'
+gem 'haml'
 gem 'bower-rails'
 gem 'therubyracer'
 
