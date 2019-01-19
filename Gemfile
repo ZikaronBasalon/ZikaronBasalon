@@ -27,9 +27,13 @@ gem 'puma'
 # Gems used only for assets and not required
 # in production environments by default.
 
+group :staging do
+  gem 'test-unit', '~> 3.0'
+end
+
 group :development do
   gem 'byebug'
-  gem 'test-unit'
+  # gem 'test-unit'
   gem 'seed_dump'
   gem 'letter_opener'
   gem 'bullet'

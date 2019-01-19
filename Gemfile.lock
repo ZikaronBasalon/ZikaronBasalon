@@ -268,7 +268,7 @@ DEPENDENCIES
   sidekiq
   simple_form
   sort_alphabetical
-  test-unit
+  test-unit (~> 3.0)
   therubyracer
   uglifier (>= 1.0.3)
   will_paginate
