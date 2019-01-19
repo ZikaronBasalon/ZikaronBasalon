@@ -67,6 +67,32 @@ namespace :hotfixes do
     end
   end
 
+  desc "unassign hosts and add comments"
+  task :unassign_hosts => :environment do
+    admin_user_id = User.where(email: "zikaronbasalon@gmail.com").first.id
+    Host.all.each do |host|
+      Host.transaction do
+        host.max_guests = nil
+        host.strangers = nil
+        host.contacted = false
+        host.survivor_details = nil
+        host.evening_public = nil
+        host.hosted_before = nil
+        host.event_date = nil
+        host.event_time = nil
+        host.org_name = nil
+        host.survivor_needed = nil
+        host.witness_id = nil
+        host.received_registration_mail = nil
+        host.contacted_witness = false
+        host.assignment_time = nil
+        host.preparation_evening = nil
+        host.active = false
+        host.save!
+      end
+    end
+  end
+
   desc "reset users active_this_year"
   task :send_users_to_last_year => :environment do
     #cancel all assignments
