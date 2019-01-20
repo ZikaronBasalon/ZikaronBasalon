@@ -37,6 +37,9 @@ GEM
       multi_json (~> 1.0)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
+    annotate (2.7.4)
+      activerecord (>= 3.2, < 6.0)
+      rake (>= 10.4, < 13.0)
     arel (3.0.3)
     bcrypt (3.1.11)
     bower-rails (0.10.0)
@@ -237,6 +240,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate
   bower-rails
   bullet
   byebug

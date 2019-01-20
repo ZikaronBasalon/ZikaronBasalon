@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: cities
+#
+#  id                          :integer          not null, primary key
+#  name                        :string(255)
+#  region_id                   :integer
+#  created_at                  :datetime         not null
+#  updated_at                  :datetime         not null
+#  manager_email               :string(255)
+#  placeid                     :string(255)
+#  name_en                     :string(255)
+#  name_he                     :string(255)
+#  community_leaderships_count :integer          default(0)
+#
+
 class City < ActiveRecord::Base
   attr_accessible :name, :region_id, :community_leaderships_count
 

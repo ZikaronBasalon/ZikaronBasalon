@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: invites
+#
+#  id         :integer          not null, primary key
+#  guest_id   :integer
+#  host_id    :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  confirmed  :boolean          default(FALSE)
+#  plus_ones  :integer          default(0)
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
