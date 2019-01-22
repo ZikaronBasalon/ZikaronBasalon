@@ -1,4 +1,5 @@
 ZikaronBasalon::Application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   post 'webhook', :to => 'webhooks#webhook'
 
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/  do
@@ -39,17 +40,17 @@ ZikaronBasalon::Application.routes.draw do
       get :unassign, on: :member
       resources :comments
     end
-    
-    match 'signup', :to => 'users#new', as: :signup
-    
+
+    match 'signup', :to => 'users#new', as: :signup, :via => [:get, :post, :delete, :put]
+
     resources :hosts do
       resources :comments
     end
 
     resources :invites, only: [:create, :update, :destroy]
 
-    match "pages/home", :to => 'pages#home', as: :host_search
-    match "pages/host_register_link", :to => 'pages#host_register_link', as: :host_register_link
+    match "pages/home", :to => 'pages#home', as: :host_search, :via => [:get, :post, :delete, :put]
+    match "pages/host_register_link", :to => 'pages#host_register_link', as: :host_register_link, :via => [:get, :post, :delete, :put]
     get "pages/privacy_policy"
     get "pages/welcome"
     root :to => 'pages#welcome'

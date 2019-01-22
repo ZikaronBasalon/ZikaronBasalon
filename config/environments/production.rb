@@ -3,6 +3,8 @@ ZikaronBasalon::Application.configure do
 
   # Code is not reloaded between requests
   config.cache_classes = false
+  config.eager_load = true
+  config.i18n.default_locale = :he
 
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
@@ -70,9 +72,4 @@ ZikaronBasalon::Application.configure do
   #config.middleware.use('PartyFoul::Middleware')
   config.assets.js_compressor = :uglifier
 
-
-
-  # Log the query plan for queries taking more than this (works
-  # with SQLite, MySQL, and PostgreSQL)
-  # config.active_record.auto_explain_threshold_in_seconds = 0.5
 end

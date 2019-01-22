@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.3.5'
-gem 'rails', '3.2.22.5'
-gem 'pg'
+gem 'rails', '4.1.5'
+gem 'pg', '~> 0.20'
 
 # Mail
 gem 'mail_view', :git => 'https://github.com/basecamp/mail_view.git'
@@ -9,7 +9,7 @@ gem 'mail_view', :git => 'https://github.com/basecamp/mail_view.git'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'will_paginate'
+gem 'will_paginate', "3.0.7"
 gem 'simple_form'
 gem 'compass-rails'
 gem 'newrelic_rpm'
@@ -24,6 +24,11 @@ gem 'sort_alphabetical'
 gem 'google_places'
 gem 'puma'
 gem 'annotate'
+gem 'paper_trail'
+gem 'rails_admin', '~> 1.3'
+gem 'rails_admin_impersonate'
+gem 'protected_attributes'
+gem 'rails_admin_rollincode'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -43,8 +48,8 @@ group :development do
 end
 
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass-rails'
+  gem 'coffee-rails'
   gem 'uglifier', '>= 1.0.3'
   gem "less-rails"
 end

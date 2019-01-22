@@ -35,6 +35,12 @@ class ApplicationController < ActionController::Base
 			u.save!
 		end
 
+    # if [RailsAdmin].include?(self.class.parent)
+    #   I18n.locale = :en
+    # else
+    #   I18n.locale = params[:locale] || I18n.default_locale
+    # end
+
 	  # current_user.locale
 	  # request.subdomain
 	  # request.env["HTTP_ACCEPT_LANGUAGE"]

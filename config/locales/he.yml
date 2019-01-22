@@ -376,7 +376,7 @@ he:
     register:
       title: "הרשמת מתארח"
       subtitle: "לפני שנמשיך, יש צורך למלא את הפרטים הבאים"
-    login: 
+    login:
       title: "כניסת מתארח"
       signin_error: "כתובת מייל או סיסמא לא נכונים"
     request:
@@ -389,10 +389,10 @@ he:
       subtitle: "אנחנו שמחים שהצטרפת לקהילת זיכרון בסלון ושבחרת לציין את ערב יום הזיכרון לשואה בדרך שונה, אינטימית ומשמעותית."
       facebook_share: "שיתוף בפייסבוק"
       back_to_website: "בחזרה לאתר"
-    request_error: 
+    request_error:
       title: "יוסטון, יש לנו בעיה"
       subtitle: "נראה שכבר הגשת בקשה אחת. כדי להגיש בקשה חדשה, צריך לבטל את הנוכחית בפרופיל שלך"
-    request_error_host: 
+    request_error_host:
       title: "יוסטון, יש לנו בעיה"
       subtitle: "מארח לא יכול להיות גם אורח :( אפשר לפתוח פרופיל נוסף"
     show:
@@ -424,7 +424,7 @@ he:
       paragraph_2_before_link: " חובה לקרוא"
       link_text_2: "כיצד אנו ממליצים"
       paragraph_2: "להתנהל החל מהשיחה הראשונה ביניכם ועד הערב עצמו."
-      paragraph_3: "אם נתקלת בבעיות, אנחנו פה." 
+      paragraph_3: "אם נתקלת בבעיות, אנחנו פה."
 
   request_mailer:
     pending_invite_received:

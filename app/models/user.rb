@@ -29,6 +29,7 @@
 #
 
 class User < ActiveRecord::Base
+  has_paper_trail
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -42,7 +43,7 @@ class User < ActiveRecord::Base
   attr_accessor :type
 
   before_destroy :save_as_deleted_user
-  
+
   def first_name
     if full_name
       return full_name.split(' ')[0]

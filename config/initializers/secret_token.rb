@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-ZikaronBasalon::Application.config.secret_token = '1e1b79ea06c9642ac5e61daf2acc8d5996b4941a146f1ff3e5a9cb764c388a0ec7c0ea33b1d17e5096ea377b596fd4c86dbe599373f341983d925ca6b7234c0a'
+ZikaronBasalon::Application.config.secret_key_base = '522cb61ac581921b98add7f69c307f2ddf4ab9926b4530582cf2e980a74c0acd68d27a099b7e82ba5c4f2fdf8a26365277530119352dee55de5925eace453327'

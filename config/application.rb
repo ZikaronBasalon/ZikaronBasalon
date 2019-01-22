@@ -7,6 +7,7 @@ if defined?(Bundler)
   Bundler.require(*Rails.groups(:assets => %w(development test)))
   # If you want your assets lazily compiled in production, use this line
   # Bundler.require(:default, :assets, Rails.env)
+  ENV['RAILS_ADMIN_THEME'] = 'rollincode'
 end
 
 module ZikaronBasalon
@@ -32,7 +33,7 @@ module ZikaronBasalon
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-    config.i18n.default_locale = :he
+    # config.i18n.default_locale = :he
     config.i18n.available_locales = [:he, :en]
     config.i18n.fallbacks = [:he]
 
@@ -44,7 +45,7 @@ module ZikaronBasalon
 
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
-    
+
     config.action_mailer.default_url_options = { host: 'zikaronbasalon.herokuapp.com' }
     config.action_mailer.perform_deliveries = true
     config.action_mailer.raise_delivery_errors = true
@@ -68,22 +69,21 @@ module ZikaronBasalon
 
     config.assets.initialize_on_precompile = false
 
-    config.assets.precompile << Proc.new { |path|
+    config.assets.precompile << Proc.new do |path|
       if path =~ /\.(css|js)\z/
-        full_path = Rails.application.assets.resolve(path).to_path
-        app_assets_path = Rails.root.join('app', 'assets').to_path
-        vendor_assets_path = Rails.root.join('vendor', 'assets').to_path
-
-        if ((full_path.starts_with? app_assets_path) || (full_path.starts_with? vendor_assets_path)) && (!path.starts_with? '_')
-          puts "\t" + full_path.slice(Rails.root.to_path.size..-1)
+        full_path = Rails.application.assets.resolve(path).to_s
+        app_assets_path = Rails.root.join('app', 'assets').to_s
+        if full_path.starts_with? app_assets_path
+          puts "including asset: " + full_path
           true
         else
+          puts "excluding asset: " + full_path
           false
         end
       else
         false
       end
-    }
+    end
 
     config.assets.paths << Rails.root.join("vendor","assets","bower_components")
     config.assets.paths << Rails.root.join("vendor","assets","bower_components","bootstrap-sass-official","assets","fonts")

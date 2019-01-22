@@ -12,6 +12,7 @@
 #
 
 class Invite < ActiveRecord::Base
+  has_paper_trail
   attr_accessible :guest_id, :host_id, :confirmed, :plus_ones
 
   belongs_to :guest
@@ -75,7 +76,7 @@ class Invite < ActiveRecord::Base
   def self.send_event_reminder
     Invite.confirmed.each do |i|
       RequestMailer.event_reminder(i).deliver if i.in_two_days
-    end 
+    end
   end
 
   def rejected
@@ -87,7 +88,7 @@ class Invite < ActiveRecord::Base
       "נדחה"
     elsif self.confirmed
       "אושר"
-    else 
+    else
       "ממתין לאישור"
     end
   end
