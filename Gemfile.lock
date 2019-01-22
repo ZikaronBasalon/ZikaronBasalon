@@ -136,6 +136,9 @@ GEM
     nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
+    paper_trail (5.2.3)
+      activerecord (>= 3.0, < 6.0)
+      request_store (~> 1.1)
     pg (0.18.4)
     polyglot (0.3.5)
     power_assert (0.2.7)
@@ -181,6 +184,8 @@ GEM
       json (~> 1.4)
     redis (3.2.2)
     ref (2.0.0)
+    request_store (1.4.1)
+      rack (>= 1.4)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
     roadie (3.4.0)
@@ -258,6 +263,7 @@ DEPENDENCIES
   mail_view!
   mocha
   newrelic_rpm
+  paper_trail
   pg
   pry-rails
   puma
@@ -282,4 +288,4 @@ RUBY VERSION
    ruby 2.3.5p376
 
 BUNDLED WITH
-   1.16.6
+   1.17.3

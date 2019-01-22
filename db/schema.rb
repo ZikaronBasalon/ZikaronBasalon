@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20180402155229) do
+ActiveRecord::Schema.define(:version => 20190122223930) do
 
   create_table "cities", :force => true do |t|
     t.string   "name"
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(:version => 20180402155229) do
     t.boolean  "active",                     :default => true
     t.integer  "invites_pending_count",      :default => 0
     t.integer  "invites_confirmed_count",    :default => 0
+    t.boolean  "active_last_year"
   end
 
   add_index "hosts", ["city_id"], :name => "index_hosts_on_city_id"
@@ -169,6 +170,17 @@ ActiveRecord::Schema.define(:version => 20180402155229) do
   add_index "users", ["meta_type"], :name => "index_users_on_meta_type"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
+  create_table "versions", :force => true do |t|
+    t.string   "item_type",  :null => false
+    t.integer  "item_id",    :null => false
+    t.string   "event",      :null => false
+    t.string   "whodunnit"
+    t.text     "object"
+    t.datetime "created_at"
+  end
+
+  add_index "versions", ["item_type", "item_id"], :name => "index_versions_on_item_type_and_item_id"
+
   create_table "witnesses", :force => true do |t|
     t.string   "full_name"
     t.string   "address"
@@ -205,6 +217,7 @@ ActiveRecord::Schema.define(:version => 20180402155229) do
     t.boolean  "available_day6"
     t.boolean  "archived",              :default => false
     t.boolean  "need_to_followup",      :default => false
+    t.boolean  "active_last_year"
   end
 
 end

@@ -11,7 +11,7 @@
 #
 
 class Manager < ActiveRecord::Base
-
+  has_paper_trail
   include CitiesHelper
   include ApplicationHelper
 

@@ -10,6 +10,7 @@
 #
 
 class CommunityLeadership < ActiveRecord::Base
+  has_paper_trail
 	attr_accessible :manager_id, :city_id
   belongs_to :manager
   belongs_to :city, counter_cache: true

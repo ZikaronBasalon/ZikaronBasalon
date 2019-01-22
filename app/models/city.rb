@@ -15,6 +15,7 @@
 #
 
 class City < ActiveRecord::Base
+  has_paper_trail
   attr_accessible :name, :region_id, :community_leaderships_count
 
   belongs_to :region

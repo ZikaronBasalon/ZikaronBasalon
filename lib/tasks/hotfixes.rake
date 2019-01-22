@@ -67,11 +67,49 @@ namespace :hotfixes do
     end
   end
 
-  desc "unassign hosts and add comments"
-  task :unassign_hosts => :environment do
-    admin_user_id = User.where(email: "zikaronbasalon@gmail.com").first.id
+  desc "add comments for hosts and witnesses"
+  task :comments_for_hosts_and_witnesses => :environment do
+    begin
+      admin_user_id = User.where(email: "zikaronbasalon@gmail.com").first.id
+      Witness.where("host_id is not null").each do |witness|
+        @witness = witness
+        host = Host.find(@witness.host_id)
+        pp witness
+        pp host
+        comment = "בשנה שעברה, '#{witness.full_name}' (#{witness.id}) היה/הייתה מצוות/ת למארח/ת #{host.user.try(:full_name) || 'n/a'} (#{witness.host_id}). בצד של המארחים הוא/היא #{host.try(:user).try(:id) || 'n/a'}."
+        pp comment
+        witness.comments.create!(user_id: admin_user_id, content: comment)
+        witness.active_last_year = true
+        witness.save
+        if host
+          host.comments.create!(user_id: admin_user_id, content: comment)
+          host.active_last_year = true
+          host.save
+        end
+      end
+    rescue => e
+      byebug
+    end
+  end
+
+  desc "unassign hosts and witnesses"
+  task :unassign_hosts_and_witnesses => :environment do
+    Witness.where("host_id is not null").each do |witness|
+      host = Host.find(witness.host_id)
+      host.witness_id = nil
+      host.save
+      witness.host_id = nil
+      witness.save
+      pp "host #{host.id}"
+      pp "witness #{witness.id}"
+    end
+  end
+
+  desc "clean_host_and_witness_data"
+  task :clean_host_and_witness_data => :environment do
     Host.all.each do |host|
       Host.transaction do
+        pp host
         host.max_guests = nil
         host.strangers = nil
         host.contacted = false
@@ -82,7 +120,6 @@ namespace :hotfixes do
         host.event_time = nil
         host.org_name = nil
         host.survivor_needed = nil
-        host.witness_id = nil
         host.received_registration_mail = nil
         host.contacted_witness = false
         host.assignment_time = nil
@@ -91,81 +128,16 @@ namespace :hotfixes do
         host.save!
       end
     end
-  end
 
-  desc "reset users active_this_year"
-  task :send_users_to_last_year => :environment do
-    #cancel all assignments
-    Host.where("assignment_time IS NOT NULL").update_all(assignment_time: nil)
-
-    #all guests and hosts inactive this year (except for managers)
-    #this makes change role popup
-    User.where(meta_type: "Guest").update_all(active_this_year:false)
-    User.where(meta_type: "Host").update_all(active_this_year:false)
-
-    #make all hosts not active (for coming up in searches)
-    # Host.where(active: true).each do |host|
-    admin_user_id = User.where(email: "zikaronbasalon@gmail.com").first.id
-
-    # Host.all.each do |host|
-    #   Host.transaction do
-        #create comment for host
-        # host.comments.create
-        # comment = "בשנה שעברה, מארח זה אירח ב '#{host.event_date} #{host.event_time}' עם העד #{host.witness_id}"
-        # where("name like '%yson%'")
-        # host.comments.where("content LIKE 'בשנה שעברה%'").destroy_all
-        # h=host.comments.where('content LIKE ?',  "בשנה שעברה%").last
-        # host.comments.where('content LIKE ?',  "בשנה שעברה%").each do |comment|
-
-        #   comment.destroy if !comment.nil?
-        # end
-        #
-        # this superceded by below
-    #     if !host.witness.nil? && false
-    #       comment = "ב2017 המארח/ת אירח/ה את איש/אשת העדות #{host.witness.full_name} #{host.witness.id}"
-    #       host.comments.create!(user_id: admin_user_id, content: comment)
-    #     end
-    #     host.max_guests = nil
-    #     host.strangers = nil
-    #     host.contacted = false
-    #     host.survivor_details = nil
-    #     host.evening_public = nil
-    #     host.hosted_before = nil
-    #     host.event_date = nil
-    #     host.event_time = nil
-    #     host.org_name = nil
-    #     host.survivor_needed = nil
-    #     host.witness_id = nil
-    #     host.received_registration_mail = nil
-    #     host.contacted_witness = false
-    #     host.assignment_time = nil
-    #     host.preparation_evening = nil
-    #     host.active = false
-    #     host.save!
-    #   end
-    # end
-
-    admin_user_id = User.where(email: "zikaronbasalon@gmail.com").first.id
-    Witness.where("host_id IS NOT NULL").each do |witness|
-      next unless witness.host.present?
-      Witness.transaction do
-        # witness.comments.where("content LIKE 'בשנה שעברה%'").destroy_all
-
-                  #בשנה שעברה, 'זליג-בונדר'             (1772)           היה/הייתה מצוות/ת למארח/ת 'לירון נמרי'                       (1518              ). בצד של המארחים הוא/היא 2185.
-        comment = "בשנה שעברה, '#{witness.full_name}' (#{witness.id}) היה/הייתה מצוות/ת למארח/ת #{witness.host.user.full_name} (#{witness.host_id}). בצד של המארחים הוא/היא #{witness.host.user.id}."
-                  #בשנה שעברה, 'זליג-בונדר'             (1772)           היה/הייתה מצוות/ת למארח/ת 'לירון נמרי'                       (1518).               בצד של המארחים הוא/היא 2185.
-        # comment = "בשנה שעברה, העד בשם '#{witness.full_name}' עם מספר סידורי #{witness.id} הייתה משוייכת למארח '#{witness.host.user.full_name}' עם מספר סידורי #{witness.host_id}. במערכת של המארח הוא #{witness.host.user.id}"
-        pp comment
-        witness.comments.create!(user_id: admin_user_id, content: comment)
-        witness.host.comments.create!(user_id: admin_user_id, content: comment)
-        witness.host_id = nil
+    Witness.all.each do |witness|
+      Host.transaction do
+        pp witness
         witness.contacted_by_host = false
         witness.available_for_teaming = nil
         witness.can_morning = nil
         witness.can_afternoon = nil
         witness.can_evening = nil
         witness.free_on_day = nil
-        # witness.has_host = nil #is reset by setting host_id to nil
         witness.external_assignment = true #mark all as not interested, until we follow up
         witness.available_day1 = nil
         witness.available_day2 = nil
@@ -173,12 +145,34 @@ namespace :hotfixes do
         witness.available_day4 = nil
         witness.available_day5 = nil
         witness.available_day6 = nil
-        # witness.concept = nil
         witness.save!
       end
     end
+  end
 
-    #remove all invites tzivutim
+  desc "reset users active_this_year"
+  task :send_users_to_last_year => :environment do
+    #cancel all assignments
+    pp 'cancelling host assignments'
+    Host.where("assignment_time IS NOT NULL").each do |host|
+      host.assignment_time = nil
+      host.save!
+    end
+
+    #all guests and hosts inactive this year (except for managers)
+    #this makes change role popup
+    pp 'making all users not active this year'
+    User.where(meta_type: "Guest").each do |user|
+      user.active_this_year = false
+      user.save!
+    end
+    User.where(meta_type: "Host").each do |user|
+      user.active_this_year = false
+      user.save!
+    end
+
+
+    pp 'remove all invites tzivutim'
     Invite.destroy_all
   end
 

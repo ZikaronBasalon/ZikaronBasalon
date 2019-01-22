@@ -42,6 +42,7 @@
 #
 
 class Host < ActiveRecord::Base
+  has_paper_trail
   require 'csv'
 
   attr_accessible :address, :city_id, :max_guests, :survivor_needed, :free_text,  :invites_pending_count,
@@ -65,7 +66,7 @@ class Host < ActiveRecord::Base
   before_destroy :cancel_invites_and_assigned_witnesses
 
 
-  def event_date 
+  def event_date
     read_attribute(:event_date) || Date.parse("11-4-2018")
   end
 

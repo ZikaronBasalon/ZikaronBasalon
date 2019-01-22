@@ -12,6 +12,7 @@
 #
 
 class Comment < ActiveRecord::Base
+  has_paper_trail
   attr_accessible :content, :user_id
   belongs_to :commentable, polymorphic: true
   belongs_to :user
