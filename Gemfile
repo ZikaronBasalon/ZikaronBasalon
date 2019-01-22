@@ -50,7 +50,7 @@ end
 group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
-  gem 'uglifier', '>= 4.0.2'
+  gem 'uglifier'
   gem "less-rails"
 end
 

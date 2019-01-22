@@ -318,7 +318,7 @@ DEPENDENCIES
   sort_alphabetical
   test-unit (~> 3.0)
   therubyracer
-  uglifier (>= 4.0.2)
+  uglifier
   will_paginate (= 3.0.7)
   xray-rails
 
