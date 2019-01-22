@@ -7,6 +7,7 @@ ZikaronBasalon::Application.configure do
   config.cache_classes = false
   config.eager_load = true
   config.i18n.default_locale = :en
+  config.assets.js_compressor = Uglifier.new(harmony: true)
 
 
   # Show full error reports and disable caching
