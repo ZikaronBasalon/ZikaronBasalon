@@ -70,6 +70,7 @@ ZikaronBasalon::Application.configure do
   config.active_support.deprecation = :notify
 
   #config.middleware.use('PartyFoul::Middleware')
-  config.assets.js_compressor = :uglifier
+  # config.assets.js_compressor = :uglifier
+  config.assets.js_compressor = Uglifier.new(harmony: true)
 
 end
