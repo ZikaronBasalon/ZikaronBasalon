@@ -38,6 +38,10 @@
 #  available_day6        :boolean
 #  archived              :boolean          default(FALSE)
 #  need_to_followup      :boolean          default(FALSE)
+#  active_last_year      :boolean
+#  available_day7        :boolean
+#  available_day8        :boolean
+#  available_day9        :boolean
 #
 
 class Witness < ActiveRecord::Base
@@ -48,7 +52,7 @@ class Witness < ActiveRecord::Base
                  :contacted, :contacted_by_host, :available_for_teaming, :can_morning,
                  :can_afternoon, :can_evening, :free_on_day, :contact_name, :contact_phone,
                  :host_id, :host, :external_assignment, :available_day1, :available_day2,
-                 :available_day3, :available_day4, :available_day5, :available_day6,
+                 :available_day3, :available_day4, :available_day5, :available_day6, :available_day7, :available_day8, :available_day9,
                  :archived, :need_to_followup
 
   belongs_to :city

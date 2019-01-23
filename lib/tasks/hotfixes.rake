@@ -5091,13 +5091,23 @@ namespace :hotfixes do
       pp "host #{host.id}"
       pp "witness #{witness.id}"
     end
+
+    Host.where("witness_id is not null").each do |host|
+      witness = Witness.find(host.witness_id)
+      host.witness_id = nil
+      host.save
+      witness.host_id = nil
+      witness.save
+      pp "host #{host.id}"
+      pp "witness #{witness.id}"
+    end
   end
 
   desc "clean_host_and_witness_data"
   task :clean_host_and_witness_data => :environment do
     Host.all.each do |host|
       Host.transaction do
-        pp host
+        pp host.id
         host.max_guests = nil
         host.strangers = nil
         host.contacted = false
@@ -5133,6 +5143,9 @@ namespace :hotfixes do
         witness.available_day4 = nil
         witness.available_day5 = nil
         witness.available_day6 = nil
+        witness.available_day7 = nil
+        witness.available_day8 = nil
+        witness.available_day9 = nil
         witness.save!
       end
     end
@@ -5183,6 +5196,9 @@ namespace :hotfixes do
         witness.available_day4 = nil
         witness.available_day5 = nil
         witness.available_day6 = nil
+        witness.available_day7 = nil
+        witness.available_day8 = nil
+        witness.available_day9 = nil
         witness.save!
       end
     end

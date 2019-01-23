@@ -1,5 +1,5 @@
 <div class="col-xs-12" id="witness-new-form" ng-controller="WitnessNewController" ng-init="init(<%= @witness.to_json(:methods => [:city_name]) %>)">
-	
+
 	<h1><%= t '.title' %></h1>
 
   <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</uib-alert>
@@ -51,7 +51,7 @@
       <label for="witness_type" >
         <%= t 'shared.type' %>
       </label>
-      <select class="form-control" id="witness_type" 
+      <select class="form-control" id="witness_type"
               ng-model="witness.witness_type"
               ng-options="o.v as o.n for o in typeOptions"
               required>
@@ -79,7 +79,7 @@
     <div class="form-group">
       <label for="event_language">השפה בה איש העדות מעביר את העדות</label>
       <div ng-show="!otherLanguageVisible">
-        <select class="form-control" id="event_language" 
+        <select class="form-control" id="event_language"
                 name="event_language"
                 required
                 ng-model="witness.language" ng-change="languageChanged()">
@@ -94,7 +94,7 @@
         </select>
       </div>
 
-      <input type="text" class="form-control" 
+      <input type="text" class="form-control"
                  ng-model="host.event_language"
                  ng-show="otherLanguageVisible" />
     </div>
@@ -108,7 +108,7 @@
 
     <div class="form-group ">
 	    <label for="stairs"><%= t '.walk_up_stairs' %></label>
-      <select class="form-control" id="stairs" 
+      <select class="form-control" id="stairs"
               ng-model="witness.stairs"
               ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.can' %>', v: true }, { n: '<%= t 'shared.cant' %>', v: false }]">
       </select>
@@ -116,14 +116,14 @@
 
 	  <div class="form-group">
       <label for="special_needs" class="control-label"><%= t '.special_needs' %></label>
-      <textarea class="form-control" id="special_needs" 
+      <textarea class="form-control" id="special_needs"
       					ng-model="witness.special_needs">
 			</textarea>
     </div>
 
   <!--   <div class="form-group">
 	    <label for="seminar_required"><%= t '.seminar_required' %></label>
-      <select class="form-control" id="seminar_required" 
+      <select class="form-control" id="seminar_required"
               ng-model="witness.seminar_required"
               ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.needs' %>', v: true }, { n: '<%= t 'shared.doesnt_need' %>', v: false }]">
       </select>
@@ -180,6 +180,30 @@
           </label>
         </div>
       </div>
+      <div class="form-group">
+        <div class="checkbox checkbox-inline">
+          <label>
+            <input type="checkbox" ng-model="witness.available_day7">
+            <%= t 'shared.available_day7' %>
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="checkbox checkbox-inline">
+          <label>
+            <input type="checkbox" ng-model="witness.available_day8">
+            <%= t 'shared.available_day8' %>
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="checkbox checkbox-inline">
+          <label>
+            <input type="checkbox" ng-model="witness.available_day9">
+            <%= t 'shared.available_day9' %>
+          </label>
+        </div>
+      </div>
     </div>
     <p>
 
@@ -205,20 +229,20 @@
           ערב
         </label>
       </div>
-    
+
     </div>
-    
+
 
 	  <div class="form-group">
       <label for="free_text" class="control-label"><%= t '.free_text' %></label>
-      <textarea class="form-control" id="free_text" 
+      <textarea class="form-control" id="free_text"
       					ng-model="witness.free_text" style="height: 250px; max-width: 330px;">
 			</textarea>
     </div>
 
     <div class="form-group">
 	    <label for="special_population"><%= t '.special_population' %></label>
-      <select class="form-control" id="special_population" 
+      <select class="form-control" id="special_population"
               ng-model="witness.special_population"
               ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.yes' %>', v: true }, { n: '<%= t 'shared.no' %>', v: false }]">
       </select>

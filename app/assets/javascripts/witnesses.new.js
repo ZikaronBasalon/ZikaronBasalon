@@ -14,12 +14,14 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
     available_day5: false,
     available_day6: false,
     available_day7: false
+    available_day8: false
+    available_day9: false
 	};
 
 	$scope.otherLanguageVisible = false;
 
 	$scope.typeOptions = [
-		{ n: 'ניצול', v: 'survivor' }, 
+		{ n: 'ניצול', v: 'survivor' },
 		{ n: 'אקדמיה', v: 'academia' },
 		{ n: 'דור שני', v: 'second_generation' },
 		{ n: 'מטפל', v: 'therapist' }
@@ -28,7 +30,7 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 	$scope.submitted = false;
 	$scope.alerts = [];
 	$scope.action = 'new';
-	
+
 	// $scope.autocomplete = new google.maps.places.Autocomplete($("#city_name")[0], { types: ['(cities)'] });
 	$scope.autocomplete = new google.maps.places.Autocomplete($("#city_name")[0]);
 	// $scope.autocomplete.setComponentRestrictions({'country': ['ps', 'il']});
@@ -60,7 +62,7 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 				_.each(response.data, addAlert);
 				$("html, body").animate({ scrollTop: 0 }, "slow");
 			});
-		
+
 		} else {
 				$("html, body").animate({ scrollTop: 0 }, "slow");
 			}
