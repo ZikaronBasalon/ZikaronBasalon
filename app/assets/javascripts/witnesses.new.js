@@ -13,8 +13,8 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
     available_day4: false,
     available_day5: false,
     available_day6: false,
-    available_day7: false
-    available_day8: false
+    available_day7: false,
+    available_day8: false,
     available_day9: false
 	};
 
