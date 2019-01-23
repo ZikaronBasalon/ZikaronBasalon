@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.3.5'
-gem 'rails', '3.2.22.5'
-gem 'pg'
+gem 'rails', '4.1.5'
+gem 'pg', '0.20'
 
 # Mail
 gem 'mail_view', :git => 'https://github.com/basecamp/mail_view.git'
@@ -25,6 +25,10 @@ gem 'google_places'
 gem 'puma'
 gem 'annotate'
 gem 'paper_trail'
+gem 'rails_admin', '~> 1.3'
+gem 'rails_admin_impersonate'
+gem 'rails_admin_rollincode'
+gem 'protected_attributes'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -44,9 +48,9 @@ group :development do
 end
 
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
+  gem 'sass-rails'
+  gem 'coffee-rails'
+  gem 'uglifier'
   gem "less-rails"
 end
 

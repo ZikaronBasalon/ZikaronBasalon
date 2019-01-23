@@ -15,10 +15,26 @@ ZikaronBasalon::Application.configure do
   config.assets.compress = false
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
-  config.assets.compile = false
+  # config.assets.compile = false
+
+
+  # Disable Rails's static asset server (Apache or nginx will already do this).
+  config.serve_static_files  = true
+  config.static_cache_control = 'public, max-age=31536000'
+
+  # Compress JavaScripts and CSS.
+  config.assets.js_compressor = :uglifier
+  # config.assets.css_compressor = :sass
+
+  # Do not fallback to assets pipeline if a precompiled asset is missed.
+  config.assets.compile = true
+
+  # Generate digests for assets URLs.
+  config.assets.digest = true
+
 
   # Generate digests for assets URLs
-  config.assets.digest = false
+  # config.assets.digest = false
 
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
@@ -68,11 +84,7 @@ ZikaronBasalon::Application.configure do
   config.active_support.deprecation = :notify
 
   #config.middleware.use('PartyFoul::Middleware')
-  config.assets.js_compressor = :uglifier
+  # config.assets.js_compressor = :uglifier
+  config.eager_load = true
 
-
-
-  # Log the query plan for queries taking more than this (works
-  # with SQLite, MySQL, and PostgreSQL)
-  # config.active_record.auto_explain_threshold_in_seconds = 0.5
 end
