@@ -5,6 +5,7 @@ require 'rails/all'
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
   Bundler.require(*Rails.groups(:assets => %w(development test)))
+  ENV['RAILS_ADMIN_THEME'] = 'rollincode'
   # If you want your assets lazily compiled in production, use this line
   # Bundler.require(:default, :assets, Rails.env)
 end
@@ -44,7 +45,7 @@ module ZikaronBasalon
 
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
-    
+
     config.action_mailer.default_url_options = { host: 'zikaronbasalon.herokuapp.com' }
     config.action_mailer.perform_deliveries = true
     config.action_mailer.raise_delivery_errors = true
@@ -70,12 +71,12 @@ module ZikaronBasalon
 
     config.assets.precompile << Proc.new { |path|
       if path =~ /\.(css|js)\z/
-        full_path = Rails.application.assets.resolve(path).to_path
-        app_assets_path = Rails.root.join('app', 'assets').to_path
-        vendor_assets_path = Rails.root.join('vendor', 'assets').to_path
+        full_path = Rails.application.assets.resolve(path).to_s
+        app_assets_path = Rails.root.join('app', 'assets').to_s
+        vendor_assets_path = Rails.root.join('vendor', 'assets').to_s
 
         if ((full_path.starts_with? app_assets_path) || (full_path.starts_with? vendor_assets_path)) && (!path.starts_with? '_')
-          puts "\t" + full_path.slice(Rails.root.to_path.size..-1)
+          puts "\t" + full_path.slice(Rails.root.to_s.size..-1)
           true
         else
           false

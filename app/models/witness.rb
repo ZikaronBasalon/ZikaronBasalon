@@ -1,6 +1,49 @@
+# == Schema Information
+#
+# Table name: witnesses
+#
+#  id                    :integer          not null, primary key
+#  full_name             :string(255)
+#  address               :string(255)
+#  city_id               :integer
+#  witness_type          :string(255)
+#  language              :string(255)      default("hebrew")
+#  email                 :string(255)
+#  phone                 :string(255)
+#  stairs                :boolean          default(FALSE)
+#  special_needs         :text
+#  seminar_required      :boolean
+#  free_text             :text
+#  special_population    :boolean          default(FALSE)
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  contacted             :boolean          default(FALSE)
+#  contacted_by_host     :boolean          default(FALSE)
+#  available_for_teaming :boolean          default(TRUE)
+#  host_id               :integer
+#  concept               :string(255)
+#  can_morning           :boolean
+#  can_afternoon         :boolean
+#  can_evening           :boolean
+#  free_on_day           :boolean
+#  contact_name          :string(255)
+#  contact_phone         :string(255)
+#  external_assignment   :boolean          default(FALSE)
+#  additional_phone      :string(255)
+#  available_day1        :boolean
+#  available_day2        :boolean
+#  available_day3        :boolean
+#  available_day4        :boolean
+#  available_day5        :boolean
+#  available_day6        :boolean
+#  archived              :boolean          default(FALSE)
+#  need_to_followup      :boolean          default(FALSE)
+#
+
 class Witness < ActiveRecord::Base
-  attr_accessible :address, :city_id, :concept, :email, :free_text, 
-  							 :full_name, :language, :phone, :additional_phone, :seminar_required, 
+  has_paper_trail
+  attr_accessible :address, :city_id, :concept, :email, :free_text,
+  							 :full_name, :language, :phone, :additional_phone, :seminar_required,
   							 :special_needs, :special_population, :stairs, :witness_type, :city_name,
                  :contacted, :contacted_by_host, :available_for_teaming, :can_morning,
                  :can_afternoon, :can_evening, :free_on_day, :contact_name, :contact_phone,
@@ -47,8 +90,8 @@ class Witness < ActiveRecord::Base
 
   def self.to_csv(witnesses, options = {})
     CSV.generate(options) do |csv|
-      csv << ['ID', 'שם', 'עיר', 'כתובת', 'טלפון', 'טלפון נוסף', 'מייל', 'שפה', 
-              'צרכים מיוחדים', 'אוכלוסיה מיוחדת', 'יכול לעלות מדרגות', 
+      csv << ['ID', 'שם', 'עיר', 'כתובת', 'טלפון', 'טלפון נוסף', 'מייל', 'שפה',
+              'צרכים מיוחדים', 'אוכלוסיה מיוחדת', 'יכול לעלות מדרגות',
               'סוג', 'שם איש קשר וקרבה לעד', 'טלפון איש קשר', 'מארח', 'ציוות חיצוני']
       witnesses.each do |witness|
         row = [

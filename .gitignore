@@ -35,3 +35,4 @@ avriel_staging_user
 
 config/database.yml
 config/environments/development.rb
+public/assets/*

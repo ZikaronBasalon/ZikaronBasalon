@@ -1,4 +1,48 @@
+# == Schema Information
+#
+# Table name: hosts
+#
+#  id                         :integer          not null, primary key
+#  address                    :string(255)
+#  city_id                    :integer
+#  max_guests                 :integer
+#  free_text                  :text
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
+#  strangers                  :boolean          default(TRUE)
+#  status                     :text
+#  contact                    :string(255)
+#  survivor_details           :text
+#  lat                        :float
+#  lng                        :float
+#  date                       :datetime
+#  evening_public             :boolean          default(TRUE)
+#  hosted_before              :boolean          default(FALSE)
+#  event_date                 :date
+#  event_time                 :string(255)
+#  floor                      :integer
+#  elevator                   :boolean
+#  org_name                   :string(255)
+#  org_role                   :string(255)
+#  event_language             :string(255)      default("hebrew")
+#  contacted                  :boolean          default(FALSE)
+#  phone                      :string(255)
+#  survivor_needed            :boolean          default(FALSE)
+#  witness_id                 :integer
+#  public_text                :text
+#  concept                    :string(255)
+#  received_registration_mail :boolean          default(FALSE)
+#  contacted_witness          :boolean          default(FALSE)
+#  country_id                 :integer
+#  assignment_time            :datetime
+#  preparation_evening        :boolean          default(FALSE)
+#  active                     :boolean          default(TRUE)
+#  invites_pending_count      :integer          default(0)
+#  invites_confirmed_count    :integer          default(0)
+#
+
 class Host < ActiveRecord::Base
+  has_paper_trail
   require 'csv'
 
   attr_accessible :address, :city_id, :max_guests, :survivor_needed, :free_text,  :invites_pending_count,
@@ -22,7 +66,7 @@ class Host < ActiveRecord::Base
   before_destroy :cancel_invites_and_assigned_witnesses
 
 
-  def event_date 
+  def event_date
     read_attribute(:event_date) || Date.parse("11-4-2018")
   end
 

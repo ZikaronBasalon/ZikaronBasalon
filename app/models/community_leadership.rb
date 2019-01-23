@@ -1,4 +1,16 @@
+# == Schema Information
+#
+# Table name: community_leaderships
+#
+#  id         :integer          not null, primary key
+#  manager_id :integer
+#  city_id    :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class CommunityLeadership < ActiveRecord::Base
+  has_paper_trail
 	attr_accessible :manager_id, :city_id
   belongs_to :manager
   belongs_to :city, counter_cache: true
