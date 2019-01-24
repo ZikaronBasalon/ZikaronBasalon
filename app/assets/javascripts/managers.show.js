@@ -76,6 +76,8 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
         delete $scope.search.witness.available_day5;
         delete $scope.search.witness.available_day6;
         delete $scope.search.witness.available_day7;
+        delete $scope.search.witness.available_day8;
+        delete $scope.search.witness.available_day9;
 
         delete $scope.search.witness.external_assignment;
         delete $scope.search.witness.archived;

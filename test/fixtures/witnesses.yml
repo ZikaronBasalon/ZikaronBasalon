@@ -38,6 +38,10 @@
 #  available_day6        :boolean
 #  archived              :boolean          default(FALSE)
 #  need_to_followup      :boolean          default(FALSE)
+#  active_last_year      :boolean
+#  available_day7        :boolean
+#  available_day8        :boolean
+#  available_day9        :boolean
 #
 
 # Read about fixtures at http://api.rubyonrails.org/v3.2.2/classes/ActiveRecord/Fixtures.html

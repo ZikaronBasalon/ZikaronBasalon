@@ -39,6 +39,7 @@
 #  active                     :boolean          default(TRUE)
 #  invites_pending_count      :integer          default(0)
 #  invites_confirmed_count    :integer          default(0)
+#  active_last_year           :boolean
 #
 
 class Host < ActiveRecord::Base
@@ -67,7 +68,7 @@ class Host < ActiveRecord::Base
 
 
   def event_date
-    read_attribute(:event_date) || Date.parse("11-4-2018")
+    read_attribute(:event_date) || Date.parse("28-4-2019")
   end
 
   def converted_time

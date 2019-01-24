@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190122223930) do
+ActiveRecord::Schema.define(version: 20190123191044) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -221,6 +221,9 @@ ActiveRecord::Schema.define(version: 20190122223930) do
     t.boolean  "archived",              default: false
     t.boolean  "need_to_followup",      default: false
     t.boolean  "active_last_year"
+    t.boolean  "available_day7"
+    t.boolean  "available_day8"
+    t.boolean  "available_day9"
   end
 
 end
