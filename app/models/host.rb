@@ -89,7 +89,7 @@ class Host < ActiveRecord::Base
   end
 
   def city_name=(name)
-  	self.city = City.find_or_create_by_name(name) if name.present?
+  	self.city = City.find_or_create_by!(name: name) if name.present?
   end
 
   def region_name
