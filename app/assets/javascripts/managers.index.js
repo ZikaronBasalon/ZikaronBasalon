@@ -35,8 +35,10 @@ app.controller('ManagerIndexController', ['$scope','$http', function($scope, $ht
 
   function getAddress() {
     $scope.result = $scope.autocomplete.getPlace();
-    if($scope.result && $scope.result.vicinity.indexOf(',') === -1) {
+    if($scope.result && $scope.result.vicinity && $scope.result.vicinity.indexOf(',') === -1) {
       $scope.city = $scope.result.vicinity;
+    } else {
+      alert('please select a city - אנא בחר עיר')
     }
     $scope.$apply();
   }
@@ -58,15 +60,15 @@ app.controller('ManagerIndexController', ['$scope','$http', function($scope, $ht
     if (dialog == true) {
         $http.delete('managers/' + manager.id)
         .then(function(response) {
-          $scope.managers = _.filter($scope.managers, function(manager) { 
-            return manager.id !== response.data.id 
+          $scope.managers = _.filter($scope.managers, function(manager) {
+            return manager.id !== response.data.id
           });
         });
     }
   }
 
   function getPlaceLocality(place) {
-  	return _.filter(place.address_components, function(component) { 
+  	return _.filter(place.address_components, function(component) {
   		return _.includes(component.types, 'locality');
   	})[0].long_name;
   }

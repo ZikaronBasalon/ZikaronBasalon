@@ -1,7 +1,7 @@
 //= require directives/datePicker
 //= require directives/isPhone
 
-app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout', 
+app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 	function($scope, $http, $uibModal, $timeout) {
 	$scope.host = {
 		hosted_before: false
@@ -119,7 +119,7 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 					phone: $scope.host.phone
 				}
 	  	}).then(function success(response) {
-	  		$scope.stepIndex += 1; 
+	  		$scope.stepIndex += 1;
 	  	})
   	}
   }
@@ -138,7 +138,7 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 					country_id: $scope.host.country_id
 				}
 	  	}).then(function success(response) {
-	  		$scope.stepIndex += 1; 
+	  		$scope.stepIndex += 1;
 	  	})
   	}
   }
@@ -205,10 +205,12 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
   function getAddress() {
 		$scope.result = $scope.autocomplete.getPlace();
 		$scope.cityFromList = true;
-		if($scope.result && $scope.result.vicinity.indexOf(',') === -1) {
+		if($scope.result && $scope.result.vicinity && $scope.result.vicinity.indexOf(',') === -1) {
       // $scope.host.city_name = getAddressComponent($scope.result, "locality");
 			$scope.host.city_name = $scope.result.vicinity;// getAddressComponent($scope.result, "locality");
-		}
+		} else {
+      alert('please select a city - אנא בחר עיר')
+    }
 		$scope.$apply();
   }
 
@@ -247,7 +249,7 @@ app.controller('HostSignupFinishedModal', ['$scope', '$uibModalInstance', 'host'
 		});
   };
 
-  
+
   // $scope.fbShare = function () {
   //   var base = window.location.origin;
   //   var link = encodeURIComponent(base + '/' + document.getElementById('locale').className + '/pages/home/'  + '?invite=' + $scope.host.id);
@@ -263,7 +265,7 @@ app.controller('HostSignupFinishedModal', ['$scope', '$uibModalInstance', 'host'
   //     href: 'http://zikaronbasalon.herokuapp.com/' + document.getElementById('locale').className + '/pages/home/'  + '?invite=' + host.id
   //   }, function(response){
   //   });
-  // };  
+  // };
 
   $scope.buildEvening = function () {
   	var locale = document.getElementById('locale').className;
