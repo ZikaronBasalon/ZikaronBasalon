@@ -11,6 +11,4 @@
 #
 
 class DeletedUser < ActiveRecord::Base
-  has_paper_trail
-  attr_accessible :email, :name, :type
 end
