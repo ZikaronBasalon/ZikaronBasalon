@@ -19,6 +19,7 @@ class City < ActiveRecord::Base
   attr_accessible :name, :region_id, :community_leaderships_count
 
   belongs_to :region
+  belongs_to :israel_city
   has_many :community_leaderships
   has_many :managers, :through => :community_leaderships
   has_many :hosts

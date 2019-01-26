@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190123191044) do
+ActiveRecord::Schema.define(version: 20190126133711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,6 +125,25 @@ ActiveRecord::Schema.define(version: 20190123191044) do
 
   add_index "invites", ["guest_id"], name: "index_invites_on_guest_id", using: :btree
   add_index "invites", ["host_id"], name: "index_invites_on_host_id", using: :btree
+
+  create_table "israel_cities", force: true do |t|
+    t.integer  "city_identifier"
+    t.string   "city_name_he"
+    t.string   "city_name_en"
+    t.integer  "city_id"
+    t.integer  "region_id"
+    t.integer  "israel_region_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "israel_regions", force: true do |t|
+    t.integer  "identifier"
+    t.string   "napa_name"
+    t.string   "lishka_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "managers", force: true do |t|
     t.datetime "created_at",                   null: false
