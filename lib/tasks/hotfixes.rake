@@ -164,7 +164,8 @@ namespace :hotfixes do
         witness.can_afternoon = nil
         witness.can_evening = nil
         witness.free_on_day = nil
-        witness.external_assignment = true #mark all as not interested, until we follow up
+        witness.external_assignment = !witness.archived? #mark all as not interested, until we follow up
+        witness.need_to_followup = false
         witness.available_day1 = nil
         witness.available_day2 = nil
         witness.available_day3 = nil

@@ -133,7 +133,7 @@ class Manager < ActiveRecord::Base
   end
 
   def city_name=(name)
-  	city = City.find_or_create_by_name(name) if name.present?
+  	city = City.find_or_create_by!(name: name) if name.present?
   	self.cities.push(city)
   end
 
