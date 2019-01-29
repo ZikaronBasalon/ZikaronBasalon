@@ -137,10 +137,15 @@ class WitnessesController < ApplicationController
 
   def unassign
     @witness = Witness.find(params[:id])
-    @host_id = @witness.host_id
     @host = @witness.host
-    @witness.update_attributes(host_id: nil, host:nil)
-    @host.update_column(:assignment_time, nil)
+    @witness.host_id = nil
+    @witness.host = nil
+    @witness.save!;
+    @host.witness_id = nil
+    @host.assignment_time = nil
+    @host.witness = nil
+    @host.save!
+    @host_id = @host.id
     ManagerMailer.assignment_cancelled(@host_id, @witness.id, current_user).deliver
     redirect_to @witness
   end
