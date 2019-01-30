@@ -34,10 +34,11 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 		$scope.eventDate.isOpen = true;
 	}
 
-	$scope.init = function(host, countries) {
-		$scope.host = host;
-		$scope.organization = !!$scope.host.org_name;
-		$scope.countries = countries;
+	$scope.init = function() {
+    $scope.host = JSON.parse(gon.host);
+    $scope.organization = !!$scope.host.org_name;
+    $scope.countries = gon.countries;
+    $scope.cities = gon.cities;
 		$scope.host.event_date = $scope.formatDate(new Date($scope.host.event_date));
 		$scope.host.event_time = $scope.host.event_time ? new Date($scope.host.event_time): null;
 		if($scope.host.city) {
@@ -198,8 +199,13 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
   }
 
   $scope.onCountrySelect = function() {
-  	var country = _.find($scope.countries, {id: $scope.host.country_id} )
-  	$scope.initAutocomplete(country.iso);
+    var country = _.find($scope.countries, {id: $scope.host.country_id} )
+    $scope.initAutocomplete(country.iso);
+  }
+
+  $scope.onCitySelect = function() {
+  	var city = _.find($scope.cities, {id: $scope.host.city_id} )
+  	$scope.initAutocomplete(city.name);
   }
 
   function getAddress() {
