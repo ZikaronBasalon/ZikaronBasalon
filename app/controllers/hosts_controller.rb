@@ -55,7 +55,7 @@ class HostsController < ApplicationController
   def edit
     gon.host = Host.find(params[:id]).to_json(:include => [:city, :country])
     gon.countries = countries = Country.all
-    gon.cities = City.select(:id, :name).first(10)
+    gon.cities = IsraelCity.where.not(city_id:nil).pluck(:city_id, :city_name_he).reduce([]){|h, (city_id, city_name)| h.push(city_id: city_id, name: city_name) }
   end
 
   def update
@@ -65,7 +65,6 @@ class HostsController < ApplicationController
       @host.received_registration_mail=false
       @host.save!
       @host.user.active_this_year=false
-      @host.user.save!
      #put here code for changing to guest from host
     elsif params[:finalStep]
       if !@host.received_registration_mail

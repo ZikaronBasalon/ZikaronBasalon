@@ -42,8 +42,10 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 		$scope.host.event_date = $scope.formatDate(new Date($scope.host.event_date));
 		$scope.host.event_time = $scope.host.event_time ? new Date($scope.host.event_time): null;
 		if($scope.host.city) {
-			$scope.host.city_name = $scope.host.city.name;
-			$scope.result = $scope.host.city_name;
+      $scope.current_city = _.find($scope.cities, function(city) { return city.city_id === $scope.host.city.id})
+			$scope.host.city_id = $scope.host.city.id;
+      // when US g autocomplete
+			// $scope.result = $scope.host.city_name;
 		}
 
 		$scope.cityFromList = false;
@@ -113,25 +115,26 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
   $scope.submitStepOne = function() {
   	$scope.submitted[0] = true;
   	if ($scope.stepOne.$valid) {
-  		$http.put('/hosts/' + $scope.host.id + '.json', {
-	  		host: {
-					hosted_before: $scope.host.hosted_before,
-					org_name: $scope.host.org_name,
-					phone: $scope.host.phone
-				}
-	  	}).then(function success(response) {
-	  		$scope.stepIndex += 1;
-	  	})
-  	}
+      $http.put('/hosts/' + $scope.host.id + '.json', {
+        host: {
+          hosted_before: $scope.host.hosted_before,
+          org_name: $scope.host.org_name,
+          phone: $scope.host.phone
+        }
+      }).then(function success(response) {
+        $scope.stepIndex += 1;
+      })
+    }
   }
 
   $scope.submitStepTwo = function() {
-  	$scope.submitted[1] = true;
-  	if ($scope.stepTwo.$valid && $scope.result) {
+    $scope.submitted[1] = true;
+  	if ($scope.stepTwo.$valid) {
+      var city_id = _.find(gon.cities, function(o) { return o.city_name == $scope.host.city_name; });
   		$http.put('/hosts/' + $scope.host.id + '.json', {
 	  		host: {
 					address: $scope.host.address,
-					city_name: $scope.host.city_name,
+					city_id: $scope.current_city.city_id,
 					floor: $scope.host.floor,
 					elevator: $scope.host.elevator,
 					event_date: $scope.host.event_date,
@@ -177,6 +180,12 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 		    });
 	  	})
   	}
+  }
+
+  $scope.onCitySet = function() {
+    if (typeof $scope.current_city === 'string') {
+      $scope.current_city = '';
+    }
   }
 
 
