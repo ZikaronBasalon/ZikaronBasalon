@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 ruby '2.3.5'
-gem 'rails', '4.1.5'
+gem 'rails', '4.2.9'
 gem 'pg', '0.20'
+gem 'paper_trail-association_tracking'
 
 # Mail
 gem 'mail_view', :git => 'https://github.com/basecamp/mail_view.git'
