@@ -17,4 +17,8 @@ class IsraelCity < ActiveRecord::Base
   belongs_to :city
   belongs_to :region
   belongs_to :israel_region
+
+  def self.city_list
+    IsraelCity.where.not(city_id:nil).pluck(:city_id, :city_name_he).reduce([]){|h, (city_id, city_name)| h.push(city_id: city_id, name: city_name) }
+  end
 end

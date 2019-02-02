@@ -55,7 +55,7 @@ class HostsController < ApplicationController
   def edit
     gon.host = Host.find(params[:id]).to_json(:include => [:city, :country])
     gon.countries = countries = Country.all
-    gon.cities = IsraelCity.where.not(city_id:nil).pluck(:city_id, :city_name_he).reduce([]){|h, (city_id, city_name)| h.push(city_id: city_id, name: city_name) }
+    gon.cities = IsraelCity.city_list
   end
 
   def update

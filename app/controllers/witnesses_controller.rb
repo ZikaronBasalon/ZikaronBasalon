@@ -1,6 +1,7 @@
 class WitnessesController < ApplicationController
   include ApplicationHelper
   # before_action :authenticate_user!
+  before_action :prepare_city_list, only: [:new, :edit]
   before_filter :is_authorized, only: [:index, :unassign, :assign, :show]
   before_filter :is_admin, only: [:destroy]
   # GET /witnesses
@@ -177,5 +178,9 @@ class WitnessesController < ApplicationController
 
   def query
     return params[:query]
+  end
+
+  def prepare_city_list
+    gon.cities = IsraelCity.city_list
   end
 end
