@@ -86,5 +86,6 @@ ZikaronBasalon::Application.configure do
   #config.middleware.use('PartyFoul::Middleware')
   # config.assets.js_compressor = :uglifier
   config.eager_load = true
+  config.active_record.raise_in_transactional_callbacks = true
 
 end
