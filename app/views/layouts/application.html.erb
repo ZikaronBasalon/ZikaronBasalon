@@ -25,8 +25,18 @@
       ga('create', 'UA-49428934-2', 'zikaronbasalon.herokuapp.com');
       ga('send', 'pageview');
     </script>
+<<<<<<< Updated upstream
+
+    <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.1.min.js"></script> -->
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script> -->
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script> -->
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-sanitize.min.js"></script> -->
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.2/ui-bootstrap.min.js"></script> -->
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.2/ui-bootstrap-tpls.min.js"></script> -->
+=======
     <script>(function(document, tag) { var script = document.createElement(tag); var element = document.getElementsByTagName('body')[0]; script.src = 'https://accessibeapp.com/api/v1/assets/js/accessibe.js'; script.async = true; script.defer = true; (typeof element === 'undefined' ? document.getElementsByTagName('html')[0] : element).appendChild(script); script.onload = function() { AccessiBe.init({ clientId : 753, clientKey : 'hNPu4zEO0J8B2IZ8mXpO', wlbl : 'Nagishly', statementLink : '', feedbackLink : '', showAllActions : false, keyNavStrong : false, hideMobile : false, hideTrigger : false, language : 'he', focusInnerColor : '#146FF8', focusOuterColor : '#ff7216', leadColor : '#146FF8', triggerColor : '#146FF8', size : 'big', position : 'right', triggerRadius : '50%', triggerPositionX : 'right', triggerPositionY : 'bottom', triggerIcon : 'default', triggerSize : 'medium', triggerOffsetX : 20, triggerOffsetY : 20, usefulLinks : { }, mobile : { triggerSize : 'small', triggerPositionX : 'right', triggerPositionY : 'bottom', triggerOffsetX : 0, triggerOffsetY : 0, triggerRadius : '0' } }); };}(document, 'script'));</script>
     <%= include_gon %>
+>>>>>>> Stashed changes
     <%= javascript_include_tag "application", "#{controller_name}.#{action_name}" if ZikaronBasalon::Application.assets.find_asset("#{controller.controller_name}.#{action_name}.js") %>
     <!-- prod: AIzaSyDSOmyr4VMv2qvWLO12OuYqH7o-67DRANk -->
     <!-- staging: AIzaSyDJ1u3XlTGQDKn6dR3vOH5bVswXBmaGiLM -->
@@ -37,6 +47,16 @@
     <%= stylesheet_link_tag "application" %>
     <%= stylesheet_link_tag params[:controller] if ZikaronBasalon::Application.assets.find_asset("#{params[:controller]}") %>
 
+<<<<<<< Updated upstream
+    <%= csrf_meta_tag %>
+    <%= yield(:head) %>
+    <meta property="og:image" content="http://static.wixstatic.com/media/21e365_91defaf889494d6ea5cad65059ba650c.jpg">
+    <meta property="og:url" content="http://zikaronbasalon.herokuapp.com">
+    <meta property="og:description" content="בין הקדושה של הטקסים הממלכתיים וההדחקה המוחלטת, זכרון בסלון מציע דרך אחת נוספת ﻿ זכרון בסלון נולד מתוך ההבנה שהזיקה שלנו, הדור השלישי, ליום הזכרון לשואה ולגבורה - הולכת ונחלשת. הפרויקט נועד לייצר דרך נוספת לציין את היום הזה, אשר תאפשר חיבור שונ">
+    
+=======
+
+>>>>>>> Stashed changes
     <% if false %>
 
       <!--Start of Tawk.to Script-->
