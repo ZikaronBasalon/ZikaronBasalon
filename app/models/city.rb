@@ -17,7 +17,7 @@
 
 class City < ActiveRecord::Base
   has_paper_trail
-  attr_accessible :name, :region_id, :community_leaderships_count, :name_he, :name_en
+  attr_accessible :name, :region_id, :community_leaderships_count, :name_he, :name_en, :israel_city_id
 
   belongs_to :region
   belongs_to :israel_city
