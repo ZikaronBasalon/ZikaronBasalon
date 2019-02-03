@@ -26,6 +26,7 @@ namespace :tasks do
         IsraelCity.where(city_name_he: city_name).first.update_columns(city_id: city_id)
         City.where(id: city_id).first.update(name: city_name, name_he: city_name)
     end
+    IsraelCity.all.each{|i| City.where(name:i.city_name_he).first.update(israel_city_id:i.id)}
   end
   desc "additional cities tasks"
   task :additional_cities_tasks => :environment do
