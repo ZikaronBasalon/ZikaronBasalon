@@ -2,8 +2,6 @@ namespace :tasks do
   # download the csv from here https://data.gov.il/dataset/citiesandsettelments/resource/d4901968-dad3-4845-a9b0-a57d027f11ab?inner_span=True and remove first line (may need to convert to utf8)
   desc "load cities data"
   task :load_cities_data => :environment do
-    IsraelCity.delete_all
-    ActiveRecord::Base.connection.reset_pk_sequence!('israel_cities')
     csv_data = File.read('yishuvim_data.csv')
     csv = CSV.parse(csv_data, headers: true)
     csv.each do |row|
