@@ -12,6 +12,7 @@
 #  name_en                     :string(255)
 #  name_he                     :string(255)
 #  community_leaderships_count :integer          default(0)
+#  israel_city_id              :integer
 #
 
 require 'test_helper'

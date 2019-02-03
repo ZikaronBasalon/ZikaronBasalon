@@ -21,4 +21,8 @@ class IsraelCity < ActiveRecord::Base
   def self.city_list
     IsraelCity.where.not(city_id:nil).pluck(:city_id, :city_name_he).reduce([]){|h, (city_id, city_name)| h.push(city_id: city_id, name: city_name) }
   end
+
+  def self.main_city_list
+    City.where(id: IsraelCity.where.not(city_id:nil).pluck(:city_id))
+  end
 end

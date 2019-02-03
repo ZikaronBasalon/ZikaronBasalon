@@ -12,6 +12,7 @@
 #  name_en                     :string(255)
 #  name_he                     :string(255)
 #  community_leaderships_count :integer          default(0)
+#  israel_city_id              :integer
 #
 
 class City < ActiveRecord::Base
@@ -24,6 +25,8 @@ class City < ActiveRecord::Base
   has_many :managers, :through => :community_leaderships
   has_many :hosts
   has_many :witnesses
+
+  scope :normalized, -> { where.not(israel_city_id: nil) }
 
   def self.without_managers
   	cities = []
