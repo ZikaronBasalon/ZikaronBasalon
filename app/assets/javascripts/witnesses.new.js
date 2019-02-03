@@ -50,6 +50,13 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
       $scope.current_city = _.find($scope.cities, function(city) {
         return city.city_id === witness.city_id;
       });
+      if ($scope.current_city === null) {
+        $scope.current_city = {
+          name: witness.city_name,
+          city_id: witness.city_id,
+          not_found: true
+        };
+      }
     }
 	}
 

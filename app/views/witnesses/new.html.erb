@@ -20,6 +20,7 @@
              ng-model="current_city"
              uib-typeahead="city as city.name for city in cities | filter: {name:$viewValue} | limitTo:12"
              ng-blur="onCitySet()">
+      <span ng-if="current_city.not_found">please update city. it's not in the new list. city_id: {{current_city.city_id}}</span>
     </div>
 
     <div class="form-group">
