@@ -188,7 +188,6 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
     }
   }
 
-
   $scope.back = function() {
   	$scope.stepIndex -= 1;
   }

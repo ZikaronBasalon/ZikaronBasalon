@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.4.5'
-gem 'rails', '4.2.9'
+gem 'rails', '4.2.11'
 gem 'pg', '0.20'
 gem 'paper_trail-association_tracking'
 gem 'gon'

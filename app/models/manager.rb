@@ -100,11 +100,10 @@ class Manager < ActiveRecord::Base
 
 
   def get_cities(current_user, country_id, region_id)
-    # todo: work here
     if user.admin? || user.sub_admin?
-      @cities = City.includes(:managers).order('name desc')
+      @cities = City.includes(:managers).normalized.order('name desc')
     else
-      @cities = City.includes(:managers).where(:id => cities.pluck(:id))
+      @cities = City.includes(:managers).normalized.where(:id => cities.pluck(:id))
     end
 
 

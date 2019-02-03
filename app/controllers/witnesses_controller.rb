@@ -181,6 +181,6 @@ class WitnessesController < ApplicationController
   end
 
   def prepare_city_list
-    gon.cities = IsraelCity.city_list
+    gon.cities = City.normalized.pluck(:id, :name).reduce([]){|h, (city_id, city_name)| h.push(city_id: city_id, name: city_name) }
   end
 end

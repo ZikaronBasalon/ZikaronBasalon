@@ -32,18 +32,34 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 	$scope.action = 'new';
 
 	// $scope.autocomplete = new google.maps.places.Autocomplete($("#city_name")[0], { types: ['(cities)'] });
-	$scope.autocomplete = new google.maps.places.Autocomplete($("#city_name")[0]);
-	// $scope.autocomplete.setComponentRestrictions({'country': ['ps', 'il']});
-	google.maps.event.addListener($scope.autocomplete, 'place_changed', getAddress);
+  // $scope.autocomplete.setComponentRestrictions({'country': ['ps', 'il']});
+
+
+	// $scope.autocomplete = new google.maps.places.Autocomplete($("#city_name")[0]);
+	// google.maps.event.addListener($scope.autocomplete, 'place_changed', getAddress);
 
 	$scope.init = function(witness) {
+    $scope.cities = gon.cities;
 		if(witness.id) {
 			delete witness.created_at;
 			delete witness.updated_at;
 			$scope.witness = witness;
 			$scope.action = 'edit';
 		}
+    if(witness.city_id) {
+      $scope.current_city = _.find($scope.cities, function(city) {
+        return city.city_id === witness.city_id;
+      });
+    }
 	}
+
+  $scope.onCitySet = function() {
+    if (typeof $scope.current_city === 'string') {
+      $scope.current_city = '';
+    } else {
+      $scope.witness.city_id = $scope.current_city.city_id;
+    }
+  }
 
 	$scope.submit = function() {
 		$scope.submitted = true;

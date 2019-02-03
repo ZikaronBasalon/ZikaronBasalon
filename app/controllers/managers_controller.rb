@@ -31,6 +31,7 @@ class ManagersController < ApplicationController
     country_id, region_id = get_country_id_and_region_id
 
     # get lists
+
     @cities = @manager.get_cities(current_user, country_id, region_id)
     @countries = @manager.get_countries
     @regions = @manager.get_regions(country_id)
