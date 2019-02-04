@@ -129,8 +129,8 @@ ActiveRecord::Schema.define(version: 20190202234805) do
 
   create_table "israel_cities", force: :cascade do |t|
     t.integer  "city_identifier"
-    t.string   "city_name_he",     limit: 255
-    t.string   "city_name_en",     limit: 255
+    t.string   "city_name_he"
+    t.string   "city_name_en"
     t.integer  "city_id"
     t.integer  "region_id"
     t.integer  "israel_region_id"
@@ -140,8 +140,8 @@ ActiveRecord::Schema.define(version: 20190202234805) do
 
   create_table "israel_regions", force: :cascade do |t|
     t.integer  "identifier"
-    t.string   "napa_name",   limit: 255
-    t.string   "lishka_name", limit: 255
+    t.string   "napa_name"
+    t.string   "lishka_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
