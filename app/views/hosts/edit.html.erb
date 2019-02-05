@@ -99,6 +99,7 @@
         <div class="form-group"
              ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.country.$error.required]">
           <label for="country"><%= t 'shared.country' %></label>
+
           <select class="form-control" id="country"
                   ng-model="host.country_id"
                   name="country"
@@ -161,11 +162,17 @@
         </div>
 
 
-        <div class="form-group">
+<!--         <div class="form-group">
           <label><%= t '.event_date' %></label>
           <p class="help-block"><%= t '.event_date_help_block' %></p>
           <date-picker style="direction: ltr;" ng-show="showDatePicker" ng-model="host.event_date" format-date="formatDate" parse-date="parseDate" on-date-selected="showDatePicker = !showDatePicker"></date-picker>
           <input ng-model="host.event_date" ng-show="!showDatePicker" ng-click="showDatePicker = !showDatePicker">
+        </div>
+ -->
+        <div class="form-group">
+          <label><%= t '.event_date' %></label>
+          <p class="help-block"><%= t '.event_date_help_block' %></p>
+          <input type="date" ng-model="host.event_date" value="<%= @host.event_date %>" class="form-control" name="event_date"/>
         </div>
 
         <div class="form-group">
