@@ -26,6 +26,7 @@
 #  active_this_year       :boolean          default(TRUE)
 #  current_year_admin     :boolean          default(FALSE)
 #  locale                 :string(255)
+#  agreed_to_terms_at     :datetime
 #
 
 class User < ActiveRecord::Base

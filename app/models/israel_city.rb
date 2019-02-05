@@ -4,8 +4,8 @@
 #
 #  id               :integer          not null, primary key
 #  city_identifier  :integer
-#  city_name_he     :string(255)
-#  city_name_en     :string(255)
+#  city_name_he     :string
+#  city_name_en     :string
 #  city_id          :integer
 #  region_id        :integer
 #  israel_region_id :integer

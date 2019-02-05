@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190202234805) do
+ActiveRecord::Schema.define(version: 20190205223232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -185,6 +185,7 @@ ActiveRecord::Schema.define(version: 20190202234805) do
     t.boolean  "active_this_year",                   default: true
     t.boolean  "current_year_admin",                 default: false
     t.string   "locale",                 limit: 255
+    t.datetime "agreed_to_terms_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -244,6 +245,19 @@ ActiveRecord::Schema.define(version: 20190202234805) do
     t.boolean  "available_day7"
     t.boolean  "available_day8"
     t.boolean  "available_day9"
+  end
+
+  create_table "world_cities", force: :cascade do |t|
+    t.string   "city_name"
+    t.string   "city_ascii_name"
+    t.float    "lat"
+    t.float    "lng"
+    t.text     "country"
+    t.text     "state"
+    t.integer  "internal_id"
+    t.integer  "city_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

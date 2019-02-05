@@ -4,8 +4,8 @@
 #
 #  id          :integer          not null, primary key
 #  identifier  :integer
-#  napa_name   :string(255)
-#  lishka_name :string(255)
+#  napa_name   :string
+#  lishka_name :string
 #  created_at  :datetime
 #  updated_at  :datetime
 #
