@@ -8,7 +8,7 @@
         <div class="description"><%= t '.description' %></div>
         <div class="description"><%= t '.description2' %></div>
       </div>
-      
+
       <div ng-if="form.type === 'guest'">
         <h2><%= t '.guest_title' %></h2>
         <div class="description"><%= t '.guest_description' %></div>
@@ -18,7 +18,7 @@
         <div class="view-toggle">
           <div ng-class="{ 'selected': form.type === 'host' }"
                ng-click="toggleRegisterAs('host')"><%= t 'shared.be_a_host' %></div>
-          
+
           <div ng-class="{ 'selected': form.type === 'guest' }"
                ng-click="toggleRegisterAs('guest')"><%= t 'shared.be_a_guest' %></div>
         </div>
@@ -31,7 +31,7 @@
     <% end %>
   </div>
 
-  <form 
+  <form
         action="users" method="post"
         ng-submit="submit($event)"
         name="signupForm" >
@@ -87,6 +87,15 @@
              ng-model="form.passwordConfirmation"
              required
              compare-to="form.password">
+    </div>
+
+    <div class="form-group">
+      <div class="checkbox checkbox-inline">
+        <label>
+          <input type="checkbox" ng-model="form.agreedToTermsAt" required>
+          <%= "#{t('shared.agreed_to_terms_at')} <a href='https://www.zikaronbasalon.com/terms'>#{t('shared.terms_of_service')}</a>".html_safe %>
+        </label>
+      </div>
     </div>
 
     <input type="submit" class="btn btn-warning form-control" value="<%= t 'shared.continue' %>">

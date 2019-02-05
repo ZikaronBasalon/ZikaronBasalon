@@ -52,6 +52,15 @@
            compare-to="form.password">
   </div>
 
+  <div class="form-group">
+    <div class="checkbox checkbox-inline">
+      <label>
+        <input type="checkbox" ng-model="form.agreedToTermsAt" required>
+        <%= "#{t('shared.agreed_to_terms_at')} <a href='https://www.zikaronbasalon.com/terms'>#{t('shared.terms_of_service')}</a>".html_safe %>
+      </label>
+    </div>
+  </div>
+
   <input type="submit" class="btn btn-warning form-control" value="<%= t 'shared.continue' %>">
 
   <p class="text-center margin-top-10">

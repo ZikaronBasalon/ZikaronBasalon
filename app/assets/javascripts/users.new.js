@@ -22,6 +22,7 @@ app.controller('UserSignupController', ['$scope', '$http', function($scope, $htt
 					email: $scope.form.email,
 					password: $scope.form.password,
 					password_confirmation: $scope.form.passwordConfirmation,
+					agreed_to_terms_at: $scope.form.agreedToTermsAt ? (new Date()).toUTCString() : null,
 					full_name: $scope.form.fullName,
 					type: $scope.form.type
 				},

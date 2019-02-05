@@ -181,6 +181,8 @@ he:
     region: "אזור"
     mailer_pargraph_noticed_profile_login: "*כדי לראות את הפרופיל שלך, יש לשים לב כי התחברת לאתר. במידה ואין את המילה ״הפרופיל שלי״ מצד ימין למעלה, יש ללחוץ על ״התחבר/י״ מצד שמאל למעלה."
     witness_contacted_red: "אדומים"
+    agreed_to_terms_at: "בהתחברות אני מסכים ל"
+    terms_of_service: "תנאי השימוש"
 
   views:
     pagination:

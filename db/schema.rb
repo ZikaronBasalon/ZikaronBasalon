@@ -11,110 +11,111 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190123191044) do
+ActiveRecord::Schema.define(version: 20190205211146) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "cities", force: true do |t|
-    t.string   "name"
+  create_table "cities", force: :cascade do |t|
+    t.string   "name",                        limit: 255
     t.integer  "region_id"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
-    t.string   "manager_email"
-    t.string   "placeid"
-    t.string   "name_en"
-    t.string   "name_he"
-    t.integer  "community_leaderships_count", default: 0
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+    t.string   "manager_email",               limit: 255
+    t.string   "placeid",                     limit: 255
+    t.string   "name_en",                     limit: 255
+    t.string   "name_he",                     limit: 255
+    t.integer  "community_leaderships_count",             default: 0
+    t.integer  "israel_city_id"
   end
 
-  create_table "comments", force: true do |t|
+  create_table "comments", force: :cascade do |t|
     t.text     "content"
     t.integer  "commentable_id"
-    t.string   "commentable_type"
-    t.string   "user_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.string   "commentable_type", limit: 255
+    t.string   "user_id",          limit: 255
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
-  create_table "community_leaderships", force: true do |t|
+  create_table "community_leaderships", force: :cascade do |t|
     t.integer  "manager_id"
     t.integer  "city_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "countries", force: true do |t|
-    t.string  "iso"
-    t.string  "name"
-    t.string  "printable_name"
-    t.string  "iso3"
+  create_table "countries", force: :cascade do |t|
+    t.string  "iso",            limit: 255
+    t.string  "name",           limit: 255
+    t.string  "printable_name", limit: 255
+    t.string  "iso3",           limit: 255
     t.integer "numcode"
     t.integer "manager_id"
-    t.integer "regions_count",  default: 0
+    t.integer "regions_count",              default: 0
   end
 
-  create_table "deleted_users", force: true do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "deleted_users", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "email",      limit: 255
+    t.string   "type",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
-  create_table "guests", force: true do |t|
-    t.string   "email"
-    t.string   "phone"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.string   "name"
+  create_table "guests", force: :cascade do |t|
+    t.string   "email",          limit: 255
+    t.string   "phone",          limit: 255
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "name",           limit: 255
     t.integer  "num_of_friends"
   end
 
-  create_table "hosts", force: true do |t|
-    t.string   "address"
+  create_table "hosts", force: :cascade do |t|
+    t.string   "address",                    limit: 255
     t.integer  "city_id"
     t.integer  "max_guests"
     t.text     "free_text"
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
-    t.boolean  "strangers",                  default: true
+    t.datetime "created_at",                                                null: false
+    t.datetime "updated_at",                                                null: false
+    t.boolean  "strangers",                              default: true
     t.text     "status"
-    t.string   "contact"
+    t.string   "contact",                    limit: 255
     t.text     "survivor_details"
     t.float    "lat"
     t.float    "lng"
     t.datetime "date"
-    t.boolean  "evening_public",             default: true
-    t.boolean  "hosted_before",              default: false
+    t.boolean  "evening_public",                         default: true
+    t.boolean  "hosted_before",                          default: false
     t.date     "event_date"
-    t.string   "event_time"
+    t.string   "event_time",                 limit: 255
     t.integer  "floor"
     t.boolean  "elevator"
-    t.string   "org_name"
-    t.string   "org_role"
-    t.string   "event_language",             default: "hebrew"
-    t.boolean  "contacted",                  default: false
-    t.string   "phone"
-    t.boolean  "survivor_needed",            default: false
+    t.string   "org_name",                   limit: 255
+    t.string   "org_role",                   limit: 255
+    t.string   "event_language",             limit: 255, default: "hebrew"
+    t.boolean  "contacted",                              default: false
+    t.string   "phone",                      limit: 255
+    t.boolean  "survivor_needed",                        default: false
     t.integer  "witness_id"
     t.text     "public_text"
-    t.string   "concept"
-    t.boolean  "received_registration_mail", default: false
-    t.boolean  "contacted_witness",          default: false
+    t.string   "concept",                    limit: 255
+    t.boolean  "received_registration_mail",             default: false
+    t.boolean  "contacted_witness",                      default: false
     t.integer  "country_id"
     t.datetime "assignment_time"
-    t.boolean  "preparation_evening",        default: false
-    t.boolean  "active",                     default: true
-    t.integer  "invites_pending_count",      default: 0
-    t.integer  "invites_confirmed_count",    default: 0
+    t.boolean  "preparation_evening",                    default: false
+    t.boolean  "active",                                 default: true
+    t.integer  "invites_pending_count",                  default: 0
+    t.integer  "invites_confirmed_count",                default: 0
     t.boolean  "active_last_year"
   end
 
   add_index "hosts", ["city_id"], name: "index_hosts_on_city_id", using: :btree
   add_index "hosts", ["country_id"], name: "index_hosts_on_country_id", using: :btree
 
-  create_table "invites", force: true do |t|
+  create_table "invites", force: :cascade do |t|
     t.integer  "guest_id"
     t.integer  "host_id"
     t.datetime "created_at",                 null: false
@@ -126,45 +127,65 @@ ActiveRecord::Schema.define(version: 20190123191044) do
   add_index "invites", ["guest_id"], name: "index_invites_on_guest_id", using: :btree
   add_index "invites", ["host_id"], name: "index_invites_on_host_id", using: :btree
 
-  create_table "managers", force: true do |t|
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.string   "temp_email"
-    t.string   "concept"
-    t.boolean  "witness_only", default: false
+  create_table "israel_cities", force: :cascade do |t|
+    t.integer  "city_identifier"
+    t.string   "city_name_he"
+    t.string   "city_name_en"
+    t.integer  "city_id"
+    t.integer  "region_id"
+    t.integer  "israel_region_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "regions", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "israel_regions", force: :cascade do |t|
+    t.integer  "identifier"
+    t.string   "napa_name"
+    t.string   "lishka_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "managers", force: :cascade do |t|
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.string   "temp_email",   limit: 255
+    t.string   "concept",      limit: 255
+    t.boolean  "witness_only",             default: false
+  end
+
+  create_table "regions", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.integer  "country_id"
   end
 
-  create_table "users", force: true do |t|
-    t.string   "email",                  default: "",    null: false
-    t.string   "encrypted_password",     default: "",    null: false
-    t.string   "reset_password_token"
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  limit: 255, default: "",    null: false
+    t.string   "encrypted_password",     limit: 255, default: "",    null: false
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",                      default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.string   "full_name"
-    t.string   "phone"
-    t.boolean  "admin",                  default: false
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+    t.string   "full_name",              limit: 255
+    t.string   "phone",                  limit: 255
+    t.boolean  "admin",                              default: false
     t.integer  "meta_id"
-    t.string   "meta_type"
-    t.boolean  "sub_admin",              default: false
+    t.string   "meta_type",              limit: 255
+    t.boolean  "sub_admin",                          default: false
     t.integer  "previous_meta_id"
-    t.string   "previous_meta_type"
-    t.boolean  "active_this_year",       default: true
-    t.boolean  "current_year_admin",     default: false
-    t.string   "locale"
+    t.string   "previous_meta_type",     limit: 255
+    t.boolean  "active_this_year",                   default: true
+    t.boolean  "current_year_admin",                 default: false
+    t.string   "locale",                 limit: 255
+    t.datetime "agreed_to_terms_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -173,7 +194,7 @@ ActiveRecord::Schema.define(version: 20190123191044) do
   add_index "users", ["meta_type"], name: "index_users_on_meta_type", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  create_table "versions", force: true do |t|
+  create_table "versions", force: :cascade do |t|
     t.string   "item_type",  null: false
     t.integer  "item_id",    null: false
     t.string   "event",      null: false
@@ -184,42 +205,42 @@ ActiveRecord::Schema.define(version: 20190123191044) do
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
-  create_table "witnesses", force: true do |t|
-    t.string   "full_name"
-    t.string   "address"
+  create_table "witnesses", force: :cascade do |t|
+    t.string   "full_name",             limit: 255
+    t.string   "address",               limit: 255
     t.integer  "city_id"
-    t.string   "witness_type"
-    t.string   "language",              default: "hebrew"
-    t.string   "email"
-    t.string   "phone"
-    t.boolean  "stairs",                default: false
+    t.string   "witness_type",          limit: 255
+    t.string   "language",              limit: 255, default: "hebrew"
+    t.string   "email",                 limit: 255
+    t.string   "phone",                 limit: 255
+    t.boolean  "stairs",                            default: false
     t.text     "special_needs"
     t.boolean  "seminar_required"
     t.text     "free_text"
-    t.boolean  "special_population",    default: false
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
-    t.boolean  "contacted",             default: false
-    t.boolean  "contacted_by_host",     default: false
-    t.boolean  "available_for_teaming", default: true
+    t.boolean  "special_population",                default: false
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
+    t.boolean  "contacted",                         default: false
+    t.boolean  "contacted_by_host",                 default: false
+    t.boolean  "available_for_teaming",             default: true
     t.integer  "host_id"
-    t.string   "concept"
+    t.string   "concept",               limit: 255
     t.boolean  "can_morning"
     t.boolean  "can_afternoon"
     t.boolean  "can_evening"
     t.boolean  "free_on_day"
-    t.string   "contact_name"
-    t.string   "contact_phone"
-    t.boolean  "external_assignment",   default: false
-    t.string   "additional_phone"
+    t.string   "contact_name",          limit: 255
+    t.string   "contact_phone",         limit: 255
+    t.boolean  "external_assignment",               default: false
+    t.string   "additional_phone",      limit: 255
     t.boolean  "available_day1"
     t.boolean  "available_day2"
     t.boolean  "available_day3"
     t.boolean  "available_day4"
     t.boolean  "available_day5"
     t.boolean  "available_day6"
-    t.boolean  "archived",              default: false
-    t.boolean  "need_to_followup",      default: false
+    t.boolean  "archived",                          default: false
+    t.boolean  "need_to_followup",                  default: false
     t.boolean  "active_last_year"
     t.boolean  "available_day7"
     t.boolean  "available_day8"
