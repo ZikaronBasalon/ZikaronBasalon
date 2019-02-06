@@ -2,9 +2,9 @@
 
 app.controller('WitnessNewController', ['$scope','$http','$timeout', function($scope, $http, $timeout) {
 	$scope.witness = {
-		can_morning: true,
-		can_afternoon: true,
-		can_evening: true,
+		can_morning: false,
+		can_afternoon: false,
+		can_evening: false,
 		free_on_day: true,
 		special_population: false,
     available_day1: false,
