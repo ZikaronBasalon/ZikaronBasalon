@@ -34,6 +34,26 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 		$scope.eventDate.isOpen = true;
 	}
 
+  $scope.getLocation = function(country_id, query) {
+    var inIsrael = _.filter($scope.countries, function(country) {
+      return country.printable_name === 'Israel' && country.id === country_id
+    }).length > 0
+    return $http.get('/cities/autocomplete_city', {
+      params: {
+        city: {
+          in_israel: inIsrael,
+          q: query
+        }
+      }
+    }).then(function(response){
+      console.log(response)
+      return response.data;
+      // return response.data.results.map(function(item){
+      //   return item.formatted_address;
+      // });
+    });
+  };
+
 	$scope.init = function() {
     $scope.host = JSON.parse(gon.host);
     $scope.organization = !!$scope.host.org_name;

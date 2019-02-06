@@ -15,6 +15,15 @@ ZikaronBasalon::Application.routes.draw do
       get '/users/sign_out' => 'devise/sessions#destroy'
     end
 
+    resources :cities do
+    end
+
+    resources :cities, only: [] do
+      collection do
+        get :autocomplete_city
+      end
+    end
+
     resources :managers do
       post :remove_city, on: :member
       get :export_hosts, on: :member

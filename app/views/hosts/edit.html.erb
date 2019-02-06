@@ -110,6 +110,7 @@
           </select>
         </div>
 
+            <!-- uib-typeahead="city as city.name for city in cities | filter: {name:$viewValue} | limitTo:12" -->
         <div class="form-group"
              ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.city.$invalid]">
           <label for="city"><%= t '.city' %></label>
@@ -117,7 +118,9 @@
             class="form-control"
             type="text"
             ng-model="current_city"
-            uib-typeahead="city as city.name for city in cities | filter: {name:$viewValue} | limitTo:12"
+            ng-disabled="!host.country_id"
+            ng-model-options="{ debounce: 200 }"
+            uib-typeahead="city as city.name for city in getLocation(host.country_id, $viewValue) | limitTo:12"
             ng-blur="onCitySet()"
             placeholder="<%= t '.city_placeholder' %>">
         </div>
