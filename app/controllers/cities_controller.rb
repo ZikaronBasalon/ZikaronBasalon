@@ -3,19 +3,15 @@ class CitiesController < ApplicationController
 
   def show
     q = JSON.parse(params.first.second)['q']
-    in_israel = JSON.parse(params.first.second)['in_israel']
+    country_id = JSON.parse(params.first.second)['country_id']
 
-    results = []
-
-    if in_israel
-      results = City.normalized.where("name ILIKE '%#{q}%' OR name_he ILIKE '%#{q}%'")
-    else
-      results = City.normalized.where("name ILIKE '%#{q}%' OR name_en ILIKE '%#{q}%'")
-    end
+    # results = City.where(country_id: country_id).where("name ILIKE '%#{q}%' OR name_he ILIKE '%#{q}%' OR name_en ILIKE '%#{q}%'")
+    results = City.normalized.where("name ILIKE '%#{q}%' OR name_he ILIKE '%#{q}%' OR name_en ILIKE '%#{q}%'")
+    # byebug
     render json: results
   end
 
   def safe_params
-    params.require(:city).permit(:in_israel, :q)
+    params.require(:city).permit(:country_id, :q)
   end
 end

@@ -35,13 +35,10 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 	}
 
   $scope.getLocation = function(country_id, query) {
-    var inIsrael = _.filter($scope.countries, function(country) {
-      return country.printable_name === 'Israel' && country.id === country_id
-    }).length > 0
     return $http.get('/cities/autocomplete_city', {
       params: {
         city: {
-          in_israel: inIsrael,
+          country_id: country_id,
           q: query
         }
       }
@@ -227,6 +224,7 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
   }
 
   $scope.onCountrySelect = function() {
+    $scope.current_city = {};
     var country = _.find($scope.countries, {id: $scope.host.country_id} )
     $scope.initAutocomplete(country.iso);
   }

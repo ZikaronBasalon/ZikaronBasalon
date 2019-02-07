@@ -14,6 +14,7 @@ app.controller('GuestSignupController', ['$scope', '$http', function($scope, $ht
 					email: $scope.form.email,
 					password: $scope.form.password,
 					password_confirmation: $scope.form.passwordConfirmation,
+					agreed_to_terms_at: $scope.form.agreedToTermsAt ? (new Date()).toUTCString() : null,
 					full_name: $scope.form.fullName,
 					type: 'guest'
 				},
@@ -25,8 +26,8 @@ app.controller('GuestSignupController', ['$scope', '$http', function($scope, $ht
 						url = window.location;
 					} else {
 						url = window.location + '?invite=' + $scope.host.id;
-					} 
-					
+					}
+
 					window.location = url;
 				} else if(response.data.errors) {
 					$scope.errors = _.map(response.data.errors, function(error) {

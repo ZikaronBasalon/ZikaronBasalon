@@ -53,7 +53,7 @@ class Witness < ActiveRecord::Base
                  :can_afternoon, :can_evening, :free_on_day, :contact_name, :contact_phone,
                  :host_id, :host, :external_assignment, :available_day1, :available_day2,
                  :available_day3, :available_day4, :available_day5, :available_day6, :available_day7, :available_day8, :available_day9,
-                 :archived, :need_to_followup
+                 :archived, :need_to_followup, :active_last_year
 
   belongs_to :city
   has_one :host

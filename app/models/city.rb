@@ -30,7 +30,7 @@ class City < ActiveRecord::Base
   has_many :hosts
   has_many :witnesses
 
-  scope :normalized, -> { where.not(israel_city_id: nil) }
+  scope :normalized, -> { where.not(israel_city_id: nil, world_city_id: nil) }
 
   def self.without_managers
   	cities = []

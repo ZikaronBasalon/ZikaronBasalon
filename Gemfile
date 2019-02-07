@@ -10,7 +10,7 @@ gem 'mail_view', :git => 'https://github.com/basecamp/mail_view.git'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-
+gem 'awesome_print'
 gem 'will_paginate'
 gem 'simple_form'
 gem 'compass-rails'
