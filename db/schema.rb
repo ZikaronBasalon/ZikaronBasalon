@@ -252,10 +252,11 @@ ActiveRecord::Schema.define(version: 20190205223232) do
     t.string   "city_ascii_name"
     t.float    "lat"
     t.float    "lng"
-    t.text     "country"
+    t.text     "country_name"
     t.text     "state"
     t.integer  "internal_id"
     t.integer  "city_id"
+    t.integer  "country_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

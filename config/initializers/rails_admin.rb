@@ -1,6 +1,6 @@
 RailsAdmin.config do |config|
   config.parent_controller = '::ApplicationController'
-
+  I18n.locale = :en
   ### Popular gems integration
 
   ## == Devise ==

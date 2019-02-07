@@ -5,10 +5,11 @@ class CreateWorldCities < ActiveRecord::Migration
       t.string :city_ascii_name
       t.float :lat
       t.float :lng
-      t.text :country
+      t.text :country_name
       t.text :state
       t.integer :internal_id
       t.integer :city_id
+      t.integer :country_id
 
       t.timestamps
     end

@@ -5,9 +5,6 @@ class CitiesController < ApplicationController
     q = JSON.parse(params.first.second)['q']
     in_israel = JSON.parse(params.first.second)['in_israel']
 
-    # byebug
-    # in_israel = safe_params[:in_israel]
-    # q = safe_params[:q]
     results = []
 
     if in_israel
