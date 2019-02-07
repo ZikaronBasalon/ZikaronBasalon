@@ -14,6 +14,7 @@
 #  community_leaderships_count :integer          default(0)
 #  israel_city_id              :integer
 #  country_id                  :integer
+#  world_city_id               :integer
 #
 
 class City < ActiveRecord::Base
@@ -21,7 +22,9 @@ class City < ActiveRecord::Base
   attr_accessible :name, :region_id, :community_leaderships_count, :name_he, :name_en, :israel_city_id
 
   belongs_to :region
+  belongs_to :country
   belongs_to :israel_city
+  belongs_to :world_city
   has_many :community_leaderships
   has_many :managers, :through => :community_leaderships
   has_many :hosts
