@@ -55,6 +55,7 @@ namespace :world_cities_tasks do
         city.name_he = world_city.city_ascii_name
         city.country_id = world_city.country_id
       end
+      world_city.update_columns(city_id: c.id)
     end
 
     # now connect cities that weren't found to world cities and back
