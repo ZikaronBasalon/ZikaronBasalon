@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190205223232) do
+ActiveRecord::Schema.define(version: 20190207220453) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20190205223232) do
     t.string   "name_he",                     limit: 255
     t.integer  "community_leaderships_count",             default: 0
     t.integer  "israel_city_id"
+    t.integer  "country_id"
   end
 
   create_table "comments", force: :cascade do |t|

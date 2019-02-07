@@ -40,13 +40,21 @@ namespace :world_cities_tasks do
     # create countries from countries of world cities
     WorldCity.pluck(:country_name).uniq.each do |country_name|
       c = Country.find_or_create_by(printable_name: country_name) do |country|
-        printable_nam = country_name
-        name = country_name.upcase
+        country.printable_nam = country_name
+        country.name = country_name.upcase
       end
       # update the world city with the country
       WorldCity.where(country_name: country_name).update_all(country_id: c.id)
     end
 
-
+    # now connect world cities to cities
+    WorldCity.all.each do |world_city|
+      c = City.find_or_create_by(name: world_city.city_ascii_name) do |city|
+        city.name = world_city.city_ascii_name
+        city.name_en = world_city.city_ascii_name
+        city.name_he = world_city.city_ascii_name
+        city.country_id = world_city.country_id
+      end
+    end
   end
 end
