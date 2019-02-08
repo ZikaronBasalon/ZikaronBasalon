@@ -6,8 +6,7 @@ class CitiesController < ApplicationController
     country_id = JSON.parse(params.first.second)['country_id']
 
     # results = City.where(country_id: country_id).where("name ILIKE '%#{q}%' OR name_he ILIKE '%#{q}%' OR name_en ILIKE '%#{q}%'")
-    results = City.normalized.where("name ILIKE '%#{q}%' OR name_he ILIKE '%#{q}%' OR name_en ILIKE '%#{q}%'")
-    # byebug
+    results = City.normalized_search(q)
     render json: results
   end
 

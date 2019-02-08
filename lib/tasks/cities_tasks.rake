@@ -48,8 +48,7 @@ namespace :cities_tasks do
 
     # update all City data from IsraelCity
     IsraelCity.where.not(city_id:nil).each do |israel_city|
-      city = City.find(israel_city.city_id)
-      city.update_columns(name: israel_city.city_name_he, name_he: israel_city.city_name_he, name_en: israel_city.city_name_en, israel_city_id: israel_city.id)
+      city = City.where(id: israel_city.city_id).update_all(name: israel_city.city_name_he, name_he: israel_city.city_name_he, name_en: israel_city.city_name_en, israel_city_id: israel_city.id)
     end
 
     # merge duplicates, update all those affected and delete unneeded
@@ -73,5 +72,7 @@ namespace :cities_tasks do
         IsraelCity.where(city_id: city_id).update_all(city_id: city_to_keep.id)
       end
     end
+    israel_country_id = Country.where(printable_name: 'Israel').last.id
+    City.where.not(israel_city_id: nil).update_all(country_id: israel_country_id)
   end
 end
