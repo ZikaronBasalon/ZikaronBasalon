@@ -56,20 +56,20 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
         }, 2000), true);
     };
 
-    $scope.onSearchHostCountrySet = function($item, $model, $label, $event) {
+    $scope.onSearchHostCountrySet = function($item) {
       $scope.search.host.country_id = $item.id;
     }
 
-    $scope.onSearchHostCitySet = function($item, $model, $label, $event) {
+    $scope.onSearchHostCitySet = function($item) {
       $scope.search.host.city_id = $item.id;
     }
 
-    $scope.onSearchWitnessCitySet = function($item, $model, $label, $event) {
+    $scope.onSearchWitnessCitySet = function($item) {
       $scope.search.witness.city_id = $item.id;
     }
 
     // todo: move to service
-    $scope.getCityLocation = function(query, country_id = 97) {
+    $scope.getCityLocation = function(query, country_id) {
       return $http.get('/cities/autocomplete_city', {
         params: {
           city: {

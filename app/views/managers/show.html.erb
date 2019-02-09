@@ -47,7 +47,7 @@
             ng-change="host_current_city = ''"
             ng-model-options="{ debounce: 200 }"
             typeahead-editable="false"
-            typeahead-on-select="onSearchHostCountrySet($item, $model, $label, $event)"
+            typeahead-on-select="onSearchHostCountrySet($item)"
             uib-typeahead="country as country.printable_name for country in getHostCountryLocation($viewValue)"
             placeholder="<%= t 'shared.country_placeholder' %>">
         </div>
@@ -67,7 +67,7 @@
             ng-model="host_current_city"
             ng-model-options="{ debounce: 200 }"
             typeahead-editable="false"
-            typeahead-on-select="onSearchHostCitySet($item, $model, $label, $event)"
+            typeahead-on-select="onSearchHostCitySet($item)"
             ng-disabled="!search.host.country_id"
             uib-typeahead="city as city.name for city in getCityLocation($viewValue, search.host.country_id)"
             placeholder="<%= t 'shared.city_placeholder' %>">
@@ -290,8 +290,8 @@
             ng-model="witness_current_city"
             ng-model-options="{ debounce: 200 }"
             typeahead-editable="false"
-            typeahead-on-select="onSearchWitnessCitySet($item, $model, $label, $event)"
-            uib-typeahead="city as city.name for city in getCityLocation($viewValue)"
+            typeahead-on-select="onSearchWitnessCitySet($item)"
+            uib-typeahead="city as city.name for city in getCityLocation($viewValue, 97)"
             placeholder="<%= t 'shared.city_placeholder' %>">
         </div>
 

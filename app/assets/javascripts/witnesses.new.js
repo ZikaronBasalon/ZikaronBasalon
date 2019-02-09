@@ -54,7 +54,7 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
     }
   }
 
-  $scope.getCityLocation = function(query, country_id = 97) {
+  $scope.getCityLocation = function(query, country_id) {
     $scope.loading_city = true;
     return $http.get('/cities/autocomplete_city', {
       params: {

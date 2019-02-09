@@ -18,7 +18,7 @@
       <input type="text" class="form-control"
              id="city_name"
              ng-model="current_city"
-             uib-typeahead="city as city.name for city in getCityLocation($viewValue)"
+             uib-typeahead="city as city.name for city in getCityLocation($viewValue, 97)"
              ng-blur="onCitySet()">
     </div>
 
