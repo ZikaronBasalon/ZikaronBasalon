@@ -121,7 +121,6 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
   $scope.submitStepTwo = function() {
     $scope.submitted[1] = true;
   	if ($scope.stepTwo.$valid) {
-      debugger
   		$http.put('/hosts/' + $scope.host.id + '.json', {
 	  		host: {
 					address: $scope.host.address,
