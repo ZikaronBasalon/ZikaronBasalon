@@ -19,6 +19,9 @@ class Country < ActiveRecord::Base
   has_many :world_cities
   belongs_to :manager
 
+  scope :normalized_search, ->(q) { where("name ILIKE '%#{q}%'") }
+
+
   # def to_s
   #   "#{printable_name}"
   # end

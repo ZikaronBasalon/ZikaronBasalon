@@ -10,6 +10,7 @@ class CreateWorldCities < ActiveRecord::Migration
       t.integer :internal_id
       t.integer :city_id
       t.integer :country_id
+      t.integer :region_id
 
       t.timestamps
     end

@@ -20,10 +20,7 @@ namespace :world_cities_tasks do
         internal_id = id
       end
     end
-  end
 
-  desc "2nd stage work"
-  task :second_stage => :environment do
     # first try to give each existing country a world city id
     Country.all.each do |country|
       WorldCity.where(city_ascii_name: country.printable_name, country_id: nil).each do |world_city|
@@ -56,6 +53,12 @@ namespace :world_cities_tasks do
         city.country_id = world_city.country_id
       end
       world_city.update_columns(city_id: c.id)
+
+      r = Region.find_or_create_by(country_id: world_city.country_id) do |region|
+        region.name = Region::OTHER_REGION_NAME
+        region.country_id = world_city.country_id
+      end
+      world_city.update_columns(region_id: r.id)
     end
 
     # now connect cities that weren't found to world cities and back
@@ -64,5 +67,8 @@ namespace :world_cities_tasks do
       WorldCity.where(id: world_city_id).update_all(city_id: city_id)
       City.where(id: city_id).update_all(world_city_id: world_city_id)
     end
+
+    # who do we need this?
+    City.where(country_id:nil).each {|c| c.update_columns(country_id: c.world_city.country_id) if c.world_city_id.present? }
   end
 end

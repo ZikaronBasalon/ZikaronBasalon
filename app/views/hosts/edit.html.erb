@@ -95,22 +95,19 @@
 
       <!-- Step two -->
       <form name="stepTwo" ng-show="'stepTwo' === steps[stepIndex]" novalidate>
-
         <div class="form-group"
-             ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.country.$error.required]">
+             ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.country.$invalid]">
           <label for="country"><%= t 'shared.country' %></label>
-
-          <select class="form-control" id="country"
-                  ng-model="host.country_id"
-                  name="country"
-                  required
-                  ng-change="onCountrySelect()"
-                  ng-options="c.id as c.printable_name for c in countries">
-            <option ng-show="!host.country_id" value=""><%= t 'shared.select' %></option>
-          </select>
+          <input
+            class="form-control"
+            type="text"
+            ng-model="current_country"
+            ng-blur="onCountrySet()"
+            ng-model-options="{ debounce: 200 }"
+            uib-typeahead="country as country.printable_name for country in getCountryLocation($viewValue)"
+            placeholder="<%= t 'shared.country_placeholder' %>">
         </div>
 
-            <!-- uib-typeahead="city as city.name for city in cities | filter: {name:$viewValue} | limitTo:12" -->
         <div class="form-group"
              ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.city.$invalid]">
           <label for="city"><%= t '.city' %></label>
@@ -118,10 +115,10 @@
             class="form-control"
             type="text"
             ng-model="current_city"
-            ng-disabled="!host.country_id"
-            ng-model-options="{ debounce: 200 }"
-            uib-typeahead="city as city.name for city in getLocation(host.country_id, $viewValue)"
             ng-blur="onCitySet()"
+            ng-disabled="!current_country"
+            ng-model-options="{ debounce: 200 }"
+            uib-typeahead="city as city.name for city in getCityLocation(current_country.id, $viewValue)"
             placeholder="<%= t '.city_placeholder' %>">
         </div>
 
@@ -135,7 +132,6 @@
                  ng-model="host.address"
                  required>
         </div>
-
 
         <div class="form-group"
              ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.floor.$invalid]">
@@ -164,18 +160,10 @@
             </select>
         </div>
 
-
-<!--         <div class="form-group">
-          <label><%= t '.event_date' %></label>
-          <p class="help-block"><%= t '.event_date_help_block' %></p>
-          <date-picker style="direction: ltr;" ng-show="showDatePicker" ng-model="host.event_date" format-date="formatDate" parse-date="parseDate" on-date-selected="showDatePicker = !showDatePicker"></date-picker>
-          <input ng-model="host.event_date" ng-show="!showDatePicker" ng-click="showDatePicker = !showDatePicker">
-        </div>
- -->
         <div class="form-group">
           <label><%= t '.event_date' %></label>
           <p class="help-block"><%= t '.event_date_help_block' %></p>
-          <input type="date" ng-model="host.event_date" value="<%= @host&.event_date %>" class="form-control" name="event_date"/>
+          <input type="date" ng-model="host.event_date" value="<%= @host&.event_date %>" class="form-control" name="event_date" date-format="yyyy-mm-dd"/>
         </div>
 
         <div class="form-group">

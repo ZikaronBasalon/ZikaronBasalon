@@ -259,6 +259,7 @@ ActiveRecord::Schema.define(version: 20190207221907) do
     t.integer  "internal_id"
     t.integer  "city_id"
     t.integer  "country_id"
+    t.integer  "region_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

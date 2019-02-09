@@ -7,6 +7,9 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 		hosted_before: false
 	};
 
+  $scope.current_city = {};
+  $scope.current_country = {};
+
 	$scope.steps = ['stepOne', 'stepTwo', 'stepThree'];
 	$scope.submitted = [false, false, false];
 	$scope.stepIndex = 0;
@@ -34,7 +37,8 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 		$scope.eventDate.isOpen = true;
 	}
 
-  $scope.getLocation = function(country_id, query) {
+  $scope.getCityLocation = function(country_id, query) {
+    $scope.loading_city = true;
     return $http.get('/cities/autocomplete_city', {
       params: {
         city: {
@@ -43,60 +47,37 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
         }
       }
     }).then(function(response){
-      console.log(response)
+      $scope.loading_city = false;
+      console.log(response.data)
       return response.data;
-      // return response.data.results.map(function(item){
-      //   return item.formatted_address;
-      // });
+    });
+  };
+
+  $scope.getCountryLocation = function(query) {
+    $scope.loading_country = true;
+    return $http.get('/cities/autocomplete_country', {
+      params: { q: query }
+    }).then(function(response){
+      $scope.loading_country = false;
+      console.log(response.data)
+      return response.data;
     });
   };
 
 	$scope.init = function() {
     $scope.host = JSON.parse(gon.host);
     $scope.organization = !!$scope.host.org_name;
-    $scope.countries = gon.countries;
-    $scope.cities = gon.cities;
-		$scope.host.event_date = $scope.formatDate(new Date($scope.host.event_date));
+		$scope.host.event_date = $scope.host.event_date;
 		$scope.host.event_time = $scope.host.event_time ? new Date($scope.host.event_time): null;
-		if($scope.host.city) {
-      $scope.current_city = _.find($scope.cities, function(city) { return city.city_id === $scope.host.city.id})
-			$scope.host.city_id = $scope.host.city.id;
-      // when US g autocomplete
-			// $scope.result = $scope.host.city_name;
-		}
 
-		$scope.cityFromList = false;
+    if($scope.host.city) {
+      $scope.current_city = { name: $scope.host.city.name, id: $scope.host.city_id };
+    }
 
 		if($scope.host.country) {
-			$scope.initAutocomplete($scope.host.country.iso)
-		} else {
-			var locale = document.getElementById('locale').className;
-			if(locale === 'he') {
-				var israel = _.find($scope.countries, { iso: 'IL' });
-				$scope.host.country_id = israel.id;
-				$scope.initAutocomplete(israel.iso);
-			} else {
-				$scope.initAutocomplete();
-			}
+      $scope.current_country = { printable_name: $scope.host.country.printable_name, id: $scope.host.country_id };
 		}
 	}
-
-  $scope.formatDate = function (date) {
-    function pad(n) {
-      return n < 10 ? '0' + n : n;
-    }
-
-    var locale = document.getElementById('locale').className;
-    if (locale == 'he') {
-      return date && pad(date.getDate() + '-' +
-      pad(date.getMonth() + 1)  + '-' +
-      date.getFullYear());
-    } else {
-      return date && pad(date.getUTCDate() + '-' +
-      pad(date.getUTCMonth() + 1)  + '-' +
-      date.getUTCFullYear());
-    }
-  };
 
   $scope.parseDate = function (s) {
       var tokens = /^(\d{2})-(\d{2})-(\d{4})$/.exec(s);
@@ -120,13 +101,6 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
   }
 
   $scope.onCityNameBlur = function() {
-  	$timeout(function() {
-  		if(!$scope.cityFromList) {
-  			$scope.host.city_name = null;
-  		}
-  		$scope.cityFromList = false;
-			$scope.$apply();
-  	}, 1000);
   }
 
   $scope.submitStepOne = function() {
@@ -147,16 +121,16 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
   $scope.submitStepTwo = function() {
     $scope.submitted[1] = true;
   	if ($scope.stepTwo.$valid) {
-      var city_id = _.find(gon.cities, function(o) { return o.city_name == $scope.host.city_name; });
+      debugger
   		$http.put('/hosts/' + $scope.host.id + '.json', {
 	  		host: {
 					address: $scope.host.address,
-					city_id: $scope.current_city.city_id,
+          city_id: $scope.current_city.id,
+					country_id: $scope.current_country.id,
 					floor: $scope.host.floor,
 					elevator: $scope.host.elevator,
 					event_date: $scope.host.event_date,
-					event_time: $scope.host.event_time,
-					country_id: $scope.host.country_id
+					event_time: $scope.host.event_time
 				}
 	  	}).then(function success(response) {
 	  		$scope.stepIndex += 1;
@@ -199,11 +173,23 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
   	}
   }
 
-  $scope.onCitySet = function() {
-    if (typeof $scope.current_city === 'string') {
+  $scope.onCountrySet = function() {
+    if (!$scope.loading_country) {
       $scope.current_city = '';
+      if (typeof $scope.current_country === 'string') {
+        $scope.current_country = '';
+      }
     }
   }
+
+  $scope.onCitySet = function() {
+    if (!$scope.loading_city) {
+      if (typeof $scope.current_city === 'string') {
+        $scope.current_city = '';
+      }
+    }
+  }
+
 
   $scope.back = function() {
   	$scope.stepIndex -= 1;
@@ -222,46 +208,6 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
   	if (country) { return country.printable_name };
   	return '';
   }
-
-  $scope.onCountrySelect = function() {
-    $scope.current_city = {};
-    var country = _.find($scope.countries, {id: $scope.host.country_id} )
-    $scope.initAutocomplete(country.iso);
-  }
-
-  $scope.onCitySelect = function() {
-  	var city = _.find($scope.cities, {id: $scope.host.city_id} )
-  	$scope.initAutocomplete(city.name);
-  }
-
-  function getAddress() {
-		$scope.result = $scope.autocomplete.getPlace();
-		$scope.cityFromList = true;
-		if($scope.result && $scope.result.vicinity && $scope.result.vicinity.indexOf(',') === -1) {
-      // $scope.host.city_name = getAddressComponent($scope.result, "locality");
-			$scope.host.city_name = $scope.result.vicinity;// getAddressComponent($scope.result, "locality");
-		} else {
-      alert('please select a city - אנא בחר עיר')
-    }
-		$scope.$apply();
-  }
-
-	function getAddressComponent(result, component){
-	 // Function recieves a google PlacesResult and an array of address components
-	 //   and returns the content of that address component
-		locality = [];
-		address_components = result.address_components;
-		for(var i in address_components){
-			type = address_components[i].types;
-			for(var j in type){
-				index = $.inArray(type[j],[component]);
-				if(type[j] == component) {
-					locality = address_components[i].long_name;
-				}
-			}
-		}
-		return locality;
-	}
 }]);
 
 

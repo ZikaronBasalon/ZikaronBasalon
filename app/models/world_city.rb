@@ -12,6 +12,7 @@
 #  internal_id     :integer
 #  city_id         :integer
 #  country_id      :integer
+#  region_id       :integer
 #  created_at      :datetime
 #  updated_at      :datetime
 #
@@ -20,6 +21,7 @@ class WorldCity < ActiveRecord::Base
   has_paper_trail
   belongs_to :city
   belongs_to :country
+  belongs_to :region
 
   def to_s
     "#{country_name}"

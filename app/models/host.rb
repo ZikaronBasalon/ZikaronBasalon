@@ -68,7 +68,7 @@ class Host < ActiveRecord::Base
 
 
   def event_date
-    read_attribute(:event_date) || Date.parse("01-05-2019")
+    (read_attribute(:event_date).presence || Time.zone.now).strftime('%Y-%m-%d')
   end
 
   def converted_time
@@ -86,10 +86,6 @@ class Host < ActiveRecord::Base
 
   def city_name
   	city.try(:name)
-  end
-
-  def city_name=(name)
-  	self.city = City.find_or_create_by!(name: name) if name.present?
   end
 
   def region_name

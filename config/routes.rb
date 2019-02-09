@@ -18,11 +18,8 @@ ZikaronBasalon::Application.routes.draw do
     resources :cities do
     end
 
-    resources :cities, only: [] do
-      collection do
-        get :autocomplete_city
-      end
-    end
+    get 'cities/autocomplete_city' => 'cities#autocomplete_city'
+    get 'cities/autocomplete_country' => 'cities#autocomplete_country'
 
     resources :managers do
       post :remove_city, on: :member
