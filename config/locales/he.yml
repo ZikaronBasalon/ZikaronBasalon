@@ -61,6 +61,7 @@ he:
 
 
   shared:
+    city_placeholder: "לבחירת עיר"
     profile_link: "בפרופיל האישי שלך"
     hey: "היי"
     new_link_text: "לחץ ליצירה"

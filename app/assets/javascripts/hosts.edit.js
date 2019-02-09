@@ -37,6 +37,7 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 		$scope.eventDate.isOpen = true;
 	}
 
+  // TODO: move these out to to a service
   $scope.getCityLocation = function(query, country_id) {
     $scope.loading_city = true;
     return $http.get('/cities/autocomplete_city', {

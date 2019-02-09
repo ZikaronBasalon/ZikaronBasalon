@@ -48,7 +48,6 @@ group :development do
   gem 'letter_opener'
   gem 'bullet'
   gem 'xray-rails'
-  gem 'pry-rails'
 end
 
 group :assets do

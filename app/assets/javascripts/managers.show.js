@@ -56,6 +56,41 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
         }, 2000), true);
     };
 
+    $scope.onSearchHostCountrySet = function($item, $model, $label, $event) {
+      $scope.search.host.country_id = $item.id;
+    }
+
+    $scope.onSearchHostCitySet = function($item, $model, $label, $event) {
+      $scope.search.host.city_id = $item.id;
+    }
+
+    $scope.onSearchWitnessCitySet = function($item, $model, $label, $event) {
+      $scope.search.witness.city_id = $item.id;
+    }
+
+    // todo: move to service
+    $scope.getCityLocation = function(query, country_id = 97) {
+      return $http.get('/cities/autocomplete_city', {
+        params: {
+          city: {
+            country_id: country_id,
+            q: query
+          }
+        }
+      }).then(function(response){
+        return response.data;
+      });
+    };
+
+    $scope.getHostCountryLocation = function(query) {
+      return $http.get('/cities/autocomplete_country', {
+        params: { q: query }
+      }).then(function(response){
+        return response.data;
+      });
+    };
+
+
     $scope.editHost = function(host) {
         window.open('/hosts/' + host.id, '_blank');
     };
