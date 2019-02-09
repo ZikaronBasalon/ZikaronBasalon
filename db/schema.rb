@@ -247,6 +247,7 @@ ActiveRecord::Schema.define(version: 20190207221907) do
     t.boolean  "available_day7"
     t.boolean  "available_day8"
     t.boolean  "available_day9"
+    t.string   "how_brought"
   end
 
   create_table "world_cities", force: :cascade do |t|

@@ -318,6 +318,7 @@ en:
       seminar_required: "צריך סמינר"
       free_text: "עוד משהו שאנחנו צריכים לדעת"
       special_population: "אוכלוסיה מיוחדת"
+      how_brought: איך הגענו לאיש העדות
     show:
       title: "פרופיל איש עדות"
     assign_modal:
