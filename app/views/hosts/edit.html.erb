@@ -118,7 +118,7 @@
             ng-blur="onCitySet()"
             ng-disabled="!current_country"
             ng-model-options="{ debounce: 200 }"
-            uib-typeahead="city as city.name for city in getCityLocation(current_country.id, $viewValue)"
+            uib-typeahead="city as city.name for city in getCityLocation($viewValue, current_country.id)"
             placeholder="<%= t '.city_placeholder' %>">
         </div>
 

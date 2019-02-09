@@ -98,7 +98,6 @@ class WitnessesController < ApplicationController
       :available_day7,
       :available_day8,
       :available_day9,
-      :city_name,
       :how_brought
     )
   end

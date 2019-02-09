@@ -31,40 +31,44 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 	$scope.alerts = [];
 	$scope.action = 'new';
 
-	// $scope.autocomplete = new google.maps.places.Autocomplete($("#city_name")[0], { types: ['(cities)'] });
-  // $scope.autocomplete.setComponentRestrictions({'country': ['ps', 'il']});
-
-
-	// $scope.autocomplete = new google.maps.places.Autocomplete($("#city_name")[0]);
-	// google.maps.event.addListener($scope.autocomplete, 'place_changed', getAddress);
-
 	$scope.init = function(witness) {
-    $scope.cities = gon.cities;
 		if(witness.id) {
 			delete witness.created_at;
 			delete witness.updated_at;
 			$scope.witness = witness;
 			$scope.action = 'edit';
 		}
+
     if(witness.city_id) {
-      $scope.current_city = _.find($scope.cities, { city_id: witness.city_id });
-      if ($scope.current_city === null) {
-        $scope.current_city = {
-          name: witness.city_name,
-          city_id: witness.city_id,
-          not_found: true
-        };
-      }
+      $scope.current_city = { name: $scope.witness.city_name, id: $scope.witness.city_id };
     }
 	}
 
   $scope.onCitySet = function() {
-    if (typeof $scope.current_city === 'string') {
-      $scope.current_city = '';
-    } else {
-      $scope.witness.city_id = $scope.current_city.city_id;
+    if (!$scope.loading_city) {
+      if (typeof $scope.current_city === 'string') {
+        $scope.current_city = '';
+      } else {
+        $scope.witness.city_id = $scope.current_city.id;
+      }
     }
   }
+
+  $scope.getCityLocation = function(query, country_id = 97) {
+    $scope.loading_city = true;
+    return $http.get('/cities/autocomplete_city', {
+      params: {
+        city: {
+          country_id: country_id,
+          q: query
+        }
+      }
+    }).then(function(response){
+      $scope.loading_city = false;
+      console.log(response.data)
+      return response.data;
+    });
+  };
 
 	$scope.submit = function() {
 		$scope.submitted = true;

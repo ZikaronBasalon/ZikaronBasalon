@@ -37,7 +37,7 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 		$scope.eventDate.isOpen = true;
 	}
 
-  $scope.getCityLocation = function(country_id, query) {
+  $scope.getCityLocation = function(query, country_id) {
     $scope.loading_city = true;
     return $http.get('/cities/autocomplete_city', {
       params: {
@@ -48,7 +48,6 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
       }
     }).then(function(response){
       $scope.loading_city = false;
-      console.log(response.data)
       return response.data;
     });
   };
@@ -59,7 +58,6 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
       params: { q: query }
     }).then(function(response){
       $scope.loading_country = false;
-      console.log(response.data)
       return response.data;
     });
   };
