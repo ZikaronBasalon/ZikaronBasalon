@@ -28,6 +28,8 @@ gem 'rails_admin', '~> 1.3'
 gem 'rails_admin_impersonate'
 gem 'rails_admin_rollincode'
 gem 'protected_attributes'
+gem 'paper_trail'
+gem 'paper_trail-association_tracking'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -37,9 +39,7 @@ group :staging do
 end
 
 group :development do
-  gem 'paper_trail-association_tracking'
   gem 'annotate'
-  gem 'paper_trail'
   gem 'byebug'
   gem 'pry-rails'
   gem 'pry-byebug'
