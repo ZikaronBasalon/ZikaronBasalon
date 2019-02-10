@@ -68,7 +68,7 @@ class Host < ActiveRecord::Base
 
 
   def event_date
-    (read_attribute(:event_date).presence || Time.zone.now).strftime('%Y-%m-%d')
+    (read_attribute(:event_date).presence || DateTime.parse("2018-05-01")).strftime('%Y-%m-%d')
   end
 
   def converted_time

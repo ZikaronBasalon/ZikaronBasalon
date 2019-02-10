@@ -53,7 +53,7 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 	$scope.init = function() {
     $scope.host = JSON.parse(gon.host);
     $scope.organization = !!$scope.host.org_name;
-		$scope.host.event_date = $scope.host.event_date;
+    $scope.host.event_date = new Date($scope.host.event_date);
 		$scope.host.event_time = $scope.host.event_time ? new Date($scope.host.event_time): null;
 
     if($scope.host.city) {

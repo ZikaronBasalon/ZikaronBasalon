@@ -53,7 +53,8 @@ class HostsController < ApplicationController
   end
 
   def edit
-    gon.host = Host.find(params[:id]).to_json(:include => [:city, :country])
+    @host = Host.find(params[:id])
+    gon.host = @host.to_json(:include => [:city, :country])
   end
 
   def update
