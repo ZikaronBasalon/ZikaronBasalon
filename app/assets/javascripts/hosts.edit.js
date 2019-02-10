@@ -7,8 +7,8 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 		hosted_before: false
 	};
 
-  $scope.current_city = {};
-  $scope.current_country = {};
+  $scope.current_city = '';
+  $scope.current_country = {id: 97, printable_name: 'Israel'};
 
 	$scope.steps = ['stepOne', 'stepTwo', 'stepThree'];
 	$scope.submitted = [false, false, false];
