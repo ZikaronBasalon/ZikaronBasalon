@@ -20,19 +20,6 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 
 	$scope.otherLanguageVisible = false;
 
-	$scope.initAutocomplete = function(iso) {
-		// var options = { types: ['(cities)'] };
-		if(iso) {
-			// options.componentRestrictions = { country: iso }
-		}
-
-    // $scope.autocomplete = new google.maps.places.Autocomplete($("#city")[0], options);
-		$scope.autocomplete = new google.maps.places.Autocomplete($("#city")[0]);
-    // $scope.autocomplete.setComponentRestrictions({'country': ['ps', 'il']});
-
-		google.maps.event.addListener($scope.autocomplete, 'place_changed', getAddress);
-	}
-
 	$scope.openDatepicker = function() {
 		$scope.eventDate.isOpen = true;
 	}
