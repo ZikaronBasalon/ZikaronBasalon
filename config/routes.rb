@@ -32,6 +32,7 @@ ZikaronBasalon::Application.routes.draw do
     resources :regions do
       member do
         put :add_city
+        patch :add_city
         get :remove_city
       end
     end
