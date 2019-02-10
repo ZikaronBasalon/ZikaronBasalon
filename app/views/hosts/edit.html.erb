@@ -105,7 +105,8 @@
             ng-blur="onCountrySet()"
             ng-model-options="{ debounce: 200 }"
             uib-typeahead="country as country.printable_name for country in getCountryLocation($viewValue)"
-            placeholder="<%= t 'shared.country_placeholder' %>">
+            placeholder="<%= t 'shared.country_placeholder' %>"
+            required>
         </div>
 
         <div class="form-group"
@@ -119,7 +120,8 @@
             ng-disabled="!current_country"
             ng-model-options="{ debounce: 200 }"
             uib-typeahead="city as city.name for city in getCityLocation($viewValue, current_country.id)"
-            placeholder="<%= t '.city_placeholder' %>">
+            placeholder="<%= t '.city_placeholder' %>"
+            required>
         </div>
 
         <div class="form-group"

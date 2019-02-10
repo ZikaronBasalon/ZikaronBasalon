@@ -5,7 +5,7 @@ class CitiesController < ApplicationController
     if params[:id] == 'autocomplete_city'
       q = JSON.parse(params.first.second)['q']
       country_id = JSON.parse(params.first.second)['country_id']
-      results = City.normalized_search(q, country_id).first(12)
+      results = City.normalized.normalized_search(q, country_id).first(12)
     elsif params[:id] == 'autocomplete_country'
       q = params[:q]
       results = Country.normalized_search(q).first(12)

@@ -3,9 +3,10 @@
 //= require directives/managerLink
 
 app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$location', function($scope, $uibModal, $http, $location) {
+    $scope.host_current_country = { id: 97, printable_name: 'Israel' }
     $scope.hosts = [];
     $scope.search = {
-        host: {},
+        host: { country_id: 97 },
         witness: {},
         reverseOrdering: false
     };
@@ -32,12 +33,10 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
 
     reset_unused_parameters();
 
-    $scope.init = function(currentUser, hosts, witnesses, cities, countries, regions, totalHosts, totalWitnesses, currentPage) {
+    $scope.init = function(currentUser, hosts, witnesses, regions, totalHosts, totalWitnesses, currentPage) {
         $scope.currentUser = currentUser;
         $scope.hosts = hosts;
         $scope.witnesses = witnesses;
-        $scope.cities = cities;
-        $scope.countries = countries;
         $scope.regions = regions;
         $scope.totalHosts = totalHosts;
         $scope.totalWitnesses = totalWitnesses;
