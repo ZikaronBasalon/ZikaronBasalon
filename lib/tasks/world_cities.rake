@@ -76,5 +76,29 @@ namespace :world_cities_tasks do
       city.update(name: city.world_city.city_ascii_name) if city.world_city.present? && city.name != city.world_city.city_ascii_name;
       city.update(name: city.israel_city.city_name_he) if city.israel_city.present? && city.name != city.israel_city.city_name_he;
     end
+
+    # combine duplicates
+    City.all.group_by(&:name).map{|a,b| [a, b.size] if b.size > 1}.compact.each do |city_name, _|
+      cities = City.where(name: city_name)
+      next if cities.size.zero?
+      preferred_cities = cities.where.not(community_leaderships_count: 0).order('created_at asc')
+      if preferred_cities.present?
+        city_to_keep = preferred_cities.first
+        cities_to_merge = cities.where.not(id: city_to_keep.id)
+      else
+        city_to_keep = cities.first
+        cities_to_merge = cities[1..-1]
+      end
+      city_ids_to_merge = cities_to_merge.map(&:id)
+      City.where(id: cities_to_merge.map(&:id)).delete_all
+      IsraelCity.where(city_id: city_ids_to_merge).delete_all
+      WorldCity.where(city_id: city_ids_to_merge).delete_all
+      city_ids_to_merge.each do |city_id|
+        Witness.where(city_id: city_id).update_all(city_id: city_to_keep.id)
+        Host.where(city_id: city_id).update_all(city_id: city_to_keep.id)
+        CommunityLeadership.where(city_id: city_id).update_all(city_id: city_to_keep.id)
+        IsraelCity.where(city_id: city_id).update_all(city_id: city_to_keep.id)
+      end
+    end
   end
 end
