@@ -60,7 +60,46 @@ class WitnessesController < ApplicationController
   end
 
   def safe_params
-    params.require(:witness).permit(:full_name, :address, :city_id, :witness_type, :language, :email, :phone, :stairs, :special_needs, :seminar_required, :free_text, :special_population, :contacted, :contacted_by_host, :available_for_teaming, :host_id, :concept, :can_morning, :can_afternoon, :can_evening, :free_on_day, :contact_name, :contact_phone, :external_assignment, :additional_phone, :available_day1, :available_day2, :available_day3, :available_day4, :available_day5, :available_day6, :archived, :need_to_followup, :active_last_year, :available_day7, :available_day8, :available_day9, :city_name)
+    params.require(:witness).permit(
+      :full_name,
+      :address,
+      :city_id,
+      :witness_type,
+      :language,
+      :email,
+      :phone,
+      :stairs,
+      :special_needs,
+      :seminar_required,
+      :free_text,
+      :special_population,
+      :contacted,
+      :contacted_by_host,
+      :available_for_teaming,
+      :host_id,
+      :concept,
+      :can_morning,
+      :can_afternoon,
+      :can_evening,
+      :free_on_day,
+      :contact_name,
+      :contact_phone,
+      :external_assignment,
+      :additional_phone,
+      :available_day1,
+      :available_day2,
+      :available_day3,
+      :available_day4,
+      :available_day5,
+      :available_day6,
+      :archived,
+      :need_to_followup,
+      :active_last_year,
+      :available_day7,
+      :available_day8,
+      :available_day9,
+      :how_brought
+    )
   end
 
   # PUT /witnesses/1
@@ -79,8 +118,6 @@ class WitnessesController < ApplicationController
           @host = Host.find(safe_params[:host_id])
           @host.update_attributes(assignment_time: Time.now.utc.localtime, witness_id: params[:id])
         end
-
-
 
         format.json { render json: @witness, status: :created, location: @witness }
       else

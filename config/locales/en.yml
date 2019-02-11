@@ -55,6 +55,7 @@ en:
 
 
   shared:
+    city_placeholder: "Enter city"
     mailer_pargraph_noticed_profile_login: "*To access your profile, please make sure you logged in to our website. If “my profile” isn’t shown on the right side at the top of the page, please click “sign in” on the left side at the top of the page. "
     profile_link: "your profile"
     create_another: "Create another"
@@ -318,6 +319,7 @@ en:
       seminar_required: "צריך סמינר"
       free_text: "עוד משהו שאנחנו צריכים לדעת"
       special_population: "אוכלוסיה מיוחדת"
+      how_brought: איך הגענו לאיש העדות
     show:
       title: "פרופיל איש עדות"
     assign_modal:

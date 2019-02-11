@@ -15,6 +15,12 @@ ZikaronBasalon::Application.routes.draw do
       get '/users/sign_out' => 'devise/sessions#destroy'
     end
 
+    resources :cities do
+    end
+
+    get 'cities/autocomplete_city' => 'cities#autocomplete_city'
+    get 'cities/autocomplete_country' => 'cities#autocomplete_country'
+
     resources :managers do
       post :remove_city, on: :member
       get :export_hosts, on: :member
@@ -26,6 +32,7 @@ ZikaronBasalon::Application.routes.draw do
     resources :regions do
       member do
         put :add_city
+        patch :add_city
         get :remove_city
       end
     end

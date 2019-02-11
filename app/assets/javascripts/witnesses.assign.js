@@ -1,19 +1,18 @@
 //= require lib/utils
-app.controller('WitnessAssignController', ['$scope', '$http', '$uibModal',  
+app.controller('WitnessAssignController', ['$scope', '$http', '$uibModal',
   function($scope, $http, $uibModal) {
 	$scope.formatBool = formatBool;
 	$scope.filter = {};
   $scope.success = false;
 
-  $scope.init = function(witness, hosts, cities, cityId) {
+  $scope.init = function(witness, cityId) {
 
     $scope.pagination = {
       currentPage: 1
     };
 
     $scope.witness = witness;
-    $scope.hosts = hosts;
-    $scope.cities = cities;
+    $scope.hosts = [];
     $scope.filter.city_id = cityId;
 
     $scope.$watch("filter.city_id", $scope.filterHosts, true);
@@ -28,9 +27,27 @@ app.controller('WitnessAssignController', ['$scope', '$http', '$uibModal',
     $scope.filterHosts();
   };
 
-    $scope.pageChanged = function() {
-      $scope.filterHosts();
-    };
+  $scope.pageChanged = function() {
+    $scope.filterHosts();
+  };
+
+  $scope.onAssignCitySelect = function($item) {
+    $scope.filter.city_id = $item.id;
+  }
+
+  // todo: move to service
+  $scope.getCityLocation = function(query, country_id) {
+    return $http.get('/cities/autocomplete_city', {
+      params: {
+        city: {
+          country_id: country_id,
+          q: query
+        }
+      }
+    }).then(function(response){
+      return response.data;
+    });
+  };
 
   $scope.filterHosts = function() {
   	var params = {};
@@ -73,13 +90,13 @@ $scope.assignHost = function(host) {
 }
 }]);
 
-app.controller('WitnessAssignModalController', ['$scope', '$http','$uibModalInstance', 'host', 'witness', 
+app.controller('WitnessAssignModalController', ['$scope', '$http','$uibModalInstance', 'host', 'witness',
  function($scope, $http, $uibModalInstance, host, witness) {
-  
+
   $scope.host = host;
   $scope.witness = witness;
   $scope.getAccesability = getAccesability;
-  $scope.formatDate = formatDate; 
+  $scope.formatDate = formatDate;
   $scope.formatLanguage = formatLanguage;
   $scope.formatStairs = formatStairs;
   $scope.formatWitnessAvailabilityTime = formatWitnessAvailabilityTime;
@@ -92,7 +109,7 @@ app.controller('WitnessAssignModalController', ['$scope', '$http','$uibModalInst
 
   $scope.createAssignment = function() {
     $scope.error = false;
-    
+
     $http.put('/witnesses/' + $scope.witness.id + '.json', {
       witness: {
         host_id: $scope.host.id

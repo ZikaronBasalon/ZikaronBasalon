@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 ruby '2.4.5'
-gem 'rails', '4.2.9'
+gem 'rails', '4.2.11'
 gem 'pg', '0.20'
-gem 'paper_trail-association_tracking'
+gem 'gon'
 
 # Mail
 gem 'mail_view', :git => 'https://github.com/basecamp/mail_view.git'
@@ -24,12 +24,12 @@ gem 'devise', '~> 3.5.6'
 gem 'sort_alphabetical'
 gem 'google_places'
 gem 'puma'
-gem 'annotate'
-gem 'paper_trail'
 gem 'rails_admin', '~> 1.3'
 gem 'rails_admin_impersonate'
 gem 'rails_admin_rollincode'
 gem 'protected_attributes'
+gem 'paper_trail'
+gem 'paper_trail-association_tracking'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -39,13 +39,15 @@ group :staging do
 end
 
 group :development do
+  gem 'annotate'
   gem 'byebug'
+  gem 'pry-rails'
+  gem 'pry-byebug'
   # gem 'test-unit'
   gem 'seed_dump'
   gem 'letter_opener'
   gem 'bullet'
   gem 'xray-rails'
-  gem 'pry-rails'
 end
 
 group :assets do

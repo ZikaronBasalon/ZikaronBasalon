@@ -42,6 +42,7 @@
 #  available_day7        :boolean
 #  available_day8        :boolean
 #  available_day9        :boolean
+#  how_brought           :string
 #
 
 # Read about fixtures at http://api.rubyonrails.org/v3.2.2/classes/ActiveRecord/Fixtures.html

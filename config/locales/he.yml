@@ -61,6 +61,7 @@ he:
 
 
   shared:
+    city_placeholder: "לבחירת עיר"
     profile_link: "בפרופיל האישי שלך"
     hey: "היי"
     new_link_text: "לחץ ליצירה"
@@ -335,6 +336,7 @@ he:
       seminar_required: "צריך סמינר"
       free_text: "אנחנו רוצים להכיר את איש העדות טוב יותר, ועל כן נבקש למלא כמה שיותר פרטים כלליים"
       special_population: "מעוניין לדבר מול אוכלוסיות מיוחדות?"
+      how_brought: איך הגענו לאיש העדות
     show:
       title: "פרופיל איש עדות"
     assign_modal:

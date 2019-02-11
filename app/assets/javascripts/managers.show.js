@@ -3,9 +3,10 @@
 //= require directives/managerLink
 
 app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$location', function($scope, $uibModal, $http, $location) {
+    $scope.host_current_country = { id: 97, printable_name: 'Israel' }
     $scope.hosts = [];
     $scope.search = {
-        host: {},
+        host: { country_id: 97 },
         witness: {},
         reverseOrdering: false
     };
@@ -32,12 +33,10 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
 
     reset_unused_parameters();
 
-    $scope.init = function(currentUser, hosts, witnesses, cities, countries, regions, totalHosts, totalWitnesses, currentPage) {
+    $scope.init = function(currentUser, hosts, witnesses, regions, totalHosts, totalWitnesses, currentPage) {
         $scope.currentUser = currentUser;
         $scope.hosts = hosts;
         $scope.witnesses = witnesses;
-        $scope.cities = cities;
-        $scope.countries = countries;
         $scope.regions = regions;
         $scope.totalHosts = totalHosts;
         $scope.totalWitnesses = totalWitnesses;
@@ -55,6 +54,41 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
             }
         }, 2000), true);
     };
+
+    $scope.onSearchHostCountrySet = function($item) {
+      $scope.search.host.country_id = $item.id;
+    }
+
+    $scope.onSearchHostCitySet = function($item) {
+      $scope.search.host.city_id = $item.id;
+    }
+
+    $scope.onSearchWitnessCitySet = function($item) {
+      $scope.search.witness.city_id = $item.id;
+    }
+
+    // todo: move to service
+    $scope.getCityLocation = function(query, country_id) {
+      return $http.get('/cities/autocomplete_city', {
+        params: {
+          city: {
+            country_id: country_id,
+            q: query
+          }
+        }
+      }).then(function(response){
+        return response.data;
+      });
+    };
+
+    $scope.getHostCountryLocation = function(query) {
+      return $http.get('/cities/autocomplete_country', {
+        params: { q: query }
+      }).then(function(response){
+        return response.data;
+      });
+    };
+
 
     $scope.editHost = function(host) {
         window.open('/hosts/' + host.id, '_blank');

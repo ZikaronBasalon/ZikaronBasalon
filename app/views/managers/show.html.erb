@@ -1,8 +1,8 @@
 <div class="col-xs-12" ng-controller="ManagerShowController"
      ng-init="init(<%= current_user.to_json(:include => :meta) %>,
         <%= @hosts.to_json(:include => [:user, :witness, city: { :include => :managers }, :methods => [:has_witness] ]) %>,
-        <%= @witnesses.to_json(:include => { city: { :include => :managers } }) %>,  <%= @cities.to_json %>,
-        <%= @countries.to_json %>, <%= @regions.to_json %>,
+        <%= @witnesses.to_json(:include => { city: { :include => :managers } }) %>,
+        <%= @regions.to_json %>,
         <%= @total_hosts.to_json %>, <%= @total_witnesses.to_json %>, <%= @page.to_json %> )">
 
   <% if current_user.the_admin? %>
@@ -39,10 +39,17 @@
         <span><%= t 'shared.filter_by' %></span>
 
         <div class="form-group">
-          <select class="form-control" ng-model="search.host.country_id"
-                  ng-options="o.id as o.name for o in countries">
-            <option value=""><%= t 'shared.country' %></option>
-          </select>
+          <label for="country"><%= t 'shared.country' %></label>
+          <input
+            class="form-control"
+            type="text"
+            ng-model="host_current_country"
+            ng-change="host_current_city = ''"
+            ng-model-options="{ debounce: 200 }"
+            typeahead-editable="false"
+            typeahead-on-select="onSearchHostCountrySet($item)"
+            uib-typeahead="country as country.printable_name for country in getHostCountryLocation($viewValue)"
+            placeholder="<%= t 'shared.country_placeholder' %>">
         </div>
 
         <div class="form-group">
@@ -53,10 +60,17 @@
         </div>
 
         <div class="form-group">
-          <select class="form-control" ng-model="search.host.city_id"
-                  ng-options="o.id as o.name for o in cities">
-            <option value=""><%= t 'shared.city' %></option>
-          </select>
+          <label for="city"><%= t 'shared.city' %></label>
+          <input
+            class="form-control"
+            type="text"
+            ng-model="host_current_city"
+            ng-model-options="{ debounce: 200 }"
+            typeahead-editable="false"
+            typeahead-on-select="onSearchHostCitySet($item)"
+            ng-disabled="!search.host.country_id"
+            uib-typeahead="city as city.name for city in getCityLocation($viewValue, search.host.country_id)"
+            placeholder="<%= t 'shared.city_placeholder' %>">
         </div>
 
         <% if I18n.locale == :he %>
@@ -269,10 +283,16 @@
         <span><%= t 'shared.filter_by' %>:</span>
 
         <div class="form-group">
-          <select class="form-control" ng-model="search.witness.city_id"
-                  ng-options="o.id as o.name for o in cities">
-            <option value=""><%= t 'shared.city' %></option>
-          </select>
+          <label for="city"><%= t 'shared.city' %></label>
+          <input
+            class="form-control"
+            type="text"
+            ng-model="witness_current_city"
+            ng-model-options="{ debounce: 200 }"
+            typeahead-editable="false"
+            typeahead-on-select="onSearchWitnessCitySet($item)"
+            uib-typeahead="city as city.name for city in getCityLocation($viewValue, 97)"
+            placeholder="<%= t 'shared.city_placeholder' %>">
         </div>
 
         <div class="form-group">

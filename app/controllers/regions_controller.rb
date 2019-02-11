@@ -6,14 +6,14 @@ class RegionsController < ApplicationController
   # before_action :authenticate_user!
   def index
     @country_region_dict = {}
-    Country.order('regions_count DESC').where('regions_count > 0').each{|country|
+    Country.order('regions_count DESC').where('regions_count > 0').each do |country|
       @country_region_dict[country.name] = []
-      Region.where(country_id:country.id).each{|region|
+      Region.where(country_id: country.id).each do |region|
         @country_region_dict[country.name].push(region)
-      }
-    }
+      end
+    end
     @regions = Region.all
-    @cities = City.all
+    @cities = City.all #todo remove
   end
 
   def show

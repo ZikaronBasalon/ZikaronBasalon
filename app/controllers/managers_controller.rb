@@ -12,14 +12,14 @@ class ManagersController < ApplicationController
   end
 
   def get_country_id_and_region_id
-    region_id = nil
+    region_id = 37
     if params[:filter].present? && params[:filter][:host].present? && params[:filter][:host][:region_id].present?
       region_id = params[:filter][:host][:region_id]
       params[:filter][:host].delete :region_id
     end
 
     # get country_id
-    country_id = params[:filter].present? && params[:filter][:host].present? ? params[:filter][:host][:country_id] : ""
+    country_id = params[:filter].present? && params[:filter][:host].present? ? params[:filter][:host][:country_id] : "97"
 
     return country_id, region_id
   end
@@ -31,6 +31,7 @@ class ManagersController < ApplicationController
     country_id, region_id = get_country_id_and_region_id
 
     # get lists
+
     @cities = @manager.get_cities(current_user, country_id, region_id)
     @countries = @manager.get_countries
     @regions = @manager.get_regions(country_id)

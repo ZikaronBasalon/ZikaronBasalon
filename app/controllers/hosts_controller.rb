@@ -54,7 +54,7 @@ class HostsController < ApplicationController
 
   def edit
     @host = Host.find(params[:id])
-    @countries = Country.all
+    gon.host = @host.to_json(:include => [:city, :country])
   end
 
   def update
@@ -64,7 +64,6 @@ class HostsController < ApplicationController
       @host.received_registration_mail=false
       @host.save!
       @host.user.active_this_year=false
-      @host.user.save!
      #put here code for changing to guest from host
     elsif params[:finalStep]
       if !@host.received_registration_mail

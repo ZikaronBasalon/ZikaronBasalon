@@ -11,7 +11,7 @@
     <% if true %>
     <div class="col-xs-12" ng-controller="HomePageController"
           ng-init="init(
-            <%= @hosts.to_json(:include => [{ :user => { :methods => [:first_name] } }, :city, :country], :methods => [:available_places, :converted_time]) %>, 
+            <%= @hosts.to_json(:include => [{ :user => { :methods => [:first_name] } }, :city, :country], :methods => [:available_places, :converted_time]) %>,
             <%= [] %>, <%= @regions.to_json %>, <%= @total_items %>,
             <%= current_user_json %>, <%= @countries.to_json %>
           )">
@@ -43,10 +43,10 @@
                   ng-change="filter()">
             <option value=""><%#= t 'shared.city' %></option>
           </select> -->
-          <ui-select multiple   
-                     ng-model="search.cities" 
-                     theme="bootstrap" 
-                     class="form-control" 
+          <ui-select multiple
+                     ng-model="search.cities"
+                     theme="bootstrap"
+                     class="form-control"
                      on-select="filter()"
                      on-remove="filter()">
             <ui-select-match placeholder="<%= t 'shared.city' %>">{{$item.name}}</ui-select-match>
@@ -54,7 +54,7 @@
               <div ng-bind-html="city.name | highlight: $select.search"></div>
             </ui-select-choices>
           </ui-select>
-        </div> 
+        </div>
 
         <div class="form-group">
           <select class="form-control" ng-model="search.event_language"
@@ -90,8 +90,8 @@
               <input type="checkbox" ng-model="search.vetrans" ng-change="filter()" style="width: 15px;">
               <%= t 'shared.vetrans' %>
             </label>
-          </div> 
-        --> 
+          </div>
+        -->
 
         <div class="form-group pull-left">
           <input type="text" class="hidden-xs form-control" ng-model="search.query" placeholder="<%= t 'shared.free_search' %>" />
@@ -136,7 +136,7 @@
             </th>
             <th class="hidden-xs"><%= t 'shared.free_text' %></th>
             <th></th>
-          </tr> 
+          </tr>
         </thead>
         <tbody>
           <tr ng-repeat="host in hosts">
@@ -164,20 +164,20 @@
 
       <div class="row">
         <div class="col-xs-12 text-center">
-          <uib-pagination total-items="totalItems" 
-                          ng-model="currentPage" 
+          <uib-pagination total-items="totalItems"
+                          ng-model="currentPage"
                           ng-change="pageChanged()"
-                          class="pagination-sm" 
-                          previous-text="&lsaquo;" 
-                          next-text="&rsaquo;" 
-                          first-text="&laquo;" 
+                          class="pagination-sm"
+                          previous-text="&lsaquo;"
+                          next-text="&rsaquo;"
+                          first-text="&laquo;"
                           last-text="&raquo;">
           </uib-pagination>
         </div>
       </div>
-    
 
-    </div> 
+
+    </div>
     <% end %>
     <!-- End of HomePageController -->
   </div>

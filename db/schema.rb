@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190205211146) do
+ActiveRecord::Schema.define(version: 20190207221907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 20190205211146) do
     t.string   "name_he",                     limit: 255
     t.integer  "community_leaderships_count",             default: 0
     t.integer  "israel_city_id"
+    t.integer  "country_id"
+    t.integer  "world_city_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -245,6 +247,22 @@ ActiveRecord::Schema.define(version: 20190205211146) do
     t.boolean  "available_day7"
     t.boolean  "available_day8"
     t.boolean  "available_day9"
+    t.string   "how_brought"
+  end
+
+  create_table "world_cities", force: :cascade do |t|
+    t.string   "city_name"
+    t.string   "city_ascii_name"
+    t.float    "lat"
+    t.float    "lng"
+    t.text     "country_name"
+    t.text     "state"
+    t.integer  "internal_id"
+    t.integer  "city_id"
+    t.integer  "country_id"
+    t.integer  "region_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
