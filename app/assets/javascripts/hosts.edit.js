@@ -4,7 +4,8 @@
 app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 	function($scope, $http, $uibModal, $timeout) {
 	$scope.host = {
-		hosted_before: false
+		hosted_before: false,
+    city_id: null
 	};
 
   $scope.current_city = '';
@@ -58,11 +59,15 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 
     if($scope.host.city) {
       $scope.current_city = { name: $scope.host.city.name, id: $scope.host.city_id };
+    } else {
+      $scope.host.city_id = null;
     }
 
-		if($scope.host.country) {
+    if($scope.host.country) {
       $scope.current_country = { printable_name: $scope.host.country.printable_name, id: $scope.host.country_id };
-		}
+    } else {
+      $scope.host.country_id = null;
+    }
 	}
 
   $scope.parseDate = function (s) {
@@ -163,6 +168,9 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
       $scope.current_city = '';
       if (typeof $scope.current_country === 'string') {
         $scope.current_country = '';
+        $scope.host.country_id = null;
+      } else {
+        $scope.host.country_id = $scope.current_country.id;
       }
     }
   }
@@ -171,6 +179,9 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
     if (!$scope.loading_city) {
       if (typeof $scope.current_city === 'string') {
         $scope.current_city = '';
+        $scope.host.city_id = null;
+      } else {
+        $scope.host.city_id = $scope.current_city.id;
       }
     }
   }

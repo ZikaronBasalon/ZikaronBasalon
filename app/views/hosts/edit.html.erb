@@ -96,11 +96,12 @@
       <!-- Step two -->
       <form name="stepTwo" ng-show="'stepTwo' === steps[stepIndex]" novalidate>
         <div class="form-group"
-             ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.country.$invalid]">
-          <label for="country"><%= t 'shared.country' %></label>
+             ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.country_id.$invalid]">
+          <label for="country_id"><%= t 'shared.country' %></label>
           <input
             class="form-control"
             type="text"
+            name="country_id"
             ng-model="current_country"
             ng-blur="onCountrySet()"
             ng-model-options="{ debounce: 200 }"
@@ -110,11 +111,12 @@
         </div>
 
         <div class="form-group"
-             ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.city.$invalid]">
-          <label for="city"><%= t '.city' %></label>
+             ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.city_id.$invalid]">
+          <label for="city_id"><%= t '.city' %></label>
           <input
             class="form-control"
             type="text"
+            name="city_id"
             ng-model="current_city"
             ng-blur="onCitySet()"
             ng-disabled="!current_country"
