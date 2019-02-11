@@ -70,5 +70,11 @@ namespace :world_cities_tasks do
 
     # who do we need this?
     City.where(country_id:nil).each {|c| c.update_columns(country_id: c.world_city.country_id) if c.world_city_id.present? }
+
+    #final cleanup for both
+    City.normalized.each do |city|
+      city.update(name: city.world_city.city_ascii_name) if city.world_city.present? && city.name != city.world_city.city_ascii_name;
+      city.update(name: city.israel_city.city_name_he) if city.israel_city.present? && city.name != city.israel_city.city_name_he;
+    end
   end
 end
