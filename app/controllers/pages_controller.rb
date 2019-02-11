@@ -15,9 +15,9 @@ class PagesController < ApplicationController
     # get country_id
     country_id = params[:country_id] ? params[:country_id] : ""
 
-    @cities = City
+    @cities = City.normalized
     if !country_id.present? && !region_id.present?
-      @cities = @cities.all
+      @cities = @cities.normalized
     else
       @cities = filter_cities(@cities, country_id, region_id)
       @cities = @cities.sort_alphabetical_by{ |c| c[:name] }
@@ -54,16 +54,16 @@ class PagesController < ApplicationController
 
   	respond_to do |format|
       format.html
-		  format.json { render json: { 
+		  format.json { render json: {
 			  	hosts: @hosts.to_json(
-			  		:include => [{ :user => { :methods => [:first_name] } }, :city, :country], 
+			  		:include => [{ :user => { :methods => [:first_name] } }, :city, :country],
 			  		:methods => [:available_places, :converted_time]
-		  		), 
+		  		),
 			  	cities: @cities,
           regions: @regions,
 			  	total_items: @total_items,
 			  	page: params[:page] || 1
-			  } 
+			  }
 		  }
 	  end
   end
@@ -73,7 +73,7 @@ class PagesController < ApplicationController
   end
 
   def welcome
-    
+
   end
 
 private
@@ -94,7 +94,7 @@ private
 	end
 
 
-  def host_in_vetrans(h, vetrans) 
+  def host_in_vetrans(h, vetrans)
     return true if !vetrans
     h.has_witness && h.witness.try(:is_vetran)
   end
