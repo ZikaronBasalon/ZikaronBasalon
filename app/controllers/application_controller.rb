@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :set_locale
   before_filter :set_fb_app
-  before_filter :protect_admin
   respond_to :json, :html
   def is_admin
   	redirect_to root_path unless current_user && (current_user.any_admin?)
@@ -21,14 +20,6 @@ class ApplicationController < ActionController::Base
 	end
 
 	private
-
-  def protect_admin
-    if params[:controller].include?('rails_admin')
-      authenticate_or_request_with_http_basic do |username, password|
-        username == 'zikaronbasalon' && password == 'zikaronbasalon'
-      end
-    end
-  end
 
 	def set_locale
 		I18n.locale = params[:locale]
