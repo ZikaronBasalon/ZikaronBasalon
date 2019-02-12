@@ -7,7 +7,10 @@ class ManagersController < ApplicationController
 
   def index
     @managers = Manager.includes(:cities, :user).all
-    @cities_without_manager = City.without_managers
+    @cities_without_manager = City.relevant_cities.without_managers
+    gon.managers = @managers.to_json(:include => [:cities, :user])
+    gon.citiesWithoutManager = @cities_without_manager.to_json
+
     respond_with(@managers)
   end
 

@@ -32,14 +32,9 @@ class City < ActiveRecord::Base
 
   scope :normalized_search, ->(q, country_id) { where(country_id: country_id).where("name ILIKE '%#{q}%'") }
   scope :normalized, -> { where("israel_city_id IS NOT NULL OR world_city_id IS NOT NULL") }
+  scope :without_managers, -> { where(community_leaderships_count: 0) }
 
-  def self.without_managers
-  	cities = []
-  	City.all.each do |c|
-  		cities.push(c) if c.community_leaderships_count === 0
-  	end
-  	cities
-  end
+  scope :relevant_cities, -> { where(id: (Witness.where.not(city_id: nil).pluck(:city_id) + Host.where.not(city_id: nil).pluck(:city_id)).uniq) }
 
   def self.without_anyone
     cities = []
