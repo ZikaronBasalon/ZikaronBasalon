@@ -1,6 +1,13 @@
 RailsAdmin.config do |config|
   config.parent_controller = '::ApplicationController'
   I18n.locale = :en
+
+  config.authenticate_with do
+    warden.authenticate! scope: :user
+  end
+  config.current_user_method do
+    current_user
+  end
   ### Popular gems integration
 
   ## == Devise ==
@@ -15,9 +22,9 @@ RailsAdmin.config do |config|
   # end
   # config.current_user_method { current_admin } # auto-generated
 
-  # config.authorize_with do |controller|
-  #   redirect_to destroy_user_session_path unless current_user.try(:admin?)
-  # end
+  config.authorize_with do |controller|
+    redirect_to Rails.application.routes.url_helpers.new_user_session_path unless current_user.try(:admin?)
+  end
 
   ## == Cancan ==
   # config.authorize_with :cancan
