@@ -111,7 +111,7 @@ class Manager < ActiveRecord::Base
       communities = CommunityLeadership.where(manager_id: current_user.meta.id)
       community_city_ids = communities.map(&:city_id)
       if communities.size > 0
-        @cities = @cities.where(id: community_city_ids)
+        @cities = @cities.where(id: community_city_ids).first(10)
       end
     end
 
@@ -122,7 +122,7 @@ class Manager < ActiveRecord::Base
   end
 
   def get_countries
-    @countries = Country.all
+    @countries = Country.all.first(10)
     @countries.map{ |c| { id: c.id, name: c.name }}.sort_alphabetical_by{|c| c[:name] }
   end
 

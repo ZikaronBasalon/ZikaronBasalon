@@ -1,6 +1,7 @@
 module CitiesHelper
 
   def filter_cities(cities, country_id, region_id)
+    binding.pry
     if region_id.present?
       cities = cities.where(region_id: region_id)
     elsif country_id.present?
