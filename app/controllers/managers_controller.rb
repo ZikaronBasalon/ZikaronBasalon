@@ -6,7 +6,6 @@ class ManagersController < ApplicationController
   respond_to :html, :json
 
   def index
-    binding.pry
     @managers = Manager.includes(:cities, :user).paginate(:page => @page || 1, :per_page => 10)
     @cities_without_manager = City.without_managers.paginate(:page => @page || 1, :per_page => 10)
     respond_with(@managers)
