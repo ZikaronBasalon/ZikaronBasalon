@@ -81,7 +81,6 @@ class ManagersController < ApplicationController
   def new
     @manager = Manager.new
     respond_with(@manager)
-    respond_with(@manager)
   end
 
   def edit
