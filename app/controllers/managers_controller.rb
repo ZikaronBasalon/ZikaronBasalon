@@ -6,7 +6,7 @@ class ManagersController < ApplicationController
   respond_to :html, :json
 
   def index
-    @managers = Manager.includes(:cities, :user)
+    @managers = Manager.includes(:cities, :user).all
     @cities_without_manager = City.without_managers
     respond_with(@managers)
   end
