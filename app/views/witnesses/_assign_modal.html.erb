@@ -1,6 +1,6 @@
 <div class="col-xs-12 request-invite">
 	<span class="glyphicon glyphicon-remove" ng-click="close()"></span>
-	
+
 	<div class="text-center">
 		<h3><%= t '.title' %></h3>
 		<p><%= t '.subtitle' %></p>
@@ -24,13 +24,13 @@
 		  			</div>
 
 		  			<div class="info-group">
-		  				<span class="label"><%= t 'shared.phone' %>:</span>
-		  				<span class="value">{{ host.phone }}</span>
+						<span class="label"><%= t 'shared.address' %>:</span>
+						<span class="value">{{ host.address }} {{ host.city.name }}</span>
 		  			</div>
 
 		  			<div class="info-group">
-		  				<span class="label"><%= t 'shared.address' %>:</span>
-		  				<span class="value">{{ host.address }} {{ host.city.name }}</span>
+						<span class="label"><%= t 'shared.phone' %>:</span>
+						<span class="value">{{ host.phone }}</span>
 		  			</div>
 
 		  			<div class="info-group">
@@ -40,7 +40,7 @@
 
 		  			<div class="info-group">
 		  				<span class="label"><%= t 'shared.date' %>:</span>
-		  				<span class="value">{{ formatDate(host.event_date) }}</span>
+						<span class="value">{{ formatDate(host.event_date) }} {{ formatTime(host.event_time) }}</span>
 		  			</div>
 
 		  			<div class="info-group">
@@ -94,7 +94,7 @@
 		  			</div>
 	  			</div>
 	  		</div>
-	  	</div>	
+	  	</div>
 	  </div>
 
 	  <div class="col-xs-12">
