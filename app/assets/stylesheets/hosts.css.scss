@@ -107,3 +107,11 @@
     height:110px;
   }
 }
+
+[name="preparationWantedGroup"] {
+  display: inline-block;
+  padding: 5px;
+  &.ng-dirty.ng-invalid {
+    border: 1px solid #a94442;
+  }
+}

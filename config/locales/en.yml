@@ -250,6 +250,7 @@ en:
       event_time: "Approximate time"
       event_time_help_block: "You don't have to insert an hour, but this could help your guests"
       event_language: "Language of event"
+      preparation_wanted: Are you interested in preparation evening?
       survivor_needed: "האם את/ה צריכ/ה עזרה במציאות איש/אשת עדות?"
       survivor_needed_help_block: "לצערנו, אין ביכולתנו להבטיח הגעה של איש עדות ואנו מעודדים לחפש עדות באופן עצמאי. תוכל/י למצוא באתר שלנו גם עדויות מצולמות וכתובות."
       strangers: "Will your Zikaron BaSalon be open for guests?"
@@ -291,6 +292,7 @@ en:
         edit: "Edit"
         contacted: "Was contacted"
         preparation_evening: "Was at Evening Preparation"
+        preparation_wanted: "Interested in Evening Preparation"
         survivor_needed: "Needs witness"
         has_survivor: "Witness assigned"
         survivor_contacted: "Host confirmed witness arrival"
