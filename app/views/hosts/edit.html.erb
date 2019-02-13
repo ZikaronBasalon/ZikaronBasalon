@@ -86,7 +86,9 @@
             <label for="orgName"><%= t '.org_name' %></label>
             <input type="text" class="form-control"
                    id="orgName"
-                   ng-model="host.org_name">
+                   ng-class="{true: 'error'}[submitted[stepIndex] && !host.org_name]"
+                   ng-model="host.org_name"
+                   required>
           </div>
         </div>
 
