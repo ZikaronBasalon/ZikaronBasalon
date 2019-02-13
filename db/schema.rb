@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190207221907) do
+ActiveRecord::Schema.define(version: 20190213075043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,6 +112,7 @@ ActiveRecord::Schema.define(version: 20190207221907) do
     t.integer  "invites_pending_count",                  default: 0
     t.integer  "invites_confirmed_count",                default: 0
     t.boolean  "active_last_year"
+    t.boolean  "preparation_wanted"
   end
 
   add_index "hosts", ["city_id"], name: "index_hosts_on_city_id", using: :btree
@@ -197,10 +198,10 @@ ActiveRecord::Schema.define(version: 20190207221907) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "versions", force: :cascade do |t|
-    t.string   "item_type",  null: false
-    t.integer  "item_id",    null: false
-    t.string   "event",      null: false
-    t.string   "whodunnit"
+    t.string   "item_type",  limit: 255, null: false
+    t.integer  "item_id",                null: false
+    t.string   "event",      limit: 255, null: false
+    t.string   "whodunnit",  limit: 255
     t.text     "object"
     t.datetime "created_at"
   end
