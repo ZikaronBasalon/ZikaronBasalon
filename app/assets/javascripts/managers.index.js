@@ -1,6 +1,7 @@
 app.controller('ManagerIndexController', ['$scope','$http', function($scope, $http) {
   $scope.managers = [];
   $scope.cities = [];
+  $scope.current_manager = null;
   $scope.current_country = { id: 97, printable_name: 'Israel' };
   $scope.cities_list = [];
 
@@ -8,6 +9,25 @@ app.controller('ManagerIndexController', ['$scope','$http', function($scope, $ht
     $scope.all_cities = gon.all_cities;
     $scope.managers = JSON.parse(gon.managers);
     $scope.citiesWithoutManager = JSON.parse(gon.citiesWithoutManager);
+  }
+
+  $scope.getManager = function(email) {
+    return $http.get('/managers/find_movil', {
+      params: { email: email }
+    }).then(function(response){
+      return response.data;
+    });
+  };
+
+  $scope.loadMovil = function(manager) {
+    // load cities and stuff for movil email
+    return $http.get('/managers/' + manager.id + '/load_movil', {})
+    .then(function(response){
+      $scope.current_manager = response.data
+    })
+    .catch(function(error) {
+      // error.data - tell that not found...
+    });
   }
 
   $scope.getCountryLocation = function(query) {
@@ -26,7 +46,7 @@ app.controller('ManagerIndexController', ['$scope','$http', function($scope, $ht
           q: query
         }
       }
-    }).then(function(response){
+    }).then(function(response) {
       return response.data;
     });
   };
@@ -36,18 +56,20 @@ app.controller('ManagerIndexController', ['$scope','$http', function($scope, $ht
     $scope.cities_list.push(city);
   }
 
-  $scope.removeMovilCity = function(city) {
-    $scope.cities_list = $scope.cities_list.filter(function(city) {
-      return city.id != city.id;
+  $scope.removeMovilCity = function(city_to_remove) {
+    $scope.cities_list.forEach(function(city, index, all) {
+      if (city_to_remove.id == city.id) {
+        all.splice(index, 1);
+      }
     });
   }
 
   $scope.createManager = function() {
-  	$http.post('/managers', {
-  		manager: {
-  			temp_email: $scope.email,
-  			cities: $scope.cities
-  		}
+    $http.post('/managers', {
+      manager: {
+        temp_email: $scope.email,
+        cities: $scope.cities
+      }
   	}).then(function(response) {
   		var manager = response.data;
   		var i = _.findIndex($scope.managers, { temp_email: manager.temp_email });

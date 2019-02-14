@@ -115,6 +115,21 @@ class ManagersController < ApplicationController
     render :json => @manager.to_json( :include => [:cities, :user] )
   end
 
+  def find_movil
+    email = params[:email]
+    render json: Manager.where("temp_email ILIKE '%#{email}%'")
+  end
+
+  def load_movil
+    movil_id = params[:id]
+    @manager = Manager.find_by_id(movil_id)
+    if @manager.present?
+      render json: @manager.to_json( :include => [:cities, :user] ), status: :ok
+    else
+      render json: { not_found: true }, status: :unprocessable_entity
+    end
+  end
+
   def export_hosts
     country_id, region_id = get_country_id_and_region_id
     @cities = @manager.get_cities(current_user, country_id, region_id)
