@@ -1,17 +1,52 @@
 app.controller('ManagerIndexController', ['$scope','$http', function($scope, $http) {
   $scope.managers = [];
-  $scope.city;
+  $scope.cities = [];
+  $scope.current_country = { id: 97, printable_name: 'Israel' };
+  $scope.cities_list = [];
 
   $scope.init = function() {
+    $scope.all_cities = gon.all_cities;
     $scope.managers = JSON.parse(gon.managers);
     $scope.citiesWithoutManager = JSON.parse(gon.citiesWithoutManager);
+  }
+
+  $scope.getCountryLocation = function(query) {
+    return $http.get('/cities/autocomplete_country', {
+      params: { q: query }
+    }).then(function(response){
+      return response.data;
+    });
+  };
+
+  $scope.getCityLocation = function(query, country_id) {
+    return $http.get('/cities/autocomplete_city', {
+      params: {
+        city: {
+          country_id: country_id,
+          q: query
+        }
+      }
+    }).then(function(response){
+      return response.data;
+    });
+  };
+
+  $scope.addMovilCity = function(city) {
+    $scope.current_city = '';
+    $scope.cities_list.push(city);
+  }
+
+  $scope.removeMovilCity = function(city) {
+    $scope.cities_list = $scope.cities_list.filter(function(city) {
+      return city.id != city.id;
+    });
   }
 
   $scope.createManager = function() {
   	$http.post('/managers', {
   		manager: {
   			temp_email: $scope.email,
-  			city_name: $scope.city
+  			cities: $scope.cities
   		}
   	}).then(function(response) {
   		var manager = response.data;

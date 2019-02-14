@@ -13,11 +13,46 @@
       <label for="email">מייל</label>
       <input type="text" class="form-control" id="email" ng-model="email" placeholder="מייל" required />
     </div>
+
     <div class="form-group">
-      <label for="city">עיר</label>
-      <input type="text" class="form-control" id="city" ng-model="city" required>
+      <label for="country_id"><%= t 'shared.country' %></label>
+      <input
+        class="form-control"
+        type="text"
+        name="country_id"
+        ng-model="current_country"
+        ng-change="host_current_city = ''"
+        typeahead-editable="false"
+        uib-typeahead="country as country.printable_name for country in getCountryLocation($viewValue)"
+
+        ng-model-options="{ debounce: 200 }"
+        uib-typeahead="country as country.printable_name for country in getCountryLocation($viewValue)"
+        placeholder="<%= t 'shared.country_placeholder' %>"
+        required>
     </div>
-    <button type="submit" class="btn btn-default">הוסף מוביל</button>
+
+    <div class="form-group">
+      <label for="city_id"><%= t '.city' %></label>
+      <input
+        class="form-control"
+        type="text"
+        name="city_id"
+        ng-model="current_city"
+        typeahead-on-select="addMovilCity($item)"
+        ng-disabled="!current_country"
+        ng-model-options="{ debounce: 200 }"
+        uib-typeahead="city as city.name for city in getCityLocation($viewValue, current_country.id)"
+        placeholder="<%= t 'shared.city_placeholder' %>"
+        required>
+
+      <button type="submit" class="btn btn-default">הוסף מוביל</button>
+
+      <span ng-repeat="city in cities_list" class="tag">
+        {{city.name}}
+        <span class="glyphicon glyphicon-remove" ng-click="removeMovilCity(city)"></span>
+      </span>
+    </div>
+
   </form>
 
   <table class="table">
