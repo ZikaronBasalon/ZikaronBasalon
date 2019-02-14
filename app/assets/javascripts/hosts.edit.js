@@ -129,11 +129,13 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
   }
 
   $scope.submitStepThree = function() {
-  	$scope.submitted[2] = true;
+	$scope.submitted[2] = true;
+	$scope.stepThree.preparationWantedGroup.$setDirty();
   	if ($scope.stepThree.$valid) {
   		$http.put('/hosts/' + $scope.host.id + '.json', {
 	  		host: {
-					event_language: $scope.host.event_language,
+				        event_language: $scope.host.event_language,
+				        preparation_wanted: $scope.host.preparation_wanted,
 					survivor_needed: $scope.host.survivor_needed,
 					strangers: $scope.host.strangers,
 					max_guests: $scope.host.max_guests,

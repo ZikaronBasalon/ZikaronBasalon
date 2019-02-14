@@ -261,6 +261,7 @@ he:
       event_time: "שעה משוערת"
       event_time_help_block: "לא חייבים להכניס שעה, אבל זה יעזור לאורחים להתכוונן"
       event_language: "השפה בה יתקיים הערב"
+      preparation_wanted: מעוניין להשתתף בערב הכנה?
       survivor_needed: "האם תצטרך/י עזרה במציאת איש/אשת עדות?"
       survivor_needed_help_block: "לצערנו, אנחנו לא יכולים להבטיח לחבר אותך לאיש עדות, ומומלץ בחום לחפש באופן עצמאי. בכל מקרה, אפשר להשתמש בעדויות מצולמות המוצעות באתר שלנו"
       strangers: "האם היית רוצה להזמין אורחים דרך האתר שלנו?"
@@ -306,7 +307,8 @@ he:
         survivor_contacted: "מארח אישר הגעת עד"
         concept: "קונספט"
         how_many_places: "כמה מקומות?"
-        preparation_evening: "ערב הכנה"
+        preparation_evening: השתתף בערב הכנה
+        preparation_wanted: מעוניין בערב הכנה
       host_updated: "הפרטים עודכנו בהצלחה"
       invites_waiting_approval: "בקשות הממתינות לאישור"
       invites_approved: "בקשות שאישרתי"

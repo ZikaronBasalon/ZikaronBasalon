@@ -40,6 +40,7 @@
 #  invites_pending_count      :integer          default(0)
 #  invites_confirmed_count    :integer          default(0)
 #  active_last_year           :boolean
+#  preparation_wanted         :boolean
 #
 
 require 'test_helper'
