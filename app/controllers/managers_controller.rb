@@ -109,6 +109,30 @@ class ManagersController < ApplicationController
     render :json => @manager.to_json
   end
 
+  def create_movil
+    body = OpenStruct.new(params[:movil])
+    @manager = Manager.find_or_create_by_temp_email(body.email.downcase)
+    user = User.find_by(email: body.email) || User.new
+    if user.new_record?
+      user.full_name = body.name
+      user.password = body.password
+      user.locale = I18n.locale
+    end
+    user.meta_type = 'Manager'
+    user.meta_id = @manager.id
+    if user.save
+      render json: @manager.to_json( :include => [:cities, :user] ), status: :ok
+    else
+      render json: {}, status: :unprocessable_entity
+    end
+  end
+
+  def add_city
+    @manager = Manager.find(params[:manager_id])
+    CommunityLeadership.find_or_create_by_manager_id_and_city_id(manager_id: @manager.id, city_id: params[:city_id])
+    render :json => @manager.to_json( :include => [:cities, :user] )
+  end
+
   def remove_city
     @city = City.find(params[:city_id])
     CommunityLeadership.find_by_manager_id_and_city_id(@manager.id, @city.id).destroy
