@@ -2,18 +2,22 @@
      ng-init="init()">
 
   <form class="form-inline" ng-submit="createManager()">
-    <div class="form-group">
-      <label for="email">מייל</label>
-      <input
+    <div class="form-group" style="width: 350px;">
+      <label for="current_movil">מייל</label>
+      <input style="width: 85%;"
         class="form-control"
         type="email"
-        name="email"
-        ng-model="email"
+        name="current_movil"
+        ng-model="current_movil"
+        typeahead-on-select="loadMovil($item.id)"
+        typeahead-editable="true"
+        uib-typeahead="movil as movil.temp_email for movil in getManager($viewValue)"
+        ng-model-options="{ debounce: 200 }"
         placeholder="מייל מוביל">
     </div>
 
-    <div class="form-group">
-      <label for="name">מייל</label>
+    <div class="form-group" ng-if="!current_manager">
+      <label for="name">שם</label>
       <input
         class="form-control"
         type="text"
@@ -22,37 +26,19 @@
         placeholder="שם מוביל">
     </div>
 
-    <div class="form-group">
-      <label for="password">מייל</label>
+    <div class="form-group" ng-if="!current_manager">
+      <label for="password">סיסמא</label>
       <input
         class="form-control"
         type="text"
         name="password"
         ng-model="password"
-        placeholder="סיסמא מוביל">
+        placeholder="סיסמת מוביל">
     </div>
 
-    <button type="submit" class="btn btn-default">הוסף מוביל</button>
+    <button type="submit" class="btn btn-default" ng-if="!current_manager">הוסף מוביל</button>
 
-  </form>
-
-  <form class="form-inline" ng-submit="createManager()">
-
-    <div class="form-group">
-      <label for="current_movil">מייל</label>
-      <input
-        class="form-control"
-        type="email"
-        name="current_movil"
-        ng-model="current_movil"
-        typeahead-on-select="loadMovil($item)"
-        typeahead-editable="false"
-        uib-typeahead="movil as movil.temp_email for movil in getManager($viewValue)"
-        ng-model-options="{ debounce: 200 }"
-        placeholder="מייל מוביל">
-    </div>
-
-    <div class="form-group">
+    <div class="form-group" ng-if="current_manager">
       <label for="country_id"><%= t 'shared.country' %></label>
       <input
         class="form-control"
@@ -66,25 +52,20 @@
         placeholder="<%= t 'shared.country_placeholder' %>">
     </div>
 
-    <div class="form-group">
+    <div class="form-group" ng-if="current_manager">
       <label for="city_id"><%= t '.city' %></label>
       <input
         class="form-control"
         type="text"
         name="city_id"
         ng-model="current_city"
-        typeahead-on-select="addMovilCity($item)"
+        typeahead-on-select="addMovilCity($item.id)"
         ng-disabled="!current_country"
         ng-model-options="{ debounce: 200 }"
         uib-typeahead="city as city.name for city in getCityLocation($viewValue, current_country.id)"
         placeholder="<%= t 'shared.city_placeholder' %>">
 
-      <button type="submit" class="btn btn-default">הוסף מוביל</button>
-
-      <span ng-repeat="city in cities_list" class="tag">
-        {{city.name}}
-        <span class="glyphicon glyphicon-remove" ng-click="removeMovilCity(city)"></span>
-      </span>
+      <button class="btn btn-default" ng-click="clearSelection()">אפס</button>
     </div>
 
   </form>
@@ -105,11 +86,11 @@
         <td>
           <span ng-repeat="city in current_manager.cities" class="tag">
             {{city.name}}
-            <span class="glyphicon glyphicon-remove" ng-click="removeCity(current_manager, city)"></span>
+            <span class="glyphicon glyphicon-remove" ng-click="removeCity(city.id)"></span>
           </span>
         </td>
         <td>
-          <button type="button" class="btn btn-danger" ng-click="deleteManager(current_manager)">מחיקת מוביל</button>
+          <button type="button" class="btn btn-danger" ng-click="deleteManager()">מחיקת מוביל</button>
         </td>
       </tr>
     </tbody>

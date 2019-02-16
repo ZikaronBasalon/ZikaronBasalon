@@ -6,12 +6,12 @@ class ManagersController < ApplicationController
   respond_to :html, :json
 
   def index
-    @managers = Manager.includes(:cities, :user).all
-    @cities_without_manager = City.relevant_cities.without_managers
-    gon.managers = @managers.to_json(:include => [:cities, :user])
-    gon.citiesWithoutManager = @cities_without_manager.to_json
+    # @managers = Manager.includes(:cities, :user).all
+    # @cities_without_manager = City.relevant_cities.without_managers
+    # gon.managers = @managers.to_json(:include => [:cities, :user])
+    # gon.citiesWithoutManager = @cities_without_manager.to_json
 
-    respond_with(@managers)
+    # respond_with(@managers)
   end
 
   def get_country_id_and_region_id
@@ -86,17 +86,24 @@ class ManagersController < ApplicationController
   def edit
   end
 
-  # Creates a temp Manager and assigns him with a City
   def create
-    @manager = Manager.where('lower(temp_email) = ?', params[:manager][:temp_email].downcase).first
-    @manager ||= Manager.create(:temp_email => params[:manager][:temp_email])
-    if @manager.new_record?
-      @manager.save!
-      ManagerMailer.new_manager(@manager.temp_email).deliver
+    body = OpenStruct.new(params[:manager])
+    @manager = Manager.find_by_temp_email(body.temp_email.downcase) || Manager.create(temp_email: body.temp_email.downcase)
+    user = User.find_by(email: body.email) || User.new
+    if user.new_record?
+      user.full_name = body.name
+      user.email = body.temp_email.downcase
+      user.password = body.password
+      user.password_confirmation = body.password_confirmation
+      user.locale = I18n.locale
     end
-    city = City.find_or_create_by_name(params[:manager][:city_name])
-    CommunityLeadership.find_or_create_by_manager_id_and_city_id(manager_id: @manager.id, city_id: city.id)
-    render :json => @manager.to_json( :include => [:cities, :user] )
+    user.meta_type = 'Manager'
+    user.meta_id = @manager.id
+    if user.save
+      render json: @manager.to_json( :include => [:cities, :user] ), status: :ok
+    else
+      render json: { errrors: user.errors.messages, params: params }, status: :unprocessable_entity
+    end
   end
 
   def update
@@ -109,27 +116,9 @@ class ManagersController < ApplicationController
     render :json => @manager.to_json
   end
 
-  def create_movil
-    body = OpenStruct.new(params[:movil])
-    @manager = Manager.find_or_create_by_temp_email(body.email.downcase)
-    user = User.find_by(email: body.email) || User.new
-    if user.new_record?
-      user.full_name = body.name
-      user.password = body.password
-      user.locale = I18n.locale
-    end
-    user.meta_type = 'Manager'
-    user.meta_id = @manager.id
-    if user.save
-      render json: @manager.to_json( :include => [:cities, :user] ), status: :ok
-    else
-      render json: {}, status: :unprocessable_entity
-    end
-  end
-
   def add_city
-    @manager = Manager.find(params[:manager_id])
-    CommunityLeadership.find_or_create_by_manager_id_and_city_id(manager_id: @manager.id, city_id: params[:city_id])
+    @manager = Manager.find(params[:id])
+    CommunityLeadership.where(manager_id: @manager.id, city_id: params[:city_id]).first || CommunityLeadership.create(manager_id: @manager.id, city_id: params[:city_id])
     render :json => @manager.to_json( :include => [:cities, :user] )
   end
 

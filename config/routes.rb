@@ -23,6 +23,7 @@ ZikaronBasalon::Application.routes.draw do
 
     resources :managers do
       post :remove_city, on: :member
+      post :add_city, on: :member
       get :find_movil, on: :collection
       get :load_movil, on: :member
       get :export_hosts, on: :member

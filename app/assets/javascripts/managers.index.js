@@ -2,13 +2,20 @@ app.controller('ManagerIndexController', ['$scope','$http', function($scope, $ht
   $scope.managers = [];
   $scope.cities = [];
   $scope.current_manager = null;
+  $scope.current_movil = null;
   $scope.current_country = { id: 97, printable_name: 'Israel' };
-  $scope.cities_list = [];
 
   $scope.init = function() {
-    $scope.all_cities = gon.all_cities;
-    $scope.managers = JSON.parse(gon.managers);
-    $scope.citiesWithoutManager = JSON.parse(gon.citiesWithoutManager);
+    var current_manager_id = localStorage.getItem("current_manager_id");
+    if (current_manager_id) {
+      $scope.loadMovil(current_manager_id);
+    }
+  }
+
+  $scope.clearSelection = function() {
+    localStorage.removeItem("current_manager_id");
+    $scope.current_manager = null;
+    $scope.current_movil = null;
   }
 
   $scope.getManager = function(email) {
@@ -19,14 +26,13 @@ app.controller('ManagerIndexController', ['$scope','$http', function($scope, $ht
     });
   };
 
-  $scope.loadMovil = function(manager) {
-    // load cities and stuff for movil email
-    return $http.get('/managers/' + manager.id + '/load_movil', {})
+  $scope.loadMovil = function(manager_id) {
+    return $http.get('/managers/' + manager_id + '/load_movil', {})
     .then(function(response){
       $scope.current_manager = response.data;
+      localStorage.setItem("current_manager_id", $scope.current_manager.id);
     })
     .catch(function(error) {
-      // error.data - tell that not found...
     });
   }
 
@@ -51,23 +57,19 @@ app.controller('ManagerIndexController', ['$scope','$http', function($scope, $ht
     });
   };
 
-  $scope.addMovilCity = function(city) {
-    $scope.current_city = '';
-    $scope.cities_list.push(city);
-  }
-
-  $scope.removeMovilCity = function(city_to_remove) {
-    $scope.cities_list.forEach(function(city, index, all) {
-      if (city_to_remove.id == city.id) {
-        all.splice(index, 1);
-      }
+  $scope.addMovilCity = function(city_id) {
+    $http.post('/managers/' + $scope.current_manager.id + '/add_city', {
+      city_id: city_id
+    }).then(function(response) {
+      $scope.current_manager = response.data;
+      $scope.current_city = null;
     });
   }
 
   $scope.createManager = function() {
     $http.post('/managers', {
       manager: {
-        temp_email: $scope.email,
+        temp_email: $scope.current_movil,
         name: $scope.name,
         password: $scope.password
       }
@@ -76,17 +78,17 @@ app.controller('ManagerIndexController', ['$scope','$http', function($scope, $ht
     });
   }
 
-  $scope.removeCity = function(manager, city) {
-    $http.post('/managers/' + manager.id + '/remove_city', {
-      city_id: city.id
+  $scope.removeCity = function(city_id) {
+    $http.post('/managers/' + $scope.current_manager.id + '/remove_city', {
+      city_id: city_id
     }).then(function(response) {
       $scope.current_manager = response.data
     });
   }
 
-  $scope.deleteManager = function(manager) {
+  $scope.deleteManager = function() {
     if (confirm("בטוח בטוח??")) {
-      $http.delete('managers/' + manager.id)
+      $http.delete('managers/' + $scope.current_manager.id)
       .then(function(response) {
         $scope.current_manager = null;
       });
