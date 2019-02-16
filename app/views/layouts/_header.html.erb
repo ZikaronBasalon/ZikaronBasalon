@@ -53,14 +53,14 @@
 				<div class="facebook-btn small-header-btn">f</div>
 			<% end %>
 		<% end %>
-		
+
 		<!-- Signin/Signout -->
 		<% if user_signed_in? %>
       <span class="hidden-xs">
         			שלום <%= current_user.full_name %>
       </span>
 			<%= link_to t('.signout'), destroy_user_session_path, method: :delete, class: 'header-link' %>
-			<%= link_to t('.signup_staff'), signup_path, class: 'header-link' if current_user.admin? %>
+			<%= link_to t('.admin_db'), rails_admin_path, class: 'header-link' if current_user.admin? %>
     <% else %>
 			<%= link_to t('.signin'), user_session_path, class: 'header-link' %>
 		<% end %>

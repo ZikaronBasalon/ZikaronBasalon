@@ -549,3 +549,8 @@ body {
 }
 
 @import "mobile.scss";
+
+[uib-typeahead-popup].dropdown-menu {
+    height: 200px;
+    overflow-y: scroll;
+}
