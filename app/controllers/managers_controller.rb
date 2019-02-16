@@ -102,7 +102,7 @@ class ManagersController < ApplicationController
     if user.save
       render json: @manager.to_json( :include => [:cities, :user] ), status: :ok
     else
-      render json: { errrors: user.errors.messages, params: params }, status: :unprocessable_entity
+      render json: { errors: user.errors.messages }, status: :unprocessable_entity
     end
   end
 
