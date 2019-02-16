@@ -12,6 +12,10 @@ app.controller('ManagerIndexController', ['$scope','$http', function($scope, $ht
     }
   }
 
+  $scope.setCurrentCountry = function(country) {
+    $scope.current_country = country;
+  }
+
   $scope.clearSelection = function() {
     localStorage.removeItem("current_manager_id");
     $scope.current_manager = null;
