@@ -1,7 +1,7 @@
 <div class="col-xs-12" id="manager-index" ng-controller="ManagerIndexController"
      ng-init="init()">
 
-  <form class="form-inline" ng-submit="createManager()">
+  <form name="manager" class="form-inline" ng-submit="createManager()">
     <div class="form-group" style="width: 350px;">
       <label for="current_movil">מייל</label>
       <input style="width: 85%;"
@@ -17,22 +17,22 @@
     </div>
 
     <div class="form-group" ng-if="!current_manager">
-      <label for="name">שם</label>
+      <label for="full_name">שם</label>
       <input
         class="form-control"
         type="text"
-        name="name"
-        ng-model="name"
+        name="full_name"
+        ng-model="full_name"
         placeholder="שם מוביל">
     </div>
 
     <div class="form-group" ng-if="!current_manager">
-      <label for="password">סיסמא</label>
+      <label for="pwd">סיסמא</label>
       <input
         class="form-control"
         type="text"
-        name="password"
-        ng-model="password"
+        name="pwd"
+        ng-model="pwd"
         placeholder="סיסמת מוביל">
     </div>
 

@@ -70,8 +70,8 @@ app.controller('ManagerIndexController', ['$scope','$http', function($scope, $ht
     $http.post('/managers', {
       manager: {
         temp_email: $scope.current_movil,
-        name: $scope.name,
-        password: $scope.password
+        name: $scope.manager.full_name.$viewValue,
+        password: $scope.manager.pwd.$viewValue
       }
   	}).then(function(response) {
       $scope.current_manager = response.data
