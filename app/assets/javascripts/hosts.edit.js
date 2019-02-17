@@ -10,6 +10,7 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 
   $scope.current_city = '';
   $scope.current_country = {id: 97, printable_name: 'Israel'};
+  $scope.current_city_exist = true;
 
 	$scope.steps = ['stepOne', 'stepTwo', 'stepThree'];
 	$scope.submitted = [false, false, false];
@@ -182,8 +183,10 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
       if (typeof $scope.current_city === 'string') {
         $scope.current_city = '';
         $scope.host.city_id = null;
+        $scope.current_city_exist = false;
       } else {
         $scope.host.city_id = $scope.current_city.id;
+        $scope.current_city_exist = true;
       }
     }
   }

@@ -21,6 +21,7 @@
              uib-typeahead="city as city.name for city in getCityLocation($viewValue, 97)"
              ng-blur="onCitySet()"
              required>
+             <div class="text-danger" ng-hide="current_city_exist">אם אינך מוצא את עירך ברשימה, הזן עיר אקראית ופנה אלינו לתמיכה.</div>
     </div>
 
     <div class="form-group">
