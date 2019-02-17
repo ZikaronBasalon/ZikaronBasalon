@@ -1,26 +1,77 @@
 <div class="col-xs-12" id="manager-index" ng-controller="ManagerIndexController"
      ng-init="init()">
 
-  <div class="margin-bottom-20">
-    <span>ערים בלי מוביל:</span>
-    <span ng-repeat="city in citiesWithoutManager" class="tag">
-      {{city.name}}
-    </span>
-  </div>
+  <form name="manager" class="form-inline" ng-submit="createManager()">
+    <div class="form-group" style="width: 350px;">
+      <label for="current_movil">מייל</label>
+      <input style="width: 85%;"
+        class="form-control"
+        type="text"
+        name="current_movil"
+        ng-model="current_movil"
+        typeahead-on-select="loadMovil($item.id)"
+        typeahead-editable="true"
+        uib-typeahead="movil as movil.temp_email for movil in getManager($viewValue)"
+        ng-model-options="{ debounce: 200 }"
+        placeholder="מייל מוביל">
+    </div>
 
-  <form class="form-inline" ng-submit="createManager()">
-    <div class="form-group">
-      <label for="email">מייל</label>
-      <input type="text" class="form-control" id="email" ng-model="email" placeholder="מייל" required />
+    <div class="form-group" ng-if="!current_manager">
+      <label for="full_name">שם</label>
+      <input
+        class="form-control"
+        type="text"
+        name="full_name"
+        ng-model="full_name"
+        placeholder="שם מוביל">
     </div>
-    <div class="form-group">
-      <label for="city">עיר</label>
-      <input type="text" class="form-control" id="city" ng-model="city" required>
+
+    <div class="form-group" ng-if="!current_manager">
+      <label for="pwd">סיסמא</label>
+      <input
+        class="form-control"
+        type="text"
+        name="pwd"
+        ng-model="pwd"
+        placeholder="סיסמת מוביל">
     </div>
-    <button type="submit" class="btn btn-default">הוסף מוביל</button>
+
+    <button type="submit" class="btn btn-default" ng-if="!current_manager">הוסף מוביל</button>
+
+    <div class="form-group" ng-if="current_manager">
+      <label for="country_id"><%= t 'shared.country' %></label>
+      <input
+        class="form-control"
+        type="text"
+        name="country_id"
+        ng-model="current_country"
+        typeahead-on-select="setCurrentCountry($item)"
+        ng-change="current_city = ''"
+        typeahead-editable="false"
+        uib-typeahead="country as country.printable_name for country in getCountryLocation($viewValue)"
+        ng-model-options="{ debounce: 200 }"
+        placeholder="<%= t 'shared.country_placeholder' %>">
+    </div>
+
+    <div class="form-group" ng-if="current_manager">
+      <label for="current_city"><%= t '.city' %></label>
+      <input
+        class="form-control"
+        type="text"
+        name="current_city"
+        ng-model="current_city"
+        typeahead-on-select="addMovilCity($item)"
+        ng-disabled="!current_country"
+        ng-model-options="{ debounce: 200 }"
+        uib-typeahead="city as city.name for city in getCityLocation($viewValue, current_country.id)"
+        placeholder="<%= t 'shared.city_placeholder' %>">
+
+      <button class="btn btn-default" ng-click="clearSelection()">אפס</button>
+    </div>
+
   </form>
 
-  <table class="table">
+  <table class="table" ng-if="current_manager">
     <thead>
       <tr>
         <th>שם</th>
@@ -30,20 +81,19 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="manager in managers">
-        <td>{{ manager.user ? manager.user.full_name : 'לא רשום' }}</td>
-        <td>{{ manager.user ? manager.user.email : manager.temp_email }}</td>
+      <tr>
+        <td>{{ current_manager.user ? current_manager.user.full_name : 'לא רשום' }}</td>
+        <td>{{ current_manager.user ? current_manager.user.email : current_manager.temp_email }}</td>
         <td>
-          <span ng-repeat="city in manager.cities" class="tag">
+          <span ng-repeat="city in current_manager.cities" class="tag">
             {{city.name}}
-            <span class="glyphicon glyphicon-remove" ng-click="removeCity(manager, city)"></span>
+            <span class="glyphicon glyphicon-remove" ng-click="removeCity(city.id)"></span>
           </span>
         </td>
         <td>
-          <button type="button" class="btn btn-danger" ng-click="deleteManager(manager)">מחיקת מוביל</button>
+          <button type="button" class="btn btn-danger" ng-click="deleteManager()">מחיקת מוביל</button>
         </td>
       </tr>
     </tbody>
   </table>
-
 </div>
