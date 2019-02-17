@@ -109,8 +109,12 @@ class ManagersController < ApplicationController
 
   def add_city
     @manager = Manager.find(params[:id])
-    CommunityLeadership.where(manager_id: @manager.id, city_id: params[:city_id]).first || CommunityLeadership.create(manager_id: @manager.id, city_id: params[:city_id])
-    render :json => @manager.to_json( :include => [:cities, :user] )
+    community_leadership = CommunityLeadership.where(manager_id: @manager.id, city_id: params[:city_id]).first || CommunityLeadership.create(manager_id: @manager.id, city_id: params[:city_id])
+    if community_leadership.valid?
+      render :json => @manager.to_json( :include => [:cities, :user] )
+    else
+      render json: { errors: community_leadership.errors.messages }, status: :unprocessable_entity
+    end
   end
 
   def remove_city
