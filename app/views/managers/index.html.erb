@@ -54,13 +54,13 @@
     </div>
 
     <div class="form-group" ng-if="current_manager">
-      <label for="city_id"><%= t '.city' %></label>
+      <label for="current_city"><%= t '.city' %></label>
       <input
         class="form-control"
         type="text"
-        name="city_id"
+        name="current_city"
         ng-model="current_city"
-        typeahead-on-select="addMovilCity($item.id)"
+        typeahead-on-select="addMovilCity($item)"
         ng-disabled="!current_country"
         ng-model-options="{ debounce: 200 }"
         uib-typeahead="city as city.name for city in getCityLocation($viewValue, current_country.id)"

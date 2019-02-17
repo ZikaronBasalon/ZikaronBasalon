@@ -2,17 +2,7 @@ class ManagersController < ApplicationController
   before_filter :set_manager, only: [:show, :edit, :update, :destroy, :remove_city, :filter_hosts, :export_hosts, :export_witnesses, :export_guests]
   before_filter :is_admin, only: [:index, :export_hosts, :export_witnesses, :export_guests]
   before_filter :correct_manager, only: [:show, :export]
-  # before_action :authenticate_user!
   respond_to :html, :json
-
-  def index
-    # @managers = Manager.includes(:cities, :user).all
-    # @cities_without_manager = City.relevant_cities.without_managers
-    # gon.managers = @managers.to_json(:include => [:cities, :user])
-    # gon.citiesWithoutManager = @cities_without_manager.to_json
-
-    # respond_with(@managers)
-  end
 
   def get_country_id_and_region_id
     region_id = 37
@@ -88,11 +78,12 @@ class ManagersController < ApplicationController
 
   def create
     body = OpenStruct.new(params[:manager])
-    @manager = Manager.find_by_temp_email(body.temp_email.downcase) || Manager.create(temp_email: body.temp_email.downcase)
+    email = body.temp_email.downcase
+    @manager = Manager.find_by_temp_email(email) || Manager.create(temp_email: email)
     user = User.find_by(email: body.email) || User.new
     if user.new_record?
       user.full_name = body.name
-      user.email = body.temp_email.downcase
+      user.email = email
       user.password = body.password
       user.password_confirmation = body.password_confirmation
       user.locale = I18n.locale

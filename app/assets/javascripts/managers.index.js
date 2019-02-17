@@ -35,8 +35,6 @@ app.controller('ManagerIndexController', ['$scope','$http', function($scope, $ht
     .then(function(response){
       $scope.current_manager = response.data;
       localStorage.setItem("current_manager_id", $scope.current_manager.id);
-    })
-    .catch(function(error) {
     });
   }
 
@@ -61,12 +59,12 @@ app.controller('ManagerIndexController', ['$scope','$http', function($scope, $ht
     });
   };
 
-  $scope.addMovilCity = function(city_id) {
+  $scope.addMovilCity = function(city) {
     $http.post('/managers/' + $scope.current_manager.id + '/add_city', {
-      city_id: city_id
+      city_id: city.id
     }).then(function(response) {
-      $scope.current_manager = response.data;
       $scope.current_city = null;
+      $scope.current_manager = response.data;
     });
   }
 
@@ -78,7 +76,8 @@ app.controller('ManagerIndexController', ['$scope','$http', function($scope, $ht
         password: $scope.manager.pwd.$viewValue
       }
   	}).then(function(response) {
-      $scope.current_manager = response.data
+      $scope.current_manager = response.data;
+      localStorage.setItem("current_manager_id", $scope.current_manager.id);
     });
   }
 
@@ -95,6 +94,7 @@ app.controller('ManagerIndexController', ['$scope','$http', function($scope, $ht
       $http.delete('managers/' + $scope.current_manager.id)
       .then(function(response) {
         $scope.current_manager = null;
+        localStorage.removeItem("current_manager_id");
       });
     }
   }
