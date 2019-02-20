@@ -27,11 +27,25 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 		{ n: 'מטפל', v: 'therapist' }
 	];
 
+	$scope.knownLanguageOptions = [
+		{ value: 'hebrew', label: 'עברית' },
+		{ value: 'english', label: 'English' },
+		{ value: 'arabic', label: 'العربية' },
+		{ value: 'french', label: 'Français' },
+		{ value: 'russian', label: 'русский' },
+		{ value: 'spanish', label: 'Español' }
+	];
+
+	$scope.languages = [];
+	$scope.languageOptions = [];
+
 	$scope.submitted = false;
 	$scope.alerts = [];
 	$scope.action = 'new';
 
 	$scope.init = function(witness) {
+		$scope.deserializeLanguage();
+		$scope.languageOptions = _.map($scope.languages, $scope.tagToOption);
 		if(witness.id) {
 			delete witness.created_at;
 			delete witness.updated_at;
@@ -42,6 +56,26 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
     if(witness.city_id) {
       $scope.current_city = { name: $scope.witness.city_name, id: $scope.witness.city_id };
     }
+	}
+
+	$scope.deserializeLanguage = function() {
+		$scope.languages = $scope.witness.language ? _.map($scope.witness.language.split(',')) : ['aaaa']
+	}
+
+	$scope.serializeLanguage = function() {
+		$scope.witness.language = $scope.languages.join(',');
+	}
+
+	$scope.tagToOption = function(newTag) {
+		var knownOption = _.find($scope.knownLanguageOptions, function(option) {
+			return _.includes([option.label, option.value], newTag);
+		});
+
+		return knownOption || { value: newTag, label: newTag };
+	}
+
+	$scope.optionToTag = function(option) {
+		return option.value;
 	}
 
   $scope.onCitySet = function() {
@@ -72,8 +106,9 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 
 	$scope.submit = function() {
 		$scope.submitted = true;
+		$scope.languages = _.map($scope.languageOptions, $scope.optionToTag);
+		$scope.serializeLanguage();
 		if($scope.form.$valid) {
-
 			submitWitness()
 			.then(function(response) {
 				if(response.status === 201) {

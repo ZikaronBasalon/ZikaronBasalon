@@ -79,25 +79,19 @@
 
     <div class="form-group">
       <label for="event_language">השפה בה איש העדות מעביר את העדות</label>
-      <div ng-show="!otherLanguageVisible">
-        <select class="form-control" id="event_language"
-                name="event_language"
-                required
-                ng-model="witness.language" ng-change="languageChanged()">
-          <option ng-show="!witness.language" value=""><%= t 'shared.select' %></option>
-          <option value="hebrew">עברית</option>
-          <option value="english">English</option>
-          <option value="arabic">العربية</option>
-          <option value="french">Français</option>
-          <option value="russian">русский</option>
-          <option value="spanish">Español</option>
-          <option value="other"><%= t 'shared.other' %></option>
-        </select>
-      </div>
-
-      <input type="text" class="form-control"
-                 ng-model="host.event_language"
-                 ng-show="otherLanguageVisible" />
+      <ui-select multiple
+          tagging="tagToOption"
+          id="event_language"
+          name="event_language"
+          class="form-control"
+          ng-model="languageOptions"
+          theme="bootstrap"
+          required>
+        <ui-select-match>{{$item.label}}</ui-select-match>
+        <ui-select-choices repeat="languageOption in knownLanguageOptions">
+          {{languageOption.label}}
+        </ui-select-choices>
+      </ui-select>
     </div>
 
     <div class="form-group">
