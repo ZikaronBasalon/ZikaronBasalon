@@ -6,7 +6,7 @@
 
   <form name="form" ng-class="{true: 'error'}[submitted]" novalidate>
     <div class="form-group">
-      <label for="full_name"><%= t 'users.new.labels.full_name' %></label>
+      <label for="full_name" class="required"><%= t 'users.new.labels.full_name' %></label>
       <input type="text" class="form-control"
              id="full_name"
              ng-model="witness.full_name"
@@ -14,7 +14,7 @@
     </div>
 
     <div class="form-group">
-      <label for="city_name">עיר/יישוב</label>
+      <label for="city_name" class="required">עיר/יישוב</label>
       <input type="text" class="form-control"
              id="city_name"
              ng-model="current_city"
@@ -24,7 +24,7 @@
     </div>
 
     <div class="form-group">
-      <label for="address">כתובת</label>
+      <label for="address" class="required">כתובת</label>
       <input type="text" class="form-control"
              id="address"
              ng-model="witness.address"
@@ -32,7 +32,7 @@
     </div>
 
     <div class="form-group">
-      <label for="phone"><%= t 'hosts.edit.phone' %></label>
+      <label for="phone" class="required"><%= t 'hosts.edit.phone' %></label>
       <input type="text" class="form-control"
              id="phone"
              ng-model="witness.phone"
@@ -41,7 +41,7 @@
     </div>
 
     <div class="form-group">
-      <label for="additional_phone"><%= t 'hosts.edit.additional_phone' %></label>
+      <label for="additional_phone" class="required"><%= t 'hosts.edit.additional_phone' %></label>
       <input type="text" class="form-control"
              id="additional_phone"
              ng-model="witness.additional_phone"
@@ -49,7 +49,7 @@
     </div>
 
     <div class="form-group ">
-      <label for="witness_type" >
+      <label for="witness_type" class="required">
         <%= t 'shared.type' %>
       </label>
       <select class="form-control" id="witness_type"
@@ -78,7 +78,7 @@
     </div>
 
     <div class="form-group">
-      <label for="event_language">השפה בה איש העדות מעביר את העדות</label>
+      <label for="event_language" class="required">השפה בה איש העדות מעביר את העדות</label>
       <div ng-show="!otherLanguageVisible">
         <select class="form-control" id="event_language"
                 name="event_language"
