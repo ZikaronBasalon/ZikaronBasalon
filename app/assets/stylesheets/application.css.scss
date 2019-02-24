@@ -44,7 +44,7 @@ input {
 	}
 }
 
-select { 
+select {
 	max-width: 200px;
 }
 
@@ -92,7 +92,7 @@ label {
 		background-color: #ffffff;
 		border: solid 2px #eea236;
 		color: #eea236;
-	}	
+	}
 
 	&.btn-orange {
 		color: #ffffff;
@@ -121,7 +121,7 @@ label {
 	li>a {
 		color: #000000;
 	}
-	
+
 
 	// a {
 	// 	color: #fff !important;
@@ -140,10 +140,10 @@ label {
 	li.header-btn {
 		padding: 5px 29px;
 		font-size: 18px;
-		
+
 		&.white {
 			border: solid 1px #000000;
-			
+
 			color: #000000;
 		}
 
@@ -235,7 +235,7 @@ header {
 	}
 
 	.language-btn {
-		background-color: #f5a623; 
+		background-color: #f5a623;
 		color: #ffffff;
 	}
 
@@ -323,7 +323,7 @@ header {
 
 
 .profile {
-	
+
 	.panel-heading, .panel-body {
 		@include flexbox((
 	    display: flex,
@@ -358,7 +358,7 @@ header {
 	}
 
 	.alert {
-		margin-top: 10px;	
+		margin-top: 10px;
 	}
 }
 
@@ -549,3 +549,8 @@ body {
 }
 
 @import "mobile.scss";
+
+[uib-typeahead-popup].dropdown-menu {
+    height: 200px;
+    overflow-y: scroll;
+}

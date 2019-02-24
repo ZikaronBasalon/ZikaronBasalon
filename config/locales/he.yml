@@ -211,7 +211,7 @@ he:
       region_managememnt: "ניהול אזורים"
       home: "דף הבית"
       managers: "ניהול מובילי קהילות"
-      signup_staff: "הרשמת צוות"
+      admin_db: "אדמין DB"
       brand: "זיכרון בסלון"
       homepage_url: "http://www.zikaronbasalon.com/"
   pages:
@@ -421,7 +421,7 @@ he:
       paragraph_3_pre_text: "לארח זיכרון בסלון זה קל ופשוט, ואנחנו כאן כדי ללוות אותך בארגון הערב בסלון שלך. בערכת המארח שלנו יש את כל מה שצריך כדי להפוך את הזיכרון בסלון שלך למוצלח ומשמעותי לכולם. בזמן הקרוב נשלח לך מייל מהצוות האיזורי שילווה אותך עד לזיכרון בסלון שלך."
       paragraph_5_pre_text: "בנוסף, מומלץ להצטרף לקבוצת המארחים שלנו בפייסבוק ולהתייעץ עם מארחים חדשים וותיקים."
       paragraph_3_link_text: "בערכת המארח שלנו"
-      paragraph_3_link_url: "http://www.zikaronbasalon.com/eveningsetup"
+      paragraph_3_link_url: "https://docs.wixstatic.com/ugd/21e365_5cf4662787344e1683d6f91f41e9c96c.pdf"
       paragraph_5_facebook_link_text: "בפייסבוק"
       paragraph_5_facebook_link_url: "https://www.facebook.com/groups/zikron/"
       paragraph_5_post_text: ", שם אפשר להתייעץ עם מארחים חדשים וותיקים."
@@ -446,7 +446,7 @@ he:
       paragraph_2: "ייש לך עוד מקומות פנויים בסלון? אפשר תמיד לשנות את מספר האורחים המוזמנים "
       your_profile: "בפרופיל האישי."
       paragraph_3: "*כדי לראות את הפרופיל שלך, יש לשים לב כי התחברת לאתר. במידה ואין את המילה ״הפרופיל שלי״ מצד ימין למעלה, יש ללחוץ על ״התחבר/י״ מצד שמאל למעלה."
-      link_url: "http://www.zikaronbasalon.com/#!eveningsetup/c1hap"
+      link_url: "https://docs.wixstatic.com/ugd/21e365_5cf4662787344e1683d6f91f41e9c96c.pdf"
 
     request_approved:
       title: "הבקשה שלך אושרה, נתראה בסלון!"
