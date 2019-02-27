@@ -44,14 +44,14 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 	$scope.action = 'new';
 
 	$scope.init = function(witness) {
-		$scope.deserializeLanguage();
-		$scope.languageOptions = _.map($scope.languages, $scope.tagToOption);
 		if(witness.id) {
 			delete witness.created_at;
 			delete witness.updated_at;
 			$scope.witness = witness;
 			$scope.action = 'edit';
 		}
+		$scope.deserializeLanguage();
+		$scope.languageOptions = _.map($scope.languages, $scope.tagToOption);
 
     if(witness.city_id) {
       $scope.current_city = { name: $scope.witness.city_name, id: $scope.witness.city_id };
@@ -59,7 +59,7 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 	}
 
 	$scope.deserializeLanguage = function() {
-		$scope.languages = $scope.witness.language ? _.map($scope.witness.language.split(',')) : ['aaaa']
+		$scope.languages = $scope.witness.language ? _.map($scope.witness.language.split(',')) : []
 	}
 
 	$scope.serializeLanguage = function() {
