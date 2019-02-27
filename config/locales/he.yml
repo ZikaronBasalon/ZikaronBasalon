@@ -284,6 +284,7 @@ he:
       build_evening: "בניית הערב"
       city: "עיר/יישוב"
       temp_subtitle: ""
+      please_fill_in_required_fields: אנא מלא את כל שדות החובה
     show:
       title: "הפרופיל שלי"
       personal_details: "הפרטים שלי"

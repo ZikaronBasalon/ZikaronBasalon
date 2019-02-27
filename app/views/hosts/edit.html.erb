@@ -93,6 +93,11 @@
           </div>
         </div>
 
+
+        <div ng-if="submitted[stepIndex] && stepOne.$invalid" class="text-danger">
+          <%= t('.please_fill_in_required_fields') %>
+        </div>
+
         <button ng-click="submitStepOne()" class="btn btn-warning"><%= t 'shared.next' %></button>
       </form>
 
@@ -179,6 +184,10 @@
           <p class="help-block"><%= t '.event_time_help_block' %></p>
 
           <input type="time" ng-model="host.event_time" class="form-control" name="event_time"/>
+        </div>
+
+        <div ng-if="submitted[stepIndex] && stepTwo.$invalid" class="text-danger">
+          <%= t('.please_fill_in_required_fields') %>
         </div>
 
         <button class="btn btn-info" ng-click="back()"><%= t 'shared.back' %></button>
@@ -288,6 +297,10 @@
         <div class="form-group">
           <label for="free_text"><%= t '.free_text' %></label>
           <textarea id="free_text" class="form-control" ng-model-options="{ debounce: 500 }" ng-model="host.free_text" style="height: 250px; max-width: 330px;"></textarea>
+        </div>
+
+        <div ng-if="submitted[stepIndex] && stepThree.$invalid" class="text-danger">
+          <%= t('.please_fill_in_required_fields') %>
         </div>
 
         <button class="btn btn-info" ng-click="back()"><%= t 'shared.back' %></button>
