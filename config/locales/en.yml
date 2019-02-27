@@ -271,6 +271,7 @@ en:
       city_placeholder: "Enter city"
       address_placeholder: "Full address (without city)"
       temp_subtitle: "We will open the registration to join a salon in a few days!"
+      please_fill_in_required_fields: Please fill in all required fields
     show:
       title: "Host profile"
       personal_details: "Your information"
