@@ -184,6 +184,8 @@ he:
     witness_contacted_red: "אדומים"
     agreed_to_terms_at: "בהתחברות אני מסכים ל"
     terms_of_service: "תנאי השימוש"
+    not_on_the_list: לא ברשימה
+    missing_city_hint: אם אינך מוצא את עירך, בחר ״לא ברשימה״ ופנה אלינו לתמיכה
 
   views:
     pagination:

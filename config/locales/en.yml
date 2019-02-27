@@ -177,7 +177,8 @@ en:
     witness_contacted_red: "Red"
     agreed_to_terms_at: "By signing in I agree to the"
     terms_of_service: "terms of use"
-
+    not_on_the_list: NOT ON THE LIST
+    missing_city_hint: If you cannot find your city, select "NOT ON THE LIST" and contact support
   views:
     pagination:
       first: "First"
