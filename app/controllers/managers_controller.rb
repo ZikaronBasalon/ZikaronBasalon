@@ -2,17 +2,7 @@ class ManagersController < ApplicationController
   before_filter :set_manager, only: [:show, :edit, :update, :destroy, :remove_city, :filter_hosts, :export_hosts, :export_witnesses, :export_guests]
   before_filter :is_admin, only: [:index, :export_hosts, :export_witnesses, :export_guests]
   before_filter :correct_manager, only: [:show, :export]
-  # before_action :authenticate_user!
   respond_to :html, :json
-
-  def index
-    @managers = Manager.includes(:cities, :user).all
-    @cities_without_manager = City.relevant_cities.without_managers
-    gon.managers = @managers.to_json(:include => [:cities, :user])
-    gon.citiesWithoutManager = @cities_without_manager.to_json
-
-    respond_with(@managers)
-  end
 
   def get_country_id_and_region_id
     region_id = 37
@@ -86,17 +76,25 @@ class ManagersController < ApplicationController
   def edit
   end
 
-  # Creates a temp Manager and assigns him with a City
   def create
-    @manager = Manager.where('lower(temp_email) = ?', params[:manager][:temp_email].downcase).first
-    @manager ||= Manager.create(:temp_email => params[:manager][:temp_email])
-    if @manager.new_record?
-      @manager.save!
-      ManagerMailer.new_manager(@manager.temp_email).deliver
+    body = OpenStruct.new(params[:manager])
+    email = body.temp_email.downcase
+    @manager = Manager.find_by_temp_email(email) || Manager.create(temp_email: email)
+    user = User.find_by(email: body.email) || User.new
+    if user.new_record?
+      user.full_name = body.name
+      user.email = email
+      user.password = body.password
+      user.password_confirmation = body.password_confirmation
+      user.locale = I18n.locale
     end
-    city = City.find_or_create_by_name(params[:manager][:city_name])
-    CommunityLeadership.find_or_create_by_manager_id_and_city_id(manager_id: @manager.id, city_id: city.id)
-    render :json => @manager.to_json( :include => [:cities, :user] )
+    user.meta_type = 'Manager'
+    user.meta_id = @manager.id
+    if user.save
+      render json: @manager.to_json( :include => [:cities, :user] ), status: :ok
+    else
+      render json: { errors: user.errors.messages }, status: :unprocessable_entity
+    end
   end
 
   def update
@@ -109,10 +107,35 @@ class ManagersController < ApplicationController
     render :json => @manager.to_json
   end
 
+  def add_city
+    @manager = Manager.find(params[:id])
+    community_leadership = CommunityLeadership.where(manager_id: @manager.id, city_id: params[:city_id]).first || CommunityLeadership.create(manager_id: @manager.id, city_id: params[:city_id])
+    if community_leadership.valid?
+      render :json => @manager.to_json( :include => [:cities, :user] )
+    else
+      render json: { errors: community_leadership.errors.messages }, status: :unprocessable_entity
+    end
+  end
+
   def remove_city
     @city = City.find(params[:city_id])
     CommunityLeadership.find_by_manager_id_and_city_id(@manager.id, @city.id).destroy
     render :json => @manager.to_json( :include => [:cities, :user] )
+  end
+
+  def find_movil
+    email = params[:email]
+    render json: Manager.where("temp_email ILIKE '%#{email}%'")
+  end
+
+  def load_movil
+    movil_id = params[:id]
+    @manager = Manager.find_by_id(movil_id)
+    if @manager.present?
+      render json: @manager.to_json( :include => [:cities, :user] ), status: :ok
+    else
+      render json: { not_found: true }, status: :unprocessable_entity
+    end
   end
 
   def export_hosts

@@ -18,7 +18,7 @@
       <form name="stepOne" ng-show="'stepOne' === steps[stepIndex]" novalidate>
 
         <div class="form-group">
-          <label for="phone"><%= t '.phone' %></label>
+          <label for="phone" class="required"><%= t '.phone' %></label>
           <input type="text" class="form-control"
                  name="phone"
                  ng-class="{true: 'error'}[submitted[stepIndex] && stepOne.phone.$invalid]"
@@ -83,7 +83,7 @@
 
         <div ng-if="organization">
           <div class="form-group">
-            <label for="orgName"><%= t '.org_name' %></label>
+            <label for="orgName" class="required"><%= t '.org_name' %></label>
             <input type="text" class="form-control"
                    id="orgName"
                    name="org_name"
@@ -100,7 +100,7 @@
       <form name="stepTwo" ng-show="'stepTwo' === steps[stepIndex]" novalidate>
         <div class="form-group"
              ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.country_id.$invalid]">
-          <label for="country_id"><%= t 'shared.country' %></label>
+          <label for="country_id" class="required"><%= t 'shared.country' %></label>
           <input
             class="form-control"
             type="text"
@@ -115,7 +115,7 @@
 
         <div class="form-group"
              ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.city_id.$invalid]">
-          <label for="city_id"><%= t '.city' %></label>
+          <label for="city_id" class="required"><%= t '.city' %></label>
           <input
             class="form-control"
             type="text"
@@ -132,7 +132,7 @@
 
         <div class="form-group"
              ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.address.$invalid]">
-          <label for="address"><%= t '.address' %></label>
+          <label for="address" class="required"><%= t '.address' %></label>
           <input type="text" class="form-control"
                  name="address"
                  placeholder="<%= t '.address_placeholder' %>"
@@ -143,7 +143,7 @@
 
         <div class="form-group"
              ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.floor.$invalid]">
-          <label for="floor"><%= t '.floor' %></label>
+          <label for="floor" class="required"><%= t '.floor' %></label>
             <select class="form-control" id="floor"
                     ng-model="host.floor"
                     name="floor"
@@ -158,7 +158,7 @@
 
         <div class="form-group"
              ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.elevator.$invalid]">
-          <label for="elevator"><%= t '.elevator' %></label>
+          <label for="elevator" class="required"><%= t '.elevator' %></label>
             <select class="form-control" id="elevator"
                     ng-model="host.elevator"
                     name="elevator"
@@ -189,7 +189,7 @@
       <form name="stepThree" ng-show="'stepThree' === steps[stepIndex]" novalidate>
         <div class="form-group"
              ng-class="{true: 'has-error'}[submitted[stepIndex] && stepThree.event_language.$invalid]">
-          <label for="event_language"><%= t '.event_language' %></label>
+          <label for="event_language" class="required"><%= t '.event_language' %></label>
           <div>
             <select class="form-control" id="event_language"
                     name="event_language"
@@ -213,7 +213,7 @@
         <% if I18n.locale == :he %>
           <div class="form-group"
                ng-class="{true: 'has-error'}[submitted[stepIndex] && stepThree.survivor_needed.$invalid]">
-            <label><%= t '.survivor_needed' %></label>
+            <label class="required"><%= t '.survivor_needed' %></label>
             <p class="help-block"><%= t '.survivor_needed_help_block' %></p>
 
             <div>
@@ -229,7 +229,7 @@
         <% end %>
 
         <div class="form-group">
-          <label><%= t '.preparation_wanted' %></label>
+          <label class="required"><%= t '.preparation_wanted' %></label>
           <div>
             <ng-form name="preparationWantedGroup">
               <div class="radio">
@@ -250,7 +250,7 @@
 
         <div class="form-group"
              ng-class="{true: 'has-error'}[submitted[stepIndex] && stepThree.strangers.$invalid]">
-          <label><%= t '.strangers' %></label>
+          <label class="required"><%= t '.strangers' %></label>
           <p class="help-block"><%= t '.strangers_help_block' %></p>
 
           <div>
@@ -277,7 +277,7 @@
 
         <div class="form-group" ng-if="host.strangers"
              ng-class="{true: 'has-error'}[submitted[stepIndex] && stepThree.max_guests.$invalid]">
-          <label for="max_guests" ><%= t '.max_guests' %></label>
+          <label for="max_guests" class="required"><%= t '.max_guests' %></label>
           <p class="help-block"><%= t '.max_guests_help_block' %></p>
           <input type="number" class="form-control"
                  required name="max_guests"

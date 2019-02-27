@@ -249,9 +249,9 @@ app.controller('HostSignupFinishedModal', ['$scope', '$uibModalInstance', 'host'
   $scope.buildEvening = function () {
   	var locale = document.getElementById('locale').className;
   	if (locale == "en") {
-  		window.location = 'http://www.zikaronbasalon.org/#!build-your-event/c1hap'
+  		window.location = 'https://www.zikaronbasalon.org/build-your-event'
   	} else {
-  		window.location = 'http://www.zikaronbasalon.com/#!eveningsetup/c1hap';
+  		window.location = 'https://www.zikaronbasalon.com/eveningsetup';
   	}
   };
 }]);
