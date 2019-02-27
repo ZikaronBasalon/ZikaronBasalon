@@ -156,7 +156,7 @@ en:
     name: "Name"
     delete: "Delete"
     country: "Country"
-    country_placeholder: "Type and select from dropdown"
+    country_placeholder: "Please type country name"
     share_on_fb: "Share evening on Facebook"
     og_title: "Come join my Zikaron Basalon evening!"
     og_description: "Come join my Zikaron Basalon evening!"
