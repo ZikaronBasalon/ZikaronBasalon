@@ -132,6 +132,7 @@
             uib-typeahead="city as city.name for city in getCityLocation($viewValue, current_country.id)"
             placeholder="<%= t '.city_placeholder' %>"
             required>
+            <div class="text-danger" ng-hide="current_city_exist"><%= t 'shared.missing_city_hint' %></div>
         </div>
 
         <div class="form-group"
