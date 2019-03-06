@@ -8,8 +8,7 @@ class CitiesController < ApplicationController
       country_id = sub_params['country_id']
       manager_meta = current_user&.meta_id
       results = City.normalized.normalized_search(q, country_id)
-      # todo: DRY
-      if sub_params[:witness_search].present?
+      if sub_params['witness_search'].nil?
         if manager_meta.present?
           if current_user.simple_admin?
             communities = CommunityLeadership.where(manager_id: current_user.meta.id)
