@@ -66,6 +66,11 @@ label.required::before {
 	color: red;
 }
 
+label.chkbx::before {
+	position: absolute;
+	margin-right: -27px;
+}
+
 .help-block {
 	color: #585858;
 }
