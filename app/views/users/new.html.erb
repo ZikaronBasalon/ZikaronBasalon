@@ -39,7 +39,7 @@
       <li ng-repeat="error in errors">{{ error }}</li>
     </ul>
     <div class="form-group">
-      <label for="fullName"><%= t '.labels.full_name' %></label>
+      <label for="fullName" class="required"><%= t '.labels.full_name' %></label>
       <input type="text" class="form-control"
              id="fullName" placeholder="<%= t '.placeholders.full_name' %>"
              ng-model="form.fullName"
@@ -47,7 +47,7 @@
     </div>
 
     <div class="form-group">
-      <label for="fullName"><%= t '.labels.email' %></label>
+      <label for="fullName" class="required"><%= t '.labels.email' %></label>
       <input type="email" class="form-control"
              id="email" placeholder="<%= t '.placeholders.email' %>"
              ng-model="form.email"
@@ -55,7 +55,7 @@
     </div>
 
     <div class="form-group" ng-class="">
-      <label for="emailConfirmation"><%= t '.labels.email_confirmation' %></label>
+      <label for="emailConfirmation" class="required"><%= t '.labels.email_confirmation' %></label>
       <input type="email" class="form-control"
            id="emailConfirmation" placeholder="<%= t '.placeholders.email_confirmation' %>"
              ng-model="form.emailConfirmation"
@@ -64,7 +64,7 @@
     </div>
 
     <div class="form-group" ng-if="form.type === 'guest'">
-      <label for="phone"><%= t 'shared.phone' %></label>
+      <label for="phone" class="required"><%= t 'shared.phone' %></label>
       <input type="text" class="form-control"
              id="phone" placeholder="<%= t 'shared.phone' %>"
              ng-model="form.phone"
@@ -73,7 +73,7 @@
     </div>
 
     <div class="form-group">
-      <label for="password"><%= t '.labels.password' %></label>
+      <label for="password" class="required"><%= t '.labels.password' %></label>
       <input type="password" class="form-control"
              id="password" placeholder="<%= t '.placeholders.password' %>"
              ng-model="form.password"
@@ -81,7 +81,7 @@
     </div>
 
     <div class="form-group">
-      <label for="passwordConfirmation"><%= t '.labels.password_confirmation' %></label>
+      <label for="passwordConfirmation" class="required"><%= t '.labels.password_confirmation' %></label>
       <input type="password" class="form-control"
              id="passwordConfirmation" placeholder="<%= t '.placeholders.password_confirmation' %>"
              ng-model="form.passwordConfirmation"
@@ -91,9 +91,18 @@
 
     <div class="form-group">
       <div class="checkbox checkbox-inline">
-        <label>
+        <label class="required chkbx">
           <input type="checkbox" ng-model="form.agreedToTermsAt" required>
-          <%= "#{t('shared.agreed_to_terms_at')} <a href='https://www.zikaronbasalon.com/terms' target='_blank'>#{t('shared.terms_of_service')}</a>".html_safe %>
+          <%= t('shared.agreed_to_terms_at').html_safe %>
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="checkbox checkbox-inline">
+        <label class="required chkbx">
+          <input type="checkbox" ng-model="form.subscribedToMarketing" required>
+          <%= t('shared.subscribed_to_marketing').html_safe %>
         </label>
       </div>
     </div>

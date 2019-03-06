@@ -20,6 +20,7 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 	};
 
 	$scope.otherLanguageVisible = false;
+	$scope.current_city_exist = true;
 
 	$scope.typeOptions = [
 		{ n: 'ניצול', v: 'survivor' },
@@ -73,9 +74,11 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
   $scope.onCitySet = function() {
     if (!$scope.loading_city) {
       if (typeof $scope.current_city === 'string') {
-        $scope.current_city = '';
+				$scope.current_city = '';
+				$scope.current_city_exist = false;
       } else {
-        $scope.witness.city_id = $scope.current_city.id;
+				$scope.witness.city_id = $scope.current_city.id;
+				$scope.current_city_exist = true;
       }
     }
   }

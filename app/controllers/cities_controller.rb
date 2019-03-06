@@ -19,6 +19,11 @@ class CitiesController < ApplicationController
         end
       end
       results.first(12)
+      if q.present?
+        city_name = City.not_on_the_list_names.detect { |name| name.upcase.include?(q.upcase) }
+        not_on_the_list_city = City.find_by(name: city_name) if city_name
+        results.unshift(not_on_the_list_city) if not_on_the_list_city
+      end
     elsif params[:id] == 'autocomplete_country'
       q = params[:q]
       results = Country.normalized_search(q).first(12)
