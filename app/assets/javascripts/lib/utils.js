@@ -1,3 +1,5 @@
+//= require config/constants
+
 function formatDate(date) {
 	var date = new Date(date);
   var day = date.getUTCDate();
@@ -168,7 +170,7 @@ function formatConcept(concept) {
           return '';
     }
   }
-  
+
 }
 
 function formatAddressDisplay(address) {
@@ -194,4 +196,12 @@ function formatCityDisplay(host) {
 
 function getLocale() {
   return document.getElementById('locale').className;
+}
+
+function defaultPrintableCountry(user) {
+  result = { id: Ids.Country.ISRAEL, printable_name: 'Israel' };
+  if (user.chul_admin) {
+    result = { id: Ids.Country.USA, printable_name: 'United States' };
+  }
+  return result;
 }

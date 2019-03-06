@@ -33,8 +33,10 @@ class City < ActiveRecord::Base
   scope :normalized_search, ->(q, country_id) { where(country_id: country_id).where("name ILIKE '%#{q}%'") }
   scope :normalized, -> { where("israel_city_id IS NOT NULL OR world_city_id IS NOT NULL") }
   scope :without_managers, -> { where(community_leaderships_count: 0) }
-
   scope :relevant_cities, -> { where(id: (Witness.where.not(city_id: nil).pluck(:city_id) + Host.where.not(city_id: nil).pluck(:city_id)).uniq) }
+  scope :israel, -> { where(country_id: Country::ISRAEL) }
+  scope :chul, -> { where.not(country_id: Country::ISRAEL) }
+
 
   def self.not_on_the_list_names
     [I18n.t('shared.not_on_the_list', locale: :he), I18n.t('shared.not_on_the_list', locale: :en)].compact

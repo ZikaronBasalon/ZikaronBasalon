@@ -8,6 +8,12 @@ class CitiesController < ApplicationController
       country_id = sub_params['country_id']
       manager_meta = current_user&.meta_id
       results = City.normalized.normalized_search(q, country_id)
+      if current_user.israel_only?
+        results = results.israel
+      elsif current_user.chul_only?
+        results = results.chul
+      end
+
       # todo: DRY
       if manager_meta.present?
         if current_user.simple_admin?
@@ -26,7 +32,13 @@ class CitiesController < ApplicationController
       end
     elsif params[:id] == 'autocomplete_country'
       q = params[:q]
-      results = Country.normalized_search(q).first(12)
+      results = Country.normalized_search(q)
+      if current_user.israel_only?
+        results = results.israel
+      elsif current_user.chul_only?
+        results = results.chul
+      end
+      results = results.first(12)
     end
     render json: results
   end

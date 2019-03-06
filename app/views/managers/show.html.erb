@@ -291,7 +291,7 @@
             ng-model-options="{ debounce: 200 }"
             typeahead-editable="false"
             typeahead-on-select="onSearchWitnessCitySet($item)"
-            uib-typeahead="city as city.name for city in getCityLocation($viewValue, 97)"
+            uib-typeahead="city as city.name for city in getCityLocation($viewValue, <%= current_user.default_country_id %>)"
             placeholder="<%= t 'shared.city_placeholder' %>">
         </div>
 

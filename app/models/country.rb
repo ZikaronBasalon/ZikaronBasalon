@@ -13,6 +13,9 @@
 #
 
 class Country < ActiveRecord::Base
+  ISRAEL = 97
+  USA = 214
+
   has_paper_trail
   attr_accessible :iso, :name, :printable_name, :iso3, :numcode, :manager_id, :regions_count
   has_many :regions
@@ -20,7 +23,8 @@ class Country < ActiveRecord::Base
   belongs_to :manager
 
   scope :normalized_search, ->(q) { where("name ILIKE '%#{q}%'") }
-
+  scope :israel, -> { where(id: ISRAEL) }
+  scope :chul, -> { where.not(id: ISRAEL) }
 
   # def to_s
   #   "#{printable_name}"

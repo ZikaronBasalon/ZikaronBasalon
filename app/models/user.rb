@@ -82,6 +82,18 @@ class User < ActiveRecord::Base
     self.admin
   end
 
+  def israel_only?
+    chul_admin == false
+  end
+
+  def chul_only?
+    chul_admin == true
+  end
+
+  def default_country_id
+    chul_only? ? Country::USA : Country::ISRAEL
+  end
+
   def save_as_deleted_user
     DeletedUser.create(name: full_name, email: email, type: meta_type)
   end

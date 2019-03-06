@@ -5,14 +5,16 @@ class ManagersController < ApplicationController
   respond_to :html, :json
 
   def get_country_id_and_region_id
-    region_id = 37
+    country_id = params.dig(:filter, :host, :country_id)&.to_i
+    country_id ||= current_user.chul_only? ? Country::USA : Country::ISRAEL
+
+    region_id = nil
     if params[:filter].present? && params[:filter][:host].present? && params[:filter][:host][:region_id].present?
       region_id = params[:filter][:host][:region_id]
       params[:filter][:host].delete :region_id
     end
 
-    # get country_id
-    country_id = params[:filter].present? && params[:filter][:host].present? ? params[:filter][:host][:country_id] : "97"
+    region_id ||= Region.find_by(country_id: country_id, name: Region::OTHER_REGION_NAME)&.id
 
     return country_id, region_id
   end
