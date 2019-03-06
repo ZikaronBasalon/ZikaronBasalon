@@ -5,13 +5,14 @@
 
 
 <form ng-controller="GuestSignupController"
+      id="signup-container"
       ng-submit="submit($event)"
       name="signupForm" >
   <ul class="errors">
     <li ng-repeat="error in errors">{{ error }}</li>
   </ul>
   <div class="form-group">
-    <label for="fullName"><%= t 'users.new.labels.full_name' %></label>
+    <label for="fullName" class="required"><%= t 'users.new.labels.full_name' %></label>
     <input type="text" class="form-control"
            id="fullName" placeholder="<%= t 'users.new.placeholders.full_name' %>"
            ng-model="form.fullName"
@@ -19,7 +20,7 @@
   </div>
 
   <div class="form-group">
-    <label for="fullName"><%= t 'users.new.labels.email' %></label>
+    <label for="fullName" class="required"><%= t 'users.new.labels.email' %></label>
     <input type="email" class="form-control"
            id="email" placeholder="<%= t 'users.new.placeholders.email' %>"
            ng-model="form.email"
@@ -27,7 +28,7 @@
   </div>
 
   <div class="form-group" ng-class="">
-    <label for="emailConfirmation"><%= t 'users.new.labels.phone' %></label>
+    <label for="emailConfirmation" class="required"><%= t 'users.new.labels.phone' %></label>
     <input type="text" class="form-control"
            id="emailConfirmation" placeholder="<%= t 'users.new.placeholders.phone' %>"
            ng-model="form.phone"
@@ -36,7 +37,7 @@
   </div>
 
   <div class="form-group">
-    <label for="password"><%= t 'users.new.labels.password' %></label>
+    <label for="password" class="required"><%= t 'users.new.labels.password' %></label>
     <input type="password" class="form-control"
            id="password" placeholder="<%= t 'users.new.placeholders.password' %>"
            ng-model="form.password"
@@ -44,7 +45,7 @@
   </div>
 
   <div class="form-group">
-    <label for="passwordConfirmation"><%= t 'users.new.labels.password_confirmation' %></label>
+    <label for="passwordConfirmation" class="required"><%= t 'users.new.labels.password_confirmation' %></label>
     <input type="password" class="form-control"
            id="passwordConfirmation" placeholder="<%= t 'users.new.placeholders.password_confirmation' %>"
            ng-model="form.passwordConfirmation"
@@ -54,9 +55,18 @@
 
   <div class="form-group">
     <div class="checkbox checkbox-inline">
-      <label>
+      <label class="required chkbx">
         <input type="checkbox" ng-model="form.agreedToTermsAt" required>
-        <%= "#{t('shared.agreed_to_terms_at')} <a href='https://www.zikaronbasalon.com/terms' target='_blank'>#{t('shared.terms_of_service')}</a>".html_safe %>
+        <%= t('shared.agreed_to_terms_at').html_safe %>
+      </label>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="checkbox checkbox-inline">
+      <label class="required chkbx">
+        <input type="checkbox" ng-model="form.subscribedToMarketing" required>
+        <%= t('shared.subscribed_to_marketing').html_safe %>
       </label>
     </div>
   </div>

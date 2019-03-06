@@ -36,6 +36,10 @@ class City < ActiveRecord::Base
 
   scope :relevant_cities, -> { where(id: (Witness.where.not(city_id: nil).pluck(:city_id) + Host.where.not(city_id: nil).pluck(:city_id)).uniq) }
 
+  def self.not_on_the_list_names
+    [I18n.t('shared.not_on_the_list', locale: :he), I18n.t('shared.not_on_the_list', locale: :en)].compact
+  end
+
   def self.without_anyone
     cities = []
     City.all.each do |c|

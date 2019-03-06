@@ -139,6 +139,8 @@ he:
     free_on_date: "פנוי בערב יום השואה"
     availability: "זמינות"
     available_days: "זמינות"
+    holocaust_day: "(יום השואה)"
+    holocaust_eve: "(ערב יום השואה)"
     multiple_available_days: "זמינות"
     org_name: "ארגון"
     has_manager: "משוייך למוביל"
@@ -182,8 +184,10 @@ he:
     region: "אזור"
     mailer_pargraph_noticed_profile_login: "*כדי לראות את הפרופיל שלך, יש לשים לב כי התחברת לאתר. במידה ואין את המילה ״הפרופיל שלי״ מצד ימין למעלה, יש ללחוץ על ״התחבר/י״ מצד שמאל למעלה."
     witness_contacted_red: "אדומים"
-    agreed_to_terms_at: "בהתחברות אני מסכים ל"
-    terms_of_service: "תנאי השימוש"
+    agreed_to_terms_at: אני מאשר/ת כי קראתי והבנתי את <a href='https://www.zikaronbasalon.com/terms' target='_blank'>התקנון</a> ואת <a href='https://www.zikaronbasalon.com/terms' target='_blank'>מדיניות הפרטיות</a> של אתר זיכרון בסלון, ואני מקבל/ת ומאשר/ת את תנאיהם
+    subscribed_to_marketing: אני מסכים/ה לקבל דיוור והודעות שונות מעמותת זיכרון בסלון ומי מטעמה, לרבות באמצעים אלקטרוניים
+    not_on_the_list: לא ברשימה
+    missing_city_hint: אם אינך מוצא את עירך, בחר ״לא ברשימה״ ופנה אלינו לתמיכה
 
   views:
     pagination:
@@ -280,6 +284,7 @@ he:
       build_evening: "בניית הערב"
       city: "עיר/יישוב"
       temp_subtitle: ""
+      please_fill_in_required_fields: אנא מלא את כל שדות החובה
     show:
       title: "הפרופיל שלי"
       personal_details: "הפרטים שלי"

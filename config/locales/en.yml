@@ -81,6 +81,8 @@ en:
     available_day9: " 6.5"
     multiple_available_days: "multiple days"
     available_days: "available days"
+    holocaust_day: "Holocaust Day"
+    holocaust_eve: "eve of Holocaust Day"
     availability: "availability"
     send_request: "Send a request"
     send_request_mobile: "Send"
@@ -175,9 +177,10 @@ en:
     region: "Region"
     hey: "Hi"
     witness_contacted_red: "Red"
-    agreed_to_terms_at: "By signing in I agree to the"
-    terms_of_service: "terms of use"
-
+    agreed_to_terms_at: I confirm that I have read and understood the <a href='https://www.zikaronbasalon.com/terms' target='_blank'>Terms and Conditions</a> and the <a href='https://www.zikaronbasalon.com/terms' target='_blank'>Privacy Policy</a> of Zikaron Basalon and I accept and agree to abide by their terms
+    subscribed_to_marketing: I agree to receive mailing and various messages from the Zikaron Basalon nonprofit and from anyone on its behalf, including by electronic means
+    not_on_the_list: NOT ON THE LIST
+    missing_city_hint: If you cannot find your city, select "NOT ON THE LIST" and contact support
   views:
     pagination:
       first: "First"
@@ -271,6 +274,7 @@ en:
       city_placeholder: "Enter city"
       address_placeholder: "Full address (without city)"
       temp_subtitle: "We will open the registration to join a salon in a few days!"
+      please_fill_in_required_fields: Please fill in all required fields
     show:
       title: "Host profile"
       personal_details: "Your information"

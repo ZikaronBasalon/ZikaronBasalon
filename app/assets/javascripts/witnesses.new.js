@@ -1,4 +1,5 @@
 //= require directives/isPhone
+//= require lib/utils
 
 app.controller('WitnessNewController', ['$scope','$http','$timeout', function($scope, $http, $timeout) {
 	$scope.witness = {
@@ -19,6 +20,7 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 	};
 
 	$scope.otherLanguageVisible = false;
+	$scope.current_city_exist = true;
 
 	$scope.typeOptions = [
 		{ n: 'ניצול', v: 'survivor' },
@@ -26,6 +28,9 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 		{ n: 'דור שני', v: 'second_generation' },
 		{ n: 'מטפל', v: 'therapist' }
 	];
+
+	$scope.knownLanguageOptions = _.map(languageNamesDictionary(), function(label, value) { return {value: value, label: label}; });
+	$scope.languages = [];
 
 	$scope.submitted = false;
 	$scope.alerts = [];
@@ -38,18 +43,42 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 			$scope.witness = witness;
 			$scope.action = 'edit';
 		}
+		$scope.deserializeLanguage();
+		this.languageOptions = _.map($scope.languages, $scope.tagToOption);
 
     if(witness.city_id) {
       $scope.current_city = { name: $scope.witness.city_name, id: $scope.witness.city_id };
     }
+	}.bind(this)
+
+	$scope.deserializeLanguage = function() {
+		$scope.languages = $scope.witness.language ? _.map($scope.witness.language.split(',')) : []
+	}
+
+	$scope.serializeLanguage = function() {
+		$scope.witness.language = $scope.languages.join(',');
+	}
+
+	$scope.tagToOption = function(newTag) {
+		var knownOption = _.find($scope.knownLanguageOptions, function(option) {
+			return _.includes([option.label, option.value], newTag);
+		});
+
+		return knownOption || { value: newTag, label: newTag };
+	}
+
+	$scope.optionToTag = function(option) {
+		return option.value;
 	}
 
   $scope.onCitySet = function() {
     if (!$scope.loading_city) {
       if (typeof $scope.current_city === 'string') {
-        $scope.current_city = '';
+				$scope.current_city = '';
+				$scope.current_city_exist = false;
       } else {
-        $scope.witness.city_id = $scope.current_city.id;
+				$scope.witness.city_id = $scope.current_city.id;
+				$scope.current_city_exist = true;
       }
     }
   }
@@ -72,8 +101,9 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 
 	$scope.submit = function() {
 		$scope.submitted = true;
+		$scope.languages = _.map(this.languageOptions, $scope.optionToTag);
+		$scope.serializeLanguage();
 		if($scope.form.$valid) {
-
 			submitWitness()
 			.then(function(response) {
 				if(response.status === 201) {
@@ -91,7 +121,7 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 		} else {
 				$("html, body").animate({ scrollTop: 0 }, "slow");
 			}
-	}
+	}.bind(this)
 
 	$scope.onCityNameBlur = function() {
   	$timeout(function() {
