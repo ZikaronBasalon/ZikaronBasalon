@@ -177,8 +177,8 @@ en:
     region: "Region"
     hey: "Hi"
     witness_contacted_red: "Red"
-    agreed_to_terms_at: I confirm that I have read and understood the <a href='https://www.zikaronbasalon.com/terms' target='_blank'>Terms and Conditions</a> and the <a href='https://www.zikaronbasalon.com/terms' target='_blank'>Privacy Policy</a> of Zikaron Basalon and I accept and agree to abide by their terms
-    subscribed_to_marketing: I agree to receive mailing and various messages from the Zikaron Basalon nonprofit and from anyone on its behalf, including by electronic means
+    agreed_to_terms_at: I have read and understood the <a href='https://www.zikaronbasalon.com/terms' target='_blank'>Terms and Conditions</a> and the <a href='https://www.zikaronbasalon.com/terms' target='_blank'>Privacy Policy</a> of Zikaron Basalon Website and agree to their terms
+    subscribed_to_marketing: I hereby agree to receive from time to time informative messages from Zikaron BaSalon, by electronic or other means
     not_on_the_list: NOT ON THE LIST
     missing_city_hint: If you cannot find your city, select "NOT ON THE LIST" and contact support
   views:
