@@ -91,9 +91,18 @@
 
     <div class="form-group">
       <div class="checkbox checkbox-inline">
-        <label class="required">
+        <label class="required chkbx">
           <input type="checkbox" ng-model="form.agreedToTermsAt" required>
-          <%= "#{t('shared.agreed_to_terms_at')} <a href='https://www.zikaronbasalon.com/terms' target='_blank'>#{t('shared.terms_of_service')}</a>".html_safe %>
+          <%= t('shared.agreed_to_terms_at').html_safe %>
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="checkbox checkbox-inline">
+        <label class="required chkbx">
+          <input type="checkbox" ng-model="form.subscribedToMarketing" required>
+          <%= t('shared.subscribed_to_marketing').html_safe %>
         </label>
       </div>
     </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190213075043) do
+ActiveRecord::Schema.define(version: 20190305191516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -165,30 +165,31 @@ ActiveRecord::Schema.define(version: 20190213075043) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "",    null: false
-    t.string   "encrypted_password",     limit: 255, default: "",    null: false
-    t.string   "reset_password_token",   limit: 255
+    t.string   "email",                   limit: 255, default: "",    null: false
+    t.string   "encrypted_password",      limit: 255, default: "",    null: false
+    t.string   "reset_password_token",    limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0,     null: false
+    t.integer  "sign_in_count",                       default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
-    t.datetime "created_at",                                         null: false
-    t.datetime "updated_at",                                         null: false
-    t.string   "full_name",              limit: 255
-    t.string   "phone",                  limit: 255
-    t.boolean  "admin",                              default: false
+    t.string   "current_sign_in_ip",      limit: 255
+    t.string   "last_sign_in_ip",         limit: 255
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+    t.string   "full_name",               limit: 255
+    t.string   "phone",                   limit: 255
+    t.boolean  "admin",                               default: false
     t.integer  "meta_id"
-    t.string   "meta_type",              limit: 255
-    t.boolean  "sub_admin",                          default: false
+    t.string   "meta_type",               limit: 255
+    t.boolean  "sub_admin",                           default: false
     t.integer  "previous_meta_id"
-    t.string   "previous_meta_type",     limit: 255
-    t.boolean  "active_this_year",                   default: true
-    t.boolean  "current_year_admin",                 default: false
-    t.string   "locale",                 limit: 255
+    t.string   "previous_meta_type",      limit: 255
+    t.boolean  "active_this_year",                    default: true
+    t.boolean  "current_year_admin",                  default: false
+    t.string   "locale",                  limit: 255
     t.datetime "agreed_to_terms_at"
+    t.boolean  "subscribed_to_marketing"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
