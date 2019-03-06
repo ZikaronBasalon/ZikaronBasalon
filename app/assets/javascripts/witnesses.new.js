@@ -1,4 +1,5 @@
 //= require directives/isPhone
+//= require lib/utils
 
 app.controller('WitnessNewController', ['$scope','$http','$timeout', function($scope, $http, $timeout) {
 	$scope.witness = {
@@ -27,17 +28,8 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 		{ n: 'מטפל', v: 'therapist' }
 	];
 
-	$scope.knownLanguageOptions = [
-		{ value: 'hebrew', label: 'עברית' },
-		{ value: 'english', label: 'English' },
-		{ value: 'arabic', label: 'العربية' },
-		{ value: 'french', label: 'Français' },
-		{ value: 'russian', label: 'русский' },
-		{ value: 'spanish', label: 'Español' }
-	];
-
+	$scope.knownLanguageOptions = _.map(languageNamesDictionary(), function(label, value) { return {value: value, label: label}; });
 	$scope.languages = [];
-	$scope.languageOptions = [];
 
 	$scope.submitted = false;
 	$scope.alerts = [];
@@ -51,12 +43,12 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 			$scope.action = 'edit';
 		}
 		$scope.deserializeLanguage();
-		$scope.languageOptions = _.map($scope.languages, $scope.tagToOption);
+		this.languageOptions = _.map($scope.languages, $scope.tagToOption);
 
     if(witness.city_id) {
       $scope.current_city = { name: $scope.witness.city_name, id: $scope.witness.city_id };
     }
-	}
+	}.bind(this)
 
 	$scope.deserializeLanguage = function() {
 		$scope.languages = $scope.witness.language ? _.map($scope.witness.language.split(',')) : []
@@ -106,7 +98,7 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 
 	$scope.submit = function() {
 		$scope.submitted = true;
-		$scope.languages = _.map($scope.languageOptions, $scope.optionToTag);
+		$scope.languages = _.map(this.languageOptions, $scope.optionToTag);
 		$scope.serializeLanguage();
 		if($scope.form.$valid) {
 			submitWitness()
@@ -126,7 +118,7 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 		} else {
 				$("html, body").animate({ scrollTop: 0 }, "slow");
 			}
-	}
+	}.bind(this)
 
 	$scope.onCityNameBlur = function() {
   	$timeout(function() {

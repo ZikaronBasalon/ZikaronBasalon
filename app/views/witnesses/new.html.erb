@@ -1,4 +1,4 @@
-<div class="col-xs-12" id="witness-new-form" ng-controller="WitnessNewController" ng-init="init(<%= @witness.to_json(:methods => [:city_name]) %>)">
+<div class="col-xs-12" id="witness-new-form" ng-controller="WitnessNewController as vm" ng-init="init(<%= @witness.to_json(:methods => [:city_name]) %>)">
 
 	<h1><%= t '.title' %></h1>
 
@@ -84,7 +84,7 @@
           id="event_language"
           name="event_language"
           class="form-control"
-          ng-model="languageOptions"
+          ng-model="vm.languageOptions"
           theme="bootstrap"
           required>
         <ui-select-match>{{$item.label}}</ui-select-match>
