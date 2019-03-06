@@ -101,7 +101,9 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 	}
 
 	$scope.closeEvening = function() {
-		if (confirm('האם אתה בטוח?')) {
+		var locale = document.getElementById('locale').className;
+		var question = locale === 'he' ?  'האם אתה בטוח?' : 'Are you sure?';
+		if (confirm(question)) {
 			$scope.host.strangers = false;
 			$scope.save();
 		}
