@@ -89,7 +89,8 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
       params: {
         city: {
           country_id: country_id,
-          q: query
+          q: query,
+          witness_search: true
         }
       }
     }).then(function(response){
