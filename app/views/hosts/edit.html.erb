@@ -243,13 +243,13 @@
             <ng-form name="preparationWantedGroup">
               <div class="radio">
                 <label>
-                  <input type="radio" ng-model="host.preparation_wanted" value="false" name="preparation_wanted" required>
+                  <input type="radio" ng-model="host.preparation_wanted" ng-value="false" name="preparation_wanted" required>
                   <%= t 'shared.no' %>
                 </label>
               </div>
               <div class="radio">
                 <label>
-                  <input type="radio" ng-model="host.preparation_wanted" value="true" name="preparation_wanted" required>
+                  <input type="radio" ng-model="host.preparation_wanted" ng-value="true" name="preparation_wanted" required>
                   <%= t 'shared.yes' %>
                 </label>
               </div>
