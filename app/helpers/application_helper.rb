@@ -35,9 +35,9 @@ module ApplicationHelper
   def filter_by_has_manager(query_obj, has_manager)
     if has_manager.present?
       if has_manager == "true"
-        query_obj = query_obj.where('cities.community_leaderships_count > 0')
+        query_obj = query_obj.where.not(city: City.where("community_leaderships_count = 0"))
       else
-        query_obj = query_obj.where('cities.community_leaderships_count = 0')
+        query_obj = query_obj.where.not(city: City.where("community_leaderships_count > 0"))
       end
     end
     query_obj
