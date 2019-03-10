@@ -60,8 +60,9 @@ var app = angular.module('zikaronbasalon',[
       }
     }
 
-  }])
-.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, modalData) {
+  }]);
+
+angular.module('zikaronbasalon').controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, modalData) {
 
   $scope.modalData = modalData;
 
@@ -82,7 +83,7 @@ app.factory('activeDialog', ['$http', '$uibModal',
     function open(data, optionalUrl) {
       var modalInstance = $uibModal.open({
         animation: true,
-        templateUrl: 'myModalContent.html',
+        template: '<div class="modal-header"> <h3 class="modal-title"><center>{{modalData.translations.header}}</center></h3> </div> <div class="modal-body"> <center>{{modalData.translations.firstLine}}</center><br> <center>{{modalData.translations.secondLine}}</center><br> </div> <div class="modal-footer"> <button class="btn btn-primary" type="button" ng-click="ok()">{{modalData.translations.stay}}</button> <button class="btn btn-warning" type="button" ng-click="cancel()">{{modalData.translations.change}}</button> </div>',
         controller: 'ModalInstanceCtrl',
         data: data,
         resolve: {
