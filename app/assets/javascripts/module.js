@@ -72,8 +72,9 @@ var app = angular.module('zikaronbasalon',[
   $scope.cancel = function () {
     $uibModalInstance.dismiss('cancel');
   };
-})
-.factory('activeDialog', ['$http', '$uibModal',
+});
+
+app.factory('activeDialog', ['$http', '$uibModal',
   function($http, $uibModal) {
     return {
       open: open
