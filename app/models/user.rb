@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-                  :full_name, :type, :phone, :agreed_to_terms_at, :subscribed_to_marketing
+                  :full_name, :type, :phone, :agreed_to_terms_at, :subscribed_to_marketing, :active_this_year
   attr_accessor :type
 
   before_destroy :save_as_deleted_user
