@@ -17,10 +17,8 @@ var app = angular.module('zikaronbasalon',[
 .config(['$httpProvider', function ($httpProvider) {
 	$httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
   $httpProvider.interceptors.push('httpRequestInterceptor');
-}]);
-
-
-app.factory('activeUsers', ['$http', 'activeDialog',
+}])
+.factory('activeUsers', ['$http', 'activeDialog',
   function($http, activeDialog) {
     return {
       assignActiveUser: assignActiveUser
@@ -62,9 +60,8 @@ app.factory('activeUsers', ['$http', 'activeDialog',
       }
     }
 
-  }]);
-
-app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, modalData) {
+  }])
+.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, modalData) {
 
   $scope.modalData = modalData;
 
@@ -75,9 +72,8 @@ app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, modalDa
   $scope.cancel = function () {
     $uibModalInstance.dismiss('cancel');
   };
-});
-
-app.factory('activeDialog', ['$http', '$uibModal',
+})
+.factory('activeDialog', ['$http', '$uibModal',
   function($http, $uibModal) {
     return {
       open: open
