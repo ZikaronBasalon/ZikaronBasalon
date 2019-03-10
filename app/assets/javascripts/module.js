@@ -62,19 +62,6 @@ var app = angular.module('zikaronbasalon',[
 
   }]);
 
-angular.module('zikaronbasalon').controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, modalData) {
-
-  $scope.modalData = modalData;
-
-  $scope.ok = function () {
-    $uibModalInstance.close();
-  };
-
-  $scope.cancel = function () {
-    $uibModalInstance.dismiss('cancel');
-  };
-});
-
 app.factory('activeDialog', ['$http', '$uibModal',
   function($http, $uibModal) {
     return {
@@ -118,3 +105,16 @@ app.factory('activeDialog', ['$http', '$uibModal',
     }
 
   }]);
+
+angular.module('zikaronbasalon').controller('ModalInstanceCtrl', ['$scope', '$uibModalInstance', 'modalData', function ($scope, $uibModalInstance, modalData) {
+
+  $scope.modalData = modalData;
+
+  $scope.ok = function () {
+    $uibModalInstance.close();
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+}]);
