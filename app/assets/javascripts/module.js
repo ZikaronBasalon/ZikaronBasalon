@@ -9,7 +9,7 @@ var app = angular.module('zikaronbasalon',[
   return {
     request: function (config) {
       config.headers.locale = document.getElementById('locale').className;
-      
+
       return config;
     }
   };
@@ -30,13 +30,13 @@ app.factory('activeUsers', ['$http', 'activeDialog',
       if (!data.active_this_year && (data.meta_type == "Host" || data.meta_type == "Guest")) {//if role not set for this year yet and is not an admin
         var changerole = false;
         var last_years_role = data.meta_type;//the was last years role
-        
+
         var translations = {en:{header:"Great to see you're back!",firstLine:"It's always nice to see people you know :)", secondLine:"",stay:"",change:""}, he:{header:"כיף שחזרתם!",firstLine:"תמיד כיף לראות פרצופים מוכרים :)", secondLine:"",stay:"",change:""}}
         if (last_years_role == "Host") {
           translations.he.secondLine = "תרצו להמשיך לארח גם השנה?";
           translations.he.stay = "כן! זו כבר מסורת";
           translations.he.change = "לא, רוצה להתארח";
-          
+
           translations.en.secondLine = "Would you like to be a host this year too?";
           translations.en.stay = "Yes! It's tradition";
           translations.en.change = "No, I'll be a guest";
@@ -44,14 +44,14 @@ app.factory('activeUsers', ['$http', 'activeDialog',
           translations.he.secondLine = "אולי השנה תרצו לארח זיכרון בסלון אצלכם?";
           translations.he.stay = "רוצה להתארח";
           translations.he.change = "כן, רוצה לארח";
-          
+
           translations.en.secondLine = "Perhaps this year you would like to host Zikaron Basalon by you?";
           translations.en.stay = "I would like to be a guest";
           translations.en.change = "I would like to host";
         }
         data.translations = translations[locale];
         activeDialog.open(data);
-      } 
+      }
       else { //he already decided to be active this year or admin
         //regular login
         if (typeof optionalUrl !== 'undefined') {
@@ -63,6 +63,19 @@ app.factory('activeUsers', ['$http', 'activeDialog',
     }
 
   }]);
+
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, modalData) {
+
+  $scope.modalData = modalData;
+
+  $scope.ok = function () {
+    $uibModalInstance.close();
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+});
 
 app.factory('activeDialog', ['$http', '$uibModal',
   function($http, $uibModal) {
@@ -107,16 +120,3 @@ app.factory('activeDialog', ['$http', '$uibModal',
     }
 
   }]);
-
-app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, modalData) {
-
-  $scope.modalData = modalData;
-
-  $scope.ok = function () {
-    $uibModalInstance.close();
-  };
-
-  $scope.cancel = function () {
-    $uibModalInstance.dismiss('cancel');
-  };
-});
