@@ -38,12 +38,12 @@
       })(window,document,window['_fs_namespace'],'script','user');
     </script>
     <%= include_gon %>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+<!--     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-sanitize.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.2/ui-bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.2/ui-bootstrap-tpls.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.2/ui-bootstrap-tpls.min.js"></script> -->
     <%= javascript_include_tag "application", "#{controller_name}.#{action_name}" if ZikaronBasalon::Application.assets.find_asset("#{controller.controller_name}.#{action_name}.js") %>
     <!-- prod: AIzaSyDSOmyr4VMv2qvWLO12OuYqH7o-67DRANk -->
     <!-- staging: AIzaSyDJ1u3XlTGQDKn6dR3vOH5bVswXBmaGiLM -->
@@ -106,20 +106,6 @@
     </div>
   </body>
   <script src="https://cdn.enable.co.il/licenses/enable-L3273orc1ftyhaj-0219-7697/init.js"></script>
-  <script type="text/ng-template" id="myModalContent.html">
-      <div class="modal-header">
-          <h3 class="modal-title"><center>{{modalData.translations.header}}</center></h3>
-      </div>
-      <div class="modal-body">
-          <center>{{modalData.translations.firstLine}}</center><br>
-          <center>{{modalData.translations.secondLine}}</center><br>
-      </div>
-
-      <div class="modal-footer">
-          <button class="btn btn-primary" type="button" ng-click="ok()">{{modalData.translations.stay}}</button>
-          <button class="btn btn-warning" type="button" ng-click="cancel()">{{modalData.translations.change}}</button>
-      </div>
-  </script>
   <script>
   window.fbAsyncInit = function() {
       FB.init({
