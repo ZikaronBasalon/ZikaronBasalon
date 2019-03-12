@@ -30,7 +30,13 @@ class City < ActiveRecord::Base
   has_many :hosts
   has_many :witnesses
 
-  scope :normalized_search, ->(q, country_id) { where(country_id: country_id).where("name ILIKE '%#{q}%'") }
+  def self.normalized_search(q, country_id, chul = false)
+    if chul
+      where.not(country_id: 97).where("name ILIKE '%#{q}%'")
+    else
+      where(country_id: country_id).where("name ILIKE '%#{q}%'")
+    end
+  end
   scope :normalized, -> { where("israel_city_id IS NOT NULL OR world_city_id IS NOT NULL") }
   scope :without_managers, -> { where(community_leaderships_count: 0) }
 

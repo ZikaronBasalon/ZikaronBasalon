@@ -7,7 +7,9 @@ class CitiesController < ApplicationController
       q = sub_params['q']
       country_id = sub_params['country_id']
       manager_meta = current_user&.meta_id
-      results = City.normalized.normalized_search(q, country_id)
+      results = City.normalized
+      results = results.normalized_search(q, country_id, current_user.email == 'zikaronbasalonglobal@gmail.com')
+
       if sub_params['witness_search'].nil?
         if manager_meta.present?
           if current_user.simple_admin?
