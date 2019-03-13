@@ -6,3 +6,16 @@ end
 task :send_event_reminder => :environment do
   Invite.send_event_reminder
 end
+
+desc 'send incomplete_registration emails to hosts who have not completed registration yet'
+task send_incomplete_registration: :environment do
+  relevant_hosts = Host.incomplete_registration.where(incomplete_registration_sent_at: nil).where('created_at < ?', 1.hour.ago)
+  relevant_hosts.each do |host|
+    begin
+      host.update_columns(incomplete_registration_sent_at: Time.current)
+      HostMailer.incomplete_registration(host.id).deliver_now
+    rescue StandardError => e
+      Rails.logger.error(e.inspect)
+    end
+  end
+end

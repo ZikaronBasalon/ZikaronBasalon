@@ -67,6 +67,7 @@ class Host < ActiveRecord::Base
   after_update :assign_manager_by_country
   before_destroy :cancel_invites_and_assigned_witnesses
 
+  scope :incomplete_registration, -> { where.not(received_registration_mail: true) }
 
   def event_date
     (read_attribute(:event_date).presence || DateTime.parse("2019-05-01")).strftime('%Y-%m-%d')
