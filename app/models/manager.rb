@@ -34,6 +34,8 @@ class Manager < ActiveRecord::Base
       city_ids = cities.map {|c| c[:id] }
     end
 
+    filter[:received_registration_mail] = true if current_user.simple_admin?
+
     hosts = Host.includes(:city, :user, :witness, :invites)
     hosts = hosts.where(filter)
     hosts = hosts.where(city_id: city_ids) if city_ids != nil && !user.sub_admin?
