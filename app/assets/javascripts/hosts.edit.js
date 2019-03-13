@@ -9,7 +9,9 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 	};
 
   $scope.current_city = '';
-  $scope.current_country = {id: 97, printable_name: 'Israel'};
+  if (document.getElementById('locale').className === 'he') {
+    $scope.current_country = { id: 97, printable_name: 'Israel' };
+  }
   $scope.current_city_exist = true;
 
 	$scope.steps = ['stepOne', 'stepTwo', 'stepThree'];
