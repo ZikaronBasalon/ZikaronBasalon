@@ -375,7 +375,7 @@ he:
       host: "מארח"
       seminar_required: "מעוניין בערב הכנה"
       special_population: "מוכנות לאוכ' מיוחדות"
-      external_assignment: "לא מעוניין להתארח השנה"
+      external_assignment: "סטטוס איש עדות"
       external_assignment_explain: "איש העדות לא מעוניין להתארח השנה"
       archived_explain: "איש העדות לא יתארח בעתיד"
       need_to_followup_explain: 'לא יכולנו לתפוס בטלפון - צריך לנסות שוב'
