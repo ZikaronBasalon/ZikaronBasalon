@@ -1,4 +1,4 @@
-app.controller('UserSigninController', ['$scope', '$http', '$uibModal', 'activeUsers', function($scope, $http, $uibModal, activeUsers) {
+app.controller('UserSigninController', ['$scope', '$http', '$uibModal', 'dialogFactory', function($scope, $http, $uibModal, dialogFactory) {
 	$scope.form = {};
 	$scope.error = false;
 
@@ -15,7 +15,7 @@ app.controller('UserSigninController', ['$scope', '$http', '$uibModal', 'activeU
 				}
 			}).then(function(response) {
 				if(response.status === 201) {
-					activeUsers.assignActiveUser(response.data);
+					dialogFactory.assignActiveUser(response.data);
 					return;
 				}
 			}).catch(function(response) {

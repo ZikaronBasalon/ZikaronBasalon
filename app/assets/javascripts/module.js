@@ -19,12 +19,11 @@ var app = angular.module('zikaronbasalon',[
   $httpProvider.interceptors.push('httpRequestInterceptor');
 }]);
 
-app.factory('agreeTerms', ['$http', ])
-
-app.factory('activeUsers', ['$http', 'activeDialog',
+app.factory('dialogFactory', ['$http', 'activeDialog',
   function($http, activeDialog) {
     return {
-      assignActiveUser: assignActiveUser
+      assignActiveUser: assignActiveUser,
+      askTermsAgreement: askTermsAgreement
     };
     function assignActiveUser(data, optionalUrl) {
       var locale = document.getElementById('locale').className;
@@ -62,7 +61,9 @@ app.factory('activeUsers', ['$http', 'activeDialog',
         }
       }
     }
-
+    function askTermsAgreement() {
+      // todo
+    }
   }]);
 
 app.factory('activeDialog', ['$http', '$uibModal',
@@ -75,7 +76,7 @@ app.factory('activeDialog', ['$http', '$uibModal',
       var modalInstance = $uibModal.open({
         animation: true,
         templateUrl: 'agreeTerms.html',
-        controller: 'ModalInstanceCtrl',
+        controller: 'AgreeTermsModalCtrl',
         data: data,
         resolve: {
           modalData: function () {
@@ -92,8 +93,8 @@ app.factory('activeDialog', ['$http', '$uibModal',
     function askUserRole(data, optionalUrl) {
       var modalInstance = $uibModal.open({
         animation: true,
-        templateUrl: 'myModalContent.html',
-        controller: 'ModalInstanceCtrl',
+        templateUrl: 'userRoleContent.html',
+        controller: 'UserRoleModalCtrl',
         data: data,
         resolve: {
           modalData: function () {
@@ -128,7 +129,7 @@ app.factory('activeDialog', ['$http', '$uibModal',
 
   }]);
 
-app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, modalData) {
+app.controller('UserRoleModalCtrl', ['$scope', '$uibModalInstance', 'modalData', function ($scope, $uibModalInstance, modalData) {
 
   $scope.modalData = modalData;
 
@@ -139,4 +140,18 @@ app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, modalDa
   $scope.cancel = function () {
     $uibModalInstance.dismiss('cancel');
   };
-});
+}]);
+
+app.controller('AgreeTermsModalCtrl', ['$scope', '$uibModalInstance', 'modalData', function ($scope, $uibModalInstance, modalData) {
+  //todo work here
+
+  $scope.modalData = modalData;
+
+  $scope.ok = function () {
+    $uibModalInstance.close();
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+}]);

@@ -1,6 +1,6 @@
 //= require lib/utils
 
-app.controller('GuestSigninController', ['$scope', '$http', 'activeUsers', function($scope, $http, activeUsers) {
+app.controller('GuestSigninController', ['$scope', '$http', 'dialogFactory', function($scope, $http, dialogFactory) {
 	$scope.form = {};
 	$scope.error = false;
 
@@ -20,8 +20,8 @@ app.controller('GuestSigninController', ['$scope', '$http', 'activeUsers', funct
 						url = window.location;
 					} else {
 						url = window.location + '?invite=' + $scope.host.id;
-					} 
-					activeUsers.assignActiveUser(response.data, url);
+					}
+					dialogFactory.assignActiveUser(response.data, url);
 					// window.location = url;
 				}
 			}).catch(function(response) {
