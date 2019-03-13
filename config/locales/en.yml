@@ -358,7 +358,7 @@ en:
       host: "מארח"
       seminar_required: "מעוניין בערב הכנה"
       special_population: "מוכנות לאוכ' מיוחדות"
-      external_assignment: "not interested in participating this year"
+      external_assignment: "Witness Status"
       external_assignment_explain: "The witness doesn't want to be assigned this year"
       archived_explain: "I want to archive the witness"
       need_to_followup_explain: "could not be reached - need to followup"
