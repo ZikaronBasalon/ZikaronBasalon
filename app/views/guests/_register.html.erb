@@ -1,5 +1,9 @@
 <div class="text-center">
   <h3><%= t '.title' %></h3>
+  <p class="text-center margin-top-10 already_a_member">
+    <span><%= t 'users.new.already_a_member' %></span>
+    <a ng-click="toggleView('login')"><%= t 'users.new.sign_in_to_system' %></a>
+  </p>
   <p class="subtitle"><%= t '.subtitle' %></p>
 </div>
 
@@ -72,11 +76,6 @@
   </div>
 
   <input type="submit" class="btn btn-warning form-control" value="<%= t 'shared.continue' %>">
-
-  <p class="text-center margin-top-10">
-    <span><%= t 'users.new.already_a_member' %></span>
-    <a ng-click="toggleView('login')"><%= t 'users.new.sign_in_to_system' %></a>
-  </p>
 </form>
 
 
