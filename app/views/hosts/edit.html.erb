@@ -237,61 +237,63 @@
           </div>
         <% end %>
 
-        <div class="form-group">
-          <label class="required"><%= t '.preparation_wanted' %></label>
-          <div>
-            <ng-form name="preparationWantedGroup">
-              <div class="radio">
-                <label>
-                  <input type="radio" ng-model="host.preparation_wanted" ng-value="false" name="preparation_wanted" required>
-                  <%= t 'shared.no' %>
-                </label>
-              </div>
-              <div class="radio">
-                <label>
-                  <input type="radio" ng-model="host.preparation_wanted" ng-value="true" name="preparation_wanted" required>
-                  <%= t 'shared.yes' %>
-                </label>
-              </div>
-            </ng-form>
+        <div ng-if="host.country_id === 97">
+          <div class="form-group">
+            <label class="required"><%= t '.preparation_wanted' %></label>
+            <div>
+              <ng-form name="preparationWantedGroup">
+                <div class="radio">
+                  <label>
+                    <input type="radio" ng-model="host.preparation_wanted" ng-value="false" name="preparation_wanted" required>
+                    <%= t 'shared.no' %>
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" ng-model="host.preparation_wanted" ng-value="true" name="preparation_wanted" required>
+                    <%= t 'shared.yes' %>
+                  </label>
+                </div>
+              </ng-form>
+            </div>
           </div>
-        </div>
 
-        <div class="form-group"
-             ng-class="{true: 'has-error'}[submitted[stepIndex] && stepThree.strangers.$invalid]">
-          <label class="required"><%= t '.strangers' %></label>
-          <p class="help-block"><%= t '.strangers_help_block' %></p>
+          <div class="form-group"
+              ng-class="{true: 'has-error'}[submitted[stepIndex] && stepThree.strangers.$invalid]">
+            <label class="required"><%= t '.strangers' %></label>
+            <p class="help-block"><%= t '.strangers_help_block' %></p>
 
-          <div>
-            <select class="form-control" id="strangers"
-                    name="strangers"
-                    required
-                    ng-model="host.strangers"
-                    ng-options="o.v as o.n for o in [{ n: '<%= t '.strangers_yes' %>', v: true }, { n: '<%= t '.strangers_no' %>', v: false }]">
-              <option ng-show="!host.strangers" value=""><%= t 'shared.select' %></option>
-            </select>
+            <div>
+              <select class="form-control" id="strangers"
+                      name="strangers"
+                      required
+                      ng-model="host.strangers"
+                      ng-options="o.v as o.n for o in [{ n: '<%= t '.strangers_yes' %>', v: true }, { n: '<%= t '.strangers_no' %>', v: false }]">
+                <option ng-show="!host.strangers" value=""><%= t 'shared.select' %></option>
+              </select>
+            </div>
           </div>
-        </div>
 
-        <div class="form-group" ng-if="host.strangers"
-             ng-class="{true: 'has-error'}[submitted[stepIndex] && stepThree.max_guests.$invalid]">
-          <label for="max_guests" class="required"><%= t '.max_guests' %></label>
-          <p class="help-block"><%= t '.max_guests_help_block' %></p>
-          <input type="number" class="form-control"
-                 required name="max_guests"
-                 id="max_guests" ng-model="host.max_guests"
-                 min="0">
-        </div>
+          <div class="form-group" ng-if="host.strangers"
+              ng-class="{true: 'has-error'}[submitted[stepIndex] && stepThree.max_guests.$invalid]">
+            <label for="max_guests" class="required"><%= t '.max_guests' %></label>
+            <p class="help-block"><%= t '.max_guests_help_block' %></p>
+            <input type="number" class="form-control"
+                  required name="max_guests"
+                  id="max_guests" ng-model="host.max_guests"
+                  min="0">
+          </div>
 
-        <div class="form-group" ng-if="host.strangers">
-          <label for="public_text" ><%= t '.public_text' %></label>
-          <p class="help-block"><%= t '.public_text_help_block' %></p>
-          <textarea
-            type="text" class="form-control"
-            name="public_text"
-            id="public_text" ng-model="host.public_text"
-            rows="7">
-            </textarea>
+          <div class="form-group" ng-if="host.strangers">
+            <label for="public_text" ><%= t '.public_text' %></label>
+            <p class="help-block"><%= t '.public_text_help_block' %></p>
+            <textarea
+              type="text" class="form-control"
+              name="public_text"
+              id="public_text" ng-model="host.public_text"
+              rows="7">
+              </textarea>
+          </div>
         </div>
 
         <div class="form-group">
