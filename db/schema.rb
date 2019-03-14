@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190307221712) do
+ActiveRecord::Schema.define(version: 20190313143518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,44 +75,45 @@ ActiveRecord::Schema.define(version: 20190307221712) do
   end
 
   create_table "hosts", force: :cascade do |t|
-    t.string   "address",                    limit: 255
+    t.string   "address",                         limit: 255
     t.integer  "city_id"
     t.integer  "max_guests"
     t.text     "free_text"
-    t.datetime "created_at",                                                null: false
-    t.datetime "updated_at",                                                null: false
-    t.boolean  "strangers",                              default: true
+    t.datetime "created_at",                                                     null: false
+    t.datetime "updated_at",                                                     null: false
+    t.boolean  "strangers",                                   default: true
     t.text     "status"
-    t.string   "contact",                    limit: 255
+    t.string   "contact",                         limit: 255
     t.text     "survivor_details"
     t.float    "lat"
     t.float    "lng"
     t.datetime "date"
-    t.boolean  "evening_public",                         default: true
-    t.boolean  "hosted_before",                          default: false
+    t.boolean  "evening_public",                              default: true
+    t.boolean  "hosted_before",                               default: false
     t.date     "event_date"
-    t.string   "event_time",                 limit: 255
+    t.string   "event_time",                      limit: 255
     t.integer  "floor"
     t.boolean  "elevator"
-    t.string   "org_name",                   limit: 255
-    t.string   "org_role",                   limit: 255
-    t.string   "event_language",             limit: 255, default: "hebrew"
-    t.boolean  "contacted",                              default: false
-    t.string   "phone",                      limit: 255
-    t.boolean  "survivor_needed",                        default: false
+    t.string   "org_name",                        limit: 255
+    t.string   "org_role",                        limit: 255
+    t.string   "event_language",                  limit: 255, default: "hebrew"
+    t.boolean  "contacted",                                   default: false
+    t.string   "phone",                           limit: 255
+    t.boolean  "survivor_needed",                             default: false
     t.integer  "witness_id"
     t.text     "public_text"
-    t.string   "concept",                    limit: 255
-    t.boolean  "received_registration_mail",             default: false
-    t.boolean  "contacted_witness",                      default: false
+    t.string   "concept",                         limit: 255
+    t.boolean  "received_registration_mail",                  default: false
+    t.boolean  "contacted_witness",                           default: false
     t.integer  "country_id"
     t.datetime "assignment_time"
-    t.boolean  "preparation_evening",                    default: false
-    t.boolean  "active",                                 default: true
-    t.integer  "invites_pending_count",                  default: 0
-    t.integer  "invites_confirmed_count",                default: 0
+    t.boolean  "preparation_evening",                         default: false
+    t.boolean  "active",                                      default: true
+    t.integer  "invites_pending_count",                       default: 0
+    t.integer  "invites_confirmed_count",                     default: 0
     t.boolean  "active_last_year"
     t.boolean  "preparation_wanted"
+    t.datetime "incomplete_registration_sent_at"
   end
 
   add_index "hosts", ["city_id"], name: "index_hosts_on_city_id", using: :btree
