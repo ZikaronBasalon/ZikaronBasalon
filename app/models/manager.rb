@@ -124,7 +124,7 @@ class Manager < ActiveRecord::Base
       end
     end
 
-    @cities = filter_cities(@cities, country_id, region_id)
+    @cities = filter_cities(@cities, country_id, region_id) if current_user.email != 'zikaronbasalonglobal@gmail.com'
 
 
     @cities.map{ |c| { id: c.id, name: c.name }}.sort_alphabetical_by{|c| c[:name] }
