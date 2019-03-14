@@ -33,6 +33,7 @@ class Manager < ActiveRecord::Base
     if region_id.present? || current_user.simple_admin?
       city_ids = cities.map {|c| c[:id] }
     end
+    filter[:received_registration_mail] = true if current_user.simple_admin?
 
     hosts = Host.includes(:city, :user, :witness, :invites)
     hosts = hosts.where(filter)

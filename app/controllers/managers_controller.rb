@@ -181,7 +181,7 @@ class ManagersController < ApplicationController
     end
 
     def host_filter
-      params[:filter].try(:[], :host)
+      params[:filter].try(:[], :host).presence || {}
     end
 
     def witness_filter
