@@ -4,9 +4,9 @@ class RegistrationsController < Devise::RegistrationsController
 	def create
     @resource = Manager.where('lower(temp_email) = ?', user_attributes[:email].downcase).first
 
-    if @resource 
+    if @resource
       @resource.user_attributes = user_attributes
-    else 
+    else
       if user_attributes[:type] == 'guest'
          @resource = Guest.new({ user_attributes: user_attributes, phone: params[:phone] })
       else
@@ -29,7 +29,8 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def after_sign_up_path_for(resource)
-  	return edit_polymorphic_path(resource, locale: nil) if resource.is_a?(Host)
+    return edit_polymorphic_path(resource, locale: nil) if resource.is_a?(Host)
+  	return polymorphic_path(resource, locale: nil) if resource.is_a?(Guest)
 		return polymorphic_path(resource, locale: nil) if resource.is_a?(Manager)
     '/' # Or :prefix_to_your_route
   end
