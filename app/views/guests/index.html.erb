@@ -11,8 +11,8 @@
   <!-- Filters -->
   <form class="form-inline margin-bottom-20">
     <div class="form-group pull-left">
-      <input type="text" class="form-control" 
-             ng-model="search.query" 
+      <input type="text" class="form-control"
+             ng-model="search.query"
              placeholder="<%= t 'shared.free_search' %>" />
     </div>
   </form>
@@ -29,7 +29,7 @@
         <td>אורחים נוספים</td>
         <th>מחק</th>
         <th>הפוך ללא זמין</th>
-      </tr> 
+      </tr>
     </thead>
     <tbody>
       <tr ng-repeat="guest in guests" ng-click="editGuest(guest)">
@@ -41,14 +41,14 @@
         <td>{{ formatDateTime((guest.invites[0] || {}).created_at) }}</td>
         <td>{{ plusOnes(guest) }}</td>
         <td>
-          <button ng-click="deleteGuest(guest)" 
+          <button ng-click="deleteGuest(guest)"
                   class="btn btn-warning">
             <%= t 'shared.delete' %>
           </button>
         </td>
         <td>
         <% if current_user.meta.is_a?(Manager) && current_user.admin? && !current_user.sub_admin? %>
-          <button ng-disabled="!guest.user.active_this_year" ng-click="deactivateGuest(guest)" 
+          <button ng-disabled="!guest.user.active_this_year" ng-click="deactivateGuest(guest)"
                   class="btn btn-warning">
             <%= t 'shared.deactivate' %>
           </button>
@@ -58,14 +58,16 @@
     </tbody>
   </table>
 
-  <uib-pagination total-items="totalGuests" 
-                  ng-model="pagination.currentPage" 
+  <uib-pagination total-items="totalGuests"
+                  ng-model="pagination.currentPage"
                   items-per-page="10"
                   ng-change="pageChanged()"
-                  class="pagination-sm" 
-                  previous-text="&lsaquo;" 
-                  next-text="&rsaquo;" 
-                  first-text="&laquo;" 
+                  class="pagination-sm"
+                  max-size="5"
+                  boundary-link-numbers="true"
+                  previous-text="&lsaquo;"
+                  next-text="&rsaquo;"
+                  first-text="&laquo;"
                   last-text="&raquo;">
   </uib-pagination>
 

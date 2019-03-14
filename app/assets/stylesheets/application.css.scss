@@ -16,6 +16,9 @@
  *
  */
 
+ //= require ui-select
+
+
 @import url('https://fonts.googleapis.com/css?family=Alef:400,700');
 @import "compass/css3/flexbox";
 // @import "external/bootstrap.min.css";
@@ -59,6 +62,16 @@ ul {
 
 label {
 	color: #a3a3a3;
+}
+
+label.required::before {
+	content:" *";
+	color: red;
+}
+
+label.chkbx::before {
+	position: absolute;
+	margin-right: -27px;
 }
 
 .help-block {
@@ -553,4 +566,9 @@ body {
 [uib-typeahead-popup].dropdown-menu {
     height: 200px;
     overflow-y: scroll;
+}
+
+.already_a_member {
+	padding-top: 10px;
+	font-size: 120%;
 }

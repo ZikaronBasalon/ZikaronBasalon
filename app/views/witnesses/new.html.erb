@@ -1,4 +1,4 @@
-<div class="col-xs-12" id="witness-new-form" ng-controller="WitnessNewController" ng-init="init(<%= @witness.to_json(:methods => [:city_name]) %>)">
+<div class="col-xs-12" id="witness-new-form" ng-controller="WitnessNewController as vm" ng-init="init(<%= @witness.to_json(:methods => [:city_name]) %>)">
 
 	<h1><%= t '.title' %></h1>
 
@@ -6,7 +6,7 @@
 
   <form name="form" ng-class="{true: 'error'}[submitted]" novalidate>
     <div class="form-group">
-      <label for="full_name"><%= t 'users.new.labels.full_name' %></label>
+      <label for="full_name" class="required"><%= t 'users.new.labels.full_name' %></label>
       <input type="text" class="form-control"
              id="full_name"
              ng-model="witness.full_name"
@@ -14,18 +14,18 @@
     </div>
 
     <div class="form-group">
-      <label for="city_name">עיר/יישוב</label>
+      <label for="city_name" class="required">עיר/יישוב</label>
       <input type="text" class="form-control"
              id="city_name"
              ng-model="current_city"
              uib-typeahead="city as city.name for city in getCityLocation($viewValue, 97)"
              ng-blur="onCitySet()"
              required>
-             <div class="text-danger" ng-hide="current_city_exist">אם אינך מוצא את עירך ברשימה, הזן עיר אקראית ופנה אלינו לתמיכה.</div>
+             <div class="text-danger" ng-hide="current_city_exist"><%= t 'shared.missing_city_hint' %></div>
     </div>
 
     <div class="form-group">
-      <label for="address">כתובת</label>
+      <label for="address" class="required">כתובת</label>
       <input type="text" class="form-control"
              id="address"
              ng-model="witness.address"
@@ -33,7 +33,7 @@
     </div>
 
     <div class="form-group">
-      <label for="phone"><%= t 'hosts.edit.phone' %></label>
+      <label for="phone" class="required"><%= t 'hosts.edit.phone' %></label>
       <input type="text" class="form-control"
              id="phone"
              ng-model="witness.phone"
@@ -50,7 +50,7 @@
     </div>
 
     <div class="form-group ">
-      <label for="witness_type" >
+      <label for="witness_type" class="required">
         <%= t 'shared.type' %>
       </label>
       <select class="form-control" id="witness_type"
@@ -79,26 +79,20 @@
     </div>
 
     <div class="form-group">
-      <label for="event_language">השפה בה איש העדות מעביר את העדות</label>
-      <div ng-show="!otherLanguageVisible">
-        <select class="form-control" id="event_language"
-                name="event_language"
-                required
-                ng-model="witness.language" ng-change="languageChanged()">
-          <option ng-show="!witness.language" value=""><%= t 'shared.select' %></option>
-          <option value="hebrew">עברית</option>
-          <option value="english">English</option>
-          <option value="arabic">العربية</option>
-          <option value="french">Français</option>
-          <option value="russian">русский</option>
-          <option value="spanish">Español</option>
-          <option value="other"><%= t 'shared.other' %></option>
-        </select>
-      </div>
-
-      <input type="text" class="form-control"
-                 ng-model="host.event_language"
-                 ng-show="otherLanguageVisible" />
+      <label for="event_language" class="required">השפה בה איש העדות מעביר את העדות</label>
+      <ui-select multiple
+          tagging="tagToOption"
+          id="event_language"
+          name="event_language"
+          class="form-control"
+          ng-model="vm.languageOptions"
+          theme="bootstrap"
+          required>
+        <ui-select-match>{{$item.label}}</ui-select-match>
+        <ui-select-choices repeat="languageOption in knownLanguageOptions">
+          {{languageOption.label}}
+        </ui-select-choices>
+      </ui-select>
     </div>
 
     <div class="form-group">
@@ -163,7 +157,7 @@
           <label>
             <input type="checkbox" ng-model="witness.available_day4">
             <%= t 'shared.available_day4' %>
-            <%= t 'shared.holocaust_day' %>
+            <%= t 'shared.holocaust_eve' %>
           </label>
         </div>
       </div>
@@ -172,7 +166,7 @@
           <label>
             <input type="checkbox" ng-model="witness.available_day5">
             <%= t 'shared.available_day5' %>
-            <%= t 'shared.holocaust_eve' %>
+            <%= t 'shared.holocaust_day' %>
           </label>
         </div>
       </div>

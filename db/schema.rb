@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190213075043) do
+ActiveRecord::Schema.define(version: 20190313143518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,44 +75,45 @@ ActiveRecord::Schema.define(version: 20190213075043) do
   end
 
   create_table "hosts", force: :cascade do |t|
-    t.string   "address",                    limit: 255
+    t.string   "address",                         limit: 255
     t.integer  "city_id"
     t.integer  "max_guests"
     t.text     "free_text"
-    t.datetime "created_at",                                                null: false
-    t.datetime "updated_at",                                                null: false
-    t.boolean  "strangers",                              default: true
+    t.datetime "created_at",                                                     null: false
+    t.datetime "updated_at",                                                     null: false
+    t.boolean  "strangers",                                   default: true
     t.text     "status"
-    t.string   "contact",                    limit: 255
+    t.string   "contact",                         limit: 255
     t.text     "survivor_details"
     t.float    "lat"
     t.float    "lng"
     t.datetime "date"
-    t.boolean  "evening_public",                         default: true
-    t.boolean  "hosted_before",                          default: false
+    t.boolean  "evening_public",                              default: true
+    t.boolean  "hosted_before",                               default: false
     t.date     "event_date"
-    t.string   "event_time",                 limit: 255
+    t.string   "event_time",                      limit: 255
     t.integer  "floor"
     t.boolean  "elevator"
-    t.string   "org_name",                   limit: 255
-    t.string   "org_role",                   limit: 255
-    t.string   "event_language",             limit: 255, default: "hebrew"
-    t.boolean  "contacted",                              default: false
-    t.string   "phone",                      limit: 255
-    t.boolean  "survivor_needed",                        default: false
+    t.string   "org_name",                        limit: 255
+    t.string   "org_role",                        limit: 255
+    t.string   "event_language",                  limit: 255, default: "hebrew"
+    t.boolean  "contacted",                                   default: false
+    t.string   "phone",                           limit: 255
+    t.boolean  "survivor_needed",                             default: false
     t.integer  "witness_id"
     t.text     "public_text"
-    t.string   "concept",                    limit: 255
-    t.boolean  "received_registration_mail",             default: false
-    t.boolean  "contacted_witness",                      default: false
+    t.string   "concept",                         limit: 255
+    t.boolean  "received_registration_mail",                  default: false
+    t.boolean  "contacted_witness",                           default: false
     t.integer  "country_id"
     t.datetime "assignment_time"
-    t.boolean  "preparation_evening",                    default: false
-    t.boolean  "active",                                 default: true
-    t.integer  "invites_pending_count",                  default: 0
-    t.integer  "invites_confirmed_count",                default: 0
+    t.boolean  "preparation_evening",                         default: false
+    t.boolean  "active",                                      default: true
+    t.integer  "invites_pending_count",                       default: 0
+    t.integer  "invites_confirmed_count",                     default: 0
     t.boolean  "active_last_year"
     t.boolean  "preparation_wanted"
+    t.datetime "incomplete_registration_sent_at"
   end
 
   add_index "hosts", ["city_id"], name: "index_hosts_on_city_id", using: :btree
@@ -165,30 +166,31 @@ ActiveRecord::Schema.define(version: 20190213075043) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "",    null: false
-    t.string   "encrypted_password",     limit: 255, default: "",    null: false
-    t.string   "reset_password_token",   limit: 255
+    t.string   "email",                   limit: 255, default: "",    null: false
+    t.string   "encrypted_password",      limit: 255, default: "",    null: false
+    t.string   "reset_password_token",    limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0,     null: false
+    t.integer  "sign_in_count",                       default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
-    t.datetime "created_at",                                         null: false
-    t.datetime "updated_at",                                         null: false
-    t.string   "full_name",              limit: 255
-    t.string   "phone",                  limit: 255
-    t.boolean  "admin",                              default: false
+    t.string   "current_sign_in_ip",      limit: 255
+    t.string   "last_sign_in_ip",         limit: 255
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+    t.string   "full_name",               limit: 255
+    t.string   "phone",                   limit: 255
+    t.boolean  "admin",                               default: false
     t.integer  "meta_id"
-    t.string   "meta_type",              limit: 255
-    t.boolean  "sub_admin",                          default: false
+    t.string   "meta_type",               limit: 255
+    t.boolean  "sub_admin",                           default: false
     t.integer  "previous_meta_id"
-    t.string   "previous_meta_type",     limit: 255
-    t.boolean  "active_this_year",                   default: true
-    t.boolean  "current_year_admin",                 default: false
-    t.string   "locale",                 limit: 255
+    t.string   "previous_meta_type",      limit: 255
+    t.boolean  "active_this_year",                    default: true
+    t.boolean  "current_year_admin",                  default: false
+    t.string   "locale",                  limit: 255
     t.datetime "agreed_to_terms_at"
+    t.boolean  "subscribed_to_marketing"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -197,16 +199,29 @@ ActiveRecord::Schema.define(version: 20190213075043) do
   add_index "users", ["meta_type"], name: "index_users_on_meta_type", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "version_associations", force: :cascade do |t|
+    t.integer "version_id"
+    t.string  "foreign_key_name", null: false
+    t.integer "foreign_key_id"
+    t.string  "foreign_type"
+  end
+
+  add_index "version_associations", ["foreign_key_name", "foreign_key_id", "foreign_type"], name: "index_version_associations_on_foreign_key", using: :btree
+  add_index "version_associations", ["version_id"], name: "index_version_associations_on_version_id", using: :btree
+
   create_table "versions", force: :cascade do |t|
-    t.string   "item_type",  limit: 255, null: false
-    t.integer  "item_id",                null: false
-    t.string   "event",      limit: 255, null: false
-    t.string   "whodunnit",  limit: 255
+    t.string   "item_type",      limit: 255, null: false
+    t.integer  "item_id",                    null: false
+    t.string   "event",          limit: 255, null: false
+    t.string   "whodunnit",      limit: 255
     t.text     "object"
     t.datetime "created_at"
+    t.integer  "transaction_id"
+    t.text     "object_changes"
   end
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
+  add_index "versions", ["transaction_id"], name: "index_versions_on_transaction_id", using: :btree
 
   create_table "witnesses", force: :cascade do |t|
     t.string   "full_name",             limit: 255

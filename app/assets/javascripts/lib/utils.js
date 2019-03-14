@@ -77,23 +77,23 @@ function getUrlParameter(name, url) {
   return results == null ? null : results[1];
 }
 
-function formatLanguage(language) {
-  switch(language) {
-    case 'hebrew':
-      return 'עברית';
-    case 'english':
-      return 'English'
-    case 'arabic':
-      return 'العربية';
-    case 'french':
-      return 'Français';
-    case 'russian':
-      return 'русский';
-    case 'spanish':
-      return 'Español';
-    default:
-        return language;
+function languageNamesDictionary() {
+	return {
+    'hebrew': 'עברית',
+    'english': 'English',
+    'arabic': 'العربية',
+    'french': 'Français',
+    'russian': 'русский' ,
+    'spanish': 'Español'
   }
+}
+
+function formatLanguage(language) {
+  if (!language) { return language };
+
+  var dictionary = languageNamesDictionary();
+  labels = _.map(_.split(language, ','), function(lang) { return dictionary[lang] || lang; });
+  return _.join(labels, ',');
 }
 
 function formatWitnessAvailabilityTime(witness) {
@@ -168,7 +168,7 @@ function formatConcept(concept) {
           return '';
     }
   }
-  
+
 }
 
 function formatAddressDisplay(address) {

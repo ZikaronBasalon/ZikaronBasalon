@@ -158,7 +158,7 @@ en:
     name: "Name"
     delete: "Delete"
     country: "Country"
-    country_placeholder: "Type and select from dropdown"
+    country_placeholder: "Please type country name"
     share_on_fb: "Share evening on Facebook"
     og_title: "Come join my Zikaron Basalon evening!"
     og_description: "Come join my Zikaron Basalon evening!"
@@ -177,9 +177,10 @@ en:
     region: "Region"
     hey: "Hi"
     witness_contacted_red: "Red"
-    agreed_to_terms_at: "By signing in I agree to the"
-    terms_of_service: "terms of use"
-
+    agreed_to_terms_at: I have read and understood the <a href='https://www.zikaronbasalon.com/terms' target='_blank'>Terms and Conditions</a> and the <a href='https://www.zikaronbasalon.com/terms' target='_blank'>Privacy Policy</a> of Zikaron Basalon Website and agree to their terms
+    subscribed_to_marketing: I hereby agree to receive from time to time informative messages from Zikaron BaSalon, by electronic or other means
+    not_on_the_list: NOT ON THE LIST
+    missing_city_hint: If you cannot find your city, select "NOT ON THE LIST" and contact support
   views:
     pagination:
       first: "First"
@@ -273,6 +274,7 @@ en:
       city_placeholder: "Enter city"
       address_placeholder: "Full address (without city)"
       temp_subtitle: "We will open the registration to join a salon in a few days!"
+      please_fill_in_required_fields: Please fill in all required fields
     show:
       title: "Host profile"
       personal_details: "Your information"
@@ -356,7 +358,7 @@ en:
       host: "מארח"
       seminar_required: "מעוניין בערב הכנה"
       special_population: "מוכנות לאוכ' מיוחדות"
-      external_assignment: "not interested in participating this year"
+      external_assignment: "Witness Status"
       external_assignment_explain: "The witness doesn't want to be assigned this year"
       archived_explain: "I want to archive the witness"
       need_to_followup_explain: "could not be reached - need to followup"

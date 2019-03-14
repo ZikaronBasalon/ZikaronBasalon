@@ -1,4 +1,5 @@
 //= require directives/isPhone
+//= require lib/utils
 
 app.controller('WitnessNewController', ['$scope','$http','$timeout', function($scope, $http, $timeout) {
 	$scope.witness = {
@@ -28,6 +29,9 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 		{ n: 'מטפל', v: 'therapist' }
 	];
 
+	$scope.knownLanguageOptions = _.map(languageNamesDictionary(), function(label, value) { return {value: value, label: label}; });
+	$scope.languages = [];
+
 	$scope.submitted = false;
 	$scope.alerts = [];
 	$scope.action = 'new';
@@ -39,10 +43,32 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 			$scope.witness = witness;
 			$scope.action = 'edit';
 		}
+		$scope.deserializeLanguage();
+		this.languageOptions = _.map($scope.languages, $scope.tagToOption);
 
     if(witness.city_id) {
       $scope.current_city = { name: $scope.witness.city_name, id: $scope.witness.city_id };
     }
+	}.bind(this)
+
+	$scope.deserializeLanguage = function() {
+		$scope.languages = $scope.witness.language ? _.map($scope.witness.language.split(',')) : []
+	}
+
+	$scope.serializeLanguage = function() {
+		$scope.witness.language = $scope.languages.join(',');
+	}
+
+	$scope.tagToOption = function(newTag) {
+		var knownOption = _.find($scope.knownLanguageOptions, function(option) {
+			return _.includes([option.label, option.value], newTag);
+		});
+
+		return knownOption || { value: newTag, label: newTag };
+	}
+
+	$scope.optionToTag = function(option) {
+		return option.value;
 	}
 
   $scope.onCitySet = function() {
@@ -63,7 +89,8 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
       params: {
         city: {
           country_id: country_id,
-          q: query
+          q: query,
+          witness_search: true
         }
       }
     }).then(function(response){
@@ -75,8 +102,9 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 
 	$scope.submit = function() {
 		$scope.submitted = true;
+		$scope.languages = _.map(this.languageOptions, $scope.optionToTag);
+		$scope.serializeLanguage();
 		if($scope.form.$valid) {
-
 			submitWitness()
 			.then(function(response) {
 				if(response.status === 201) {
@@ -94,7 +122,7 @@ app.controller('WitnessNewController', ['$scope','$http','$timeout', function($s
 		} else {
 				$("html, body").animate({ scrollTop: 0 }, "slow");
 			}
-	}
+	}.bind(this)
 
 	$scope.onCityNameBlur = function() {
   	$timeout(function() {

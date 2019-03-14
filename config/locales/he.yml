@@ -6,7 +6,7 @@ he:
         user:
           attributes:
             email:
-              taken: "כתובת המייל שהזנת תפוסה"
+              taken: "קיים משתמש עם כתובת המייל שהזנת. אנא התחבר/י למערכת"
               invalid: "אופס, משהו לא בסדר בכתובת המייל"
         witness:
           attributes:
@@ -35,7 +35,7 @@ he:
         password_confirmation: "הכנס אימות סיסמא"
         phone: "טלפון"
       submit: "המשך"
-      already_a_member: "נרשמת כבר?"
+      already_a_member: נרשמת בעבר בתור מארח/ת או אורח/ת?
       sign_in_to_system: "התחבר/י למערכת"
       guest_title: "הרשמה לאורח/ת זיכרון בסלון"
       guest_description: "מארחים רבים פותחים את סלונם לשכנים וחברים, ומזמינים אתכם להצטרף. כל מה שצריך לעשות זה להירשם, לחפש סלון שמתאים לכם ולשלוח בקשה למארח/ת."
@@ -184,8 +184,10 @@ he:
     region: "אזור"
     mailer_pargraph_noticed_profile_login: "*כדי לראות את הפרופיל שלך, יש לשים לב כי התחברת לאתר. במידה ואין את המילה ״הפרופיל שלי״ מצד ימין למעלה, יש ללחוץ על ״התחבר/י״ מצד שמאל למעלה."
     witness_contacted_red: "אדומים"
-    agreed_to_terms_at: "בהתחברות אני מסכים ל"
-    terms_of_service: "תנאי השימוש"
+    agreed_to_terms_at: אני מאשר/ת כי קראתי והבנתי את <a href='https://www.zikaronbasalon.com/terms' target='_blank'>התקנון</a> ואת <a href='https://www.zikaronbasalon.com/terms' target='_blank'>מדיניות הפרטיות</a> של אתר זיכרון בסלון, ואני מקבל/ת ומאשר/ת את תנאיהם
+    subscribed_to_marketing: אני מסכים/ה לקבל הודעות שונות מזיכרון בסלון ומי מטעמה, לרבות באמצעים אלקטרוניים
+    not_on_the_list: לא ברשימה
+    missing_city_hint: אם אינך מוצא את עירך, בחר ״לא ברשימה״ ופנה אלינו לתמיכה
 
   views:
     pagination:
@@ -258,12 +260,12 @@ he:
       elevator: "מעלית"
       ground_floor: "קומת קרקע"
       event_date: "תאריך הערב"
-      event_date_help_block: "אנחנו ממליצים לקיים את המפגש בערב יום השואה, אבל אפשר גם בימים הסמוכים לו. תמיד אפשר לחזור ולעדכן את הבחירה"
+      event_date_help_block: "אנחנו ממליצים לקיים את המפגש בערב יום השואה (1.5), אבל אפשר גם בימים הסמוכים לו. תמיד אפשר לחזור ולעדכן את הבחירה"
       event_date_placeholder: "בחירת תאריך"
       event_time: "שעה משוערת"
       event_time_help_block: "לא חייבים להכניס שעה, אבל זה יעזור לאורחים להתכוונן"
       event_language: "השפה בה יתקיים הערב"
-      preparation_wanted: מעוניין להשתתף בערב הכנה?
+      preparation_wanted: מעוניין/ת להשתתף בערב הכנה למארחים באזור מגורייך?
       survivor_needed: "האם תצטרך/י עזרה במציאת איש/אשת עדות?"
       survivor_needed_help_block: "לצערנו, אנחנו לא יכולים להבטיח לחבר אותך לאיש עדות, ומומלץ בחום לחפש באופן עצמאי. בכל מקרה, אפשר להשתמש בעדויות מצולמות המוצעות באתר שלנו"
       strangers: "האם היית רוצה להזמין אורחים דרך האתר שלנו?"
@@ -273,7 +275,7 @@ he:
       max_guests: "כמה אורחים יוכלו להצטרף לסלון?"
       max_guests_help_block: "הכוונה היא לאורחים שיוכלו לבקש להצטרף דרך האתר, ולא למספר הכולל את החברים והמשפחה"
       public_text: "מומלץ לכתוב כמה מילים על הסלון שהאורחים יוכלו לראות לפני שליחת הבקשה"
-      public_text_help_block: "לדוגמא: האם כדאי להביא משהו? האם הסלון יתמקד בנושא מסויים? מי יהיו המשתתפים? תמיד אפשר לחזור ולעדכן."
+      public_text_help_block: "לדוגמא: האם כדאי להביא משהו? האם הסלון יתמקד בנושא מסויים? מי יהיו המשתתפים? תמיד אפשר לחזור ולעדכן את הבחירה."
       free_text: "עוד משהו שאנחנו צריכים לדעת?"
       finish: "סיום הרשמה"
       thanks_for_joining: "אנחנו שמחים שהצטרפת לאלפי מארחים בארץ ובעולם!"
@@ -282,6 +284,7 @@ he:
       build_evening: "בניית הערב"
       city: "עיר/יישוב"
       temp_subtitle: ""
+      please_fill_in_required_fields: אנא מלא את כל שדות החובה
     show:
       title: "הפרופיל שלי"
       personal_details: "הפרטים שלי"
@@ -372,7 +375,7 @@ he:
       host: "מארח"
       seminar_required: "מעוניין בערב הכנה"
       special_population: "מוכנות לאוכ' מיוחדות"
-      external_assignment: "לא מעוניין להתארח השנה"
+      external_assignment: "סטטוס איש עדות"
       external_assignment_explain: "איש העדות לא מעוניין להתארח השנה"
       archived_explain: "איש העדות לא יתארח בעתיד"
       need_to_followup_explain: 'לא יכולנו לתפוס בטלפון - צריך לנסות שוב'
@@ -437,6 +440,9 @@ he:
       paragraph_2: "להתנהל החל מהשיחה הראשונה ביניכם ועד הערב עצמו."
       paragraph_3: "אם נתקלת בבעיות, אנחנו פה."
 
+    incomplete_registration:
+      subject: זיכרון בסלון - אנא השלם/י את תהליך ההרשמה
+
   request_mailer:
     pending_invite_received:
       title: "יש אורחים שמחכים לאישור להצטרף לסלון שלך!"
@@ -465,7 +471,7 @@ he:
       paragraph_1: "לצערנו, הסלון של %{name} כבר מלא ואין בו מקום. אבל אל דאגה, עדיין אפשר להצטרף לסלונים אחרים!"
       paragraph_2: "היית רוצה לארח ערב של זיכרון בסלון בעצמך? אם כן, "
       link_text: "אנחנו כאן."
-      link_url: "mailto:zikaronbasalon@gmail.com"
+      link_url: "mailto:info@zikaronbasalon.com>"
       paragraph_3: "*כדי לראות את הפרופיל שלך, יש לשים לב כי התחברת לאתר. במידה ואין את המילה ״הפרופיל שלי״ מצד ימין למעלה, יש ללחוץ על ״התחבר/י״ מצד שמאל למעלה."
 
     new_guest:

@@ -9,7 +9,9 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 	};
 
   $scope.current_city = '';
-  $scope.current_country = {id: 97, printable_name: 'Israel'};
+  if (document.getElementById('locale').className === 'he') {
+    $scope.current_country = { id: 97, printable_name: 'Israel' };
+  }
   $scope.current_city_exist = true;
 
 	$scope.steps = ['stepOne', 'stepTwo', 'stepThree'];
@@ -130,8 +132,10 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
   }
 
   $scope.submitStepThree = function() {
-	$scope.submitted[2] = true;
-	$scope.stepThree.preparationWantedGroup.$setDirty();
+  $scope.submitted[2] = true;
+  if ($scope.stepThree.preparationWantedGroup) {
+    $scope.stepThree.preparationWantedGroup.$setDirty();
+  }
   	if ($scope.stepThree.$valid) {
   		$http.put('/hosts/' + $scope.host.id + '.json', {
 	  		host: {
@@ -249,9 +253,9 @@ app.controller('HostSignupFinishedModal', ['$scope', '$uibModalInstance', 'host'
   $scope.buildEvening = function () {
   	var locale = document.getElementById('locale').className;
   	if (locale == "en") {
-  		window.location = 'https://docs.wixstatic.com/ugd/21e365_d619c48193b7494980d767ae3d25d1e2.pdf'
+  		window.location = 'https://www.zikaronbasalon.org/build-your-event'
   	} else {
-  		window.location = 'https://docs.wixstatic.com/ugd/21e365_5cf4662787344e1683d6f91f41e9c96c.pdf';
+  		window.location = 'https://www.zikaronbasalon.com/eveningsetup';
   	}
   };
 }]);

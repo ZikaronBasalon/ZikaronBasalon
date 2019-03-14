@@ -79,7 +79,7 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 				max_guests: $scope.host.max_guests
 			}
   	}).then(function success(response) {
-  		$scope.success = true; 
+  		$scope.success = true;
   	})
 	}
 
@@ -101,8 +101,12 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 	}
 
 	$scope.closeEvening = function() {
-		$scope.host.strangers = false;
-		$scope.save();
+		var locale = document.getElementById('locale').className;
+		var question = locale === 'he' ?  'האם אתה בטוח?' : 'Are you sure?';
+		if (confirm(question)) {
+			$scope.host.strangers = false;
+			$scope.save();
+		}
 	}
 
 	// $scope.fbShare = function () {
@@ -117,9 +121,9 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 	// 	}, function(response){
 
 	// 	});
-	// };	
+	// };
 
-	
+
 	// $scope.fbShare = function () {
 	// 	var base = window.location.origin;
 	// 	var link = encodeURIComponent(base + '/' + document.getElementById('locale').className + '/pages/home/'  + '?invite=' + $scope.host.id);
@@ -128,7 +132,7 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 	// 	  '_blank' // <- This is what makes it open in a new window.
 	// 	);
  //  	};
-	
+
 
 	  $scope.fbShare = function () {
   	FB.ui({
@@ -137,7 +141,7 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 		}, function(response){
 		});
   };
-	
+
 	function initInvites(invites) {
 		var invites = _.groupBy(invites, 'confirmed');
 		$scope.pendingInvites = invites[false];

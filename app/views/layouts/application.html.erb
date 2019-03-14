@@ -20,13 +20,30 @@
       ga('create', 'UA-49428934-2', 'zikaronbasalon.herokuapp.com');
       ga('send', 'pageview');
     </script>
+    <script>
+      window['_fs_debug'] = false;
+      window['_fs_host'] = 'fullstory.com';
+      window['_fs_org'] = 'JN38A';
+      window['_fs_namespace'] = 'FS';
+      (function(m,n,e,t,l,o,g,y){
+      if (e in m) {if(m.console && m.console.log) { m.console.log('FullStory namespace conflict. Please set window["_fs_namespace"].');} return;}
+      g=m[e]=function(a,b,s){g.q?g.q.push([a,b,s]):g._api(a,b,s);};g.q=[];
+      o=n.createElement(t);o.async=1;o.src='https://'+_fs_host+'/s/fs.js';
+      y=n.getElementsByTagName(t)[0];y.parentNode.insertBefore(o,y);
+      g.identify=function(i,v,s){g(l,{uid:i},s);if(v)g(l,v,s)};g.setUserVars=function(v,s){g(l,v,s)};g.event=function(i,v,s){g('event',{n:i,p:v},s)};
+      g.shutdown=function(){g("rec",!1)};g.restart=function(){g("rec",!0)};
+      g.consent=function(a){g("consent",!arguments.length||a)};
+      g.identifyAccount=function(i,v){o='account';v=v||{};v.acctId=i;g(o,v)};
+      g.clearUserCookie=function(){};
+      })(window,document,window['_fs_namespace'],'script','user');
+    </script>
     <%= include_gon %>
-    <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.1.min.js"></script> -->
-    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script> -->
-    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script> -->
-    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-sanitize.min.js"></script> -->
-    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.2/ui-bootstrap.min.js"></script> -->
-    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.2/ui-bootstrap-tpls.min.js"></script> -->
+<!--     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.2/ui-bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.2/ui-bootstrap-tpls.min.js"></script> -->
     <%= javascript_include_tag "application", "#{controller_name}.#{action_name}" if ZikaronBasalon::Application.assets.find_asset("#{controller.controller_name}.#{action_name}.js") %>
     <!-- prod: AIzaSyDSOmyr4VMv2qvWLO12OuYqH7o-67DRANk -->
     <!-- staging: AIzaSyDJ1u3XlTGQDKn6dR3vOH5bVswXBmaGiLM -->
@@ -89,20 +106,6 @@
     </div>
   </body>
   <script src="https://cdn.enable.co.il/licenses/enable-L3273orc1ftyhaj-0219-7697/init.js"></script>
-  <script type="text/ng-template" id="myModalContent.html">
-      <div class="modal-header">
-          <h3 class="modal-title"><center>{{modalData.translations.header}}</center></h3>
-      </div>
-      <div class="modal-body">
-          <center>{{modalData.translations.firstLine}}</center><br>
-          <center>{{modalData.translations.secondLine}}</center><br>
-      </div>
-
-      <div class="modal-footer">
-          <button class="btn btn-primary" type="button" ng-click="ok()">{{modalData.translations.stay}}</button>
-          <button class="btn btn-warning" type="button" ng-click="cancel()">{{modalData.translations.change}}</button>
-      </div>
-  </script>
   <script>
   window.fbAsyncInit = function() {
       FB.init({

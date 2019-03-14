@@ -2,45 +2,46 @@
 #
 # Table name: hosts
 #
-#  id                         :integer          not null, primary key
-#  address                    :string(255)
-#  city_id                    :integer
-#  max_guests                 :integer
-#  free_text                  :text
-#  created_at                 :datetime         not null
-#  updated_at                 :datetime         not null
-#  strangers                  :boolean          default(TRUE)
-#  status                     :text
-#  contact                    :string(255)
-#  survivor_details           :text
-#  lat                        :float
-#  lng                        :float
-#  date                       :datetime
-#  evening_public             :boolean          default(TRUE)
-#  hosted_before              :boolean          default(FALSE)
-#  event_date                 :date
-#  event_time                 :string(255)
-#  floor                      :integer
-#  elevator                   :boolean
-#  org_name                   :string(255)
-#  org_role                   :string(255)
-#  event_language             :string(255)      default("hebrew")
-#  contacted                  :boolean          default(FALSE)
-#  phone                      :string(255)
-#  survivor_needed            :boolean          default(FALSE)
-#  witness_id                 :integer
-#  public_text                :text
-#  concept                    :string(255)
-#  received_registration_mail :boolean          default(FALSE)
-#  contacted_witness          :boolean          default(FALSE)
-#  country_id                 :integer
-#  assignment_time            :datetime
-#  preparation_evening        :boolean          default(FALSE)
-#  active                     :boolean          default(TRUE)
-#  invites_pending_count      :integer          default(0)
-#  invites_confirmed_count    :integer          default(0)
-#  active_last_year           :boolean
-#  preparation_wanted         :boolean
+#  id                              :integer          not null, primary key
+#  address                         :string(255)
+#  city_id                         :integer
+#  max_guests                      :integer
+#  free_text                       :text
+#  created_at                      :datetime         not null
+#  updated_at                      :datetime         not null
+#  strangers                       :boolean          default(TRUE)
+#  status                          :text
+#  contact                         :string(255)
+#  survivor_details                :text
+#  lat                             :float
+#  lng                             :float
+#  date                            :datetime
+#  evening_public                  :boolean          default(TRUE)
+#  hosted_before                   :boolean          default(FALSE)
+#  event_date                      :date
+#  event_time                      :string(255)
+#  floor                           :integer
+#  elevator                        :boolean
+#  org_name                        :string(255)
+#  org_role                        :string(255)
+#  event_language                  :string(255)      default("hebrew")
+#  contacted                       :boolean          default(FALSE)
+#  phone                           :string(255)
+#  survivor_needed                 :boolean          default(FALSE)
+#  witness_id                      :integer
+#  public_text                     :text
+#  concept                         :string(255)
+#  received_registration_mail      :boolean          default(FALSE)
+#  contacted_witness               :boolean          default(FALSE)
+#  country_id                      :integer
+#  assignment_time                 :datetime
+#  preparation_evening             :boolean          default(FALSE)
+#  active                          :boolean          default(TRUE)
+#  invites_pending_count           :integer          default(0)
+#  invites_confirmed_count         :integer          default(0)
+#  active_last_year                :boolean
+#  preparation_wanted              :boolean
+#  incomplete_registration_sent_at :datetime
 #
 
 class Host < ActiveRecord::Base
@@ -67,6 +68,7 @@ class Host < ActiveRecord::Base
   after_update :assign_manager_by_country
   before_destroy :cancel_invites_and_assigned_witnesses
 
+  scope :incomplete_registration, -> { where.not(received_registration_mail: true) }
 
   def event_date
     (read_attribute(:event_date).presence || DateTime.parse("2019-05-01")).strftime('%Y-%m-%d')
