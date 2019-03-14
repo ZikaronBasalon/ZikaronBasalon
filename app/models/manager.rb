@@ -109,11 +109,10 @@ class Manager < ActiveRecord::Base
 
   def get_cities(current_user, country_id, region_id)
     if user.admin? || user.sub_admin?
-      @cities = City.includes(:managers).normalized.order('name desc')
+      @cities = City.includes(:managers).order('name desc')
     else
       @cities = City.includes(:managers).normalized.where(:id => cities.pluck(:id))
     end
-
 
     if user.simple_admin?
       communities = CommunityLeadership.where(manager_id: current_user.meta.id)
@@ -122,9 +121,7 @@ class Manager < ActiveRecord::Base
         @cities = @cities.where(id: community_city_ids)
       end
     end
-
-    @cities = filter_cities(@cities, country_id, region_id)
-
+    @cities = filter_cities(@cities, country_id, region_id) unless current_user.admin?
 
     @cities.map{ |c| { id: c.id, name: c.name }}.sort_alphabetical_by{|c| c[:name] }
   end
