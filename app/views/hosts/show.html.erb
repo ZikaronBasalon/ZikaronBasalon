@@ -68,7 +68,7 @@
       </div>
     </div>
 
-    <div class="col-xs-12" ng-if="host.strangers">
+    <div class="col-xs-12" ng-if="host.strangers && host.country_id == 97">
 
       <!--New: Direct registeration link to salon-->
       <strong><%= t '.register_link_explain' %></strong>
@@ -237,14 +237,14 @@
             </div>
           </div>
 
-          <div class="field-group">
+          <div class="field-group" ng-if="host.country_id == 97">
             <div class="info-label"><%= t '.labels.open_places' %></div>
             <div ng-show="host.strangers">
               <input type="number" ng-model="host.max_guests" min="0" class="form-control" style="width: 80px;">
             </div>
           </div>
 
-          <div class="field-group">
+          <div class="field-group" ng-if="host.country_id == 97">
             <div class="info-label"><%= t '.labels.public_text' %></div>
             <div>{{ host.public_text }}</div>
           </div>
