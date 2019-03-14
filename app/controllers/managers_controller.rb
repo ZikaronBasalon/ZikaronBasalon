@@ -240,4 +240,8 @@ class ManagersController < ApplicationController
     def need_to_followup
       params[:need_to_followup]
     end
+
+    def received_registration_mail
+      params[:received_registration_mail]
+    end
 end
