@@ -9,7 +9,9 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 	};
 
   $scope.current_city = '';
-  $scope.current_country = {id: 97, printable_name: 'Israel'};
+  if (document.getElementById('locale').className === 'he') {
+    $scope.current_country = { id: 97, printable_name: 'Israel' };
+  }
   $scope.current_city_exist = true;
 
 	$scope.steps = ['stepOne', 'stepTwo', 'stepThree'];
@@ -130,8 +132,10 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
   }
 
   $scope.submitStepThree = function() {
-	$scope.submitted[2] = true;
-	$scope.stepThree.preparationWantedGroup.$setDirty();
+  $scope.submitted[2] = true;
+  if ($scope.stepThree.preparationWantedGroup) {
+    $scope.stepThree.preparationWantedGroup.$setDirty();
+  }
   	if ($scope.stepThree.$valid) {
   		$http.put('/hosts/' + $scope.host.id + '.json', {
 	  		host: {

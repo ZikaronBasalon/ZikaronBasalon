@@ -33,6 +33,7 @@ class Manager < ActiveRecord::Base
     if region_id.present? || current_user.simple_admin?
       city_ids = cities.map {|c| c[:id] }
     end
+    filter[:received_registration_mail] = true if current_user.simple_admin?
 
     hosts = Host.includes(:city, :user, :witness, :invites)
     hosts = hosts.where(filter)
@@ -44,6 +45,10 @@ class Manager < ActiveRecord::Base
 
     # sort
     sort = 'hosts.created_at' if sort.blank? || sort == 'created_at'
+    if sort == 'city'
+      hosts = hosts.joins(:city)
+      sort = 'cities.name'
+    end
     sort_order = !reverse_ordering.to_i.zero? ? " desc" : " asc"
     hosts = hosts.order(sort + sort_order)
 
@@ -65,6 +70,10 @@ class Manager < ActiveRecord::Base
 
     # sort
     sort = 'witnesses.created_at' if sort.blank? || sort == 'created_at'
+    if sort == 'city.name'
+      witnesses = witnesses.joins(:city)
+      sort = 'cities.name'
+    end
     sort_order = " desc"
     witnesses = witnesses.order(sort + sort_order)
 
@@ -107,7 +116,7 @@ class Manager < ActiveRecord::Base
     end
 
 
-    if user.simple_admin?
+    if user.simple_admin? && current_user.email != 'zikaronbasalonglobal@gmail.com'
       communities = CommunityLeadership.where(manager_id: current_user.meta.id)
       community_city_ids = communities.map(&:city_id)
       if communities.size > 0
@@ -115,7 +124,7 @@ class Manager < ActiveRecord::Base
       end
     end
 
-    @cities = filter_cities(@cities, country_id, region_id)
+    @cities = filter_cities(@cities, country_id, region_id) if current_user.email != 'zikaronbasalonglobal@gmail.com'
 
 
     @cities.map{ |c| { id: c.id, name: c.name }}.sort_alphabetical_by{|c| c[:name] }
