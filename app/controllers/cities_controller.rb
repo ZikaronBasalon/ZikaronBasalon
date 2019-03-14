@@ -12,7 +12,7 @@ class CitiesController < ApplicationController
 
       if sub_params['witness_search'].nil?
         if manager_meta.present?
-          if current_user.simple_admin?
+          if current_user.simple_admin? && current_user.email != 'zikaronbasalonglobal@gmail.com'
             communities = CommunityLeadership.where(manager_id: current_user.meta.id)
             community_city_ids = communities.map(&:city_id)
             if communities.size > 0
