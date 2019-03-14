@@ -9,7 +9,8 @@ end
 
 desc 'send incomplete_registration emails to hosts who have not completed registration yet'
 task send_incomplete_registration: :environment do
-  relevant_hosts = Host.incomplete_registration.where(incomplete_registration_sent_at: nil).where('created_at < ?', 1.hour.ago)
+  relevant_hosts = Host.incomplete_registration.where(incomplete_registration_sent_at: nil).where('created_at > ?', DateTime.new(2019, 3, 1)).where('created_at > ?', 5.minutes.ago)
+
   relevant_hosts.each do |host|
     begin
       host.update_columns(incomplete_registration_sent_at: Time.current)
