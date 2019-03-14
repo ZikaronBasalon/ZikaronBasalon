@@ -26,7 +26,11 @@ class ManagersController < ApplicationController
 
     # get lists
 
-    @cities = @manager.get_cities(current_user, country_id, region_id)
+    if current_user.email == 'zikaronbasalonglobal@gmail.com'
+      @cities = City.where.not(country_id: 97)
+    else
+      @cities = @manager.get_cities(current_user, country_id, region_id)
+    end
     @countries = @manager.get_countries
     @regions = @manager.get_regions(country_id)
 
