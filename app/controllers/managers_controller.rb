@@ -5,14 +5,15 @@ class ManagersController < ApplicationController
   respond_to :html, :json
 
   def get_country_id_and_region_id
-    region_id = 37
+    region_id = 37 unless current_user.admin?
     if params[:filter].present? && params[:filter][:host].present? && params[:filter][:host][:region_id].present?
       region_id = params[:filter][:host][:region_id]
       params[:filter][:host].delete :region_id
     end
 
     # get country_id
-    country_id = params[:filter].present? && params[:filter][:host].present? ? params[:filter][:host][:country_id] : "97"
+    country_id = 97 unless current_user.admin?
+    country_id = params[:filter][:host][:country_id] if params[:filter].present? && params[:filter][:host].present?
 
     return country_id, region_id
   end
