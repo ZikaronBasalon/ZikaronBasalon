@@ -80,9 +80,9 @@ class Manager < ActiveRecord::Base
     witnesses = witnesses.where(filter)
     witnesses = witnesses.where("LOWER(full_name) LIKE LOWER(?)", "%#{query.downcase}%") if query.present?
     if has_host.present?
-      if has_host === 'true'
+      if has_host == 'true'
         witnesses = witnesses.where("host_id IS NOT NULL")
-      elsif has_host === 'false'
+      elsif has_host == 'false'
         witnesses = witnesses.where(host_id: nil)
       end
     end
@@ -115,14 +115,15 @@ class Manager < ActiveRecord::Base
       @cities = City.includes(:managers).normalized.where(:id => cities.pluck(:id))
     end
 
-    if user.simple_admin?
+    if user.simple_admin? && current_user.email != 'zikaronbasalonglobal@gmail.com'
       communities = CommunityLeadership.where(manager_id: current_user.meta.id)
       community_city_ids = communities.map(&:city_id)
       if communities.size > 0
         @cities = @cities.where(id: community_city_ids)
       end
     end
-    @cities = filter_cities(@cities, country_id, region_id) unless current_user.admin?
+
+    @cities = filter_cities(@cities, country_id, region_id) if !current_user.admin? && current_user.email != 'zikaronbasalonglobal@gmail.com'
 
     @cities.map{ |c| { id: c.id, name: c.name }}.sort_alphabetical_by{|c| c[:name] }
   end
