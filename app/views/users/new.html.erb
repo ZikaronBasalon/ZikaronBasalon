@@ -2,16 +2,25 @@
         ng-init="init('<%= @type %>')" >
 
   <div class="text-center title-container">
+
     <% if params[:type] === 'host' || params[:type] === 'guest' %>
       <div ng-if="form.type === 'host'">
         <h2><%= t '.title' %></h2>
         <div class="description"><%= t '.description' %></div>
         <div class="description"><%= t '.description2' %></div>
+        <p class="already_a_member">
+          <span><%= t '.already_a_member' %></span>
+          <a href="/<%=I18n.locale.to_s%>/users/sign_in"><%= t '.sign_in_to_system' %></a>
+        </p>
       </div>
 
       <div ng-if="form.type === 'guest'">
         <h2><%= t '.guest_title' %></h2>
         <div class="description"><%= t '.guest_description' %></div>
+        <p class="already_a_member">
+          <span><%= t '.already_a_member' %></span>
+          <a href="/<%=I18n.locale.to_s%>/users/sign_in"><%= t '.sign_in_to_system' %></a>
+        </p>
       </div>
 
       <div class="margin-top-20">
@@ -28,7 +37,13 @@
       <div class="description">
         <%= t '.manager_description' %>
       </div>
+    <p class="already_a_member">
+      <span><%= t '.already_a_member' %></span>
+      <a href="/<%=I18n.locale.to_s%>/users/sign_in"><%= t '.sign_in_to_system' %></a>
+    </p>
     <% end %>
+
+
   </div>
 
   <form
@@ -109,9 +124,5 @@
 
     <input type="submit" class="btn btn-warning form-control" value="<%= t 'shared.continue' %>">
 
-    <p>
-      <span><%= t '.already_a_member' %></span>
-      <a href="/<%=I18n.locale.to_s%>/users/sign_in"><%= t '.sign_in_to_system' %></a>
-    </p>
   </form>
 </div>

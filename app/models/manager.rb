@@ -44,6 +44,10 @@ class Manager < ActiveRecord::Base
 
     # sort
     sort = 'hosts.created_at' if sort.blank? || sort == 'created_at'
+    if sort == 'city'
+      hosts = hosts.joins(:city)
+      sort = 'cities.name'
+    end
     sort_order = !reverse_ordering.to_i.zero? ? " desc" : " asc"
     hosts = hosts.order(sort + sort_order)
 
@@ -65,6 +69,10 @@ class Manager < ActiveRecord::Base
 
     # sort
     sort = 'witnesses.created_at' if sort.blank? || sort == 'created_at'
+    if sort == 'city.name'
+      witnesses = witnesses.joins(:city)
+      sort = 'cities.name'
+    end
     sort_order = " desc"
     witnesses = witnesses.order(sort + sort_order)
 

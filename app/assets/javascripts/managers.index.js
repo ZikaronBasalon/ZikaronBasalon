@@ -3,7 +3,9 @@ app.controller('ManagerIndexController', ['$scope','$http', function($scope, $ht
   $scope.cities = [];
   $scope.current_manager = null;
   $scope.current_movil = null;
-  $scope.current_country = { id: 97, printable_name: 'Israel' };
+  if (document.getElementById('locale').className === 'he') {
+    $scope.current_country = { id: 97, printable_name: 'Israel' };
+  }
 
   $scope.init = function() {
     var current_manager_id = localStorage.getItem("current_manager_id");

@@ -3,7 +3,10 @@
 //= require directives/managerLink
 
 app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$location', function($scope, $uibModal, $http, $location) {
-    $scope.host_current_country = { id: 97, printable_name: 'Israel' }
+    if (document.getElementById('locale').className === 'he') {
+        $scope.current_country = { id: 97, printable_name: 'Israel' };
+    }
+
     $scope.hosts = [];
     $scope.search = {
         host: { country_id: 97 },
