@@ -2,7 +2,7 @@
       ng-init="init(<%= @host.to_json(:include => [:user, :witness, :city, { invites: { :include => { guest: { :include => :user } } } }, { comments: { :include => :user } }], :methods => [:converted_time]) %>)">
   <div class="col-xs-12">
     <div>
-<!--       <button class="btn btn-primary" 
+<!--       <button class="btn btn-primary"
               style="background-color: #3b5998;"
               ng-click="fbShare();">
         <%= t 'shared.share_on_fb' %>
@@ -10,7 +10,7 @@
     </div>
     <h1><%= t '.title' %></h1>
   </div>
-  
+
   <div class="col-sm-8 col-xs-12">
     <div class="col-xs-12" ng-if="success">
       <div class="alert alert-success" role="alert">
@@ -68,7 +68,7 @@
       </div>
     </div>
 
-    <div class="col-xs-12" ng-if="host.strangers">
+    <div class="col-xs-12" ng-if="host.strangers && host.country_id == 97">
 
       <!--New: Direct registeration link to salon-->
       <strong><%= t '.register_link_explain' %></strong>
@@ -101,7 +101,7 @@
               <a ng-href="/<%=I18n.locale.to_s%>/witnesses/{{host.witness.id}}"><b>{{ host.witness.full_name }}</b></a>
            </div>
          </div>
-          
+
           <div class="field-group">
             <div class="info-label"><%= t '.labels.phone' %></div>
             <div>{{ host.witness.phone }}</div>
@@ -185,7 +185,7 @@
            </div>
         </div>
         <div class="panel-body">
-          
+
           <div class="field-group">
             <div class="info-label"><%= t '.labels.date_and_time' %></div>
             <div>
@@ -210,8 +210,8 @@
         </div>
 
         <div class="panel-body">
-          
-          <div class="field-group">
+
+          <div class="field-group" ng-if="host.country_id == 97">
             <div class="info-label"><%= t '.labels.salon_type' %></div>
             <div>
               <div class="radio">
@@ -237,14 +237,14 @@
             </div>
           </div>
 
-          <div class="field-group">
+          <div class="field-group" ng-if="host.country_id == 97">
             <div class="info-label"><%= t '.labels.open_places' %></div>
             <div ng-show="host.strangers">
               <input type="number" ng-model="host.max_guests" min="0" class="form-control" style="width: 80px;">
             </div>
           </div>
 
-          <div class="field-group">
+          <div class="field-group" ng-if="host.country_id == 97">
             <div class="info-label"><%= t '.labels.public_text' %></div>
             <div>{{ host.public_text }}</div>
           </div>
@@ -264,7 +264,7 @@
              <div class="info-title"><%= t '.manager_actions' %></div>
           </div>
           <div class="panel-body">
-            
+
             <div class="field-group">
               <div class="info-label"><%= t '.labels.contacted' %></div>
               <div>
@@ -350,16 +350,16 @@
         </div>
 
         <div class="col-xs-12 panel">
-          <div comment-form obj="host" resource="hosts" 
+          <div comment-form obj="host" resource="hosts"
                user-id="<%= current_user.id %>"
                callback="commentCallback"></div>
-        </div>   
+        </div>
       </div>
     <% end %>
 
     <% if current_user.meta.is_a?(Manager) || current_user.admin? || @host.witness || 1 %>
       <div class="col-xs-6">
-        <button class="btn btn-warning"  
+        <button class="btn btn-warning"
                   ng-click="save()">
           <%= t 'shared.save' %>
         </button>
@@ -373,7 +373,7 @@
     <% end %>
     <% if current_user.meta.is_a?(Manager) && current_user.admin? && !current_user.sub_admin? %>
       <div class="col-xs-6">
-      <button class="btn btn-warning" ng-disabled="!host.active" 
+      <button class="btn btn-warning" ng-disabled="!host.active"
              ng-click="deactivateHost()">
         <%= t 'shared.deactivate' %>
       </button>
@@ -381,7 +381,7 @@
     <% end %>
 
   </div>
-  
+
   <% if current_user.meta.is_a?(Manager) %>
     <div class="col-xs-4">
       <div comment-list comments="host.comments"/></div>
