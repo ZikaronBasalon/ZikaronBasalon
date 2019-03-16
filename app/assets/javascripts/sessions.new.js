@@ -15,7 +15,7 @@ app.controller('UserSigninController', ['$scope', '$http', '$uibModal', 'dialogF
 				}
 			}).then(function(response) {
 				if(response.status === 201) {
-					dialogFactory.assignActiveUser(response.data);
+					dialogFactory.askTermsAgreement(response.data);
 					return;
 				}
 			}).catch(function(response) {

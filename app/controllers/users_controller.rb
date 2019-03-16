@@ -4,6 +4,10 @@ class UsersController < ApplicationController
 		@type = params[:type]
 	end
 
+	def mark_terms_agreement
+		binding.pry
+	end
+
 	def assignrole
 		if !params[:changerole].nil?
 			user_role = RoleChanger.new(params[:id])

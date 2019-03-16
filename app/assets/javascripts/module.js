@@ -62,7 +62,9 @@ app.factory('dialogFactory', ['$http', 'activeDialog',
       }
     }
     function askTermsAgreement() {
-      // todo
+      debugger
+      var termsData = gon.termsModal;
+      activeDialog.askAgreeTerms(termsData);
     }
   }]);
 
@@ -77,17 +79,20 @@ app.factory('activeDialog', ['$http', '$uibModal',
         animation: true,
         templateUrl: 'agreeTerms.html',
         controller: 'AgreeTermsModalCtrl',
-        data: data,
+        data: modalData,
         resolve: {
           modalData: function () {
-            return data;
+            return modalData;
           }
         }
       });
       modalInstance.result.then(function (selectedItem) {
-        assignUserRole(data, false, optionalUrl); //the user clicked ok""
-      }, function () {
-        assignUserRole(data, true, optionalUrl);
+        $http.put('/users/' + modalData.user_id + '/mark_terms_agreement.json')
+        .then(function(response) {
+          debugger
+        }).catch(function() {
+          location.reload();
+        })
       });
     }
     function askUserRole(data, optionalUrl) {

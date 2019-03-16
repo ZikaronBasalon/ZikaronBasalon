@@ -44,6 +44,7 @@ ZikaronBasalon::Application.routes.draw do
     resources :sessions, only: [:new, :create]
     resources :users, only: [:new] do
       put :assignrole, on: :member
+      put :mark_terms_agreement, on: :member
     end
     resources :witnesses do
       get :assign, on: :member

@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= content_for?(:title) ? yield(:title) : "זכרון בסלון" %></title>
     <%= favicon_link_tag %>
+    <% unless Rails.env.development? %>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -37,6 +38,7 @@
       g.clearUserCookie=function(){};
       })(window,document,window['_fs_namespace'],'script','user');
     </script>
+    <% end %>
     <%= include_gon %>
 <!--     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>
@@ -128,23 +130,21 @@
           <center>{{modalData.translations.mainText}}</center><br>
           <div class="form-group">
             <div class="checkbox checkbox-inline">
-              <label>
-                <input type="checkbox" ng-model="modalData.agreeTerms">
-                {{modalData.translations.agreeTermsText}}
+              <input type="checkbox" ng-model="modalData.agreeTerms">
+              <label ng-bind-html="modalData.translations.agreeTermsText">
               </label>
             </div>
           </div>
           <div class="form-group">
             <div class="checkbox checkbox-inline">
-              <label>
-                <input type="checkbox" ng-model="modalData.agreeMarketing">
-                {{modalData.translations.agreeMarketingText}}
+              <input type="checkbox" ng-model="modalData.agreeMarketing">
+              <label ng-bind-html="modalData.translations.agreeMarketingText">
               </label>
             </div>
           </div>
       </div>
 
-      <div class="modal-footer">
+      <div class="modal-footer" style="text-align:center;">
           <button class="btn btn-primary" type="button" ng-click="ok()">{{modalData.translations.continue}}</button>
       </div>
   </script>
