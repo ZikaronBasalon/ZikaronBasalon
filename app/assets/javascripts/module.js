@@ -27,11 +27,27 @@ app.factory('dialogFactory', ['$http', 'activeDialog',
     };
     function assignActiveUser(data, optionalUrl) {
       var locale = document.getElementById('locale').className;
-      if (!data.active_this_year && (data.meta_type == "Host" || data.meta_type == "Guest")) {//if role not set for this year yet and is not an admin
+      if (!data.active_this_year && (data.meta_type == "Host" || data.meta_type == "Guest")) {
+        //if role not set for this year yet and is not an admin
         var changerole = false;
         var last_years_role = data.meta_type;//the was last years role
 
-        var translations = {en:{header:"Great to see you're back!",firstLine:"It's always nice to see people you know :)", secondLine:"",stay:"",change:""}, he:{header:"כיף שחזרתם!",firstLine:"תמיד כיף לראות פרצופים מוכרים :)", secondLine:"",stay:"",change:""}}
+        var translations = {
+          en: {
+            header: "Great to see you're back!",
+            firstLine: "It's always nice to see people you know :)",
+            secondLine: "",
+            stay: "",
+            change: ""
+          },
+          he: {
+            header: "כיף שחזרתם!",
+            firstLine: "תמיד כיף לראות פרצופים מוכרים :)",
+            secondLine: "",
+            stay: "",
+            change: ""
+          }
+        }
         if (last_years_role == "Host") {
           translations.he.secondLine = "תרצו להמשיך לארח גם השנה?";
           translations.he.stay = "כן! זו כבר מסורת";
@@ -54,10 +70,10 @@ app.factory('dialogFactory', ['$http', 'activeDialog',
       }
       else { //he already decided to be active this year or admin
         //regular login
-        if (typeof optionalUrl !== 'undefined') {
+        if (!!optionalUrl) {
           window.location = optionalUrl;
         } else {
-          window.location = '/' + locale + '/' + data.meta_type.toLowerCase() + 's/' + data.meta_id;
+          window.location = gon.userInfo.redirectLink;
         }
       }
     }
@@ -89,7 +105,7 @@ app.factory('activeDialog', ['$http', '$uibModal',
       modalInstance.result.then(function (selectedItem) {
         $http.put('/users/' + modalData.user_id + '/mark_terms_agreement.json')
         .then(function(response) {
-          debugger
+
         }).catch(function() {
           location.reload();
         })
@@ -121,10 +137,8 @@ app.factory('activeDialog', ['$http', '$uibModal',
         data = role_response.data
         if (typeof optionalUrl !== 'undefined') {
           window.location = optionalUrl;
-        } else if (data.meta_type == "Host") {
-          window.location = '/' + document.getElementById('locale').className + '/' + data.meta_type.toLowerCase() + 's/' + data.meta_id + '/edit';
         } else {
-          window.location = '/' + document.getElementById('locale').className + '/' + data.meta_type.toLowerCase() + 's/' + data.meta_id;
+          window.location = gon.userInfo.redirectLink;
         }
       })
       .catch(function(role_response) {
@@ -154,9 +168,5 @@ app.controller('AgreeTermsModalCtrl', ['$scope', '$uibModalInstance', 'modalData
 
   $scope.ok = function () {
     $uibModalInstance.close();
-  };
-
-  $scope.cancel = function () {
-    $uibModalInstance.dismiss('cancel');
   };
 }]);
