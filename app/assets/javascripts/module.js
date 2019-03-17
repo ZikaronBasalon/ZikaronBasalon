@@ -77,10 +77,9 @@ app.factory('dialogFactory', ['$http', 'activeDialog',
         }
       }
     }
-    function askTermsAgreement() {
-      debugger
+    function askTermsAgreement(userData) {
       var termsData = gon.termsModal;
-      activeDialog.askAgreeTerms(termsData);
+      activeDialog.askAgreeTerms(termsData, userData);
     }
   }]);
 
@@ -105,8 +104,9 @@ app.factory('activeDialog', ['$http', '$uibModal',
       modalInstance.result.then(function (selectedItem) {
         $http.put('/users/' + modalData.user_id + '/mark_terms_agreement.json')
         .then(function(response) {
-
+          debugger
         }).catch(function() {
+          debugger
           location.reload();
         })
       });
