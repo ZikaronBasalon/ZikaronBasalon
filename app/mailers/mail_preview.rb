@@ -87,4 +87,8 @@ class MailPreview < MailView
     HostMailer.witness_assigned(host_id, witness_id, :he)
   end
 
+  def incomplete_registration_he
+    host = Host.last
+    HostMailer.incomplete_registration(host.id)
+  end
 end

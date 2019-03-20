@@ -442,6 +442,9 @@ he:
       paragraph_2: "להתנהל החל מהשיחה הראשונה ביניכם ועד הערב עצמו."
       paragraph_3: "אם נתקלת בבעיות, אנחנו פה."
 
+    incomplete_registration:
+      subject: זיכרון בסלון - אנא השלם/י את תהליך ההרשמה
+
   request_mailer:
     pending_invite_received:
       title: "יש אורחים שמחכים לאישור להצטרף לסלון שלך!"

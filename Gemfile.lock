@@ -55,7 +55,7 @@ GEM
     bullet (5.9.0)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11)
-    byebug (11.0.0)
+    byebug (10.0.2)
     chunky_png (1.3.11)
     coderay (1.1.2)
     coffee-rails (4.2.2)
@@ -85,7 +85,7 @@ GEM
     concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
     crass (1.0.4)
-    css_parser (1.7.0)
+    css_parser (1.6.0)
       addressable
     derailed (0.1.0)
       derailed_benchmarks
@@ -97,12 +97,11 @@ GEM
       rack (>= 1)
       rake (> 10, < 13)
       thor (~> 0.19)
-    devise (3.5.10)
+    devise (4.6.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
-      railties (>= 3.2.6, < 5)
+      railties (>= 4.1.0, < 6.0)
       responders
-      thread_safe (~> 0.1)
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.7.0)
@@ -124,7 +123,7 @@ GEM
       temple (>= 0.8.0)
       tilt
     heapy (0.1.4)
-    httparty (0.16.4)
+    httparty (0.16.3)
       mime-types (~> 3.0)
       multi_xml (>= 0.5.2)
     i18n (0.9.5)
@@ -177,12 +176,12 @@ GEM
     multi_json (1.13.1)
     multi_xml (0.6.0)
     nested_form (0.3.2)
-    newrelic_rpm (6.1.0.352)
+    newrelic_rpm (6.0.0.351)
     nokogiri (1.10.1)
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
-    paper_trail (10.2.1)
-      activerecord (>= 4.2, < 6.1)
+    paper_trail (10.1.0)
+      activerecord (>= 4.2, < 6.0)
       request_store (~> 1.1)
     paper_trail-association_tracking (2.0.0)
     pg (0.20.0)
@@ -192,8 +191,8 @@ GEM
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
-    pry-byebug (3.7.0)
-      byebug (~> 11.0)
+    pry-byebug (3.6.0)
+      byebug (~> 10.0)
       pry (~> 0.10)
     pry-rails (0.3.9)
       pry (>= 0.10.4)
@@ -296,7 +295,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    temple (0.8.1)
+    temple (0.8.0)
     test-unit (3.3.0)
       power_assert
     therubyracer (0.12.3)
@@ -314,7 +313,7 @@ GEM
     warden (1.2.7)
       rack (>= 1.0)
     will_paginate (3.1.6)
-    xray-rails (0.3.2)
+    xray-rails (0.3.1)
       rails (>= 3.1.0)
 
 PLATFORMS
@@ -328,7 +327,7 @@ DEPENDENCIES
   coffee-rails
   compass-rails
   derailed
-  devise (~> 3.5.6)
+  devise (~> 4.6.0)
   figaro
   gon
   google_places
@@ -370,4 +369,4 @@ RUBY VERSION
    ruby 2.4.5p335
 
 BUNDLED WITH
-   2.0.1
+   1.17.3
