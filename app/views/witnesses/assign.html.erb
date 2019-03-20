@@ -1,5 +1,5 @@
 <div class="col-xs-12" ng-controller="WitnessAssignController"
-     ng-init="init(<%= @witness.to_json() %>, <%= @city_id.to_json %> )">
+     ng-init="init(<%= @witness.to_json() %>, <%= @city_id.to_json %>, <%= @event_language.to_json %>)">
   <div class="row">
     <div class="col-xs-12" ng-if="success">
       <div class="alert alert-success" role="alert">
@@ -22,6 +22,19 @@
                  uib-typeahead="city as city.name for city in getCityLocation($viewValue, 97)"
                  placeholder="<%= t 'shared.city' %>">
         </div>
+        <div class="form-group">
+          <select class="form-control" ng-model="filter.event_language">
+            <option value=""><%= t 'shared.event_language' %></option>
+            <option value="hebrew">עברית</option>
+            <option value="english">English</option>
+            <option value="arabic">العربية</option>
+            <option value="french">Français</option>
+            <option value="russian">русский</option>
+            <option value="spanish">Español</option>
+            <option value="other"><%= t 'shared.other' %></option>
+          </select>
+        </div>
+
 
         <div class="form-group pull-left">
           <input type="text" class="form-control" ng-model="filter.query"
@@ -61,6 +74,15 @@
               <%= t 'shared.free_text' %>
               <span class="caret" ng-if="sortProp === 'free_text'"></span>
             </th>
+            <th>
+              <%= t '.accesability' %>
+            </th>
+            <th>
+              <%= t 'shared.language' %>
+            </th>
+            <th>
+              <%= t '.availability' %>
+            </th>
             <th></th>
           </tr>
         </thead>
@@ -72,6 +94,9 @@
             <td>{{ host.address }}</td>
             <td>{{ formatBool(!host.hosted_before) }}</td>
             <td>{{ host.free_text }}</td>
+            <td>{{ getAccesability(host) }}</td>
+            <td>{{ formatLanguage(host.event_language) }}</td>
+						<td>{{ formatDate(host.event_date) }} {{ formatTime(host.event_time) }}</td>
             <td>
             	<button ng-click="assignHost(host)" class="btn btn-warning">
 	            	<%= t 'shared.assign' %>

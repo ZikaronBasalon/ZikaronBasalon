@@ -1,11 +1,15 @@
 //= require lib/utils
 app.controller('WitnessAssignController', ['$scope', '$http', '$uibModal',
   function($scope, $http, $uibModal) {
-	$scope.formatBool = formatBool;
+  $scope.formatBool = formatBool;
+  $scope.formatLanguage = formatLanguage;
+  $scope.formatDate = formatDate;
+  $scope.formatTime = formatTime;
+	$scope.getAccesability = getAccesability;
 	$scope.filter = {};
   $scope.success = false;
 
-  $scope.init = function(witness, cityId) {
+  $scope.init = function(witness, cityId, eventLanguage) {
 
     $scope.pagination = {
       currentPage: 1
@@ -14,8 +18,11 @@ app.controller('WitnessAssignController', ['$scope', '$http', '$uibModal',
     $scope.witness = witness;
     $scope.hosts = [];
     $scope.filter.city_id = cityId;
+    $scope.filter.event_language = eventLanguage;
+
 
     $scope.$watch("filter.city_id", $scope.filterHosts, true);
+    $scope.$watch("filter.event_language", $scope.filterHosts, true);
 
     $scope.$watch('filter.query', _.throttle(function(oldVal, newVal) {
       if(newVal != oldVal) {
@@ -54,6 +61,10 @@ app.controller('WitnessAssignController', ['$scope', '$http', '$uibModal',
 
   	if($scope.filter.city_id) {
   		params.city_id = $scope.filter.city_id;
+    }
+
+  	if($scope.filter.event_language) {
+  		params.event_language = $scope.filter.event_language;
   	}
 
     if($scope.filter.query) {

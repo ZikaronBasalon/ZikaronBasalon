@@ -147,6 +147,8 @@ class WitnessesController < ApplicationController
         @hosts = Host.where(city_id: get_city_ids_for_assignment, survivor_needed: true)
       end
 
+      @hosts = @hosts.where(event_language: params[:event_language]) if params[:event_language]
+
       # Extra Filters replaces @hosts.select statement below
       @hosts = @hosts.where(received_registration_mail: true)
       if query.present?
