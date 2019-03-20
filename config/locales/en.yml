@@ -329,6 +329,7 @@ en:
     show:
       title: "פרופיל איש עדות"
     assign:
+      witness_assignment: ציוות איש עדות
       floor: floor
       elevator: elevator
       accesability: accesability

@@ -347,6 +347,7 @@ he:
     show:
       title: "פרופיל איש עדות"
     assign:
+      witness_assignment: ציוות איש עדות
       floor: קומה
       elevator: מעלית
       accesability: נגישות
