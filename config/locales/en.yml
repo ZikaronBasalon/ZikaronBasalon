@@ -328,6 +328,11 @@ en:
       how_brought: איך הגענו לאיש העדות
     show:
       title: "פרופיל איש עדות"
+    assign:
+      floor: floor
+      elevator: elevator
+      accesability: accesability
+      availability: availability
     assign_modal:
       title: "ציוות מארח ואיש עדות"
       subtitle: "כאן תוכלו לוודא כי מדובר בציוות מוצלח."

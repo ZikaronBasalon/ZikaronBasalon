@@ -347,6 +347,8 @@ he:
     show:
       title: "פרופיל איש עדות"
     assign:
+      floor: קומה
+      elevator: מעלית
       accesability: נגישות
       availability: זמינות
     assign_modal:

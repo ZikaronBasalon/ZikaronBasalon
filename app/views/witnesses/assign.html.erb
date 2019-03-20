@@ -1,5 +1,12 @@
 <div class="col-xs-12" ng-controller="WitnessAssignController"
-     ng-init="init(<%= @witness.to_json(:include => [{ comments: { :include => :user } }]) %>, <%= @city_id.to_json %>, <%= @event_language.to_json %>, <%= @available_day.to_json %>)">
+     ng-init="init(
+       <%= @witness.to_json(:include => [{ comments: { :include => :user } }]) %>,
+       <%= @city_id.to_json %>,
+       <%= @floor.to_json %>,
+       <%= @elevator.to_json %>,
+       <%= @event_language.to_json %>,
+       <%= @available_day.to_json %>)"
+    >
   <div class="row">
     <div class="col-xs-12" ng-if="success">
       <div class="alert alert-success" role="alert">
@@ -140,6 +147,19 @@
                  typeahead-on-select="onAssignCitySelect($item)"
                  uib-typeahead="city as city.name for city in getCityLocation($viewValue, 97)"
                  placeholder="<%= t 'shared.city' %>">
+        </div>
+        <div class="form-group">
+          <select class="form-control" ng-model="filter.floor">
+            <option value=""><%= t '.floor' %></option>
+            <option ng-repeat="x in [].constructor(10) track by $index" value="{{$index}}">{{$index}}</option>
+            <option value=">9"><%= t 'shared.other' %></option>
+          </select>
+        </div>
+        <div class="form-group">
+          <select class="form-control" ng-model="filter.elevator"
+              ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.yes' %>', v: 'true' }, { n: '<%= t 'shared.no' %>', v: 'false' }]">
+            <option value=""><%= t '.elevator' %></option>
+          </select>
         </div>
         <div class="form-group">
           <select class="form-control" ng-model="filter.event_language">

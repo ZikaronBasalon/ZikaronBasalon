@@ -147,6 +147,21 @@ class WitnessesController < ApplicationController
         @hosts = Host.where(city_id: get_city_ids_for_assignment, survivor_needed: true)
       end
 
+      if params[:floor]
+        if params[:floor][0] == '>'
+          above_floor = params[:floor][1..-1].to_i
+          @hosts = @hosts.where('floor > ?', above_floor)
+        else
+          floor = params[:floor].to_i
+          @hosts = @hosts.where(floor: floor)
+        end
+      end
+
+      if params[:elevator]
+        is_elevator = ActiveRecord::Type::Boolean.new.type_cast_from_user(params[:elevator])
+        @hosts = @hosts.where(elevator: is_elevator)
+      end
+
       @hosts = @hosts.where(event_language: params[:event_language]) if params[:event_language]
 
       if params[:available_day]
