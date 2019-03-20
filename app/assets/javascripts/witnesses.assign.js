@@ -1,4 +1,6 @@
 //= require lib/utils
+//= require directives/commentList
+
 app.controller('WitnessAssignController', ['$scope', '$http', '$uibModal',
   function($scope, $http, $uibModal) {
   $scope.formatBool = formatBool;
@@ -16,6 +18,7 @@ app.controller('WitnessAssignController', ['$scope', '$http', '$uibModal',
     };
 
     $scope.witness = witness;
+		$scope.comments = witness.comments;
     $scope.hosts = [];
     $scope.filter.city_id = cityId;
     $scope.filter.event_language = eventLanguage;
