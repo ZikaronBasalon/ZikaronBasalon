@@ -57,7 +57,6 @@ class ApplicationController < ActionController::Base
         continue: I18n.t('shared.continue')
       }
     };
-    gon.userInfo = { redirectLink: "/#{I18n.locale}/#{current_user.meta_type.downcase}s/#{current_user.meta_id}" }.merge(JSON.parse(current_user.to_json)) if current_user.present?
   end
 
 	def default_url_options(options = {})

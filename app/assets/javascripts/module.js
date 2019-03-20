@@ -73,7 +73,7 @@ app.factory('dialogFactory', ['$http', 'activeDialog',
         if (!!optionalUrl) {
           window.location = optionalUrl;
         } else {
-          window.location = gon.userInfo.redirectLink;
+          window.location = gon.redirectLink;
         }
       }
     }
@@ -138,7 +138,7 @@ app.factory('activeDialog', ['$http', '$uibModal',
         if (typeof optionalUrl !== 'undefined') {
           window.location = optionalUrl;
         } else {
-          window.location = gon.userInfo.redirectLink;
+          window.location = gon.redirectLink;
         }
       })
       .catch(function(role_response) {

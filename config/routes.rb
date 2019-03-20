@@ -11,7 +11,7 @@ ZikaronBasalon::Application.routes.draw do
 
     get 'my-profile', :to => 'users#profile'
 
-    devise_for :users, controllers: { registrations: "registrations" } do
+    devise_for :users, controllers: { registrations: 'registrations' } do
       get '/users/sign_out' => 'devise/sessions#destroy'
     end
 
@@ -61,10 +61,11 @@ ZikaronBasalon::Application.routes.draw do
 
     resources :invites, only: [:create, :update, :destroy]
 
-    match "pages/home", :to => 'pages#home', as: :host_search, :via => [:get, :post, :delete, :put]
-    match "pages/host_register_link", :to => 'pages#host_register_link', as: :host_register_link, :via => [:get, :post, :delete, :put]
-    get "pages/privacy_policy"
-    get "pages/welcome"
+    match 'pages/home', :to => 'pages#home', as: :host_search, :via => [:get, :post, :delete, :put]
+    match 'pages/host_register_link', :to => 'pages#host_register_link', as: :host_register_link, :via => [:get, :post, :delete, :put]
+    get 'pages/privacy_policy'
+    get 'pages/welcome'
+    post 'pages/missing_terms_agreement'
     root :to => 'pages#welcome'
   end
 end

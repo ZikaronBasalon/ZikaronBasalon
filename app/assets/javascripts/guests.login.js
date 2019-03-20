@@ -8,6 +8,15 @@ app.controller('GuestSigninController', ['$scope', '$http', 'dialogFactory', fun
 		$scope.error = false;
 		event.preventDefault();
 		if ($scope.signinForm.$valid) {
+			return $http.get('/pages/missing_terms_agreement', {
+				user: {
+					email: $scope.form.email,
+					password: $scope.form.password,
+				}
+			}).then(function(response) {
+				debugger
+			});
+
 			$http.post('/users/sign_in.json', {
 				user: {
 					email: $scope.form.email,
