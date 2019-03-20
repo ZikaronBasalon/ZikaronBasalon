@@ -149,6 +149,17 @@ class WitnessesController < ApplicationController
 
       @hosts = @hosts.where(event_language: params[:event_language]) if params[:event_language]
 
+      if params[:available_day]
+        @hosts =
+          if params[:available_day] == 'available_day_other'
+            know_dates = (1..30).map { |day| available_day_to_available_date("available_day#{day}") }.compact
+            @hosts.where.not(event_date: know_dates)
+          else
+            date = available_day_to_available_date(params[:available_day])
+            @hosts.where(event_date: date)
+          end
+      end
+
       # Extra Filters replaces @hosts.select statement below
       @hosts = @hosts.where(received_registration_mail: true)
       if query.present?
@@ -216,5 +227,14 @@ class WitnessesController < ApplicationController
 
   def query
     return params[:query]
+  end
+
+  private
+
+  def available_day_to_available_date(available_day)
+    return nil unless available_day&.start_with?('available_day')
+
+    d_m = I18n.t(available_day, scope: :shared, default: nil)
+    Date.strptime("#{d_m}.#{Time.current.to_date.year}", "%d.%m.%Y") if d_m
   end
 end
