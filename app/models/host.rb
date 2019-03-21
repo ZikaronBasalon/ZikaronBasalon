@@ -52,7 +52,7 @@ class Host < ActiveRecord::Base
   :invites_confirmed_count, :city_name, :status, :strangers, :contact, :survivor_details, :lat, :lng, :event_date,
   :event_time, :evening_public, :hosted_before, :floor, :elevator, :org_name, :org_role,
   :event_language, :contacted, :preparation_evening, :phone, :witness_id, :user_attributes, :public_text, :concept,
-  :received_registration_mail, :contacted_witness, :country_id, :assignment_time, :preparation_wanted
+  :received_registration_mail, :contacted_witness, :country_id, :assignment_time, :preparation_wanted, :date, :active, :active_last_year, :incomplete_registration_sent_at, :comment_ids, :invite_ids
 
   attr_accessor :available_places
 
