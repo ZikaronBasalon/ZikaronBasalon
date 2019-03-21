@@ -301,7 +301,7 @@ he:
         address: "כתובת"
         date_and_time: "תאריך ושעה משוערת"
         organization: "ארגון"
-        langauge: "שפה"
+        language: "שפה"
         accesability: "נגישות"
         salon_type: "סוג סלון"
         open_places: "מקומות פנויים"
@@ -348,6 +348,12 @@ he:
       how_brought: איך הגענו לאיש העדות
     show:
       title: "פרופיל איש עדות"
+    assign:
+      witness_assignment: ציוות איש עדות
+      floor: קומה
+      elevator: מעלית
+      accesability: נגישות
+      availability: זמינות
     assign_modal:
       title: "ציוות מארח ואיש עדות"
       subtitle: "כאן תוכלו לוודא כי מדובר בציוות מוצלח."
@@ -362,7 +368,7 @@ he:
       address: "כתובת"
       date_and_time: "תאריך ושעה משוערת"
       organization: "שייך לארגון"
-      langauge: "שפה"
+      language: "שפה"
       accesability: "נגישות הסלון"
       salon_type: "סוג סלון"
       open_places: "מקומות פנויים"

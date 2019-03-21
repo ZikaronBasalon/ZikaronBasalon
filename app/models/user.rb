@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-                  :full_name, :type, :phone, :agreed_to_terms_at, :subscribed_to_marketing, :active_this_year
+                  :full_name, :type, :phone, :agreed_to_terms_at, :subscribed_to_marketing, :active_this_year, :reset_password_sent_at, :remember_created_at, :sign_in_count, :current_sign_in_at, :last_sign_in_at, :current_sign_in_ip, :last_sign_in_ip, :admin, :meta_id, :meta_type, :sub_admin, :previous_meta_id, :previous_meta_type, :current_year_admin, :locale
   attr_accessor :type
 
   before_destroy :save_as_deleted_user

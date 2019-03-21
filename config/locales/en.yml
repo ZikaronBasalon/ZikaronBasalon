@@ -289,7 +289,7 @@ en:
         address: "Address"
         date_and_time: "Approximate date and time of evening"
         organization: "Do you represent any organization"
-        langauge: "Language"
+        language: "Language"
         accesability: "Accessibility"
         salon_type: "Open/closed salon"
         open_places: "How many guests do you want to invite?"
@@ -330,6 +330,12 @@ en:
       how_brought: איך הגענו לאיש העדות
     show:
       title: "פרופיל איש עדות"
+    assign:
+      witness_assignment: ציוות איש עדות
+      floor: floor
+      elevator: elevator
+      accesability: accesability
+      availability: availability
     assign_modal:
       title: "ציוות מארח ואיש עדות"
       subtitle: "כאן תוכלו לוודא כי מדובר בציוות מוצלח."
@@ -345,7 +351,7 @@ en:
       address: "כתובת"
       date_and_time: "תאריך ושעה משוערת"
       organization: "שייך לארגון"
-      langauge: "שפה"
+      language: "שפה"
       accesability: "נגישות הסלון"
       salon_type: "סוג סלון"
       open_places: "מקומות פנויים"
