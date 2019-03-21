@@ -9,7 +9,7 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
 
     $scope.hosts = [];
     $scope.search = {
-        host: { country_id: 97 },
+        host: { },
         witness: {},
         reverseOrdering: false
     };
