@@ -3,10 +3,9 @@
   <div class="text-center title-container">
     <div class="title"><%= t '.title' %></div>
   </div>
-
   <form ng-submit="submit($event)" name="passwordForm">
-    <p class="has-error" ng-show="error">
-      <%= t '.reset_password_error' %>
+    <p class="alert alert-danger" ng-if="errors">
+      {{ errorMessages(errors) }}
     </p>
     <div class="form-group">
       <label for="password" class="required"><%= t 'users.new.labels.password' %></label>
