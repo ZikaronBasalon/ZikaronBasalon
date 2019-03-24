@@ -69,17 +69,16 @@ app.factory('dialogFactory', ['$http', 'activeDialog',
         activeDialog.askUserRole(data);
       }
       else { //he already decided to be active this year or admin
-        //regular login
-        if (!!optionalUrl) {
-          window.location = optionalUrl;
-        } else {
+        if (gon.redirectLink) {
           window.location = gon.redirectLink;
+        } else if (!!optionalUrl) {
+          window.location = optionalUrl;
         }
       }
     }
-    function askTermsAgreement(userData) {
+    function askTermsAgreement(userData, signinData) {
       var termsData = gon.termsModal;
-      activeDialog.askAgreeTerms(termsData, userData);
+      activeDialog.askAgreeTerms(termsData, userData, signinData);
     }
   }]);
 
@@ -89,26 +88,21 @@ app.factory('activeDialog', ['$http', '$uibModal',
       askAgreeTerms: askAgreeTerms,
       askUserRole: askUserRole
     };
-    function askAgreeTerms(modalData) {
+    function askAgreeTerms(modalData, userData, signinData) {
+      var data = { modalData: modalData, userData: userData, signinData: signinData };
       var modalInstance = $uibModal.open({
         animation: true,
         templateUrl: 'agreeTerms.html',
         controller: 'AgreeTermsModalCtrl',
-        data: modalData,
+        data: data,
         resolve: {
-          modalData: function () {
-            return modalData;
+          data: function () {
+            return data;
           }
         }
       });
       modalInstance.result.then(function (selectedItem) {
-        $http.put('/users/' + modalData.user_id + '/mark_terms_agreement.json')
-        .then(function(response) {
-          debugger
-        }).catch(function() {
-          debugger
-          location.reload();
-        })
+        //not interesting
       });
     }
     function askUserRole(data, optionalUrl) {
@@ -124,9 +118,9 @@ app.factory('activeDialog', ['$http', '$uibModal',
         }
       });
       modalInstance.result.then(function (selectedItem) {
-        assignUserRole(data, false, optionalUrl); //the user clicked ok""
+        assignUserRole(data, false, optionalUrl || gon.redirectLink); //the user clicked ok""
       }, function () {
-        assignUserRole(data, true, optionalUrl);
+        assignUserRole(data, true, optionalUrl || gon.redirectLink);
       });
     }
     function assignUserRole(data, changerole, optionalUrl) {
@@ -138,7 +132,7 @@ app.factory('activeDialog', ['$http', '$uibModal',
         if (typeof optionalUrl !== 'undefined') {
           window.location = optionalUrl;
         } else {
-          window.location = gon.redirectLink;
+          window.location = data.redirectLink;
         }
       })
       .catch(function(role_response) {
@@ -161,12 +155,24 @@ app.controller('UserRoleModalCtrl', ['$scope', '$uibModalInstance', 'modalData',
   };
 }]);
 
-app.controller('AgreeTermsModalCtrl', ['$scope', '$uibModalInstance', 'modalData', function ($scope, $uibModalInstance, modalData) {
-  //todo work here
-
-  $scope.modalData = modalData;
+app.controller('AgreeTermsModalCtrl', ['$scope', '$uibModalInstance', 'data', 'dialogFactory', '$http', function ($scope, $uibModalInstance, data, dialogFactory, $http) {
+  $scope.redMain = false;
+  $scope.modalData = data.modalData;
+  $scope.signinData = data.signinData;
+  $scope.userData = data.userData;
+  $scope.form = {};
 
   $scope.ok = function () {
-    $uibModalInstance.close();
+    if ($scope.agreeTermsForm.$valid) {
+      $uibModalInstance.close();
+      $http.put('/users/mark_terms_agreement.json', $scope.signinData)
+      .then(function(response) {
+        dialogFactory.assignActiveUser(response.data.user, response.data.redirectLink);
+      }).catch(function() {
+        location.reload();
+      })
+    } else {
+      $scope.redMain = true;
+    }
   };
 }]);
