@@ -97,7 +97,7 @@ GEM
       rack (>= 1)
       rake (> 10, < 13)
       thor (~> 0.19)
-    devise (4.6.1)
+    devise (4.5.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0, < 6.0)
@@ -327,7 +327,7 @@ DEPENDENCIES
   coffee-rails
   compass-rails
   derailed
-  devise (~> 4.6.0)
+  devise (~> 4.4, < 4.6)
   figaro
   gon
   google_places
