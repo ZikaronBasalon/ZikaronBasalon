@@ -7,8 +7,8 @@ class RoleChanger
   def change_role
     current_role_type = @user.meta_type
     new_role_name = current_role_type == "Host" ? "Guest" : "Host"
-    previous_exists = !@user.previous_meta_type.nil?
-    
+    previous_exists = @user.previous_meta_type.present?
+
     if previous_exists
       previous_phone = @user.meta.phone
       @user.meta_type, @user.previous_meta_type = @user.previous_meta_type, @user.meta_type #swap meta_type values using Parallel Assignment
@@ -65,6 +65,6 @@ class RoleChanger
     end
     nil
   end
- 
+
 end
 
