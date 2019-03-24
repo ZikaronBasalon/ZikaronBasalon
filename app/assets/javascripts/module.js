@@ -167,7 +167,11 @@ app.controller('AgreeTermsModalCtrl', ['$scope', '$uibModalInstance', 'data', 'd
       $uibModalInstance.close();
       $http.put('/users/mark_terms_agreement.json', $scope.signinData)
       .then(function(response) {
-        dialogFactory.assignActiveUser(response.data.user, response.data.redirectLink);
+        if (!gon.guestMode) {
+          dialogFactory.assignActiveUser(response.data.user, response.data.redirectLink);
+        } else if (gon.redirectLink) {
+          location.href = gon.redirectLink;
+        }
       }).catch(function() {
         location.reload();
       })

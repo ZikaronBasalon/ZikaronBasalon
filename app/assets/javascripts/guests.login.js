@@ -25,6 +25,7 @@ app.controller('GuestSigninController', ['$scope', '$http', 'dialogFactory', fun
 				if (!!response.data.user.agreed_to_terms_at && !!response.data.user.subscribed_to_marketing) {
 					window.location = url;
 				} else {
+					gon.guestMode = true;
 					// the user wasn't signed in; needs to agree, then we resubmit the form
 					dialogFactory.askTermsAgreement(response.data.user, userSubmit);
 				}
