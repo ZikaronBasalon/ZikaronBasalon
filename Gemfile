@@ -12,6 +12,7 @@ gem 'mail_view', :git => 'https://github.com/basecamp/mail_view.git'
 gem 'will_paginate'
 gem 'compass-rails'
 gem 'newrelic_rpm'
+gem 'kaminari' # needed for rails admin
 gem 'sidekiq'
 gem 'figaro'
 gem 'roadie'
