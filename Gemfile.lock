@@ -327,7 +327,7 @@ DEPENDENCIES
   coffee-rails
   compass-rails
   derailed
-  devise (~> 4.4, < 4.6)
+  devise (< 4.6.0)
   figaro
   gon
   google_places
