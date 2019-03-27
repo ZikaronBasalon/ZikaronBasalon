@@ -40,7 +40,7 @@ class PagesController < ApplicationController
   	@hosts = @hosts.paginate(:page => params[:page] || 1, :per_page => 10)
     @total_items = @hosts.count
 
-    @hosts = sort_by_field(@hosts, params[:sort] || 'user.full_name')
+    @hosts = sort_by_field(@hosts.to_a, params[:sort] || 'user.full_name')
     if params[:reverse_ordering].to_i == 0
       @hosts = @hosts.reverse
     end
