@@ -65,7 +65,7 @@ class Manager < ActiveRecord::Base
     return hosts, hosts_count
   end
 
-  def get_witnesses(is_paging, page, filter, query, sort, has_manager, has_host, language)
+  def get_witnesses(is_paging, page, filter, query, sort, reverse_ordering, has_manager, has_host, language)
     witnesses = Witness.includes(:city, :host)
 
     # sort
@@ -74,7 +74,7 @@ class Manager < ActiveRecord::Base
       witnesses = witnesses.joins(:city)
       sort = 'cities.name'
     end
-    sort_order = " desc"
+    sort_order = !reverse_ordering.to_i.zero? ? " desc" : " asc"
     witnesses = witnesses.order(sort + sort_order)
 
     witnesses = witnesses.where(filter)
