@@ -69,6 +69,18 @@ class Host < ActiveRecord::Base
   before_destroy :cancel_invites_and_assigned_witnesses
 
   scope :incomplete_registration, -> { where.not(received_registration_mail: true) }
+  scope :on_floor, ->(floor) {
+    if floor.is_a?(String)
+      if floor[0] == '>'
+        above_floor = floor[1..-1].to_i
+        where('floor > ?', above_floor)
+      else
+        where(floor: floor.to_i)
+      end
+    else
+      where(floor: floor)
+    end
+  }
 
   def event_date
     (read_attribute(:event_date).presence || DateTime.parse("2019-05-01")).strftime('%Y-%m-%d')

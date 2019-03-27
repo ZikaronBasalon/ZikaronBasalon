@@ -191,6 +191,7 @@ he:
     not_on_the_list: לא ברשימה
     missing_city_hint: אם אינך מוצא את עירך, בחר ״לא ברשימה״ ופנה אלינו לתמיכה
     elevator: מעלית
+    floor: קומה
 
   views:
     pagination:
