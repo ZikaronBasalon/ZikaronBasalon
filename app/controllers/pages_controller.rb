@@ -33,6 +33,7 @@ class PagesController < ApplicationController
 
     # additional filtering
     @hosts = @hosts.where('invites_confirmed_count + invites_pending_count < max_guests')
+    @hosts = @hosts.joins(:user) if query.present?
     @hosts = filter_by_query(@hosts, query)
     @hosts = filter_by_language(@hosts, 'event_language', params[:event_language])
 
