@@ -39,6 +39,11 @@ class PagesController < ApplicationController
     end
     @hosts = filter_by_language(@hosts, 'event_language', params[:event_language])
 
+    if params[:elevator]
+      is_elevator = ActiveRecord::Type::Boolean.new.type_cast_from_user(params[:elevator])
+      @hosts = @hosts.where(elevator: is_elevator)
+    end
+
   	@hosts = @hosts.paginate(:page => params[:page] || 1, :per_page => 10)
     @total_items = @hosts.count
 

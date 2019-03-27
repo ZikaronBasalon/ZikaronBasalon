@@ -75,6 +75,12 @@
           <input placeholder="תאריך" ng-model="search.event_date" ng-click="showDatePicker = !showDatePicker">
         </div>
 
+        <div class="form-group">
+          <select class="form-control" ng-model="search.elevator" ng-change="filter()"
+              ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.yes' %>', v: 'true' }, { n: '<%= t 'shared.no' %>', v: 'false' }]">
+            <option value=""><%= t 'shared.elevator' %></option>
+          </select>
+        </div>
 
         <!--<div class="form-group">-->
           <!---->
