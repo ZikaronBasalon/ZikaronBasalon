@@ -1,6 +1,6 @@
 //= require lib/utils
 
-app.controller('GuestSigninController', ['$scope', '$http', 'activeUsers', function($scope, $http, activeUsers) {
+app.controller('GuestSigninController', ['$scope', '$http', 'dialogFactory', function($scope, $http, dialogFactory) {
 	$scope.form = {};
 	$scope.error = false;
 
@@ -8,25 +8,26 @@ app.controller('GuestSigninController', ['$scope', '$http', 'activeUsers', funct
 		$scope.error = false;
 		event.preventDefault();
 		if ($scope.signinForm.$valid) {
-			$http.post('/users/sign_in.json', {
+			var userSubmit = {
 				user: {
 					email: $scope.form.email,
-					password: $scope.form.password,
+					password: $scope.form.password
 				}
-			}).then(function(response) {
-				if(response.status === 201) {
-					var url;
-					if(getUrlParameter('invite', window.location)) {
-						url = window.location;
-					} else {
-						url = window.location + '?invite=' + $scope.host.id;
-					} 
-					activeUsers.assignActiveUser(response.data, url);
-					// window.location = url;
+			};
+			return $http.post('/pages/missing_terms_agreement', userSubmit).then(function(response) {
+				gon.redirectLink = response.data.redirectLink;
+				if (getUrlParameter('invite', window.location)) {
+					url = window.location;
+				} else {
+					url = window.location + '?invite=' + $scope.host.id;
 				}
-			}).catch(function(response) {
-				if(response.status > 400) {
-					$scope.error = true;
+				gon.redirectLink = url;
+				if (!!response.data.user.agreed_to_terms_at && !!response.data.user.subscribed_to_marketing) {
+					window.location = url;
+				} else {
+					gon.guestMode = true;
+					// the user wasn't signed in; needs to agree, then we resubmit the form
+					dialogFactory.askTermsAgreement(response.data.user, userSubmit);
 				}
 			});
 		}

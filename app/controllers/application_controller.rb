@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 	include SessionsHelper
   protect_from_forgery
   before_filter :set_locale
+  before_filter :set_gon_stuff
   before_filter :set_fb_app
   respond_to :json, :html
   def is_admin
@@ -45,6 +46,18 @@ class ApplicationController < ActionController::Base
 	def set_fb_app
 		@fb_app_id = ENV['FACEBOOK_APP_ID'] || '754373994725074'
 	end
+
+  def set_gon_stuff
+    gon.termsModal = {
+      translations: {
+        header: I18n.t('shared.tos_updated'),
+        mainText: I18n.t('shared.we_have_updated'),
+        agreeTermsText: I18n.t('shared.agreed_to_terms_at').html_safe,
+        agreeMarketingText: I18n.t('shared.subscribed_to_marketing').html_safe,
+        continue: I18n.t('shared.continue')
+      }
+    };
+  end
 
 	def default_url_options(options = {})
 	  {locale: I18n.locale}

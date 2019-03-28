@@ -9,18 +9,15 @@ gem 'mail_view', :git => 'https://github.com/basecamp/mail_view.git'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-gem 'awesome_print'
 gem 'will_paginate'
-gem 'simple_form'
 gem 'compass-rails'
 gem 'newrelic_rpm'
-gem 'kaminari'
+gem 'kaminari' # needed for rails admin
 gem 'sidekiq'
 gem 'figaro'
 gem 'roadie'
 gem 'roadie-rails'
-#gem 'party_foul'
-gem 'devise', '~> 4.6.0'
+gem 'devise', '< 4.6.0'
 gem 'sort_alphabetical'
 gem 'google_places'
 gem 'puma'
@@ -39,6 +36,7 @@ group :staging do
 end
 
 group :development do
+  gem 'derailed'
   gem 'annotate'
   gem 'byebug'
   gem 'pry-rails'
