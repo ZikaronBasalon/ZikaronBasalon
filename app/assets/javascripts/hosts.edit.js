@@ -224,9 +224,10 @@ app.controller('HostSignupFinishedModal', ['$scope', '$uibModalInstance', 'host'
   };
 
   $scope.fbShare = function () {
+    var url = host.country_id === 97 ? 'https://www.zikaronbasalon.com/' : 'https://www.zikaronbasalon.org/';
   	FB.ui({
 		  method: 'share',
-		  href: 'http://www.zikaronbasalon.com/'
+		  href: url,
 		}, function(response){
 
 		});

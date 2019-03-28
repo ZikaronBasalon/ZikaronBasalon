@@ -219,7 +219,7 @@
                  ng-show="otherLanguageVisible" />
         </div>
 
-        <% if I18n.locale == :he %>
+        <div ng-if="stepTwo.country_id.$modelValue.id === 97">
           <div class="form-group"
                ng-class="{true: 'has-error'}[submitted[stepIndex] && stepThree.survivor_needed.$invalid]">
             <label class="required"><%= t '.survivor_needed' %></label>
@@ -235,9 +235,7 @@
               </select>
             </div>
           </div>
-        <% end %>
 
-        <div ng-if="stepTwo.country_id.$modelValue.id === 97">
           <div class="form-group">
             <label class="required"><%= t '.preparation_wanted' %></label>
             <div>
