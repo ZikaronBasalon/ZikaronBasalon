@@ -97,7 +97,7 @@ GEM
       rack (>= 1)
       rake (> 10, < 13)
       thor (~> 0.19)
-    devise (4.5.0)
+    devise (4.6.2)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0, < 6.0)
@@ -177,7 +177,7 @@ GEM
     multi_xml (0.6.0)
     nested_form (0.3.2)
     newrelic_rpm (6.0.0.351)
-    nokogiri (1.10.1)
+    nokogiri (1.10.2)
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
     paper_trail (10.1.0)
@@ -327,7 +327,7 @@ DEPENDENCIES
   coffee-rails
   compass-rails
   derailed
-  devise (< 4.6.0)
+  devise (= 4.6.2)
   figaro
   gon
   google_places
