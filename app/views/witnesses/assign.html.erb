@@ -1,5 +1,14 @@
 <div class="col-xs-12" ng-controller="WitnessAssignController"
-     ng-init="init(<%= @witness.to_json() %>, <%= @city_id.to_json %> )">
+     ng-init="init(
+       <%= @witness.to_json(:include => [{ comments: { :include => :user } }]) %>,
+       <%= @city_id.to_json %>,
+       <%= @floor.to_json %>,
+       <%= @elevator.to_json %>,
+       <%= @event_language.to_json %>,
+       <%= @available_day.to_json %>)"
+    >
+
+  <h1><%= t('.witness_assignment') %></h1>
   <div class="row">
     <div class="col-xs-12" ng-if="success">
       <div class="alert alert-success" role="alert">
@@ -8,6 +17,125 @@
     </div>
 
     <div class="col-xs-12" ng-if="!success">
+      <div class="row profile">
+        <div class="col-xs-8">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <div class="info-title"><%= t 'profile.personal_details' %></div>
+            </div>
+            <div class="panel-body">
+              <div class="field-group">
+                <div class="info-label"><%= t 'profile.labels.name' %></div>
+                <div>{{ witness.full_name }}</div>
+              </div>
+
+              <div class="field-group">
+                <div class="info-label"><%= t 'profile.labels.phone' %></div>
+                <div>{{ witness.phone }}<br>{{ witness.additional_phone }}</div>
+              </div>
+
+              <div class="field-group">
+                <div class="info-label"><%= t 'profile.labels.email' %></div>
+                <div>{{ witness.email }}</div>
+              </div>
+
+              <div class="field-group">
+                <div class="info-label"><%= t 'profile.labels.address' %></div>
+                <div>{{ witness.address }}</div>
+              </div>
+
+              <div class="field-group">
+                <div class="info-label">עיר</div>
+                <div>{{ witness.city.name }}</div>
+              </div>
+            </div>
+
+            <div class="panel-body">
+              <div class="field-group">
+                <div class="info-label"><%= t 'shared.type' %></div>
+                <div>{{ formatWitnessType(witness.witness_type) }}</div>
+              </div>
+
+              <div class="field-group">
+                <div class="info-label">שם איש קשר וקרבה לעד</div>
+                <div>{{ witness.contact_name }}</div>
+              </div>
+
+              <div class="field-group">
+                <div class="info-label">טלפון איש קשר</div>
+                <div>{{ witness.contact_phone }}</div>
+              </div>
+
+              <div class="field-group">
+                <div class="info-label">שפה</div>
+                <div>{{ formatLanguage(witness.language) }}</div>
+              </div>
+
+              <div class="field-group">
+                <div class="info-label"><%= t 'witnesses.new.walk_up_stairs' %></div>
+                <div>{{ formatBool(witness.stairs) }}</div>
+              </div>
+            </div>
+
+            <div class="panel-body">
+              <div class="field-group">
+                <div class="info-label">צרכים מיוחדים</div>
+                <div>{{ witness.special_needs }}</div>
+              </div>
+
+              <div class="field-group">
+                <div class="info-label">זקוק לסמינר</div>
+                <div>{{ formatBool(witness.seminar_required) }}</div>
+              </div>
+
+              <div class="field-group">
+                <div class="info-label">זמינות</div>
+                <div>
+                  <span ng-if="witness.can_morning" class="margin-left-5">בוקר</span>
+                  <span ng-if="witness.can_afternoon" class="margin-left-5">צהריים</span>
+                  <span ng-if="witness.can_evening" class="margin-left-5">ערב</span>
+                </div>
+              </div>
+
+              <div class="field-group">
+                <div class="info-label">אוכלוסיה מיוחדת</div>
+                <div>{{ formatBool(witness.special_population) }}</div>
+              </div>
+            </div>
+
+            <div class="panel-body">
+              <div class="field-group">
+                <div class="info-label"><%= t "shared.available_days" %></div>
+                <span ng-if="witness.available_day1" class="margin-left-5"> <%= t "shared.available_day1" %></span>
+                <span ng-if="witness.available_day2" class="margin-left-5"> <%= t "shared.available_day2" %></span>
+                <span ng-if="witness.available_day3" class="margin-left-5"> <%= t "shared.available_day3" %></span>
+                <span ng-if="witness.available_day4" class="margin-left-5"> <%= t "shared.available_day4" %></span>
+                <span ng-if="witness.available_day5" class="margin-left-5"> <%= t "shared.available_day5" %></span>
+                <span ng-if="witness.available_day6" class="margin-left-5"> <%= t "shared.available_day6" %></span>
+                <span ng-if="witness.available_day7" class="margin-left-5"> <%= t "shared.available_day7" %></span>
+                <span ng-if="witness.available_day8" class="margin-left-5"> <%= t "shared.available_day8" %></span>
+                <span ng-if="witness.available_day9" class="margin-left-5"> <%= t "shared.available_day9" %></span>
+              </div>
+            </div>
+
+            <div class="panel-body">
+              <div class="field-group">
+                <div class="info-label">הערות</div>
+                <div>{{ witness.free_text }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% if current_user && current_user.meta.is_a?(Manager) %>
+          <div class="col-xs-4">
+            <div comment-list comments="witness.comments"/></div>
+          </div>
+        <% end %>
+
+        </div>
+      </div>
+    </div>
+
       <!-- Host filters -->
       <form class="form-inline" name="hostFilter">
         <span><%= t 'shared.filter_by' %></span>
@@ -22,7 +150,48 @@
                  uib-typeahead="city as city.name for city in getCityLocation($viewValue, 97)"
                  placeholder="<%= t 'shared.city' %>">
         </div>
-
+        <div class="form-group">
+          <select class="form-control" ng-model="filter.floor">
+            <option value=""><%= t '.floor' %></option>
+            <option ng-repeat="x in [].constructor(10) track by $index" value="{{$index}}">{{$index}}</option>
+            <option value=">9"><%= t 'shared.other' %></option>
+          </select>
+        </div>
+        <div class="form-group">
+          <select class="form-control" ng-model="filter.elevator"
+              ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.yes' %>', v: 'true' }, { n: '<%= t 'shared.no' %>', v: 'false' }]">
+            <option value=""><%= t '.elevator' %></option>
+          </select>
+        </div>
+        <div class="form-group">
+          <select class="form-control" ng-model="filter.event_language">
+            <option value=""><%= t 'shared.event_language' %></option>
+            <option value="hebrew">עברית</option>
+            <option value="english">English</option>
+            <option value="arabic">العربية</option>
+            <option value="french">Français</option>
+            <option value="russian">русский</option>
+            <option value="spanish">Español</option>
+            <option value="other"><%= t 'shared.other' %></option>
+          </select>
+        </div>
+         <div class="form-group">
+            <select class="form-control" ng-model="filter.available_day"
+                    ng-options="o.v as o.n for o in [
+                   { n: '<%= t 'shared.available_day1' %>', v: 'available_day1' },
+                   { n: '<%= t 'shared.available_day2' %>', v: 'available_day2' },
+                   { n: '<%= t 'shared.available_day3' %>', v: 'available_day3' },
+                   { n: '<%= t 'shared.available_day4' %>', v: 'available_day4' },
+                   { n: '<%= t 'shared.available_day5' %>', v: 'available_day5' },
+                   { n: '<%= t 'shared.available_day6' %>', v: 'available_day6' },
+                   { n: '<%= t 'shared.available_day7' %>', v: 'available_day7' },
+                   { n: '<%= t 'shared.available_day8' %>', v: 'available_day8' },
+                   { n: '<%= t 'shared.available_day9' %>', v: 'available_day9' },
+                   { n: '<%= t 'shared.other' %>', v: 'available_day_other' }
+                    ]">
+              <option value=""><%= t 'shared.availability' %></option>
+            </select>
+          </div>
         <div class="form-group pull-left">
           <input type="text" class="form-control" ng-model="filter.query"
                  placeholder="<%= t 'shared.search' %>" />
@@ -61,6 +230,15 @@
               <%= t 'shared.free_text' %>
               <span class="caret" ng-if="sortProp === 'free_text'"></span>
             </th>
+            <th>
+              <%= t '.accesability' %>
+            </th>
+            <th>
+              <%= t 'shared.language' %>
+            </th>
+            <th>
+              <%= t '.availability' %>
+            </th>
             <th></th>
           </tr>
         </thead>
@@ -72,6 +250,9 @@
             <td>{{ host.address }}</td>
             <td>{{ formatBool(!host.hosted_before) }}</td>
             <td>{{ host.free_text }}</td>
+            <td>{{ getAccesability(host) }}</td>
+            <td>{{ formatLanguage(host.event_language) }}</td>
+						<td>{{ formatDate(host.event_date) }} {{ formatTime(host.event_time) }}</td>
             <td>
             	<button ng-click="assignHost(host)" class="btn btn-warning">
 	            	<%= t 'shared.assign' %>

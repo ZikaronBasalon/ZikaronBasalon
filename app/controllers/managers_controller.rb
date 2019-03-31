@@ -175,7 +175,7 @@ class ManagersController < ApplicationController
   end
 
   def export_guests
-    @guests = Guest.includes(:user, :invites).all
+    @guests = Guest.includes(:user, :invites).joins(:user).where(users: { active_this_year: true }).all
 
     send_data Guest.to_csv(@guests), :disposition => "attachment; filename=guests.csv"
   end

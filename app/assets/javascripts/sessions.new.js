@@ -1,4 +1,4 @@
-app.controller('UserSigninController', ['$scope', '$http', '$uibModal', 'activeUsers', function($scope, $http, $uibModal, activeUsers) {
+app.controller('UserSigninController', ['$scope', '$http', '$uibModal', 'dialogFactory', function($scope, $http, $uibModal, dialogFactory) {
 	$scope.form = {};
 	$scope.error = false;
 
@@ -8,19 +8,21 @@ app.controller('UserSigninController', ['$scope', '$http', '$uibModal', 'activeU
 		$scope.locale = document.getElementById('locale').className;
 		event.preventDefault();
 		if ($scope.signinForm.$valid) {
-			$http.post('/users/sign_in.json', {
+			var userSubmit = {
 				user: {
 					email: $scope.form.email,
 					password: $scope.form.password,
 				}
-			}).then(function(response) {
-				if(response.status === 201) {
-					activeUsers.assignActiveUser(response.data);
-					return;
-				}
-			}).catch(function(response) {
-				if(response.status > 400) {
-					$scope.error = true;
+			};
+			// this logs in the user if not missing terms agreement
+			return $http.post('/pages/missing_terms_agreement', userSubmit).then(function(response) {
+				gon.redirectLink = response.data.redirectLink;
+				if (!!response.data.user.agreed_to_terms_at && !!response.data.user.subscribed_to_marketing) {
+					// checks if user needs to be asked to be host/guest this year and displays dialog if needed
+					dialogFactory.assignActiveUser(response.data.user);
+				} else {
+					// the user wasn't signed in; needs to agree, then we resubmit the form
+					dialogFactory.askTermsAgreement(response.data.user, userSubmit);
 				}
 			});
 		}

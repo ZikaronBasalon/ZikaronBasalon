@@ -4,6 +4,15 @@ class UsersController < ApplicationController
 		@type = params[:type]
 	end
 
+	def mark_terms_agreement
+		user = User.find_by(email: user_params[:email]) if user_params[:email].present?
+		if user.present? && user.valid_password?(user_params[:password])
+			user.update(agreed_to_terms_at: Time.now, subscribed_to_marketing: true)
+	    sign_in user
+	  end
+	  render json: { user: user, redirectLink: "/#{I18n.locale}/#{user.meta_type.downcase}s/#{user.meta_id}" }, status: :ok
+	end
+
 	def assignrole
 		if !params[:changerole].nil?
 			user_role = RoleChanger.new(params[:id])
@@ -14,7 +23,8 @@ class UsersController < ApplicationController
 				user_role.activate_user
 				user_role.activate_role
 			end
-			render json: user_role.reload_user, status: 201
+			user = user_role.reload_user
+			render json: { user: user, redirectLink: "/#{I18n.locale}/#{user.meta_type.downcase}s/#{user.meta_id}" }, status: 201
 		end
 
 	end
@@ -26,4 +36,10 @@ class UsersController < ApplicationController
 			redirect_to polymorphic_path(current_user.meta)
 		end
 	end
+
+	private
+
+	def user_params
+    params.require(:user).permit(:email, :password)
+  end
 end
