@@ -28,7 +28,6 @@ class Manager < ActiveRecord::Base
 
   def get_hosts(current_user, is_paging, page, filter, query, sort, has_manager, has_survivor, is_red, is_org, language, in_future, has_invites,
                   reverse_ordering, cities, country_id, region_id)
-
     city_ids = nil
     if region_id.present? || current_user.simple_admin?
       city_ids = cities.map {|c| c[:id] }
@@ -150,7 +149,7 @@ class Manager < ActiveRecord::Base
     end
     # query by search
     if query.present?
-      hosts = hosts.joins(:user, :city)
+      hosts = hosts.joins(:user).includes(:city)
       hosts = filter_by_query(hosts, query)
     end
     # query by has_manager
