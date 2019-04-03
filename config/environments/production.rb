@@ -67,7 +67,10 @@ ZikaronBasalon::Application.configure do
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
   # Don't care if the mailer can't send
-  config.action_mailer.default_url_options = { host: 'zikaronbasalon.herokuapp.com' }
+
+  # TODO: add a new environment called "staging" instead of defining ACTUAL_RAILS_ENV
+  host = ENV['ACTUAL_RAILS_ENV'] == 'staging' ? 'zikaronbasalonstaging.herokuapp.com' : 'zikaronbasalon.herokuapp.com'
+  config.action_mailer.default_url_options = { host: host }
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.delivery_method = :smtp
