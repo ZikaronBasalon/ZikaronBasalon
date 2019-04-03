@@ -115,7 +115,7 @@ class Manager < ActiveRecord::Base
       @cities = City.includes(:managers).normalized.where(:id => cities.pluck(:id))
     end
 
-    if user.simple_admin? && current_user.email != 'zikaronbasalonglobal@gmail.com'
+    if user.simple_admin? && !current_user.global_admin?
       communities = CommunityLeadership.where(manager_id: current_user.meta.id)
       community_city_ids = communities.map(&:city_id)
       if communities.size > 0

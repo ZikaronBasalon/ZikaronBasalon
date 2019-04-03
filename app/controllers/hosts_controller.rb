@@ -106,7 +106,7 @@ class HostsController < ApplicationController
     # If is a manager/admin - with this area - allow
     if user_type == 'Manager' && current_user.simple_admin?
       # If is a legit manager who has this host - allow
-      if meta.hosts.pluck(:id).include?(id)
+      if current_user.global_admin? || meta.hosts.pluck(:id).include?(id)
         return
       # If manager doesn't have host - disallow
       else

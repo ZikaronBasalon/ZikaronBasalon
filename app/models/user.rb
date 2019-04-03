@@ -74,6 +74,10 @@ class User < ActiveRecord::Base
     self.meta_type == 'Manager' && !self.sub_admin && !self.admin
   end
 
+  def global_admin?
+    email == 'zikaronbasalonglobal@gmail.com'
+  end
+
   def any_admin?
     self.admin || self.sub_admin || (self.meta_type == 'Manager' && !self.sub_admin && !self.admin)
   end
