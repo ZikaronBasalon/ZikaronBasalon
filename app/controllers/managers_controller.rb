@@ -27,7 +27,7 @@ class ManagersController < ApplicationController
     # get lists
 
     if current_user.email == 'zikaronbasalonglobal@gmail.com'
-      @cities = City.where.not(country_id: 97)
+      @cities = City.where("country_id <> 97 OR name = 'NOT ON THE LIST'")
     else
       @cities = @manager.get_cities(current_user, country_id, region_id)
     end
@@ -243,5 +243,9 @@ class ManagersController < ApplicationController
 
     def need_to_followup
       params[:need_to_followup]
+    end
+
+    def received_registration_mail
+      params[:received_registration_mail]
     end
 end
