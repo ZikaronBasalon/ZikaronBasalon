@@ -2,9 +2,10 @@ class InvitesController < ApplicationController
   respond_to :html, :json
 
   def create
+    current_user.update_columns(active_this_year: true)
     @invite = Invite.new({
-      guest_id: current_user.meta.id, 
-      host_id: params[:invite][:host_id], 
+      guest_id: current_user.meta.id,
+      host_id: params[:invite][:host_id],
       plus_ones: params[:invite][:plus_ones].to_i
     })
 

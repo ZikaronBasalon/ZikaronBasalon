@@ -76,7 +76,25 @@ class PagesController < ApplicationController
 
   end
 
+  def missing_terms_agreement
+    user = User.find_by(email: terms_params[:email]) if terms_params[:email].present?
+    if user.present? && user.valid_password?(terms_params[:password])
+      if user.agreed_to_terms_at.present? && user.subscribed_to_marketing
+        sign_in user
+        render json: { user: user, redirectLink: "/#{I18n.locale}/#{user.meta_type.downcase}s/#{user.meta_id}" }, status: :ok
+      else
+        render json: { user: { agreed_to_terms_at: user.agreed_to_terms_at, subscribed_to_marketing: user.subscribed_to_marketing } }, status: :ok
+      end
+      return
+    end
+    render plain: '', status: :not_found
+  end
+
 private
+  def terms_params
+    params.require(:page).require(:user).permit(:email, :password)
+  end
+
 	def host_conditions_hash
 		h = { }
     h[:strangers] = true

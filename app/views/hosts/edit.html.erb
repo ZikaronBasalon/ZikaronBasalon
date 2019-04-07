@@ -104,12 +104,12 @@
       <!-- Step two -->
       <form name="stepTwo" ng-show="'stepTwo' === steps[stepIndex]" novalidate>
         <div class="form-group"
-             ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.country_id.$invalid]">
-          <label for="country_id" class="required"><%= t 'shared.country' %></label>
+             ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.c_ountry_id.$invalid]">
+          <label for="c_ountry_id" class="required"><%= t 'shared.country' %></label>
           <input
             class="form-control"
             type="text"
-            name="country_id"
+            name="c_ountry_id"
             ng-model="current_country"
             ng-blur="onCountrySet()"
             ng-model-options="{ debounce: 200 }"
@@ -119,12 +119,12 @@
         </div>
 
         <div class="form-group"
-             ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.city_id.$invalid]">
-          <label for="city_id" class="required"><%= t '.city' %></label>
+             ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.c_ity_id.$invalid]">
+          <label for="c_ity_id" class="required"><%= t '.city' %></label>
           <input
             class="form-control"
             type="text"
-            name="city_id"
+            name="c_ity_id"
             ng-model="current_city"
             ng-blur="onCitySet()"
             ng-disabled="!current_country"
@@ -136,12 +136,12 @@
         </div>
 
         <div class="form-group"
-             ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.address.$invalid]">
-          <label for="address" class="required"><%= t '.address' %></label>
+             ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.ax_dress.$invalid]">
+          <label for="ax_dress" class="required"><%= t '.address' %></label>
           <input type="text" class="form-control"
-                 name="address"
+                 name="ax_dress"
                  placeholder="<%= t '.address_placeholder' %>"
-                 id="address"
+                 id="ax_dress"
                  ng-model="host.address"
                  required>
         </div>
@@ -219,7 +219,7 @@
                  ng-show="otherLanguageVisible" />
         </div>
 
-        <% if I18n.locale == :he %>
+        <div ng-if="stepTwo.c_ountry_id.$modelValue.id === 97">
           <div class="form-group"
                ng-class="{true: 'has-error'}[submitted[stepIndex] && stepThree.survivor_needed.$invalid]">
             <label class="required"><%= t '.survivor_needed' %></label>
@@ -235,9 +235,7 @@
               </select>
             </div>
           </div>
-        <% end %>
 
-        <div ng-if="stepTwo.country_id.$modelValue.id === 97">
           <div class="form-group">
             <label class="required"><%= t '.preparation_wanted' %></label>
             <div>

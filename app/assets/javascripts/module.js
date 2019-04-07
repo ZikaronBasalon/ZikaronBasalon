@@ -17,19 +17,37 @@ var app = angular.module('zikaronbasalon',[
 .config(['$httpProvider', function ($httpProvider) {
 	$httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
   $httpProvider.interceptors.push('httpRequestInterceptor');
-}])
-.factory('activeUsers', ['$http', 'activeDialog',
+}]);
+
+app.factory('dialogFactory', ['$http', 'activeDialog',
   function($http, activeDialog) {
     return {
-      assignActiveUser: assignActiveUser
+      assignActiveUser: assignActiveUser,
+      askTermsAgreement: askTermsAgreement
     };
     function assignActiveUser(data, optionalUrl) {
       var locale = document.getElementById('locale').className;
-      if (!data.active_this_year && (data.meta_type == "Host" || data.meta_type == "Guest")) {//if role not set for this year yet and is not an admin
+      if (!data.active_this_year && (data.meta_type == "Host" || data.meta_type == "Guest")) {
+        //if role not set for this year yet and is not an admin
         var changerole = false;
         var last_years_role = data.meta_type;//the was last years role
 
-        var translations = {en:{header:"Great to see you're back!",firstLine:"It's always nice to see people you know :)", secondLine:"",stay:"",change:""}, he:{header:"כיף שחזרתם!",firstLine:"תמיד כיף לראות פרצופים מוכרים :)", secondLine:"",stay:"",change:""}}
+        var translations = {
+          en: {
+            header: "Great to see you're back!",
+            firstLine: "It's always nice to see people you know :)",
+            secondLine: "",
+            stay: "",
+            change: ""
+          },
+          he: {
+            header: "כיף שחזרתם!",
+            firstLine: "תמיד כיף לראות פרצופים מוכרים :)",
+            secondLine: "",
+            stay: "",
+            change: ""
+          }
+        }
         if (last_years_role == "Host") {
           translations.he.secondLine = "תרצו להמשיך לארח גם השנה?";
           translations.he.stay = "כן! זו כבר מסורת";
@@ -48,30 +66,50 @@ var app = angular.module('zikaronbasalon',[
           translations.en.change = "I would like to host";
         }
         data.translations = translations[locale];
-        activeDialog.open(data);
+        activeDialog.askUserRole(data);
       }
       else { //he already decided to be active this year or admin
-        //regular login
-        if (typeof optionalUrl !== 'undefined') {
+        if (gon.redirectLink) {
+          window.location = gon.redirectLink;
+        } else if (!!optionalUrl) {
           window.location = optionalUrl;
-        } else {
-          window.location = '/' + locale + '/' + data.meta_type.toLowerCase() + 's/' + data.meta_id;
         }
       }
     }
-
+    function askTermsAgreement(userData, signinData) {
+      var termsData = gon.termsModal;
+      activeDialog.askAgreeTerms(termsData, userData, signinData);
+    }
   }]);
 
 app.factory('activeDialog', ['$http', '$uibModal',
   function($http, $uibModal) {
     return {
-      open: open
+      askAgreeTerms: askAgreeTerms,
+      askUserRole: askUserRole
     };
-    function open(data, optionalUrl) {
+    function askAgreeTerms(modalData, userData, signinData) {
+      var data = { modalData: modalData, userData: userData, signinData: signinData };
       var modalInstance = $uibModal.open({
         animation: true,
-        template: '<div class="modal-header"> <h3 class="modal-title"><center>{{modalData.translations.header}}</center></h3> </div> <div class="modal-body"> <center>{{modalData.translations.firstLine}}</center><br> <center>{{modalData.translations.secondLine}}</center><br> </div> <div class="modal-footer"> <button class="btn btn-primary" type="button" ng-click="ok()">{{modalData.translations.stay}}</button> <button class="btn btn-warning" type="button" ng-click="cancel()">{{modalData.translations.change}}</button> </div>',
-        controller: 'ModalInstanceCtrl',
+        templateUrl: 'agreeTerms.html',
+        controller: 'AgreeTermsModalCtrl',
+        data: data,
+        resolve: {
+          data: function () {
+            return data;
+          }
+        }
+      });
+      modalInstance.result.then(function (selectedItem) {
+        //not interesting
+      });
+    }
+    function askUserRole(data, optionalUrl) {
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'userRoleContent.html',
+        controller: 'UserRoleModalCtrl',
         data: data,
         resolve: {
           modalData: function () {
@@ -80,9 +118,9 @@ app.factory('activeDialog', ['$http', '$uibModal',
         }
       });
       modalInstance.result.then(function (selectedItem) {
-        assignUserRole(data, false, optionalUrl); //the user clicked ok""
+        assignUserRole(data, false, optionalUrl || gon.redirectLink); //the user clicked ok""
       }, function () {
-        assignUserRole(data, true, optionalUrl);
+        assignUserRole(data, true, optionalUrl || gon.redirectLink);
       });
     }
     function assignUserRole(data, changerole, optionalUrl) {
@@ -93,10 +131,8 @@ app.factory('activeDialog', ['$http', '$uibModal',
         data = role_response.data
         if (typeof optionalUrl !== 'undefined') {
           window.location = optionalUrl;
-        } else if (data.meta_type == "Host") {
-          window.location = '/' + document.getElementById('locale').className + '/' + data.meta_type.toLowerCase() + 's/' + data.meta_id + '/edit';
         } else {
-          window.location = '/' + document.getElementById('locale').className + '/' + data.meta_type.toLowerCase() + 's/' + data.meta_id;
+          window.location = data.redirectLink;
         }
       })
       .catch(function(role_response) {
@@ -106,7 +142,7 @@ app.factory('activeDialog', ['$http', '$uibModal',
 
   }]);
 
-angular.module('zikaronbasalon').controller('ModalInstanceCtrl', ['$scope', '$uibModalInstance', 'modalData', function ($scope, $uibModalInstance, modalData) {
+app.controller('UserRoleModalCtrl', ['$scope', '$uibModalInstance', 'modalData', function ($scope, $uibModalInstance, modalData) {
 
   $scope.modalData = modalData;
 
@@ -116,5 +152,31 @@ angular.module('zikaronbasalon').controller('ModalInstanceCtrl', ['$scope', '$ui
 
   $scope.cancel = function () {
     $uibModalInstance.dismiss('cancel');
+  };
+}]);
+
+app.controller('AgreeTermsModalCtrl', ['$scope', '$uibModalInstance', 'data', 'dialogFactory', '$http', function ($scope, $uibModalInstance, data, dialogFactory, $http) {
+  $scope.redMain = false;
+  $scope.modalData = data.modalData;
+  $scope.signinData = data.signinData;
+  $scope.userData = data.userData;
+  $scope.form = {};
+
+  $scope.ok = function () {
+    if ($scope.agreeTermsForm.$valid) {
+      $uibModalInstance.close();
+      $http.put('/users/mark_terms_agreement.json', $scope.signinData)
+      .then(function(response) {
+        if (!gon.guestMode) {
+          dialogFactory.assignActiveUser(response.data.user, response.data.redirectLink);
+        } else if (gon.redirectLink) {
+          location.href = gon.redirectLink;
+        }
+      }).catch(function() {
+        location.reload();
+      })
+    } else {
+      $scope.redMain = true;
+    }
   };
 }]);
