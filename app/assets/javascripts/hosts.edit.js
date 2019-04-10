@@ -98,6 +98,9 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
   }
 
   $scope.submitStepOne = function() {
+    if ($scope.stepOne.hostedBeforeGroup) {
+      $scope.stepOne.hostedBeforeGroup.$setDirty();
+    }
   	$scope.submitted[0] = true;
   	if ($scope.stepOne.$valid) {
       $http.put('/hosts/' + $scope.host.id + '.json', {
