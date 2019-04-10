@@ -80,7 +80,7 @@ class PagesController < ApplicationController
   end
 
   def missing_terms_agreement
-    user = User.find_by(email: terms_params[:email]) if terms_params[:email].present?
+    user = User.find_by(email: terms_params[:email].downcase) if terms_params[:email].present?
     if user.present? && user.valid_password?(terms_params[:password])
       if user.agreed_to_terms_at.present? && user.subscribed_to_marketing
         sign_in user
