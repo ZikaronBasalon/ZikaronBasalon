@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190313143518) do
+ActiveRecord::Schema.define(version: 20190410141537) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(version: 20190313143518) do
     t.float    "lng"
     t.datetime "date"
     t.boolean  "evening_public",                              default: true
-    t.boolean  "hosted_before",                               default: false
+    t.boolean  "hosted_before"
     t.date     "event_date"
     t.string   "event_time",                      limit: 255
     t.integer  "floor"

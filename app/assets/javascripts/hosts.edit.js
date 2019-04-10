@@ -4,7 +4,7 @@
 app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 	function($scope, $http, $uibModal, $timeout) {
 	$scope.host = {
-		hosted_before: false,
+		hosted_before: null,
     city_id: null
 	};
 
