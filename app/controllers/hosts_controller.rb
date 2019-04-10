@@ -77,11 +77,15 @@ class HostsController < ApplicationController
       @host.user.save!
     elsif params[:host].present?
       @host.update_attributes(params[:host])
-      # Make sure that if a city is created it is assigned to the Other region of it's country
       if @host.city.present?
-        other_region_of_country = Region.where(country_id:@host.country.id, name:Region::OTHER_REGION_NAME).last
-        @host.city.region_id = other_region_of_country.id
-        @host.city.save!
+        if @host.country.blank?
+          @host.country_id = @host.city.country_id
+        else
+          # Make sure that if a city is created it is assigned to the Other region of it's country
+          other_region_of_country = Region.where(country_id:@host.country.id, name:Region::OTHER_REGION_NAME).last
+          @host.city.region_id = other_region_of_country.id
+          @host.city.save!
+        end
       end
       @host.save!
     end
