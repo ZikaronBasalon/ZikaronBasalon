@@ -5,9 +5,14 @@ app.controller('UpdatePasswordController', ['$scope', '$http', function($scope, 
 		$scope.token = token;
 	}
 
+	$scope.errorMessages = function(errors) {
+		return _.map(_.keys(errors), function(field) { return field + ': ' + errors[field].join('; ') }).join('<br>');
+	}
+
 	$scope.submit = function(event) {
 		event.preventDefault();
 		if ($scope.passwordForm.$valid) {
+			$scope.errors = null;
 			$http.put('/users/password.json', {
 				user: {
 					password: $scope.form.password,
@@ -18,7 +23,7 @@ app.controller('UpdatePasswordController', ['$scope', '$http', function($scope, 
 				window.location = '/';
 			}).catch(function(response) {
 				if(response.status > 400) {
-					$scope.error = true;
+					$scope.errors = response.data && response.data.errors
 				}
 			});
 		}
