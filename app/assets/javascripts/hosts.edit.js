@@ -4,7 +4,7 @@
 app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 	function($scope, $http, $uibModal, $timeout) {
 	$scope.host = {
-		hosted_before: false,
+		hosted_before: null,
     city_id: null
 	};
 
@@ -98,6 +98,9 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
   }
 
   $scope.submitStepOne = function() {
+    if ($scope.stepOne.hostedBeforeGroup) {
+      $scope.stepOne.hostedBeforeGroup.$setDirty();
+    }
   	$scope.submitted[0] = true;
   	if ($scope.stepOne.$valid) {
       $http.put('/hosts/' + $scope.host.id + '.json', {

@@ -29,28 +29,31 @@
         </div>
 
         <div class="form-group">
-          <label><%= t '.hosted_before' %></label>
-          <div class="radio">
-            <label>
-              <input type="radio"
-                     name="hostedBefore"
-                     id="hostedBeforeFalse"
-                     ng-value="false"
-                     ng-model="host.hosted_before"
-                     checked>
-              <%= t '.hosted_before_no' %>
-            </label>
-          </div>
-          <div class="radio">
-            <label>
-              <input type="radio"
-                     name="hostedBefore"
-                     id="hostedBeforeTrue"
-                     ng-value="true"
-                     ng-model="host.hosted_before">
-              <%= t '.hosted_before_yes' %>
-            </label>
-          </div>
+          <label class="block"><%= t '.hosted_before' %></label>
+          <ng-form name="hostedBeforeGroup">
+            <div class="radio">
+              <label>
+                <input type="radio"
+                       name="hostedBefore"
+                       id="hostedBeforeFalse"
+                       ng-value="false"
+                       ng-model="host.hosted_before"
+                       required>
+                <%= t '.hosted_before_no' %>
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio"
+                       name="hostedBefore"
+                       id="hostedBeforeTrue"
+                       ng-value="true"
+                       ng-model="host.hosted_before"
+                       required>
+                <%= t '.hosted_before_yes' %>
+              </label>
+            </div>
+          </ng-form>
         </div>
 
         <div class="form-group">
