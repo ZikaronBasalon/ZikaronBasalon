@@ -33,7 +33,10 @@ class PagesController < ApplicationController
 
     # additional filtering
     @hosts = @hosts.where('invites_confirmed_count + invites_pending_count < max_guests')
-    @hosts = filter_by_query(@hosts, query)
+    if query.present?
+      @hosts = @hosts.joins(:user, :city)
+      @hosts = filter_by_query(@hosts, query)
+    end
     @hosts = filter_by_language(@hosts, 'event_language', params[:event_language])
 
   	@hosts = @hosts.paginate(:page => params[:page] || 1, :per_page => 10)
