@@ -192,6 +192,7 @@ he:
     missing_city_hint: אם אינך מוצא את עירך, בחר ״לא ברשימה״ ופנה אלינו לתמיכה
     elevator: מעלית
     floor: קומה
+    ground_floor: קומת קרקע
 
   views:
     pagination:

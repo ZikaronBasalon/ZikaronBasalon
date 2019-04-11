@@ -151,10 +151,12 @@
                  placeholder="<%= t 'shared.city' %>">
         </div>
         <div class="form-group">
-          <select class="form-control" ng-model="filter.floor">
+          <select class="form-control" ng-model="filter.floor"
+                    ng-options="o.v as o.n for o in [
+                      { n: '<%= t 'shared.ground_floor' %>', v: 0 }, { n: '1', v: 1 },
+                      { n: '2', v: 2 }, { n: '3+', v: 3 }
+                    ]">
             <option value=""><%= t '.floor' %></option>
-            <option ng-repeat="x in [].constructor(10) track by $index" value="{{$index}}">{{$index}}</option>
-            <option value=">9"><%= t 'shared.other' %></option>
           </select>
         </div>
         <div class="form-group">
