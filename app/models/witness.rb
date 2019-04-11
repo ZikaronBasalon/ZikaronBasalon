@@ -64,8 +64,13 @@ class Witness < ActiveRecord::Base
   validates_uniqueness_of :phone, :on => :create
 
   before_validation :normalize_phone
+  before_validation :set_default_available_day
 
   default_scope { includes(:city) }
+
+  def self.available_day_columns
+    column_names.select { |name| name =~ /\Aavailable_day\d+\Z/ }
+  end
 
   def city_name
   	city.try(:name)
@@ -124,5 +129,16 @@ class Witness < ActiveRecord::Base
 
   def normalize_phone
     self.phone = phone.gsub("-", "")
+  end
+
+  def available_day_attributes
+    attributes.slice(*self.class.available_day_columns)
+  end
+
+  def set_default_available_day
+    return if external_assignment? || archived? || need_to_followup?
+    return if available_day_attributes.values.any?
+
+    self.available_day4 = true
   end
 end
