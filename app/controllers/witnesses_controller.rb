@@ -209,6 +209,7 @@ class WitnessesController < ApplicationController
     @host.witness_id = nil
     @host.assignment_time = nil
     @host.witness = nil
+    @host.contact_witness_sent_at = nil
     @host.save!
     @host_id = @host.id
     ManagerMailer.assignment_cancelled(@host_id, @witness.id, current_user).deliver
