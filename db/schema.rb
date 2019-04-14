@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190410141537) do
+ActiveRecord::Schema.define(version: 20190411100215) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 20190410141537) do
     t.boolean  "active_last_year"
     t.boolean  "preparation_wanted"
     t.datetime "incomplete_registration_sent_at"
+    t.datetime "contact_witness_sent_at"
   end
 
   add_index "hosts", ["city_id"], name: "index_hosts_on_city_id", using: :btree

@@ -451,6 +451,9 @@ he:
     incomplete_registration:
       subject: זיכרון בסלון - אנא השלם/י את תהליך ההרשמה
 
+    contact_witness:
+      subject: זיכרון בסלון - איש העדות מחכה לשמוע ממך
+
   request_mailer:
     pending_invite_received:
       title: "יש אורחים שמחכים לאישור להצטרף לסלון שלך!"

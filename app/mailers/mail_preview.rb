@@ -1,3 +1,4 @@
+# Preview all emails at http://localhost:3000/mail_view
 # app/mailers/mail_preview.rb or lib/mail_preview.rb
 class MailPreview < MailView
   def new_host_en
@@ -90,5 +91,10 @@ class MailPreview < MailView
   def incomplete_registration_he
     host = Host.last
     HostMailer.incomplete_registration(host.id)
+  end
+
+  def contact_witness_he
+    host = Host.last
+    HostMailer.contact_witness(host.id)
   end
 end
