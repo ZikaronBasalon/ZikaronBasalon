@@ -17,7 +17,7 @@
 #  lng                             :float
 #  date                            :datetime
 #  evening_public                  :boolean          default(TRUE)
-#  hosted_before                   :boolean          default(FALSE)
+#  hosted_before                   :boolean
 #  event_date                      :date
 #  event_time                      :string(255)
 #  floor                           :integer
@@ -42,6 +42,8 @@
 #  active_last_year                :boolean
 #  preparation_wanted              :boolean
 #  incomplete_registration_sent_at :datetime
+#  contact_witness_sent_at         :datetime
+#  name_of_city                    :string
 #
 
 class Host < ActiveRecord::Base
@@ -52,7 +54,7 @@ class Host < ActiveRecord::Base
   :invites_confirmed_count, :city_name, :status, :strangers, :contact, :survivor_details, :lat, :lng, :event_date,
   :event_time, :evening_public, :hosted_before, :floor, :elevator, :org_name, :org_role,
   :event_language, :contacted, :preparation_evening, :phone, :witness_id, :user_attributes, :public_text, :concept,
-  :received_registration_mail, :contacted_witness, :country_id, :assignment_time, :preparation_wanted, :date, :active, :active_last_year, :incomplete_registration_sent_at, :comment_ids, :invite_ids
+  :received_registration_mail, :contacted_witness, :country_id, :assignment_time, :preparation_wanted, :date, :active, :active_last_year, :incomplete_registration_sent_at, :comment_ids, :invite_ids, :name_of_city
 
   attr_accessor :available_places
 
