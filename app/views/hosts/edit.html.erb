@@ -124,12 +124,13 @@
         <div class="form-group"
              ng-class="{true: 'has-error'}[submitted[stepIndex] && stepTwo.c_ity_id.$invalid]">
           <label for="c_ity_id" class="required"><%= t '.city' %></label>
-          <input
+            <input
             class="form-control"
             type="text"
             name="c_ity_id"
             ng-model="current_city"
-            ng-blur="onCitySet()"
+            typeahead-on-select="onCitySet($item)"
+            typeahead-editable="false"
             ng-disabled="!current_country"
             ng-model-options="{ debounce: 200 }"
             uib-typeahead="city as city.name for city in getCityLocation($viewValue, current_country.id)"
