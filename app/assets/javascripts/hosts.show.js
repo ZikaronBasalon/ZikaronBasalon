@@ -17,13 +17,26 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 		if(host.invites && host.invites.length > 0) {
 			initInvites(host.invites);
 		}
-
-		//as long as the host didn't finish filling out his details, take him to edit page
-		if ($scope.host.active == false) {
-			if (confirm("some details are missing. press ok to fill them in")) {
-				window.location = '/' + document.getElementById('locale').className + '/hosts/' + $scope.host.id + '/edit';
-			}
-		}
+    if (
+      !host.active ||
+      !host.address ||
+      !host.city_id ||
+      !host.country_id ||
+      !host.event_date ||
+      !host.event_language ||
+      host.floor == null ||
+      host.hosted_before == null ||
+      !host.max_guests ||
+      !host.phone ||
+      host.preparation_evening == null ||
+      host.country_id == 97 && (
+        host.survivor_needed == null ||
+        host.preparation_wanted == null ||
+        host.strangers == null
+      )
+    ) {
+      window.location = '/' + document.getElementById('locale').className + '/hosts/' + $scope.host.id + '/edit';
+    }
 	}
 
 
