@@ -19,21 +19,7 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 		}
     if (
       !host.active ||
-      !host.address ||
-      !host.city_id ||
-      !host.country_id ||
-      !host.event_date ||
-      !host.event_language ||
-      host.floor == null ||
-      host.hosted_before == null ||
-      !host.max_guests ||
-      !host.phone ||
-      host.preparation_evening == null ||
-      host.country_id == 97 && (
-        host.survivor_needed == null ||
-        host.preparation_wanted == null ||
-        host.strangers == null
-      )
+      !host.received_registration_mail
     ) {
       window.location = '/' + document.getElementById('locale').className + '/hosts/' + $scope.host.id + '/edit';
     }
