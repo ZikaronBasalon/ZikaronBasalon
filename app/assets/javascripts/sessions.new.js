@@ -2,12 +2,17 @@ app.controller('UserSigninController', ['$scope', '$http', '$uibModal', 'dialogF
 	$scope.form = {};
 	$scope.error = false;
 
+	$scope.errorMessages = function(messages) {
+		return messages.join('<br>');
+	}
+
 	$scope.submit = function(event) {
 		$scope.error = false;
 
 		$scope.locale = document.getElementById('locale').className;
 		event.preventDefault();
 		if ($scope.signinForm.$valid) {
+			$scope.errors = null;
 			var userSubmit = {
 				user: {
 					email: $scope.form.email,
@@ -23,6 +28,10 @@ app.controller('UserSigninController', ['$scope', '$http', '$uibModal', 'dialogF
 				} else {
 					// the user wasn't signed in; needs to agree, then we resubmit the form
 					dialogFactory.askTermsAgreement(response.data.user, userSubmit);
+				}
+			}).catch(function(response) {
+				if(response.status > 400) {
+					$scope.errors = response.data && response.data.errors;
 				}
 			});
 		}
