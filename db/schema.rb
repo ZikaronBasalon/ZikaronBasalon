@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190414193908) do
+ActiveRecord::Schema.define(version: 20190417134413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 20190414193908) do
     t.string   "event_language",                  limit: 255, default: "hebrew"
     t.boolean  "contacted",                                   default: false
     t.string   "phone",                           limit: 255
-    t.boolean  "survivor_needed",                             default: false
+    t.boolean  "survivor_needed"
     t.integer  "witness_id"
     t.text     "public_text"
     t.string   "concept",                         limit: 255
