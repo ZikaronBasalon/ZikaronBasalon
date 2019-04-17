@@ -90,7 +90,8 @@ class PagesController < ApplicationController
       end
       return
     end
-    render plain: '', status: :not_found
+
+    render json: { errors: ['Invalid email or password.'] }, status: :not_found
   end
 
 private
