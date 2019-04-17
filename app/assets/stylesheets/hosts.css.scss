@@ -108,7 +108,7 @@
   }
 }
 
-[name="preparationWantedGroup"], [name="hostedBeforeGroup"] {
+[name="preparationWantedGroup"], [name="hostedBeforeGroup"], [name="survivor_needed_group"] {
   display: inline-block;
   padding: 5px;
   &.ng-dirty.ng-invalid {

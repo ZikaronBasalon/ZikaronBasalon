@@ -156,6 +156,10 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
   if ($scope.stepThree.preparationWantedGroup) {
     $scope.stepThree.preparationWantedGroup.$setDirty();
   }
+  if ($scope.stepThree.survivor_needed_group) {
+    $scope.stepThree.survivor_needed_group.$setDirty();
+  }
+
   	if ($scope.stepThree.$valid) {
   		$http.put('/hosts/' + $scope.host.id + '.json', {
 	  		host: {

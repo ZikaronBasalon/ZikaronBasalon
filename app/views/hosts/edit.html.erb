@@ -224,20 +224,33 @@
         </div>
 
         <div ng-if="stepTwo.c_ountry_id.$modelValue.id === 97">
-          <div class="form-group"
-               ng-class="{true: 'has-error'}[submitted[stepIndex] && stepThree.survivor_needed.$invalid]">
+          <div class="form-group">
             <label class="required"><%= t '.survivor_needed' %></label>
             <p class="help-block"><%= t '.survivor_needed_help_block' %></p>
-
-            <div>
-              <select class="form-control" id="survivor_needed"
-                      ng-model="host.survivor_needed"
-                      name="survivor_needed"
-                      required
-                      ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.yes' %>', v: true }, { n: '<%= t 'shared.no' %>', v: false }]">
-               <option ng-show="!host.survivor_needed" value=""><%= t 'shared.select' %></option>
-              </select>
-            </div>
+            <ng-form name="survivor_needed_group">
+              <div class="radio">
+                <label>
+                  <input type="radio"
+                        name="survivor_needed"
+                        id="survivor_needed_false"
+                        ng-value="false"
+                        ng-model="host.survivor_needed"
+                        required>
+                  <%= t 'shared.no' %>
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio"
+                        name="survivor_needed"
+                        id="survivor_needed_true"
+                        ng-value="true"
+                        ng-model="host.survivor_needed"
+                        required>
+                  <%= t 'shared.yes' %>
+                </label>
+              </div>
+            </ng-form>
           </div>
 
           <div class="form-group">
