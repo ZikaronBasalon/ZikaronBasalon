@@ -29,13 +29,15 @@
           </select>
         </div>
 
-        <div class="form-group">
-          <select class="form-control city-select" ng-model="search.region_id"
-                  ng-options="o.id as o.name for o in regions | orderBy:'name'"
-                  ng-change="filter()">
-            <option value=""><%= t 'shared.region' %></option>
-          </select>
-        </div>
+        <% if false %>
+          <div class="form-group">
+            <select class="form-control city-select" ng-model="search.region_id"
+                    ng-options="o.id as o.name for o in regions | orderBy:'name'"
+                    ng-change="filter()">
+              <option value=""><%= t 'shared.region' %></option>
+            </select>
+          </div>
+        <% end %>
 
         <div class="form-group">
           <!-- <select class="form-control city-select" ng-model="search.city_id"
