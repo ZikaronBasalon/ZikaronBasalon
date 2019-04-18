@@ -10,7 +10,7 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 	$scope.formatStrangers = formatStrangers;
 	$scope.formatBool = formatBool;
 
-	$scope.init = function(host) {
+	$scope.init = function(host, admin) {
 		$scope.host = host;
 		$scope.comments = host.comments;
 
@@ -18,8 +18,8 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 			initInvites(host.invites);
 		}
     if (
-      !host.active ||
-      !host.received_registration_mail
+      (!host.active ||
+      !host.received_registration_mail) && !admin
     ) {
       window.location = '/' + document.getElementById('locale').className + '/hosts/' + $scope.host.id + '/edit';
     }
