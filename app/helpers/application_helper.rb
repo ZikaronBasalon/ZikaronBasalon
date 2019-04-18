@@ -46,9 +46,12 @@ module ApplicationHelper
   def filter_by_language(query_obj, field_name, language)
     if language.present?
       if language != "other"
-        query_obj = query_obj.where(field_name + "='" + language + "'")
+        query_obj = query_obj.where("#{field_name} ILIKE ?", "%#{language}%")
       else
-        query_obj = query_obj.where(field_name + " NOT IN ('english', 'hebrew', 'arabic', 'french', 'russian', 'spanish')")
+        existing_languages = query_obj.reorder(field_name).where.not(field_name => nil).distinct.pluck(field_name)
+        known_languages = %w[english hebrew arabic french russian spanish]
+        other_languages = existing_languages.select { |st| (st.split(',') - known_languages).present? }
+        query_obj = query_obj.where(field_name => other_languages)
       end
     end
     query_obj

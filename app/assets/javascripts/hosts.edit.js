@@ -4,7 +4,7 @@
 app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 	function($scope, $http, $uibModal, $timeout) {
 	$scope.host = {
-		hosted_before: false,
+		hosted_before: null,
     city_id: null
 	};
 
@@ -28,6 +28,20 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 		$scope.eventDate.isOpen = true;
 	}
 
+  $scope.onCitySet = function(selected_city) {
+    $scope.current_city = $scope.current_city || selected_city
+    if (!$scope.loading_city) {
+      if (typeof $scope.current_city === 'string') {
+        $scope.current_city = '';
+        $scope.host.city_id = null;
+        $scope.current_city_exist = false;
+      } else {
+        $scope.host.city_id = _.get($scope, 'current_city.id');
+        $scope.current_city_exist = true;
+      }
+    }
+  }
+
   // TODO: move these out to to a service
   $scope.getCityLocation = function(query, country_id) {
     $scope.loading_city = true;
@@ -38,7 +52,7 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
           q: query
         }
       }
-    }).then(function(response){
+    }).then(function(response) {
       $scope.loading_city = false;
       return response.data;
     });
@@ -61,7 +75,7 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 		$scope.host.event_time = $scope.host.event_time ? new Date($scope.host.event_time): null;
 
     if($scope.host.city) {
-      $scope.current_city = { name: $scope.host.city.name, id: $scope.host.city_id };
+      $scope.current_city = $scope.host.city.name
     } else {
       $scope.host.city_id = null;
     }
@@ -98,6 +112,9 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
   }
 
   $scope.submitStepOne = function() {
+    if ($scope.stepOne.hostedBeforeGroup) {
+      $scope.stepOne.hostedBeforeGroup.$setDirty();
+    }
   	$scope.submitted[0] = true;
   	if ($scope.stepOne.$valid) {
       $http.put('/hosts/' + $scope.host.id + '.json', {
@@ -118,6 +135,7 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
   		$http.put('/hosts/' + $scope.host.id + '.json', {
 	  		host: {
 					address: $scope.host.address,
+          name_of_city: $scope.current_city.name,
           city_id: $scope.current_city.id,
 					country_id: $scope.current_country.id,
 					floor: $scope.host.floor,
@@ -127,7 +145,9 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
 				}
 	  	}).then(function success(response) {
 	  		$scope.stepIndex += 1;
-	  	})
+	  	}).catch(function() {
+        alert('העיר שהזנת לא נקלטה במערכת. אנא הזן שוב ובחר את העיר מהרשימה. במידה ונתקלת בבעיה אנא שלח מייל ל- digital@zikaronbasalon.com')
+      })
   	}
   }
 
@@ -177,24 +197,11 @@ app.controller('HostEditController', ['$scope','$http','$uibModal','$timeout',
         $scope.current_country = '';
         $scope.host.country_id = null;
       } else {
-        $scope.host.country_id = $scope.current_country.id;
+        $scope.host.country_id = _.get($scope, 'current_country.id', 97);
+
       }
     }
   }
-
-  $scope.onCitySet = function() {
-    if (!$scope.loading_city) {
-      if (typeof $scope.current_city === 'string') {
-        $scope.current_city = '';
-        $scope.host.city_id = null;
-        $scope.current_city_exist = false;
-      } else {
-        $scope.host.city_id = $scope.current_city.id;
-        $scope.current_city_exist = true;
-      }
-    }
-  }
-
 
   $scope.back = function() {
   	$scope.stepIndex -= 1;

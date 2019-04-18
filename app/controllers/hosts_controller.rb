@@ -76,16 +76,23 @@ class HostsController < ApplicationController
       @host.user.active_this_year=true
       @host.user.save!
     elsif params[:host].present?
-      @host.update_attributes(params[:host])
-      # Make sure that if a city is created it is assigned to the Other region of it's country
+      @host.update(params[:host])
+      raise if params[:host].keys.include?('city_id') && @host.city_id.blank?
       if @host.city.present?
-        other_region_of_country = Region.where(country_id:@host.country.id, name:Region::OTHER_REGION_NAME).last
-        @host.city.region_id = other_region_of_country.id
-        @host.city.save!
+        if @host.country.blank?
+          @host.country_id = @host.city.country_id
+        else
+          # Make sure that if a city is created it is assigned to the Other region of it's country
+          other_region_of_country = Region.where(country_id: @host.country.id, name:Region::OTHER_REGION_NAME).last || Region.last
+          @host.city.region_id = other_region_of_country.id
+          @host.city.save!
+        end
+        @host.save!
       end
-      @host.save!
     end
-    respond_with(@host)
+    render json: @host, status: :ok
+  rescue => e
+    render :blank, status: :unprocessable_entity
   end
 
   # Checks if user has access to view page
@@ -106,7 +113,7 @@ class HostsController < ApplicationController
     # If is a manager/admin - with this area - allow
     if user_type == 'Manager' && current_user.simple_admin?
       # If is a legit manager who has this host - allow
-      if meta.hosts.pluck(:id).include?(id)
+      if current_user.global_admin? || meta.hosts.pluck(:id).include?(id)
         return
       # If manager doesn't have host - disallow
       else

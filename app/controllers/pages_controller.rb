@@ -33,7 +33,10 @@ class PagesController < ApplicationController
 
     # additional filtering
     @hosts = @hosts.where('invites_confirmed_count + invites_pending_count < max_guests')
-    @hosts = filter_by_query(@hosts, query)
+    if query.present?
+      @hosts = @hosts.joins(:user, :city)
+      @hosts = filter_by_query(@hosts, query)
+    end
     @hosts = filter_by_language(@hosts, 'event_language', params[:event_language])
 
   	@hosts = @hosts.paginate(:page => params[:page] || 1, :per_page => 10)
@@ -77,7 +80,7 @@ class PagesController < ApplicationController
   end
 
   def missing_terms_agreement
-    user = User.find_by(email: terms_params[:email]) if terms_params[:email].present?
+    user = User.find_by(email: terms_params[:email].downcase) if terms_params[:email].present?
     if user.present? && user.valid_password?(terms_params[:password])
       if user.agreed_to_terms_at.present? && user.subscribed_to_marketing
         sign_in user
@@ -87,7 +90,8 @@ class PagesController < ApplicationController
       end
       return
     end
-    render plain: '', status: :not_found
+
+    render json: { errors: ['Invalid email or password.'] }, status: :not_found
   end
 
 private

@@ -28,7 +28,6 @@ class Manager < ActiveRecord::Base
 
   def get_hosts(current_user, is_paging, page, filter, query, sort, has_manager, has_survivor, is_red, is_org, language, in_future, has_invites,
                   reverse_ordering, cities, country_id, region_id)
-
     city_ids = nil
     if region_id.present? || current_user.simple_admin?
       city_ids = cities.map {|c| c[:id] }
@@ -80,9 +79,9 @@ class Manager < ActiveRecord::Base
     witnesses = witnesses.where(filter)
     witnesses = witnesses.where("LOWER(full_name) LIKE LOWER(?)", "%#{query.downcase}%") if query.present?
     if has_host.present?
-      if has_host === 'true'
+      if has_host == 'true'
         witnesses = witnesses.where("host_id IS NOT NULL")
-      elsif has_host === 'false'
+      elsif has_host == 'false'
         witnesses = witnesses.where(host_id: nil)
       end
     end
@@ -115,7 +114,7 @@ class Manager < ActiveRecord::Base
       @cities = City.includes(:managers).normalized.where(:id => cities.pluck(:id))
     end
 
-    if user.simple_admin? && current_user.email != 'zikaronbasalonglobal@gmail.com'
+    if user.simple_admin? && !current_user.global_admin?
       communities = CommunityLeadership.where(manager_id: current_user.meta.id)
       community_city_ids = communities.map(&:city_id)
       if communities.size > 0
@@ -150,7 +149,7 @@ class Manager < ActiveRecord::Base
     end
     # query by search
     if query.present?
-      hosts = hosts.joins(:user, :city)
+      hosts = hosts.joins(:user).includes(:city)
       hosts = filter_by_query(hosts, query)
     end
     # query by has_manager

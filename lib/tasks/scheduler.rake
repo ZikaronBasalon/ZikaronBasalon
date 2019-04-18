@@ -20,3 +20,23 @@ task send_incomplete_registration: :environment do
     end
   end
 end
+
+desc 'send contact_witness emails to hosts who have not contacted the witnesses yet'
+task send_contact_witness: :environment do
+  hours_to_wait = ENV['HOURS_BEFORE_CONTACT_WITNESS_EMAIL'].presence&.to_f || 48.0
+  relevant_hosts =
+    Host
+    .where(contacted_witness: false, contact_witness_sent_at: nil)
+    .where.not(assignment_time: nil)
+    .where('assignment_time > ?', DateTime.new(2019, 3, 1))
+    .where('assignment_time < ?', hours_to_wait.hours.ago)
+
+  relevant_hosts.each do |host|
+    begin
+      host.update_columns(contact_witness_sent_at: Time.current)
+      HostMailer.contact_witness(host.id).deliver_now
+    rescue StandardError => e
+      Rails.logger.error(e.inspect)
+    end
+  end
+end

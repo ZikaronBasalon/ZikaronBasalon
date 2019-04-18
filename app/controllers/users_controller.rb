@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 	end
 
 	def mark_terms_agreement
-		user = User.find_by(email: user_params[:email]) if user_params[:email].present?
+		user = User.find_by(email: user_params[:email].downcase) if user_params[:email].present?
 		if user.present? && user.valid_password?(user_params[:password])
 			user.update(agreed_to_terms_at: Time.now, subscribed_to_marketing: true)
 	    sign_in user

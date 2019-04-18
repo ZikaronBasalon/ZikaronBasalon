@@ -25,7 +25,7 @@ class Invite < ActiveRecord::Base
     h = Host.where(id: host_id).last
     if confirmed
       h.invites_confirmed_count -= total_invites_count
-    elsif confirmed === false
+    elsif confirmed == false
       h.invites_pending_count -= total_invites_count
     end
     h.save!

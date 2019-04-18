@@ -10,20 +10,19 @@ app.controller('HostShowController', ['$scope', '$http', function($scope, $http)
 	$scope.formatStrangers = formatStrangers;
 	$scope.formatBool = formatBool;
 
-	$scope.init = function(host) {
+	$scope.init = function(host, admin) {
 		$scope.host = host;
 		$scope.comments = host.comments;
 
 		if(host.invites && host.invites.length > 0) {
 			initInvites(host.invites);
 		}
-
-		//as long as the host didn't finish filling out his details, take him to edit page
-		if ($scope.host.active == false) {
-			if (confirm("some details are missing. press ok to fill them in")) {
-				window.location = '/' + document.getElementById('locale').className + '/hosts/' + $scope.host.id + '/edit';
-			}
-		}
+    if (
+      (!host.active ||
+      !host.received_registration_mail) && !admin
+    ) {
+      window.location = '/' + document.getElementById('locale').className + '/hosts/' + $scope.host.id + '/edit';
+    }
 	}
 
 
