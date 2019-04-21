@@ -73,6 +73,8 @@ class GuestsController < ApplicationController
 
     return if (current_user && (current_user.admin? || current_user.sub_admin?)) || (meta && meta.is_a?(Manager))
 
+    return if meta.id == id
+
     redirect_to user_session_path if meta.nil? || (meta.is_a?(Guest) && meta.id != id)
     redirect_to user_session_path if meta.is_a?(Manager) && !meta.hosts.pluck(:id).include?(id)
 
