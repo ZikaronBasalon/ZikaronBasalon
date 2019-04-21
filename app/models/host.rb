@@ -77,7 +77,7 @@ class Host < ActiveRecord::Base
   end
 
   def converted_time
-    return nil if event_time.nil?
+    return nil if event_time.nil? || event_time.blank?
 
     begin
       zone = TZInfo::Country.get(country.iso).zone_names.first
