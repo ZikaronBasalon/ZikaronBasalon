@@ -29,7 +29,7 @@ class ManagersController < ApplicationController
     if current_user.email == 'zikaronbasalonglobal@gmail.com'
       not_on_list_en = I18n.t('shared.not_on_the_list', locale: :en)
       not_on_list_he = I18n.t('shared.not_on_the_list', locale: :he)
-      @cities = City.where("country_id <> 97 OR (country_id <> 97 AND (name = '#{not_on_list_en}' OR name = '#{not_on_list_he}'))")
+      @cities = City.where("country_id <> 97 OR name = '#{not_on_list_en}' OR name = '#{not_on_list_he}'")
     else
       @cities = @manager.get_cities(current_user, country_id, region_id)
     end
