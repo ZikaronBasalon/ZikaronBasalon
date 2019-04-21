@@ -37,6 +37,7 @@ class Manager < ActiveRecord::Base
     hosts = Host.includes(:city, :user, :witness, :invites)
     hosts = hosts.where(filter)
     hosts = hosts.where(city_id: city_ids) if city_ids != nil && !user.sub_admin?
+    hosts = hosts.where.not(country_id: 97) if user.email == 'zikaronbasalonglobal@gmail.com'
     hosts = hosts.where(:active => true) unless user.admin? && !user.current_year_admin?
 
     # add specific host filters (replaces host_in_filter)
