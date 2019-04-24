@@ -155,6 +155,7 @@ en:
     has_manager_true: "Assigned"
     has_manager_false: "Not assigned"
     free_search: "Search"
+    organizations_search: Organizations search
     name: "Name"
     delete: "Delete"
     country: "Country"
