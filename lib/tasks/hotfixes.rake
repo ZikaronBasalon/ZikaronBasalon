@@ -489,4 +489,19 @@ namespace :hotfixes do
     print("\n" + "finished")
   end
 
+  desc 'set default availability day for witnesses'
+  task set_default_available_day: :environment do
+    all_witnesses = Witness.all.to_a
+    all_witnesses.each do |witness|
+      begin
+        witness.set_default_available_day
+        if witness.changes.present?
+          Rails.logger.info("witness #{witness.id} - setting default available day")
+          witness.save!
+        end
+      rescue StandardError => e
+        Rails.logger.error(e.inspect)
+      end
+    end
+  end
 end
