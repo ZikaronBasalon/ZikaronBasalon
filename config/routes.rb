@@ -3,12 +3,6 @@ ZikaronBasalon::Application.routes.draw do
   post 'webhook', :to => 'webhooks#webhook'
 
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/  do
-
-    # Add support for Mailpreview
-    if Rails.env.development?
-      mount MailPreview => 'mail_view'
-    end
-
     get 'my-profile', :to => 'users#profile'
 
     devise_for :users, controllers: { registrations: 'registrations' } do

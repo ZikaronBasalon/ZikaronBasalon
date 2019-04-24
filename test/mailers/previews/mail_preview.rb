@@ -1,6 +1,6 @@
 # Preview all emails at http://localhost:3000/mail_view
 # app/mailers/mail_preview.rb or lib/mail_preview.rb
-class MailPreview < MailView
+class MailPreview <  ActionMailer::Preview
   def new_host_en
     host = Host.last
     HostMailer.new_host(host.user.id, :en)

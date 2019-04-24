@@ -190,7 +190,7 @@ ol li {
         <tr>
           <td align="left" >
             <% logo_name = @locale == :en ? 'mail_logo_en' : 'mail_logo_he' %>
-            <img src="http://zikaronbasalon<%= "#{ 'staging' if Rails.env.staging? }" %>.herokuapp.com/<%= logo_name %>.png">
+            <%= email_image_tag(logo_name + '.png') %>
           </td>
         </tr>
         <tr>

@@ -4,9 +4,6 @@ gem 'rails', '4.2.11'
 gem 'pg', '0.20'
 gem 'gon'
 
-# Mail
-gem 'mail_view', :git => 'https://github.com/basecamp/mail_view.git'
-
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem 'will_paginate'
