@@ -150,6 +150,7 @@ he:
     is_org: "שייך לארגון"
     has_survivor_set: "מוגדר איש עדות"
     free_search: "חיפוש חופשי"
+    organizations_search: חיפוש ארגונים
     delete: "מחיקה"
     country: "מדינה"
     country_placeholder: "הקלד/י שם מדינה באנגלית"

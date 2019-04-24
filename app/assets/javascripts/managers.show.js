@@ -15,7 +15,8 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
     };
 
     $scope.query = {
-        host: null
+        host: null,
+        organization: null
     };
 
     $scope.activeView = 'witnesses';
@@ -161,6 +162,7 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
             reverse_ordering: +$scope.search.reverseOrdering,
             host_query: $scope.query.host,
             witness_query: $scope.query.witness,
+            organization_query: $scope.query.organization,
             host_sort: $scope.sortProp,
             witness_sort: $scope.witnessSortProp,
             has_manager: $scope.search.has_manager,
@@ -198,6 +200,7 @@ app.controller('ManagerShowController', ['$scope','$uibModal', '$http', '$locati
                 host: getFilterKeys($scope.search.host)
             },
             host_query: $scope.query.host,
+            organization_query: $scope.query.organization,
             host_sort: $scope.sortProp,
             has_manager: $scope.search.has_manager,
             has_host: $scope.search.has_host,
