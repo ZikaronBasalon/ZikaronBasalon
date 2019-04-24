@@ -71,6 +71,7 @@ class Host < ActiveRecord::Base
   before_destroy :cancel_invites_and_assigned_witnesses
 
   scope :incomplete_registration, -> { where.not(received_registration_mail: true) }
+  scope :org_name_contains, ->(st) { where('org_name ILIKE ?', "%#{st}%") }
 
   def event_date
     (read_attribute(:event_date).presence || DateTime.parse("2019-05-01")).strftime('%Y-%m-%d')

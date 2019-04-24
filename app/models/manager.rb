@@ -26,7 +26,7 @@ class Manager < ActiveRecord::Base
  	attr_accessor :city_name
 	validates_uniqueness_of :temp_email
 
-  def get_hosts(current_user, is_paging, page, filter, query, sort, has_manager, has_survivor, is_red, is_org, language, in_future, has_invites,
+  def get_hosts(current_user, is_paging, page, filter, query, organization_query, sort, has_manager, has_survivor, is_red, is_org, language, in_future, has_invites,
                   reverse_ordering, cities, country_id, region_id)
     city_ids = nil
     if region_id.present? || current_user.simple_admin?
@@ -40,7 +40,7 @@ class Manager < ActiveRecord::Base
     hosts = hosts.where(:active => true) unless user.admin? && !user.current_year_admin?
 
     # add specific host filters (replaces host_in_filter)
-    hosts = add_filters_to_hosts(hosts, query, has_manager, has_survivor, is_red, is_org, language, in_future, has_invites)
+    hosts = add_filters_to_hosts(hosts, query, organization_query, has_manager, has_survivor, is_red, is_org, language, in_future, has_invites)
 
     # sort
     sort = 'hosts.created_at' if sort.blank? || sort == 'created_at'
@@ -142,7 +142,7 @@ class Manager < ActiveRecord::Base
   	self.cities.push(city)
   end
 
-  def add_filters_to_hosts(hosts, query, has_manager, has_survivor, is_red, is_org, language, in_future, has_invites)
+  def add_filters_to_hosts(hosts, query, organization_query, has_manager, has_survivor, is_red, is_org, language, in_future, has_invites)
     # language
     if language.present?
       hosts = filter_by_language(hosts,'event_language', language)
@@ -152,6 +152,11 @@ class Manager < ActiveRecord::Base
       hosts = hosts.joins(:user).includes(:city)
       hosts = filter_by_query(hosts, query)
     end
+
+    if organization_query.present?
+      hosts = hosts.org_name_contains(organization_query)
+    end
+
     # query by has_manager
     if has_manager.present?
       hosts = filter_by_has_manager(hosts, has_manager)
