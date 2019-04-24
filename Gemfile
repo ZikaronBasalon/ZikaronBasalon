@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.4.5'
-gem 'rails', '4.2.11'
+gem 'rails', '>= 4.2.11.1'
 gem 'pg', '0.20'
 gem 'gon'
 
