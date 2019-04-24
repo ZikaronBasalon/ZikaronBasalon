@@ -54,6 +54,7 @@ class ManagersController < ApplicationController
                                         witness_filter,
                                         params[:witness_query],
                                         params[:witness_sort],
+                                        reverse_ordering,
                                         has_manager,
                                         has_host,
                                         language)
