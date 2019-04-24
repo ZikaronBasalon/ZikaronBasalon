@@ -190,6 +190,9 @@ he:
     subscribed_to_marketing: אני מסכים/ה לקבל הודעות שונות מזיכרון בסלון ומי מטעמה, לרבות באמצעים אלקטרוניים
     not_on_the_list: לא ברשימה
     missing_city_hint: אם אינך מוצא את עירך, בחר ״לא ברשימה״ ופנה אלינו לתמיכה
+    elevator: מעלית
+    floor: קומה
+    ground_floor: קומת קרקע
 
   views:
     pagination:

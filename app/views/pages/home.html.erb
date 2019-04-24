@@ -59,6 +59,23 @@
         </div>
 
         <div class="form-group">
+          <select class="form-control" ng-model="search.floor" ng-change="filter()"
+                    ng-options="o.v as o.n for o in [
+                      { n: '<%= t 'shared.ground_floor' %>', v: 0 }, { n: '1', v: 1 },
+                      { n: '2', v: 2 }, { n: '3+', v: 3 }
+                    ]">
+            <option value=""><%= t 'shared.floor' %></option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <select class="form-control" ng-model="search.elevator" ng-change="filter()"
+              ng-options="o.v as o.n for o in [{ n: '<%= t 'shared.yes' %>', v: 'true' }, { n: '<%= t 'shared.no' %>', v: 'false' }]">
+            <option value=""><%= t 'shared.elevator' %></option>
+          </select>
+        </div>
+
+        <div class="form-group">
           <select class="form-control" ng-model="search.event_language"
                   ng-change="filter()">
             <option value=""><%= t 'shared.language' %></option>
@@ -76,7 +93,6 @@
           <date-picker format-date="formatDate" parse-date="parseDate" ng-change="filter()" style="direction:ltr; z-index:10000; position:absolute;" ng-show="showDatePicker" ng-model="search.event_date" on-date-selected="showDatePicker = !showDatePicker"></date-picker>
           <input placeholder="תאריך" ng-model="search.event_date" ng-click="showDatePicker = !showDatePicker">
         </div>
-
 
         <!--<div class="form-group">-->
           <!---->

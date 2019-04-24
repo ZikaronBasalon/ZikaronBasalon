@@ -114,6 +114,8 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
         region_id: $scope.search.region_id,
         event_language: $scope.search.event_language,
         event_date: $scope.search.event_date,
+        floor: $scope.search.floor,
+        elevator: $scope.search.elevator,
         query: $scope.search.query,
         sort: $scope.sortProp,
         reverse_ordering: +$scope.search.reverseOrdering,
@@ -159,6 +161,6 @@ app.controller('HomePageController', ['$scope','$http', '$uibModal', function($s
     $scope.currentPage = 1;
     $scope.getHosts($scope.currentPage);
   }
-  
+
 }]);
 

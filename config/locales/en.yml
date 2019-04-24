@@ -183,6 +183,8 @@ en:
     subscribed_to_marketing: I hereby agree to receive from time to time informative messages from Zikaron BaSalon, by electronic or other means
     not_on_the_list: NOT ON THE LIST
     missing_city_hint: If you cannot find your city, select "NOT ON THE LIST" and contact support
+    ground_floor: Ground floor
+
   views:
     pagination:
       first: "First"
