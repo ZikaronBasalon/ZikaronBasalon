@@ -32,9 +32,9 @@ class City < ActiveRecord::Base
 
   def self.normalized_search(q, country_id, chul = false)
     if chul
-      where.not(country_id: 97).where("name ILIKE '%#{q}%'")
+      where.not(country_id: 97).where('name ILIKE ?', "%#{q}%")
     else
-      where(country_id: country_id).where("name ILIKE '%#{q}%'")
+      where(country_id: country_id).where('name ILIKE ?', "%#{q}%")
     end
   end
   scope :normalized, -> { where("israel_city_id IS NOT NULL OR world_city_id IS NOT NULL") }

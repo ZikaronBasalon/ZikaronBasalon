@@ -132,7 +132,7 @@ class ManagersController < ApplicationController
 
   def find_movil
     email = params[:email]
-    render json: Manager.where("temp_email ILIKE '%#{email}%'")
+    render json: Manager.where('temp_email ILIKE ?', "%#{email}%")
   end
 
   def load_movil
