@@ -54,27 +54,27 @@ module ApplicationHelper
     query_obj
   end
 
-  def get_like_string_for_simple_query(query)
-    like_string = "users.full_name LIKE '%" + query + "%'"
-    like_string += " OR "
-    like_string += "users.email LIKE '%" + query + "%'"
+  def get_like_string_for_simple_query
+    like_string = 'users.full_name LIKE :query'
+    like_string += ' OR '
+    like_string += 'users.email LIKE :query'
     like_string
   end
 
   def filter_by_query_simple(query_obj, query)
     if query.present?
-      like_string = get_like_string_for_simple_query(query)
-      query_obj = query_obj.where(like_string)
+      like_string = get_like_string_for_simple_query
+      query_obj = query_obj.where(like_string, query: "%#{query}%")
     end
     query_obj
   end
 
   def filter_by_query(query_obj, query)
     if query.present?
-      like_string = get_like_string_for_simple_query(query)
-      like_string += " OR "
-      like_string += "cities.name LIKE '%" + query + "%'"
-      query_obj = query_obj.where(like_string)
+      like_string = get_like_string_for_simple_query
+      like_string += ' OR '
+      like_string += 'cities.name LIKE :query'
+      query_obj = query_obj.where(like_string, query: "%#{query}%")
     end
     query_obj
   end
