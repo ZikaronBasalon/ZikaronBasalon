@@ -64,6 +64,7 @@ class Witness < ActiveRecord::Base
   validates_uniqueness_of :phone, :on => :create
 
   before_validation :normalize_phone
+  before_save :send_tzivut_email
 
   default_scope { includes(:city) }
 
@@ -124,5 +125,17 @@ class Witness < ActiveRecord::Base
 
   def normalize_phone
     self.phone = phone.gsub("-", "")
+  end
+
+  def send_tzivut_email
+    if changes['host_id'].present? && changes['host_id'].first.nil? && changes['host_id'].last.present?
+      HostMailer.witness_assigned(
+        host_id,
+        id,
+        I18n.locale
+      ).deliver
+      @host = Host.find(host_id)
+      @host.update_attributes(assignment_time: Time.now.utc.localtime, witness_id: id)
+    end
   end
 end

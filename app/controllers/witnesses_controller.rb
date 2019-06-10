@@ -109,16 +109,6 @@ class WitnessesController < ApplicationController
 
     respond_to do |format|
       if @witness.update(safe_params)
-         if(safe_params[:host_id].present?)
-          HostMailer.witness_assigned(
-            safe_params[:host_id],
-            @witness.id,
-            I18n.locale
-          ).deliver
-          @host = Host.find(safe_params[:host_id])
-          @host.update_attributes(assignment_time: Time.now.utc.localtime, witness_id: params[:id])
-        end
-
         format.json { render json: @witness, status: :created, location: @witness }
       else
         format.json { render json: @witness.errors, status: :unprocessable_entity }
