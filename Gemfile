@@ -46,6 +46,7 @@ group :development do
   gem 'letter_opener'
   gem 'bullet'
   gem 'xray-rails'
+  gem 'falcon'
 end
 
 group :assets do

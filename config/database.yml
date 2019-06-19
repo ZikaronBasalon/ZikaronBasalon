@@ -10,8 +10,9 @@ development:
   database: zb_development_dev
   host: localhost
   pool: 5
-  username: postgres
-  password: postgres
+  username:
+  password:
+
 
 production:
   adapter: postgresql
@@ -28,8 +29,8 @@ test:
   database: zb_development_test
   host: localhost
   pool: 5
-  username: postgres
-  password: postgres
+  username:
+  password:
 
 # development:
 #   adapter: sqlite3
