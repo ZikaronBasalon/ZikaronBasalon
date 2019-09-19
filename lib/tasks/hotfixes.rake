@@ -71,6 +71,31 @@ namespace :hotfixes do
     end
   end
 
+  desc "new add comments end of year"
+  task :new_add_comments => :environment do
+    begin
+      admin_user_id = User.where(email: "zikaronbasalon@gmail.com").first.id
+      Host.where.not(witness_id: nil).each_with_index do |host, index|
+        @host = host
+        witness = host.witness
+        next if witness.nil?
+        host_full_name = host&.user&.full_name || 'n/a'
+        host_user_id = host&.user&.id || 'n/a'
+        comment = "בשנה שעברה, '#{witness.full_name}' (#{witness.id}) היה/הייתה מצוות/ת למארח/ת #{host_full_name} (#{host.id}). בצד של המארחים הוא/היא #{host_user_id}."
+        witness.comments.create!(user_id: admin_user_id, content: comment)
+        witness.active_last_year = true
+        witness.save!
+        host.comments.create!(user_id: admin_user_id, content: comment)
+        host.active_last_year = true
+        host.save!
+        p "good with host id #{host.id}"
+      end
+    rescue => e
+      p "error with host id #{@host.id}"
+    end
+  end
+
+
   desc "add comments for hosts and witnesses"
   task :comments_for_hosts_and_witnesses => :environment do
     begin

@@ -28,8 +28,8 @@ test:
   database: zb_development_test
   host: localhost
   pool: 5
-  username: postgres
-  password: postgres
+  username: aryeh
+  password: 123
 
 # development:
 #   adapter: sqlite3
